@@ -1,0 +1,48 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page" id="offer-info">
+            <p class="header">Предложение</p>
+            <table class="striped w100">
+                <tr>
+                    <td class="right">Вид предложения</td>
+                    <td class="w50">
+                        <select id="offer-type" data-player="{$num}">
+                            {section name=i loop=$offertype_array}
+                                <option value="{$offertype_array[i].offertype_id}">
+                                    {$offertype_array[i].offertype_name}
+                                </option>
+                            {/section}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">Выплата</td>
+                    <td>
+                        <input type="text" id="offer-price" data-player="{$num}" value="{$player_array.0.player_transfer_price}">
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td class="block-page w50">
+            <p class="header">Информация</p>
+            <table class="striped w100">
+                <tr>
+                    <td class="w50">Трансферный статус</td>
+                    <td>{$player_array.0.statustransfer_name}</td>
+                </tr>
+                <tr>
+                    <td>Арендный статус</td>
+                    <td>{$player_array.0.statusrent_name}</td>
+                </tr>
+                <tr>
+                    <td>Комндный статус</td>
+                    <td>{$player_array.0.statusteam_name}</td>
+                </tr>
+                <tr>
+                    <td>Запрашиваемая цена</td>
+                    <td>{$player_array.0.player_transfer_price|f_igosja_money}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

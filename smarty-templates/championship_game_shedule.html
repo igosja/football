@@ -1,0 +1,23 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page">
+            <p class="header">Расписание</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w20">Дата</th>
+                    <th>Стадия</th>
+                </tr>
+                {section name=i loop=$stage_array}
+                    <tr>
+                        <td class="center">{$stage_array[i].shedule_date|date_format:"%d.%m.%Y"}</td>
+                        <td>
+                            <a href="championship_game_result.php?num={$num}&stage={$stage_array[i].stage_id}">
+                                {$stage_array[i].stage_name}
+                            </a>
+                        </td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+</table>

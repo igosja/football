@@ -1,0 +1,187 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page w50">
+            <p class="header">Вид</p>
+            <table class="w100">
+                <tr>
+                    <td class="w1" rowspan="4">
+                        <img
+                            alt="{$game_array[0].tournament_name}"
+                            class="img-50"
+                            src="img/tournament/{$game_array[0].tournament_id}.png"
+                        />
+                    </td>
+                    <td><h6>{$game_array[0].tournament_name}</h6></td>
+                    <td class="right">{$game_array[0].shedule_date|date_format:"%d.%m.%Y"}</td>
+                </tr>
+                <tr>
+                    <td>Судья: 
+                        <a href="referee_home_profile.php?num={$game_array[0].referee_id}">
+                            {$game_array[0].name_name} {$game_array[0].surname_name}
+                        </a>
+                        (оценка - {$game_array[0].game_referee_mark})
+                    </td>
+                    <td class="right">
+                        <img
+                            alt="{$game_array[0].weather_name}"
+                            class="img-12"
+                            src="img/weather/12/{$game_array[0].weather_id}.png"
+                        />
+                        {$game_array[0].game_temperature}{$smarty.const.CELSIUS}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Зрителей: {$game_array[0].game_visitor|number_format:0:",":" "}</td>
+                </tr>
+                <tr>
+                    <td class="center" colspan="2">{$game_array[0].stadium_name}, {$game_array[0].city_name}</td>
+                </tr>
+            </table>
+            <table class="w100">
+                <tr>
+                    <td class="center w50">
+                        <h5>
+                            <a href="team_team_review_profile.php?num={$game_array[0].game_home_team_id}">
+                                {$game_array[0].game_home_team_name}
+                            </a>
+                        </h5>
+                    </td>
+                    <td class="center">
+                        <h5>
+                            <a href="team_team_review_profile.php?num={$game_array[0].game_guest_team_id}">
+                                {$game_array[0].game_guest_team_name}
+                            </a>
+                        </h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="striped w100">
+                            {section name=i loop=$home_event_array}
+                                <tr>
+                                    <td>
+                                        <img
+                                            alt="{$home_event_array[i].eventtype_name}"
+                                            class="img-12"
+                                            src="img/eventtype/{$home_event_array[i].eventtype_id}.png"
+                                        />
+                                        <a href="player_home_profile.php?num={$home_event_array[i].player_id}">
+                                            {$home_event_array[i].name_name} {$home_event_array[i].surname_name}
+                                        </a>
+                                        ({$home_event_array[i].event_minute})
+                                    </td>
+                                </tr>
+                            {/section}
+                        </table>
+                    </td>
+                    <td>
+                        <table class="striped w100">
+                            {section name=i loop=$guest_event_array}
+                                <tr>
+                                    <td>
+                                        <img
+                                            alt="{$guest_event_array[i].eventtype_name}"
+                                            class="img-12"
+                                            src="img/eventtype/{$guest_event_array[i].eventtype_id}.png"
+                                        />
+                                        <a href="player_home_profile.php?num={$guest_event_array[i].player_id}">
+                                            {$guest_event_array[i].name_name} {$guest_event_array[i].surname_name}
+                                        </a>
+                                        ({$guest_event_array[i].event_minute})
+                                    </td>
+                                </tr>
+                            {/section}
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td class="block-page">
+            <p class="header">Статистика матча</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="center w33">{$game_array[0].game_home_team_name}</th>
+                    <th class="center w33"></th>
+                    <th class="center">{$game_array[0].game_guest_team_name}</th>
+                </tr>
+                <tr>
+                    <td class="center">{$game_array[0].game_home_shot}</td>
+                    <td class="center">Удары</td>
+                    <td class="center">{$game_array[0].game_guest_shot}</td>
+                </tr>
+                <tr>
+                    <td class="center">{$game_array[0].game_home_ontarget}</td>
+                    <td class="center">В створ</td>
+                    <td class="center">{$game_array[0].game_guest_ontarget}</td>
+                </tr>
+                <tr>
+                    <td class="center">{$game_array[0].game_home_foul}</td>
+                    <td class="center">Фолы</td>
+                    <td class="center">{$game_array[0].game_guest_foul}</td>
+                </tr>
+                <tr>
+                    <td class="center">{$game_array[0].game_home_yellow} ({$game_array[0].game_home_red})</td>
+                    <td class="center">Желтые (красные) карточки</td>
+                    <td class="center">{$game_array[0].game_guest_yellow} ({$game_array[0].game_guest_red})</td>
+                </tr>
+                <tr>
+                    <td class="center">{$game_array[0].game_home_possession}%</td>
+                    <td class="center">Владение</td>
+                    <td class="center">{$game_array[0].game_guest_possession}%</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page">
+            <p class="header">Статистика ({$game_array[0].game_home_team_name})</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w5">№</th>
+                    <th>Имя</th>
+                    <th class="w10">Поз</th>
+                    <th class="w10">Конд</th>
+                    <th class="w10">Оцн</th>
+                </tr>
+                {section name=i loop=$home_player_array}
+                    <tr>
+                        <td class="center">{$home_player_array[i].player_number}</td>
+                        <td>
+                            <a href="player_home_profile.php?num={$home_player_array[i].player_id}">
+                                {$home_player_array[i].name_name} {$home_player_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="center">{$home_player_array[i].position_name}</td>
+                        <td class="center">{$home_player_array[i].lineup_condition}%</td>
+                        <td class="center">{$home_player_array[i].lineup_mark}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page">
+            <p class="header">Статистика ({$game_array[0].game_guest_team_name})</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w5">№</th>
+                    <th>Имя</th>
+                    <th class="w10">Поз</th>
+                    <th class="w10">Конд</th>
+                    <th class="w10">Оцн</th>
+                </tr>
+                {section name=i loop=$guest_player_array}
+                    <tr>
+                        <td class="center">{$guest_player_array[i].player_number}</td>
+                        <td>
+                            <a href="player_home_profile.php?num={$guest_player_array[i].player_id}">
+                                {$guest_player_array[i].name_name} {$guest_player_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="center">{$guest_player_array[i].position_name}</td>
+                        <td class="center">{$guest_player_array[i].lineup_condition}%</td>
+                        <td class="center">{$guest_player_array[i].lineup_mark}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,47 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page w100">
+            <p class="header">Тренеры</p>
+            <table class="striped w100">
+                <tr>
+                    <th></th>
+                    <th colspan="2">Физические кондиции</th>
+                    <th colspan="5">Общие</th>
+                    <th colspan="2">Вратарские</th>
+                </tr>
+                <tr>
+                    <th>Тренер</th>
+                    <th class="w8">Сила</th>
+                    <th class="w8">Атлетизм</th>
+                    <th class="w8">Тактика</th>
+                    <th class="w8">Контроль мяча</th>
+                    <th class="w8">Оборона</th>
+                    <th class="w8">Действия в атаке</th>
+                    <th class="w8">Удары</th>
+                    <th class="w8">Парирование ударов</th>
+                    <th class="w8">Игра руками</th>
+                </tr>
+                {section name=i loop=$staff_array}
+                    <tr>
+                        <td>
+                            <a href="staff_home_profile.php?num={$staff_array[i].staff_id}">
+                                <b>{$staff_array[i].name_name} {$staff_array[i].surname_name}</b>
+                            </a>
+                            <br/>
+                            {$staff_array[i].staffpost_name}
+                        </td>
+                        <td class="center"><input type="checkbox"></td>
+                        <td class="center"><input type="checkbox"></td>
+                        <td class="center"><input type="checkbox"></td>
+                        <td class="center"><input type="checkbox"></td>
+                        <td class="center"><input type="checkbox"></td>
+                        <td class="center"><input type="checkbox"></td>
+                        <td class="center"><input type="checkbox"></td>
+                        <td class="center"><input type="checkbox"></td>
+                        <td class="center"><input type="checkbox"></td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,51 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page">
+            <p class="header">Менеджеры</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w1">Ранг</th>
+                    <th>Имя</th>
+                    <th colspan="2">Команда</th>
+                    <th colspan="2">Страна менеджера</th>
+                    <th class="w10">Рейтинг</th>
+                </tr>
+                {section name=i loop=$user_array}
+                    <tr>
+                        <td class="center">{$smarty.section.i.iteration}</td>
+                        <td>
+                            <a href="player_home_profile.php?num={$user_array[i].user_id}">
+                                {$user_array[i].user_login}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            {if $user_array[i].team_id}
+                                <img
+                                    alt="{$user_array[i].team_name}"
+                                    class="img-12"
+                                    src="img/team/12/{$user_array[i].team_id}.png"
+                                />
+                            {/if}
+                        </td>
+                        <td class="w25">
+                            <a href="team_team_review_profile.php?num={$user_array[i].team_id}">
+                                {$user_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img src="img/flag/12/{$user_array[i].country_id}.png" class="img-12" />
+                        </td>
+                        <td class="w20">
+                            <a href="national_team_review_profile.php?num={$user_array[i].country_id}">
+                                {$user_array[i].country_name}
+                            </a>
+                        </td>
+                        <td class="center">
+                            {$user_array[i].user_reputation|f_igosja_five_star:"12"}
+                        </td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+</table>

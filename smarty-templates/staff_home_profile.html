@@ -1,0 +1,108 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page w50">
+            <p class="header">Персональные данные</p>
+            <table class="striped w100">
+                <tr>
+                    <td>Команда</td>
+                    <td>
+                        <img
+                            alt="{$staff_array[0].team_name}"
+                            class="img-12"
+                            src="img/team/12/{$staff_array[0].team_id}.png"
+                        />
+                        <a href="team_team_review_profile.php?num={$staff_array[0].team_id}">
+                            {$staff_array[0].team_name}
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Национальность</td>
+                    <td>
+                        <img
+                            alt="{$staff_array[0].country_name}"
+                            class="img-12"
+                            src="img/flag/12/{$staff_array[0].country_id}.png"
+                        />
+                        <a href="national_team_review_profile.php?num={$staff_array[0].country_id}">
+                            {$staff_array[0].country_name}
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Возраст</td>
+                    <td>{$staff_array[0].staff_age}</td>
+                </tr>
+                <tr>
+                    <td>Репутация</td>
+                    <td>{$staff_array[0].staff_reputation|f_igosja_five_star:12}</td>
+                </tr>
+                <tr>
+                    <td>Должность</td>
+                    <td>{$staff_array[0].staffpost_name}</td>
+                </tr>
+            </table>
+        </td>
+        {if (6 == $staff_array.0.staffpost_id)}
+            <td class="block-page">
+                <p class="header">Уровень знания</p>
+                <table class="striped w100">
+                    {section name=i loop=$scout_array}
+                        <tr>
+                            <td class="w25">
+                                <img
+                                    alt="{$scout_array[i].country_name}"
+                                    class="img-12"
+                                    src="img/flag/12/{$scout_array[i].country_id}.png"
+                                />
+                                <a href="national_team_review_profile.php?num={$scout_array[i].country_id}">
+                                    {$scout_array[i].country_name}
+                                </a>
+                            </td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: {$scout_array[i].count_scout}%">
+                                        {$smarty.const.SPACE}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {/section}
+                </table>
+            </td>
+        {else}
+            <td class="block-page">
+                <p class="header">Характеристики</p>
+                <table class="w100">
+                    <tr>
+                        {section name=i loop=$attribute_array}
+                            {if (!isset($attribute_array[i.index_prev].attributechapterstaff_name) ||
+                                 $attribute_array[i.index_prev].attributechapterstaff_name != $attribute_array[i].attributechapterstaff_name)}
+                                <td class="w50">
+                                    <table class="striped w100">
+                                        <tr>
+                                            <th colspan="2">{$attribute_array[i].attributechapterstaff_name}</th>
+                                        </tr>
+                            {/if}
+                                <tr>
+                                    <td>{$attribute_array[i].attributestaff_name}</td>
+                                    <td class="w50">
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: {$attribute_array[i].staffattribute_value}%">
+                                                {$smarty.const.SPACE}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {if (!isset($attribute_array[i.index_next].attributechapterstaff_name) ||
+                                 $attribute_array[i.index_next].attributechapterstaff_name != $attribute_array[i].attributechapterstaff_name)}
+                                    </table>
+                                </td>
+                            {/if}
+                        {/section}
+                    </tr>
+                </table>
+            </td>
+        {/if}
+    </tr>
+</table>

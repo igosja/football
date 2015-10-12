@@ -1,0 +1,31 @@
+<?php
+
+include ('include/include.php');
+
+if (isset($_GET['num']))
+{
+    $get_num = (int) $_GET['num'];
+}
+else
+{
+    $get_num = 1;
+}
+
+$sql = "SELECT `tournament_tournamenttype_id`
+        FROM `tournament`
+        WHERE `tournament_id`='$get_num'
+        LIMIT 1";
+$tournament_sql = $mysqli->query($sql);
+
+$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+
+$tournamenttype_id = $tournament_array[0]['tournament_tournamenttype_id'];
+
+if (2 == $tournamenttype_id)
+{
+    redirect('championship_review_profile.php?num=' . $get_num);
+
+    exit();
+}
+
+$smarty->display('main.html');

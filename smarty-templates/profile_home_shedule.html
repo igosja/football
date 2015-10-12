@@ -1,0 +1,40 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page">
+            <p class="header">Календарь</p>
+            <table class="striped w100">
+                {section name=i loop=$shedule_array}
+                    <tr>
+                        <td class="center w10">{$shedule_array[i].shedule_date|date_format:"%d.%m.%Y"}</td>
+                        <td class="w1">
+                            {if ($shedule_array[i].game_home_team_id == $authorization_team_id)}
+                                Д
+                            {else}
+                                Г
+                            {/if}
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$shedule_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$shedule_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$shedule_array[i].team_id}">
+                                {$shedule_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="right">
+                            {if (1 == $shedule_array[i].game_played)}
+                                <a href="game_review_main.php?num={$shedule_array[i].game_id}">
+                                    {$shedule_array[i].home_score}:{$shedule_array[i].guest_score}
+                                </a>
+                            {/if}
+                        </td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+</table>

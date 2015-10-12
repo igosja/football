@@ -1,0 +1,127 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page w50">
+            <p class="header">Общая информация</p>
+            <table class="center w100">
+                <tr>
+                    <td class="w50"><h5>{$player_array.0.player_price|f_igosja_money}</h5></td>
+                    <td class="vcenter" rowspan="3">
+                        <img
+                            alt="{$player_array.0.team_name}"
+                            class="img-50"
+                            src="img/team/50/{$player_array.0.team_id}.png"
+                        />
+                            
+                    </td>
+                </tr>
+                <tr>
+                    <td>Цена</td>
+                </tr>
+                <tr>
+                    <td><h5>{$player_array.0.player_salary|f_igosja_money}</h5></td>
+                </tr>
+                <tr>
+                    <td>Зарплата</td>
+                    <td>
+                        <a href="team_team_review_profile.php?num={$player_array.0.team_id}">
+                            {$player_array.0.team_name}
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td class="block-page" rowspan="2">
+            <p class="header">Интерес</p>
+            <table class="striped w100">
+                <tr>
+                    <th colspan="2">Недавние предложения</th>
+                    <th class="w25">Дата</th>
+                    <th class="w25">Сумма</th>
+                </tr>
+                {section name=i loop=$playeroffer_array}
+                    <tr>
+                        <td class="w1">
+                            <img
+                                alt="{$playeroffer_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$playeroffer_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$playeroffer_array[i].team_id}">
+                                {$playeroffer_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center">{$playeroffer_array[i].playeroffer_date|date_format:"%d.%m.%Y"}</td>
+                        <td class="right">{$playeroffer_array[i].playeroffer_price|f_igosja_money}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page" id="transfer-info">
+            <p class="header">Трансферная информация</p>
+            <table class="center w100">
+                <tr>
+                    <td class="w50">
+                        <select class="w100" id="status-transfer" data-player="{$num}">
+                            {section name=i loop=$statustransfer_array}
+                                <option value="{$statustransfer_array[i].statustransfer_id}"
+                                    {if ($statustransfer_array[i].statustransfer_id == $player_array.0.player_statustransfer_id)}
+                                        selected
+                                    {/if}
+                                >
+                                    {$statustransfer_array[i].statustransfer_name}
+                                </option>
+                            {/section}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="w100" id="status-rent" data-player="{$num}">
+                            {section name=i loop=$statusrent_array}
+                                <option value="{$statusrent_array[i].statusrent_id}"
+                                    {if ($statusrent_array[i].statusrent_id == $player_array.0.player_statusrent_id)}
+                                        selected
+                                    {/if}
+                                >
+                                    {$statusrent_array[i].statusrent_name}
+                                </option>
+                            {/section}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Трасферный статус</td>
+                    <td>Арендный статус</td>
+                </tr>
+                <tr>
+                    <td>{$smarty.const.SPACE}</td>
+                    <td>{$smarty.const.SPACE}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <select class="w100" id="status-team" data-player="{$num}">
+                            {section name=i loop=$statusteam_array}
+                                <option value="{$statusteam_array[i].statusteam_id}"
+                                    {if ($statusteam_array[i].statusteam_id == $player_array.0.player_statusteam_id)}
+                                        selected
+                                    {/if}
+                                >
+                                    {$statusteam_array[i].statusteam_name}
+                                </option>
+                            {/section}
+                        </select>
+                    </td>
+                    <td>
+                        <input class="w100" type="text" id="transfer-price" data-player="{$num}" value="{$player_array.0.player_transfer_price}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Командный статус</td>
+                    <td>Запрашиваемая цена трансфера</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

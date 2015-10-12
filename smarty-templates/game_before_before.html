@@ -1,0 +1,181 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page">
+            <p class="header">Погодные условия</p>
+            <table class="striped w100">
+                <tr>
+                    <td class="center" rowspan="3">
+                        <img alt="" class="img-20" src="img/weather/1.png" />
+                        <br />
+                        14{$smarty.const.CELSIUS}
+                    </td>
+                    <td>
+                        {$game_array[0].shedule_date|date_format:"%d.%m.%Y"},
+                        {$game_array[0].stadium_name}
+                        ({$game_array[0].city_name})
+                    </td>
+                </tr>
+                <tr>
+                    <td>{$game_array[0].stadiumquality_name}</td>
+                </tr>
+                <tr>
+                    <td>Вместимость стадиона - {$game_array[0].stadium_capacity}</td>
+                </tr>
+            </table>
+        </td>
+        <td class="block-page w33" rowspan="2">
+            <p class="header">Предыдущие матчи</p>
+            <table class="striped w100">
+                <tr>
+                    <th>Дата</th>
+                    <th colspan="5">Матч</th>
+                </tr>
+                {section name=i loop=$last_array}
+                    <tr>
+                        <td class="center w10">{$last_array[i].shedule_date|date_format:"%d.%m.%Y"}</td>
+                        <td class="right w35">
+                            {$last_array[i].home_name}
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt=""
+                                class="img-12"
+                                src="img/team/12/{$last_array[i].game_home_team_id}.png"
+                            />
+                        </td>
+                        <td class="center">
+                            <a href="game_review_main.php?num={$last_array[i].game_id}">
+                                {$last_array[i].game_home_score}:{$last_array[i].game_guest_score}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt=""
+                                class="img-12"
+                                src="img/team/12/{$last_array[i].game_guest_team_id}.png"
+                            />
+                        </td>
+                        <td class="w35">
+                            {$last_array[i].guest_name}
+                        </td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page" rowspan="3">
+            <p class="header">Турнирная таблица</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w10">М</th>
+                    <th colspan="2">Команда</th>
+                    <th class="w10">О</th>
+                </tr>
+                {section name=i loop=$standing_array}
+                    <tr>
+                        <td class="center">{$standing_array[i].standing_place}</td>
+                        <td class="w1">
+                            <img
+                                alt="{$standing_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$standing_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$standing_array[i].team_id}">
+                                {$standing_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center">{$standing_array[i].standing_point}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page w33">
+            <p class="header">Судья</p>
+            <h6>
+                <p class="center">
+                    <a href="referee_home_profile.php?num={$game_array[0].referee_id}">
+                        {$game_array[0].name_name}
+                        {$game_array[0].surname_name}
+                    </a>
+                </p>
+            </h6>
+            <table class="striped w100">
+                <tr>
+                    <td>Отработал матчей в этом сезоне</td>
+                    <td class="right">{$game_array.0.statisticreferee_game}</td>
+                </tr>
+                <tr>
+                    <td>Показал желтых карточек</td>
+                    <td class="right">
+                        {$game_array.0.statisticreferee_yellow}
+                        ({($game_array.0.statisticreferee_yellow/$game_array.0.statisticreferee_game)|round:1}/матч)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Показал красных карточек</td>
+                    <td class="right">
+                        {$game_array.0.statisticreferee_red}
+                        ({($game_array.0.statisticreferee_red/$game_array.0.statisticreferee_game)|round:1}/матч)
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page">
+            <p class="header">{$game_array[0].game_home_team_name} (матчи)</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w20">Дата</th>
+                    <th>Соперник</th>
+                    <th class="w15">Счет</th>
+                </tr>
+                {section name=i loop=$home_latest_game_array}
+                    <tr>
+                        <td class="center">{$home_latest_game_array[i].shedule_date|date_format:"%d.%m.%Y"}</td>
+                        <td>
+                            <img alt="" class="img-12" src="img/team/12/{$home_latest_game_array[i].team_id}.png" />
+                            <a href="team_team_review_profile.php?num={$home_latest_game_array[i].team_id}">
+                                {$home_latest_game_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center">
+                            <a href="game_review_main.php?num={$home_latest_game_array[i].game_id}">
+                                {$home_latest_game_array[i].home_score}:{$home_latest_game_array[i].guest_score}
+                            </a>
+                        </td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page">
+            <p class="header">{$game_array[0].game_guest_team_name} (матчи)</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w15">Дата</th>
+                    <th>Соперник</th>
+                    <th class="w15">Счет</th>
+                </tr>
+                {section name=i loop=$guest_latest_game_array}
+                    <tr>
+                        <td class="center">{$guest_latest_game_array[i].shedule_date|date_format:"%d.%m.%Y"}</td>
+                        <td>
+                            <img alt="" class="img-12" src="img/team/12/{$guest_latest_game_array[i].team_id}.png" />
+                            <a href="team_team_review_profile.php?num={$guest_latest_game_array[i].team_id}">
+                                {$guest_latest_game_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center">
+                            <a href="game_review_main.php?num={$guest_latest_game_array[i].game_id}">
+                                {$guest_latest_game_array[i].home_score}:{$guest_latest_game_array[i].guest_score}
+                            </a>
+                        </td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+</table>

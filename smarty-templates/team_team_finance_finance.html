@@ -1,0 +1,147 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page">
+            <p class="header">
+                <a href="javascript:;" class="finance-link active" data-id="1">Итог</a>
+                <a href="javascript:;" class="finance-link" data-id="2">Доходы</a>
+                <a href="javascript:;" class="finance-link" data-id="3">Расходы</a>
+            </p>
+            <table class="striped w100" id="finance-1">
+                <tr>
+                    <th>Статьи</th>
+                    <th class="w20">Этот сезон</th>
+                    <th class="w20">Прошлый сезон</th>
+                </tr>
+                <tr>
+                    <td>Доходы</td>
+                    <td class="right">{$finance_array.0.finance_income|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Расходы</td>
+                    <td class="right">{$finance_array.0.finance_expense|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Затраты по зарплате</td>
+                    <td class="right">{$finance_array.0.finance_expense_salary|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Прибыль (Убытки)</td>
+                    <td class="right">{($finance_array.0.finance_income-$finance_array.0.finance_expense)|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Баланс</td>
+                    <td class="right">{$team_array.0.team_finance|f_igosja_money}</td>
+                    <td></td>
+                </tr>
+            </table>
+            <table class="striped w100" id="finance-2" style="display: none;">
+                <tr>
+                    <th>Статьи</th>
+                    <th class="w20">Этот сезон</th>
+                    <th class="w20">Прошлый сезон</th>
+                </tr>
+                <tr>
+                    <td>Билеты</td>
+                    <td class="right">{$finance_array.0.finance_income_ticket|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Сезонные абонементы</td>
+                    <td class="right">{$finance_array.0.finance_income_subscription|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Доход от ТВ трансляций</td>
+                    <td class="right">{$finance_array.0.finance_income_tv|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Призовые</td>
+                    <td class="right">{$finance_array.0.finance_income_prize|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Тарнсферные доходы</td>
+                    <td class="right">{$finance_array.0.finance_income_transfer|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Спонсорские выплаты</td>
+                    <td class="right">{$finance_array.0.finance_income_sponsor|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Продажа клубной артибутики</td>
+                    <td class="right">{$finance_array.0.finance_income_attributes|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Полученные инвестиции</td>
+                    <td class="right">{$finance_array.0.finance_income_donat|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+            </table>
+            <table class="striped w100" id="finance-3" style="display: none;">
+                <tr>
+                    <th>Статьи</th>
+                    <th class="w20">Этот сезон</th>
+                    <th class="w20">Прошлый сезон</th>
+                </tr>
+                <tr>
+                    <td>Зарплата</td>
+                    <td class="right">{$finance_array.0.finance_expense_salary|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Скаутские расходы</td>
+                    <td class="right">{$finance_array.0.finance_expense_scout|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Трансферные расходы</td>
+                    <td class="right">{$finance_array.0.finance_expense_transfer|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Выплаты агентам игроков</td>
+                    <td class="right">{$finance_array.0.finance_expense_agent|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Строительство базы и стадиона</td>
+                    <td class="right">{$finance_array.0.finance_expense_build|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Содержание базы команды</td>
+                    <td class="right">{$finance_array.0.finance_expense_base|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Содержание стадиона</td>
+                    <td class="right">{$finance_array.0.finance_expense_stadium|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Выплаты по займам</td>
+                    <td class="right">{$finance_array.0.finance_expense_loan|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Штрафы</td>
+                    <td class="right">{$finance_array.0.finance_expense_penalty|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+                <tr>
+                    <td>Налоги</td>
+                    <td class="right">{$finance_array.0.finance_expense_tax|f_igosja_money}</td>
+                    <td class="right">1 $</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

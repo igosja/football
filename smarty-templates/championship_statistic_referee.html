@@ -1,0 +1,31 @@
+<table class="block-table w100">
+    <tr>
+        <td rowspan="2" class="block-page w30">
+            <p class="header">Статистика судей</p>
+            <table class="striped w100">
+                <tr>
+                    <th>Имя</th>
+                    <th class="w10">Матчей</th>
+                    <th class="w10">Желтые карточки</th>
+                    <th class="w10">Красные карточки</th>
+                    <th class="w10">Пенальти</th>
+                    <th class="w10">Средняя оценка</th>
+                </tr>
+                {section name=i loop=$referee_array}
+                    <tr>
+                        <td>
+                            <a href="referee_home_profile.php?num={$referee_array[i].referee_id}">
+                                {$referee_array[i].name_name} {$referee_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="center">{$referee_array[i].statisticreferee_game}</td>
+                        <td class="center">{$referee_array[i].statisticreferee_yellow}</td>
+                        <td class="center">{$referee_array[i].statisticreferee_red}</td>
+                        <td class="center">{$referee_array[i].statisticreferee_penalty}</td>
+                        <td class="center">{$referee_array[i].statisticreferee_mark}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+</table>

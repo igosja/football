@@ -1,0 +1,51 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page">
+            <p class="header">Турниры</p>
+            <table class="w100">
+                <tr>
+                    <td>
+                        <table class="striped w100">
+                            <tr>
+                                <th class="w10">Сезон</th>
+                                <th class="w10">Место</th>
+                                <th colspan="2">Команда</th>
+                                <th colspan="2">Турнир</th>
+                            </tr>
+                            {section name=i loop=$progress_array}
+                                <tr>
+                                    <td class="center">{$progress_array[i].standing_season_id}</td>
+                                    <td class="center">{$progress_array[i].standing_place}</td>
+                                    <td class="w1">
+                                        <img
+                                            alt="{$progress_array[i].team_name}"
+                                            class="img-12"
+                                            src="img/team/12/{$progress_array[i].team_id}.png"
+                                        />
+                                    </td>
+                                    <td>
+                                        <a href="team_team_review_profile.php?num={$progress_array[i].team_id}">
+                                            {$progress_array[i].team_name}
+                                        </a>
+                                    </td>
+                                    <td class="w1">
+                                        <img
+                                            alt="{$progress_array[i].tournament_name}"
+                                            class="img-12"
+                                            src="img/tournament/12/{$progress_array[i].tournament_id}.png"
+                                        />
+                                    </td>
+                                    <td class="w35">
+                                        <a href="tournament_review_profile.php?num={$progress_array[i].tournament_id}">
+                                            {$progress_array[i].tournament_name}
+                                        </a>
+                                    </td>
+                                </tr>
+                            {/section}
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

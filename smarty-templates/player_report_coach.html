@@ -1,0 +1,49 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page" colspan="2">
+            <p class="header">Отчет</p>
+            <table class="center w100">
+                <tr>
+                    <td class="w50">Текущая способность</td>
+                    <td>Потенциальная способность</td>
+                </tr>
+                <tr>
+                    <td>
+                        {$player_array.0.player_ability_current|f_igosja_five_star:"20"}
+                    </td>
+                    <td>
+                        {$player_array.0.player_ability_max|f_igosja_five_star:"20"}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page w50">
+            <p class="header">Позиция</p>
+            <table class="center w100">
+                <tr>
+                    <td class="w50">Позиция</td>
+                    <td>Роль</td>
+                </tr>
+                <tr>
+                    <td><h5>{$player_array.0.position_description}</h5></td>
+                    <td><h5>{$player_array.0.role_name}</h5></td>
+                </tr>
+            </table>
+        </td>
+        <td class="block-page">
+            <p class="header">Пригодность</p>
+            <table class="striped w100">
+                {section name=i loop=$player_array}
+                    <tr>
+                        <td class="w50">{$player_array[i].role_name}</td>
+                        <td class="center">
+                            {$player_array.0.player_ability_current|f_igosja_five_star:"12"}
+                        </td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+</table>

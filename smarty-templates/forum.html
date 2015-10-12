@@ -1,0 +1,45 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page">
+            <p class="header">Форум</p>
+            {section name=i loop=$forum_array}
+                {if (!isset($forum_array[i.index_prev].forumchapter_id)
+                     || $forum_array[i.index_prev].forumchapter_id != $forum_array[i].forumchapter_id)}
+                    <table class="forum-group w100">
+                        <tr>
+                            <th>{$forum_array[i].forumchapter_name}</th>
+                            <th class="w10">Темы</th>
+                            <th class="w10">Сообщений</th>
+                            <th class="w20">Последнее</th>
+                        </tr>
+                {/if}
+                <tr>
+                    <td>
+                        <strong>
+                            <a href="forum_group.php?num={$forum_array[i].forumthemegroup_id}">
+                                {$forum_array[i].forumthemegroup_name}
+                            </a>
+                        </strong>
+                        <br />
+                        {$forum_array[i].forumthemegroup_description}
+                    </td>
+                    <td class="center vcenter">{$forum_array[i].count_theme}</td>
+                    <td class="center vcenter">{$forum_array[i].count_post}</td>
+                    <td>
+                        <a href="forum_theme.php?num={$forum_array[i].forumtheme_id}">
+                            {$forum_array[i].forumtheme_name}
+                        </a>
+                        <br/>
+                        {$forum_array[i].user_login}
+                        <br/>
+                        {$forum_array[i].forumpost_date|date_format:"%H:%M %d.%m.%Y"}
+                    </td>
+                </tr>
+                {if (!isset($forum_array[i.index_next].forumchapter_id)
+                     || $forum_array[i.index_next].forumchapter_id != $forum_array[i].forumchapter_id)}
+                    </table>
+                {/if}
+            {/section}
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,170 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page w35">
+            <p class="header">Учетная запись</p>
+            <table class="striped w100">
+                <tr>
+                    <td class="w50">Страна</td>
+                    <td class="right">
+                        <a href="national_team_review_profile.php?num={$user_array.0.country_id}">
+                            {$user_array.0.country_name}
+                        </a>
+                        <img
+                            alt="{$user_array.0.country_name}"
+                            class="img-12"
+                            src="img/flag/12/{$user_array.0.country_id}.png"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Репутация</td>
+                    <td class="right">{$user_array.0.user_reputation|f_igosja_five_star:"12"}</td>
+                </tr>
+                <tr>
+                    <td>Сыграно матчей</td>
+                    <td class="right">{$user_array.0.statisticuser_game}</td>
+                </tr>
+                <tr>
+                    <td>Выиграно матчей</td>
+                    <td class="right">{$user_array.0.statisticuser_win}</td>
+                </tr>
+            </table>
+        </td>
+        <td class="block-page w35">
+            <p class="header">Характеристики</p>
+            <table class="striped w100">
+                <tr>
+                    <td class="w50">Репутация</td>
+                    <td>Верность команде</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: {$user_array.0.user_reputation}%">
+                                {$smarty.const.SPACE}
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: {$user_array.0.user_fidelity}%">
+                                {$smarty.const.SPACE}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Тактическое постоянство</td>
+                    <td>Предпочтение нац. игрокам</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: {$user_array.0.user_tactic_stability}%">
+                                {$smarty.const.SPACE}
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: {$user_array.0.user_local_player}%">
+                                {$smarty.const.SPACE}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td class="block-page" rowspan="3">
+            <p class="header">Краткое изложение карьеры</p>
+            <table class="striped w100">
+                {section name=i loop=$career_array}
+                    <tr>
+                        <td class="w1" rowspan="3"><img alt="" class="img-50" src="img/team/50/{$career_array[i].team_id}.png" /></td>
+                        <td>{$career_array[i].team_name}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img alt="" class="img-12" src="img/flag/12/{$career_array[i].country_id}.png" />
+                            {$career_array[i].country_name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Сезоны: {$career_array[i].history_season_id}
+                            -
+                            {if (isset($career_array[i.index_next].history_season_id))}
+                                {$career_array[i.index_next].history_season_id}
+                            {else}
+                                н.в.
+                            {/if}
+                        </td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page w25" rowspan="2">
+            <p class="header">Тактика</p>
+            <table class="striped w100">
+                <tr>
+                    <td class="w50">Любимая схема</td>
+                    <td>{$user_array.0.formation_name}</td>
+                </tr>
+                <tr>
+                    <td>Стиль игры</td>
+                    <td>{$user_array.0.gamestyle_name}</td>
+                </tr>
+                <tr>
+                    <td>Настрой на игру</td>
+                    <td>{$user_array.0.gamemood_name}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page">
+            <p class="header">Статистика карьеры</p>
+            <table class="striped w100">
+                <tr>
+                    <td class="w25"></td>
+                    <td class="w25"></td>
+                    <td class="w25"></td>
+                    <td class="w25"></td>
+                </tr>
+                <tr>
+                    <td class="w25">Матчей</td>
+                    <td class="right w25">{$user_array.0.statisticuser_game}</td>
+                    <td class="w25">Забито</td>
+                    <td class="right">{$user_array.0.statisticuser_score}</td>
+                </tr>
+                <tr>
+                    <td>Выигрыши</td>
+                    <td class="right">{$user_array.0.statisticuser_win}</td>
+                    <td>Пропущено</td>
+                    <td class="right">{$user_array.0.statisticuser_pass}</td>
+                </tr>
+                <tr>
+                    <td>Ничьи</td>
+                    <td class="right">{$user_array.0.statisticuser_draw}</td>
+                    <td>Разница</td>
+                    <td class="right">{$user_array.0.statisticuser_score-$user_array.0.statisticuser_pass}</td>
+                </tr>
+                <tr>
+                    <td>Поражения</td>
+                    <td class="right">{$user_array.0.statisticuser_loose}</td>
+                    <td>Побед</td>
+                    
+                    <td class="right">
+                        {if (0 == $user_array.0.statisticuser_game)}
+                            0
+                        {else}
+                            {$user_array.0.statisticuser_win/$user_array.0.statisticuser_game*100|round}
+                        {/if} %
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

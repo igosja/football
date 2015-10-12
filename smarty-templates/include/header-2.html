@@ -1,0 +1,81 @@
+<div class="header-2-back">
+    <div class="header-2">
+        <table class="w100">
+            <tr>
+                <td class="left">
+                    {include file="include/header-2-$header_2_block.html"}
+                </td>
+                <td class="right fright">
+                    <table class="horizontal-menu-table">
+                        <tr class="horizontal-menu" id="horizontal-menu-tr">
+                            <td class="right">
+                                <table>
+                                    <tr>
+                                        {section name=i loop=$horizontalmenu_array}
+                                            {if (!isset ($horizontalmenu_array[i.index_prev].horizontalmenu_name) ||
+                                                 $horizontalmenu_array[i.index_prev].horizontalmenu_name != $horizontalmenu_array[i].horizontalmenu_name)}
+                                                <td>
+                                                    <a href="javascript:;" id="horizontal-menu-{$smarty.section.i.index + 1}"
+                                                        {assign var="class" value=""}
+                                                        {section name=j loop=$horizontalmenu_array}
+                                                            {if ($horizontalmenu_array[i].horizontalmenu_name == $horizontalmenu_array[j].horizontalmenu_name &&
+                                                                 $horizontalmenu_array[j].horizontalsubmenu_href == $chapter)}
+                                                                {assign var="class" value="active"}
+                                                            {/if}
+                                                        {/section}
+
+                                                        class="{$class}"
+                                                    >
+                                                        {$horizontalmenu_array[i].horizontalmenu_name}
+                                                    </a>
+                                                </td>
+                                            {/if}
+                                        {/section}
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        {section name=i loop=$horizontalmenu_array}
+                            {if (!isset ($horizontalmenu_array[i.index_prev].horizontalmenu_name) ||
+                                 $horizontalmenu_array[i.index_prev].horizontalmenu_name != $horizontalmenu_array[i].horizontalmenu_name)}
+                                <tr 
+                                    {assign var="class" value="none"}
+                                    {section name=j loop=$horizontalmenu_array}
+                                        {if ($horizontalmenu_array[i].horizontalmenu_name == $horizontalmenu_array[j].horizontalmenu_name &&
+                                             $horizontalmenu_array[j].horizontalsubmenu_href == $chapter)}
+                                            {assign var="class" value="horizontal-menu"}
+                                        {/if}
+                                    {/section}
+
+                                    class="{$class}"
+                                    id="horizontal-menu-{$smarty.section.i.index + 1}-tr"
+                                >
+                                    <td>
+                                        <table>
+                                            <tr>
+                            {/if}
+                            {if ($horizontalmenu_array[i].horizontalsubmenu_name)}
+                                <td>
+                                    <a href="{$horizontalmenu_array[i].horizontalsubmenu_href}?num={$num}"
+                                        {if $horizontalmenu_array[i].horizontalsubmenu_href == $chapter}
+                                            class="active"
+                                        {/if}
+                                    >
+                                        {$horizontalmenu_array[i].horizontalsubmenu_name}
+                                    </a>
+                                </td>
+                            {/if}
+                            {if (!isset ($horizontalmenu_array[i.index_next].horizontalmenu_name) ||
+                                 $horizontalmenu_array[i.index_next].horizontalmenu_name != $horizontalmenu_array[i].horizontalmenu_name)}
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            {/if}
+                        {/section}
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

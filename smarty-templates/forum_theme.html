@@ -1,0 +1,123 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page">
+            <p class="header">{$head_array.0.forumtheme_name}</p>
+            <table class="w100">
+                <tr>
+                    <td>
+                        <button>
+                            <a href="forum_posting.php?theme={$head_array.0.forumtheme_id}">
+                                Ответить
+                            </a>
+                        </button>
+                    </td>
+                    <td class="right">
+                        Страницы:
+                        {section name=i loop=$count_forum}
+                            {if ($smarty.section.i.iteration == 1 ||
+                                 $smarty.section.i.iteration == $count_forum ||
+                                ($smarty.section.i.iteration >= $page - 2 &&
+                                 $smarty.section.i.iteration <= $page + 2))}
+                            <button
+                                {if ($smarty.section.i.iteration == $page)}
+                                    class="button-active"
+                                {/if}
+                            >
+                                <a href="forum_theme.php?num={$num}&page={$smarty.section.i.iteration}">
+                                    {$smarty.section.i.iteration}
+                                </a>
+                            </button>
+                            {/if}
+                        {/section}
+                    </td>
+                </tr>
+            </table>
+            <table class="forum-theme w100">
+                <tr>
+                    <th class="w20">
+                        
+                    </th>
+                    <th>
+                        {$head_array.0.forumtheme_name}, {$head_array.0.forumtheme_date|date_format:"%H:%M %d.%m.%Y"}
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>{$head_array.0.user_login}</strong>
+                        <br/>
+                        <a href="team_team_review_profile.php?num={$head_array.0.team_id}">
+                            {$head_array.0.team_name} ({$head_array.0.city_name}, {$head_array.0.country_name})
+                        </a>
+                        <br/>
+                        <button>
+                            <a href="forum_message.php?num={$head_array.0.user_id}">
+                                ЛC
+                            </a>
+                        </button>
+                    </td>
+                    <td>
+                        <p class="justify">{$head_array.0.forumtheme_text}
+                    </td>
+                </tr>
+            </table>
+            {section name=i loop=$forum_array}
+                <table class="forum-theme w100">
+                    <tr>
+                        <th class="w20"></th>
+                        <th>
+                            {$forum_array[i].forumpost_name}, {$forum_array.0.forumpost_date|date_format:"%H:%M %d.%m.%Y"}
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>{$head_array.0.user_login}</strong>
+                            <br/>
+                            <a href="team_team_review_profile.php?num={$forum_array.0.team_id}">
+                                {$forum_array.0.team_name} ({$forum_array.0.city_name}, {$forum_array.0.country_name})
+                            </a>
+                            <br/>
+                            <button>
+                                <a href="forum_message.php?num={$forum_array.0.user_id}">
+                                    ЛC
+                                </a>
+                            </button>
+                        </td>
+                        <td>
+                            <p class="justify">{$forum_array[i].forumpost_text}
+                        </td>
+                    </tr>
+                </table>
+            {/section}
+            <table class="w100">
+                <tr>
+                    <td>
+                        <button>
+                            <a href="forum_posting.php?theme={$head_array.0.forumtheme_id}">
+                                Ответить
+                            </a>
+                        </button>
+                    </td>
+                    <td class="right">
+                        Страницы:
+                        {section name=i loop=$count_forum}
+                            {if ($smarty.section.i.iteration == 1 ||
+                                 $smarty.section.i.iteration == $count_forum ||
+                                ($smarty.section.i.iteration >= $page - 2 &&
+                                 $smarty.section.i.iteration <= $page + 2))}
+                            <button
+                                {if ($smarty.section.i.iteration == $page)}
+                                    class="button-active"
+                                {/if}
+                            >
+                                <a href="forum_theme.php?num={$num}&page={$smarty.section.i.iteration}">
+                                    {$smarty.section.i.iteration}
+                                </a>
+                            </button>
+                            {/if}
+                        {/section}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

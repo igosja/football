@@ -1,0 +1,251 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page w33">
+            <p class="header">Игры</p>
+            <table class="striped w100">
+                {section name=i loop=$game_array}
+                    <tr>
+                        <td class="w50">
+                            <a href="player_home_profile.php?num={$game_array[i].player_id}">
+                                {$game_array[i].name_name} {$game_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$game_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$game_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$game_array[i].team_id}">
+                                {$game_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center w10">{$game_array[i].statisticplayer_game}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page w33">
+            <p class="header">Победы</p>
+            <table class="striped w100">
+                {section name=i loop=$win_array}
+                    <tr>
+                        <td class="w50">
+                            <a href="player_home_profile.php?num={$win_array[i].player_id}">
+                                {$win_array[i].name_name} {$win_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$win_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$win_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$win_array[i].team_id}">
+                                {$win_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center w10">{$win_array[i].statisticplayer_win}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page">
+            <p class="header">Лучший игрок матча</p>
+            <table class="striped w100">
+                {section name=i loop=$best_array}
+                    <tr>
+                        <td class="w50">
+                            <a href="player_home_profile.php?num={$best_array[i].player_id}">
+                                {$best_array[i].name_name} {$best_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$best_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$best_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$best_array[i].team_id}">
+                                {$best_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center w10">{$best_array[i].statisticplayer_best}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page">
+            <p class="header">Голы</p>
+            <table class="striped w100">
+                {section name=i loop=$goal_array}
+                    <tr>
+                        <td class="w50">
+                            <a href="player_home_profile.php?num={$goal_array[i].player_id}">
+                                {$goal_array[i].name_name} {$goal_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$goal_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$goal_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$goal_array[i].team_id}">
+                                {$goal_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center w10">{$goal_array[i].statisticplayer_goal}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page">
+            <p class="header">Голевые передачи</p>
+            <table class="striped w100">
+                {section name=i loop=$pass_array}
+                    <tr>
+                        <td class="w50">
+                            <a href="player_home_profile.php?num={$pass_array[i].player_id}">
+                                {$pass_array[i].name_name} {$pass_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$pass_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$pass_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$pass_array[i].team_id}">
+                                {$pass_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center w10">{$pass_array[i].statisticplayer_pass_scoring}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page">
+            <p class="header">Процент ударов в створ</p>
+            <table class="striped w100">
+                {section name=i loop=$shot_array}
+                    <tr>
+                        <td class="w50">
+                            <a href="player_home_profile.php?num={$shot_array[i].player_id}">
+                                {$shot_array[i].name_name} {$shot_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$shot_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$shot_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$shot_array[i].team_id}">
+                                {$shot_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center w10">{$shot_array[i].statisticplayer_shot}%</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page">
+            <p class="header">Красные карточки</p>
+            <table class="striped w100">
+                {section name=i loop=$red_array}
+                    <tr>
+                        <td class="w50">
+                            <a href="player_home_profile.php?num={$red_array[i].player_id}">
+                                {$red_array[i].name_name} {$red_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$red_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$red_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$red_array[i].team_id}">
+                                {$red_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center w10">{$red_array[i].statisticplayer_red}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page">
+            <p class="header">Желтые карточки</p>
+            <table class="striped w100">
+                {section name=i loop=$yellow_array}
+                    <tr>
+                        <td class="w50">
+                            <a href="player_home_profile.php?num={$yellow_array[i].player_id}">
+                                {$yellow_array[i].name_name} {$yellow_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$yellow_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$yellow_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$yellow_array[i].team_id}">
+                                {$yellow_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center w10">{$yellow_array[i].statisticplayer_yellow}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page">
+            <p class="header">Перодоленное расстояние</p>
+            <table class="striped w100">
+                {section name=i loop=$distance_array}
+                    <tr>
+                        <td class="w50">
+                            <a href="player_home_profile.php?num={$distance_array[i].player_id}">
+                                {$distance_array[i].name_name} {$distance_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$distance_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$distance_array[i].team_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="team_team_review_profile.php?num={$distance_array[i].team_id}">
+                                {$distance_array[i].team_name}
+                            </a>
+                        </td>
+                        <td class="center w10">{$distance_array[i].statisticplayer_distance} м</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+</table>

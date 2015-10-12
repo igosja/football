@@ -1,0 +1,13 @@
+{capture name=tpl}
+{include file='include/header.html'}
+{include file='include/header-1.html'}
+{include file='include/header-2.html'}
+{include file='include/header-3.html'}
+{include file='include/header-4.html'}
+{include file="$tpl.html"}
+{include file='include/footer.html'}
+{/capture}
+
+{$smarty.capture.tpl|strip}
+
+{*debug*}

@@ -1,0 +1,49 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page">
+            <p class="header">Знания</p>
+            <table class="striped w100">
+                <tr>
+                    <th colspan="2">Страна</th>
+                    <th class="w33">Игроков изучено</th>
+                </tr>
+                {section name=i loop=$knowledge_array}
+                    <tr>
+                        <td class="w1">
+                            <img
+                                alt="{$knowledge_array[i].country_name}"
+                                class="img-12"
+                                src="img/flag/12/{$knowledge_array[i].country_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="national_team_review_profile.php?num={$knowledge_array[i].country_id}">
+                                {$knowledge_array[i].country_name}
+                            </a>
+                        </td>
+                        <td class="center">{$knowledge_array[i].count_scout_player} ({$knowledge_array[i].count_scout}%)</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page w35">
+            <p class="header">Скауты</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w50">Скаут</th>
+                    <th class="w50">Зарплата</th>
+                </tr>
+                {section name=i loop=$scout_array}
+                    <tr>
+                        <td>
+                            <a href="staff_home_profile.php?num={$scout_array[i].staff_id}">
+                                {$scout_array[i].name_name} {$scout_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="right">{$scout_array[i].staff_salary|f_igosja_money}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+    </tr>
+</table>

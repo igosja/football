@@ -1,0 +1,38 @@
+<div class="header-1-back">
+    <div class="header-1">
+        <table>
+            <tr>
+                <td>
+                    <ul class="main-menu">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/">Меню</a>
+                            <ul>
+                                <li><a href="continent_review_profile.php?num=1">Лига</a></li>
+                            </ul>
+                        </li>
+                        {if 0 == $authorization_permission}
+                            <li><a href="login.php">Войти</a></li>
+                            <li><a href="registration.php">Зарегестрироваться</a></li>
+                            <li><a href="forget_password.php">Забыли пароль?</a></li>
+                        {else}
+                            <li><a href="profile_home_home.php">{$authorization_login}</a>
+                                <ul>
+                                    <li><a href="questionary.php">Личные данные</a></li>
+                                    <li><a href="logout.php">Выйти</a></li>
+                                </ul>
+                            </li>
+                            {if (isset($authorization_team_id))}
+                                <li>
+                                    <a href="team_lineup_team_player.php?num={$authorization_team_id}">
+                                        {$authorization_team_name}
+                                    </a>
+                                </li>
+                            {/if}
+                        {/if}
+                        <li><a href="forum.php">Форум</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

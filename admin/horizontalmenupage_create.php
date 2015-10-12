@@ -1,0 +1,32 @@
+<?php
+
+include ('../include/include.php');
+
+if (isset($_POST['horizontalmenupage_name']))
+{
+    $horizontalmenupage_name  = $_POST['horizontalmenupage_name'];
+    $chapter_id = (int) $_POST['chapter_id'];
+
+    $sql = "INSERT INTO `horizontalmenupage`
+            SET `horizontalmenupage_name`=?,
+                `horizontalmenupage_horizontalmenuchapter_id`=?";
+    $prepare = $mysqli->prepare($sql);
+    $prepare->bind_param('si', $horizontalmenupage_name, $chapter_id);
+    $prepare->execute();
+    $prepare->close();
+
+    redirect('horizontalmenupage_list.php');
+
+    exit;
+}
+
+$sql = "SELECT `horizontalmenuchapter_id`, `horizontalmenuchapter_name`
+        FROM `horizontalmenuchapter`
+        ORDER BY `horizontalmenuchapter_name` ASC";
+$chapter_sql = $mysqli->query($sql);
+
+$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
+
+$smarty->assign('chapter_array', $chapter_array);
+
+$smarty->display('admin_main.html');
