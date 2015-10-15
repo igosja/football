@@ -13,7 +13,7 @@ $sql = "SELECT `game_id`,
         FROM `game`
         LEFT JOIN `shedule`
         ON `game_shedule_id`=`shedule_id`
-        WHERE `shedule_date`=CURDATE()
+        WHERE `shedule_date`='2015-10-12'
         AND `game_played`='1'";
 $game_sql = $mysqli->query($sql);
 
