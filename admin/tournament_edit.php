@@ -11,7 +11,7 @@ else
     $get_num = 1;
 }
 
-$sql = "SELECT `tournament_country_id`, `tournament_level`, `tournament_member`, `tournament_name`, `tournament_tournamenttype_id`
+$sql = "SELECT `tournament_country_id`, `tournament_level`, `tournament_visitor`, `tournament_name`, `tournament_tournamenttype_id`
         FROM `tournament`
         WHERE `tournament_id`='$get_num'
         LIMIT 1";
@@ -31,18 +31,18 @@ if (isset($_POST['tournamenttype_id']))
     $tournamenttype_id  = (int) $_POST['tournamenttype_id'];
     $tournament_name    = $_POST['tournament_name'];
     $tournament_level   = (int) $_POST['tournament_level'];
-    $tournament_member  = (int) $_POST['tournament_member'];
+    $tournament_visitor  = (float) $_POST['tournament_visitor'];
     $country_id         = (int) $_POST['country_id'];
 
     $sql = "UPDATE `tournament`
             SET `tournament_name`=?,
                 `tournament_tournamenttype_id`=?,
                 `tournament_level`=?,
-                `tournament_member`=?,
+                `tournament_visitor`=?,
                 `tournament_country_id`=?
             WHERE `tournament_id`='$get_num'";
     $prepare = $mysqli->prepare($sql);
-    $prepare->bind_param('siiii', $tournament_name, $tournamenttype_id, $tournament_level, $tournament_member, $country_id);
+    $prepare->bind_param('siidi', $tournament_name, $tournamenttype_id, $tournament_level, $tournament_visitor, $country_id);
     $prepare->execute();
     $prepare->close();
 
@@ -75,7 +75,7 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name    = $tournament_array[0]['tournament_name'];
 $tournament_level   = $tournament_array[0]['tournament_level'];
-$tournament_member  = $tournament_array[0]['tournament_member'];
+$tournament_visitor  = $tournament_array[0]['tournament_visitor'];
 $tournamenttype_id  = $tournament_array[0]['tournament_tournamenttype_id'];
 $country_id         = $tournament_array[0]['tournament_country_id'];
 
@@ -95,7 +95,7 @@ $tournamenttype_array = $tournamenttype_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('tournament_name', $tournament_name);
 $smarty->assign('tournament_level', $tournament_level);
-$smarty->assign('tournament_member', $tournament_member);
+$smarty->assign('tournament_visitor', $tournament_visitor);
 $smarty->assign('tournamenttype_id', $tournamenttype_id);
 $smarty->assign('country_id', $country_id);
 $smarty->assign('country_array', $country_array);

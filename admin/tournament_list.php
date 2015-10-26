@@ -2,7 +2,7 @@
 
 include ('../include/include.php');
 
-$sql = "SELECT `country_name`, `tournament_id`, `tournament_level`, `tournament_member`, `tournament_name`, `tournamenttype_name`
+$sql = "SELECT `country_name`, `tournament_id`, `tournament_level`, `tournament_name`, `tournamenttype_name`
         FROM `tournament`
         LEFT JOIN `tournamenttype`
         ON `tournament_tournamenttype_id`=`tournamenttype_id`

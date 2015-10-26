@@ -13,7 +13,6 @@
                     <th>Тип</th>
                     <th>Уровень</th>
                     <th>Страна</th>
-                    <th>Участников</th>
                     <th>Действия</th>
                 </tr>
                 {section name=i loop=$tournament_array}
@@ -30,9 +29,6 @@
                         </td>
                         <td class="left">
                             {$tournament_array[i].country_name}
-                        </td>
-                        <td>
-                            {$tournament_array[i].tournament_member}
                         </td>
                         <td>
                             <a href="tournament_edit.php?num={$tournament_array[i].tournament_id}" class="link-img link-pencil"></a>

@@ -1383,12 +1383,14 @@ function f_igosja_generator_lineup_current_to_lineup()
     {
         $sql = "INSERT INTO `lineup` 
                 (
+                    `lineup_condition`,
                     `lineup_player_id`,
                     `lineup_position_id`,
                     `lineup_game_id`,
                     `lineup_team_id`
                 )
-                SELECT `lineupcurrent_player_id_" . $i . "`,
+                SELECT `player_condition`,
+                       `lineupcurrent_player_id_" . $i . "`,
                        `lineupcurrent_position_id_" . $i . "`,
                        `game_id`,
                        `game_home_team_id`
@@ -1397,6 +1399,8 @@ function f_igosja_generator_lineup_current_to_lineup()
                 ON `game_shedule_id`=`shedule_id`
                 LEFT JOIN `lineupcurrent`
                 ON `lineupcurrent_team_id`=`game_home_team_id`
+                LEFT JOIN `player`
+                ON `player_id`=`lineupcurrent_player_id_" . $i . "`
                 WHERE `shedule_date`=CURDATE()
                 AND `game_played`='0'
                 ORDER BY `game_id` ASC";
@@ -1404,12 +1408,14 @@ function f_igosja_generator_lineup_current_to_lineup()
 
         $sql = "INSERT INTO `lineup`
                 (
+                    `lineup_condition`,
                     `lineup_player_id`,
                     `lineup_position_id`,
                     `lineup_game_id`,
                     `lineup_team_id`
                 )
-                SELECT `lineupcurrent_player_id_" . $i . "`,
+                SELECT `player_condition`,
+                       `lineupcurrent_player_id_" . $i . "`,
                        `lineupcurrent_position_id_" . $i . "`,
                        `game_id`,
                        `game_guest_team_id`
@@ -1418,6 +1424,8 @@ function f_igosja_generator_lineup_current_to_lineup()
                 ON `game_shedule_id`=`shedule_id`
                 LEFT JOIN `lineupcurrent`
                 ON `lineupcurrent_team_id`=`game_guest_team_id`
+                LEFT JOIN `player`
+                ON `player_id`=`lineupcurrent_player_id_" . $i . "`
                 WHERE `shedule_date`=CURDATE()
                 AND `game_played`='0'
                 ORDER BY `game_id` ASC";
@@ -1819,19 +1827,249 @@ function f_igosja_generator_game_result($minute)
         $data['tournament']['tournament_id']    = $game_array[$i]['game_tournament_id'];
         $data['game_id']                        = $game_id;
         $data['home']['team']['team_id']        = $home_team_id;
+        $data['home']['team']['power']          = 0;
+        $data['home']['team']['player_number']  = 0;
         $data['guest']['team']['team_id']       = $guest_team_id;
+        $data['guest']['team']['power']         = 0;
+        $data['guest']['team']['player_number'] = 0;
 
-        $sql = "SELECT `lineup_id`,
+        for ($j=1; $j<=5; $j++)
+        {
+            $sql = "SELECT `playerattribute_value`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_captain_player_id_" . $j . "`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_LEADER . "'";
+            $leader_sql = $mysqli->query($sql);
+
+            $count_leader = $leader_sql->num_rows;
+
+            if (1 == $count_leader)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_leader)
+        {
+            $sql = "SELECT `playerattribute_value`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_LEADER . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $leader_sql = $mysqli->query($sql);
+        }
+
+        $leader_array = $leader_sql->fetch_all(MYSQLI_ASSOC);
+
+        $leader_value = $leader_array[0]['playerattribute_value'];
+        $leader_value = round(1 + $leader_value / 1000, 2);
+
+        for ($j=1; $j<=5; $j++)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_freekick_left_player_id_" . $j . "`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'";
+            $free_sql = $mysqli->query($sql);
+
+            $count_free = $free_sql->num_rows;
+
+            if (1 == $count_free)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_free)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_FREE_KICK . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $free_sql = $mysqli->query($sql);
+        }
+
+        $free_array = $free_sql->fetch_all(MYSQLI_ASSOC);
+
+        $free_id_1 = $free_array[0]['lineup_player_id'];
+
+        for ($j=1; $j<=5; $j++)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_freekick_right_player_id_" . $j . "`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'";
+            $free_sql = $mysqli->query($sql);
+
+            $count_free = $free_sql->num_rows;
+
+            if (1 == $count_free)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_free)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_FREE_KICK . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $free_sql = $mysqli->query($sql);
+        }
+
+        $free_array = $free_sql->fetch_all(MYSQLI_ASSOC);
+
+        $free_id_2 = $free_array[0]['lineup_player_id'];
+
+        for ($j=1; $j<=5; $j++)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_corner_left_player_id_" . $j . "`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'";
+            $corner_sql = $mysqli->query($sql);
+
+            $count_corner = $corner_sql->num_rows;
+
+            if (1 == $count_corner)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_corner)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_CORNER . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $corner_sql = $mysqli->query($sql);
+        }
+
+        $corner_array = $corner_sql->fetch_all(MYSQLI_ASSOC);
+
+        $corner_id_1 = $corner_array[0]['lineup_player_id'];
+
+        for ($j=1; $j<=5; $j++)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_corner_right_player_id_" . $j . "`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'";
+            $corner_sql = $mysqli->query($sql);
+
+            $count_corner = $corner_sql->num_rows;
+
+            if (1 == $count_corner)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_corner)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_CORNER . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $corner_sql = $mysqli->query($sql);
+        }
+
+        $corner_array = $corner_sql->fetch_all(MYSQLI_ASSOC);
+
+        $corner_id_2 = $corner_array[0]['lineup_player_id'];
+
+        for ($j=1; $j<=7; $j++)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_penalty_player_id_" . $j . "`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'";
+            $penalty_sql = $mysqli->query($sql);
+
+            $count_penalty = $penalty_sql->num_rows;
+
+            if (1 == $count_penalty)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_penalty)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$home_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_PENALTY . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $penalty_sql = $mysqli->query($sql);
+        }
+
+        $penalty_array = $penalty_sql->fetch_all(MYSQLI_ASSOC);
+
+        $penalty_id = $penalty_array[0]['lineup_player_id'];
+
+        $sql = "SELECT `lineup_condition`,
+                       `lineup_id`,
                        `lineup_position_id`,
-                       `player_condition`,
+                       `lineup_red`,
+                       `lineup_yellow`,
                        `player_id`,
                        `player_height`,
+                       SUM(`playerattribute_value`) AS `player_power`,
                        `player_practice`
                 FROM `lineup`
                 LEFT JOIN `player`
                 ON `player_id`=`lineup_player_id`
+                LEFT JOIN `playerattribute`
+                ON `playerattribute_player_id`=`player_id`
                 WHERE `lineup_team_id`='$home_team_id'
                 AND `lineup_game_id`='$game_id'
+                GROUP BY `player_id`
                 ORDER BY `lineup_position_id` ASC";
         $lineup_sql = $mysqli->query($sql);
 
@@ -1843,12 +2081,46 @@ function f_igosja_generator_game_result($minute)
         {
             $player_id = $lineup_array[$j]['player_id'];
 
+            if ($player_id == $free_id_1)
+            {
+                $data['home']['team']['free'][0] = $j;
+            }
+
+            if ($player_id == $free_id_2)
+            {
+                $data['home']['team']['free'][1] = $j;
+            }
+
+            if ($player_id == $corner_id_1)
+            {
+                $data['home']['team']['corner'][0] = $j;
+            }
+
+            if ($player_id == $corner_id_2)
+            {
+                $data['home']['team']['corner'][1] = $j;
+            }
+
+            if ($player_id == $penalty_id)
+            {
+                $data['home']['team']['penalty'] = $j;
+            }
+
             $data['home']['player'][$j]['lineup_id']        = $lineup_array[$j]['lineup_id'];
             $data['home']['player'][$j]['lineup_position']  = $lineup_array[$j]['lineup_position_id'];
             $data['home']['player'][$j]['player_id']        = $player_id;
-            $data['home']['player'][$j]['condition']        = $lineup_array[$j]['player_condition'];
+            $data['home']['player'][$j]['condition']        = $lineup_array[$j]['lineup_condition'];
             $data['home']['player'][$j]['practice']         = $lineup_array[$j]['player_practice'];
             $data['home']['player'][$j]['height']           = $lineup_array[$j]['player_height'];
+            $data['home']['player'][$j]['red']              = $lineup_array[$j]['lineup_red'];
+            $data['home']['player'][$j]['yellow']           = $lineup_array[$j]['lineup_yellow'];
+
+            if (0 == $lineup_array[$j]['lineup_red'] &&
+                2 > $lineup_array[$j]['lineup_yellow'])
+            {
+                $data['home']['team']['power']         = $data['home']['team']['power'] + round($lineup_array[$j]['player_power'] * 1.1 * $leader_value);
+                $data['home']['team']['player_number'] = $data['home']['team']['power'] + 1;
+            }
 
             $sql = "SELECT `playerattribute_attribute_id`,
                            `playerattribute_value`
@@ -1863,7 +2135,7 @@ function f_igosja_generator_game_result($minute)
 
             for ($k=0; $k<$count_attribute; $k++)
             {
-                $data['home']['player'][$j]['attribute'][$attaribute_array[$k]['playerattribute_attribute_id']] = $attaribute_array[$k]['playerattribute_value'];
+                $data['home']['player'][$j]['attribute'][$attaribute_array[$k]['playerattribute_attribute_id']] = round($attaribute_array[$k]['playerattribute_value'] * 1.1);
             }
 
             $sql = "SELECT `playerposition_position_id`,
@@ -1883,17 +2155,243 @@ function f_igosja_generator_game_result($minute)
             }
         }
 
-        $sql = "SELECT `lineup_id`,
+        for ($j=1; $j<=5; $j++)
+        {
+            $sql = "SELECT `playerattribute_value`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_captain_player_id_" . $j . "`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_LEADER . "'";
+            $leader_sql = $mysqli->query($sql);
+
+            $count_leader = $leader_sql->num_rows;
+
+            if (1 == $count_leader)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_leader)
+        {
+            $sql = "SELECT `playerattribute_value`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_LEADER . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $leader_sql = $mysqli->query($sql);
+        }
+
+        $leader_array = $leader_sql->fetch_all(MYSQLI_ASSOC);
+
+        $leader_value = $leader_array[0]['playerattribute_value'];
+        $leader_value = round(1 + $leader_value / 1000, 2);
+
+        for ($j=1; $j<=5; $j++)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_freekick_left_player_id_" . $j . "`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'";
+            $free_sql = $mysqli->query($sql);
+
+            $count_free = $free_sql->num_rows;
+
+            if (1 == $count_free)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_free)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_FREE_KICK . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $free_sql = $mysqli->query($sql);
+        }
+
+        $free_array = $free_sql->fetch_all(MYSQLI_ASSOC);
+
+        $free_id_1 = $free_array[0]['lineup_player_id'];
+
+        for ($j=1; $j<=5; $j++)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_freekick_right_player_id_" . $j . "`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'";
+            $free_sql = $mysqli->query($sql);
+
+            $count_free = $free_sql->num_rows;
+
+            if (1 == $count_free)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_free)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_FREE_KICK . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $free_sql = $mysqli->query($sql);
+        }
+
+        $free_array = $free_sql->fetch_all(MYSQLI_ASSOC);
+
+        $free_id_2 = $free_array[0]['lineup_player_id'];
+
+        for ($j=1; $j<=5; $j++)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_corner_left_player_id_" . $j . "`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'";
+            $corner_sql = $mysqli->query($sql);
+
+            $count_corner = $corner_sql->num_rows;
+
+            if (1 == $count_corner)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_corner)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_CORNER . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $corner_sql = $mysqli->query($sql);
+        }
+
+        $corner_array = $corner_sql->fetch_all(MYSQLI_ASSOC);
+
+        $corner_id_1 = $corner_array[0]['lineup_player_id'];
+
+        for ($j=1; $j<=5; $j++)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_corner_right_player_id_" . $j . "`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'";
+            $corner_sql = $mysqli->query($sql);
+
+            $count_corner = $corner_sql->num_rows;
+
+            if (1 == $count_corner)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_corner)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_CORNER . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $corner_sql = $mysqli->query($sql);
+        }
+
+        $corner_array = $corner_sql->fetch_all(MYSQLI_ASSOC);
+
+        $corner_id_2 = $corner_array[0]['lineup_player_id'];
+
+        for ($j=1; $j<=7; $j++)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    CROSS JOIN `team`
+                    ON `lineup_player_id`=`team_penalty_player_id_" . $j . "`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'";
+            $penalty_sql = $mysqli->query($sql);
+
+            $count_penalty = $penalty_sql->num_rows;
+
+            if (1 == $count_penalty)
+            {
+                break;
+            }
+        }
+
+        if (0 == $count_penalty)
+        {
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `playerattribute`
+                    ON `lineup_player_id`=`playerattribute_player_id`
+                    WHERE `lineup_team_id`='$guest_team_id'
+                    AND `lineup_game_id`='$game_id'
+                    AND `playerattribute_attribute_id`='" . ATTRIBUTE_PENALTY . "'
+                    ORDER BY `playerattribute_value` DESC
+                    LIMIT 1";
+            $penalty_sql = $mysqli->query($sql);
+        }
+
+        $penalty_array = $penalty_sql->fetch_all(MYSQLI_ASSOC);
+
+        $penalty_id = $penalty_array[0]['lineup_player_id'];
+
+        $sql = "SELECT `lineup_condition`,
+                       `lineup_id`,
                        `lineup_position_id`,
-                       `player_condition`,
+                       `lineup_red`,
+                       `lineup_yellow`,
                        `player_id`,
                        `player_height`,
+                       SUM(`playerattribute_value`) AS `player_power`,
                        `player_practice`
                 FROM `lineup`
                 LEFT JOIN `player`
                 ON `player_id`=`lineup_player_id`
+                LEFT JOIN `playerattribute`
+                ON `playerattribute_player_id`=`player_id`
                 WHERE `lineup_team_id`='$guest_team_id'
                 AND `lineup_game_id`='$game_id'
+                GROUP BY `player_id`
                 ORDER BY `lineup_position_id` ASC";
         $lineup_sql = $mysqli->query($sql);
 
@@ -1905,12 +2403,46 @@ function f_igosja_generator_game_result($minute)
         {
             $player_id = $lineup_array[$j]['player_id'];
 
+            if ($player_id == $free_id_1)
+            {
+                $data['guest']['team']['free'][0] = $j;
+            }
+
+            if ($player_id == $free_id_2)
+            {
+                $data['guest']['team']['free'][1] = $j;
+            }
+
+            if ($player_id == $corner_id_1)
+            {
+                $data['guest']['team']['corner'][0] = $j;
+            }
+
+            if ($player_id == $corner_id_2)
+            {
+                $data['guest']['team']['corner'][1] = $j;
+            }
+
+            if ($player_id == $penalty_id)
+            {
+                $data['guest']['team']['penalty'] = $j;
+            }
+
             $data['guest']['player'][$j]['lineup_id']       = $lineup_array[$j]['lineup_id'];
             $data['guest']['player'][$j]['lineup_position'] = $lineup_array[$j]['lineup_position_id'];
             $data['guest']['player'][$j]['player_id']       = $player_id;
-            $data['guest']['player'][$j]['condition']       = $lineup_array[$j]['player_condition'];
+            $data['guest']['player'][$j]['condition']       = $lineup_array[$j]['lineup_condition'];
             $data['guest']['player'][$j]['practice']        = $lineup_array[$j]['player_practice'];
             $data['guest']['player'][$j]['height']          = $lineup_array[$j]['player_height'];
+            $data['guest']['player'][$j]['red']             = $lineup_array[$j]['lineup_red'];
+            $data['guest']['player'][$j]['yellow']          = $lineup_array[$j]['lineup_yellow'];
+
+            if (0 == $lineup_array[$j]['lineup_red'] &&
+                2 > $lineup_array[$j]['lineup_yellow'])
+            {
+                $data['guest']['team']['power']         = $data['guest']['team']['power'] + round($lineup_array[$j]['player_power'] * $leader_value);
+                $data['guest']['team']['player_number'] = $data['guest']['team']['power'] + 1;
+            }
 
             $sql = "SELECT `playerattribute_attribute_id`,
                            `playerattribute_value`
@@ -1958,7 +2490,7 @@ function f_igosja_generator_game_result($minute)
 function f_igosja_generator_decision($data)
 //Игрок принимает решение
 {
-    $decision = rand(1,6);
+    $decision = rand(1, 6);
 
     $data['decision'] = $decision;
 
@@ -1977,7 +2509,7 @@ function f_igosja_generator_decision_result($data)
 
     if (0 == $data['take'])
     {
-        $player = rand(1, 10);
+        $player = f_igosja_generator_select_player($data, $data['team']);
     }
     else
     {
@@ -1985,9 +2517,14 @@ function f_igosja_generator_decision_result($data)
         $data['take'] = 0;
     }
 
-    $player_id  = $data[$data['team']]['player'][$player]['player_id'];
-    $char       = $data[$data['team']]['player'][$player]['attribute'][ATTRIBUTE_FIELD_VIEW];
-    $vision     = rand($char, 200);
+    $player_id          = $data[$data['team']]['player'][$player]['player_id'];
+    $char               = $data[$data['team']]['player'][$player]['attribute'][ATTRIBUTE_FIELD_VIEW];
+    $condition          = $data[$data['team']]['player'][$player]['condition'];
+    $practice           = $data[$data['team']]['player'][$player]['practice'];
+    $team_power         = $data[$data['team']]['team']['power'];
+    $team_player_number = $data[$data['team']]['team']['player_number'];
+    $char               = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
+    $vision             = rand($char, 200);
 
     if (200 == $vision)
     {
@@ -2034,7 +2571,7 @@ function f_igosja_generator_decision_result($data)
 function f_igosja_generator_air_before_shot()
 //Высота передачи (верхом/низом)
 {
-    $air = rand(1,2);
+    $air = rand(1, 2);
 
     return $air;
 }
@@ -2044,7 +2581,7 @@ function f_igosja_generator_shot($data)
 {
     global $mysqli;
 
-    $player_opponent    = rand(1,10);
+    $player_opponent    = f_igosja_generator_select_player($data, $data['opponent']);
     $game_id            = $data['game_id'];
     $team_id            = $data[$data['team']]['team']['team_id'];
     $opponent_id        = $data[$data['opponent']]['team']['team_id'];
@@ -2055,10 +2592,12 @@ function f_igosja_generator_shot($data)
     $minute             = $data['minute'];
     $air                = $data['air'];
     $player_pass        = $data['pass'];
+    $team_power         = $data[$data['team']]['team']['power'];
+    $team_player_number = $data[$data['team']]['team']['player_number'];
 
     if (0 == $data['take'])
     {
-        $player_shot = rand(1, 10);
+        $player_shot = f_igosja_generator_select_player($data, $data['team']);
     }
     else
     {
@@ -2068,6 +2607,8 @@ function f_igosja_generator_shot($data)
 
     $lineup_id = $data[$data['team']]['player'][$player_shot]['lineup_id'];
     $player_id = $data[$data['team']]['player'][$player_shot]['player_id'];
+    $condition = $data[$data['team']]['player'][$player_shot]['condition'];
+    $practice  = $data[$data['team']]['player'][$player_shot]['practice'];
 
     if (0 < $player_pass)
     {
@@ -2077,7 +2618,7 @@ function f_igosja_generator_shot($data)
 
     if ($air == 1) //Удар с земли
     {
-        $distance = rand(1,2);
+        $distance = rand(1, 2);
 
         if (1 == $distance) //Близкое расстояние
         {
@@ -2094,6 +2635,7 @@ function f_igosja_generator_shot($data)
             $mysqli->query($sql);
 
             $char = round(($char_1 + ($char_2 + $char_3) * 25 / 100) / 1.5);
+            $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
             $success = f_igosja_generator_success($char);
 
@@ -2233,7 +2775,7 @@ function f_igosja_generator_shot($data)
                         f_igosja_generator_corner($data);
                     }
                 }
-                else
+                elseif (1 == $opposition)
                 {
                     $sql = "INSERT INTO `broadcasting`
                             SET `broadcasting_game_id`='$game_id',
@@ -2270,6 +2812,7 @@ function f_igosja_generator_shot($data)
             $mysqli->query($sql);
 
             $char = round(($char_1 + ($char_2 + $char_3) * 25 / 100) / 3);
+            $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
             $success = f_igosja_generator_success($char);
 
@@ -2410,7 +2953,7 @@ function f_igosja_generator_shot($data)
                         f_igosja_generator_corner($data);
                     }
                 }
-                else
+                elseif (1 == $opposition)
                 {
                     $sql = "INSERT INTO `broadcasting`
                             SET `broadcasting_game_id`='$game_id',
@@ -2454,7 +2997,8 @@ function f_igosja_generator_shot($data)
                     `broadcasting_text`='пытается сыграть головой.'";
         $mysqli->query($sql);
 
-        $char = ($char_1 + ($char_2 + $char_3 + $char_8 / 2) * 50 / 100 + ($char_4 + $char_5 + $char_6 + $char_7) * 25 / 100) / 3.5;
+        $char = round(($char_1 + ($char_2 + $char_3 + $char_8 / 2) * 50 / 100 + ($char_4 + $char_5 + $char_6 + $char_7) * 25 / 100) / 3.5);
+        $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
         $success = f_igosja_generator_success($char);
 
@@ -2597,7 +3141,7 @@ function f_igosja_generator_shot($data)
                     f_igosja_generator_corner($data);
                 }
             }
-            else
+            elseif (1 == $opposition)
             {
                 $sql = "INSERT INTO `broadcasting`
                         SET `broadcasting_game_id`='$game_id',
@@ -2645,7 +3189,7 @@ function f_igosja_generator_air_pass($data)
 
     if (0 == $data['take'])
     {
-        $player_air_pass = rand(1, 10);
+        $player_air_pass = f_igosja_generator_select_player($data, $data['team']);
     }
     else
     {
@@ -2653,16 +3197,21 @@ function f_igosja_generator_air_pass($data)
         $data['take']    = 0;
     }
 
-    $game_id   = $data['game_id'];
-    $team_id   = $data[$data['team']]['team']['team_id'];
-    $minute    = $data['minute'];
-    $player_id = $data[$data['team']]['player'][$player_air_pass]['player_id'];
+    $game_id            = $data['game_id'];
+    $team_id            = $data[$data['team']]['team']['team_id'];
+    $minute             = $data['minute'];
+    $player_id          = $data[$data['team']]['player'][$player_air_pass]['player_id'];
+    $condition          = $data[$data['team']]['player'][$player_air_pass]['condition'];
+    $practice           = $data[$data['team']]['player'][$player_air_pass]['practice'];
+    $team_power         = $data[$data['team']]['team']['power'];
+    $team_player_number = $data[$data['team']]['team']['player_number'];
 
     $char_1 = $data[$data['team']]['player'][$player_air_pass]['attribute'][ATTRIBUTE_AIR_PASS];
     $char_2 = $data[$data['team']]['player'][$player_air_pass]['attribute'][ATTRIBUTE_COMPOSURE];
     $char_3 = $data[$data['team']]['player'][$player_air_pass]['attribute'][ATTRIBUTE_CONCENTRATION];
 
     $char = round(($char_1 + ($char_2 + $char_3) * 25 / 100) / 1.5);
+    $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
     $air_pass = rand($char, 200);
 
@@ -2708,7 +3257,7 @@ function f_igosja_generator_fast_pass($data)
 
     if (0 == $data['take'])
     {
-        $player_fast_pass = rand(1, 10);
+        $player_fast_pass = f_igosja_generator_select_player($data, $data['team']);
     }
     else
     {
@@ -2716,13 +3265,17 @@ function f_igosja_generator_fast_pass($data)
         $data['take']     = 0;
     }
 
-    $player_opponent    = rand(1, 10);
+    $player_opponent    = f_igosja_generator_select_player($data, $data['opponent']);
     $game_id            = $data['game_id'];
     $team_id            = $data[$data['team']]['team']['team_id'];
     $minute             = $data['minute'];
     $player_id          = $data[$data['team']]['player'][$player_fast_pass]['player_id'];
+    $condition          = $data[$data['team']]['player'][$player_fast_pass]['condition'];
+    $practice           = $data[$data['team']]['player'][$player_fast_pass]['practice'];
     $opponent_id        = $data[$data['opponent']]['team']['team_id'];
     $opponent_player_id = $data[$data['opponent']]['player'][$player_opponent]['player_id'];
+    $team_power         = $data[$data['team']]['team']['power'];
+    $team_player_number = $data[$data['team']]['team']['player_number'];
 
     $char_1 = $data[$data['team']]['player'][$player_fast_pass]['attribute'][ATTRIBUTE_AIR_PASS];
     $char_2 = $data[$data['team']]['player'][$player_fast_pass]['attribute'][ATTRIBUTE_PASS];
@@ -2730,6 +3283,7 @@ function f_igosja_generator_fast_pass($data)
     $char_4 = $data[$data['team']]['player'][$player_fast_pass]['attribute'][ATTRIBUTE_CONCENTRATION];
 
     $char = round(($char_1 + $char_2 + ($char_3 + $char_4) * 25 / 100) / 2.5);
+    $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
     $fast_pass = rand($char, 200);
 
@@ -2798,7 +3352,7 @@ function f_igosja_generator_long_pass($data)
 
     if (0 == $data['take'])
     {
-        $player_long_pass = rand(1, 10);
+        $player_long_pass = f_igosja_generator_select_player($data, $data['team']);
     }
     else
     {
@@ -2806,15 +3360,19 @@ function f_igosja_generator_long_pass($data)
         $data['take']     = 0;
     }
 
-    $player_opponent    = rand(1, 10);
-    $player_take        = rand(1, 10);
+    $player_take        = f_igosja_generator_select_player($data, $data['team'], $player_long_pass);
+    $player_opponent    = f_igosja_generator_select_player($data, $data['opponent']);
     $game_id            = $data['game_id'];
     $team_id            = $data[$data['team']]['team']['team_id'];
     $minute             = $data['minute'];
     $player_id          = $data[$data['team']]['player'][$player_long_pass]['player_id'];
+    $condition          = $data[$data['team']]['player'][$player_long_pass]['condition'];
+    $practice           = $data[$data['team']]['player'][$player_long_pass]['practice'];
+    $take_player_id     = $data[$data['team']]['player'][$player_take]['player_id'];
     $opponent_id        = $data[$data['opponent']]['team']['team_id'];
     $opponent_player_id = $data[$data['opponent']]['player'][$player_opponent]['player_id'];
-    $take_player_id     = $data[$data['opponent']]['player'][$player_take]['player_id'];
+    $team_power         = $data[$data['team']]['team']['power'];
+    $team_player_number = $data[$data['team']]['team']['player_number'];
 
     $data['take'] = $player_take;
 
@@ -2824,6 +3382,7 @@ function f_igosja_generator_long_pass($data)
     $char_4 = $data[$data['team']]['player'][$player_long_pass]['attribute'][ATTRIBUTE_CONCENTRATION];
 
     $char = round(($char_1 + $char_2 + ($char_3 + $char_4) * 25 / 100) / 2.5);
+    $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
     $long_pass = rand($char, 200);
 
@@ -2904,7 +3463,7 @@ function f_igosja_generator_pass($data)
 
     if (0 == $data['take'])
     {
-        $player_pass = rand(1, 10);
+        $player_pass = f_igosja_generator_select_player($data, $data['team']);
     }
     else
     {
@@ -2912,19 +3471,24 @@ function f_igosja_generator_pass($data)
         $data['take'] = 0;
     }
 
-    $player_take        = rand(1, 10);
+    $player_take        = f_igosja_generator_select_player($data, $data['team'], $player_pass);
     $data['take']       = $player_take;
     $game_id            = $data['game_id'];
     $team_id            = $data[$data['team']]['team']['team_id'];
     $minute             = $data['minute'];
     $player_id          = $data[$data['team']]['player'][$player_pass]['player_id'];
-    $take_player_id     = $data[$data['opponent']]['player'][$player_take]['player_id'];
+    $condition          = $data[$data['team']]['player'][$player_pass]['condition'];
+    $practice           = $data[$data['team']]['player'][$player_pass]['practice'];
+    $take_player_id     = $data[$data['team']]['player'][$player_take]['player_id'];
+    $team_power         = $data[$data['team']]['team']['power'];
+    $team_player_number = $data[$data['team']]['team']['player_number'];
 
     $char_1 = $data[$data['team']]['player'][$player_pass]['attribute'][ATTRIBUTE_PASS];
     $char_2 = $data[$data['team']]['player'][$player_pass]['attribute'][ATTRIBUTE_COMPOSURE];
     $char_3 = $data[$data['team']]['player'][$player_pass]['attribute'][ATTRIBUTE_CONCENTRATION];
 
     $char = round(($char_1 + ($char_2 + $char_3) * 25 / 100) / 1.5);
+    $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
     $pass = rand($char, 200);
 
@@ -2990,7 +3554,7 @@ function f_igosja_generator_dribling($data)
 
     if (0 == $data['take'])
     {
-        $player_dribling = rand(1, 10);
+        $player_dribling = f_igosja_generator_select_player($data, $data['team']);
     }
     else
     {
@@ -3002,12 +3566,17 @@ function f_igosja_generator_dribling($data)
     $team_id            = $data[$data['team']]['team']['team_id'];
     $minute             = $data['minute'];
     $player_id          = $data[$data['team']]['player'][$player_dribling]['player_id'];
+    $condition          = $data[$data['team']]['player'][$player_dribling]['condition'];
+    $practice           = $data[$data['team']]['player'][$player_dribling]['practice'];
+    $team_power         = $data[$data['team']]['team']['power'];
+    $team_player_number = $data[$data['team']]['team']['player_number'];
 
     $char_1 = $data[$data['team']]['player'][$player_dribling]['attribute'][ATTRIBUTE_DRIBLING];
     $char_2 = $data[$data['team']]['player'][$player_dribling]['attribute'][ATTRIBUTE_COMPOSURE];
     $char_3 = $data[$data['team']]['player'][$player_dribling]['attribute'][ATTRIBUTE_CONCENTRATION];
 
     $char = round(($char_1 + ($char_2 + $char_3) * 25 / 100) / 1.5);
+    $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
     $dribling = rand($char, 200);
 
@@ -3048,7 +3617,7 @@ function f_igosja_generator_taking($data)
 {
     if (0 == $data['take'])
     {
-        $player_taking = rand(1, 10);
+        $player_taking = f_igosja_generator_select_player($data, $data['team']);
     }
     else
     {
@@ -3056,11 +3625,17 @@ function f_igosja_generator_taking($data)
         $data['take']    = 0;
     }
 
+    $team_power         = $data[$data['team']]['team']['power'];
+    $team_player_number = $data[$data['team']]['team']['player_number'];
+    $condition          = $data[$data['team']]['player'][$player_taking]['condition'];
+    $practice           = $data[$data['team']]['player'][$player_taking]['practice'];
+
     $char_1 = $data[$data['team']]['player'][$player_taking]['attribute'][ATTRIBUTE_TAKING];
     $char_2 = $data[$data['team']]['player'][$player_taking]['attribute'][ATTRIBUTE_COMPOSURE];
     $char_3 = $data[$data['team']]['player'][$player_taking]['attribute'][ATTRIBUTE_CONCENTRATION];
 
     $char = round(($char_1 + ($char_2 + $char_3) * 25 / 100) / 1.5);
+    $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
     $taking = rand($char, 200);
 
@@ -3085,15 +3660,29 @@ function f_igosja_generator_opposition($data)
     $team_id            = $data[$data['team']]['team']['team_id'];
     $opponent_id        = $data[$data['opponent']]['team']['team_id'];
     $gk_player_id       = $data[$data['opponent']]['player'][0]['player_id'];
+    $gk_condition       = $data[$data['opponent']]['player'][0]['condition'];
+    $gk_practice        = $data[$data['opponent']]['player'][0]['practice'];
     $tournament_id      = $data['tournament']['tournament_id'];
     $season_id          = $data['season'];
     $minute             = $data['minute'];
-    $player_shot        = rand(1, 10);
+    $player_shot        = rand(0, 1);
+    $player_shot        = $data[$data['team']]['team']['free'][$player_shot];
     $shot_player_id     = $data[$data['team']]['player'][$player_shot]['player_id'];
     $shot_lineup_id     = $data[$data['team']]['player'][$player_shot]['lineup_id'];
-    $player_opposition  = rand(1, 10);
+    $shot_condition     = $data[$data['team']]['player'][$player_shot]['condition'];
+    $shot_practice      = $data[$data['team']]['player'][$player_shot]['practice'];
+    $player_penalty     = $data[$data['team']]['team']['penalty'];
+    $penalty_player_id  = $data[$data['team']]['player'][$player_penalty]['player_id'];
+    $penalty_lineup_id  = $data[$data['team']]['player'][$player_penalty]['lineup_id'];
+    $penalty_condition  = $data[$data['team']]['player'][$player_penalty]['condition'];
+    $penalty_practice   = $data[$data['team']]['player'][$player_penalty]['practice'];
+    $player_opposition  = f_igosja_generator_select_player($data, $data['opponent']);
     $lineup_id          = $data[$data['opponent']]['player'][$player_opposition]['lineup_id'];
     $player_id          = $data[$data['opponent']]['player'][$player_opposition]['player_id'];
+    $condition          = $data[$data['opponent']]['player'][$player_opposition]['condition'];
+    $practice           = $data[$data['opponent']]['player'][$player_opposition]['practice'];
+    $team_power         = $data[$data['opponent']]['team']['power'];
+    $team_player_number = $data[$data['opponent']]['team']['player_number'];
 
     $char_1     = $data[$data['opponent']]['player'][$player_opposition]['attribute'][ATTRIBUTE_PRESSING];
     $char_2     = $data[$data['opponent']]['player'][$player_opposition]['attribute'][ATTRIBUTE_FAMBLE];
@@ -3105,14 +3694,17 @@ function f_igosja_generator_opposition($data)
     $char_8     = $data[$data['opponent']]['player'][$player_opposition]['attribute'][ATTRIBUTE_SERVICEABILITY];
     $char_9     = $data[$data['opponent']]['player'][$player_opposition]['attribute'][ATTRIBUTE_BRAVE];
     $char_10    = $data[$data['opponent']]['player'][$player_opposition]['attribute'][ATTRIBUTE_AGRESSION];
-    $char_11    = $data[$data['team']]['player'][$player_shot]['attribute'][ATTRIBUTE_PENALTY];
+    $char_11    = $data[$data['team']]['player'][$player_penalty]['attribute'][ATTRIBUTE_PENALTY];
     $char_12    = $data[$data['team']]['player'][$player_shot]['attribute'][ATTRIBUTE_COMPOSURE];
     $char_13    = $data[$data['team']]['player'][$player_shot]['attribute'][ATTRIBUTE_CONCENTRATION];
     $char_14    = $data[$data['opponent']]['player'][0]['attribute'][ATTRIBUTE_GK_PENALTY];
     $char_15    = $data[$data['team']]['player'][$player_shot]['attribute'][ATTRIBUTE_FREE_KICK];
     $char_16    = $data[$data['opponent']]['player'][0]['attribute'][ATTRIBUTE_GK_FREE_KICK];
+    $char_17    = $data[$data['team']]['player'][$player_penalty]['attribute'][ATTRIBUTE_COMPOSURE];
+    $char_18    = $data[$data['team']]['player'][$player_penalty]['attribute'][ATTRIBUTE_CONCENTRATION];
 
     $char = round(($char_1 + $char_2 + ($char_3 + $char_4 + $char_5 + $char_6 + $char_7 + $char_8 + $char_9) * 25 / 100) / 3.75);
+    $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
     $opposition = rand($char, 200);
 
@@ -3120,9 +3712,9 @@ function f_igosja_generator_opposition($data)
     {
         $result = 1;
 
-        $foul_char = rand(100, 100 + $char_10);
+        $foul_char = rand(100 - $char_10, 200);
 
-        if (150 > $foul_char)
+        if (150 < $foul_char)
         {
             $result = 2;
 
@@ -3155,7 +3747,7 @@ function f_igosja_generator_opposition($data)
                     WHERE `lineup_id`='$lineup_id'";
             $mysqli->query($sql);
 
-            if (100 == $foul_char)
+            if (200 == $foul_char)
             {
                 $sql = "INSERT INTO `broadcasting`
                         SET `broadcasting_game_id`='$game_id',
@@ -3172,7 +3764,8 @@ function f_igosja_generator_opposition($data)
                         LIMIT 1";
                 $mysqli->query($sql);
 
-                $char = round(($char_11 + ($char_12 + $char_13) * 25 / 100) / 1.5) * 10;
+                $char = round(($char_11 + ($char_17 + $char_18) * 25 / 100) / 1.5);
+                $char = round($char * $penalty_practice * $penalty_condition / 100 / 100) * 10;
 
                 $sql = "UPDATE `game`
                         SET `game_home_shot`=IF(`game_home_team_id`='$team_id',`game_home_shot`+'1',`game_home_shot`),
@@ -3187,7 +3780,7 @@ function f_igosja_generator_opposition($data)
                         SET `statisticplayer_penalty`=`statisticplayer_penalty`+'1',
                             `statisticplayer_shot`=`statisticplayer_shot`+'1',
                             `statisticplayer_ontarget`=`statisticplayer_ontarget`+'1'
-                        WHERE `statisticplayer_player_id`='$shot_player_id'
+                        WHERE `statisticplayer_player_id`='$penalty_player_id'
                         AND `statisticplayer_tournament_id`='$tournament_id'
                         AND `statisticplayer_season_id`='$season_id'
                         AND `statisticplayer_team_id`='$team_id'
@@ -3198,18 +3791,19 @@ function f_igosja_generator_opposition($data)
                         SET `lineup_shot`=`lineup_shot`+'1',
                             `lineup_ontarget`=`lineup_ontarget`+'1',
                             `lineup_penalty`=`lineup_penalty`+'1'
-                        WHERE `lineup_id`='$shot_lineup_id'
+                        WHERE `lineup_id`='$penalty_lineup_id'
                         LIMIT 1";
                 $mysqli->query($sql);
 
-                $goalkeeper = rand($char_14, 200);
+                $gk_char = round($char_14 * $gk_practice * $gk_condition / 100 / 100);
+                $goalkeeper = rand($gk_char, 200);
 
                 if ($char > $goalkeeper)
                 {
                     $sql = "INSERT INTO `broadcasting`
                             SET `broadcasting_game_id`='$game_id',
                                 `broadcasting_minute`='$minute',
-                                `broadcasting_player_id`='$shot_player_id',
+                                `broadcasting_player_id`='$penalty_player_id',
                                 `broadcasting_team_id`='$team_id',
                                 `broadcasting_text`='реализовывает пенальти.'";
                     $mysqli->query($sql);
@@ -3224,7 +3818,7 @@ function f_igosja_generator_opposition($data)
                     $sql = "UPDATE `statisticplayer`
                             SET `statisticplayer_penalty_goal`=`statisticplayer_penalty_goal`+'1',
                                 `statisticplayer_goal`=`statisticplayer_goal`+'1'
-                            WHERE `statisticplayer_player_id`='$shot_player_id'
+                            WHERE `statisticplayer_player_id`='$penalty_player_id'
                             AND `statisticplayer_tournament_id`='$tournament_id'
                             AND `statisticplayer_season_id`='$season_id'
                             AND `statisticplayer_team_id`='$team_id'
@@ -3235,14 +3829,14 @@ function f_igosja_generator_opposition($data)
                             SET `event_eventtype_id`='" . EVENT_PENALTY_GOAL . "',
                                 `event_game_id`='$game_id',
                                 `event_minute`='$minute',
-                                `event_player_id`='$shot_player_id',
+                                `event_player_id`='$penalty_player_id',
                                 `event_team_id`='$team_id'";
                     $mysqli->query($sql);
 
                     $sql = "UPDATE `lineup`
                             SET `lineup_goal`=`lineup_goal`+'1',
                                 `lineup_penalty_goal`=`lineup_penalty_goal`+'1'
-                            WHERE `lineup_id`='$shot_lineup_id'";
+                            WHERE `lineup_id`='$penalty_lineup_id'";
                     $mysqli->query($sql);
                 }
                 else
@@ -3268,7 +3862,7 @@ function f_igosja_generator_opposition($data)
             }
             else
             {
-                if (101 == $foul_char)
+                if (199 == $foul_char)
                 {
                     $sql = "INSERT INTO `broadcasting`
                             SET `broadcasting_game_id`='$game_id',
@@ -3314,7 +3908,7 @@ function f_igosja_generator_opposition($data)
                             AND `disqualification_player_id`='$player_id'";
                     $mysqli->query($sql);
                 }
-                elseif (115 > $foul_char)
+                elseif (185 < $foul_char)
                 {
                     $sql = "INSERT INTO `broadcasting`
                             SET `broadcasting_game_id`='$game_id',
@@ -3361,6 +3955,7 @@ function f_igosja_generator_opposition($data)
                 }
 
                 $char = round(($char_15 + ($char_12 + $char_13) * 25 / 100) / 1.5);
+                $char = round($char * $shot_practice * $shot_condition / 100 / 100);
 
                 $success = f_igosja_generator_success($char);
 
@@ -3395,7 +3990,7 @@ function f_igosja_generator_opposition($data)
                             WHERE `lineup_id`='$lineup_id'";
                     $mysqli->query($sql);
 
-                    $opposition = f_igosja_generator_success($char);
+                    $opposition = f_igosja_generator_success($opposition);
 
                     if (0 == $opposition)
                     {
@@ -3428,8 +4023,10 @@ function f_igosja_generator_opposition($data)
                                 WHERE `lineup_id`='$shot_lineup_id'";
                         $mysqli->query($sql);
 
-                        $player_free    = rand($char_15, 200);
-                        $gk_free        = rand($char_16, 200);
+                        $player_free    = round($char_15 * $shot_practice * $shot_condition / 100 / 100);
+                        $player_free    = rand($player_free, 200);
+                        $gk_free        = round($char_16 * $gk_practice * $gk_condition / 100 / 100);
+                        $gk_free        = rand($gk_free, 200);
 
                         if ($player_free > $gk_free)
                         {
@@ -3498,6 +4095,9 @@ function f_igosja_generator_opposition($data)
 function f_igosja_generator_goalkeeper_opposition($data)
 //Игра вратаря
 {
+    $condition = $data[$data['opponent']]['player'][0]['condition'];
+    $practice  = $data[$data['opponent']]['player'][0]['practice'];
+
     $char_1 = $data[$data['opponent']]['player'][0]['attribute'][ATTRIBUTE_REACTION];
     $char_2 = $data[$data['opponent']]['player'][0]['attribute'][ATTRIBUTE_HANDS];
     $char_3 = $data[$data['opponent']]['player'][0]['attribute'][ATTRIBUTE_IN_AREA];
@@ -3506,6 +4106,7 @@ function f_igosja_generator_goalkeeper_opposition($data)
     $char_6 = $data[$data['opponent']]['player'][0]['attribute'][ATTRIBUTE_COORDINATE];
 
     $char = round(($char_1 + $char_2 * 50 / 100 + ($char_3 + $char_4 + $char_5 + $char_6) * 25 / 100) / 2.5);
+    $char = round($char * $practice * $condition / 100 / 100);
 
     $gk_play = rand($char, 200);
 
@@ -3530,17 +4131,25 @@ function f_igosja_generator_corner($data)
     $team_id            = $data[$data['team']]['team']['team_id'];
     $opponent_id        = $data[$data['opponent']]['team']['team_id'];
     $gk_player_id       = $data[$data['opponent']]['player'][0]['player_id'];
+    $gk_condition       = $data[$data['opponent']]['player'][0]['condition'];
+    $gk_practice        = $data[$data['opponent']]['player'][0]['practice'];
     $minute             = $data['minute'];
-    $player_corner      = rand(1, 10);
+    $player_corner      = rand(0, 1);
+    $player_corner      = $data[$data['team']]['corner'][$player_corner];
     $corner_player_id   = $data[$data['team']]['player'][$player_corner]['player_id'];
-    $player_defence     = rand(1, 10);
+    $condition          = $data[$data['team']]['player'][$player_corner]['condition'];
+    $practice           = $data[$data['team']]['player'][$player_corner]['practice'];
+    $player_defence     = f_igosja_generator_select_player($data, $data['opponent']);
     $defence_player_id  = $data[$data['opponent']]['player'][$player_defence]['player_id'];
+    $team_power         = $data[$data['team']]['team']['power'];
+    $team_player_number = $data[$data['team']]['team']['player_number'];
 
     $char_1 = $data[$data['opponent']]['player'][0]['attribute'][ATTRIBUTE_CATCH];
     $char_2 = $data[$data['team']]['player'][$player_corner]['attribute'][ATTRIBUTE_CORNER];
     $char_3 = $data[$data['team']]['player'][$player_corner]['attribute'][ATTRIBUTE_COMPOSURE];
     $char_4 = $data[$data['team']]['player'][$player_corner]['attribute'][ATTRIBUTE_CONCENTRATION];
 
+    $char_1  = $char_1 * $gk_practice * $gk_condition / 100 / 100;
     $gk_play = rand(100, 100 + $char_1);
 
     if (150 < $gk_play)
@@ -3561,6 +4170,7 @@ function f_igosja_generator_corner($data)
         $mysqli->query($sql);
 
         $char = round(($char_2 + ($char_3 + $char_4) * 25 / 100) / 1.5);
+        $char = round(($char * $practice * $condition / 100 / 100 + $team_power / MAX_TEAM_POWER) * $team_player_number / NUMBER_PLAYER_ON_FIELD / 2);
 
         $air_pass = rand($char, 200);
 
@@ -3611,6 +4221,8 @@ function f_igosja_generator_one_on_one($data)
     $team_id        = $data[$data['team']]['team']['team_id'];
     $opponent_id    = $data[$data['opponent']]['team']['team_id'];
     $gk_player_id   = $data[$data['opponent']]['player'][0]['player_id'];
+    $gk_condition   = $data[$data['opponent']]['player'][0]['condition'];
+    $gk_practice    = $data[$data['opponent']]['player'][0]['practice'];
     $tournament_id  = $data['tournament']['tournament_id'];
     $season_id      = $data['season'];
     $minute         = $data['minute'];
@@ -3620,7 +4232,7 @@ function f_igosja_generator_one_on_one($data)
 
     if (0 == $data['take'])
     {
-        $player_shot = rand(1, 10);
+        $player_shot = f_igosja_generator_select_player($data, $data['team']);
     }
     else
     {
@@ -3628,8 +4240,10 @@ function f_igosja_generator_one_on_one($data)
         $data['take'] = 0;
     }
 
-    $lineup_id      = $data[$data['team']]['player'][$player_shot]['lineup_id'];
-    $player_id      = $data[$data['team']]['player'][$player_shot]['player_id'];
+    $lineup_id = $data[$data['team']]['player'][$player_shot]['lineup_id'];
+    $player_id = $data[$data['team']]['player'][$player_shot]['player_id'];
+    $condition = $data[$data['team']]['player'][$player_shot]['condition'];
+    $practice  = $data[$data['team']]['player'][$player_shot]['practice'];
 
     $char_1 = $data[$data['team']]['player'][$player_shot]['attribute'][ATTRIBUTE_SHOT];
     $char_2 = $data[$data['team']]['player'][$player_shot]['attribute'][ATTRIBUTE_COMPOSURE];
@@ -3637,6 +4251,7 @@ function f_igosja_generator_one_on_one($data)
     $char_4 = $data[$data['opponent']]['player'][0]['attribute'][ATTRIBUTE_ONE_ON_ONE];
 
     $char = round(($char_1 + ($char_2 + $char_3) * 25 / 100) / 1.5);
+    $char = round($char * $practice * $opponent);
 
     $success = f_igosja_generator_success($char);
 
@@ -3675,7 +4290,8 @@ function f_igosja_generator_one_on_one($data)
                 WHERE `lineup_id`='$lineup_id'";
         $mysqli->query($sql);
 
-        $gk_play = rand($char_4, 200);
+        $gk_play = round($char_4 * $gk_condition * $gk_practice / 100 / 100);
+        $gk_play = rand($gk_play, 200);
 
         if (150 < $gk_play)
         {
@@ -3903,21 +4519,17 @@ function f_igosja_generator_player_condition_practice()
 {
     global $mysqli;
 
-    $sql = "UPDATE `player`
-            SET `player_condition`=`player_condition`-'8'-'4'*RAND(),
+    $sql = "UPDATE `lineup`
+            LEFT JOIN `player`
+            ON `player_id`=`lineup_player_id`
+            LEFT JOIN `game`
+            ON `game_id`=`lineup_game_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            SET `player_condition`=`lineup_condition`,
                 `player_practice`=`player_practice`+'10'+'5'*RAND()
-            WHERE `player_id` IN 
-            (
-                SELECT `lineup_player_id`
-                FROM `lineup`
-                LEFT JOIN `game`
-                ON `game_id`=`lineup_game_id`
-                LEFT JOIN `shedule`
-                ON `game_shedule_id`=`shedule_id`
-                WHERE `game_played`='0'
-                AND `shedule_date`=CURDATE()
-                ORDER BY `lineup_player_id` ASC
-            )";
+            WHERE `shedule_date`=CURDATE()
+            AND `game_played`='0'";
     $mysqli->query($sql);
 
     $sql = "UPDATE `player`
@@ -3931,8 +4543,8 @@ function f_igosja_generator_player_condition_practice()
     $mysqli->query($sql);
 
     $sql = "UPDATE `player`
-            SET `player_condition`='0'
-            WHERE `player_condition`<'0'";
+            SET `player_condition`='50'
+            WHERE `player_condition`<'50'";
     $mysqli->query($sql);
 
     $sql = "UPDATE `player`
@@ -3941,8 +4553,8 @@ function f_igosja_generator_player_condition_practice()
     $mysqli->query($sql);
 
     $sql = "UPDATE `player`
-            SET `player_practice`='0'
-            WHERE `player_practice`<'0'";
+            SET `player_practice`='50'
+            WHERE `player_practice`<'50'";
     $mysqli->query($sql);
 }
 
@@ -4090,7 +4702,7 @@ function f_igosja_generator_statistic_team_user_referee()
 }
 
 function f_igosja_generator_standing()
-//Обновляем турнирніе таблицы
+//Обновляем турнирные таблицы
 {
     global $mysqli;
     global $igosja_season_id;
@@ -4205,4 +4817,1498 @@ function f_igosja_generator_make_played()
             SET `game_played`='1'
             WHERE `shedule_date`=CURDATE()";
     $mysqli->query($sql);
+}
+
+function f_igosja_generator_game_tire()
+{
+    global $mysqli;
+
+    $sql = "UPDATE `lineup`
+            LEFT JOIN `game`
+            ON `game_id`=`lineup_game_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            SET `lineup_condition`=`lineup_condition`-'1'
+            WHERE `shedule_date`=CURDATE()
+            AND `lineup_condition`>'50'
+            AND `game_played`='0'";
+    $mysqli->query($sql);
+}
+
+function f_igosja_generator_select_player($data, $team, $player_1 = 0)
+//Выбор игрока, который владеет мячом
+{
+    $player = rand(1, 10);
+    $red    = $data[$team]['player'][$player]['red'];
+    $yellow = $data[$team]['player'][$player]['yellow'];
+
+    if ($player == $player_1 ||
+        $red == 1 ||
+        $yellow == 2)
+    {
+        $player = f_igosja_generator_select_player($data, $team, $player_1);
+    }
+
+    return $player;
+}
+
+function f_igosja_generator_disqualification_decrease()
+//Снятие дисквалификаций
+{
+    global $mysqli;
+
+    $sql = "UPDATE `disqualification`
+            SET `disqualification_yellow`='0'
+            WHERE `disqualification_yellow`='2'
+            AND `disqualification_red`='0'";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `disqualification`
+            SET `disqualification_red`='0'
+            WHERE `disqualification_red`='1'";
+    $mysqli->query($sql);
+}
+
+function f_igosja_generator_visitor()
+//Количество зрителей на трибунах
+{
+    global $mysqli;
+
+    $sql = "UPDATE `game`
+            LEFT JOIN `shedule`
+            ON `game_shedule_id`=`shedule_id`
+            LEFT JOIN `tournament`
+            ON `game_tournament_id`=`tournament_id`
+            LEFT JOIN `team` AS `home`
+            ON `game_home_team_id`=`home`.`team_id`
+            LEFT JOIN `team` AS `guest`
+            ON `game_guest_team_id`=`guest`.`team_id`
+            LEFT JOIN `stadium`
+            ON `stadium_id`=`game_stadium_id`
+            SET `game_visitor`=
+            IF(ROUND((`home`.`team_visitor`+`guest`.`team_visitor`)*`tournament_visitor`)>`stadium_capacity`,
+               `stadium_capacity`,
+               ROUND((`home`.`team_visitor`+`guest`.`team_visitor`)*`tournament_visitor`)>`stadium_capacity`)
+            WHERE `shedule_date`=CURDATE()
+            AND `game_played`='0'";
+    $mysqli->query($sql);
+}
+
+function f_igosja_generator_game_series()
+//Увеличение серий матчей (побед, без поражений, без пропущенных...)
+{
+    global $mysqli;
+
+    $sql = "SELECT `game_guest_score`,
+                   `game_guest_team_id`,
+                   `game_home_score`,
+                   `game_home_team_id`,
+                   `game_tournament_id`
+            FROM `game`
+            LEFT JOIN `shedule`
+            ON `game_shedule_id`=`shedule_id`
+            WHERE `shedule_date`=CURDATE()
+            AND `game_played`='0'";
+    $game_sql = $mysqli->query($sql);
+
+    $count_game = $game_sql->num_rows;
+
+    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+
+    for ($i=0; $i<$count_game; $i++)
+    {
+        $home_team_id   = $game_array[$i]['game_home_team_id'];
+        $guest_team_id  = $game_array[$i]['game_guest_team_id'];
+        $tournament_id  = $game_array[$i]['game_tournament_id'];
+        $home_score     = $game_array[$i]['game_home_score'];
+        $guest_score    = $game_array[$i]['game_guest_score'];
+
+        if ($home_score > $guest_score)
+        {
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_WIN . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_WIN . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_LOOSE. "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_LOOSE . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$home_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_NO_WIN . "')
+                    AND `series_tournament_id`='0'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_LOOSE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_LOOSE . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_LOOSE . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_WIN . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_WIN . "')
+                    AND `series_tournament_id`='0'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_WIN . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_WIN . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_LOOSE . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$home_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_NO_WIN . "')
+                    AND `series_tournament_id`='$tournament_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_LOOSE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_LOOSE . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_LOOSE . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_WIN . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_WIN . "')
+                    AND `series_tournament_id`='$tournament_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+        }
+        elseif ($home_score < $guest_score)
+        {
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_WIN . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_WIN . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_LOOSE. "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_LOOSE . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_NO_WIN . "')
+                    AND `series_tournament_id`='0'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_LOOSE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_LOOSE . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_LOOSE . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_WIN . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$home_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_WIN . "')
+                    AND `series_tournament_id`='0'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_WIN . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_WIN . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_LOOSE . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_NO_WIN . "')
+                    AND `series_tournament_id`='$tournament_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_LOOSE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_LOOSE . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_LOOSE . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_WIN . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$home_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_WIN . "')
+                    AND `series_tournament_id`='$tournament_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+        }
+        elseif ($home_score == $guest_score)
+        {
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_WIN . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_LOOSE. "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_LOOSE . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_WIN . "')
+                    AND `series_tournament_id`='0'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_LOOSE . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_WIN . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$home_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_WIN . "')
+                    AND `series_tournament_id`='0'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_WIN . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_LOOSE . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_WIN . "')
+                    AND `series_tournament_id`='$tournament_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_LOOSE . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_WIN . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_WIN . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$home_team_id'
+                    AND (`series_seriestype_id`='" . SERIES_LOOSE . "'
+                    OR `series_seriestype_id`='" . SERIES_WIN . "')
+                    AND `series_tournament_id`='$tournament_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+        }
+
+        if (0 == $home_score)
+        {
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_SCORE . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_PASS . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_PASS . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_PASS . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_SCORE . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_PASS . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_PASS . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_PASS . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+        }
+        elseif (0 != $home_score)
+        {
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_PASS . "'";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_PASS . "'";
+            $mysqli->query($sql);
+        }
+
+        if (0 == $guest_score)
+        {
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_SCORE . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_PASS . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_PASS . ",
+                            `series_value`='1',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_PASS . "'
+                        AND `series_tournament_id`='0'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$guest_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_SCORE . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$guest_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "SELECT `series_id`
+                    FROM `series`
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_PASS . "'
+                    LIMIT 1";
+            $check_sql = $mysqli->query($sql);
+
+            $count_check = $check_sql->num_rows;
+
+            if (0 == $count_check)
+            {
+                $sql = "INSERT INTO `series`
+                        SET `series_team_id`='$home_team_id',
+                            `series_seriestype_id`=" . SERIES_NO_PASS . ",
+                            `series_value`='1',
+                            `series_tournament_id`='$tournament_id',
+                            `series_date_start`=CURDATE(),
+                            `series_date_end`=CURDATE()";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `series`
+                        SET `series_value`=`series_value`+'1',
+                            `series_date_end`=CURDATE()
+                        WHERE `series_team_id`='$home_team_id'
+                        AND `series_seriestype_id`='" . SERIES_NO_PASS . "'
+                        AND `series_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+        }
+        elseif (0 != $guest_score)
+        {
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='0'
+                    AND `series_seriestype_id`='" . SERIES_NO_PASS . "'";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$guest_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_SCORE . "'";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `series`
+                    SET `series_delete`='1'
+                    WHERE `series_team_id`='$home_team_id'
+                    AND `series_tournament_id`='$tournament_id'
+                    AND `series_seriestype_id`='" . SERIES_NO_PASS . "'";
+            $mysqli->query($sql);
+        }
+    }
+}
+
+function f_igosja_generator_team_series_to_record()
+//Обровление командных рекордов из серий матчей (побед, без поражений, без пропущенных...)
+{
+    global $mysqli;
+
+    for ($j=0; $j<6; $j++)
+    {
+        if     (0 == $j) {$series = SERIES_WIN;         $record = RECORD_TEAM_WIN;}
+        elseif (1 == $j) {$series = SERIES_NO_LOOSE;    $record = RECORD_TEAM_NO_LOOSE;}
+        elseif (2 == $j) {$series = SERIES_NO_WIN;      $record = RECORD_TEAM_NO_WIN;}
+        elseif (3 == $j) {$series = SERIES_LOOSE;       $record = RECORD_TEAM_LOOSE;}
+        elseif (4 == $j) {$series = SERIES_NO_PASS;     $record = RECORD_TEAM_NO_PASS;}
+        else             {$series = SERIES_NO_SCORE;    $record = RECORD_TEAM_NO_SCORE;}
+
+        $sql = "SELECT `series_date_end`,
+                       `series_date_start`,
+                       `series_team_id`,
+                       `series_value`
+                FROM `series`
+                WHERE `series_seriestype_id`='$series'
+                AND `series_tournament_id`='0'
+                ORDER BY `series_team_id` ASC";
+        $series_sql = $mysqli->query($sql);
+
+        $count_series = $series_sql->num_rows;
+
+        $series_array = $series_sql->fetch_all(MYSQLI_ASSOC);
+
+        for ($i=0; $i<$count_series; $i++)
+        {
+            $team_id    = $series_array[$i]['series_team_id'];
+            $date_start = $series_array[$i]['series_date_start'];
+            $date_end   = $series_array[$i]['series_date_end'];
+            $value      = $series_array[$i]['series_value'];
+
+            $sql = "SELECT `recordteam_value`
+                    FROM `recordteam`
+                    WHERE `recordteam_team_id`='$team_id'
+                    AND `recordteam_recordteamtype_id`='$record'
+                    LIMIT 1";
+            $record_sql = $mysqli->query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
+            {
+                $sql = "INSERT INTO `recordteam`
+                        SET `recordteam_team_id`='$team_id',
+                            `recordteam_value`='$value',
+                            `recordteam_date_end`='$date_end',
+                            `recordteam_date_start`='$date_start'
+                            `recordteam_recordteamtype_id`='$record'";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value = $record_array[0]['recordteam_value'];
+
+                if ($record_value < $value)
+                {
+                    $sql = "UPDATE `recordteam`
+                            SET `recordteam_value`='$value',
+                                `recordteam_date_end`='$date_end',
+                                `recordteam_date_start`='$date_start'
+                            WHERE `recordteam_recordteamtype_id`='$record'
+                            AND `recordteam_team_id`='$team_id'
+                            LIMIT 1";
+                    $mysqli->query($sql);
+                }
+            }
+        }
+    }
+}
+
+function f_igosja_generator_tornament_series_to_record()
+//Обровление командных рекордов из серий матчей (побед, без поражений, без пропущенных...)
+{
+    global $mysqli;
+
+    for ($j=0; $j<6; $j++)
+    {
+        if     (0 == $j) {$series = SERIES_WIN;         $record = RECORD_TOURNAMENT_WIN;}
+        elseif (1 == $j) {$series = SERIES_NO_LOOSE;    $record = RECORD_TOURNAMENT_NO_LOOSE;}
+        elseif (2 == $j) {$series = SERIES_NO_WIN;      $record = RECORD_TOURNAMENT_NO_WIN;}
+        elseif (3 == $j) {$series = SERIES_LOOSE;       $record = RECORD_TOURNAMENT_LOOSE;}
+        elseif (4 == $j) {$series = SERIES_NO_PASS;     $record = RECORD_TOURNAMENT_NO_PASS;}
+        else             {$series = SERIES_NO_SCORE;    $record = RECORD_TOURNAMENT_NO_SCORE;}
+
+        $sql = "SELECT `series_tournament_id`
+                FROM `series`
+                WHERE `series_seriestype_id`='$series'
+                AND `series_tournament_id`!='0'
+                GROUP BY `series_tournament_id`
+                ORDER BY `series_tournament_id` ASC";
+        $tournament_sql = $mysqli->query($sql);
+
+        $count_tournament = $tournament_sql->num_rows;
+
+        $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+
+        for ($i=0; $i<$count_tournament; $i++)
+        {
+            $tournament_id = $tournament_array[$i]['series_tournament_id'];
+
+            $sql = "SELECT `series_date_end`,
+                           `series_date_start`,
+                           `series_team_id`,
+                           `series_value`
+                    FROM `series`
+                    WHERE `series_seriestype_id`='$series'
+                    AND `series_tournament_id`='$tournament_id'
+                    ORDER BY `series_value` DESC
+                    LIMIT 1";
+            $series_sql = $mysqli->query($sql);
+
+            $series_array = $series_sql->fetch_all(MYSQLI_ASSOC);
+
+            $team_id    = $series_array[0]['series_team_id'];
+            $date_start = $series_array[0]['series_date_start'];
+            $date_end   = $series_array[0]['series_date_end'];
+            $value      = $series_array[0]['series_value'];
+
+            $sql = "SELECT `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='$record'
+                    LIMIT 1";
+            $record_sql = $mysqli->query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
+            {
+                $sql = "INSERT INTO `recordtournament`
+                        SET `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_team_id`='$team_id',
+                            `recordtournament_value_1`='$value',
+                            `recordtournament_date_end`='$date_end',
+                            `recordtournament_date_start`='$date_start'
+                            `recordtournament_recordtournamenttype_id`='$record'";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value = $record_array[0]['recordteam_value'];
+
+                if ($record_value < $value)
+                {
+                    $sql = "UPDATE `recordteam`
+                            SET `recordtournament_team_id`='$team_id',
+                                `recordtournament_value_1`='$value',
+                                `recordtournament_date_end`='$date_end',
+                                `recordtournament_date_start`='$date_start'
+                            WHERE `recordtournament_recordtournamenttype_id`='$record'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    $mysqli->query($sql);
+                }
+            }
+        }
+    }
 }
