@@ -108,6 +108,13 @@ for ($i=1; $i<=90; $i=$i+2)
     sleep(1);
 }
 
+f_igosja_generator_referee_mark();
+
+print '.';
+flush();
+
+sleep(1);
+
 f_igosja_generator_statistic_player();
 
 print '.';
@@ -150,7 +157,21 @@ flush();
 
 sleep(1);
 
-f_igosja_generator_tornament_series_to_record();
+f_igosja_generator_tournament_series_to_record();
+
+print '.';
+flush();
+
+sleep(1);
+
+f_igosja_generator_team_record();
+
+print '.';
+flush();
+
+sleep(1);
+
+f_igosja_generator_tournament_record();
 
 print '.';
 flush();
