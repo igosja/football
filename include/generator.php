@@ -2477,6 +2477,21 @@ function f_igosja_generator_game_result($minute)
             }
         }
 
+        if (1 == $minute)
+        {
+            $home_power  = $data['home']['team']['power'];
+            $guest_power = $data['guest']['team']['power'];
+            $home_possession = round($home_power / ($home_power + $guest_power) * 100);
+            $guest_possession = 100 - $home_possession;
+            
+            $sql = "UPDATE `game`
+                    SET `game_home_possession`='$home_possession',
+                        `game_guest_possession`='$guest_possession'
+                    WHERE `game_id`='$game_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+        }
+
         f_igosja_generator_decision($data);
 
         $data['minute'] = $minute + 1;
@@ -2584,6 +2599,22 @@ function f_igosja_generator_shot($data)
     $player_opponent    = f_igosja_generator_select_player($data, $data['opponent']);
     $game_id            = $data['game_id'];
     $team_id            = $data[$data['team']]['team']['team_id'];
+
+    $sql = "SELECT SUM(`lineup_shot`) AS `sum`
+            FROM `lineup`
+            WHERE `lineup_team_id`='$team_id'
+            AND `lineup_game_id`='$game_id'";
+    $sum_sql = $mysqli->query($sql);
+
+    $sum_array = $sum_sql->fetch_all(MYSQLI_ASSOC);
+
+    $sum = $sum_array[0]['sum'];
+
+    if (15 <= $sum)
+    {
+        return 0;
+    }
+
     $opponent_id        = $data[$data['opponent']]['team']['team_id'];
     $opponent_player_id = $data[$data['opponent']]['player'][$player_opponent]['player_id'];
     $gk_player_id       = $data[$data['opponent']]['player'][0]['player_id'];
@@ -7424,4 +7455,153 @@ function f_igosja_generator_tournament_record()
             }
         }
     }
+}
+
+function f_igosja_generator_mood_after_game()
+{
+    global $mysqli;
+
+    $sql = "UPDATE `game`
+            LEFT JOIN `lineup`
+            ON `lineup_team_id`=`game_home_team_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            LEFT JOIN `player`
+            ON `player_id`=`lineup_player_id`
+            SET `player_mood_id`=IF(`game_home_score`>`game_guest_score`, `player_mood_id`+'1', IF(`game_home_score`<`game_guest_score`, `player_mood_id`-'1', `player_mood_id`))
+            WHERE `shedule_date`=CURDATE()
+            AND `game_played`='0'";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `game`
+            LEFT JOIN `lineup`
+            ON `lineup_team_id`=`game_guest_team_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            LEFT JOIN `player`
+            ON `player_id`=`lineup_player_id`
+            SET `player_mood_id`=IF(`game_home_score`<`game_guest_score`, `player_mood_id`+'1', IF(`game_home_score`>`game_guest_score`, `player_mood_id`-'1', `player_mood_id`))
+            WHERE `shedule_date`=CURDATE()
+            AND `game_played`='0'";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `player`
+            SET `player_mood_id`='1'
+            WHERE `player_mood_id`<'1'";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `player`
+            SET `player_mood`='7'
+            WHERE `player_mood`>'7'";
+    $mysqli->query($sql);
+}
+
+function f_igosja_generator_injury_after_game()
+{
+    global $mysqli;
+
+    $sql = "UPDATE `injury`
+            LEFT JOIN `player`
+            ON `injury_player_id`=`player_id`
+            SET `player_injury`='0'
+            WHERE `injury_end_date`<=CURDATE()";
+    $mysqli->query($sql);
+}
+
+function f_igosja_generator_game_moments()
+{
+    global $mysqli;
+
+    $sql = "UPDATE `game`
+            LEFT JOIN `shedule`
+            ON `game_shedule_id`=`shedule_id`
+            SET `game_home_moment`=`game_home_shot`/(2 + 2*RAND()),
+            `game_guest_moment`=`game_guest_shot`/(2 + 2*RAND())
+            WHERE `shedule_date`=CURDATE()
+            AND `game_played`='0'";
+    $mysqli->query($sql);
+}
+
+function f_igosja_generator_game_offside()
+{
+    global $mysqli;
+    
+    $sql = "SELECT `game_guest_team_id`,
+                   `game_home_team_id`,
+                   `game_id`
+            FROM `game`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            WHERE `game_played`='0'
+            AND `shedule_date`=CURDATE()
+            ORDER BY `game_id`";
+    $game_sql = $mysqli->query($sql);
+
+    $count_game = $game_sql->num_rows;
+
+    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+
+    for ($i=0; $i<$count_game; $i++)
+    {
+        $game_id        = $game_array[$i]['game_id'];
+        $home_id        = $game_array[$i]['game_home_team_id'];
+        $guest_id       = $game_array[$i]['game_guest_team_id'];
+        $home_offside   = rand(3, 6);
+        $guest_offside  = rand(3, 6);
+
+        $sql = "UPDATE `game`
+                SET `game_guest_offside`='$guest_offside',
+                    `game_home_offside`='$home_offside'
+                WHERE `game_id`='$game_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+
+        $sql = "UPDATE `lineup`
+                SET `lineup_offside`='2'
+                WHERE `lineup_game_id`='$game_id'
+                AND `lineup_team_id`='$home_id'
+                ORDER BY `lineup_position_id` DESC
+                LIMIT 1";
+        $mysqli->query($sql);
+
+        $limit = $home_offside - 2;
+
+        $sql = "UPDATE `lineup`
+                SET `lineup_offside`='1'
+                WHERE `lineup_game_id`='$game_id'
+                AND `lineup_team_id`='$home_id'
+                ORDER BY `lineup_position_id` DESC
+                LIMIT 1, $limit";
+        $mysqli->query($sql);
+
+        $sql = "UPDATE `lineup`
+                SET `lineup_offside`='2'
+                WHERE `lineup_game_id`='$game_id'
+                AND `lineup_team_id`='$guest_id'
+                ORDER BY `lineup_position_id` DESC
+                LIMIT 1";
+        $mysqli->query($sql);
+
+        $limit = $guest_offside - 2;
+
+        $sql = "UPDATE `lineup`
+                SET `lineup_offside`='1'
+                WHERE `lineup_game_id`='$game_id'
+                AND `lineup_team_id`='$guest_id'
+                ORDER BY `lineup_position_id` DESC
+                LIMIT 1, $limit";
+        $mysqli->query($sql);
+    }
+}
+
+function f_igosja_generator_standing_history()
+{
+    global $mysqli;
+    global $igosja_season_id;
+
+    $sql = "INSERT INTO `standinghistory` (`standinghistory_tournament_id`, `standinghistory_team_id`, `standinghistory_stage_id`, `standinghistory_place`)
+            SELECT `standing_tournament_id`, `standing_team_id`, `standing_game`, `standing_place`
+            FROM `standing`
+            WHERE `standing_season_id`='$igosja_season_id'";
+    $mysqli->query($sql);
 }

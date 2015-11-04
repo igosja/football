@@ -74,25 +74,6 @@ function tactic_player_field()
     }
 }
 
-function tournament_type()
-//Создание турнира в админке
-{
-    var tournament_value = $("#tournament-type").val();
-
-    if (2 == tournament_value)
-    {
-        $('#tournament-name').show();
-        $('#tournament-member').show();
-        $('#tournament-level').show();
-    }
-    else
-    {
-        $('#tournament-name').hide();
-        $('#tournament-member').hide();
-        $('#tournament-level').hide();
-    }
-}
-
 function tactic_name(player_select)
 //Выбор игроков в стартовый состав
 {

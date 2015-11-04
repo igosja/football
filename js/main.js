@@ -63,10 +63,6 @@ $(document).ready(function($)
         );
     });
 
-    $(tournament_type); //Создание турнира в админке
-
-    $('#tournament-type').on('change', tournament_type); //Создание турнира в админке
-
     //Записная книжка менеджера
     $('#note-create').on('click', function()
     //Создание заметки

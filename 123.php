@@ -13,7 +13,9 @@ $sql = "SELECT `game_id`,
         FROM `game`
         LEFT JOIN `shedule`
         ON `game_shedule_id`=`shedule_id`
-        WHERE `shedule_date`='2015-10-12'
+        /*WHERE `shedule_date`=CURDATE()
+        AND `game_played`='0'*/
+        WHERE `shedule_date`='2015-10-11'
         AND `game_played`='1'";
 $game_sql = $mysqli->query($sql);
 
@@ -27,18 +29,10 @@ for ($i=0; $i<$count_game; $i++)
     $home_team_id   = $game_array[$i]['game_home_team_id'];
     $guest_team_id  = $game_array[$i]['game_guest_team_id'];
 
-    $data['minute']                      = 1;
-    $data['season']                      = $igosja_season_id;
-    $data['air']                         = '';
-    $data['decision']                    = '';
-    $data['pass']                        = '';
-    $data['take']                        = '';
-    $data['team']                        = 'home';
-    $data['opponent']                    = 'guest';
-    $data['tournament']['tournament_id'] = $game_array[$i]['game_tournament_id'];
-    $data['game_id']                     = $game_id;
-    $data['home']['team']['team_id']     = $home_team_id;
-    $data['guest']['team']['team_id']    = $guest_team_id;
+    $data['tournament_id']              = $game_array[$i]['game_tournament_id'];
+    $data['game_id']                    = $game_id;
+    $data['home']['team']['team_id']    = $home_team_id;
+    $data['guest']['team']['team_id']   = $guest_team_id;
 
     $sql = "SELECT `lineup_id`,
                    `lineup_position_id`,
@@ -159,11 +153,6 @@ for ($i=0; $i<$count_game; $i++)
             $data['guest']['player'][$j]['posititon'][$position_array[$k]['playerposition_position_id']] = $position_array[$k]['playerposition_value'];
         }
     }
-
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
-    exit;
 }
 
 print round(microtime(true) - $start_time, 5);

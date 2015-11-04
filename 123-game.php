@@ -4,6 +4,59 @@ set_time_limit(0);
 
 include ('include/include.php');
 
+$sql = "TRUNCATE `standing`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `broadcasting`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `disqualification`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `event`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `game`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `lineup`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `lineupcurrent`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `recordteam`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `recordtournament`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `series`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `shedule`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `standinghistory`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `statisticplayer`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `statisticreferee`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `statisticteam`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `statisticuser`";
+$mysqli->query($sql);
+
+$sql = "UPDATE `player`
+        SET `player_practice`='50',
+            `player_condition`='100'";
+$mysqli->query($sql);
+
 $sql = "INSERT INTO `standing` (`standing_tournament_id`, `standing_country_id`, `standing_season_id`, `standing_team_id`)
         SELECT '2', '6', '1', `team_id`
         FROM `team`
@@ -16,8 +69,12 @@ $shedule_insert_sql = array();
 for ($i=1; $i<=38; $i++)
 {
     $date = date('Y-m-d');
-    $date = strtotime($date . ' +' . $i . 'days');
-    $date = date('Y-m-d', $date);
+
+    if (1 < $i)
+    {
+        $date = strtotime($date . ' +' . $i . 'days');
+        $date = date('Y-m-d', $date);
+    }
 
     $shedule_insert_sql[] = "('$date', '1')";
 }
