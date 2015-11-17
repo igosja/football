@@ -12,8 +12,18 @@
                                 <table>
                                     <tr>
                                         {section name=i loop=$horizontalmenu_array}
-                                            {if (!isset ($horizontalmenu_array[i.index_prev].horizontalmenu_name) ||
-                                                 $horizontalmenu_array[i.index_prev].horizontalmenu_name != $horizontalmenu_array[i].horizontalmenu_name)}
+                                            {if (((!isset($horizontalmenu_array[i.index_prev].horizontalmenu_name) ||
+                                                $horizontalmenu_array[i.index_prev].horizontalmenu_name != $horizontalmenu_array[i].horizontalmenu_name) &&
+                                                ((1 == $horizontalmenu_array[i].horizontalmenu_authorization && 
+                                                isset($authorization_id)) ||
+                                                0 == $horizontalmenu_array[i].horizontalmenu_authorization)) &&
+                                                ((1 == $horizontalmenu_array[i].horizontalmenu_myteam &&
+                                                isset($smarty.get.num) &&
+                                                isset($authorization_team_id) &&
+                                                $smarty.get.num == $authorization_team_id) ||
+                                                0 == $horizontalmenu_array[i].horizontalmenu_myteam ||
+                                                (1 == $horizontalmenu_array[i].horizontalmenu_myteam &&
+                                                !isset($smarty.get.num))))}
                                                 <td>
                                                     <a href="javascript:;" id="horizontal-menu-{$smarty.section.i.index + 1}"
                                                         {assign var="class" value=""}
@@ -23,7 +33,6 @@
                                                                 {assign var="class" value="active"}
                                                             {/if}
                                                         {/section}
-
                                                         class="{$class}"
                                                     >
                                                         {$horizontalmenu_array[i].horizontalmenu_name}
@@ -54,7 +63,17 @@
                                         <table>
                                             <tr>
                             {/if}
-                            {if ($horizontalmenu_array[i].horizontalsubmenu_name)}
+                            {if (($horizontalmenu_array[i].horizontalsubmenu_name &&
+                                (0 == $horizontalmenu_array[i].horizontalsubmenu_authorization ||
+                                (1 == $horizontalmenu_array[i].horizontalsubmenu_authorization &&
+                                isset($authorization_id)))) &&
+                                ((1 == $horizontalmenu_array[i].horizontalmenu_myteam &&
+                                isset($smarty.get.num) &&
+                                isset($authorization_team_id) &&
+                                $smarty.get.num == $authorization_team_id) ||
+                                0 == $horizontalmenu_array[i].horizontalmenu_myteam ||
+                                (1 == $horizontalmenu_array[i].horizontalmenu_myteam &&
+                                !isset($smarty.get.num))))}
                                 <td>
                                     <a href="{$horizontalmenu_array[i].horizontalsubmenu_href}?num={$num}"
                                         {if $horizontalmenu_array[i].horizontalsubmenu_href == $chapter}

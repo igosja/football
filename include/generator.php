@@ -7605,3 +7605,263 @@ function f_igosja_generator_standing_history()
             WHERE `standing_season_id`='$igosja_season_id'";
     $mysqli->query($sql);
 }
+
+function f_igosja_generator_training()
+{
+    global $mysqli;
+
+    $sql = "SELECT `player_id`,
+                   `player_power`,
+                   `player_training_attribute_id`,
+                   `playerattribute_value`,
+                   `staff_reputation`,
+                   `team_training_level`
+            FROM `player`
+            LEFT JOIN `team`
+            ON `team_id`=`player_team_id`
+            LEFT JOIN `staff`
+            ON `staff_team_id`=`team_id`
+            LEFT JOIN `playerposition`
+            ON `playerposition_player_id`=`player_id`
+            LEFT JOIN `playerattribute`
+            ON (`playerattribute_attribute_id`=`player_training_attribute_id`
+            AND `playerattribute_player_id`=`player_id`)
+            LEFT JOIN
+            (
+                SELECT SUM(`playerattribute_value`) AS `player_power`, `playerattribute_player_id` AS `attribute_player_id`
+                FROM `playerattribute`
+                LEFT JOIN `attribute`
+                ON `playerattribute_attribute_id`=`attribute_id`
+                WHERE `attribute_attributechapter_id`!='3'
+                GROUP BY `playerattribute_player_id`
+            ) AS `t1`
+            ON `attribute_player_id`=`player_id`
+            WHERE `player_team_id`!='0'
+            AND `playerposition_position_id`!='1'
+            AND `playerposition_value`='100'
+            AND `staff_staffpost_id`='1'
+            AND `player_age`<'30'
+            ORDER BY `player_id` ASC";
+    $player_sql = $mysqli->query($sql);
+
+    $count_player = $player_sql->num_rows;
+
+    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+    for ($i=0; $i<$count_player; $i++)
+    {
+        $player_id          = $player_array[$i]['player_id'];
+        $player_power       = $player_array[$i]['player_power'];
+        $training           = $player_array[$i]['team_training_level'];
+        $coach              = $player_array[$i]['staff_reputation'];
+        $attribute_value    = $player_array[$i]['playerattribute_value'];
+        $attribute_id       = $player_array[$i]['player_training_attribute_id'];
+
+        if ($player_power < MAX_TRAINING_PLAYER_POWER / 2 + MAX_TRAINING_PLAYER_POWER * $training * $coach / 10000)
+        {
+            if ($attribute_value < MAX_ATTRIBUTE_VALUE &&
+                0 < $attribute_id)
+            {
+                $sql = "UPDATE `playerattribute`
+                        SET `playerattribute_value`=`playerattribute_value`+'1'
+                        WHERE `playerattribute_player_id`='$player_id'
+                        AND `playerattribute_attribute_id`='$attribute_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `playerattribute`
+                        LEFT JOIN `attribute`
+                        ON `attribute_id`=`playerattribute_attribute_id`
+                        SET `playerattribute_value`=`playerattribute_value`+'1'
+                        WHERE `playerattribute_player_id`='$player_id'
+                        AND `attribute_attributechapter_id`!='3'
+                        AND `playerattribute_value`<'" . MAX_ATTRIBUTE_VALUE . "'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+        }
+    }
+
+    $sql = "SELECT `player_id`,
+                   `player_power`,
+                   `player_training_attribute_id`,
+                   `playerattribute_value`,
+                   `staff_reputation`,
+                   `team_training_level`
+            FROM `player`
+            LEFT JOIN `team`
+            ON `team_id`=`player_team_id`
+            LEFT JOIN `staff`
+            ON `staff_team_id`=`team_id`
+            LEFT JOIN `playerposition`
+            ON `playerposition_player_id`=`player_id`
+            LEFT JOIN `playerattribute`
+            ON (`playerattribute_attribute_id`=`player_training_attribute_id`
+            AND `playerattribute_player_id`=`player_id`)
+            LEFT JOIN
+            (
+                SELECT SUM(`playerattribute_value`) AS `player_power`, `playerattribute_player_id` AS `attribute_player_id`
+                FROM `playerattribute`
+                LEFT JOIN `attribute`
+                ON `playerattribute_attribute_id`=`attribute_id`
+                WHERE `attribute_attributechapter_id`!='3'
+                GROUP BY `playerattribute_player_id`
+            ) AS `t1`
+            ON `attribute_player_id`=`player_id`
+            WHERE `player_team_id`!='0'
+            AND `playerposition_position_id`='1'
+            AND `playerposition_value`='100'
+            AND `staff_staffpost_id`='1'
+            AND `player_age`<'30'
+            ORDER BY `player_id` ASC";
+    $player_sql = $mysqli->query($sql);
+
+    $count_player = $player_sql->num_rows;
+
+    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+    for ($i=0; $i<$count_player; $i++)
+    {
+        $player_id          = $player_array[$i]['player_id'];
+        $player_power       = $player_array[$i]['player_power'];
+        $training           = $player_array[$i]['team_training_level'];
+        $coach              = $player_array[$i]['staff_reputation'];
+        $attribute_value    = $player_array[$i]['playerattribute_value'];
+        $attribute_id       = $player_array[$i]['player_training_attribute_id'];
+
+        if ($player_power < MAX_TRAINING_PLAYER_POWER / 2 + MAX_TRAINING_PLAYER_POWER * $training * $coach / 10000)
+        {
+            if ($attribute_value < MAX_ATTRIBUTE_VALUE &&
+                0 < $attribute_id)
+            {
+                $sql = "UPDATE `playerattribute`
+                        SET `playerattribute_value`=`playerattribute_value`+'1'
+                        WHERE `playerattribute_player_id`='$player_id'
+                        AND `playerattribute_attribute_id`='$attribute_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `playerattribute`
+                        LEFT JOIN `attribute`
+                        ON `attribute_id`=`playerattribute_attribute_id`
+                        SET `playerattribute_value`=`playerattribute_value`+'1'
+                        WHERE `playerattribute_player_id`='$player_id'
+                        AND `attribute_attributechapter_id`!='3'
+                        AND `playerattribute_value`<'" . MAX_ATTRIBUTE_VALUE . "'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+        }
+    }
+
+    $sql = "SELECT `player_id`,
+                   `player_power`,
+                   `player_training_attribute_id`,
+                   `playerattribute_value`,
+                   `staff_reputation`,
+                   `team_training_level`
+            FROM `player`
+            LEFT JOIN `team`
+            ON `team_id`=`player_team_id`
+            LEFT JOIN `staff`
+            ON `staff_team_id`=`team_id`
+            LEFT JOIN `playerposition`
+            ON `playerposition_player_id`=`player_id`
+            LEFT JOIN `playerattribute`
+            ON (`playerattribute_attribute_id`=`player_training_attribute_id`
+            AND `playerattribute_player_id`=`player_id`)
+            LEFT JOIN
+            (
+                SELECT SUM(`playerattribute_value`) AS `player_power`, `playerattribute_player_id` AS `attribute_player_id`
+                FROM `playerattribute`
+                LEFT JOIN `attribute`
+                ON `playerattribute_attribute_id`=`attribute_id`
+                WHERE `attribute_attributechapter_id`!='3'
+                GROUP BY `playerattribute_player_id`
+            ) AS `t1`
+            ON `attribute_player_id`=`player_id`
+            WHERE `player_team_id`!='0'
+            AND `playerposition_position_id`='1'
+            AND `playerposition_value`='100'
+            AND `staff_staffpost_id`='1'
+            AND `player_age`<'30'
+            ORDER BY `player_id` ASC";
+    $player_sql = $mysqli->query($sql);
+
+    $count_player = $player_sql->num_rows;
+
+    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+    for ($i=0; $i<$count_player; $i++)
+    {
+        $player_id          = $player_array[$i]['player_id'];
+        $player_power       = $player_array[$i]['player_power'];
+        $training           = $player_array[$i]['team_training_level'];
+        $coach              = $player_array[$i]['staff_reputation'];
+        $attribute_value    = $player_array[$i]['playerattribute_value'];
+        $attribute_id       = $player_array[$i]['player_training_attribute_id'];
+
+        if ($player_power < MAX_TRAINING_PLAYER_POWER / 2 + MAX_TRAINING_PLAYER_POWER * $training * $coach / 10000)
+        {
+            if ($attribute_value < MAX_ATTRIBUTE_VALUE &&
+                0 < $attribute_id)
+            {
+                $sql = "UPDATE `playerattribute`
+                        SET `playerattribute_value`=`playerattribute_value`+'1'
+                        WHERE `playerattribute_player_id`='$player_id'
+                        AND `playerattribute_attribute_id`='$attribute_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `playerattribute`
+                        LEFT JOIN `attribute`
+                        ON `attribute_id`=`playerattribute_attribute_id`
+                        SET `playerattribute_value`=`playerattribute_value`+'1'
+                        WHERE `playerattribute_player_id`='$player_id'
+                        AND `attribute_attributechapter_id`!='3'
+                        AND `playerattribute_value`<'" . MAX_ATTRIBUTE_VALUE . "'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+        }
+    }
+
+    $sql = "UPDATE `playerattribute`
+            LEFT JOIN `player`
+            ON `player_id`=`playerattribute_player_id`
+            SET `playerattribute_value`=`playerattribute_value`+'1'
+            WHERE `player_team_id`!='0'
+            AND `playerattribute_value`<'100'
+            AND `playerattribute_attribute_id`=
+            (
+                SELECT `attribute_id`
+                FROM `attribute`
+                WHERE `attribute_attributechapter_id`='3'
+                ORDER BY RAND()
+                LIMIT 1
+            )";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `playerattribute`
+            LEFT JOIN `player`
+            ON `player_id`=`playerattribute_player_id`
+            SET `playerattribute_value`=`playerattribute_value`-'1'
+            WHERE `player_team_id`!='0'
+            AND `player_age`>='30'
+            AND `playerattribute_value`>'10'
+            AND `playerattribute_attribute_id`=
+            (
+                SELECT `attribute_id`
+                FROM `attribute`
+                WHERE `attribute_attributechapter_id`!='3'
+                ORDER BY RAND()
+                LIMIT 1
+            )";
+    $mysqli->query($sql);
+}

@@ -9,7 +9,6 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/function.php');
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/session.php');
 
 $file_name      = $_SERVER['PHP_SELF'];
-
 $file_name      = explode('/', $file_name);
 $chapter        = $file_name[1];
 $file_name      = end($file_name);
@@ -33,14 +32,20 @@ $season_array = $season_sql->fetch_all(MYSQLI_ASSOC);
 
 $igosja_season_id = $season_array[0]['season_id'];
 
-$sql = "SELECT `continent_id`, `continent_name`
+$sql = "SELECT `continent_id`,
+               `continent_name`
         FROM `continent`
         ORDER BY `continent_id` ASC";
 $continent_sql = $mysqli->query($sql);
 
 $continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `horizontalsubmenu_name`, `horizontalmenu_name`, `horizontalsubmenu_href`
+$sql = "SELECT `horizontalmenu_authorization`,
+               `horizontalmenu_myteam`,
+               `horizontalmenu_name`,
+               `horizontalsubmenu_authorization`,
+               `horizontalsubmenu_name`,
+               `horizontalsubmenu_href`
         FROM `horizontalmenu`
         LEFT JOIN `horizontalsubmenu`
         ON `horizontalmenu_id`=`horizontalsubmenu_horizontalmenu_id`
@@ -73,3 +78,28 @@ $smarty->assign('start_time', $start_time);
 $smarty->assign('chapter', $chapter);
 $smarty->assign('header_2_block', $header_2_block);
 $smarty->assign('tpl', $file_name);
+
+$sql = "SELECT `horizontalmenupage_authorization`,
+               `horizontalmenupage_myteam`
+        FROM `horizontalmenupage`
+        WHERE `horizontalmenupage_name`='$file_name'
+        LIMIT 1";
+$horizontalmenupage_sql = $mysqli->query($sql);
+
+$horizontalmenupage_array = $horizontalmenupage_sql->fetch_all(MYSQLI_ASSOC);
+
+if (isset($horizontalmenupage_array[0]['horizontalmenupage_authorization']))
+{
+    $page_authorization = $horizontalmenupage_array[0]['horizontalmenupage_authorization'];
+}
+else
+{
+    $page_authorization = 0;
+}
+
+if (1 == $page_authorization &&
+    !isset($authorization_id))
+{
+    $smarty->display('only_logged.html');
+    exit;
+}

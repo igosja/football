@@ -2,13 +2,14 @@
 
 include ('include/include.php');
 
-if (isset($_GET['num']))
+if (isset($authorization_team_id))
 {
-    $get_num = (int) $_GET['num'];
+    $get_num = $authorization_team_id;
 }
 else
 {
-    $get_num = 1;
+    $smarty->display('only_my_team.html');
+    exit;
 }
 
 $sql = "SELECT `team_name`
