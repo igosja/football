@@ -4605,7 +4605,7 @@ function f_igosja_generator_player_condition_practice()
 }
 
 function f_igosja_generator_statistic_team_user_referee()
-//Обновляем статистику команд и менеджеров
+//Обновляем статистику судей, команд и менеджеров
 {
     global $mysqli;
     global $igosja_season_id;

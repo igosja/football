@@ -1,0 +1,47 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page w50">
+            <p class="header">Общие</p>
+            <table class="w100">
+                <tr>
+                    <td class="w50">Стиль игры</td>
+                    <td>
+                        <select name="gamestyle" id="gamestyle-select">
+                            {section name=i loop=$gamestyle_array}
+                                <option value="{$gamestyle_array[i].gamestyle_id}">{$gamestyle_array[i].gamestyle_name}</option>
+                            {/section}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Настрой на игру</td>
+                    <td>
+                        <select name="gamemood" id="gamemood-select">
+                            {section name=i loop=$gamemood_array}
+                                <option value="{$gamemood_array[i].gamemood_id}">{$gamemood_array[i].gamemood_name}</option>
+                            {/section}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <table class="w100">
+                {section name=i loop=$gamestyle_array}
+                    <tr id="gamestyle-tr-{$gamestyle_array[i].gamestyle_id}" style="display:none;" class="gamestyle-tr">
+                        <td><h2>{$gamestyle_array[i].gamestyle_name}</h2>{$gamestyle_array[i].gamestyle_description}</td>
+                    </tr>
+                {/section}
+            </table>
+            <br />
+            <table class="w100">
+                {section name=i loop=$gamemood_array}
+                    <tr id="gamemood-tr-{$gamemood_array[i].gamemood_id}" style="display:none;" class="gamemood-tr">
+                        <td><h2>{$gamemood_array[i].gamemood_name}</h2>{$gamemood_array[i].gamemood_description}</td>
+                    </tr>
+                {/section}
+            </table>
+        </td>
+        <td class="block-page">
+            <p class="header">Инструкции</p>
+        </td>
+    </tr>
+</table>
