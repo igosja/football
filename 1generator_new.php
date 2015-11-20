@@ -344,8 +344,8 @@ for ($i=0; $i<$count_game; $i++)
     $guest_foul         = $guest_foul + rand(8, 17);
     $home_penalty       = $home_penalty  + floor(rand(0, 7) / 7);
     $guest_penalty      = $guest_penalty + floor(rand(0, 7) / 7);
-    $home_yellow        = $home_yellow  + rand(0, 4);
-    $guest_yellow       = $guest_yellow + rand(0, 4);
+    $home_yellow        = $home_yellow  + rand(0, 3);
+    $guest_yellow       = $guest_yellow + rand(0, 3);
     $home_red           = $home_red  + floor(rand(0, 8) / 8);
     $guest_red          = $guest_red + floor(rand(0, 8) / 8);
     $home_possesion     = round($home_team_power / ( $home_team_power + $guest_team_power ) * 100 + rand(-10, 10));
@@ -421,8 +421,9 @@ $sql = "UPDATE `lineup`
         AND `lineup_position_id`='1'";
 $mysqli->query($sql);
 */
-//тут записываем данные матча в таблицу сосотавов, обновляем статистику игроков и создаем события матча
 
+//тут записываем данные матча в таблицу сосотавов, обновляем статистику игроков и создаем события матча
+/*
 $sql = "SELECT `game_id`,
                `game_guest_foul`,
                `game_guest_offside`,
@@ -581,6 +582,7 @@ for ($i=0; $i<$count_game; $i++)
                 AND `lineup_game_id`='$game_id'
                 AND `lineup_foul_made`>'0'
                 AND `lineup_yellow`='0'
+                AND `lineup_red`='0'
                 ORDER BY RAND()
                 LIMIT 1";
         $player_sql = $mysqli->query($sql);
@@ -631,6 +633,7 @@ for ($i=0; $i<$count_game; $i++)
                 AND `lineup_game_id`='$game_id'
                 AND `lineup_foul_made`>'0'
                 AND `lineup_yellow`='0'
+                AND `lineup_red`='0'
                 ORDER BY RAND()
                 LIMIT 1";
         $player_sql = $mysqli->query($sql);
@@ -680,6 +683,7 @@ for ($i=0; $i<$count_game; $i++)
                 AND `lineup_position_id`!='1'
                 AND `lineup_game_id`='$game_id'
                 AND `lineup_foul_made`>'0'
+                AND `lineup_foul_made`>`lineup_yellow`
                 AND `lineup_red`='0'
                 ORDER BY RAND()
                 LIMIT 1";
@@ -730,6 +734,7 @@ for ($i=0; $i<$count_game; $i++)
                 AND `lineup_position_id`!='1'
                 AND `lineup_game_id`='$game_id'
                 AND `lineup_foul_made`>'0'
+                AND `lineup_foul_made`>`lineup_yellow`
                 AND `lineup_red`='0'
                 ORDER BY RAND()
                 LIMIT 1";
@@ -1001,6 +1006,8 @@ for ($i=0; $i<$count_game; $i++)
                 WHERE `lineup_team_id`='$home_team_id'
                 AND `lineup_position_id`!='1'
                 AND `lineup_game_id`='$game_id'
+                AND `lineup_red`='0'
+                AND `lineup_yellow`<'2'
                 AND `lineup_ontarget`>`lineup_goal`
                 ORDER BY RAND()
                 LIMIT 1";
@@ -1047,6 +1054,8 @@ for ($i=0; $i<$count_game; $i++)
                 WHERE `lineup_team_id`='$guest_team_id'
                 AND `lineup_position_id`!='1'
                 AND `lineup_game_id`='$game_id'
+                AND `lineup_red`='0'
+                AND `lineup_yellow`<'2'
                 AND `lineup_ontarget`>`lineup_goal`
                 ORDER BY RAND()
                 LIMIT 1";
@@ -1093,6 +1102,8 @@ for ($i=0; $i<$count_game; $i++)
                 WHERE `lineup_team_id`='$home_team_id'
                 AND `lineup_position_id`!='1'
                 AND `lineup_game_id`='$game_id'
+                AND `lineup_red`='0'
+                AND `lineup_yellow`<'2'
                 AND `lineup_ontarget`>`lineup_goal`
                 ORDER BY `lineup_goal`-`lineup_ontarget` DESC, RAND()
                 LIMIT 1";
@@ -1132,6 +1143,8 @@ for ($i=0; $i<$count_game; $i++)
                 WHERE `lineup_team_id`='$home_team_id'
                 AND `lineup_position_id`!='1'
                 AND `lineup_game_id`='$game_id'
+                AND `lineup_red`='0'
+                AND `lineup_yellow`<'2'
                 AND `lineup_id`!='$lineup_id'
                 ORDER BY RAND()
                 LIMIT 1";
@@ -1168,6 +1181,8 @@ for ($i=0; $i<$count_game; $i++)
                 WHERE `lineup_team_id`='$guest_team_id'
                 AND `lineup_position_id`!='1'
                 AND `lineup_game_id`='$game_id'
+                AND `lineup_red`='0'
+                AND `lineup_yellow`<'2'
                 AND `lineup_ontarget`>`lineup_goal`
                 ORDER BY `lineup_goal`-`lineup_ontarget` DESC, RAND()
                 LIMIT 1";
@@ -1207,6 +1222,8 @@ for ($i=0; $i<$count_game; $i++)
                 WHERE `lineup_team_id`='$guest_team_id'
                 AND `lineup_position_id`!='1'
                 AND `lineup_game_id`='$game_id'
+                AND `lineup_red`='0'
+                AND `lineup_yellow`<'2'
                 AND `lineup_id`!='$lineup_id'
                 ORDER BY RAND()
                 LIMIT 1";
@@ -1235,6 +1252,54 @@ for ($i=0; $i<$count_game; $i++)
         $mysqli->query($sql);
     }
 }
+*/
+
+//тут обновляем статистику игроков, которую не надо пускать в циклы
+/*
+$sql = "UPDATE `lineup`
+        LEFT JOIN `game`
+        ON `lineup_game_id`=`game_id`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `statisticplayer`
+        ON `statisticplayer_player_id`=`lineup_player_id`
+        AND `statisticplayer_tournament_id`=`game_tournament_id`
+        AND `statisticplayer_team_id`=`lineup_team_id`
+        SET `statisticplayer_game`=`statisticplayer_game`+'1',
+            `statisticplayer_distance`=`statisticplayer_distance`+`lineup_distance`,
+            `statisticplayer_mark`=`statisticplayer_mark`+`lineup_mark`
+            `statisticplayer_pass`=`statisticplayer_pass`+`lineup_pass`
+            `statisticplayer_pass_accurate`=`statisticplayer_pass_accurate`+`lineup_pass_accurate`
+        WHERE `statisticplayer_season_id`='$igosja_season_id'
+        AND `shedule_date`=CURDATE()
+        AND `game_played`='0'";
+$mysqli->query($sql);
+*/
+
+//тут вычислим лучших игровок матча и в статистику
+/*
+$sql = "UPDATE `statisticplayer`
+        LEFT JOIN
+        (
+            SELECT *
+            FROM `lineup`
+            LEFT JOIN `game`
+            ON `lineup_game_id`=`game_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            WHERE `shedule_date`=CURDATE()
+            AND `game_played`='0'
+            GROUP BY `lineup_game_id`
+            ORDER BY `lineup_mark` DESC
+        ) AS `t1`
+        ON `statisticplayer_player_id`=`lineup_player_id`
+        AND `statisticplayer_tournament_id`=`game_tournament_id`
+        AND `statisticplayer_team_id`=`lineup_team_id`
+        SET `statisticplayer_best`=`statisticplayer_best`+'1'
+        WHERE `statisticplayer_season_id`='$igosja_season_id'
+        AND `lineup_id` IS NOT NULL";
+$mysqli->query($sql);
+*/
 
 //тут обновляем статистику судьи, команд и менеджеров
 /*
