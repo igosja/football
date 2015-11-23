@@ -2,7 +2,16 @@
 
 set_time_limit(0);
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+
+$sql = "TRUNCATE `player`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `playerattribute`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `playerposition`";
+$mysqli->query($sql);
 
 $sql = "TRUNCATE `standing`";
 $mysqli->query($sql);
@@ -52,6 +61,25 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `statisticuser`";
 $mysqli->query($sql);
 
+$sql = "SELECT `team_id`
+        FROM `team`
+        WHERE `team_id`!='0'
+        ORDER BY `team_id` ASC";
+$team_sql = $mysqli->query($sql);
+
+$count_team = $team_sql->num_rows;
+$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+
+for ($i=0; $i<$count_team; $i++)
+{
+    $team_id = $team_array[$i]['team_id'];
+
+    for ($j=0; $j<NUMBER_PLAYER_IN_NEW_TEAM; $j++)
+    {
+        f_igosja_player_create($team_id, $j);
+    }
+}
+
 $sql = "UPDATE `player`
         SET `player_practice`='50',
             `player_condition`='100'";
@@ -66,15 +94,11 @@ $mysqli->query($sql);
 
 $shedule_insert_sql = array();
 
-for ($i=1; $i<=38; $i++)
+for ($i=0; $i<38; $i++)
 {
     $date = date('Y-m-d');
-
-    if (1 < $i)
-    {
-        $date = strtotime($date . ' +' . $i . 'days');
-        $date = date('Y-m-d', $date);
-    }
+    $date = strtotime($date . ' +' . $i . 'days');
+    $date = date('Y-m-d', $date);
 
     $shedule_insert_sql[] = "('$date', '1')";
 }
@@ -494,5 +518,5 @@ $sql = "INSERT INTO `game`
                 ('$team_11','$team_10','1','$team_11','38','15'+RAND()*'15','2','1'+RAND()*'3');";
 $mysqli->query($sql);
 
-print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек.
+print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
        <br/>Потребление памяти (байт): ' . number_format(memory_get_usage(), 0, ",", " ");

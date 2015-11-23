@@ -150,14 +150,14 @@ flush();
 
 usleep(1);
 
-f_igosja_generator_standing_history();
+f_igosja_generator_standing();
 
 print '.';
 flush();
 
 usleep(1);
 
-f_igosja_generator_standing();
+f_igosja_generator_standing_history();
 
 print '.';
 flush();
@@ -214,6 +214,13 @@ flush();
 usleep(1);
 
 f_igosja_generator_make_played();
+
+print '.';
+flush();
+
+usleep(1);
+
+f_igosja_generator_training();
 
 print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек.';
 print '<br/>Потребление памяти (байт): ' . number_format(memory_get_usage(), 0, ",", " ");

@@ -249,11 +249,13 @@ function f_igosja_player_create($team_id, $i)
 
     $country_id = $team_array[0]['city_country_id'];
 
-    $sql = "SELECT `countryname_name_id`, `countrysurname_surname_id`
+    $sql = "SELECT `countryname_name_id`,
+                   `countrysurname_surname_id`
             FROM `countryname`
             LEFT JOIN
             (
-                SELECT `countrysurname_surname_id`, `countrysurname_country_id`
+                SELECT `countrysurname_surname_id`,
+                       `countrysurname_country_id`
                 FROM `countrysurname`
                 WHERE `countrysurname_country_id`='$country_id'
                 ORDER BY RAND()
@@ -284,7 +286,8 @@ function f_igosja_player_create($team_id, $i)
                 `player_ability_current`='5',
                 `player_ability_max`='10',
                 `player_height`='$height',
-                `player_weight`='$weight'";
+                `player_weight`='$weight',
+                `player_position_id`='$position_id'";
     $mysqli->query($sql);
 
     $player_id = $mysqli->insert_id;
