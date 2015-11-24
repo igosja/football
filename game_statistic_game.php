@@ -54,6 +54,7 @@ $sql = "SELECT `game_guest_corner`,
                    `lineup_team_id`
             FROM `lineup`
             WHERE `lineup_game_id`='$get_num'
+            AND `lineup_position_id`<='25'
             GROUP BY `lineup_team_id`
         ) AS `t3`
         ON `t3`.`lineup_team_id`=`game_home_team_id`
@@ -63,6 +64,7 @@ $sql = "SELECT `game_guest_corner`,
                    `lineup_team_id`
             FROM `lineup`
             WHERE `lineup_game_id`='$get_num'
+            AND `lineup_position_id`<='25'
             GROUP BY `lineup_team_id`
         ) AS `t4`
         ON `t4`.`lineup_team_id`=`game_guest_team_id`
