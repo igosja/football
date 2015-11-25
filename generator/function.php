@@ -1702,6 +1702,8 @@ function f_igosja_generator_statistic_team_user_referee()
     $count_game = $game_sql->num_rows;
     $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
+    print $count_game;
+
     for ($i=0; $i<$count_game; $i++)
     {
         $game_id        = $game_array[$i]['game_id'];
@@ -1736,7 +1738,7 @@ function f_igosja_generator_statistic_team_user_referee()
         $guest_loose    = 0;
         $full_house     = 0;
 
-        if ($visitor = $stadium)
+        if ($visitor == $stadium)
         {
             $full_house = 1;
         }
@@ -2025,26 +2027,41 @@ function f_igosja_generator_standing()
         $mysqli->query($sql);
     }
 
-    $sql = "SELECT `standing_id`
+    $sql = "SELECT `standing_country_id`
             FROM `standing`
             WHERE `standing_season_id`='$igosja_season_id'
-            ORDER BY `standing_point` DESC, `standing_score`-`standing_pass` DESC, `standing_score` DESC";
-    $standing_sql = $mysqli->query($sql);
+            GROUP BY `standing_country_id`
+            ORDER BY `standing_country_id` ASC";
+    $country_sql = $mysqli->query($sql);
 
-    $count_standing = $standing_sql->num_rows;
+    $count_country = $country_sql->num_rows;
+    $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-    $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
-
-    for ($i=0; $i<$count_standing; $i++)
+    for ($i=0; $i<$count_country; $i++)
     {
-        $standing_id = $standing_array[$i]['standing_id'];
+        $country_id = $country_array[$i]['standing_country_id'];
 
-        $place = $i + 1;
+        $sql = "SELECT `standing_id`
+                FROM `standing`
+                WHERE `standing_country_id`='$country_id'
+                AND `standing_season_id`='$igosja_season_id'
+                ORDER BY `standing_point` DESC, `standing_score`-`standing_pass` DESC, `standing_score` DESC";
+        $standing_sql = $mysqli->query($sql);
 
-        $sql = "UPDATE `standing`
-                SET `standing_place`='$place'
-                WHERE `standing_id`='$standing_id'";
-        $mysqli->query($sql);
+        $count_standing = $standing_sql->num_rows;
+        $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+
+        for ($j=0; $j<$count_standing; $j++)
+        {
+            $standing_id = $standing_array[$j]['standing_id'];
+
+            $place = $j + 1;
+
+            $sql = "UPDATE `standing`
+                    SET `standing_place`='$place'
+                    WHERE `standing_id`='$standing_id'";
+            $mysqli->query($sql);
+        }
     }
 
     usleep(1);
@@ -4014,6 +4031,7 @@ function f_igosja_generator_tournament_record()
 //Рекорды турниров
 {
     global $mysqli;
+    global $igosja_season_id;
 
     $sql = "SELECT `game_tournament_id`
             FROM `game`
@@ -4080,6 +4098,63 @@ function f_igosja_generator_tournament_record()
                         SET `recordtournament_game_id`='$game_id',
                             `recordtournament_value_1`='$visitor'
                         WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_HIGHEST_ATTENDANCE . "'
+                        AND `recordtournament_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+        }
+
+        $sql = "SELECT `statisticteam_team_id`,
+                       `statisticteam_season_id`,
+                       ROUND(`statisticteam_visitor`/`statisticteam_game`,0) AS `visitor`
+                FROM `statisticteam`
+                WHERE `statisticteam_tournament_id`='$tournament_id'
+                GROUP BY `statisticteam_season_id`
+                ORDER BY `visitor` DESC
+                LIMIT 1";
+        $visitor_sql = $mysqli->query($sql);
+
+        $visitor_array = $visitor_sql->fetch_all(MYSQLI_ASSOC);
+
+        $team_id                = $visitor_array[0]['statisticteam_team_id'];
+        $statistic_season_id    = $visitor_array[0]['statisticteam_season_id'];
+        $visitor                = $visitor_array[0]['visitor'];
+
+        $sql = "SELECT `recordtournament_season_id`,
+                       `recordtournament_value_1`
+                FROM `recordtournament`
+                WHERE `recordtournament_tournament_id`='$tournament_id'
+                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
+                LIMIT 1";
+        $record_sql = $mysqli->query($sql);
+
+        $count_record = $record_sql->num_rows;
+
+        if (0 == $count_record)
+        {
+            $sql = "INSERT INTO `recordtournament`
+                    SET `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "',
+                        `recordtournament_season_id`='$statistic_season_id',
+                        `recordtournament_team_id`='$team_id',
+                        `recordtournament_tournament_id`='$tournament_id',
+                        `recordtournament_value_1`='$visitor'";
+            $mysqli->query($sql);
+        }
+        else
+        {
+            $record_array  = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+            $record_value  = $record_array[0]['recordtournament_value_1'];
+            $record_season = $record_array[0]['recordtournament_season_id'];
+
+            if ($visitor > $record_value ||
+                $statistic_season_id == $record_season)
+            {
+                $sql = "UPDATE `recordtournament`
+                        SET `recordtournament_game_id`='$game_id',
+                            `recordtournament_team_id`='$team_id',
+                            `recordtournament_value_1`='$visitor'
+                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
                         AND `recordtournament_tournament_id`='$tournament_id'
                         LIMIT 1";
                 $mysqli->query($sql);
@@ -4264,7 +4339,7 @@ function f_igosja_generator_tournament_record()
         $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
         $player_id  = $player_array[0]['lineup_player_id'];
-        $mark       = $player_array[0]['lineup_mark'];
+        $mark       = $player_array[0]['lineup_mark'] * 10; //Нужно целое число
 
         $sql = "SELECT `recordtournament_value_1`
                 FROM `recordtournament`
@@ -4337,8 +4412,7 @@ function f_igosja_generator_tournament_record()
         else
         {
             $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
-
-            $record_value = $record_array[0]['recordteam_value'];
+            $record_value = $record_array[0]['recordtournament_value_1'];
 
             if ($goal > $record_value)
             {
@@ -4388,7 +4462,7 @@ function f_igosja_generator_tournament_record()
         {
             $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value = $record_array[0]['recordteam_value'];
+            $record_value = $record_array[0]['recordtournament_value_1'];
 
             if ($pass > $record_value)
             {
@@ -4438,7 +4512,7 @@ function f_igosja_generator_tournament_record()
         {
             $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value = $record_array[0]['recordteam_value'];
+            $record_value = $record_array[0]['recordtournament_value_1'];
 
             if ($best > $record_value)
             {
@@ -4446,6 +4520,224 @@ function f_igosja_generator_tournament_record()
                         SET `recordtournament_player_id`='$player_id',
                             `recordtournament_value_1`='$best'
                         WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_BEST . "'
+                        AND `recordtournament_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+        }
+
+        $sql = "SELECT `standing_point`,
+                       `standing_team_id`
+                FROM `standing`
+                WHERE `standing_season_id`='$igosja_season_id'
+                AND `standing_tournament_id`='$tournament_id'
+                ORDER BY `standing_point` DESC
+                LIMIT 1";
+        $point_sql = $mysqli->query($sql);
+
+        $point_array = $point_sql->fetch_all(MYSQLI_ASSOC);
+
+        $team_id = $point_array[0]['standing_team_id'];
+        $point   = $point_array[0]['standing_point'];
+
+        $sql = "SELECT `recordtournament_value_1`
+                FROM `recordtournament`
+                WHERE `recordtournament_tournament_id`='$tournament_id'
+                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_POINT . "'
+                LIMIT 1";
+        $record_sql = $mysqli->query($sql);
+
+        $count_record = $record_sql->num_rows;
+
+        if (0 == $count_record)
+        {
+            $sql = "INSERT INTO `recordtournament`
+                    SET `recordtournament_team_id`='$team_id',
+                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_POINT . "',
+                        `recordtournament_tournament_id`='$tournament_id',
+                        `recordtournament_value_1`='$point',
+                        `recordtournament_season_id`='$igosja_season_id'";
+            $mysqli->query($sql);
+        }
+        else
+        {
+            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_value = $record_array[0]['recordtournament_value_1'];
+
+            if ($visitor > $record_value)
+            {
+                $sql = "UPDATE `recordtournament`
+                        SET `recordtournament_team_id`='$team_id',
+                            `recordtournament_value_1`='$point',
+                            `recordtournament_season_id`='$igosja_season_id'
+                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_POINT . "'
+                        AND `recordtournament_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+        }
+
+        $sql = "SELECT `standing_score`,
+                       `standing_team_id`
+                FROM `standing`
+                WHERE `standing_season_id`='$igosja_season_id'
+                AND `standing_tournament_id`='$tournament_id'
+                ORDER BY `standing_score` DESC
+                LIMIT 1";
+        $point_sql = $mysqli->query($sql);
+
+        $point_array = $point_sql->fetch_all(MYSQLI_ASSOC);
+
+        $team_id = $point_array[0]['standing_team_id'];
+        $score   = $point_array[0]['standing_score'];
+
+        $sql = "SELECT `recordtournament_value_1`
+                FROM `recordtournament`
+                WHERE `recordtournament_tournament_id`='$tournament_id'
+                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_SCORE . "'
+                LIMIT 1";
+        $record_sql = $mysqli->query($sql);
+
+        $count_record = $record_sql->num_rows;
+
+        if (0 == $count_record)
+        {
+            $sql = "INSERT INTO `recordtournament`
+                    SET `recordtournament_team_id`='$team_id',
+                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_SCORE . "',
+                        `recordtournament_tournament_id`='$tournament_id',
+                        `recordtournament_value_1`='$score',
+                        `recordtournament_season_id`='$igosja_season_id'";
+            $mysqli->query($sql);
+        }
+        else
+        {
+            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_value = $record_array[0]['recordtournament_value_1'];
+
+            if ($visitor > $record_value)
+            {
+                $sql = "UPDATE `recordtournament`
+                        SET `recordtournament_team_id`='$team_id',
+                            `recordtournament_value_1`='$score',
+                            `recordtournament_season_id`='$igosja_season_id'
+                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_SCORE . "'
+                        AND `recordtournament_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+        }
+
+        $sql = "SELECT `statisticteam_red`,
+                       `statisticteam_team_id`,
+                       `statisticteam_yellow`
+                FROM `statisticteam`
+                WHERE `statisticteam_season_id`='$igosja_season_id'
+                AND `statisticteam_tournament_id`='$tournament_id'
+                ORDER BY `statisticteam_red` DESC, `statisticteam_yellow` DESC
+                LIMIT 1";
+        $discipline_sql = $mysqli->query($sql);
+
+        $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
+
+        $team_id = $discipline_array[0]['statisticteam_team_id'];
+        $red     = $discipline_array[0]['statisticteam_red'];
+        $yellow  = $discipline_array[0]['statisticteam_yellow'];
+
+        $sql = "SELECT `recordtournament_value_1`,
+                       `recordtournament_value_2`
+                FROM `recordtournament`
+                WHERE `recordtournament_tournament_id`='$tournament_id'
+                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "'
+                LIMIT 1";
+        $record_sql = $mysqli->query($sql);
+
+        $count_record = $record_sql->num_rows;
+
+        if (0 == $count_record)
+        {
+            $sql = "INSERT INTO `recordtournament`
+                    SET `recordtournament_team_id`='$team_id',
+                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "',
+                        `recordtournament_tournament_id`='$tournament_id',
+                        `recordtournament_value_1`='$red',
+                        `recordtournament_value_2`='$yellow',
+                        `recordtournament_season_id`='$igosja_season_id'";
+            $mysqli->query($sql);
+        }
+        else
+        {
+            $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_value_1 = $record_array[0]['recordtournament_value_1'];
+            $record_value_2 = $record_array[0]['recordtournament_value_2'];
+
+            if ($red > $record_value_1 ||
+                ($red == $record_value_1 &&
+                 $yellow > $record_value_2))
+            {
+                $sql = "UPDATE `recordtournament`
+                        SET `recordtournament_team_id`='$team_id',
+                            `recordtournament_value_1`='$red',
+                            `recordtournament_value_2`='$yellow',
+                            `recordtournament_season_id`='$igosja_season_id'
+                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "'
+                        AND `recordtournament_tournament_id`='$tournament_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+        }
+
+        $sql = "SELECT `statisticplayer_player_id`,
+                       SUM(`statisticplayer_red`) AS `red`,
+                       SUM(`statisticplayer_yellow`) AS `yellow`
+                FROM `statisticplayer`
+                WHERE `statisticplayer_tournament_id`='$tournament_id'
+                GROUP BY `statisticplayer_player_id`
+                ORDER BY `red` DESC, `yellow` DESC
+                LIMIT 1";
+        $discipline_sql = $mysqli->query($sql);
+
+        $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
+
+        $player_id  = $discipline_array[0]['statisticplayer_player_id'];
+        $red        = $discipline_array[0]['red'];
+        $yellow     = $discipline_array[0]['yellow'];
+
+        $sql = "SELECT `recordtournament_value_1`,
+                       `recordtournament_value_2`
+                FROM `recordtournament`
+                WHERE `recordtournament_tournament_id`='$tournament_id'
+                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_PLAYER . "'
+                LIMIT 1";
+        $record_sql = $mysqli->query($sql);
+
+        $count_record = $record_sql->num_rows;
+
+        if (0 == $count_record)
+        {
+            $sql = "INSERT INTO `recordtournament`
+                    SET `recordtournament_player_id`='$player_id',
+                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_PLAYER . "',
+                        `recordtournament_tournament_id`='$tournament_id',
+                        `recordtournament_value_1`='$red',
+                        `recordtournament_value_2`='$yellow'";
+            $mysqli->query($sql);
+        }
+        else
+        {
+            $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_value_1 = $record_array[0]['recordtournament_value_1'];
+            $record_value_2 = $record_array[0]['recordtournament_value_2'];
+
+            if ($red > $record_value_1 ||
+                ($red == $record_value_1 &&
+                 $yellow > $record_value_2))
+            {
+                $sql = "UPDATE `recordtournament`
+                        SET `recordtournament_player_id`='$player_id',
+                            `recordtournament_value_1`='$red',
+                            `recordtournament_value_2`='$yellow'
+                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_PLAYER . "'
                         AND `recordtournament_tournament_id`='$tournament_id'
                         LIMIT 1";
                 $mysqli->query($sql);
@@ -4801,5 +5093,39 @@ function f_igosja_generator_training()
     $mysqli->query($sql);
 }
 
+function f_igosja_generator_player_salary()
+//Зарплата игроков
+{
+    global $mysqli;
 
+    $sql = "UPDATE `player`
+            LEFT JOIN
+            (
+                SELECT `playerattribute_player_id`,
+                       SUM(`playerattribute_value`) AS `power`
+                FROM `playerattribute`
+                GROUP BY `playerattribute_player_id`
+            ) AS `t1`
+            ON `player_id`=`playerattribute_player_id`
+            SET `player_salary`=ROUND(POW(`power`, 1.3))";
+    $mysqli->query($sql);
+}
+
+function f_igosja_generator_staff_salary()
+//Зарплата персонала
+{
+    global $mysqli;
+
+    $sql = "UPDATE `staff`
+            LEFT JOIN
+            (
+                SELECT `staffattribute_staff_id`,
+                       SUM(`staffattribute_value`) AS `power`
+                FROM `staffattribute`
+                GROUP BY `staffattribute_staff_id`
+            ) AS `t1`
+            ON `staff_id`=`staffattribute_staff_id`
+            SET `staff_salary`=ROUND(POW(`power`, 1.3))";
+    $mysqli->query($sql);
+}
 

@@ -27,7 +27,10 @@
                     <tr>
                         <td>Имя</td>
                         <td>
-                            <input name="name_name" type="text" value="{if (isset($name_name))}{$name_name}{/if}"/>
+                            <textarea
+                                class="w100"
+                                name="name_name"
+                                rows="5">{if (isset($name_name))}{$name_name}{/if}</textarea>
                         </td>
                     </tr>
                     <tr>

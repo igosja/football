@@ -102,7 +102,7 @@ $sql = "SELECT `game_guest_score`,
         LEFT JOIN `surname`
         ON `surname_id`=`player_surname_id`
         WHERE `recordtournament_tournament_id`='$get_num'
-        ORDER BY `recordtournament_id` ASC";
+        ORDER BY `recordtournamenttype_id` ASC";
 $record_sql = $mysqli->query($sql);
 
 $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);

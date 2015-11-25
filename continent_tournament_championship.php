@@ -42,7 +42,7 @@ $sql = "SELECT `country_id`,
         ON `tournament_country_id`=`country_id`
         WHERE `country_continent_id`='$get_num'
         AND `tournament_tournamenttype_id`='2'
-        ORDER BY `tournament_reputation` ASC";
+        ORDER BY `tournament_reputation` DESC";
 $tournament_sql = $mysqli->query($sql);
 
 $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);

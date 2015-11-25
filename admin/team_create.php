@@ -61,11 +61,6 @@ if (isset($_POST['city_id']))
     $prepare->execute();
     $prepare->close();
 
-    if ('image/png' == $_FILES['team_logo']['type'])
-    {
-        copy($_FILES['team_logo']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/team/' . $team_id . '.png');
-    }
-
     if ('image/png' == $_FILES['team_logo_120']['type'])
     {
         copy($_FILES['team_logo_120']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/team/120/' . $team_id . '.png');

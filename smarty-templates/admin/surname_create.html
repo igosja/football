@@ -25,9 +25,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Фамилия</td>
+                        <td>Фамилии (через "," без пробелов)</td>
                         <td class="left">
-                            <input name="surname_name" type="text" value="{if (isset($surname_name))}{$surname_name}{/if}"/>
+                            <textarea
+                                class="w100"
+                                name="surname_name"
+                                rows="5">{if (isset($surname_name))}{$surname_name}{/if}</textarea>
                         </td>
                     </tr>
                     <tr>

@@ -11,7 +11,13 @@
                             src="img/tournament/{$game_array[0].tournament_id}.png"
                         />
                     </td>
-                    <td><h6>{$game_array[0].tournament_name}</h6></td>
+                    <td>
+                        <h6>
+                            <a href="tournament_review_profile.php?num={$game_array[0].tournament_id}">
+                                {$game_array[0].tournament_name}
+                            </a>
+                        </h6>
+                    </td>
                     <td class="right">{$game_array[0].shedule_date|date_format:"%d.%m.%Y"}</td>
                 </tr>
                 <tr>
