@@ -54,7 +54,7 @@ $sql = "SELECT `finance_expense_agent`+
                `finance_expense_tax`,
                `finance_expense_transfer`,
                `finance_expense_transport`,
-               `finance_income_attributes`,
+               `finance_income_attributes`+
                `finance_income_donat`+
                `finance_income_prize`+
                `finance_income_sponsor`+

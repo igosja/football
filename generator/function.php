@@ -112,10 +112,11 @@ function f_igosja_generator_lineup_current_check_and_fill()
             $team_id        = $game_array[$i][$team];
             $user_id        = $game_array[$i][$user];
             $last_visit     = $game_array[$i][$visit];
+            $last_visit     = strtotime($last_visit) + (int) THREE_DAYS_TO_SECOND;
             $tournament_id  = $game_array[$i]['game_tournament_id'];
 
             if (0 == $user_id ||
-                strtotime(date('Y-m-d H:i:s')) > strtotime($last_visit) + THREE_DAYS_TO_SECOND)
+                strtotime(date('Y-m-d H:i:s')) > $last_visit)
             {
                 $sql = "UPDATE `lineupcurrent`
                         SET `lineupcurrent_auto`='1',
@@ -690,7 +691,9 @@ function f_igosja_generator_visitor()
             SET `game_visitor`=
             IF(ROUND((`home`.`team_visitor`+`guest`.`team_visitor`)*`tournament_visitor`)>`stadium_capacity`,
                `stadium_capacity`,
-               ROUND((`home`.`team_visitor`+`guest`.`team_visitor`)*`tournament_visitor`)>`stadium_capacity`)
+               ROUND(`home`.`team_visitor`+`guest`.`team_visitor`)*`tournament_visitor`),
+                `game_ticket_price`=
+            IF(ROUND(`stadium_capacity`/'1000')>'10',ROUND(`stadium_capacity`/'1000'),'10')
             WHERE `shedule_date`=CURDATE()
             AND `game_played`='0'";
     $mysqli->query($sql);
@@ -1701,8 +1704,6 @@ function f_igosja_generator_statistic_team_user_referee()
 
     $count_game = $game_sql->num_rows;
     $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
-
-    print $count_game;
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -5091,6 +5092,11 @@ function f_igosja_generator_training()
                 LIMIT 1
             )";
     $mysqli->query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }
 
 function f_igosja_generator_player_salary()
@@ -5109,6 +5115,11 @@ function f_igosja_generator_player_salary()
             ON `player_id`=`playerattribute_player_id`
             SET `player_salary`=ROUND(POW(`power`, 1.3))";
     $mysqli->query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }
 
 function f_igosja_generator_staff_salary()
@@ -5127,5 +5138,137 @@ function f_igosja_generator_staff_salary()
             ON `staff_id`=`staffattribute_staff_id`
             SET `staff_salary`=ROUND(POW(`power`, 1.3))";
     $mysqli->query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }
 
+function f_igosja_generator_finance()
+//Финансы после матча
+{
+    global $mysqli;
+    global $igosja_season_id;
+
+    $sql = "SELECT `finance_team_id`,
+                   `team_id`
+            FROM `team`
+            LEFT JOIN
+            (
+                SELECT `finance_team_id`
+                FROM `finance`
+                WHERE `finance_season_id`='$igosja_season_id'
+                GROUP BY `finance_team_id`
+            ) AS `t1`
+            ON `team_id`=`finance_team_id`
+            WHERE `team_id`>'0'
+            ORDER BY `team_id` ASC";
+    $team_sql = $mysqli->query($sql);
+
+    $count_team = $team_sql->num_rows;
+    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+
+    for ($i=0; $i<$count_team; $i++)
+    {
+        $finance_team_id = $team_array[$i]['finance_team_id'];
+
+        if (!$finance_team_id)
+        {
+            $team_id = $team_array[$i]['team_id'];
+
+            $sql = "INSERT INTO `finance`
+                    SET `finance_team_id`='$team_id',
+                        `finance_season_id`='$igosja_season_id'";
+            $mysqli->query($sql);
+        }
+    }
+
+    $sql = "UPDATE `finance`
+            LEFT JOIN `team`
+            ON `team_id`=`finance_team_id`
+            LEFT JOIN
+            (
+                SELECT `standing_place`,
+                       `standing_team_id`
+                FROM `standing`
+                WHERE `standing_season_id`='$igosja_season_id'
+            ) AS `t1`
+            ON `standing_team_id`=`team_id`
+            LEFT JOIN
+            (
+                SELECT `player_team_id`,
+                       SUM(`player_salary`) AS `player_salary`
+                FROM `player`
+                GROUP BY `player_team_id`
+            ) AS `t2`
+            ON `player_team_id`=`team_id`
+            LEFT JOIN
+            (
+                SELECT `staff_team_id`,
+                       SUM(`staff_salary`) AS `staff_salary`
+                FROM `staff`
+                GROUP BY `staff_team_id`
+            ) AS `t3`
+            ON `staff_team_id`=`team_id`
+            SET `finance_income_tv`=`finance_income_tv`+'500000',
+                `finance_income_attributes`=`finance_income_attributes`+('100'-`standing_place`)*'10000'/'105',
+                `finance_income_sponsor`=`finance_income_sponsor`+('100'-`standing_place`)*'100000'/'105',
+                `finance_expense_agent`=`finance_expense_agent`+ROUND(`player_salary`/'100'),
+                `finance_expense_scout`=`finance_expense_scout`+POW(`team_training_level`,'2')*'100',
+                `finance_expense_salary`=`finance_expense_salary`+`player_salary`+`staff_salary`,
+                `finance_expense_base`=`finance_expense_base`+POW(`team_school_level`,'2')*'1000000'/'105'
+                                       +POW(`team_training_level`,'2')*'1000000'/'105',
+                `team_finance`=`team_finance`
+                               +'500000'
+                               +('100'-`standing_place`)*'10000'/'105'
+                               +('100'-`standing_place`)*'100000'/'105'
+                               -POW(`team_training_level`,'2')*'100'
+                               -ROUND(`player_salary`/'100')
+                               -`player_salary`
+                               -`staff_salary`
+                               -POW(`team_school_level`,'2')*'1000000'/'105'
+                               -POW(`team_training_level`,'2')*'1000000'/'105'
+            WHERE `finance_season_id`='$igosja_season_id'";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `game`
+            LEFT JOIN `finance`
+            ON `game_home_team_id`=`finance_team_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            LEFT JOIN `team`
+            ON `finance_team_id`=`team_id`
+            LEFT JOIN `stadium`
+            ON `stadium_id`=`game_stadium_id`
+            SET `finance_income_ticket`=`finance_income_ticket`+ROUND(`game_ticket_price`*`game_visitor`*'0.8'),
+                `finance_income_subscription`=`finance_income_subscription`+ROUND(`game_ticket_price`*`game_visitor`*'0.1'),
+                `finance_expense_stadium`=`finance_expense_stadium`+`stadium_capacity`*POW(`stadium_capacity`/'7500','2'),
+                `team_finance`=`team_finance`
+                               +ROUND(`game_ticket_price`*`game_visitor`*'0.9')
+                               -`stadium_capacity`*POW(`stadium_capacity`/'7500','2')
+            WHERE `shedule_date`=CURDATE()
+            AND `finance_season_id`='$igosja_season_id'
+            AND `game_played`='0'";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `game`
+            LEFT JOIN `finance`
+            ON `game_guest_team_id`=`finance_team_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            LEFT JOIN `team`
+            ON `finance_team_id`=`team_id`
+            SET `finance_income_ticket`=`finance_income_ticket`+ROUND(`game_ticket_price`*`game_visitor`*'0.1'),
+                `finance_expense_transport`=`finance_expense_transport`+'500',
+                `team_finance`=`team_finance`+ROUND(`game_ticket_price`*`game_visitor`*'0.1')-'500'
+            WHERE `shedule_date`=CURDATE()
+            AND `finance_season_id`='$igosja_season_id'
+            AND `game_played`='0'";
+    $mysqli->query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
+}

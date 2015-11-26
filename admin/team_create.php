@@ -89,23 +89,6 @@ if (isset($_POST['city_id']))
     f_igosja_staff_create($team_id);
     f_igosja_history(2, 0, $team_id);
 
-    $sql = "INSERT INTO `standing`
-            SET `standing_country_id`=(SELECT `city_country_id`
-                                       FROM `city` 
-                                       WHERE `city_id`='$city_id'
-                                       LIMIT 1),
-                `standing_season_id`='$igosja_season_id',
-                `standing_team_id`='$team_id',
-                `standing_tournament_id`=(SELECT `tournament_id`
-                                          FROM `tournament`
-                                          LEFT JOIN `city`
-                                          ON `city_country_id`=`tournament_country_id`
-                                          WHERE `tournament_tournamenttype_id`='2'
-                                          AND `city_id`='$city_id'
-                                          ORDER BY `tournament_level` DESC
-                                          LIMIT 1)";
-    $mysqli->query($sql);
-
     redirect('team_list.php');
 
     exit;

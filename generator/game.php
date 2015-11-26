@@ -61,6 +61,21 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `statisticuser`";
 $mysqli->query($sql);
 
+$sql = "TRUNCATE `finance`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `staff`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `staffattribute`";
+$mysqli->query($sql);
+
+$sql = "UPDATE `team`
+        SET `team_finance`='0'
+        WHERE `team_id`!='0'
+        ORDER BY `team_id` ASC";
+$mysqli->query($sql);
+
 $sql = "SELECT `team_id`
         FROM `team`
         WHERE `team_id`!='0'
@@ -78,6 +93,8 @@ for ($i=0; $i<$count_team; $i++)
     {
         f_igosja_player_create($team_id, $j);
     }
+
+    f_igosja_staff_create($team_id);
 }
 
 $sql = "UPDATE `player`
