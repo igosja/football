@@ -706,6 +706,16 @@ td.nopadding
     content: url('../img/icon/plus.png');
 }
 
+.link-delete
+{
+    content: url('../img/icon/delete.png');
+}
+
+.link-ok
+{
+    content: url('../img/icon/ok.png');
+}
+
 /*Флаги, эмблемы*/
 .img-12
 {

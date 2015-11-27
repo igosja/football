@@ -50,6 +50,7 @@ $sql = "SELECT `game_home_team_id`,
         ON `game_tournament_id`=`tournament_id`
         WHERE (`game_home_team_id`='$get_num'
         OR `game_guest_team_id`='$get_num')
+        AND `shedule_season_id`='$igosja_season_id'
         ORDER BY `shedule_date` ASC";
 $game_sql = $mysqli->query($sql);
 

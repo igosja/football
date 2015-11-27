@@ -906,4 +906,227 @@ $(document).ready(function($)
             }
         );
     });
+
+    $('.asktoplay-link').on('click', function()
+    //Просмотр инфо о доступном дне для тов матчей
+    {
+        $('#asktoplay').addClass('loading');
+
+        var shedule_id = $(this).data('shedule');
+
+        $.ajax
+        (
+            {
+                url: 'json.php?asktoplay=' + shedule_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    var select = '<option value="0">-</option>';
+
+                    for (var i=0; i<data.team_array.length; i++)
+                    {
+                        select = select
+                            + '<option value="'
+                            + data.team_array[i].team_id
+                            + '">'
+                            + data.team_array[i].team_name
+                            + '</option>';
+                    }
+
+                    var invitee     = '<table class="striped w100"><tr><th colspan="4">Полученные приглашения</th></tr>';
+                    var home_guest  = '';
+
+                    for (var i=0; i<data.invitee_array.length; i++)
+                    {
+                        if (1 == data.invitee_array[i].asktoplay_home)
+                        {
+                            home_guest = 'В гостях';
+                        }
+                        else
+                        {
+                            home_guest = 'Дома';
+                        }
+
+                        invitee = invitee
+                            + '<tr><td class="w1"><img src="/img/team/12/'
+                            + data.invitee_array[i].team_id
+                            + '.png" alt="'
+                            + data.invitee_array[i].team_name
+                            + '"></td><td><a href="team_team_review_profile.php?num='
+                            + data.invitee_array[i].team_id
+                            + '">'
+                            + data.invitee_array[i].team_name
+                            + '</a></td><td class="center w30">'
+                            + home_guest
+                            + '</td><td class="center w20"><a href="asktoplay.php?ok='
+                            + data.invitee_array[i].asktoplay_id
+                            + '&shedule='
+                            + shedule_id
+                            + '&team='
+                            + data.invitee_array[i].team_id
+                            + '" class="link-img link-ok" /> <a href="javascript:;" data-delete="'
+                            + data.invitee_array[i].asktoplay_id
+                            + '" data-shedule="'
+                            + shedule_id
+                            + '" class="link-img link-delete asktoplay-delete" /></td></tr>';
+                    }
+
+                    invitee = invitee + '</table>';
+
+                    var inviter = '<table class="striped w100"><tr><th colspan="4">Отправленные приглашения</th></tr>';
+
+                    for (var i=0; i<data.inviter_array.length; i++)
+                    {
+                        if (1 == data.inviter_array[i].asktoplay_home)
+                        {
+                            home_guest = 'Дома';
+                        }
+                        else
+                        {
+                            home_guest = 'В гостях';
+                        }
+
+                        inviter = inviter
+                            + '<tr><td class="w1"><img src="/img/team/12/'
+                            + data.inviter_array[i].team_id
+                            + '.png" alt="'
+                            + data.inviter_array[i].team_name
+                            + '"></td><td><a href="team_team_review_profile.php?num='
+                            + data.inviter_array[i].team_id
+                            + '">'
+                            + data.inviter_array[i].team_name
+                            + '</a></td><td class="center w30">'
+                            + home_guest
+                            + '</td><td class="center w20"><a href="javascript:;" data-delete="'
+                            + data.inviter_array[i].asktoplay_id
+                            + '" data-shedule="'
+                            + shedule_id
+                            + '" class="link-img link-delete asktoplay-delete" /></td></tr>';
+                    }
+
+                    inviter = inviter + '</table>';
+
+                    $('#astoplay-select-team').html(select);
+                    $('#asktoplay-invitee').html(invitee);
+                    $('#asktoplay-inviter').html(inviter);
+                    $('#asktoplay-submit').data('shedule', shedule_id);
+                    $('#asktoplay-date').html(data.shedule_date);
+                    $('#asktoplay-table').show();
+                    $('#asktoplay').removeClass('loading');
+
+                    asktoplay_delete();
+                }
+            }
+        );
+    });
+
+    $('#asktoplay-submit').on('click', function()
+    {
+        $('#asktoplay').addClass('loading');
+
+        var shedule_id  = $(this).data('shedule');
+        var home_flag   = $('#asktoplay-home').val();
+        var team_id     = $('#astoplay-select-team').val();
+
+        $.ajax
+        (
+            {
+                url: 'json.php?asktoplay=' + shedule_id + '&invite=' + team_id + '&home=' + home_flag,
+                dataType: "json",
+                success: function(data)
+                {
+                    var select = '<option value="0">-</option>';
+
+                    for (var i=0; i<data.team_array.length; i++)
+                    {
+                        select = select
+                            + '<option value="'
+                            + data.team_array[i].team_id
+                            + '">'
+                            + data.team_array[i].team_name
+                            + '</option>';
+                    }
+
+                    var invitee     = '<table class="striped w100"><tr><th colspan="4">Полученные приглашения</th></tr>';
+                    var home_guest  = '';
+
+                    for (var i=0; i<data.invitee_array.length; i++)
+                    {
+                        if (1 == data.invitee_array[i].asktoplay_home)
+                        {
+                            home_guest = 'В гостях';
+                        }
+                        else
+                        {
+                            home_guest = 'Дома';
+                        }
+
+                        invitee = invitee
+                            + '<tr><td class="w1"><img src="/img/team/12/'
+                            + data.invitee_array[i].team_id
+                            + '.png" alt="'
+                            + data.invitee_array[i].team_name
+                            + '"></td><td><a href="team_team_review_profile.php?num='
+                            + data.invitee_array[i].team_id
+                            + '">'
+                            + data.invitee_array[i].team_name
+                            + '</a></td><td class="center w30">'
+                            + home_guest
+                            + '</td><td class="center w20"><a href="asktoplay.php?ok='
+                            + data.invitee_array[i].asktoplay_id
+                            + '" class="link-img link-ok" /> <a href="javascript:;" data-delete="'
+                            + data.invitee_array[i].asktoplay_id
+                            + '" data-shedule="'
+                            + shedule_id
+                            + '" class="link-img link-delete asktoplay-delete" /></td></tr>';
+                    }
+
+                    invitee = invitee + '</table>';
+
+                    var inviter = '<table class="striped w100"><tr><th colspan="4">Отправленные приглашения</th></tr>';
+
+                    for (var i=0; i<data.inviter_array.length; i++)
+                    {
+                        if (1 == data.inviter_array[i].asktoplay_home)
+                        {
+                            home_guest = 'Дома';
+                        }
+                        else
+                        {
+                            home_guest = 'В гостях';
+                        }
+
+                        inviter = inviter
+                            + '<tr><td class="w1"><img src="/img/team/12/'
+                            + data.inviter_array[i].team_id
+                            + '.png" alt="'
+                            + data.inviter_array[i].team_name
+                            + '"></td><td><a href="team_team_review_profile.php?num='
+                            + data.inviter_array[i].team_id
+                            + '">'
+                            + data.inviter_array[i].team_name
+                            + '</a></td><td class="center w30">'
+                            + home_guest
+                            + '</td><td class="center w20"><a href="javascript:;" data-delete="'
+                            + data.inviter_array[i].asktoplay_id
+                            + '" data-shedule="'
+                            + shedule_id
+                            + '" class="link-img link-delete asktoplay-delete" /></td></tr>';
+                    }
+
+                    inviter = inviter + '</table>';
+
+                    $('#astoplay-select-team').html(select);
+                    $('#asktoplay-invitee').html(invitee);
+                    $('#asktoplay-inviter').html(inviter);
+                    $('#asktoplay-submit').data('shedule', shedule_id);
+                    $('#asktoplay-date').html(data.shedule_date);
+                    $('#asktoplay-table').show();
+                    $('#asktoplay').removeClass('loading');
+
+                    asktoplay_delete();
+                }
+            }
+        );
+    });
 });

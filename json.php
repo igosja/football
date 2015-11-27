@@ -649,6 +649,124 @@ elseif (isset($_GET['instruction_id']))
 
     $json_data['success'] = 1;
 }
+elseif (isset($_GET['asktoplay']))
+{
+    $shedule_id  = (int) $_GET['asktoplay'];
+
+    if (isset($_GET['delete']))
+    {
+        $delete = (int) $_GET['delete'];
+
+        $sql = "SELECT COUNT(`asktoplay_id`) AS `count`
+                FROM `asktoplay`
+                WHERE `asktoplay_shedule_id`='$shedule_id'
+                AND `asktoplay_id`='$delete'
+                AND (`asktoplay_invitee_team_id`='$authorization_team_id'
+                OR `asktoplay_inviter_team_id`='$authorization_team_id')";
+        $check_sql = $mysqli->query($sql);
+
+        $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
+        $count_check = $check_array[0]['count'];
+
+        if (0 != $count_check)
+        {
+            $sql = "DELETE FROM `asktoplay`
+                    WHERE `asktoplay_id`='$delete'";
+            $mysqli->query($sql);
+        }
+    }
+    elseif (isset($_GET['invite']))
+    {
+        $invite = (int) $_GET['invite'];
+        $home   = (int) $_GET['home'];
+
+        $sql = "SELECT COUNT(`game_id`) AS `count`
+                FROM `game`
+                WHERE `game_shedule_id`='$shedule_id'
+                AND (`game_home_team_id`='$authorization_team_id'
+                OR `game_guest_team_id`='$authorization_team_id')";
+        $check_sql = $mysqli->query($sql);
+
+        $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
+        $count_check = $check_array[0]['count'];
+
+        if (0 == $count_check)
+        {
+            $sql = "INSERT INTO `asktoplay`
+                    SET `asktoplay_invitee_team_id`='$invite',
+                        `asktoplay_inviter_team_id`='$authorization_team_id',
+                        `asktoplay_home`='$home',
+                        `asktoplay_shedule_id`='$shedule_id'";
+            $mysqli->query($sql);
+        }
+    }
+
+    $sql = "SELECT `shedule_date`
+            FROM `shedule`
+            WHERE `shedule_id`='$shedule_id'";
+    $shedule_sql = $mysqli->query($sql);
+
+    $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+
+    $shedule_date = date('d.m.Y', strtotime($shedule_array[0]['shedule_date']));
+
+    $sql = "SELECT `team_id`,
+                   `team_name`
+            FROM `team`
+            WHERE `team_id` NOT IN
+            (
+                SELECT `game_home_team_id`
+                FROM `game`
+                LEFT JOIN `shedule`
+                ON `shedule_id`=`game_shedule_id`
+                WHERE `shedule_id`='$shedule_id'
+            )
+            AND `team_id` NOT IN
+            (
+                SELECT `game_guest_team_id`
+                FROM `game`
+                LEFT JOIN `shedule`
+                ON `shedule_id`=`game_shedule_id`
+                WHERE `shedule_id`='$shedule_id'
+            )
+            AND `team_id`!='$authorization_team_id'
+            AND `team_id`!='0'
+            ORDER BY `team_name` ASC";
+    $team_sql = $mysqli->query($sql);
+
+    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+
+    $sql = "SELECT `asktoplay_home`,
+                   `asktoplay_id`,
+                   `team_id`,
+                   `team_name`
+            FROM `asktoplay`
+            LEFT JOIN `team`
+            ON `team_id`=`asktoplay_inviter_team_id`
+            WHERE `asktoplay_shedule_id`='$shedule_id'
+            AND `asktoplay_invitee_team_id`='$authorization_team_id'";
+    $invitee_sql = $mysqli->query($sql);
+
+    $invitee_array = $invitee_sql->fetch_all(MYSQLI_ASSOC);
+
+    $sql = "SELECT `asktoplay_home`,
+                   `asktoplay_id`,
+                   `team_id`,
+                   `team_name`
+            FROM `asktoplay`
+            LEFT JOIN `team`
+            ON `team_id`=`asktoplay_invitee_team_id`
+            WHERE `asktoplay_shedule_id`='$shedule_id'
+            AND `asktoplay_inviter_team_id`='$authorization_team_id'";
+    $inviter_sql = $mysqli->query($sql);
+
+    $inviter_array = $inviter_sql->fetch_all(MYSQLI_ASSOC);
+
+    $json_data['shedule_date']  = $shedule_date;
+    $json_data['team_array']    = $team_array;
+    $json_data['invitee_array'] = $invitee_array;
+    $json_data['inviter_array'] = $inviter_array;
+}
 elseif (isset($_GET['change_role_id']))
 {
     $role_id     = (int) $_GET['change_role_id'];
