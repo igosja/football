@@ -5113,7 +5113,8 @@ function f_igosja_generator_player_salary()
                 GROUP BY `playerattribute_player_id`
             ) AS `t1`
             ON `player_id`=`playerattribute_player_id`
-            SET `player_salary`=ROUND(POW(`power`, 1.3))";
+            SET `player_salary`=ROUND(POW(`power`, 1.3)),
+                `player_price`=`player_salary`*'987'";
     $mysqli->query($sql);
 
     usleep(1);
@@ -5265,6 +5266,72 @@ function f_igosja_generator_finance()
             WHERE `shedule_date`=CURDATE()
             AND `finance_season_id`='$igosja_season_id'
             AND `game_played`='0'";
+    $mysqli->query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
+}
+
+function f_igosja_generator_building()
+//Заверешение строительства базы и стадиона
+{
+    global $mysqli;
+
+    $sql = "UPDATE `team`
+            LEFT JOIN `building`
+            ON `building_team_id`=`team_id`
+            SET `team_training_level`=`team_training_level`+'1'
+            WHERE `building_end_date`=CURDATE()
+            AND `building_buildingtype_id`='1'";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `team`
+            LEFT JOIN `building`
+            ON `building_team_id`=`team_id`
+            SET `team_school_level`=`team_school_level`+'1'
+            WHERE `building_end_date`=CURDATE()
+            AND `building_buildingtype_id`='2'";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `stadium`
+            LEFT JOIN `team`
+            ON `team_id`=`stadium_team_id`
+            LEFT JOIN `building`
+            ON `building_team_id`=`team_id`
+            SET `stadium_capacity`=`building_capacity`
+            WHERE `building_end_date`=CURDATE()
+            AND `building_buildingtype_id`='3'";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `stadium`
+            LEFT JOIN `team`
+            ON `team_id`=`stadium_team_id`
+            LEFT JOIN `building`
+            ON `building_team_id`=`team_id`
+            SET `stadium_length`=`building_length`,
+                `stadium_width`=`building_width`
+            WHERE `building_end_date`=CURDATE()
+            AND `building_buildingtype_id`='5'";
+    $mysqli->query($sql);
+
+    $sql = "UPDATE `stadium`
+            LEFT JOIN `team`
+            ON `team_id`=`stadium_team_id`
+            LEFT JOIN `building`
+            ON `building_team_id`=`team_id`
+            SET `stadium_stadiumquality_id`='1'
+            WHERE `building_end_date`=CURDATE()
+            AND `building_buildingtype_id`='4'";
+    $mysqli->query($sql);
+
+    $sql = "DELETE FROM `building`
+            WHERE `building_end_date`<=CURDATE()";
+    $mysqli->query($sql);
+
+    $sql = "DELETE FROM `building`
+            WHERE `building_buildingtype_id` IN (4,5)";
     $mysqli->query($sql);
 
     usleep(1);

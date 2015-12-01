@@ -88,13 +88,13 @@ $yellow_array = $yellow_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `team_id`,
                `team_name`,
-               `statisticteam_row_win`
-        FROM `statisticteam`
+               `series_value`
+        FROM `series`
         LEFT JOIN `team`
-        ON `team_id`=`statisticteam_team_id`
-        WHERE `statisticteam_tournament_id`='$get_num'
-        AND `statisticteam_season_id`='$igosja_season_id'
-        ORDER BY `statisticteam_row_win` DESC, `team_id` ASC
+        ON `team_id`=`series_team_id`
+        WHERE `series_tournament_id`='$get_num'
+        AND `series_seriestype_id`='" . SERIES_WIN . "'
+        ORDER BY `series_value` DESC, `team_id` ASC
         LIMIT 5";
 $win_sql = $mysqli->query($sql);
 
@@ -102,27 +102,27 @@ $win_array = $win_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `team_id`,
                `team_name`,
-               `statisticteam_row_draw`
-        FROM `statisticteam`
+               `series_value`
+        FROM `series`
         LEFT JOIN `team`
-        ON `team_id`=`statisticteam_team_id`
-        WHERE `statisticteam_tournament_id`='$get_num'
-        AND `statisticteam_season_id`='$igosja_season_id'
-        ORDER BY `statisticteam_row_draw` DESC, `team_id` ASC
+        ON `team_id`=`series_team_id`
+        WHERE `series_tournament_id`='$get_num'
+        AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
+        ORDER BY `series_value` DESC, `team_id` ASC
         LIMIT 5";
-$draw_sql = $mysqli->query($sql);
+$no_loose_sql = $mysqli->query($sql);
 
-$draw_array = $draw_sql->fetch_all(MYSQLI_ASSOC);
+$no_loose_array = $no_loose_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `team_id`,
                `team_name`,
-               `statisticteam_row_loose`
-        FROM `statisticteam`
+               `series_value`
+        FROM `series`
         LEFT JOIN `team`
-        ON `team_id`=`statisticteam_team_id`
-        WHERE `statisticteam_tournament_id`='$get_num'
-        AND `statisticteam_season_id`='$igosja_season_id'
-        ORDER BY `statisticteam_row_loose` DESC, `team_id` ASC
+        ON `team_id`=`series_team_id`
+        WHERE `series_tournament_id`='$get_num'
+        AND `series_seriestype_id`='" . SERIES_LOOSE . "'
+        ORDER BY `series_value` DESC, `team_id` ASC
         LIMIT 5";
 $loose_sql = $mysqli->query($sql);
 
@@ -130,13 +130,13 @@ $loose_array = $loose_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `team_id`,
                `team_name`,
-               `statisticteam_nopass`
-        FROM `statisticteam`
+               `series_value`
+        FROM `series`
         LEFT JOIN `team`
-        ON `team_id`=`statisticteam_team_id`
-        WHERE `statisticteam_tournament_id`='$get_num'
-        AND `statisticteam_season_id`='$igosja_season_id'
-        ORDER BY `statisticteam_nopass` DESC, `team_id` ASC
+        ON `team_id`=`series_team_id`
+        WHERE `series_tournament_id`='$get_num'
+        AND `series_seriestype_id`='" . SERIES_NO_PASS . "'
+        ORDER BY `series_value` DESC, `team_id` ASC
         LIMIT 5";
 $nopass_sql = $mysqli->query($sql);
 
@@ -149,7 +149,7 @@ $smarty->assign('pass_array', $pass_array);
 $smarty->assign('red_array', $red_array);
 $smarty->assign('yellow_array', $yellow_array);
 $smarty->assign('win_array', $win_array);
-$smarty->assign('draw_array', $draw_array);
+$smarty->assign('no_loose_array', $no_loose_array);
 $smarty->assign('loose_array', $loose_array);
 $smarty->assign('nopass_array', $nopass_array);
 

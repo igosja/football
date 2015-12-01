@@ -1,0 +1,28 @@
+<table class="block-table w100">
+    <tr>
+        <td class="block-page">
+            <p class="header">Изменение уровня тренировочной базы</p>
+            {if (isset($school_array.0.building_end_date))}
+                <p class="center warning">
+                    Сейчас проходит улучшение молодежной инфраструктуры<br/>
+                    Строительство продлится до {$school_array.0.building_end_date|date_format:"d.m.Y"}
+                </p>
+            {else}
+                <table class="striped w100">
+                    <tr>
+                        <td class="right w50">Команда</td>
+                        <td>{$school_array.0.team_name}</td>
+                    </tr>
+                    <tr>
+                        <td class="right">Уровень молодежной инфраструктуры</td>
+                        <td>{$school_array.0.team_school_level}</td>
+                    </tr>
+                    <tr>
+                        <td class="center"><a href="school.php?level=1">Увеличить уровень</a></td>
+                        <td class="center"><a href="school.php?level=0">Уменьшить уровень</a></td>
+                    </tr>
+                </table>
+            {/if}
+        </td>
+    </tr>
+</table>

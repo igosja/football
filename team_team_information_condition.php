@@ -45,8 +45,21 @@ $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
 
+$sql = "SELECT `building_capacity`,
+               `building_end_date`,
+               `buildingtype_name`
+        FROM `building`
+        LEFT JOIN `buildingtype`
+        ON `building_buildingtype_id`=`buildingtype_id`
+        WHERE `building_team_id`='$get_num'
+        ORDER BY `building_end_date` ASC";
+$building_sql = $mysqli->query($sql);
+
+$building_array = $building_sql->fetch_all(MYSQLI_ASSOC);
+
 $smarty->assign('num', $get_num);
 $smarty->assign('team_name', $team_name);
 $smarty->assign('team_array', $team_array);
+$smarty->assign('building_array', $building_array);
 
 $smarty->display('main.html');

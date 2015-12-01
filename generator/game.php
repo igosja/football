@@ -70,8 +70,14 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `staffattribute`";
 $mysqli->query($sql);
 
+$sql = "INSERT INTO `player`
+        SET `player_id`='0'";
+$mysqli->query($sql);
+
 $sql = "UPDATE `team`
-        SET `team_finance`='0'
+        SET `team_finance`='0',
+            `team_school_level`='1',
+            `team_training_level`='1'
         WHERE `team_id`!='0'
         ORDER BY `team_id` ASC";
 $mysqli->query($sql);
@@ -121,9 +127,18 @@ for ($i=0; $i<38; $i++)
     $date = strtotime($date . ' +' . $i . 'days');
     $date = date('Y-m-d', $date);
 
-    $shedule_insert_sql[] = "('$date', '1')";
+    $shedule_insert_sql[] = "('$date', '$igosja_season_id')";
 }
+/*
+for ($i=0; $i<10; $i++)
+{
+    $date = date('Y-m-d');
+    $date = strtotime($date . ' +' . $i . 'days');
+    $date = date('Y-m-d', $date);
 
+    $shedule_insert_sql[] = "('$date', '$igosja_season_id')";
+}
+*/
 $shedule_insert_sql = implode(',', $shedule_insert_sql);
 
 $sql = "INSERT INTO `shedule` (`shedule_date`, `shedule_season_id`)
@@ -184,16 +199,16 @@ for ($i=0; $i<$count_country; $i++)
                 ('$team_18','$team_4','1','$team_18','1','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
                 ('$team_19','$team_3','1','$team_19','1','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
                 ('$team_20','$team_11','1','$team_20','1','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
-                ('$team_3','$team_1','1','$team_3','$tournament_id','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
-                ('$team_4','$team_19','1','$team_4','$tournament_id','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
-                ('$team_5','$team_18','1','$team_5','$tournament_id','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
-                ('$team_6','$team_17','1','$team_6','$tournament_id','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
-                ('$team_7','$team_16','1','$team_7','$tournament_id','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
-                ('$team_8','$team_15','1','$team_8','$tournament_id','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
-                ('$team_9','$team_14','1','$team_9','$tournament_id','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
-                ('$team_10','$team_13','1','$team_10','$tournament_id','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
-                ('$team_11','$team_12','1','$team_11','$tournament_id','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
-                ('$team_2','$team_20','1','$team_2','$tournament_id','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
+                ('$team_3','$team_1','1','$team_3','2','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
+                ('$team_4','$team_19','1','$team_4','2','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
+                ('$team_5','$team_18','1','$team_5','2','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
+                ('$team_6','$team_17','1','$team_6','2','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
+                ('$team_7','$team_16','1','$team_7','2','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
+                ('$team_8','$team_15','1','$team_8','2','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
+                ('$team_9','$team_14','1','$team_9','2','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
+                ('$team_10','$team_13','1','$team_10','2','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
+                ('$team_11','$team_12','1','$team_11','2','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
+                ('$team_2','$team_20','1','$team_2','2','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
                 ('$team_1','$team_4','1','$team_1','3','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
                 ('$team_2','$team_3','1','$team_2','3','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),
                 ('$team_13','$team_11','1','$team_13','3','15'+RAND()*'15','$tournament_id','1'+RAND()*'3'),

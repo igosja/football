@@ -9,7 +9,12 @@
                 </tr>
                 <tr>
                     <td>Вместимость стадиона</td>
-                    <td>{$team_array.0.stadium_capacity|number_format:0:",":" "}</td>
+                    <td>
+                        {$team_array.0.stadium_capacity|number_format:0:",":" "}
+                        {if (isset($authorization_team_id) && $num == $authorization_team_id)}
+                            [<a href="stadium.php">Изменить</a>]
+                        {/if}
+                    </td>
                 </tr>
                 <tr>
                     <td>Команда</td>
@@ -26,23 +31,47 @@
                 </tr>
                 <tr>
                     <td>Состояние газона</td>
-                    <td>{$team_array.0.stadiumquality_name}</td>
+                    <td>
+                        {$team_array.0.stadiumquality_name}
+                        {if (isset($authorization_team_id) && $num == $authorization_team_id)}
+                            [<a href="fieldgrass.php">Заменить</a>]
+                        {/if}
+                    </td>
                 </tr>
                 <tr>
                     <td>Размеры поля</td>
-                    <td>Длина: {$team_array.0.stadium_length} м, ширина: {$team_array.0.stadium_width} м</td>
+                    <td>
+                        Длина: {$team_array.0.stadium_length} м, ширина: {$team_array.0.stadium_width} м
+                        {if (isset($authorization_team_id) && $num == $authorization_team_id)}
+                            [<a href="fieldsize.php">Изменить</a>]
+                        {/if}
+                    </td>
                 </tr>
                 <tr>
                     <td>Уровень тренировочной базы</td>
-                    <td>{$team_array.0.team_training_level}</td>
+                    <td>
+                        {$team_array.0.team_training_level}
+                        {if (isset($authorization_team_id) && $num == $authorization_team_id)}
+                            [<a href="base.php">Изменить</a>]
+                        {/if}
+                    </td>
                 </tr>
                 <tr>
                     <td>Уровень молодежной инфраструктуры</td>
-                    <td>{$team_array.0.team_school_level}</td>
+                    <td>
+                        {$team_array.0.team_school_level}
+                        {if (isset($authorization_team_id) && $num == $authorization_team_id)}
+                            [<a href="school.php">Изменить</a>]
+                        {/if}
+                    </td>
                 </tr>
                 <tr>
-                    <td>Запланированное расширение</td>
-                    <td>-</td>
+                    <td>Запланированное работы</td>
+                    <td>
+                        {section name=i loop=$building_array}
+                            {$building_array[i].buildingtype_name} (дата заврешения - {$building_array[i].building_end_date|date_format:"d.m.Y"})<br/>
+                        {/section}
+                    </td>
                 </tr>
             </table>
         </td>

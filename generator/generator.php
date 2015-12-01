@@ -37,6 +37,7 @@ f_igosja_generator_player_salary();
 f_igosja_generator_staff_salary();
 f_igosja_generator_finance();
 f_igosja_generator_make_played();
+f_igosja_generator_building();
 
 print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
        <br/>Потребление памяти: ' . number_format(memory_get_usage(), 0, ",", " ") . ' Б';

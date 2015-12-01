@@ -128,6 +128,7 @@ $(document).ready(function($)
     });
 
     if ($(input_on_page_array).is('#tactic-player-formation'))
+    //Загрузка стриницы тактики
     {
         tactic_player_field();
     }
@@ -449,17 +450,19 @@ $(document).ready(function($)
     });
 
     if ($(select_on_page_array).is('#tactic-select'))
+    //Загрузка страницы такстики
     {
         tactic_field();
-        tactic_name($('[data-position="1"]'));
     }
 
     $('#tactic-select').on('change', function()
+    //Смена расстановки на странице тактики
     {
         tactic_field();
     });
 
     $('.position-select').on('change', function()
+    //Смена позиции игрока на странице тактики
     {
         tactic_name(this);
     });
@@ -529,6 +532,7 @@ $(document).ready(function($)
     });
 
     if ($(select_on_page_array).is('#select-captain-1'))
+    //Загрузка капитана
     {
         captain_select();
     }
@@ -628,6 +632,7 @@ $(document).ready(function($)
     });
 
     if ($(select_on_page_array).is('#select-penalty-1'))
+    //Загрузка страницы пенальтистов
     {
         penalty_select();
     }
@@ -658,6 +663,7 @@ $(document).ready(function($)
     });
 
     if ($(select_on_page_array).is('#select-corner-left-1'))
+    //Загрузка страницы исполнителей стандартов
     {
         corner_left_select();
         corner_right_select();
@@ -824,6 +830,7 @@ $(document).ready(function($)
     });
 
     $('.finance-link').on('click', function()
+    //Переключение вкладок на странице финансов
     {
         var data_id = $(this).data('id');
         $('.finance-link').removeClass('active');
@@ -856,11 +863,13 @@ $(document).ready(function($)
     });
 
     if ($(select_on_page_array).is('.player-number'))
+    //Загрузка номеров игроков
     {
         player_number();
     }
 
     $('.player-number').on('change', function()
+    //Смена номера игрока
     {
         $('#player-info').addClass('loading');
 
@@ -886,6 +895,7 @@ $(document).ready(function($)
     });
 
     $('.instruction-checkbox').on('change', function()
+    //Смена командных инкструкций
     {
         $('#instruction-block').addClass('loading');
 
@@ -1021,6 +1031,7 @@ $(document).ready(function($)
     });
 
     $('#asktoplay-submit').on('click', function()
+    //Отправка приглашения на товарищеский матч
     {
         $('#asktoplay').addClass('loading');
 

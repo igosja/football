@@ -108,29 +108,29 @@
                                 {$win_array[i].team_name}
                             </a>
                         </td>
-                        <td class="w15">{$win_array[i].statisticteam_row_win}</td>
+                        <td class="w15">{$win_array[i].series_value}</td>
                     </tr>
                 {/section}
             </table>
         </td>
         <td class="block-page w25">
-            <p class="header">Ничьих подряд</p>
+            <p class="header">Игр без поражений подряд</p>
             <table class="striped w100">
-                {section name=i loop=$draw_array}
+                {section name=i loop=$no_loose_array}
                     <tr>
                         <td class="w1">
                             <img
-                                alt="{$draw_array[i].team_name}"
+                                alt="{$no_loose_array[i].team_name}"
                                 class="img-12"
-                                src="img/team/12/{$draw_array[i].team_id}.png"
+                                src="img/team/12/{$no_loose_array[i].team_id}.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num={$draw_array[i].team_id}">
-                                {$draw_array[i].team_name}
+                            <a href="team_team_review_profile.php?num={$no_loose_array[i].team_id}">
+                                {$no_loose_array[i].team_name}
                             </a>
                         </td>
-                        <td class="w15">{$draw_array[i].statisticteam_row_draw}</td>
+                        <td class="w15">{$no_loose_array[i].series_value}</td>
                     </tr>
                 {/section}
             </table>
@@ -152,7 +152,7 @@
                                 {$loose_array[i].team_name}
                             </a>
                         </td>
-                        <td class="w15">{$loose_array[i].statisticteam_row_loose}</td>
+                        <td class="w15">{$loose_array[i].series_value}</td>
                     </tr>
                 {/section}
             </table>
@@ -174,7 +174,7 @@
                                 {$nopass_array[i].team_name}
                             </a>
                         </td>
-                        <td class="w15">{$nopass_array[i].statisticteam_nopass}</td>
+                        <td class="w15">{$nopass_array[i].series_value}</td>
                     </tr>
                 {/section}
             </table>

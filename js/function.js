@@ -153,11 +153,12 @@ function tactic_player_field()
 //Построение на поле на странице индивидуальных заданий игрокам
 {
     var formation = $('#tactic-player-formation').val();
+    console.log(formation);
     formation = parseInt(formation);
     formation--;
     formation = formation_array[formation];
 
-    var field_icon            = $('#field-icon');
+    var field_icon = $('#field-icon');
 
     $(field_icon).empty();
 

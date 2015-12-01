@@ -150,8 +150,8 @@ $sql = "SELECT `asktoplay_shedule_id`,
         ) AS `t2`
         ON `shedule_id`=`asktoplay_shedule_id`
         WHERE `shedule_season_id`='$igosja_season_id'
-        AND `shedule_date`>CURDATE()
-        ORDER BY `shedule_id` ASC";
+        AND `shedule_date`>=CURDATE()
+        ORDER BY `shedule_date` ASC";
 $shedule_sql = $mysqli->query($sql);
 
 $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
