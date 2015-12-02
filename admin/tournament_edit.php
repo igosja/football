@@ -11,7 +11,11 @@ else
     $get_num = 1;
 }
 
-$sql = "SELECT `tournament_country_id`, `tournament_level`, `tournament_visitor`, `tournament_name`, `tournament_tournamenttype_id`
+$sql = "SELECT `tournament_country_id`,
+               `tournament_level`,
+               `tournament_name`,
+               `tournament_tournamenttype_id`,
+               `tournament_visitor`
         FROM `tournament`
         WHERE `tournament_id`='$get_num'
         LIMIT 1";
@@ -31,7 +35,7 @@ if (isset($_POST['tournamenttype_id']))
     $tournamenttype_id  = (int) $_POST['tournamenttype_id'];
     $tournament_name    = $_POST['tournament_name'];
     $tournament_level   = (int) $_POST['tournament_level'];
-    $tournament_visitor  = (float) $_POST['tournament_visitor'];
+    $tournament_visitor = (float) $_POST['tournament_visitor'];
     $country_id         = (int) $_POST['country_id'];
 
     $sql = "UPDATE `tournament`
@@ -45,11 +49,6 @@ if (isset($_POST['tournamenttype_id']))
     $prepare->bind_param('siidi', $tournament_name, $tournamenttype_id, $tournament_level, $tournament_visitor, $country_id);
     $prepare->execute();
     $prepare->close();
-
-    if ('image/png' == $_FILES['tournament_logo']['type'])
-    {
-        copy($_FILES['tournament_logo']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/tournament/' . $get_num . '.png');
-    }
 
     if ('image/png' == $_FILES['tournament_logo_90']['type'])
     {

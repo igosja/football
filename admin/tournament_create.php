@@ -23,11 +23,6 @@ if (isset($_POST['tournamenttype_id']))
 
     $tournament_id = $mysqli->insert_id;
 
-    if ('image/png' == $_FILES['tournament_logo']['type'])
-    {
-        copy($_FILES['tournament_logo']['tmp_name'], '../img/tournament/' . $tournament_id . '.png');
-    }
-
     if ('image/png' == $_FILES['tournament_logo_90']['type'])
     {
         copy($_FILES['tournament_logo_90']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/tournament/90/' . $tournament_id . '.png');

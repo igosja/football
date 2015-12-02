@@ -30,19 +30,25 @@ $continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
 
 $continent_name = $continent_array[0]['continent_name'];
 
-$sql = "SELECT `country_id`, `country_name`, `continent_id`, `continent_name`
+$sql = "SELECT `country_id`,
+               `country_name`,
+               `tournament_id`,
+               `tournament_name`,
+               `tournament_reputation`
         FROM `country`
         LEFT JOIN `continent`
         ON `continent_id`=`country_continent_id`
+        CROSS JOIN `tournament`
+        ON `tournament_country_id`=`country_id`
         WHERE `country_continent_id`='$get_num'
-        ORDER BY `country_name` ASC";
-$country_sql = $mysqli->query($sql);
+        AND `tournament_tournamenttype_id`='3'
+        ORDER BY `tournament_reputation` DESC";
+$tournament_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('header_2_title', $continent_name);
 $smarty->assign('num', $get_num);
-$smarty->assign('continent_name', $continent_name);
-$smarty->assign('country_array', $country_array);
+$smarty->assign('tournament_array', $tournament_array);
 
 $smarty->display('main.html');
