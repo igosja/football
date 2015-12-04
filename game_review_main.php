@@ -18,6 +18,7 @@ $sql = "SELECT `city_name`,
                `game_guest_red`,
                `game_guest_score`,
                `game_guest_shot`,
+               `game_guest_shoot_out`,
                `game_guest_team_id`,
                `t2`.`team_name` AS `game_guest_team_name`,
                `game_guest_yellow`,
@@ -27,6 +28,7 @@ $sql = "SELECT `city_name`,
                `game_home_red`,
                `game_home_score`,
                `game_home_shot`,
+               `game_home_shoot_out`,
                `game_home_team_id`,
                `t1`.`team_name` AS `game_home_team_name`,
                `game_home_yellow`,
@@ -97,7 +99,18 @@ if (0 == $game_played)
 
 $home_score     = $game_array[0]['game_home_score'];
 $guest_score    = $game_array[0]['game_guest_score'];
-$header_2_score = $home_score . '-' . $guest_score;
+$header_2_score = $home_score . ':' . $guest_score;
+$home_shootout  = $game_array[0]['game_home_shoot_out'];
+$guest_shootout = $game_array[0]['game_guest_shoot_out'];
+
+if (0 != $home_shootout && 0 != $guest_shootout)
+{
+    $header_2_shootout = '(пен. ' . $home_shootout . ':' . $guest_score . ')';
+}
+else
+{
+    $header_2_shootout = '';
+}
 
 $sql = "SELECT `event_minute`,
                `eventtype_id`,
@@ -195,6 +208,7 @@ $smarty->assign('header_2_home_name', $header_2_home_name);
 $smarty->assign('header_2_guest_id', $header_2_guest_id);
 $smarty->assign('header_2_guest_name', $header_2_guest_name);
 $smarty->assign('header_2_score', $header_2_score);
+$smarty->assign('header_2_shootout', $header_2_shootout);
 $smarty->assign('game_array', $game_array);
 $smarty->assign('home_event_array', $home_event_array);
 $smarty->assign('guest_event_array', $guest_event_array);

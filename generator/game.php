@@ -73,6 +73,12 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `cupparticipant`";
 $mysqli->query($sql);
 
+$sql = "TRUNCATE `leagueparticipant`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `league`";
+$mysqli->query($sql);
+
 $sql = "INSERT INTO `player`
         SET `player_id`='0'";
 $mysqli->query($sql);
@@ -134,14 +140,24 @@ $mysqli->query($sql);
 
 $shedule_insert_sql = array();
 
+for ($i=0; $i<22; $i++)
+{
+    $date = date('Y-m-d');
+    $date = strtotime($date . ' +' . $i . 'days');
+    $date = date('Y-m-d', $date);
+
+    $shedule_insert_sql[] = "('$date', '$igosja_season_id', '" . TOURNAMENT_TYPE_CHAMPIONS_LEAGUE . "')";
+}
+
+/* Этот блок для кубка
 for ($i=0; $i<9; $i++)
 {
     $date = date('Y-m-d');
     $date = strtotime($date . ' +' . $i . 'days');
     $date = date('Y-m-d', $date);
 
-    $shedule_insert_sql[] = "('$date', '$igosja_season_id')";
-}
+    $shedule_insert_sql[] = "('$date', '$igosja_season_id', '3')";
+}*/
 /* Этот блок для чемпионата - 38 туров
 for ($i=0; $i<38; $i++)
 {
@@ -149,12 +165,12 @@ for ($i=0; $i<38; $i++)
     $date = strtotime($date . ' +' . $i . 'days');
     $date = date('Y-m-d', $date);
 
-    $shedule_insert_sql[] = "('$date', '$igosja_season_id')";
+    $shedule_insert_sql[] = "('$date', '$igosja_season_id', '2')";
 }
 */
 $shedule_insert_sql = implode(',', $shedule_insert_sql);
 
-$sql = "INSERT INTO `shedule` (`shedule_date`, `shedule_season_id`)
+$sql = "INSERT INTO `shedule` (`shedule_date`, `shedule_season_id`, `shedule_tournamenttype_id`)
         VALUES $shedule_insert_sql;";
 $mysqli->query($sql);
 /* календарь чемпионата страны
@@ -585,7 +601,7 @@ for ($i=0; $i<$count_country; $i++)
     $mysqli->query($sql);
 }
 */
-
+/*
 $sql = "SELECT `tournament_id`,
                `tournament_country_id`
         FROM `tournament`
@@ -651,6 +667,85 @@ for ($i=0; $i<$count_country; $i++)
                     `game_weather_id`='1'+RAND()*'3'";
         $mysqli->query($sql);
     }
+}
+*/
+
+$sql = "INSERT INTO `leagueparticipant` (`leagueparticipant_team_id`)
+        SELECT `team_id`
+        FROM `team`
+        WHERE `team_id`!='0'
+        ORDER BY RAND()";
+$mysqli->query($sql);
+
+$sql = "UPDATE `leagueparticipant`
+        SET `leagueparticipant_in`='39'
+        WHERE `leagueparticipant_in`='0'
+        LIMIT 4";
+$mysqli->query($sql);
+
+$sql = "UPDATE `leagueparticipant`
+        SET `leagueparticipant_in`='40'
+        WHERE `leagueparticipant_in`='0'
+        LIMIT 2";
+$mysqli->query($sql);
+
+$sql = "UPDATE `leagueparticipant`
+        SET `leagueparticipant_in`='41'
+        WHERE `leagueparticipant_in`='0'
+        LIMIT 2";
+$mysqli->query($sql);
+
+$sql = "UPDATE `leagueparticipant`
+        SET `leagueparticipant_in`='42'
+        WHERE `leagueparticipant_in`='0'
+        LIMIT 2";
+$mysqli->query($sql);
+
+$sql = "UPDATE `leagueparticipant`
+        SET `leagueparticipant_in`='1'
+        WHERE `leagueparticipant_in`='0'";
+$mysqli->query($sql);
+
+$sql = "SELECT `leagueparticipant_team_id`
+        FROM `leagueparticipant`
+        ORDER BY `leagueparticipant_id` ASC
+        LIMIT 4";
+$team_sql = $mysqli->query($sql);
+
+$count_team = $team_sql->num_rows;
+$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+
+for ($i=0; $i<$count_team; $i=$i+2)
+{
+    $team_1 = $team_array[$i]['leagueparticipant_team_id'];
+    $team_2 = $team_array[$i+1]['leagueparticipant_team_id'];
+
+    $sql = "INSERT INTO `game`
+            SET `game_guest_team_id`='$team_2',
+                `game_home_team_id`='$team_1',
+                `game_referee_id`='1',
+                `game_stadium_id`='$team_1',
+                `game_stage_id`='39',
+                `game_shedule_id`='1',
+                `game_temperature`='15'+RAND()*'15',
+                `game_tournament_id`='" . TOURNAMENT_CHAMPIONS_LEAGUE . "',
+                `game_weather_id`='1'+RAND()*'3'";
+    $mysqli->query($sql);
+
+    $game_id = $mysqli->insert_id;
+
+    $sql = "INSERT INTO `game`
+            SET `game_first_game_id`='$game_id',
+                `game_guest_team_id`='$team_1',
+                `game_home_team_id`='$team_2',
+                `game_referee_id`='1',
+                `game_stadium_id`='$team_2',
+                `game_stage_id`='39',
+                `game_shedule_id`='2',
+                `game_temperature`='15'+RAND()*'15',
+                `game_tournament_id`='" . TOURNAMENT_CHAMPIONS_LEAGUE . "',
+                `game_weather_id`='1'+RAND()*'3'";
+    $mysqli->query($sql);
 }
 
 print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '

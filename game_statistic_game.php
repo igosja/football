@@ -23,6 +23,7 @@ $sql = "SELECT `game_guest_corner`,
                `game_guest_team_id`,
                `t2`.`team_name` AS `game_guest_team_name`,
                `game_guest_score`,
+               `game_guest_shoot_out`,
                `game_guest_shot`,
                `game_guest_yellow`,
                `game_home_corner`,
@@ -37,6 +38,7 @@ $sql = "SELECT `game_guest_corner`,
                `game_home_team_id`,
                `t1`.`team_name` AS `game_home_team_name`,
                `game_home_score`,
+               `game_home_shoot_out`,
                `game_home_shot`,
                `game_home_yellow`,
                `game_id`,
@@ -99,6 +101,17 @@ if (0 == $game_played)
 $home_score     = $game_array[0]['game_home_score'];
 $guest_score    = $game_array[0]['game_guest_score'];
 $header_2_score = $home_score . '-' . $guest_score;
+$home_shootout  = $game_array[0]['game_home_shoot_out'];
+$guest_shootout = $game_array[0]['game_guest_shoot_out'];
+
+if (0 != $home_shootout && 0 != $guest_shootout)
+{
+    $header_2_shootout = '(пен. ' . $home_shootout . ':' . $guest_score . ')';
+}
+else
+{
+    $header_2_shootout = '';
+}
 
 $smarty->assign('num', $get_num);
 $smarty->assign('header_2_home_id', $header_2_home_id);
@@ -106,6 +119,7 @@ $smarty->assign('header_2_home_name', $header_2_home_name);
 $smarty->assign('header_2_guest_id', $header_2_guest_id);
 $smarty->assign('header_2_guest_name', $header_2_guest_name);
 $smarty->assign('header_2_score', $header_2_score);
+$smarty->assign('header_2_shootout', $header_2_shootout);
 $smarty->assign('game_array', $game_array);
 
 $smarty->display('main.html');

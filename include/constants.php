@@ -67,6 +67,10 @@ define('SERIES_NO_SCORE', 6);
 define('SITE_URL', $_SERVER['HTTP_HOST']);
 define('SPACE', '&nbsp;');
 define('THREE_DAYS_TO_SECOND', '259200');
+define('TOURNAMENT_TYPE_CHAMPIONS_LEAGUE', '4');
+define('TOURNAMENT_TYPE_CHAMPIONSHIP', '2');
+define('TOURNAMENT_TYPE_CUP', '3');
+define('TOURNAMENT_CHAMPIONS_LEAGUE', '6');
 
 $HEADER_2_ARRAY = array('team', 'national');
 $LEFT_LEG_POSITION_ARRAY = array(5, 11);
