@@ -862,18 +862,10 @@ $(document).ready(function($)
         );
     });
 
-    if ($(select_on_page_array).is('.player-number'))
-    //Загрузка номеров игроков
-    {
-        player_number();
-    }
-
     $('.player-number').on('change', function()
     //Смена номера игрока
     {
         $('#player-info').addClass('loading');
-
-        player_number();
 
         var player_id   = $(this).data('player');
         var number      = $(this).val();

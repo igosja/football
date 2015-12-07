@@ -79,6 +79,9 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `league`";
 $mysqli->query($sql);
 
+$sql = "TRUNCATE `scout`";
+$mysqli->query($sql);
+
 $sql = "INSERT INTO `player`
         SET `player_id`='0'";
 $mysqli->query($sql);

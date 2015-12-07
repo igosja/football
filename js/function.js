@@ -110,45 +110,6 @@
     });
 }
 
-function player_number()
-//Смена командных номеров
-{
-    var select_array = $('.player-number');
-    var value_array  = [];
-    var selected     = '';
-
-    for (var i=0; i<select_array.length; i++)
-    {
-        value_array.push(parseInt($(select_array[i]).val()));
-    }
-
-    for (var i=0; i<select_array.length; i++)
-    {
-        var select_value = $(select_array[i]).val();
-
-        $(select_array[i]).empty();
-        $(select_array[i]).append('<option value="0">-</option>');
-
-        for (var j=1; j<100; j++)
-        {
-            if (-1 == $.inArray(j, value_array) ||
-                j == select_value)
-            {
-                if (j == select_value)
-                {
-                    selected = ' selected';
-                }
-                else
-                {
-                    selected = '';
-                }
-
-                $(select_array[i]).append('<option value="' + j + '"' + selected + '>' + j + '</option>');
-            }
-        }
-    }
-}
-
 function tactic_player_field()
 //Построение на поле на странице индивидуальных заданий игрокам
 {

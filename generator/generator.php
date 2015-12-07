@@ -37,10 +37,12 @@ f_igosja_generator_tournament_record();
 f_igosja_generator_mood_after_game();
 f_igosja_generator_injury_after_game();
 f_igosja_generator_training();
+f_igosja_generator_after_training();
 f_igosja_generator_player_salary();
 f_igosja_generator_staff_salary();
 f_igosja_generator_finance();
 f_igosja_generator_make_played();
+f_igosja_generator_scout();
 f_igosja_generator_building();
 
 print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '

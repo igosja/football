@@ -4,7 +4,7 @@
             <p class="header">Игроки</p>
             <table class="striped w100">
                 <tr>
-                    <th class="w5">Пзц</th>
+                    <th class="w1">№</th>
                     <th>Имя</th>
                     <th class="w5">Позиция</th>
                     <th class="w5">Нац</th>
@@ -19,21 +19,13 @@
                 {section name=i loop=$player_array}
                     <tr>
                         <td class="center nopadding">
-                            <select
+                            <input
                                 class="player-number"
                                 data-player="{$player_array[i].player_id}"
-                            >
-                                <option value="0">-</option>
-                                {section name=j loop=99}
-                                    <option value="{$smarty.section.j.iteration}"
-                                        {if ($player_array[i].player_number == $smarty.section.j.iteration)}
-                                            selected
-                                        {/if}
-                                    >
-                                        {$smarty.section.j.iteration}
-                                    </option>
-                                {/section}
-                            </select>
+                                size="1"
+                                type="text"
+                                value="{$player_array[i].player_number}"
+                            />
                         </td>
                         <td>
                             <a href="player_home_profile.php?num={$player_array[i].player_id}">
