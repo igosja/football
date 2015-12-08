@@ -141,6 +141,7 @@ $(document).ready(function($)
         $.ajax
         (
             {
+                beforeSend: function(){$('#role-block').addClass('loading');},
                 url: 'json.php?player_tactic_position_id=' + position_id,
                 dataType: "json",
                 success: function(data)
@@ -404,18 +405,34 @@ $(document).ready(function($)
         );
     });
 
-    $('#offer-price, #offer-type').on('change', function()
-    //Стоимость трансферного предложения
+    $('#offer-type').on('change', function()
+    //Трансферное предложение (смена форм аренды и трансфера)
+    {
+        var offer_type  = $(this).val();
+
+        if (1 == offer_type)
+        {
+            $('#tr-offer-period').hide();
+        }
+        else
+        {
+            $('#tr-offer-period').show();
+        }
+    });
+
+    $('#offer-submit').on('click', function()
+    //Отправка трансферного предложения
     {
         var player_id   = $(this).data('player');
         var price       = $('#offer-price').val();
         var offer_type  = $('#offer-type').val();
+        var period      = $('#offer-period').val();
 
         $.ajax
         (
             {
                 beforeSend: function(){$('#offer-info').addClass('loading');},
-                url: 'json.php?player_id=' + player_id + '&offer_price=' + price + '&offer_type=' + offer_type,
+                url: 'json.php?player_id=' + player_id + '&offer_price=' + price + '&offer_period=' + period + '&offer_type=' + offer_type,
                 dataType: "json",
                 success: function(data)
                 {

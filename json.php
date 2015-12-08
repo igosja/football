@@ -353,12 +353,14 @@ elseif (isset($_GET['offer_price']))
 {
     $offer_price    = (int) $_GET['offer_price'];
     $offer_type     = (int) $_GET['offer_type'];
+    $offer_period   = (int) $_GET['offer_period'];
     $player_id      = (int) $_GET['player_id'];
 
     $sql = "SELECT `playeroffer_id`
             FROM `playeroffer`
             WHERE `playeroffer_player_id`='$player_id'
             AND `playeroffer_team_id`='$authorization_team_id'
+            AND `playeroffer_offertype_id`='$offer_type'
             LIMIT 1";
     $check_sql = $mysqli->query($sql);
 
@@ -369,6 +371,7 @@ elseif (isset($_GET['offer_price']))
         $sql = "INSERT INTO `playeroffer`
                 SET `playeroffer_player_id`='$player_id',
                     `playeroffer_offertype_id`='$offer_type',
+                    `playeroffer_period`='$offer_period',
                     `playeroffer_price`='$offer_price',
                     `playeroffer_team_id`='$authorization_team_id',
                     `playeroffer_date`=SYSDATE()";
@@ -378,6 +381,7 @@ elseif (isset($_GET['offer_price']))
     {
         $sql = "UPDATE `playeroffer`
                 SET `playeroffer_offertype_id`='$offer_type',
+                    `playeroffer_period`='$offer_period',
                     `playeroffer_price`='$offer_price',
                     `playeroffer_date`=SYSDATE()
                 WHERE `playeroffer_player_id`='$player_id'

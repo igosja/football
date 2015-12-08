@@ -56,7 +56,7 @@ $sql = "SELECT `leader`,
         ON `playerposition_position_id`=`position_id`
         WHERE `player_team_id`='$get_num'
         AND `playerposition_value`='100'
-        ORDER BY `position_id` DESC";
+        ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);

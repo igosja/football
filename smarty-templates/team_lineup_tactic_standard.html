@@ -24,7 +24,7 @@
                     {/section}
                 </table>
             </td>
-            <td class="block-page">
+            <td class="block-page" id="corner-block">
                 <p class="header">Угловые</p>
                 <table class="w100">
                     <tr>
@@ -34,11 +34,11 @@
                     <tr>
                         <td class="w25">1</td>
                         <td class="w25">
-                            <select name="corner_left_1" id="select-corner-left-1" class="select-corner-left">
+                            <select name="corner_left_1" id="select-corner-left-1" class="select-corner-left" data-id="1">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_corner_left_player_id_1 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_corner_left_player_id_1 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -49,11 +49,11 @@
                         </td>
                         <td class="w25">1</td>
                         <td class="w25">
-                            <select name="corner_right_1" id="select-corner-right-1" class="select-corner-right">
+                            <select name="corner_right_1" id="select-corner-right-1" class="select-corner-right" data-id="1">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_corner_right_player_id_1 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_corner_right_player_id_1 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -66,11 +66,11 @@
                     <tr>
                         <td class="w25">2</td>
                         <td class="w25">
-                            <select name="corner_left_2" id="select-corner-left-2" class="select-corner-left">
+                            <select name="corner_left_2" id="select-corner-left-2" class="select-corner-left" data-id="2">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_corner_left_player_id_2 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_corner_left_player_id_2 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -81,11 +81,11 @@
                         </td>
                         <td class="w25">2</td>
                         <td class="w25">
-                            <select name="corner_right_2" id="select-corner-right-2" class="select-corner-right">
+                            <select name="corner_right_2" id="select-corner-right-2" class="select-corner-right" data-id="2">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_corner_right_player_id_2 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_corner_right_player_id_2 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -98,11 +98,11 @@
                     <tr>
                         <td class="w25">3</td>
                         <td class="w25">
-                            <select name="corner_left_3" id="select-corner-left-3" class="select-corner-left">
+                            <select name="corner_left_3" id="select-corner-left-3" class="select-corner-left" data-id="3">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_corner_left_player_id_3 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_corner_left_player_id_3 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -113,11 +113,11 @@
                         </td>
                         <td class="w25">3</td>
                         <td class="w25">
-                            <select name="corner_right_3" id="select-corner-right-3" class="select-corner-right">
+                            <select name="corner_right_3" id="select-corner-right-3" class="select-corner-right" data-id="3">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_corner_right_player_id_3 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_corner_right_player_id_3 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -130,11 +130,11 @@
                     <tr>
                         <td class="w25">4</td>
                         <td class="w25">
-                            <select name="corner_left_4" id="select-corner-left-4" class="select-corner-left">
+                            <select name="corner_left_4" id="select-corner-left-4" class="select-corner-left" data-id="4">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_corner_left_player_id_4 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_corner_left_player_id_4 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -145,11 +145,11 @@
                         </td>
                         <td class="w25">4</td>
                         <td class="w25">
-                            <select name="corner_right_4" id="select-corner-right-4" class="select-corner-right">
+                            <select name="corner_right_4" id="select-corner-right-4" class="select-corner-right" data-id="4">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_corner_right_player_id_4 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_corner_right_player_id_4 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -162,11 +162,11 @@
                     <tr>
                         <td class="w25">5</td>
                         <td class="w25">
-                            <select name="corner_left_5" id="select-corner-left-5" class="select-corner-left">
+                            <select name="corner_left_5" id="select-corner-left-5" class="select-corner-left" data-id="5">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_corner_left_player_id_5 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_corner_left_player_id_5 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -177,11 +177,11 @@
                         </td>
                         <td class="w25">5</td>
                         <td class="w25">
-                            <select name="corner_right_5" id="select-corner-right-5" class="select-corner-right">
+                            <select name="corner_right_5" id="select-corner-right-5" class="select-corner-right" data-id="5">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_corner_right_player_id_5 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_corner_right_player_id_5 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -195,7 +195,7 @@
             </td>
         </tr>
         <tr>
-            <td class="block-page">
+            <td class="block-page" id="freekick-block">
                 <p class="header">Штрафные</p>
                 <table class="w100">
                     <tr>
@@ -205,11 +205,11 @@
                     <tr>
                         <td class="w25">1</td>
                         <td class="w25">
-                            <select name="freekick_left_1" id="select-freekick-left-1" class="select-freekick-left">
+                            <select name="freekick_left_1" id="select-freekick-left-1" class="select-freekick-left" data-id="1">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_freekick_left_player_id_1 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_freekick_left_player_id_1 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -220,11 +220,11 @@
                         </td>
                         <td class="w25">1</td>
                         <td class="w25">
-                            <select name="freekick_right_1" id="select-freekick-right-1" class="select-freekick-right">
+                            <select name="freekick_right_1" id="select-freekick-right-1" class="select-freekick-right" data-id="1">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_freekick_right_player_id_1 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_freekick_right_player_id_1 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -237,11 +237,11 @@
                     <tr>
                         <td class="w25">2</td>
                         <td class="w25">
-                            <select name="freekick_left_2" id="select-freekick-left-2" class="select-freekick-left">
+                            <select name="freekick_left_2" id="select-freekick-left-2" class="select-freekick-left" data-id="2">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_freekick_left_player_id_2 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_freekick_left_player_id_2 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -252,11 +252,11 @@
                         </td>
                         <td class="w25">2</td>
                         <td class="w25">
-                            <select name="freekick_right_2" id="select-freekick-right-2" class="select-freekick-right">
+                            <select name="freekick_right_2" id="select-freekick-right-2" class="select-freekick-right" data-id="2">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_freekick_right_player_id_2 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_freekick_right_player_id_2 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -269,11 +269,11 @@
                     <tr>
                         <td class="w25">3</td>
                         <td class="w25">
-                            <select name="freekick_left_3" id="select-freekick-left-3" class="select-freekick-left">
+                            <select name="freekick_left_3" id="select-freekick-left-3" class="select-freekick-left" data-id="3">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_freekick_left_player_id_3 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_freekick_left_player_id_3 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -284,11 +284,11 @@
                         </td>
                         <td class="w25">3</td>
                         <td class="w25">
-                            <select name="freekick_right_3" id="select-freekick-right-3" class="select-freekick-right">
+                            <select name="freekick_right_3" id="select-freekick-right-3" class="select-freekick-right" data-id="3">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_freekick_right_player_id_3 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_freekick_right_player_id_3 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -301,11 +301,11 @@
                     <tr>
                         <td class="w25">4</td>
                         <td class="w25">
-                            <select name="freekick_left_4" id="select-freekick-left-4" class="select-freekick-left">
+                            <select name="freekick_left_4" id="select-freekick-left-4" class="select-freekick-left" data-id="4">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_freekick_left_player_id_4 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_freekick_left_player_id_4 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -316,11 +316,11 @@
                         </td>
                         <td class="w25">4</td>
                         <td class="w25">
-                            <select name="freekick_right_4" id="select-freekick-right-4" class="select-freekick-right">
+                            <select name="freekick_right_4" id="select-freekick-right-4" class="select-freekick-right" data-id="4">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_freekick_right_player_id_4 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_freekick_right_player_id_4 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -333,11 +333,11 @@
                     <tr>
                         <td class="w25">5</td>
                         <td class="w25">
-                            <select name="freekick_left_5" id="select-freekick-left-5" class="select-freekick-left">
+                            <select name="freekick_left_5" id="select-freekick-left-5" class="select-freekick-left" data-id="5">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_freekick_left_player_id_5 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_freekick_left_player_id_5 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -348,11 +348,11 @@
                         </td>
                         <td class="w25">5</td>
                         <td class="w25">
-                            <select name="freekick_right_5" id="select-freekick-right-5" class="select-freekick-right">
+                            <select name="freekick_right_5" id="select-freekick-right-5" class="select-freekick-right" data-id="5">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_freekick_right_player_id_5 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_freekick_right_player_id_5 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -366,7 +366,7 @@
             </td>
         </tr>
         <tr>
-            <td class="block-page">
+            <td class="block-page" id="out-block">
                 <p class="header">Ауты</p>
                 <table class="w100">
                     <tr>
@@ -376,11 +376,11 @@
                     <tr>
                         <td class="w25">1</td>
                         <td class="w25">
-                            <select name="out_left_1" id="select-out-left-1" class="select-out-left">
+                            <select name="out_left_1" id="select-out-left-1" class="select-out-left" data-id="1">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_out_left_player_id_1 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_out_left_player_id_1 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -391,11 +391,11 @@
                         </td>
                         <td class="w25">1</td>
                         <td class="w25">
-                            <select name="out_right_1" id="select-out-right-1" class="select-out-right">
+                            <select name="out_right_1" id="select-out-right-1" class="select-out-right" data-id="1">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_out_right_player_id_1 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_out_right_player_id_1 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -408,11 +408,11 @@
                     <tr>
                         <td class="w25">2</td>
                         <td class="w25">
-                            <select name="out_left_2" id="select-out-left-2" class="select-out-left">
+                            <select name="out_left_2" id="select-out-left-2" class="select-out-left" data-id="2">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_out_left_player_id_2 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_out_left_player_id_2 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -423,11 +423,11 @@
                         </td>
                         <td class="w25">2</td>
                         <td class="w25">
-                            <select name="out_right_2" id="select-out-right-2" class="select-out-right">
+                            <select name="out_right_2" id="select-out-right-2" class="select-out-right" data-id="2">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_out_right_player_id_2 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_out_right_player_id_2 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -440,11 +440,11 @@
                     <tr>
                         <td class="w25">3</td>
                         <td class="w25">
-                            <select name="out_left_3" id="select-out-left-3" class="select-out-left">
+                            <select name="out_left_3" id="select-out-left-3" class="select-out-left" data-id="3">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_out_left_player_id_3 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_out_left_player_id_3 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -455,11 +455,11 @@
                         </td>
                         <td class="w25">3</td>
                         <td class="w25">
-                            <select name="out_right_3" id="select-out-right-3" class="select-out-right">
+                            <select name="out_right_3" id="select-out-right-3" class="select-out-right" data-id="3">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_out_right_player_id_3 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_out_right_player_id_3 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -472,11 +472,11 @@
                     <tr>
                         <td class="w25">4</td>
                         <td class="w25">
-                            <select name="out_left_4" id="select-out-left-4" class="select-out-left">
+                            <select name="out_left_4" id="select-out-left-4" class="select-out-left" data-id="4">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_out_left_player_id_4 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_out_left_player_id_4 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -487,11 +487,11 @@
                         </td>
                         <td class="w25">4</td>
                         <td class="w25">
-                            <select name="out_right_4" id="select-out-right-4" class="select-out-right">
+                            <select name="out_right_4" id="select-out-right-4" class="select-out-right" data-id="4">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_out_right_player_id_4 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_out_right_player_id_4 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -504,11 +504,11 @@
                     <tr>
                         <td class="w25">5</td>
                         <td class="w25">
-                            <select name="out_left_5" id="select-out-left-5" class="select-out-left">
+                            <select name="out_left_5" id="select-out-left-5" class="select-out-left" data-id="5">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_out_left_player_id_5 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_out_left_player_id_5 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
@@ -519,11 +519,11 @@
                         </td>
                         <td class="w25">5</td>
                         <td class="w25">
-                            <select name="out_right_5" id="select-out-right-5" class="select-out-right">
+                            <select name="out_right_5" id="select-out-right-5" class="select-out-right" data-id="5">
                                 <option value="0">-</option>
                                 {section name=i loop=$player_array}
                                     <option value="{$player_array[i].player_id}"
-                                        {if $standard_array.0.teamrole_out_right_player_id_5 == $player_array[i].player_id}
+                                        {if $standard_array.0.team_out_right_player_id_5 == $player_array[i].player_id}
                                             selected
                                         {/if}
                                     >
