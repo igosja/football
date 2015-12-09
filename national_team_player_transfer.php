@@ -11,45 +11,59 @@ else
     $get_num = 1;
 }
 
-$sql = "SELECT `team_name`
-        FROM `team`
-        WHERE `team_id`='$get_num'
+$sql = "SELECT `country_name`
+        FROM `country`
+        WHERE `country_id`='$get_num'
         LIMIT 1";
-$team_sql = $mysqli->query($sql);
+$country_sql = $mysqli->query($sql);
 
-$count_team = $team_sql->num_rows;
+$count_country = $country_sql->num_rows;
 
-if (0 == $count_team)
+if (0 == $count_country)
 {
     $smarty->display('wrong_page.html');
-    
+
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$team_name = $team_array[0]['team_name'];
+$country_name = $country_array[0]['country_name'];
 
-$sql = "SELECT `player_id`, `name_name`, `surname_name`, `team_id`, `team_name`, `position_name`
-        FROM `playerposition`
-        LEFT JOIN `position`
-        ON `playerposition_position_id`=`position_id`
+$sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
+               `buyer`.`team_name` AS `buyer_name`,
+               `name_name`,
+               `player_id`,
+               `seller`.`team_id` AS `seller_id`,
+               `seller`.`team_name` AS `seller_name`,
+               `surname_name`,
+               `transferhistory_date`,
+               `transferhistory_price`
+        FROM `transferhistory`
         LEFT JOIN `player`
-        ON `playerposition_player_id`=`player_id`
+        ON `player_id`=`transferhistory_player_id`
         LEFT JOIN `name`
-        ON `player_name_id`=`name_id`
+        ON `name_id`=`player_name_id`
         LEFT JOIN `surname`
-        ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
-        WHERE `team_id`='$get_num'
-        AND `playerposition_value`='100'";
-$player_sql = $mysqli->query($sql);
+        ON `surname_id`=`player_surname_id`
+        LEFT JOIN `team` AS `buyer`
+        ON `buyer`.`team_id`=`transferhistory_buyer_id`
+        LEFT JOIN `city` AS `buyer_city`
+        ON `buyer`.`team_city_id`=`buyer_city`.`city_id`
+        LEFT JOIN `team` AS `seller`
+        ON `seller`.`team_id`=`transferhistory_seller_id`
+        LEFT JOIN `city` AS `seller_city`
+        ON `seller`.`team_city_id`=`seller_city`.`city_id`
+        WHERE `transferhistory_season_id`='$igosja_season_id'
+        AND (`seller_city`.`city_country_id`='$get_num'
+        OR `buyer_city`.`city_country_id`='$get_num')
+        ORDER BY `transferhistory_price` DESC";
+$transfer_sql = $mysqli->query($sql);
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 
+$smarty->assign('team_name', $country_name);
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
-$smarty->assign('player_array', $player_array);
+$smarty->assign('transfer_array', $transfer_array);
 
 $smarty->display('main.html');

@@ -30,23 +30,29 @@
             <p class="header">Профиль менеджера</p>
             <table class="left striped w100">
                 <tr>
-                    <td colspan="2" class="center"><img alt="" class="img-90" src="/img/photo.png" /></td>
-                </tr>
-                <tr>
                     <td>Имя</td>
-                    <td><a href="player_home_profile.php?num=1">Usman Burrows</a></td>
+                    <td>
+                        {$country_array.0.user_firstname} {$country_array.0.user_lastname}
+                    </td>
                 </tr>
                 <tr>
-                    <td>Возраст</td>
-                    <td>25</td>
+                    <td>Год рождения</td>
+                    <td>{$country_array.0.user_birth_year}</td>
                 </tr>
                 <tr>
                     <td>Гражданство</td>
-                    <td><img alt="" class="img-12" src="img/flag/12/1.png" /> Англия</td>
+                    <td>
+                        <img
+                            alt="{$country_array.0.user_country_name}"
+                            class="img-12"
+                            src="img/flag/12/{$country_array.0.user_country_id}.png"
+                        />
+                        {$country_array.0.user_country_name}
+                    </td>
                 </tr>
                 <tr>
                     <td>Дата присоединения</td>
-                    <td>{$smarty.now|date_format:"%d.%m.%Y"}</td>
+                    <td>{$country_array.0.user_registration_date|date_format:"%d.%m.%Y"}</td>
                 </tr>
             </table>
         </td>
@@ -54,22 +60,30 @@
             <p class="header">Следующий матч</p>
             <table class="center w100">
                 <tr>
-                    <td>Friendly</td>
+                    <td>
+                        <a href="tournament_review_profile.php?num={$nearest_game_array.0.tournament_id}">
+                            {$nearest_game_array.0.tournament_name}
+                        </a>
+                    </td>
                 </tr>
                 <tr>
                     <td>{$smarty.const.SPACE}</td>
                 </tr>
                 <tr>
-                    <td><img alt="" class="img-50" src="img/flag/50/2.png" /></td>
+                    <td>
+                        <img
+                            alt="{$nearest_game_array.0.country_name}"
+                            class="img-50"
+                            src="img/flag/50/{$nearest_game_array.0.country_id}.png"
+                        />
+                    </td>
                 </tr>
                 <tr>
-                    <td><a href="national_team_review_profile.php?num=2">Бразилия</a></td>
-                </tr>
-                <tr>
-                    <td>{$smarty.const.SPACE}</td>
-                </tr>
-                <tr>
-                    <td>Wembley</td>
+                    <td>
+                        <a href="national_team_review_profile.php?num={$nearest_game_array.0.country_id}">
+                            {$nearest_game_array.0.country_name}
+                        </a>
+                    </td>
                 </tr>
             </table>
         </td>
@@ -79,7 +93,7 @@
             <p class="header">Мировой рейтинг</p>
             <table class="center w100">
                 <tr>
-                    <td><h1>1</h1></td>
+                    <td><h1>{$rating_array.0.ratingcountry_position}</h1></td>
                 </tr>
             </table>
         </td>
@@ -126,13 +140,39 @@
                     <th colspan="2">Откуда</th>
                     <th colspan="2">Куда</th>
                 </tr>
-                <tr>
-                    <td><a href="player_home_profile.php?num=1">Usman Burrows</a></td>
-                    <td class="w1"><img alt="" class="img-12" src="img/team/12/1.png" /></td>
-                    <td><a href="team_team_review_profile.php?num=1">Arsenal</a></td>
-                    <td class="w1"><img alt="" class="img-12" src="img/team/12/1.png" /></td>
-                    <td><a href="team_team_review_profile.php?num=1">Arsenal</a></td>
-                </tr>
+                {section name=i loop=$transfer_array}
+                    <tr>
+                        <td>
+                            <a href="player_home_profile.php?num={$transfer_array[i].player_id}">
+                                {$transfer_array[i].name_name} {$transfer_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$transfer_array[i].seller_name}"
+                                class="img-12"
+                                src="img/team/12/{$transfer_array[i].seller_id}.png"
+                            />
+                        </td>
+                        <td class="w30">
+                            <a href="team_team_review_profile.php?num={$transfer_array[i].seller_id}">
+                                {$transfer_array[i].seller_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$transfer_array[i].buyer_name}"
+                                class="img-12"
+                                src="img/team/12/{$transfer_array[i].buyer_id}.png"
+                            />
+                        </td>
+                        <td class="w30">
+                            <a href="team_team_review_profile.php?num={$transfer_array[i].buyer_id}">
+                                {$transfer_array[i].buyer_name}
+                            </a>
+                        </td>
+                    </tr>
+                {/section}
             </table>
         </td>
     </tr>

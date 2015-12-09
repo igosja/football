@@ -12,6 +12,8 @@ if (isset($_SESSION['authorization_id']))
     $authorization_permission   = $_SESSION['authorization_permission'];
     $authorization_team_id      = $_SESSION['authorization_team_id'];
     $authorization_team_name    = $_SESSION['authorization_team_name'];
+    $authorization_country_id   = $_SESSION['authorization_country_id'];
+    $authorization_country_name = $_SESSION['authorization_country_name'];
 
     $sql = "UPDATE `user`
             SET `user_last_visit`=SYSDATE()
@@ -23,6 +25,8 @@ if (isset($_SESSION['authorization_id']))
     $smarty->assign('authorization_login', $authorization_login);
     $smarty->assign('authorization_team_id', $authorization_team_id);
     $smarty->assign('authorization_team_name', $authorization_team_name);
+    $smarty->assign('authorization_country_id', $authorization_country_id);
+    $smarty->assign('authorization_country_name', $authorization_country_name);
 }
 
 $smarty->assign('authorization_permission', $authorization_permission);

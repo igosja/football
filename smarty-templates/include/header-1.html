@@ -28,6 +28,13 @@
                                     </a>
                                 </li>
                             {/if}
+                            {if (isset($authorization_country_id))}
+                                <li>
+                                    <a href="national_lineup_team_player.php?num={$authorization_country_id}">
+                                        {$authorization_country_name}
+                                    </a>
+                                </li>
+                            {/if}
                         {/if}
                         <li><a href="forum.php">Форум</a></li>
                     </ul>

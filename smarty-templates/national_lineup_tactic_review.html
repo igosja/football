@@ -103,11 +103,12 @@
         </td>
         <td class="block-page">
             <form action="" method="POST">
+
                 <table class="w100">
                     <tr>
                         <td>
                             <p class="header">Тактика</p>
-                            <select id="tactic-select" name="formation_id">
+                            <select id="tactic-select" name="formation_id" class="w100">
                                 {section name=i loop=$formation_array}
                                     <option value="{$formation_array[i].formation_id}"
                                         {if ($lineup_array.0.lineupcurrent_formation_id == $formation_array[i].formation_id)}
@@ -123,21 +124,40 @@
                     <tr>
                         <td>
                             <p class="header">Настрой</p>
-                            <select>
-                                <option></option>
+                            <select name="gamemood_id" class="w100">
+                                {section name=i loop=$gamemood_array}
+                                    <option value="{$gamemood_array[i].gamemood_id}"
+                                        {if ($lineup_array.0.lineupcurrent_gamemood_id == $gamemood_array[i].gamemood_id)}
+                                            selected
+                                        {/if}
+                                    >
+                                        {$gamemood_array[i].gamemood_name}
+                                    </option>
+                                {/section}
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <p class="header">Стиль игры</p>
-                            <select>
-                                <option></option>
+                            <select name="gamestyle_id" class="w100">
+                                {section name=i loop=$gamestyle_array}
+                                    <option value="{$gamestyle_array[i].gamestyle_id}"
+                                        {if ($lineup_array.0.lineupcurrent_gamestyle_id == $gamestyle_array[i].gamestyle_id)}
+                                            selected
+                                        {/if}
+                                    >
+                                        {$gamestyle_array[i].gamestyle_name}
+                                    </option>
+                                {/section}
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td>{$smarty.const.SPACE}</td>
+                    </tr>
+                    <tr>
+                        <td class="center">
                             <input type="hidden" class="hidden" value="" id="input-position-1" name="position_1" />
                             <input type="hidden" class="hidden" value="" id="input-position-2" name="position_2" />
                             <input type="hidden" class="hidden" value="" id="input-position-3" name="position_3" />

@@ -133,6 +133,12 @@ $(document).ready(function($)
         tactic_player_field();
     }
 
+    if ($(input_on_page_array).is('#tactic-player-formation-national'))
+    //Загрузка стриницы тактики
+    {
+        tactic_player_field_national();
+    }
+
     $('.player-tactic-shirt').on('click', function()
     //Роль игрока при редактировании индивидуальной тактики
     {
@@ -141,7 +147,7 @@ $(document).ready(function($)
         $.ajax
         (
             {
-                beforeSend: function(){$('#role-block').addClass('loading');},
+                beforeSend: function(){$('#position-block').addClass('loading');},
                 url: 'json.php?player_tactic_position_id=' + position_id,
                 dataType: "json",
                 success: function(data)
@@ -192,6 +198,75 @@ $(document).ready(function($)
                             }
                         );
                     });
+
+                    $('#position-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
+    $('.player-tactic-shirt-national').on('click', function()
+    //Роль игрока при редактировании индивидуальной тактики
+    {
+        var position_id = $(this).data('position');
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#position-block').addClass('loading');},
+                url: 'json.php?player_tactic_position_id_national=' + position_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    var role_select = '<select id="role-id-national" data-position="' + data.position + '">';
+
+                    for (var i=0; i<data.role_array.length; i++)
+                    {
+                        role_select = role_select + '<option value="' + data.role_array[i].role_id + '"';
+
+                        if (data.role_array[i].role_id == data.role_id)
+                        {
+                            role_select = role_select + ' selected';
+                        }
+
+                        role_select = role_select + '>' + data.role_array[i].role_name + '</option>';
+                    }
+
+                    role_select = role_select + '</select>';
+
+                    $('#position-name').text(data.position_name);
+                    $('#table-player-position-name').text(data.position_description);
+                    $('#table-player-position-game').text(data.game);
+                    $('#table-player-mark').text(data.mark);
+                    $('#player-name').text(data.player_name + ' на позиции ' + data.position_name);
+                    $('#table-player-name').text(data.player_name);
+                    $('#role-name').html(role_select);
+                    $('#role-description').html(data.role_description);
+                    $('#player-table').removeClass('none');
+                    $('#position-block').removeClass('loading');
+
+                    $('#role-id-national').on('change', function()
+                    //Смена роли игрока
+                    {
+                        var role_id = $(this).val();
+                        var position_id = $(this).data('position');
+
+                        $.ajax
+                        (
+                            {
+                                beforeSend: function(){$('#position-block').addClass('loading');},
+                                url: 'json.php?change_role_id_national=' + role_id + '&position_id=' + position_id,
+                                dataType: "json",
+                                success: function(data)
+                                {
+                                    $('#role-description').html(data.role_array[0].role_description);
+                                    $('#position-block').removeClass('loading');
+                                }
+                            }
+                        );
+                    });
+
+                    $('#position-block').removeClass('loading');
                 }
             }
         );
@@ -528,6 +603,26 @@ $(document).ready(function($)
         );
     });
 
+    $('#gamestyle-select-national').on('change', function()
+    //Смена командного стиля игры
+    {
+        var style_id = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#tactic-block').addClass('loading');},
+                url: 'json.php?national_style_id=' + style_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    $('#gamestyle').html('<h6>' + data.gamestyle_array[0].gamestyle_name + '</h6>' + data.gamestyle_array[0].gamestyle_description);
+                    $('#tactic-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
     $('#gamemood-select').on('change', function()
     //Смена командного настроя на игру
     {
@@ -538,6 +633,26 @@ $(document).ready(function($)
             {
                 beforeSend: function(){$('#tactic-block').addClass('loading');},
                 url: 'json.php?mood_id=' + mood_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    $('#gamemood').html('<h6>' + data.gamemood_array[0].gamemood_name + '</h6>' + data.gamemood_array[0].gamemood_description);
+                    $('#tactic-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
+    $('#gamemood-select-national').on('change', function()
+    //Смена командного настроя на игру
+    {
+        var mood_id = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#tactic-block').addClass('loading');},
+                url: 'json.php?national_mood_id=' + mood_id,
                 dataType: "json",
                 success: function(data)
                 {
@@ -567,6 +682,37 @@ $(document).ready(function($)
             {
                 beforeSend: function(){$('#player-block').addClass('loading');},
                 url: 'json.php?captain_id=' + captain_id + '&player_id=' + player_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#player-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
+    if ($(select_on_page_array).is('#select-captain-1-national'))
+    //Загрузка капитана
+    {
+        captain_select_national();
+    }
+
+    $('.select-captain-national').on('change', function()
+    //Выбор капитана
+    {
+        captain_select_national();
+
+        var captain_id = $(this).data('id');
+        var player_id  = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#player-block').addClass('loading');},
+                url: 'json.php?captain_id_national=' + captain_id + '&player_id=' + player_id,
                 dataType: "json",
                 success: function(data)
                 {
@@ -679,6 +825,37 @@ $(document).ready(function($)
         );
     });
 
+    if ($(select_on_page_array).is('#select-penalty-1-national'))
+    //Загрузка страницы пенальтистов
+    {
+        penalty_select_national();
+    }
+
+    $('.select-penalty-national').on('change', function()
+    //Выбор пенальтистов
+    {
+        penalty_select();
+
+        var penalty_id = $(this).data('id');
+        var player_id  = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#player-block').addClass('loading');},
+                url: 'json.php?penalty_id_national=' + penalty_id + '&player_id=' + player_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#player-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
     if ($(select_on_page_array).is('#select-corner-left-1'))
     //Загрузка страницы исполнителей стандартов
     {
@@ -688,6 +865,17 @@ $(document).ready(function($)
         freekick_right_select();
         out_left_select();
         out_right_select();
+    }
+
+    if ($(select_on_page_array).is('#select-corner-left-1-national'))
+    //Загрузка страницы исполнителей стандартов
+    {
+        corner_left_select_national();
+        corner_right_select_national();
+        freekick_left_select_national();
+        freekick_right_select_national();
+        out_left_select_national();
+        out_right_select_national();
     }
 
     $('.select-corner-left').on('change', function()
@@ -703,6 +891,31 @@ $(document).ready(function($)
             {
                 beforeSend: function(){$('#corner-block').addClass('loading');},
                 url: 'json.php?corner_left=' + standard_id + '&player_id=' + player_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#corner-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
+    $('.select-corner-left-national').on('change', function()
+    //Выбор исполнителей стандартов
+    {
+        corner_left_select_national();
+
+        var standard_id     = $(this).data('id');
+        var player_id       = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#corner-block').addClass('loading');},
+                url: 'json.php?corner_left_national=' + standard_id + '&player_id=' + player_id,
                 dataType: "json",
                 success: function(data)
                 {
@@ -740,6 +953,31 @@ $(document).ready(function($)
         );
     });
 
+    $('.select-corner-right-national').on('change', function()
+    //Выбор исполнителей стандартов
+    {
+        corner_right_select_national();
+
+        var standard_id     = $(this).data('id');
+        var player_id       = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#corner-block').addClass('loading');},
+                url: 'json.php?corner_right_national=' + standard_id + '&player_id=' + player_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#corner-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
     $('.select-freekick-left').on('change', function()
     //Выбор исполнителей стандартов
     {
@@ -753,6 +991,31 @@ $(document).ready(function($)
             {
                 beforeSend: function(){$('#freekick-block').addClass('loading');},
                 url: 'json.php?freekick_left=' + standard_id + '&player_id=' + player_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#freekick-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
+    $('.select-freekick-left-national').on('change', function()
+    //Выбор исполнителей стандартов
+    {
+        freekick_left_select_national();
+
+        var standard_id     = $(this).data('id');
+        var player_id       = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#freekick-block').addClass('loading');},
+                url: 'json.php?freekick_left_national=' + standard_id + '&player_id=' + player_id,
                 dataType: "json",
                 success: function(data)
                 {
@@ -790,6 +1053,31 @@ $(document).ready(function($)
         );
     });
 
+    $('.select-freekick-right-national').on('change', function()
+    //Выбор исполнителей стандартов
+    {
+        freekick_right_select_national();
+
+        var standard_id     = $(this).data('id');
+        var player_id       = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#freekick-block').addClass('loading');},
+                url: 'json.php?freekick_right_national=' + standard_id + '&player_id=' + player_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#freekick-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
     $('.select-out-left').on('change', function()
     //Выбор исполнителей стандартов
     {
@@ -815,6 +1103,31 @@ $(document).ready(function($)
         );
     });
 
+    $('.select-out-left-national').on('change', function()
+    //Выбор исполнителей стандартов
+    {
+        out_left_select_national();
+
+        var standard_id     = $(this).data('id');
+        var player_id       = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#out-block').addClass('loading');},
+                url: 'json.php?out_left_national=' + standard_id + '&player_id=' + player_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#out-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
     $('.select-out-right').on('change', function()
     //Выбор исполнителей стандартов
     {
@@ -828,6 +1141,31 @@ $(document).ready(function($)
             {
                 beforeSend: function(){$('#out-block').addClass('loading');},
                 url: 'json.php?out_right=' + standard_id + '&player_id=' + player_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#out-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
+    $('.select-out-right-national').on('change', function()
+    //Выбор исполнителей стандартов
+    {
+        out_right_select_national();
+
+        var standard_id     = $(this).data('id');
+        var player_id       = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#out-block').addClass('loading');},
+                url: 'json.php?out_right_national=' + standard_id + '&player_id=' + player_id,
                 dataType: "json",
                 success: function(data)
                 {
@@ -903,6 +1241,30 @@ $(document).ready(function($)
         );
     });
 
+    $('.player-number-national').on('change', function()
+    //Смена номера игрока в сборной
+    {
+        $('#player-info').addClass('loading');
+
+        var player_id   = $(this).data('player');
+        var number      = $(this).val();
+
+        $.ajax
+        (
+            {
+                url: 'json.php?player_id=' + player_id + '&number_national=' + number,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#player-info').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
     $('.instruction-checkbox').on('change', function()
     //Смена командных инкструкций
     {
@@ -914,6 +1276,29 @@ $(document).ready(function($)
         (
             {
                 url: 'json.php?instruction_id=' + instruction,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#instruction-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
+    $('.instruction-checkbox-national').on('change', function()
+    //Смена командных инкструкций
+    {
+        $('#instruction-block').addClass('loading');
+
+        var instruction = $(this).val();
+
+        $.ajax
+        (
+            {
+                url: 'json.php?national_instruction_id=' + instruction,
                 dataType: "json",
                 success: function(data)
                 {

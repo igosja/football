@@ -11,31 +11,43 @@ else
     $get_num = 1;
 }
 
-$sql = "SELECT `city_name`, `team_id`, `team_name`, `team_school_level`, `team_training_level`, `stadium_capacity`, `stadium_length`, `stadium_name`, `stadium_width`
+$sql = "SELECT `country_name`,
+               `city_name`,
+               `stadium_capacity`,
+               `stadium_length`,
+               `stadium_name`,
+               `stadium_width`,
+               `stadiumquality_name`,
+               `team_id`
         FROM `team`
         LEFT JOIN `stadium`
         ON `stadium_team_id`=`team_id`
         LEFT JOIN `city`
         ON `team_city_id`=`city_id`
-        WHERE `team_id`='$get_num'
+        LEFT JOIN `country`
+        ON `city_country_id`=`country_id`
+        LEFT JOIN `stadiumquality`
+        ON `stadiumquality_id`=`stadium_stadiumquality_id`
+        WHERE `city_country_id`='$get_num'
+        ORDER BY `stadium_capacity` DESC
         LIMIT 1";
-$team_sql = $mysqli->query($sql);
+$country_sql = $mysqli->query($sql);
 
-$count_team = $team_sql->num_rows;
+$count_country = $country_sql->num_rows;
 
-if (0 == $count_team)
+if (0 == $count_country)
 {
     $smarty->display('wrong_page.html');
-    
+
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$team_name = $team_array[0]['team_name'];
+$country_name = $country_array[0]['country_name'];
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
-$smarty->assign('team_array', $team_array);
+$smarty->assign('team_name', $country_name);
+$smarty->assign('country_array', $country_array);
 
 $smarty->display('main.html');

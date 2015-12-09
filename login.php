@@ -10,17 +10,21 @@ if (isset($_POST['authorization_login']))
     $authorization_password = $_POST['authorization_password'];
     $authorization_password = f_igosja_chiper_password($authorization_password);
 
-    $sql = "SELECT `user_id`,
+    $sql = "SELECT `country_id`,
+                   `country_name`,
+                   `team_id`,
+                   `team_name`,
+                   `user_id`,
                    `user_password`,
                    `userrole_permission`,
-                   `user_activation`,
-                   `team_id`,
-                   `team_name`
+                   `user_activation`
             FROM `user`
             LEFT JOIN `userrole`
             ON `user_userrole_id`=`userrole_id`
             LEFT JOIN `team`
             ON `team_user_id`=`user_id`
+            LEFT JOIN `country`
+            ON `country_user_id`=`user_id`
             WHERE `user_login`=?
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
@@ -55,6 +59,8 @@ if (isset($_POST['authorization_login']))
             $user_id                    = $user_array[0]['user_id'];
             $authorization_team_id      = $user_array[0]['team_id'];
             $authorization_team_name    = $user_array[0]['team_name'];
+            $authorization_country_id   = $user_array[0]['country_id'];
+            $authorization_country_name = $user_array[0]['country_name'];
             $user_permission            = $user_array[0]['userrole_permission'];
 
             $_SESSION['authorization_id']           = $user_id;
@@ -62,6 +68,8 @@ if (isset($_POST['authorization_login']))
             $_SESSION['authorization_password']     = $authorization_password;
             $_SESSION['authorization_team_id']      = $authorization_team_id;
             $_SESSION['authorization_team_name']    = $authorization_team_name;
+            $_SESSION['authorization_country_id']   = $authorization_country_id;
+            $_SESSION['authorization_country_name'] = $authorization_country_name;
             $_SESSION['authorization_permission']   = $user_permission;
 
             header('Location: profile_home_home.php');

@@ -6,7 +6,7 @@
                 <tr>
                     <td class="w50">Стиль игры</td>
                     <td>
-                        <select name="gamestyle" id="gamestyle-select">
+                        <select id="gamestyle-select">
                             {section name=i loop=$gamestyle_array}
                                 <option value="{$gamestyle_array[i].gamestyle_id}"
                                     {if ($gamestyle_array[i].gamestyle_id == $lineup_array.0.lineupcurrent_gamestyle_id)}
@@ -20,7 +20,7 @@
                 <tr>
                     <td>Настрой на игру</td>
                     <td>
-                        <select name="gamemood" id="gamemood-select">
+                        <select id="gamemood-select">
                             {section name=i loop=$gamemood_array}
                                 <option value="{$gamemood_array[i].gamemood_id}"
                                     {if ($gamemood_array[i].gamemood_id == $lineup_array.0.lineupcurrent_gamemood_id)}

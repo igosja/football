@@ -1,51 +1,50 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page">
-            <p class="header">Игроки</p>
+            <p class="header">Оценочная стоимость</p>
             <table class="striped w100">
                 <tr>
-                    <th class="w5">Пзц</th>
-                    <th class="w5">Инф</th>
-                    <th>Имя</th>
-                    <th class="w5">Позиция</th>
-                    <th class="w5">Нац</th>
-                    <th class="w5">Воз</th>
-                    <th class="w5">Вес</th>
-                    <th class="w5">Рост</th>
-                    <th class="w5">Настроение</th>
-                    <th class="w5">Конд</th>
-                    <th class="w5">Фит</th>
+                    <th class="w1">Ранг</th>
+                    <th colspan="2">Название</th>
+                    <th colspan="2">Страна</th>
+                    <th class="w10">Всего</th>
+                    <th class="w50"></th>
                 </tr>
-                {section name=i loop=$player_array}
+                {section name=i loop=$team_array}
                     <tr>
-                        <td class="center nopadding">
-                            <select name="">
-                                <option value="">Да</option>
-                                <option value="">Нет</option>
-                            </select>
+                        <td class="center">{$smarty.section.i.iteration}</td>
+                        <td class="w1">
+                            <img
+                                alt="{$team_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$team_array[i].team_id}.png"
+                            />
                         </td>
-                        <td class="center"></td>
                         <td>
-                            <a href="player_home_profile.php?num={$player_array[i].player_id}">
-                                {$player_array[i].name_name}
-                                {$player_array[i].surname_name}
+                            <a href="team_team_review_profile.php?num={$team_array[i].team_id}">
+                                {$team_array[i].team_name}
                             </a>
                         </td>
-                        <td class="center">{$player_array[i].position_name}</td>
-                        <td class="center">
-                            <a href="national_team_review_profile.php?num={$player_array[i].player_country_id}">
-                                <img alt="" class="img-12" src="img/flag/12/{$player_array[i].player_country_id}.png">
+                        <td class="w1">
+                            <img
+                                alt="{$team_array[i].country_name}"
+                                class="img-12"
+                                src="img/flag/12/{$team_array[i].country_id}.png"
+                            />
+                        </td>
+                        <td class="w15">
+                            <a href="national_team_review_profile.php?num={$team_array[i].country_id}">
+                                {$team_array[i].country_name}
                             </a>
                         </td>
-                        <td class="center">{$player_array[i].player_age}</td>
-                        <td class="center">{$player_array[i].player_weight} кг</td>
-                        <td class="center">{$player_array[i].player_height} см</td>
-                        <td class="center">
-                            <img alt="" class="img-12" src="/img/mood/{$player_array[i].mood_id}.png">
-                            {$player_array[i].mood_name|truncate:7:""}
+                        <td class="right">{$team_array[i].team_price|f_igosja_money}</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: {$team_array[i].team_price/$team_array.0.team_price*100}%">
+                                    {$smarty.const.SPACE}
+                                </div>
+                            </div>
                         </td>
-                        <td class="center">{$player_array[i].player_condition} %</td>
-                        <td class="center">{$player_array[i].player_practice} %</td>
                     </tr>
                 {/section}
             </table>

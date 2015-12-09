@@ -120,6 +120,122 @@ if (isset($_GET['player_tactic_position_id']))
     $json_data['position']              = $lineup_array[0]['lineup_position'];
     $json_data['role_array']            = $role_array;
 }
+elseif (isset($_GET['player_tactic_position_id_national']))
+{
+    $position_id = (int) $_GET['player_tactic_position_id_national'];
+
+    $sql = "SELECT `position_name`
+            FROM `position`
+            WHERE `position_id`='$position_id'
+            LIMIT 1";
+    $position_sql = $mysqli->query($sql);
+
+    $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+
+    $sql = "SELECT `count_game`,
+                   `lineup_position`,
+                   `mark`,
+                   `name_name`,
+                   `player_id`,
+                   `position_description`,
+                   `role_description`,
+                   `role_id`,
+                   `surname_name`
+            FROM `player`
+            LEFT JOIN `name`
+            ON `player_name_id`=`name_id`
+            LEFT JOIN `surname`
+            ON `player_surname_id`=`surname_id`
+            LEFT JOIN `playerposition`
+            ON `playerposition_player_id`=`player_id`
+            LEFT JOIN `position`
+            ON `position_id`=`playerposition_position_id`
+            INNER JOIN
+            (
+                SELECT
+                    IF ('$position_id'=`lineupcurrent_position_id_1`,  `lineupcurrent_player_id_1`,
+                    IF ('$position_id'=`lineupcurrent_position_id_2`,  `lineupcurrent_player_id_2`,
+                    IF ('$position_id'=`lineupcurrent_position_id_3`,  `lineupcurrent_player_id_3`,
+                    IF ('$position_id'=`lineupcurrent_position_id_4`,  `lineupcurrent_player_id_4`,
+                    IF ('$position_id'=`lineupcurrent_position_id_5`,  `lineupcurrent_player_id_5`,
+                    IF ('$position_id'=`lineupcurrent_position_id_6`,  `lineupcurrent_player_id_6`,
+                    IF ('$position_id'=`lineupcurrent_position_id_7`,  `lineupcurrent_player_id_7`,
+                    IF ('$position_id'=`lineupcurrent_position_id_8`,  `lineupcurrent_player_id_8`,
+                    IF ('$position_id'=`lineupcurrent_position_id_9`,  `lineupcurrent_player_id_9`,
+                    IF ('$position_id'=`lineupcurrent_position_id_10`, `lineupcurrent_player_id_10`,
+                    IF ('$position_id'=`lineupcurrent_position_id_11`, `lineupcurrent_player_id_11`,
+                        0
+                    ))))))))))) AS `lineup_player_id`,
+                    IF ('$position_id'=`lineupcurrent_position_id_1`,  `lineupcurrent_role_id_1`,
+                    IF ('$position_id'=`lineupcurrent_position_id_2`,  `lineupcurrent_role_id_2`,
+                    IF ('$position_id'=`lineupcurrent_position_id_3`,  `lineupcurrent_role_id_3`,
+                    IF ('$position_id'=`lineupcurrent_position_id_4`,  `lineupcurrent_role_id_4`,
+                    IF ('$position_id'=`lineupcurrent_position_id_5`,  `lineupcurrent_role_id_5`,
+                    IF ('$position_id'=`lineupcurrent_position_id_6`,  `lineupcurrent_role_id_6`,
+                    IF ('$position_id'=`lineupcurrent_position_id_7`,  `lineupcurrent_role_id_7`,
+                    IF ('$position_id'=`lineupcurrent_position_id_8`,  `lineupcurrent_role_id_8`,
+                    IF ('$position_id'=`lineupcurrent_position_id_9`,  `lineupcurrent_role_id_9`,
+                    IF ('$position_id'=`lineupcurrent_position_id_10`, `lineupcurrent_role_id_10`,
+                    IF ('$position_id'=`lineupcurrent_position_id_11`, `lineupcurrent_role_id_11`,
+                        0
+                    ))))))))))) AS `lineup_role_id`,
+                    IF ('$position_id'=`lineupcurrent_position_id_1`,  '1',
+                    IF ('$position_id'=`lineupcurrent_position_id_2`,  '2',
+                    IF ('$position_id'=`lineupcurrent_position_id_3`,  '3',
+                    IF ('$position_id'=`lineupcurrent_position_id_4`,  '4',
+                    IF ('$position_id'=`lineupcurrent_position_id_5`,  '5',
+                    IF ('$position_id'=`lineupcurrent_position_id_6`,  '6',
+                    IF ('$position_id'=`lineupcurrent_position_id_7`,  '7',
+                    IF ('$position_id'=`lineupcurrent_position_id_8`,  '8',
+                    IF ('$position_id'=`lineupcurrent_position_id_9`,  '9',
+                    IF ('$position_id'=`lineupcurrent_position_id_10`, '10',
+                    IF ('$position_id'=`lineupcurrent_position_id_11`, '11',
+                        0
+                    ))))))))))) AS `lineup_position`
+                FROM `lineupcurrent`
+                WHERE `lineupcurrent_country_id`='$authorization_country_id'
+                LIMIT 1
+            ) AS `t1`
+            ON `lineup_player_id`=`player_id`
+            LEFT JOIN `role`
+            ON `lineup_role_id`=`role_id`
+            LEFT JOIN
+            (
+                SELECT SUM(`statisticplayer_game`) AS `count_game`,
+                       ROUND(SUM(`statisticplayer_mark`)/SUM(`statisticplayer_game`),2) AS `mark`,
+                       `statisticplayer_player_id`
+                FROM `statisticplayer`
+                WHERE `statisticplayer_season_id`='$igosja_season_id'
+                GROUP BY `statisticplayer_player_id`
+            ) AS `t2`
+            ON `player_id`=`statisticplayer_player_id`
+            WHERE `playerposition_value`='100'
+            LIMIT 1";
+    $lineup_sql = $mysqli->query($sql);
+
+    $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+
+    $sql = "SELECT `role_id`,
+                   `role_name`
+            FROM `positionrole`
+            LEFT JOIN `role`
+            ON `role_id`=`positionrole_role_id`
+            WHERE `positionrole_position_id`='$position_id'
+            ORDER BY `positionrole_id` ASC";
+    $role_sql = $mysqli->query($sql);
+
+    $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
+
+    $json_data['position_name']         = $position_array[0]['position_name'];
+    $json_data['position_description']  = $lineup_array[0]['position_description'];
+    $json_data['player_name']           = $lineup_array[0]['name_name'] . ' ' . $lineup_array[0]['surname_name'];
+    $json_data['role_id']               = $lineup_array[0]['role_id'];
+    $json_data['role_description']      = $lineup_array[0]['role_description'];
+    $json_data['game']                  = $lineup_array[0]['count_game'];
+    $json_data['mark']                  = $lineup_array[0]['mark'];
+    $json_data['position']              = $lineup_array[0]['lineup_position'];
+    $json_data['role_array']            = $role_array;
+}
 elseif (isset($_GET['select_value']))
 {
     $value      = (int) $_GET['select_value'];
@@ -349,6 +465,19 @@ elseif (isset($_GET['number']))
 
     $json_data['success'] = 1;
 }
+elseif (isset($_GET['number_national']))
+{
+    $number    = (int) $_GET['number_national'];
+    $player_id = (int) $_GET['player_id'];
+
+    $sql = "UPDATE `player`
+            SET `player_number_national`='$number'
+            WHERE `player_id`='$player_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $json_data['success'] = 1;
+}
 elseif (isset($_GET['offer_price']))
 {
     $offer_price    = (int) $_GET['offer_price'];
@@ -443,6 +572,27 @@ elseif (isset($_GET['style_id']))
 
     $json_data['gamestyle_array'] = $gamestyle_array;
 }
+elseif (isset($_GET['national_style_id']))
+{
+    $style_id = (int) $_GET['national_style_id'];
+
+    $sql = "UPDATE `lineupcurrent`
+            SET `lineupcurrent_gamestyle_id`='$style_id'
+            WHERE `lineupcurrent_country_id`='$authorization_country_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $sql = "SELECT `gamestyle_description`,
+                   `gamestyle_name`
+            FROM `gamestyle`
+            WHERE `gamestyle_id`='$style_id'
+            LIMIT 1";
+    $gamestyle_sql = $mysqli->query($sql);
+
+    $gamestyle_array = $gamestyle_sql->fetch_all(MYSQLI_ASSOC);
+
+    $json_data['gamestyle_array'] = $gamestyle_array;
+}
 elseif (isset($_GET['mood_id']))
 {
     $mood_id = (int) $_GET['mood_id'];
@@ -450,6 +600,27 @@ elseif (isset($_GET['mood_id']))
     $sql = "UPDATE `lineupcurrent`
             SET `lineupcurrent_gamemood_id`='$mood_id'
             WHERE `lineupcurrent_team_id`='$authorization_team_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $sql = "SELECT `gamemood_description`,
+                   `gamemood_name`
+            FROM `gamemood`
+            WHERE `gamemood_id`='$mood_id'
+            LIMIT 1";
+    $gamemood_sql = $mysqli->query($sql);
+
+    $gamemood_array = $gamemood_sql->fetch_all(MYSQLI_ASSOC);
+
+    $json_data['gamemood_array'] = $gamemood_array;
+}
+elseif (isset($_GET['national_mood_id']))
+{
+    $mood_id = (int) $_GET['national_mood_id'];
+
+    $sql = "UPDATE `lineupcurrent`
+            SET `lineupcurrent_gamemood_id`='$mood_id'
+            WHERE `lineupcurrent_country_id`='$authorization_country_id'
             LIMIT 1";
     $mysqli->query($sql);
 
@@ -477,6 +648,19 @@ elseif (isset($_GET['penalty_id']))
 
     $json_data['success'] = 1;
 }
+elseif (isset($_GET['penalty_id_national']))
+{
+    $penalty_id = (int) $_GET['penalty_id_national'];
+    $player_id  = (int) $_GET['player_id'];
+
+    $sql = "UPDATE `country`
+            SET `country_penalty_player_id_" . $penalty_id . "`='$player_id'
+            WHERE `country_id`='$authorization_country_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $json_data['success'] = 1;
+}
 elseif (isset($_GET['captain_id']))
 {
     $captain_id = (int) $_GET['captain_id'];
@@ -485,6 +669,19 @@ elseif (isset($_GET['captain_id']))
     $sql = "UPDATE `team`
             SET `team_captain_player_id_" . $captain_id . "`='$player_id'
             WHERE `team_id`='$authorization_team_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $json_data['success'] = 1;
+}
+elseif (isset($_GET['captain_id_national']))
+{
+    $captain_id = (int) $_GET['captain_id_national'];
+    $player_id  = (int) $_GET['player_id'];
+
+    $sql = "UPDATE `country`
+            SET `country_captain_player_id_" . $captain_id . "`='$player_id'
+            WHERE `country_id`='$authorization_country_id'
             LIMIT 1";
     $mysqli->query($sql);
 
@@ -503,6 +700,19 @@ elseif (isset($_GET['corner_left']))
 
     $json_data['success'] = 1;
 }
+elseif (isset($_GET['corner_left_national']))
+{
+    $corner_left = (int) $_GET['corner_left_national'];
+    $player_id   = (int) $_GET['player_id'];
+
+    $sql = "UPDATE `country`
+            SET `country_corner_left_player_id_" . $corner_left . "`='$player_id'
+            WHERE `country_id`='$authorization_country_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $json_data['success'] = 1;
+}
 elseif (isset($_GET['corner_right']))
 {
     $corner_right = (int) $_GET['corner_right'];
@@ -511,6 +721,19 @@ elseif (isset($_GET['corner_right']))
     $sql = "UPDATE `team`
             SET `team_corner_right_player_id_" . $corner_right . "`='$player_id'
             WHERE `team_id`='$authorization_team_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $json_data['success'] = 1;
+}
+elseif (isset($_GET['corner_right_national']))
+{
+    $corner_right = (int) $_GET['corner_right_national'];
+    $player_id    = (int) $_GET['player_id'];
+
+    $sql = "UPDATE `country`
+            SET `country_corner_right_player_id_" . $corner_right . "`='$player_id'
+            WHERE `country_id`='$authorization_country_id'
             LIMIT 1";
     $mysqli->query($sql);
 
@@ -529,6 +752,19 @@ elseif (isset($_GET['freekick_left']))
 
     $json_data['success'] = 1;
 }
+elseif (isset($_GET['freekick_left_national']))
+{
+    $freekick_left = (int) $_GET['freekick_left_national'];
+    $player_id     = (int) $_GET['player_id'];
+
+    $sql = "UPDATE `country`
+            SET `country_freekick_left_player_id_" . $freekick_left . "`='$player_id'
+            WHERE `country_id`='$authorization_country_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $json_data['success'] = 1;
+}
 elseif (isset($_GET['freekick_right']))
 {
     $freekick_right = (int) $_GET['freekick_right'];
@@ -537,6 +773,19 @@ elseif (isset($_GET['freekick_right']))
     $sql = "UPDATE `team`
             SET `team_freekick_right_player_id_" . $freekick_right . "`='$player_id'
             WHERE `team_id`='$authorization_team_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $json_data['success'] = 1;
+}
+elseif (isset($_GET['freekick_right_national']))
+{
+    $freekick_right = (int) $_GET['freekick_right_national'];
+    $player_id      = (int) $_GET['player_id'];
+
+    $sql = "UPDATE `country`
+            SET `country_freekick_right_player_id_" . $freekick_right . "`='$player_id'
+            WHERE `country_id`='$authorization_country_id'
             LIMIT 1";
     $mysqli->query($sql);
 
@@ -555,6 +804,19 @@ elseif (isset($_GET['out_left']))
 
     $json_data['success'] = 1;
 }
+elseif (isset($_GET['out_left_national']))
+{
+    $out_left  = (int) $_GET['out_left_national'];
+    $player_id = (int) $_GET['player_id'];
+
+    $sql = "UPDATE `country`
+            SET `country_out_left_player_id_" . $out_left . "`='$player_id'
+            WHERE `country_id`='$authorization_country_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $json_data['success'] = 1;
+}
 elseif (isset($_GET['out_right']))
 {
     $out_right = (int) $_GET['out_right'];
@@ -563,6 +825,19 @@ elseif (isset($_GET['out_right']))
     $sql = "UPDATE `team`
             SET `team_out_right_player_id_" . $out_right . "`='$player_id'
             WHERE `team_id`='$authorization_team_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $json_data['success'] = 1;
+}
+elseif (isset($_GET['out_right_national']))
+{
+    $out_right = (int) $_GET['out_right_national'];
+    $player_id = (int) $_GET['player_id'];
+
+    $sql = "UPDATE `country`
+            SET `country_out_right_player_id_" . $out_right . "`='$player_id'
+            WHERE `country_id`='$authorization_country_id'
             LIMIT 1";
     $mysqli->query($sql);
 
@@ -625,6 +900,52 @@ elseif (isset($_GET['instruction_id']))
     {
         $sql = "INSERT INTO `teaminstruction`
                 SET `teaminstruction_team_id`='$authorization_team_id',
+                    `teaminstruction_instruction_id`='$instruction_id'";
+        $mysqli->query($sql);
+    }
+    else
+    {
+        $teaminstruction_array = $teaminstruction_sql->fetch_all(MYSQLI_ASSOC);
+
+        $teaminstruction_id     = $teaminstruction_array[0]['teaminstruction_id'];
+        $teaminstruction_status = $teaminstruction_array[0]['teaminstruction_status'];
+
+        if (0 == $teaminstruction_status)
+        {
+            $teaminstruction_status = 1;
+        }
+        else
+        {
+            $teaminstruction_status = 0;
+        }
+
+        $sql = "UPDATE `teaminstruction`
+                SET `teaminstruction_status`='$teaminstruction_status'
+                WHERE `teaminstruction_id`='$teaminstruction_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $json_data['success'] = 1;
+}
+elseif (isset($_GET['national_instruction_id']))
+{
+    $instruction_id = (int) $_GET['national_instruction_id'];
+
+    $sql = "SELECT `teaminstruction_id`,
+                   `teaminstruction_status`
+            FROM `teaminstruction`
+            WHERE `teaminstruction_country_id`='$authorization_country_id'
+            AND `teaminstruction_instruction_id`='$instruction_id'
+            LIMIT 1";
+    $teaminstruction_sql = $mysqli->query($sql);
+
+    $count_teaminstruction = $teaminstruction_sql->num_rows;
+
+    if (0 == $count_teaminstruction)
+    {
+        $sql = "INSERT INTO `teaminstruction`
+                SET `teaminstruction_country_id`='$authorization_country_id',
                     `teaminstruction_instruction_id`='$instruction_id'";
         $mysqli->query($sql);
     }
@@ -779,6 +1100,27 @@ elseif (isset($_GET['change_role_id']))
     $sql = "UPDATE `lineupcurrent`
             SET `lineupcurrent_role_id_" . $position_id . "`='$role_id'
             WHERE `lineupcurrent_team_id`='$authorization_team_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $sql = "SELECT `role_description`
+            FROM `role`
+            WHERE `role_id`='$role_id'
+            LIMIT 1";
+    $role_sql = $mysqli->query($sql);
+
+    $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
+
+    $json_data['role_array'] = $role_array;
+}
+elseif (isset($_GET['change_role_id_national']))
+{
+    $role_id     = (int) $_GET['change_role_id_national'];
+    $position_id = (int) $_GET['position_id'];
+
+    $sql = "UPDATE `lineupcurrent`
+            SET `lineupcurrent_role_id_" . $position_id . "`='$role_id'
+            WHERE `lineupcurrent_country_id`='$authorization_country_id'
             LIMIT 1";
     $mysqli->query($sql);
 

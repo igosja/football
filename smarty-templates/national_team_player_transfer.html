@@ -1,32 +1,54 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page">
-            <p class="header">Все игроки</p>
+            <p class="header">Трансферы</p>
             <table class="striped w100">
                 <tr>
-                    <th class="w5">Инф</th>
-                    <th>Имя</th>
-                    <th class="w5">Позиция</th>
-                    <th class="w5">Нац</th>
-                    <th class="w5">Рост</th>
-                    <th class="w5">Вес</th>
-                    <th class="w5">Воз</th>
-                    <th class="w5">Цена</th>
+                    <th class="w10">Дата</th>
+                    <th>Игрок</th>
+                    <th colspan="2">Продавец</th>
+                    <th colspan="2">Покупатель</th>
+                    <th class="w15">Сумма</th>
                 </tr>
-                {section name=i loop=$player_array}
+                {section name=i loop=$transfer_array}
                     <tr>
-                        <td>-</td>
-                        <td>
-                            <a href="player_home_profile.php?num={$player_array[i].player_id}">
-                                {$player_array[i].name_name} {$player_array[i].surname_name}
+                        <td class="center">
+                            <a href="player_home_profile.php?num=1">
+                                {$transfer_array[i].transferhistory_date|date_format:"%d.%m.%Y"}
                             </a>
                         </td>
-                        <td>{$player_array[i].position_name}</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>
+                            <a href="player_home_profile.php?num={$transfer_array[i].player_id}">
+                                {$transfer_array[i].name_name} {$transfer_array[i].surname_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$transfer_array[i].seller_name}"
+                                class="img-12"
+                                src="img/team/12/{$transfer_array[i].seller_id}.png"
+                            />
+                        </td>
+                        <td class="w20">
+                            <a href="team_team_review_profile.php?num={$transfer_array[i].seller_id}">
+                                {$transfer_array[i].seller_name}
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$transfer_array[i].buyer_name}"
+                                class="img-12"
+                                src="img/team/12/{$transfer_array[i].buyer_id}.png"
+                            />
+                        </td>
+                        <td class="w20">
+                            <a href="team_team_review_profile.php?num={$transfer_array[i].buyer_id}">
+                                {$transfer_array[i].buyer_name}
+                            </a>
+                        </td>
+                        <td class="right">
+                            {$transfer_array[i].transferhistory_price|f_igosja_money}
+                        </td>
                     </tr>
                 {/section}
             </table>

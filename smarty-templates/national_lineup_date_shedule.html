@@ -1,10 +1,51 @@
 <table class="block-table w100">
     <tr>
-        <td class="block-page w50" rowspan="3">
-            <p class="header">Матчи</p>
-        </td>
         <td class="block-page">
-            <p class="header">Arsenal (Д)</p>
+            <p class="header">Матчи</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w10">Дата</th>
+                    <th colspan="2">Соперник</th>
+                    <th class="w5">Счет</th>
+                    <th colspan="2">Турнир</th>
+                </tr>
+                {section name=i loop=$game_array}
+                    <tr>
+                        <td class="center">{$game_array[i].shedule_date|date_format:"%d.%m.%Y"}</td>
+                        <td class="w1">
+                            <img
+                                alt="{$game_array[i].country_name}"
+                                class="img-12"
+                                src="img/flag/12/{$game_array[i].country_id}.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="country_country_review_profile.php?num={$game_array[i].country_id}">
+                                {$game_array[i].country_name}
+                            </a>
+                        </td>
+                        <td class="center">
+                            {if (1 == $game_array[i].game_played)}
+                                <a href="game_review_main.php?num={$game_array[i].game_id}">
+                                    {$game_array[i].home_score}:{$game_array[i].guest_score}
+                                </a>
+                            {/if}
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="{$game_array[i].tournament_name}"
+                                class="img-12"
+                                src="img/tournament/12/{$game_array[i].tournament_id}.png"
+                            />
+                        </td>
+                        <td class="w20">
+                            <a href="tournament_review_profile.php?num={$game_array[i].tournament_id}">
+                                {$game_array[i].tournament_name}
+                            </a>
+                        </td>
+                    </tr>
+                {/section}
+            </table>
         </td>
     </tr>
 </table>
