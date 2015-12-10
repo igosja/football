@@ -1,236 +1,190 @@
 <table class="block-table w100">
     <tr>
-        <td class="block-page w20" rowspan="3">
-            <p class="header">Данные по клубу</p>
-            <table class="center">
-                <tr>
-                    <td><img alt="" class="img-120" src="img/team/120/{$num}.png" /></td>
-                </tr>
-                <tr>
-                    <td><h6>{$smarty.const.SPACE}</h6></td>
-                </tr>
-                <tr>
-                    <td><img alt="" class="img-50" src="img/tournament/{$team_array.0.tournament_id}.png" /></td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="tournament_review_profile.php?num={$team_array.0.tournament_id}">
-                            <h6>{$team_array.0.tournament_name}</h6>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="national_team_review_profile.php?num=1">
-                            <img src="img/flag/12/{$team_array.0.country_id}.png" alt="" class="img-12" /> {$team_array.0.country_name}
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><h6>{$smarty.const.SPACE}</h6></td>
-                </tr>
-                <tr>
-                    <td><h1>{$team_array.0.team_season_id}</h1></td>
-                </tr>
-                <tr>
-                    <td>Сезон основания</td>
-                </tr>
-                <tr>
-                    <td><h6>{$smarty.const.SPACE}</h6></td>
-                </tr>
-                <tr>
-                    <td><h1>В норме</h1></td>
-                </tr>
-                <tr>
-                    <td>Финансовый статус</td>
-                </tr>
-                <tr>
-                    <td><h6>{$smarty.const.SPACE}</h6></td>
-                </tr>
-                <tr>
-                    <td><h1>-</h1></td>
-                </tr>
-                <tr>
-                    <td>Международные соревнования</td>
-                </tr>
-            </table>
-        </td>
-        <td class="block-page w40">
-            <p class="header">Команда</p>
+        <td class="block-page">
+            <p class="header">Итоги сезона</p>
             <table class="striped w100">
                 <tr>
-                    <td>{$team_array.0.team_name}</td>
-                    <td class="right">
-                        {$team_array.0.standing_place} в
-                        <a href="tournament_review_profile.php?num={$team_array.0.tournament_id}">
-                            {$team_array.0.tournament_name}
-                        </a>
-                    </td>
+                    <th colspan="2">{$championship_array.0.tournament_name}</th>
                 </tr>
                 <tr>
-                    <td>Сыграно матчей</td>
-                    <td class="right">{$count_game_array.0.count_game}</td>
+                    <td class="w50">Победитель</td>
+                    <td>
+                        <img
+                            alt="{$championship_array.0.team_name}"
+                            class="img-12"
+                            src="img/team/12/{$championship_array.0.team_id}.png"
+                        />
+                        <a href="team_team_review_profile.php?num={$championship_array.0.team_id}">
+                            {$championship_array.0.team_name}
+                        </a>
+                    </td>
                 </tr>
                 <tr>
                     <td>Лучший бомбардир</td>
-                    <td class="right">
-                        <a href="player_home_profile.php?num={$player_goal_array.0.player_id}">
-                            {$player_goal_array.0.name_name} {$player_goal_array.0.surname_name}
+                    <td>
+                        <a href="player_home_profile.php?num={$championship_goal_array.0.player_id}">
+                            {$championship_goal_array.0.name_name} {$championship_goal_array.0.surname_name}
                         </a>
+                        из команды
+                        <img
+                            alt="{$championship_goal_array.0.team_name}"
+                            class="img-12"
+                            src="img/team/12/{$championship_goal_array.0.team_id}.png"
+                        />
+                        <a href="team_team_review_profile.php?num={$championship_goal_array.0.team_id}">
+                            {$championship_goal_array.0.team_name}
+                        </a>
+                        ({$championship_goal_array.0.statisticplayer_goal})
                     </td>
                 </tr>
                 <tr>
                     <td>Лучший асистент</td>
-                    <td class="right">
-                        <a href="player_home_profile.php?num={$player_pass_array.0.player_id}">
-                            {$player_pass_array.0.name_name} {$player_pass_array.0.surname_name}
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Наибольшее число раз ИМ</td>
-                    <td class="right">
-                        <a href="player_home_profile.php?num={$player_best_array.0.player_id}">
-                            {$player_best_array.0.name_name} {$player_best_array.0.surname_name}
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </td>
-        <td class="block-page">
-            <p class="header">Следующий матч</p>
-            <table class="w100">
-                <tr>
-                    <td class="center w50"><img alt="" class="img-90" src="img/team/90/{$nearest_game_array[0].team_id}.png" /></td>
                     <td>
-                        <table class="striped w100">
-                            <tr>
-                                <td>
-                                    <a href="team_team_review_profile.php?num={$nearest_game_array[0].team_id}">
-                                        {$nearest_game_array[0].team_name}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>{$nearest_game_array[0].tournament_name}</td>
-                            </tr>
-                            <tr>
-                                <td>{$nearest_game_array[0].shedule_date|date_format:"%d.%m.%Y"}</td>
-                            </tr>
-                            <tr>
-                                <td><a href="game_before_before.php?num={$nearest_game_array[0].game_id}">Просмотр</a></td>
-                            </tr>
-                        </table>
+                        <a href="player_home_profile.php?num={$championship_pass_array.0.player_id}">
+                            {$championship_pass_array.0.name_name} {$championship_pass_array.0.surname_name}
+                        </a>
+                        из команды
+                        <img
+                            alt="{$championship_pass_array.0.team_name}"
+                            class="img-12"
+                            src="img/team/12/{$championship_pass_array.0.team_id}.png"
+                        />
+                        <a href="team_team_review_profile.php?num={$championship_pass_array.0.team_id}">
+                            {$championship_pass_array.0.team_name}
+                        </a>
+                        ({$championship_pass_array.0.statisticplayer_pass_scoring})
+                    </td>
+                </tr>
+                <tr>
+                    <td>Лучшая средняя оценка</td>
+                    <td>
+                        <a href="player_home_profile.php?num={$championship_mark_array.0.player_id}">
+                            {$championship_mark_array.0.name_name} {$championship_mark_array.0.surname_name}
+                        </a>
+                        из команды
+                        <img
+                            alt="{$championship_mark_array.0.team_name}"
+                            class="img-12"
+                            src="img/team/12/{$championship_mark_array.0.team_id}.png"
+                        />
+                        <a href="team_team_review_profile.php?num={$championship_mark_array.0.team_id}">
+                            {$championship_mark_array.0.team_name}
+                        </a>
+                        ({$championship_mark_array.0.mark})
                     </td>
                 </tr>
             </table>
-        </td>
-    </tr>
-    <tr>
-        <td class="block-page">
-            <p class="header">Ключевые должности</p>
             <table class="striped w100">
                 <tr>
-                    <td>Менеджер</td>
-                    <td><a href="coach_home_profile.php?num=1">{$team_array.0.user_login}</a></td>
-                    <td class="w1">
-                        <img alt="" class="img-12" src="img/flag/12/{$team_array.0.user_country_id}.png" />
-                    </td>
+                    <th colspan="2">{$cup_array.0.tournament_name}</th>
+                </tr>
+                <tr>
+                    <td class="w50">Победитель</td>
                     <td>
-                        <a href="national_team_review_profile.php?num={$team_array.0.user_country_id}">
-                            {$team_array.0.user_country_name}
+                        <img
+                            alt="{$cup_array.0.team_name}"
+                            class="img-12"
+                            src="img/team/12/{$cup_array.0.team_id}.png"
+                        />
+                        <a href="team_team_review_profile.php?num={$cup_array.0.team_id}">
+                            {$cup_array.0.team_name}
                         </a>
                     </td>
                 </tr>
                 <tr>
-                    <td>Капитан</td>
+                    <td>Лучший бомбардир</td>
                     <td>
-                        <a href="player_home_profile.php?num={$team_array.0.captain_id}">
-                            {$team_array.0.captain_name} {$team_array.0.captain_name}
+                        <a href="player_home_profile.php?num={$cup_goal_array.0.player_id}">
+                            {$cup_goal_array.0.name_name} {$cup_goal_array.0.surname_name}
                         </a>
-                    </td>
-                    <td><img alt="" class="img-12" src="img/flag/12/{$team_array.0.captain_country_id}.png" /></td>
-                    <td>
-                        <a href="national_team_review_profile.php?num={$team_array.0.captain_country_id}">
-                            {$team_array.0.captain_country_name}
+                        из команды
+                        <img
+                            alt="{$cup_goal_array.0.team_name}"
+                            class="img-12"
+                            src="img/team/12/{$cup_goal_array.0.team_id}.png"
+                        />
+                        <a href="team_team_review_profile.php?num={$cup_goal_array.0.team_id}">
+                            {$cup_goal_array.0.team_name}
                         </a>
+                        ({$cup_goal_array.0.statisticplayer_goal})
                     </td>
                 </tr>
                 <tr>
-                    <td>Вице-капитан</td>
+                    <td>Лучший асистент</td>
                     <td>
-                        <a href="player_home_profile.php?num={$team_array.0.vicecaptain_id}">
-                            {$team_array.0.vicecaptain_name} {$team_array.0.vicecaptain_name}
+                        <a href="player_home_profile.php?num={$cup_pass_array.0.player_id}">
+                            {$cup_pass_array.0.name_name} {$cup_pass_array.0.surname_name}
                         </a>
+                        из команды
+                        <img
+                            alt="{$cup_pass_array.0.team_name}"
+                            class="img-12"
+                            src="img/team/12/{$cup_pass_array.0.team_id}.png"
+                        />
+                        <a href="team_team_review_profile.php?num={$cup_pass_array.0.team_id}">
+                            {$cup_pass_array.0.team_name}
+                        </a>
+                        ({$cup_pass_array.0.statisticplayer_pass_scoring})
                     </td>
-                    <td><img alt="" class="img-12" src="img/flag/12/{$team_array.0.vicecaptain_country_id}.png" /></td>
+                </tr>
+                <tr>
+                    <td>Лучшая средняя оценка</td>
                     <td>
-                        <a href="national_team_review_profile.php?num={$team_array.0.vicecaptain_country_id}">
-                            {$team_array.0.vicecaptain_country_name}
+                        <a href="player_home_profile.php?num={$cup_mark_array.0.player_id}">
+                            {$cup_mark_array.0.name_name} {$cup_mark_array.0.surname_name}
                         </a>
+                        из команды
+                        <img
+                            alt="{$cup_mark_array.0.team_name}"
+                            class="img-12"
+                            src="img/team/12/{$cup_mark_array.0.team_id}.png"
+                        />
+                        <a href="team_team_review_profile.php?num={$cup_mark_array.0.team_id}">
+                            {$cup_mark_array.0.team_name}
+                        </a>
+                        ({$cup_mark_array.0.mark})
                     </td>
                 </tr>
             </table>
-        </td>
-        <td class="block-page" rowspan="2">
-            <table class="center w100">
-                <p class="header">Результаты</p>
+            <table class="striped w100">
                 <tr>
-                    {section name=i loop=$latest_game_array}
-                        <td class="w20">
-                            <table class="w100">
-                                <tr>
-                                    <td>{$latest_game_array[i].shedule_date|date_format:"%d.%m.%Y"}</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        {if ($latest_game_array[i].home_score > $latest_game_array[i].guest_score)}
-                                            (В)
-                                        {elseif ($latest_game_array[i].home_score == $latest_game_array[i].guest_score)}
-                                            (Н)
-                                        {else}
-                                            (П)
-                                        {/if}
-                                        <a href="game_review_main.php?num={$latest_game_array[i].game_id}">
-                                            {$latest_game_array[i].home_score}-{$latest_game_array[i].guest_score}
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><br /><img alt="" class="img-50" src="img/team/50/{$latest_game_array[i].team_id}.png" /></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="team_team_review_profile.php?num={$latest_game_array[i].team_id}">
-                                            {$latest_game_array[i].team_name}
-                                        </a>
-                                        <br />
-                                        {if ($latest_game_array[i].game_home_team_id == $num)}
-                                            (Д)
-                                        {else}
-                                            (Г)
-                                        {/if}
-                                    </td>
-                                </tr>
-                            </table>
+                    <th colspan="2">Лига чемпионов - квалификация</th>
+                </tr>
+                {section name=i loop=$champions_qualify_array}
+                    <tr>
+                        <td class="w50">
+                            <img
+                                alt="{$champions_qualify_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$champions_qualify_array[i].team_id}.png"
+                            />
+                            <a href="team_team_review_profile.php?num={$champions_qualify_array[i].team_id}">
+                                {$champions_qualify_array[i].team_name}
+                            </a>
                         </td>
-                    {/section}
-                </tr>
+                        <td>{$champions_qualify_array[i].stage_name}</td>
+                    </tr>
+                {/section}
             </table>
-        </td>
-    </tr>
-    <tr>
-        <td class="block-page">
-            <p class="header">Стадион</p>
-            <table class="center w100">
+            <table class="striped w100">
                 <tr>
-                    <td class="w50"><h1>{$team_array.0.stadium_name}</h1></td>
-                    <td><h1>{$team_array.0.stadium_capacity}</h1></td>
+                    <th colspan="2">Лига чемпионов - достижения</th>
                 </tr>
-                <tr>
-                    <td>{$team_array.0.city_name}</td>
-                    <td>Вместимость стадиона</td>
-                </tr>
+                {section name=i loop=$champions_out_array}
+                    <tr>
+                        <td class="w50">
+                            <img
+                                alt="{$champions_out_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$champions_out_array[i].team_id}.png"
+                            />
+                            <a href="team_team_review_profile.php?num={$champions_out_array[i].team_id}">
+                                {$champions_out_array[i].team_name}
+                            </a>
+                        </td>
+                        <td>{$champions_out_array[i].stage_name}</td>
+                    </tr>
+                {/section}
             </table>
         </td>
     </tr>

@@ -480,6 +480,28 @@ $(document).ready(function($)
         );
     });
 
+    $('.player-national-include').on('change', function()
+    //Изменение трансферной цены
+    {
+        var player_id   = $(this).data('player');
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#player-block').addClass('loading');},
+                url: 'json.php?to_national_player_id=' + player_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#player-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
     $('#offer-type').on('change', function()
     //Трансферное предложение (смена форм аренды и трансфера)
     {

@@ -1134,5 +1134,38 @@ elseif (isset($_GET['change_role_id_national']))
 
     $json_data['role_array'] = $role_array;
 }
+elseif (isset($_GET['to_national_player_id']))
+{
+    $player_id = (int) $_GET['to_national_player_id'];
+
+    $sql = "SELECT `player_national_id`
+            FROM `player`
+            WHERE `player_id`='$player_id'
+            LIMIT 1";
+    $player_sql = $mysqli->query($sql);
+
+    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+    $national_id = $player_array[0]['player_national_id'];
+
+    if (0 == $national_id)
+    {
+        $sql = "UPDATE `player`
+                SET `player_national_id`='$authorization_country_id'
+                WHERE `player_id`='$player_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+    else
+    {
+        $sql = "UPDATE `player`
+                SET `player_national_id`='0'
+                WHERE `player_id`='$player_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $json_data['success'] = 1;
+}
 
 print json_encode($json_data);

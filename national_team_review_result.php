@@ -11,171 +11,246 @@ else
     $get_num = 1;
 }
 
-$sql = "SELECT `captain_country_id`, `captain_country_name`, `captain_id`, `captain_name`, `captain_surname`, `city_name`, `country_id`, `country_name`, `stadium_capacity`, `stadium_name`, `standing_place`, `team_name`, `team_season_id`, `tournament_id`, `tournament_name`, `user_country_id`, `user_country_name`, `user_login`, `vicecaptain_country_id`, `vicecaptain_country_name`, `vicecaptain_id`, `vicecaptain_name`, `vicecaptain_surname`
-        FROM `team`
-        LEFT JOIN `city`
-        ON `team_city_id`=`city_id`
-        LEFT JOIN `country`
-        ON `city_country_id`=`country_id`
-        LEFT JOIN `stadium`
-        ON `stadium_team_id`=`team_id`
-        LEFT JOIN `tournament`
-        ON `tournament_country_id`=`country_id`
-        LEFT JOIN `standing`
-        ON (`standing_tournament_id`=`tournament_id`
-        AND `standing_team_id`=`team_id`)
-        LEFT JOIN 
-        (
-            SELECT `country_id` AS `user_country_id`, `country_name` AS `user_country_name`, `user_id`, `user_login`
-            FROM `user`
-            LEFT JOIN `country`
-            ON `country_id`=`user_country_id`
-        ) AS `t1`
-        ON `user_id`=`team_user_id`
-        LEFT JOIN `teamrole`
-        ON `teamrole_team_id`=`team_id`
-        LEFT JOIN
-        (
-            SELECT `country_id` AS `captain_country_id`, `country_name` AS `captain_country_name`, `player_id` AS `captain_id`, `name_name` AS `captain_name`, `surname_name` AS `captain_surname`
-            FROM `player`
-            LEFT JOIN `name`
-            ON `name_id`=`player_name_id`
-            LEFT JOIN `surname`
-            ON `surname_id`=`player_surname_id`
-            LEFT JOIN `country`
-            ON `player_country_id`=`country_id`
-        ) AS `t2`
-        ON `captain_id`=`teamrole_captain_player_id_1`
-        LEFT JOIN
-        (
-            SELECT `country_id` AS `vicecaptain_country_id`, `country_name` AS `vicecaptain_country_name`, `player_id` AS `vicecaptain_id`, `name_name` AS `vicecaptain_name`, `surname_name` AS `vicecaptain_surname`
-            FROM `player`
-            LEFT JOIN `name`
-            ON `name_id`=`player_name_id`
-            LEFT JOIN `surname`
-            ON `surname_id`=`player_surname_id`
-            LEFT JOIN `country`
-            ON `player_country_id`=`country_id`
-        ) AS `t3`
-        ON `vicecaptain_id`=`teamrole_captain_player_id_2`
-        WHERE `team_id`='$get_num'
-        AND `tournament_tournamenttype_id`='2'
-        AND `standing_season_id`='$igosja_season_id'
-        LIMIT 1";
-$team_sql = $mysqli->query($sql);
+$sql = "SELECT `country_name`
+        FROM `country`
+        WHERE `country_id`='$get_num'";
+$country_sql = $mysqli->query($sql);
 
-$count_team = $team_sql->num_rows;
+$count_country = $country_sql->num_rows;
 
-if (0 == $count_team)
+if (0 == $count_country)
 {
     $smarty->display('wrong_page.html');
 
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `game_id`, `shedule_date`, `team_id`, `team_name`, `tournament_name`
-        FROM `game`
-        LEFT JOIN `shedule`
-        ON `shedule_id`=`game_shedule_id`
-        LEFT JOIN `team`
-        ON IF (`game_home_team_id`='$get_num', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
+$country_name = $country_array[0]['country_name'];
+
+$sql = "SELECT `team_id`,
+               `team_name`,
+               `tournament_id`,
+               `tournament_name`
+        FROM `standing`
         LEFT JOIN `tournament`
-        ON `game_tournament_id`=`tournament_id`
-        WHERE (`game_home_team_id`='$get_num'
-        OR `game_guest_team_id`='$get_num')
-        AND `game_played`='0'
-        ORDER BY `shedule_date` ASC
+        ON `standing_tournament_id`=`tournament_id`
+        LEFT JOIN `team`
+        ON `team_id`=`standing_team_id`
+        WHERE `standing_season_id`='$igosja_season_id'
+        AND `tournament_country_id`='$get_num'
+        ORDER BY `standing_place` ASC
         LIMIT 1";
-$nearest_game_sql = $mysqli->query($sql);
+$championship_sql = $mysqli->query($sql);
 
-$nearest_game_array = $nearest_game_sql->fetch_all(MYSQLI_ASSOC);
+$championship_array = $championship_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `game_home_team_id`, IF (`game_home_team_id`='$get_num', `game_home_score`, `game_guest_score`) AS `home_score`, `game_id`, IF (`game_home_team_id`='$get_num', `game_guest_score`, `game_home_score`) AS `guest_score`, `shedule_date`, `team_id`, `team_name`, `tournament_name`
-        FROM `game`
-        LEFT JOIN `shedule`
-        ON `shedule_id`=`game_shedule_id`
-        LEFT JOIN `team`
-        ON IF (`game_home_team_id`='$get_num', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
-        LEFT JOIN `tournament`
-        ON `game_tournament_id`=`tournament_id`
-        WHERE (`game_home_team_id`='$get_num'
-        OR `game_guest_team_id`='$get_num')
-        AND `game_played`='1'
-        ORDER BY `shedule_date` DESC
-        LIMIT 5";
-$latest_game_sql = $mysqli->query($sql);
+$tournament_id = $championship_array[0]['tournament_id'];
 
-$latest_game_array = $latest_game_sql->fetch_all(MYSQLI_ASSOC);
-
-$sql = "SELECT COUNT(`game_id`) AS `count_game`
-        FROM `game`
-        LEFT JOIN `shedule`
-        ON `shedule_id`=`game_shedule_id`
-        WHERE (`game_home_team_id`='$get_num'
-        OR `game_guest_team_id`='$get_num')
-        AND `game_played`='1'
-        AND `shedule_season_id`='$igosja_season_id'";
-$count_game_sql = $mysqli->query($sql);
-
-$count_game_array = $count_game_sql->fetch_all(MYSQLI_ASSOC);
-
-$sql = "SELECT `name_name`, `player_id`, `surname_name`
+$sql = "SELECT `name_name`,
+               `player_id`,
+               `statisticplayer_goal`,
+               `surname_name`,
+               `team_id`,
+               `team_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `statisticplayer_player_id`=`player_id`
         LEFT JOIN `name`
-        ON `player_name_id`=`name_id`
+        ON `name_id`=`player_name_id`
         LEFT JOIN `surname`
-        ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_team_id`='$get_num'
+        ON `surname_id`=`player_surname_id`
+        LEFT JOIN `team`
+        ON `statisticplayer_team_id`=`team_id`
+        WHERE `statisticplayer_tournament_id`='$tournament_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_goal` DESC
         LIMIT 1";
-$player_goal_sql = $mysqli->query($sql);
+$championship_goal_sql = $mysqli->query($sql);
 
-$player_goal_array = $player_goal_sql->fetch_all(MYSQLI_ASSOC);
+$championship_goal_array = $championship_goal_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `name_name`, `player_id`, `surname_name`
+$sql = "SELECT `name_name`,
+               `player_id`,
+               `statisticplayer_pass_scoring`,
+               `surname_name`,
+               `team_id`,
+               `team_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `statisticplayer_player_id`=`player_id`
         LEFT JOIN `name`
-        ON `player_name_id`=`name_id`
+        ON `name_id`=`player_name_id`
         LEFT JOIN `surname`
-        ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_team_id`='$get_num'
+        ON `surname_id`=`player_surname_id`
+        LEFT JOIN `team`
+        ON `statisticplayer_team_id`=`team_id`
+        WHERE `statisticplayer_tournament_id`='$tournament_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_pass_scoring` DESC
         LIMIT 1";
-$player_pass_sql = $mysqli->query($sql);
+$championship_pass_sql = $mysqli->query($sql);
 
-$player_pass_array = $player_pass_sql->fetch_all(MYSQLI_ASSOC);
+$championship_pass_array = $championship_pass_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `name_name`, `player_id`, `surname_name`
+$sql = "SELECT ROUND(`statisticplayer_mark`/`statisticplayer_game`, '1') AS `mark`,
+               `name_name`,
+               `player_id`,
+               `surname_name`,
+               `team_id`,
+               `team_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `statisticplayer_player_id`=`player_id`
         LEFT JOIN `name`
-        ON `player_name_id`=`name_id`
+        ON `name_id`=`player_name_id`
         LEFT JOIN `surname`
-        ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_team_id`='$get_num'
-        ORDER BY `statisticplayer_best` DESC
+        ON `surname_id`=`player_surname_id`
+        LEFT JOIN `team`
+        ON `statisticplayer_team_id`=`team_id`
+        WHERE `statisticplayer_tournament_id`='$tournament_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'
+        ORDER BY `mark` DESC
         LIMIT 1";
-$player_best_sql = $mysqli->query($sql);
+$championship_mark_sql = $mysqli->query($sql);
 
-$player_best_array = $player_best_sql->fetch_all(MYSQLI_ASSOC);
+$championship_mark_array = $championship_mark_sql->fetch_all(MYSQLI_ASSOC);
 
-$team_name = $team_array[0]['team_name'];
+$sql = "SELECT `team_id`,
+               `team_name`,
+               `tournament_id`,
+               `tournament_name`
+        FROM `cupparticipant`
+        LEFT JOIN `tournament`
+        ON `cupparticipant_tournament_id`=`tournament_id`
+        LEFT JOIN `team`
+        ON `team_id`=`cupparticipant_team_id`
+        WHERE `cupparticipant_season_id`='$igosja_season_id'
+        AND `cupparticipant_out`='0'
+        AND `tournament_country_id`='$get_num'
+        AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CUP . "'
+        LIMIT 1";
+$cup_sql = $mysqli->query($sql);
+
+$cup_array = $cup_sql->fetch_all(MYSQLI_ASSOC);
+
+$tournament_id = $cup_array[0]['tournament_id'];
+
+$sql = "SELECT `name_name`,
+               `player_id`,
+               `statisticplayer_goal`,
+               `surname_name`,
+               `team_id`,
+               `team_name`
+        FROM `statisticplayer`
+        LEFT JOIN `player`
+        ON `statisticplayer_player_id`=`player_id`
+        LEFT JOIN `name`
+        ON `name_id`=`player_name_id`
+        LEFT JOIN `surname`
+        ON `surname_id`=`player_surname_id`
+        LEFT JOIN `team`
+        ON `statisticplayer_team_id`=`team_id`
+        WHERE `statisticplayer_tournament_id`='$tournament_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'
+        ORDER BY `statisticplayer_goal` DESC
+        LIMIT 1";
+$cup_goal_sql = $mysqli->query($sql);
+
+$cup_goal_array = $cup_goal_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `name_name`,
+               `player_id`,
+               `statisticplayer_pass_scoring`,
+               `surname_name`,
+               `team_id`,
+               `team_name`
+        FROM `statisticplayer`
+        LEFT JOIN `player`
+        ON `statisticplayer_player_id`=`player_id`
+        LEFT JOIN `name`
+        ON `name_id`=`player_name_id`
+        LEFT JOIN `surname`
+        ON `surname_id`=`player_surname_id`
+        LEFT JOIN `team`
+        ON `statisticplayer_team_id`=`team_id`
+        WHERE `statisticplayer_tournament_id`='$tournament_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'
+        ORDER BY `statisticplayer_pass_scoring` DESC
+        LIMIT 1";
+$cup_pass_sql = $mysqli->query($sql);
+
+$cup_pass_array = $cup_pass_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT ROUND(`statisticplayer_mark`/`statisticplayer_game`, '1') AS `mark`,
+               `name_name`,
+               `player_id`,
+               `surname_name`,
+               `team_id`,
+               `team_name`
+        FROM `statisticplayer`
+        LEFT JOIN `player`
+        ON `statisticplayer_player_id`=`player_id`
+        LEFT JOIN `name`
+        ON `name_id`=`player_name_id`
+        LEFT JOIN `surname`
+        ON `surname_id`=`player_surname_id`
+        LEFT JOIN `team`
+        ON `statisticplayer_team_id`=`team_id`
+        WHERE `statisticplayer_tournament_id`='$tournament_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'
+        ORDER BY `mark` DESC
+        LIMIT 1";
+$cup_mark_sql = $mysqli->query($sql);
+
+$cup_mark_array = $cup_mark_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `stage_name`,
+               `team_id`,
+               `team_name`
+        FROM `leagueparticipant`
+        LEFT JOIN `team`
+        ON `leagueparticipant_team_id`=`team_id`
+        LEFT JOIN `city`
+        ON `city_id`=`team_city_id`
+        LEFT JOIN `stage`
+        ON `leagueparticipant_in`=`stage_id`
+        WHERE `city_country_id`='$get_num'
+        AND `leagueparticipant_season_id`='$igosja_season_id'
+        ORDER BY `leagueparticipant_in` DESC";
+$champions_qualify_sql = $mysqli->query($sql);
+
+$champions_qualify_array = $champions_qualify_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `stage_name`,
+               `team_id`,
+               `team_name`
+        FROM `leagueparticipant`
+        LEFT JOIN `team`
+        ON `leagueparticipant_team_id`=`team_id`
+        LEFT JOIN `city`
+        ON `city_id`=`team_city_id`
+        LEFT JOIN `stage`
+        ON `leagueparticipant_out`=`stage_id`
+        WHERE `city_country_id`='$get_num'
+        AND `leagueparticipant_season_id`='$igosja_season_id'
+        ORDER BY `leagueparticipant_out` DESC";
+$champions_out_sql = $mysqli->query($sql);
+
+$champions_out_array = $champions_out_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
-$smarty->assign('team_array', $team_array);
-$smarty->assign('count_game_array', $count_game_array);
-$smarty->assign('player_goal_array', $player_goal_array);
-$smarty->assign('player_pass_array', $player_pass_array);
-$smarty->assign('player_best_array', $player_best_array);
-$smarty->assign('latest_game_array', $latest_game_array);
-$smarty->assign('nearest_game_array', $nearest_game_array);
+$smarty->assign('team_name', $country_name);
+$smarty->assign('championship_array', $championship_array);
+$smarty->assign('championship_goal_array', $championship_goal_array);
+$smarty->assign('championship_pass_array', $championship_pass_array);
+$smarty->assign('championship_mark_array', $championship_mark_array);
+$smarty->assign('cup_array', $cup_array);
+$smarty->assign('cup_goal_array', $cup_goal_array);
+$smarty->assign('cup_pass_array', $cup_pass_array);
+$smarty->assign('cup_mark_array', $cup_mark_array);
+$smarty->assign('champions_qualify_array', $champions_qualify_array);
+$smarty->assign('champions_out_array', $champions_out_array);
 
 $smarty->display('main.html');
