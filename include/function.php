@@ -283,8 +283,7 @@ function f_igosja_player_create($team_id, $i)
                 `player_team_id`='$team_id',
                 `player_leg_left`='$leg_left',
                 `player_leg_right`='$leg_right',
-                `player_ability_current`='5',
-                `player_ability_max`='10',
+                `player_ability`='5',
                 `player_height`='$height',
                 `player_weight`='$weight',
                 `player_position_id`='$position_id'";

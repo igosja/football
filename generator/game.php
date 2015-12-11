@@ -82,6 +82,9 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `scout`";
 $mysqli->query($sql);
 
+$sql = "TRUNCATE `worldcup`";
+$mysqli->query($sql);
+
 $sql = "INSERT INTO `player`
         SET `player_id`='0'";
 $mysqli->query($sql);
@@ -126,7 +129,8 @@ for ($i=0; $i<$count_team; $i++)
 
 $sql = "UPDATE `player`
         SET `player_practice`='50',
-            `player_condition`='100'";
+            `player_condition`='100',
+            `player_national_id`=`player_country_id`";
 $mysqli->query($sql);
 
 $sql = "INSERT INTO `standing` (`standing_tournament_id`, `standing_country_id`, `standing_season_id`, `standing_team_id`)
@@ -141,8 +145,22 @@ $sql = "INSERT INTO `standing` (`standing_tournament_id`, `standing_country_id`,
         ORDER BY RAND()";
 $mysqli->query($sql);
 
+$sql = "INSERT INTO `worldcup` (`worldcup_tournament_id`, `worldcup_country_id`, `worldcup_season_id`)
+        VALUES ('7', '6', '$igosja_season_id'),
+               ('7', '64', '$igosja_season_id');";
+$mysqli->query($sql);
+
 $shedule_insert_sql = array();
 
+for ($i=0; $i<10; $i++)
+{
+    $date = date('Y-m-d');
+    $date = strtotime($date . ' +' . $i . 'days');
+    $date = date('Y-m-d', $date);
+
+    $shedule_insert_sql[] = "('$date', '$igosja_season_id', '" . TOURNAMENT_TYPE_WORLD_CUP . "')";
+}
+/*Этот блок для лиги чемпионов
 for ($i=0; $i<22; $i++)
 {
     $date = date('Y-m-d');
@@ -151,7 +169,7 @@ for ($i=0; $i<22; $i++)
 
     $shedule_insert_sql[] = "('$date', '$igosja_season_id', '" . TOURNAMENT_TYPE_CHAMPIONS_LEAGUE . "')";
 }
-
+*/
 /* Этот блок для кубка
 for ($i=0; $i<9; $i++)
 {
@@ -673,7 +691,7 @@ for ($i=0; $i<$count_country; $i++)
 }
 */
 
-$sql = "INSERT INTO `leagueparticipant` (`leagueparticipant_team_id`)
+/*$sql = "INSERT INTO `leagueparticipant` (`leagueparticipant_team_id`)
         SELECT `team_id`
         FROM `team`
         WHERE `team_id`!='0'
@@ -749,7 +767,41 @@ for ($i=0; $i<$count_team; $i=$i+2)
                 `game_tournament_id`='" . TOURNAMENT_CHAMPIONS_LEAGUE . "',
                 `game_weather_id`='1'+RAND()*'3'";
     $mysqli->query($sql);
-}
+}*/
+
+$sql = "SELECT `ratingcountry_country_id`
+        FROM `ratingcountry`
+        ORDER BY RAND()";
+$country_sql = $mysqli->query($sql);
+
+$count_country = $country_sql->num_rows;
+$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+
+$country_1 = $country_array[0]['ratingcountry_country_id'];
+$country_2 = $country_array[1]['ratingcountry_country_id'];
+
+$sql = "INSERT INTO `game`
+        (
+            `game_home_country_id`,
+            `game_guest_country_id`,
+            `game_referee_id`,
+            `game_stadium_id`,
+            `game_shedule_id`,
+            `game_temperature`,
+            `game_tournament_id`,
+            `game_weather_id`
+        )
+        VALUES  ('$country_1','$country_2','1','1','1','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3'),
+                ('$country_2','$country_1','1','2','2','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3'),
+                ('$country_1','$country_2','1','3','3','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3'),
+                ('$country_2','$country_1','1','4','4','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3'),
+                ('$country_1','$country_2','1','5','5','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3'),
+                ('$country_2','$country_1','1','6','6','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3'),
+                ('$country_1','$country_2','1','7','7','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3'),
+                ('$country_2','$country_1','1','8','8','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3'),
+                ('$country_1','$country_2','1','9','9','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3'),
+                ('$country_2','$country_1','1','10','10','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3');";
+$mysqli->query($sql);
 
 print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
        <br/>Потребление памяти: ' . number_format(memory_get_usage(), 0, ",", " ") . ' Б';
