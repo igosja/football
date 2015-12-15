@@ -17,11 +17,6 @@ if (isset($_POST['continent_id']))
 
     $country_id = $mysqli->insert_id;
 
-    if ('image/png' == $_FILES['country_flag']['type'])
-    {
-        copy($_FILES['country_flag']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/flag/' . $country_id . '.png');
-    }
-
     if ('image/png' == $_FILES['country_flag_90']['type'])
     {
         copy($_FILES['country_flag_90']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/flag/90/' . $country_id . '.png');

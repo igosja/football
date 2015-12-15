@@ -7,17 +7,15 @@ if (isset($_POST['tournamenttype_id']))
     $tournamenttype_id  = (int) $_POST['tournamenttype_id'];
     $tournament_name    = $_POST['tournament_name'];
     $tournament_level   = (int) $_POST['tournament_level'];
-    $tournament_visitor  = (float) $_POST['tournament_visitor'];
     $country_id         = (int) $_POST['country_id'];
 
     $sql = "INSERT INTO `tournament`
             SET `tournament_name`=?,
                 `tournament_tournamenttype_id`=?,
                 `tournament_level`=?,
-                `tournament_visitor`=?,
                 `tournament_country_id`=?";
     $prepare = $mysqli->prepare($sql);
-    $prepare->bind_param('siidi', $tournament_name, $tournamenttype_id, $tournament_level, $tournament_visitor, $country_id);
+    $prepare->bind_param('siii', $tournament_name, $tournamenttype_id, $tournament_level, $country_id);
     $prepare->execute();
     $prepare->close();
 
@@ -43,14 +41,16 @@ if (isset($_POST['tournamenttype_id']))
     exit;
 }
 
-$sql = "SELECT `country_id`, `country_name`
+$sql = "SELECT `country_id`,
+               `country_name`
         FROM `country`
         ORDER BY `country_id` ASC";
 $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `tournamenttype_id`, `tournamenttype_name`
+$sql = "SELECT `tournamenttype_id`,
+               `tournamenttype_name`
         FROM `tournamenttype`
         ORDER BY `tournamenttype_id` ASC";
 $tournamenttype_sql = $mysqli->query($sql);

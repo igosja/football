@@ -51,12 +51,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Посещаемость</td>
-                        <td class="left">
-                            <input name="tournament_visitor" type="text" value="{if (isset($tournament_visitor))}{$tournament_visitor}{else}0{/if}"/>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>Эмблема (90x90, png)</td>
                         <td class="left">
                             <input name="tournament_logo_90" type="file"/>
@@ -79,6 +73,15 @@
                             <input type="submit" value="Сохранить"/>
                         </td>
                     </tr>
+                    {if (isset($smarty.get.num))}
+                        <tr>
+                            <td colspan="2">
+                                <img src="/img/tournament/90/{$smarty.get.num}.png" />
+                                <img src="/img/tournament/50/{$smarty.get.num}.png" />
+                                <img src="/img/tournament/12/{$smarty.get.num}.png" />
+                            </td>
+                        </tr>
+                    {/if}
                 </table>
             </form>
         </td>

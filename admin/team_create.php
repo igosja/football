@@ -8,13 +8,15 @@ if (isset($_POST['city_id']))
     $team_name      = $_POST['team_name'];
     $stadium_name   = $_POST['stadium_name'];
 
-    $sql = "SELECT `count_team_id`, `t1`.`country_id` AS `country_id`
+    $sql = "SELECT `count_team_id`,
+                   `t1`.`country_id` AS `country_id`
             FROM `country` AS `t1`
             LEFT JOIN `city` AS `t2`
             ON `city_country_id`=`country_id`
             LEFT JOIN 
             (
-                SELECT COUNT(`team_id`) AS `count_team_id`, `country_id`
+                SELECT COUNT(`team_id`) AS `count_team_id`,
+                       `country_id`
                 FROM `team`
                 LEFT JOIN `city`
                 ON `city_id`=`team_city_id`
@@ -38,8 +40,9 @@ if (isset($_POST['city_id']))
                 SET `country_season_id`='$igosja_season_id'
                 WHERE `county_id`='$country_id'
                 LIMIT 1";
+        $mysqli->query($sql);
 
-        f_igosja_history(1, $country_id);
+        f_igosja_history(1, 0, $country_id);
     }
 
     $sql = "INSERT INTO `team`
@@ -87,7 +90,7 @@ if (isset($_POST['city_id']))
     }
 
     f_igosja_staff_create($team_id);
-    f_igosja_history(2, 0, $team_id);
+    f_igosja_history(2, 0, 0, $team_id);
 
     redirect('team_list.php');
 

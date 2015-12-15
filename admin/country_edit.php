@@ -41,11 +41,6 @@ if (isset($_POST['continent_id']))
     $prepare->execute();
     $prepare->close();
 
-    if ('image/png' == $_FILES['country_flag']['type'])
-    {
-        copy($_FILES['country_flag']['tmp_name'], '../img/flag/' . $get_num . '.png');
-    }
-
     if ('image/png' == $_FILES['country_flag_90']['type'])
     {
         copy($_FILES['country_flag_90']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/flag/90/' . $get_num . '.png');
