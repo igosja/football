@@ -216,6 +216,47 @@ function f_igosja_chiper_password($password)
     return $password;
 }
 
+function f_igosja_referee_create($country_id)
+//Создание судьи
+{
+    global $mysqli;
+
+    $country_id = (int) $country_id;
+
+    $sql = "SELECT `countryname_name_id`,
+                   `countrysurname_surname_id`
+            FROM `countryname`
+            LEFT JOIN
+            (
+                SELECT `countrysurname_surname_id`,
+                       `countrysurname_country_id`
+                FROM `countrysurname`
+                WHERE `countrysurname_country_id`='$country_id'
+                ORDER BY RAND()
+                LIMIT 1
+            ) AS `t2`
+            ON `countrysurname_country_id`=`countryname_country_id`
+            WHERE `countryname_country_id`='$country_id'
+            ORDER BY RAND()
+            LIMIT 1";
+    $name_sql = $mysqli->query($sql);
+
+    $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+
+    $name_id    = $name_array[0]['countryname_name_id'];
+    $surname_id = $name_array[0]['countrysurname_surname_id'];
+    $age        = rand(35, 50);
+    $reputation = rand(1,100);
+
+    $sql = "INSERT INTO `referee`
+            SET `referee_country_id`='$country_id',
+                `referee_name_id`='$name_id',
+                `referee_age`='$age',
+                `referee_surname_id`='$surname_id',
+                `referee_reputation`='$reputation'";
+    $mysqli->query($sql);
+}
+
 function f_igosja_player_create($team_id, $i)
 //Создание игроков при создании команды в админке
 {
@@ -411,6 +452,7 @@ function f_igosja_player_leg($position_id)
 }
 
 function f_igosja_leg_name($leg_left, $leg_right)
+//Название рабочей ноги игрока (левая/правая)
 {
     if (8 <= $leg_left &&
         8 <= $leg_right)
@@ -430,6 +472,7 @@ function f_igosja_leg_name($leg_left, $leg_right)
 }
 
 function f_igosja_progress_class($value)
+//Цветная полоса состояния
 {
     if (80 < $value)
     {
@@ -448,6 +491,7 @@ function f_igosja_progress_class($value)
 }
 
 function f_igosja_position_icon($value)
+//Цвет иконки позиции в зависимости от навыков игры
 {
     if (80 < $value)
     {
