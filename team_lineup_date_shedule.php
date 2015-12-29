@@ -33,7 +33,6 @@ $team_name = $team_array[0]['team_name'];
 $sql = "SELECT `game_home_team_id`,
                `game_id`,
                `game_played`,
-               `game_tv`,
                IF (`game_home_team_id`='$get_num', `game_guest_score`, `game_home_score`) AS `guest_score`,
                IF (`game_home_team_id`='$get_num', `game_home_score`, `game_guest_score`) AS `home_score`,
                `shedule_date`,

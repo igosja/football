@@ -120,6 +120,7 @@ if (isset($_GET['ok']))
 $sql = "SELECT `asktoplay_shedule_id`,
                `shedule_date`,
                `shedule_id`,
+               `shedule_tournamenttype_id`,
                `team_id`,
                `team_name`,
                `tournament_id`,
@@ -150,12 +151,23 @@ $sql = "SELECT `asktoplay_shedule_id`,
         ) AS `t2`
         ON `shedule_id`=`asktoplay_shedule_id`
         WHERE `shedule_season_id`='$igosja_season_id'
+        AND `shedule_tournamenttype_id`!='" . TOURNAMENT_TYPE_OFF_SEASON . "'
         AND `shedule_date`>=CURDATE()
         ORDER BY `shedule_date` ASC";
 $shedule_sql = $mysqli->query($sql);
 
 $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
+$sql = "SELECT `cupparticipant_out`
+        FROM `cupparticipant`
+        WHERE `cupparticipant_team_id`='$get_num'
+        AND `cupparticipant_season_id`='$igosja_season_id'
+        LIMIT 1";
+$cupparticipant_sql = $mysqli->query($sql);
+
+$cupparticipant_array = $cupparticipant_sql->fetch_all(MYSQLI_ASSOC);
+
 $smarty->assign('shedule_array', $shedule_array);
+$smarty->assign('cupparticipant_array', $cupparticipant_array);
 
 $smarty->display('main.html');

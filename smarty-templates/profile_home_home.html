@@ -157,152 +157,158 @@
             </td>
             <td class="block-page w25">
                 <p class="header">Финансы</p>
-                <table class="striped w100">
-                    <tr>
-                        <td>Баланс</td>
-                        <td class="right">{$finance_array.0.team_finance|f_igosja_money}</td>
-                    </tr>
-                    <tr>
-                        <td>Прибыль текущего сезона</td>
-                        <td class="right">{$finance_array.0.profit|f_igosja_money}</td>
-                    </tr>
-                    <tr>
-                        <td>Зарплата игроков</td>
-                        <td class="right">{$finance_array.0.total_player_salary|f_igosja_money}</td>
-                    </tr>
-                    <tr>
-                        <td>Средняя зарплата</td>
-                        <td class="right">{$finance_array.0.average_player_salary|f_igosja_money}</td>
-                    </tr>
-                    <tr>
-                        <td>Зарплата персонала</td>
-                        <td class="right">{$finance_array.0.total_staff_salary|f_igosja_money}</td>
-                    </tr>
-                    <tr>
-                        <td>Средняя зарплата</td>
-                        <td class="right">{$finance_array.0.average_staff_salary|f_igosja_money}</td>
-                    </tr>
-                </table>
+                {section name=i loop=$finance_array}
+                    <table class="striped w100">
+                        <tr>
+                            <td>Баланс</td>
+                            <td class="right">{$finance_array[i].team_finance|f_igosja_money}</td>
+                        </tr>
+                        <tr>
+                            <td>Прибыль текущего сезона</td>
+                            <td class="right">{$finance_array[i].profit|f_igosja_money}</td>
+                        </tr>
+                        <tr>
+                            <td>Зарплата игроков</td>
+                            <td class="right">{$finance_array[i].total_player_salary|f_igosja_money}</td>
+                        </tr>
+                        <tr>
+                            <td>Средняя зарплата</td>
+                            <td class="right">{$finance_array[i].average_player_salary|f_igosja_money}</td>
+                        </tr>
+                        <tr>
+                            <td>Зарплата персонала</td>
+                            <td class="right">{$finance_array[i].total_staff_salary|f_igosja_money}</td>
+                        </tr>
+                        <tr>
+                            <td>Средняя зарплата</td>
+                            <td class="right">{$finance_array[i].average_staff_salary|f_igosja_money}</td>
+                        </tr>
+                    </table>
+                {/section}
             </td>
         </tr>
         <tr>
             <td class="block-page w25">
                 <p class="header">Статистика команды</p>
-                <table class="striped w100">
-                    <tr>
-                        <td class="center" colspan="2">
-                            <img
-                                alt="{$statistic_team_array.0.tournament_name}"
-                                class="img-12"
-                                src="img/tournament/12/{$statistic_team_array.0.tournament_id}.png"
-                            />
-                            <a href="tournament_review_profile?num={$statistic_team_array.0.tournament_id}">
-                                {$statistic_team_array.0.tournament_name}
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Сыграно матчей</td>
-                        <td class="right">{$statistic_team_array.0.statisticteam_game}</td>
-                    </tr>
-                    <tr>
-                        <td>Забито голов</td>
-                        <td class="right">{$statistic_team_array.0.statisticteam_goal}</td>
-                    </tr>
-                    <tr>
-                        <td>Пропушено голов</td>
-                        <td class="right">{$statistic_team_array.0.statisticteam_pass}</td>
-                    </tr>
-                    <tr>
-                        <td>Желтые карточки</td>
-                        <td class="right">{$statistic_team_array.0.statisticteam_yellow}</td>
-                    </tr>
-                    <tr>
-                        <td>Красные карточки</td>
-                        <td class="right">{$statistic_team_array.0.statisticteam_red}</td>
-                    </tr>
-                    <tr>
-                        <td>Средняя посещаемость</td>
-                        <td class="right">
-                            {$statistic_team_array.0.statisticteam_visitor}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Аншлаги</td>
-                        <td class="right">{$statistic_team_array.0.statisticteam_full_house}</td>
-                    </tr>
-                </table>
+                {section name=i loop=$statistic_team_array}
+                    <table class="striped w100">
+                        <tr>
+                            <td class="center" colspan="2">
+                                <img
+                                    alt="{$statistic_team_array[i].tournament_name}"
+                                    class="img-12"
+                                    src="img/tournament/12/{$statistic_team_array[i].tournament_id}.png"
+                                />
+                                <a href="tournament_review_profile?num={$statistic_team_array[i].tournament_id}">
+                                    {$statistic_team_array[i].tournament_name}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Сыграно матчей</td>
+                            <td class="right">{$statistic_team_array[i].statisticteam_game}</td>
+                        </tr>
+                        <tr>
+                            <td>Забито голов</td>
+                            <td class="right">{$statistic_team_array[i].statisticteam_goal}</td>
+                        </tr>
+                        <tr>
+                            <td>Пропушено голов</td>
+                            <td class="right">{$statistic_team_array[i].statisticteam_pass}</td>
+                        </tr>
+                        <tr>
+                            <td>Желтые карточки</td>
+                            <td class="right">{$statistic_team_array[i].statisticteam_yellow}</td>
+                        </tr>
+                        <tr>
+                            <td>Красные карточки</td>
+                            <td class="right">{$statistic_team_array[i].statisticteam_red}</td>
+                        </tr>
+                        <tr>
+                            <td>Средняя посещаемость</td>
+                            <td class="right">
+                                {$statistic_team_array[i].statisticteam_visitor}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Аншлаги</td>
+                            <td class="right">{$statistic_team_array[i].statisticteam_full_house}</td>
+                        </tr>
+                    </table>
+                {/section}
             </td>
             <td class="block-page">
                 <p class="header">Статистика игрока</p>
-                <table class="striped w100">
-                    <tr>
-                        <td class="center" colspan="2">
-                            <img
-                                alt="{$statistic_player_array.0.tournament_name}"
-                                class="img-12"
-                                src="img/tournament/12/{$statistic_player_array.0.tournament_id}.png"
-                            />
-                            <a href="tournament_review_profile?num={$statistic_player_array.0.tournament_id}">
-                                {$statistic_player_array.0.tournament_name}
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Лучший бомбардир</td>
-                        <td class="right">
-                            <a href="player_home_profile.php?num={$statistic_player_array.0.goal_player_id}">
-                                {$statistic_player_array.0.goal_name} {$statistic_player_array.0.goal_surname}
-                            </a>
-                            ({$statistic_player_array.0.statisticplayer_goal})
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Лучший ассистент</td>
-                        <td class="right">
-                            <a href="player_home_profile.php?num={$statistic_player_array.0.pass_player_id}">
-                                {$statistic_player_array.0.pass_name} {$statistic_player_array.0.pass_surname}
-                            </a>
-                            ({$statistic_player_array.0.statisticplayer_pass_scoring})
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Игрок матча</td>
-                        <td class="right">
-                            <a href="player_home_profile.php?num={$statistic_player_array.0.best_player_id}">
-                                {$statistic_player_array.0.best_name} {$statistic_player_array.0.best_surname}
-                            </a>
-                            ({$statistic_player_array.0.statisticplayer_best})
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Сыграно матчей</td>
-                        <td class="right">
-                            <a href="player_home_profile.php?num={$statistic_player_array.0.game_player_id}">
-                                {$statistic_player_array.0.game_name} {$statistic_player_array.0.game_surname}
-                            </a>
-                            ({$statistic_player_array.0.statisticplayer_game})
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Желтых карточек</td>
-                        <td class="right">
-                            <a href="player_home_profile.php?num={$statistic_player_array.0.yellow_player_id}">
-                                {$statistic_player_array.0.yellow_name} {$statistic_player_array.0.yellow_surname}
-                            </a>
-                            ({$statistic_player_array.0.statisticplayer_yellow})
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Красных карточек</td>
-                        <td class="right">
-                            <a href="player_home_profile.php?num={$statistic_player_array.0.red_player_id}">
-                                {$statistic_player_array.0.red_name} {$statistic_player_array.0.red_surname}
-                            </a>
-                            ({$statistic_player_array.0.statisticplayer_red})
-                        </td>
-                    </tr>
-                </table>
+                {section name=i loop=$statistic_player_array}
+                    <table class="striped w100">
+                        <tr>
+                            <td class="center" colspan="2">
+                                <img
+                                    alt="{$statistic_player_array[i].tournament_name}"
+                                    class="img-12"
+                                    src="img/tournament/12/{$statistic_player_array[i].tournament_id}.png"
+                                />
+                                <a href="tournament_review_profile?num={$statistic_player_array[i].tournament_id}">
+                                    {$statistic_player_array[i].tournament_name}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Лучший бомбардир</td>
+                            <td class="right">
+                                <a href="player_home_profile.php?num={$statistic_player_array[i].goal_player_id}">
+                                    {$statistic_player_array[i].goal_name} {$statistic_player_array[i].goal_surname}
+                                </a>
+                                ({$statistic_player_array[i].statisticplayer_goal})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Лучший ассистент</td>
+                            <td class="right">
+                                <a href="player_home_profile.php?num={$statistic_player_array[i].pass_player_id}">
+                                    {$statistic_player_array[i].pass_name} {$statistic_player_array[i].pass_surname}
+                                </a>
+                                ({$statistic_player_array[i].statisticplayer_pass_scoring})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Игрок матча</td>
+                            <td class="right">
+                                <a href="player_home_profile.php?num={$statistic_player_array[i].best_player_id}">
+                                    {$statistic_player_array[i].best_name} {$statistic_player_array[i].best_surname}
+                                </a>
+                                ({$statistic_player_array[i].statisticplayer_best})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Сыграно матчей</td>
+                            <td class="right">
+                                <a href="player_home_profile.php?num={$statistic_player_array[i].game_player_id}">
+                                    {$statistic_player_array[i].game_name} {$statistic_player_array[i].game_surname}
+                                </a>
+                                ({$statistic_player_array[i].statisticplayer_game})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Желтых карточек</td>
+                            <td class="right">
+                                <a href="player_home_profile.php?num={$statistic_player_array[i].yellow_player_id}">
+                                    {$statistic_player_array[i].yellow_name} {$statistic_player_array[i].yellow_surname}
+                                </a>
+                                ({$statistic_player_array[i].statisticplayer_yellow})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Красных карточек</td>
+                            <td class="right">
+                                <a href="player_home_profile.php?num={$statistic_player_array[i].red_player_id}">
+                                    {$statistic_player_array[i].red_name} {$statistic_player_array[i].red_surname}
+                                </a>
+                                ({$statistic_player_array[i].statisticplayer_red})
+                            </td>
+                        </tr>
+                    </table>
+                {/section}
             </td>
             <td class="block-page w25">
                 <p class="header">Травмы</p>

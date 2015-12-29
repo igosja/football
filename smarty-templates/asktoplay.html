@@ -36,7 +36,9 @@
                             {/if}
                         </td>
                         <td class="center">
-                            {if ($shedule_array[i].team_id)}
+                            {if ($shedule_array[i].team_id ||
+                                (0 == $cupparticipant_array.0.cupparticipant_out &&
+                                $smarty.const.TOURNAMENT_TYPE_CUP == $shedule_array[i].shedule_tournamenttype_id))}
                                 Недоступен
                             {else}
                                 <a href="javascript:;" class="asktoplay-link" data-shedule="{$shedule_array[i].shedule_id}">

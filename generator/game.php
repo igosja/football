@@ -210,7 +210,7 @@ $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 for ($i=0; $i<$count_country; $i++)
 {
-    $country_id    = $country_array[$i]['standing_country_id'];
+    $country_id = $country_array[$i]['standing_country_id'];
 
     for ($j=0; $j<30; $j++)
     {
@@ -249,7 +249,7 @@ for ($i=0; $i<$count_country; $i++)
     for ($j=0; $j<$count_referee; $j++)
     {
         $referee  = 'referee_' . ($j + 1);
-        $$referee = $referee_sql[$j]['referee_id'];
+        $$referee = $referee_array[$j]['referee_id'];
     }
 
     $sql = "INSERT INTO `game`
@@ -674,7 +674,7 @@ for ($i=0; $i<$count_country; $i++)
     for ($j=0; $j<$count_referee; $j++)
     {
         $referee  = 'referee_' . ($j + 1);
-        $$referee = $referee_sql[$j]['referee_id'];
+        $$referee = $referee_array[$j]['referee_id'];
     }
 
     $tournament_id  = $country_array[$i]['tournament_id'];

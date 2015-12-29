@@ -525,7 +525,10 @@ elseif (isset($_GET['news_id']))
 {
     $news_id = (int) $_GET['news_id'];
 
-    $sql = "SELECT `news_text`,
+    $sql = "SELECT `news_answered`,
+                   `news_asktoplay_id`,
+                   `news_newstheme_id`,
+                   `news_text`,
                    `news_title`
             FROM `news`
             WHERE `news_id`='$news_id'
@@ -533,6 +536,27 @@ elseif (isset($_GET['news_id']))
     $news_sql = $mysqli->query($sql);
 
     $news_array = $news_sql->fetch_all(MYSQLI_ASSOC);
+
+    $news_answered = $news_array[0]['news_answered'];
+    $newstheme_id  = $news_array[0]['news_newstheme_id'];
+    $asktoplay_id  = $news_array[0]['news_asktoplay_id'];
+
+    if (0 == $news_answered &&
+        NEWSTHEME_ASKTOPLAY == $newstheme_id)
+    {
+        $news_array[0]['news_button'] = '<button id="news-asktoplay-yes" data-id="' . $asktoplay_id . '" data-news="' . $news_id . '">Согласиться</button>
+                                         <button id="news-asktoplay-no" data-id="' . $asktoplay_id . '" data-news="' . $news_id . '">Отказаться</button>';
+    }
+    else
+    {
+        $news_array[0]['news_button'] = '';
+    }
+
+    $sql = "UPDATE `news`
+            SET `news_read`='1'
+            WHERE `news_id`='$news_id'
+            LIMIT 1";
+    $mysqli->query($sql);
 
     $json_data['news_array'] = $news_array;
 }
@@ -1023,21 +1047,91 @@ elseif (isset($_GET['asktoplay']))
                         `asktoplay_home`='$home',
                         `asktoplay_shedule_id`='$shedule_id'";
             $mysqli->query($sql);
+
+            $asktoplay_id = $mysqli->insert_id;
+
+            $sql = "SELECT `city_name`,
+                           `stadium_name`,
+                           `team_name`,
+                           `team_user_id`
+                    FROM `team`
+                    LEFT JOIN `stadium`
+                    ON `stadium_team_id`=`team_id`
+                    LEFT JOIN `city`
+                    ON `city_id`=`team_city_id`
+                    WHERE `team_id`='$invite'
+                    LIMIT 1";
+            $team_sql = $mysqli->query($sql);
+
+            $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+
+            $team_name      = $team_array[0]['team_name'];
+            $city_name      = $team_array[0]['city_name'];
+            $stadium_name   = $team_array[0]['stadium_name'];
+            $user_id        = $team_array[0]['team_user_id'];
+
+            $sql = "SELECT `shedule_date`
+                    FROM `shedule`
+                    WHERE `shedule_id`='$shedule_id'
+                    LIMIT 1";
+            $shedule_sql = $mysqli->query($sql);
+
+            $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+
+            $shedule_date = $shedule_array[0]['shedule_date'];
+            $shedule_date = date(strtotime($shedule_date), 'd.m.Y');
+
+            $sql = "SELECT `newstheme_name`,
+                           `newstheme_text`
+                    FROM `newstheme`
+                    WHERE `newstheme_id`='" . NEWSTHEME_ASKTOPLAY . "'
+                    LIMIT 1";
+            $newstheme_sql = $mysqli->query($sql);
+
+            $newstheme_array = $newstheme_sql->fetch_all(MYSQLI_ASSOC);
+
+            $newstheme_name = $newstheme_array[0]['newstheme_name'];
+            $newstheme_text = $newstheme_array[0]['newstheme_text'];
+            $newstheme_text = sprintf($newstheme_text, $authorization_team_name, $stadium_name, $city_name, $shedule_date);
+
+            $sql = "INSERT INTO `news`
+                    SET `news_asktoplay_id`='$asktoplay_id',
+                        `news_date`=CURDATE(),
+                        `news_newstheme_id`='" . NEWSTHEME_ASKTOPLAY . "',
+                        `news_title`='$newstheme_name',
+                        `news_text`='$newstheme_text',
+                        `news_user_id`='$user_id'";
+            $mysqli->query($sql);
         }
     }
 
-    $sql = "SELECT `shedule_date`
+    $sql = "SELECT `shedule_date`,
+                   `shedule_tournamenttype_id`
             FROM `shedule`
             WHERE `shedule_id`='$shedule_id'";
     $shedule_sql = $mysqli->query($sql);
 
     $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
-    $shedule_date = date('d.m.Y', strtotime($shedule_array[0]['shedule_date']));
+    $shedule_date       = date('d.m.Y', strtotime($shedule_array[0]['shedule_date']));
+    $tournamenttype_id  = $shedule_array[0]['shedule_tournamenttype_id'];
+
+    if (TOURNAMENT_TYPE_CUP == $tournamenttype_id)
+    {
+        $addition_sql_1 =  "LEFT JOIN `cupparticipant`
+                            ON `cupparticipant_team_id`=`team_id`";
+        $addition_sql_2 =  "AND `cupparticipant_season_id`='$igosja_season_id'
+                            AND `cupparticipant_out`!='0'";
+    }
+    else
+    {
+        $addition_sql_1 = $addition_sql_2 = '';
+    }
 
     $sql = "SELECT `team_id`,
                    `team_name`
             FROM `team`
+            $addition_sql_1
             WHERE `team_id` NOT IN
             (
                 SELECT `game_home_team_id`
@@ -1056,6 +1150,8 @@ elseif (isset($_GET['asktoplay']))
             )
             AND `team_id`!='$authorization_team_id'
             AND `team_id`!='0'
+            AND `team_user_id`!='0'
+            $addition_sql_2
             ORDER BY `team_name` ASC";
     $team_sql = $mysqli->query($sql);
 
@@ -1164,6 +1260,67 @@ elseif (isset($_GET['to_national_player_id']))
                 LIMIT 1";
         $mysqli->query($sql);
     }
+
+    $json_data['success'] = 1;
+}
+elseif (isset($_GET['asktoplay_reject']))
+{
+    $asktoplay_id   = (int) $_GET['asktoplay_reject'];
+    $news_id        = (int) $_GET['asktoplay_news_id'];
+
+    $sql = "UPDATE `news`
+            SET `news_answer`='1'
+            WHERE `news_id`='$news_id'";
+    $mysqli->query($sql);
+
+    $sql = "SELECT `team_name`
+            FROM `team`
+            WHERE `asktoplay_id`='$authorization_team_id'
+            LIMIT 1";
+    $team_sql = $mysqli->query($sql);
+
+    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+
+    $team_name  = $team_array[0]['team_name'];
+
+    $sql = "SELECT `team_user_id`
+            FROM `team`
+            LEFT JOIN `asktoplay`
+            ON `asktoplay_inviter_team_id`=`team_id`
+            WHERE `asktoplay_id`='$asktoplay_id'
+            LIMIT 1";
+    $team_sql = $mysqli->query($sql);
+
+    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+
+    $user_id    = $team_array[0]['team_user_id'];
+
+    $sql = "DELETE FROM `aasktoplay`
+            WHERE `asktoplay_id`='$asktoplay_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $sql = "SELECT `newstheme_name`,
+                   `newstheme_text`
+            FROM `newstheme`
+            WHERE `newstheme_id`='" . NEWSTHEME_ASKTOPLAY_NO . "'
+            LIMIT 1";
+    $newstheme_sql = $mysqli->query($sql);
+
+    $newstheme_array = $newstheme_sql->fetch_all(MYSQLI_ASSOC);
+
+    $newstheme_name = $newstheme_array[0]['newstheme_name'];
+    $newstheme_text = $newstheme_array[0]['newstheme_text'];
+    $newstheme_text = sprintf($newstheme_text, $team_name);
+
+    $sql = "INSERT INTO `news`
+            SET `news_asktoplay_id`='$asktoplay_id',
+                `news_date`=CURDATE(),
+                `news_newstheme_id`='" . NEWSTHEME_ASKTOPLAY_NO . "',
+                `news_title`='$newstheme_name',
+                `news_text`='$newstheme_text',
+                `news_user_id`='$user_id'";
+    $mysqli->query($sql);
 
     $json_data['success'] = 1;
 }

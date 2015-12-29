@@ -110,10 +110,50 @@
     });
 }
 
+function player_number()
+//Смена командных номеров
+{
+    var select_array = $('.player-number');
+    var value_array  = [];
+    var selected     = '';
+
+    for (var i=0; i<select_array.length; i++)
+    {
+        value_array.push(parseInt($(select_array[i]).val()));
+    }
+
+    for (var i=0; i<select_array.length; i++)
+    {
+        var select_value = $(select_array[i]).val();
+
+        $(select_array[i]).empty();
+        $(select_array[i]).append('<option value="0">-</option>');
+
+        for (var j=1; j<100; j++)
+        {
+            if (-1 == $.inArray(j, value_array) ||
+                j == select_value)
+            {
+                if (j == select_value)
+                {
+                    selected = ' selected';
+                }
+                else
+                {
+                    selected = '';
+                }
+
+                $(select_array[i]).append('<option value="' + j + '"' + selected + '>' + j + '</option>');
+            }
+        }
+    }
+}
+
 function tactic_player_field()
 //Построение на поле на странице индивидуальных заданий игрокам
 {
     var formation = $('#tactic-player-formation').val();
+    console.log(formation);
     formation = parseInt(formation);
     formation--;
     formation = formation_array[formation];
@@ -137,43 +177,6 @@ function tactic_player_field()
             '<tr>' +
             '<td class="center">' +
             '<a href="javascript:;" class="player-tactic-shirt" data-position="' + position[0] + '">' +
-            '<img alt="" class="img-20" src="img/shirt.png" />' +
-            '</a>' +
-            '</td>' +
-            '</tr>' +
-            '</table>';
-
-        $(field_icon).append(icon_img);
-    }
-}
-
-function tactic_player_field_national()
-//Построение на поле на странице индивидуальных заданий игрокам
-{
-    var formation = $('#tactic-player-formation-national').val();
-    formation = parseInt(formation);
-    formation--;
-    formation = formation_array[formation];
-
-    var field_icon = $('#field-icon');
-
-    $(field_icon).empty();
-
-    for (var i=0; i<formation.length; i++)
-    {
-        var position = formation[i];
-        position = parseInt(position);
-        position--;
-        var coordinate = coordinate_array[position];
-        var icon_width = coordinate[0];
-        var icon_length = coordinate[1];
-        icon_width = parseInt(icon_width) * 25;
-        icon_length = parseInt(icon_length) * 11 + 3;
-        position = position_array[position];
-        var icon_img = '<table class="w1" style="position: absolute; top: ' + icon_width + 'px; left: ' + icon_length + 'px;">' +
-            '<tr>' +
-            '<td class="center">' +
-            '<a href="javascript:;" class="player-tactic-shirt-national" data-position="' + position[0] + '">' +
             '<img alt="" class="img-20" src="img/shirt.png" />' +
             '</a>' +
             '</td>' +
@@ -374,22 +377,6 @@ function penalty_select()
     }
 }
 
-function penalty_select_national()
-//Выбор пенальнистов команды
-{
-    $('option').show();
-
-    for (var i=1; i<=7; i++) //Всего у нас семь возможных пенальтистов
-    {
-        var penalty_value = $('#select-penalty-' + i + '-national').val();
-
-        if (0 != penalty_value)
-        {
-            $('option[value=' + penalty_value + ']').hide();
-        }
-    }
-}
-
 function captain_select()
 //Выбор капитана команды
 {
@@ -398,22 +385,6 @@ function captain_select()
     for (var i=1; i<=5; i++) //Всего у нас пять возможных капитанов
     {
         var captain_value = $('#select-captain-' + i).val();
-
-        if (0 != captain_value)
-        {
-            $('option[value=' + captain_value + ']').hide();
-        }
-    }
-}
-
-function captain_select_national()
-//Выбор капитана команды
-{
-    $('option').show();
-
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных капитанов
-    {
-        var captain_value = $('#select-captain-' + i + '-national').val();
 
         if (0 != captain_value)
         {
@@ -514,102 +485,6 @@ function out_right_select()
         if (0 != out_right_value)
         {
             $('.select-out-right option[value=' + out_right_value + ']').hide();
-        }
-    }
-}
-
-function corner_left_select_national()
-//Выбор исполнителя левого углового команды
-{
-    $('.select-corner-left-national option').show();
-
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
-    {
-        var corner_left_value = $('#select-corner-left-' + i + '-national').val();
-
-        if (0 != corner_left_value)
-        {
-            $('.select-corner-left-national option[value=' + corner_left_value + ']').hide();
-        }
-    }
-}
-
-function corner_right_select_national()
-//Выбор исполнителя левого углового команды
-{
-    $('.select-corner-right-national option').show();
-
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
-    {
-        var corner_right_value = $('#select-corner-right-' + i + '-national').val();
-
-        if (0 != corner_right_value)
-        {
-            $('.select-corner-right-national option[value=' + corner_right_value + ']').hide();
-        }
-    }
-}
-
-function freekick_left_select_national()
-//Выбор исполнителя левого углового команды
-{
-    $('.select-freekick-left-national option').show();
-
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
-    {
-        var freekick_left_value = $('#select-freekick-left-' + i + '-national').val();
-
-        if (0 != freekick_left_value)
-        {
-            $('.select-freekick-left-national option[value=' + freekick_left_value + ']').hide();
-        }
-    }
-}
-
-function freekick_right_select_national()
-//Выбор исполнителя левого углового команды
-{
-    $('.select-freekick-right-national option').show();
-
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
-    {
-        var freekick_right_value = $('#select-freekick-right-' + i + '-national').val();
-
-        if (0 != freekick_right_value)
-        {
-            $('.select-freekick-right-national option[value=' + freekick_right_value + ']').hide();
-        }
-    }
-}
-
-function out_left_select_national()
-//Выбор исполнителя левого углового команды
-{
-    $('.select-out-left-national option').show();
-
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
-    {
-        var out_left_value = $('#select-out-left-' + i + '-national').val();
-
-        if (0 != out_left_value)
-        {
-            $('.select-out-left-national option[value=' + out_left_value + ']').hide();
-        }
-    }
-}
-
-function out_right_select_national()
-//Выбор исполнителя левого углового команды
-{
-    $('.select-out-right-national option').show();
-
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
-    {
-        var out_right_value = $('#select-out-right-' + i + '-national').val();
-
-        if (0 != out_right_value)
-        {
-            $('.select-out-right-national option[value=' + out_right_value + ']').hide();
         }
     }
 }

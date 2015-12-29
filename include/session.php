@@ -27,6 +27,18 @@ if (isset($_SESSION['authorization_id']))
     $smarty->assign('authorization_team_name', $authorization_team_name);
     $smarty->assign('authorization_country_id', $authorization_country_id);
     $smarty->assign('authorization_country_name', $authorization_country_name);
+
+    $sql = "SELECT COUNT(`news_id`) AS `count_news`
+            FROM `news`
+            WHERE `news_user_id`='$authorization_id'
+            AND `news_read`='0'";
+    $message_sql = $mysqli->query($sql);
+
+    $message_array = $message_sql->fetch_all(MYSQLI_ASSOC);
+
+    $count_message = $message_array[0]['count_news'];
+
+    $smarty->assign('count_message', $count_message);
 }
 
 $smarty->assign('authorization_permission', $authorization_permission);

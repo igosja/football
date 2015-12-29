@@ -21,6 +21,7 @@
                                     <li><a href="logout.php">Выйти</a></li>
                                 </ul>
                             </li>
+                            <li><a href="profile_news_inbox.php">Сообщения {if (isset($count_message) && 0 < $count_message)}({$count_message}){/if}</a></li>
                             {if (isset($authorization_team_id))}
                                 <li>
                                     <a href="team_lineup_team_player.php?num={$authorization_team_id}">

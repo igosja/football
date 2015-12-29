@@ -7,7 +7,6 @@
                 <tr>
                     <th class="w10">Дата</th>
                     <th colspan="2">Соперник</th>
-                    <th class="w5">ТВ</th>
                     <th class="w5">Счет</th>
                     <th colspan="2">Турнир</th>
                 </tr>
@@ -25,11 +24,6 @@
                             <a href="team_team_review_profile.php?num={$game_array[i].team_id}">
                                 {$game_array[i].team_name}
                             </a>
-                        </td>
-                        <td class="center">
-                            {if (1 == $game_array[i].game_tv)}
-                                ТВ
-                            {/if}
                         </td>
                         <td class="center">
                             {if (1 == $game_array[i].game_played)}
