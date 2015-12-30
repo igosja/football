@@ -428,40 +428,40 @@ $(document).ready(function($)
         );
     });
 
-    $('.news-title').on('click', function()
+    $('.inbox-title').on('click', function()
     //Текст новости
     {
-        var news_id = $(this).data('id');
+        var inbox_id = $(this).data('id');
 
         $.ajax
         (
             {
-                beforeSend: function(){$('#news-block').addClass('loading');},
-                url: 'json.php?news_id=' + news_id,
+                beforeSend: function(){$('#inbox-block').addClass('loading');},
+                url: 'json.php?inbox_id=' + inbox_id,
                 dataType: "json",
                 success: function(data)
                 {
-                    $('.news-header').html(data.news_array[0].news_title);
-                    $('.news-text').html(data.news_array[0].news_text);
-                    $('.news-button').html(data.news_array[0].news_button);
-                    $('#news-block').removeClass('loading');
+                    $('.inbox-header').html(data.inbox_array[0].inbox_title);
+                    $('.inbox-text').html(data.inbox_array[0].inbox_text);
+                    $('.inbox-button').html(data.inbox_array[0].inbox_button);
+                    $('#inbox-block').removeClass('loading');
 
-                    $('body #news-asktoplay-no').on('click', function()
+                    $('body #inbox-asktoplay-no').on('click', function()
                     //Отказ сыграть товарищеский матч
                     {
                         var asktoplay   = $(this).data('id');
-                        var news_id     = $(this).data('news');
+                        var inbox_id     = $(this).data('inbox');
 
                         $.ajax
                         (
                             {
-                                beforeSend: function(){$('#news-block').addClass('loading');},
-                                url: 'json.php?asktoplay_reject=' + asktoplay + '&asktoplay_news_id=' + news_id,
+                                beforeSend: function(){$('#inbox-block').addClass('loading');},
+                                url: 'json.php?asktoplay_reject=' + asktoplay + '&asktoplay_inbox_id=' + inbox_id,
                                 dataType: "json",
                                 success: function(data)
                                 {
-                                    $('.news-button').empty();
-                                    $('#news-block').removeClass('loading');
+                                    $('.inbox-button').empty();
+                                    $('#inbox-block').removeClass('loading');
                                 }
                             }
                         )

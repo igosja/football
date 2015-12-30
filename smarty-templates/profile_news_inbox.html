@@ -3,27 +3,27 @@
         <td class="block-page w25">
             <p class="header">Новости</p>
             <table class="striped w100">
-                {section name=i loop=$news_array}
+                {section name=i loop=$inbox_array}
                     <tr>
-                        <td class="news-title" data-id="{$news_array[i].news_id}">
-                            {$news_array[i].news_title}
-                            <p class="grey">{$news_array[i].news_date|date_format:"%d.%m.%Y"}</p>
+                        <td class="inbox-title" data-id="{$inbox_array[i].inbox_id}">
+                            {$inbox_array[i].inbox_title}
+                            <p class="grey">{$inbox_array[i].inbox_date|date_format:"%d.%m.%Y"}</p>
                         </td>
                     </tr>
                 {/section}
             </table>
         </td>
-        <td class="block-page" id="news-block">
-            <p class="header news-header"></p>
+        <td class="block-page" id="inbox-block">
+            <p class="header inbox-header"></p>
             <table class="w100">
                 <tr>
-                    <td class="news-text"></td>
+                    <td class="inbox-text"></td>
                 </tr>
                 <tr>
                     <td><br/></td>
                 </tr>
                 <tr>
-                    <td class="news-button center"></td>
+                    <td class="inbox-button center"></td>
                 </tr>
             </table>
         </td>

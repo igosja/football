@@ -521,44 +521,44 @@ elseif (isset($_GET['offer_price']))
 
     $json_data['success'] = 1;
 }
-elseif (isset($_GET['news_id']))
+elseif (isset($_GET['inbox_id']))
 {
-    $news_id = (int) $_GET['news_id'];
+    $inbox_id = (int) $_GET['inbox_id'];
 
-    $sql = "SELECT `news_answered`,
-                   `news_asktoplay_id`,
-                   `news_newstheme_id`,
-                   `news_text`,
-                   `news_title`
-            FROM `news`
-            WHERE `news_id`='$news_id'
+    $sql = "SELECT `inbox_answered`,
+                   `inbox_asktoplay_id`,
+                   `inbox_inboxtheme_id`,
+                   `inbox_text`,
+                   `inbox_title`
+            FROM `inbox`
+            WHERE `inbox_id`='$inbox_id'
             LIMIT 1";
-    $news_sql = $mysqli->query($sql);
+    $inbox_sql = $mysqli->query($sql);
 
-    $news_array = $news_sql->fetch_all(MYSQLI_ASSOC);
+    $inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);
 
-    $news_answered = $news_array[0]['news_answered'];
-    $newstheme_id  = $news_array[0]['news_newstheme_id'];
-    $asktoplay_id  = $news_array[0]['news_asktoplay_id'];
+    $inbox_answered = $inbox_array[0]['inbox_answered'];
+    $inboxtheme_id  = $inbox_array[0]['inbox_inboxtheme_id'];
+    $asktoplay_id  = $inbox_array[0]['inbox_asktoplay_id'];
 
-    if (0 == $news_answered &&
-        NEWSTHEME_ASKTOPLAY == $newstheme_id)
+    if (0 == $inbox_answered &&
+        INBOXTHEME_ASKTOPLAY == $inboxtheme_id)
     {
-        $news_array[0]['news_button'] = '<button id="news-asktoplay-yes" data-id="' . $asktoplay_id . '" data-news="' . $news_id . '">Согласиться</button>
-                                         <button id="news-asktoplay-no" data-id="' . $asktoplay_id . '" data-news="' . $news_id . '">Отказаться</button>';
+        $inbox_array[0]['inbox_button'] = '<button id="inbox-asktoplay-yes" data-id="' . $asktoplay_id . '" data-inbox="' . $inbox_id . '">Согласиться</button>
+                                         <button id="inbox-asktoplay-no" data-id="' . $asktoplay_id . '" data-inbox="' . $inbox_id . '">Отказаться</button>';
     }
     else
     {
-        $news_array[0]['news_button'] = '';
+        $inbox_array[0]['inbox_button'] = '';
     }
 
-    $sql = "UPDATE `news`
-            SET `news_read`='1'
-            WHERE `news_id`='$news_id'
+    $sql = "UPDATE `inbox`
+            SET `inbox_read`='1'
+            WHERE `inbox_id`='$inbox_id'
             LIMIT 1";
     $mysqli->query($sql);
 
-    $json_data['news_array'] = $news_array;
+    $json_data['inbox_array'] = $inbox_array;
 }
 elseif (isset($_GET['note_id']))
 {
@@ -1081,26 +1081,26 @@ elseif (isset($_GET['asktoplay']))
             $shedule_date = $shedule_array[0]['shedule_date'];
             $shedule_date = date(strtotime($shedule_date), 'd.m.Y');
 
-            $sql = "SELECT `newstheme_name`,
-                           `newstheme_text`
-                    FROM `newstheme`
-                    WHERE `newstheme_id`='" . NEWSTHEME_ASKTOPLAY . "'
+            $sql = "SELECT `inboxtheme_name`,
+                           `inboxtheme_text`
+                    FROM `inboxtheme`
+                    WHERE `inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY . "'
                     LIMIT 1";
-            $newstheme_sql = $mysqli->query($sql);
+            $inboxtheme_sql = $mysqli->query($sql);
 
-            $newstheme_array = $newstheme_sql->fetch_all(MYSQLI_ASSOC);
+            $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
 
-            $newstheme_name = $newstheme_array[0]['newstheme_name'];
-            $newstheme_text = $newstheme_array[0]['newstheme_text'];
-            $newstheme_text = sprintf($newstheme_text, $authorization_team_name, $stadium_name, $city_name, $shedule_date);
+            $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
+            $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
+            $inboxtheme_text = sprintf($inboxtheme_text, $authorization_team_name, $stadium_name, $city_name, $shedule_date);
 
-            $sql = "INSERT INTO `news`
-                    SET `news_asktoplay_id`='$asktoplay_id',
-                        `news_date`=CURDATE(),
-                        `news_newstheme_id`='" . NEWSTHEME_ASKTOPLAY . "',
-                        `news_title`='$newstheme_name',
-                        `news_text`='$newstheme_text',
-                        `news_user_id`='$user_id'";
+            $sql = "INSERT INTO `inbox`
+                    SET `inbox_asktoplay_id`='$asktoplay_id',
+                        `inbox_date`=CURDATE(),
+                        `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY . "',
+                        `inbox_title`='$inboxtheme_name',
+                        `inbox_text`='$inboxtheme_text',
+                        `inbox_user_id`='$user_id'";
             $mysqli->query($sql);
         }
     }
@@ -1266,11 +1266,11 @@ elseif (isset($_GET['to_national_player_id']))
 elseif (isset($_GET['asktoplay_reject']))
 {
     $asktoplay_id   = (int) $_GET['asktoplay_reject'];
-    $news_id        = (int) $_GET['asktoplay_news_id'];
+    $inbox_id        = (int) $_GET['asktoplay_inbox_id'];
 
-    $sql = "UPDATE `news`
-            SET `news_answer`='1'
-            WHERE `news_id`='$news_id'";
+    $sql = "UPDATE `inbox`
+            SET `inbox_answer`='1'
+            WHERE `inbox_id`='$inbox_id'";
     $mysqli->query($sql);
 
     $sql = "SELECT `team_name`
@@ -1300,26 +1300,26 @@ elseif (isset($_GET['asktoplay_reject']))
             LIMIT 1";
     $mysqli->query($sql);
 
-    $sql = "SELECT `newstheme_name`,
-                   `newstheme_text`
-            FROM `newstheme`
-            WHERE `newstheme_id`='" . NEWSTHEME_ASKTOPLAY_NO . "'
+    $sql = "SELECT `inboxtheme_name`,
+                   `inboxtheme_text`
+            FROM `inboxtheme`
+            WHERE `inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_NO . "'
             LIMIT 1";
-    $newstheme_sql = $mysqli->query($sql);
+    $inboxtheme_sql = $mysqli->query($sql);
 
-    $newstheme_array = $newstheme_sql->fetch_all(MYSQLI_ASSOC);
+    $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
 
-    $newstheme_name = $newstheme_array[0]['newstheme_name'];
-    $newstheme_text = $newstheme_array[0]['newstheme_text'];
-    $newstheme_text = sprintf($newstheme_text, $team_name);
+    $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
+    $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
+    $inboxtheme_text = sprintf($inboxtheme_text, $team_name);
 
-    $sql = "INSERT INTO `news`
-            SET `news_asktoplay_id`='$asktoplay_id',
-                `news_date`=CURDATE(),
-                `news_newstheme_id`='" . NEWSTHEME_ASKTOPLAY_NO . "',
-                `news_title`='$newstheme_name',
-                `news_text`='$newstheme_text',
-                `news_user_id`='$user_id'";
+    $sql = "INSERT INTO `inbox`
+            SET `inbox_asktoplay_id`='$asktoplay_id',
+                `inbox_date`=CURDATE(),
+                `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_NO . "',
+                `inbox_title`='$inboxtheme_name',
+                `inbox_text`='$inboxtheme_text',
+                `inbox_user_id`='$user_id'";
     $mysqli->query($sql);
 
     $json_data['success'] = 1;
