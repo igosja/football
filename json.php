@@ -505,6 +505,51 @@ elseif (isset($_GET['offer_price']))
                     `playeroffer_team_id`='$authorization_team_id',
                     `playeroffer_date`=SYSDATE()";
         $mysqli->query($sql);
+
+        $playeroffer_id = $mysqli->insert_id;
+
+        $sql = "SELECT `name_name`,
+                       `surname_name`,
+                       `team_user_id`
+                FROM `player`
+                LEFT JOIN `name`
+                ON `name_id`=`player_name_id`
+                LEFT JOIN `surname`
+                ON `surname_id`=`player_surname_id`
+                LEFT JOIN `team`
+                ON `team_id`=`player_team_id`
+                WHERE `player_id`='$player_id'
+                LIMIT 1";
+        $player_sql = $mysqli->query($sql);
+
+        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+        $name           = $player_array[0]['name_name'];
+        $surname        = $player_array[0]['surname_name'];
+        $player_name    = $name . ' ' . $surname;
+        $user_id        = $player_array[0]['team_user_id'];
+
+        $sql = "SELECT `inboxtheme_name`,
+                       `inboxtheme_text`
+                FROM `inboxtheme`
+                WHERE `inboxtheme_id`='" . INBOXTHEME_TRANSFER . "'
+                LIMIT 1";
+        $inboxtheme_sql = $mysqli->query($sql);
+
+        $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+
+        $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
+        $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
+        $inboxtheme_text = sprintf($inboxtheme_text, $authorization_team_name, $player_name);
+
+        $sql = "INSERT INTO `inbox`
+                SET `inbox_date`=CURDATE(),
+                    `inbox_inboxtheme_id`='" . INBOXTHEME_TRANSFER . "',
+                    `inbox_playeroffer_id`='$playeroffer_id',
+                    `inbox_title`='$inboxtheme_name',
+                    `inbox_text`='$inboxtheme_text',
+                    `inbox_user_id`='$user_id'";
+        $mysqli->query($sql);
     }
     else
     {
@@ -525,8 +570,7 @@ elseif (isset($_GET['inbox_id']))
 {
     $inbox_id = (int) $_GET['inbox_id'];
 
-    $sql = "SELECT `inbox_answered`,
-                   `inbox_asktoplay_id`,
+    $sql = "SELECT `inbox_asktoplay_id`,
                    `inbox_inboxtheme_id`,
                    `inbox_text`,
                    `inbox_title`
@@ -537,15 +581,16 @@ elseif (isset($_GET['inbox_id']))
 
     $inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);
 
-    $inbox_answered = $inbox_array[0]['inbox_answered'];
     $inboxtheme_id  = $inbox_array[0]['inbox_inboxtheme_id'];
     $asktoplay_id  = $inbox_array[0]['inbox_asktoplay_id'];
 
-    if (0 == $inbox_answered &&
-        INBOXTHEME_ASKTOPLAY == $inboxtheme_id)
+    if (INBOXTHEME_ASKTOPLAY == $inboxtheme_id)
     {
-        $inbox_array[0]['inbox_button'] = '<button id="inbox-asktoplay-yes" data-id="' . $asktoplay_id . '" data-inbox="' . $inbox_id . '">Согласиться</button>
-                                         <button id="inbox-asktoplay-no" data-id="' . $asktoplay_id . '" data-inbox="' . $inbox_id . '">Отказаться</button>';
+        $inbox_array[0]['inbox_button'] = '<button><a href="asktoplay.php">Подробнее</a></button>';
+    }
+    elseif (INBOXTHEME_TRANSFER == $inboxtheme_id)
+    {
+        $inbox_array[0]['inbox_button'] = '<button><a href="team_team_transfer_center.php">Подробнее</a></button>';
     }
     else
     {
@@ -1020,7 +1065,13 @@ elseif (isset($_GET['asktoplay']))
         if (0 != $count_check)
         {
             $sql = "DELETE FROM `asktoplay`
-                    WHERE `asktoplay_id`='$delete'";
+                    WHERE `asktoplay_id`='$delete'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "DELETE FROM `inbox`
+                    WHERE `inbox_asktoplay_id`='$delete'
+                    LIMIT 1";
             $mysqli->query($sql);
         }
     }
@@ -1050,25 +1101,49 @@ elseif (isset($_GET['asktoplay']))
 
             $asktoplay_id = $mysqli->insert_id;
 
-            $sql = "SELECT `city_name`,
-                           `stadium_name`,
-                           `team_name`,
+            $sql = "SELECT `team_name`,
                            `team_user_id`
                     FROM `team`
-                    LEFT JOIN `stadium`
-                    ON `stadium_team_id`=`team_id`
-                    LEFT JOIN `city`
-                    ON `city_id`=`team_city_id`
                     WHERE `team_id`='$invite'
                     LIMIT 1";
             $team_sql = $mysqli->query($sql);
 
             $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
-            $team_name      = $team_array[0]['team_name'];
-            $city_name      = $team_array[0]['city_name'];
-            $stadium_name   = $team_array[0]['stadium_name'];
-            $user_id        = $team_array[0]['team_user_id'];
+            $team_name  = $team_array[0]['team_name'];
+            $user_id    = $team_array[0]['team_user_id'];
+
+            if (1 == $home)
+            {
+                $sql = "SELECT `city_name`,
+                               `stadium_name`
+                        FROM `team`
+                        LEFT JOIN `stadium`
+                        ON `stadium_team_id`=`team_id`
+                        LEFT JOIN `city`
+                        ON `city_id`=`team_city_id`
+                        WHERE `team_id`='$authorization_team_id'
+                        LIMIT 1";
+            }
+            else
+            {
+                $sql = "SELECT `city_name`,
+                               `stadium_name`
+                        FROM `team`
+                        LEFT JOIN `stadium`
+                        ON `stadium_team_id`=`team_id`
+                        LEFT JOIN `city`
+                        ON `city_id`=`team_city_id`
+                        WHERE `team_id`='$invite'
+                        LIMIT 1";
+            }
+
+            $stadium_sql = $mysqli->query($sql);
+
+            $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
+
+            $city_name      = $stadium_array[0]['city_name'];
+            $stadium_name   = $stadium_array[0]['stadium_name'];
 
             $sql = "SELECT `shedule_date`
                     FROM `shedule`
@@ -1079,7 +1154,7 @@ elseif (isset($_GET['asktoplay']))
             $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
             $shedule_date = $shedule_array[0]['shedule_date'];
-            $shedule_date = date(strtotime($shedule_date), 'd.m.Y');
+            $shedule_date = date('d.m.Y', strtotime($shedule_date));
 
             $sql = "SELECT `inboxtheme_name`,
                            `inboxtheme_text`
@@ -1260,67 +1335,6 @@ elseif (isset($_GET['to_national_player_id']))
                 LIMIT 1";
         $mysqli->query($sql);
     }
-
-    $json_data['success'] = 1;
-}
-elseif (isset($_GET['asktoplay_reject']))
-{
-    $asktoplay_id   = (int) $_GET['asktoplay_reject'];
-    $inbox_id        = (int) $_GET['asktoplay_inbox_id'];
-
-    $sql = "UPDATE `inbox`
-            SET `inbox_answer`='1'
-            WHERE `inbox_id`='$inbox_id'";
-    $mysqli->query($sql);
-
-    $sql = "SELECT `team_name`
-            FROM `team`
-            WHERE `asktoplay_id`='$authorization_team_id'
-            LIMIT 1";
-    $team_sql = $mysqli->query($sql);
-
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
-
-    $team_name  = $team_array[0]['team_name'];
-
-    $sql = "SELECT `team_user_id`
-            FROM `team`
-            LEFT JOIN `asktoplay`
-            ON `asktoplay_inviter_team_id`=`team_id`
-            WHERE `asktoplay_id`='$asktoplay_id'
-            LIMIT 1";
-    $team_sql = $mysqli->query($sql);
-
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
-
-    $user_id    = $team_array[0]['team_user_id'];
-
-    $sql = "DELETE FROM `aasktoplay`
-            WHERE `asktoplay_id`='$asktoplay_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $sql = "SELECT `inboxtheme_name`,
-                   `inboxtheme_text`
-            FROM `inboxtheme`
-            WHERE `inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_NO . "'
-            LIMIT 1";
-    $inboxtheme_sql = $mysqli->query($sql);
-
-    $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
-
-    $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
-    $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
-    $inboxtheme_text = sprintf($inboxtheme_text, $team_name);
-
-    $sql = "INSERT INTO `inbox`
-            SET `inbox_asktoplay_id`='$asktoplay_id',
-                `inbox_date`=CURDATE(),
-                `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_NO . "',
-                `inbox_title`='$inboxtheme_name',
-                `inbox_text`='$inboxtheme_text',
-                `inbox_user_id`='$user_id'";
-    $mysqli->query($sql);
 
     $json_data['success'] = 1;
 }

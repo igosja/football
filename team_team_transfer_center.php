@@ -40,6 +40,11 @@ if (isset($_GET['from_del']))
             AND `playeroffer_team_id`='$get_num'";
     $mysqli->query($sql);
 
+    $sql = "DELETE FROM `inbox`
+            WHERE `inbox_playeroffer_id`='$delete'
+            LIMIT 1";
+    $mysqli->query($sql);
+
     redirect('team_team_transfer_center.php');
     exit;
 }
@@ -53,6 +58,11 @@ elseif (isset($_GET['to_del']))
             ON `playeroffer_player_id`=`player_id`
             WHERE `playeroffer_id`='$delete'
             AND `player_team_id`='$get_num'";
+    $mysqli->query($sql);
+
+    $sql = "DELETE FROM `inbox`
+            WHERE `inbox_playeroffer_id`='$delete'
+            LIMIT 1";
     $mysqli->query($sql);
 
     redirect('team_team_transfer_center.php');
@@ -92,6 +102,11 @@ elseif (isset($_GET['to_ok']))
             ON `playeroffer_player_id`=`player_id`
             WHERE `playeroffer_id`='$ok'
             AND `player_team_id`='$get_num'";
+    $mysqli->query($sql);
+
+    $sql = "DELETE FROM `inbox`
+            WHERE `inbox_playeroffer_id`='$ok'
+            LIMIT 1";
     $mysqli->query($sql);
 
     redirect('team_team_transfer_center.php');

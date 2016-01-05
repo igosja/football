@@ -121,9 +121,7 @@
                         </td>
                         <td class="right">{$offer_from_me_array[i].playeroffer_price|f_igosja_money}</td>
                         <td class="center">
-                            <a href="team_team_transfer_center.php?from_del={$offer_from_me_array[i].playeroffer_id}">
-                                Отозвать предложение
-                            </a>
+                            <a href="team_team_transfer_center.php?from_del={$offer_from_me_array[i].playeroffer_id}" class="link-img link-delete"></a>
                         </td>
                     </tr>
                 {/section}
@@ -179,12 +177,8 @@
                         </td>
                         <td class="right">{$offer_to_me_array[i].playeroffer_price|f_igosja_money}</td>
                         <td class="center">
-                            <a href="team_team_transfer_center.php?to_ok={$offer_to_me_array[i].playeroffer_id}">
-                                Согласиться
-                            </a>
-                            <a href="team_team_transfer_center.php?to_del={$offer_to_me_array[i].playeroffer_id}">
-                                Отклонить
-                            </a>
+                            <a href="team_team_transfer_center.php?to_ok={$offer_to_me_array[i].playeroffer_id}" class="link-img link-ok"></a>
+                            <a href="team_team_transfer_center.php?to_del={$offer_to_me_array[i].playeroffer_id}" class="link-img link-delete"></a>
                         </td>
                     </tr>
                 {/section}

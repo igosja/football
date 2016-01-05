@@ -36,6 +36,10 @@ if (isset($_GET['ok']))
                 AND `asktoplay_shedule_id`='$shedule_id'";
         $mysqli->query($sql);
 
+        $sql = "DELETE FROM `inbox`
+                WHERE `inbox_asktoplay_id`='$askroplay_id'";
+        $mysqli->query($sql);
+
         redirect('asktoplay.php');
         exit;
     }
@@ -58,6 +62,10 @@ if (isset($_GET['ok']))
                 AND `asktoplay_shedule_id`='$shedule_id'";
         $mysqli->query($sql);
 
+        $sql = "DELETE FROM `inbox`
+                WHERE `inbox_asktoplay_id`='$askroplay_id'";
+        $mysqli->query($sql);
+
         redirect('asktoplay.php');
         exit;
     }
@@ -66,7 +74,8 @@ if (isset($_GET['ok']))
             FROM `asktoplay`
             WHERE `asktoplay_invitee_team_id`='$get_num'
             AND `asktoplay_inviter_team_id`='$team_id'
-            AND `asktoplay_shedule_id`='$shedule_id'";
+            AND `asktoplay_shedule_id`='$shedule_id'
+            ORDER BY `asktoplay_id` ASC";
     $asktoplay_sql = $mysqli->query($sql);
 
     $count_asktoplay = $asktoplay_sql->num_rows;
@@ -100,17 +109,45 @@ if (isset($_GET['ok']))
 
         $mysqli->query($sql);
 
-        $sql = "DELETE FROM `asktoplay`
+        $sql = "SELECT `asktoplay_id`
+                FROM `asktoplay`
                 WHERE (`asktoplay_invitee_team_id`='$get_num'
                 OR `asktoplay_inviter_team_id`='$get_num')
                 AND `asktoplay_shedule_id`='$shedule_id'";
-        $mysqli->query($sql);
+        $asktoplay_sql = $mysqli->query($sql);
 
-        $sql = "DELETE FROM `asktoplay`
+        $count_asktoplay = $asktoplay_sql->num_rows;
+
+        $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
+
+        for ($i=0; $i<$count_asktoplay; $i++)
+        {
+            $asktoplay_id = $asktoplay_array[$i]['asktoplay_id'];
+
+            $sql = "DELETE FROM `inbox`
+                    WHERE `inbox_asktoplay_id`='$asktoplay_id'";
+            $mysqli->query($sql);
+        }
+
+        $sql = "SELECT `asktoplay_id`
+                FROM `asktoplay`
                 WHERE (`asktoplay_invitee_team_id`='$team_id'
                 OR `asktoplay_inviter_team_id`='$team_id')
                 AND `asktoplay_shedule_id`='$shedule_id'";
-        $mysqli->query($sql);
+        $asktoplay_sql = $mysqli->query($sql);
+
+        $count_asktoplay = $asktoplay_sql->num_rows;
+
+        $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
+
+        for ($i=0; $i<$count_asktoplay; $i++)
+        {
+            $asktoplay_id = $asktoplay_array[$i]['asktoplay_id'];
+
+            $sql = "DELETE FROM `inbox`
+                    WHERE `inbox_asktoplay_id`='$asktoplay_id'";
+            $mysqli->query($sql);
+        }
 
         redirect('asktoplay.php');
         exit;

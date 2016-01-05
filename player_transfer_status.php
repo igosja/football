@@ -18,6 +18,9 @@ $sql = "SELECT `name_name`,
                `player_statusteam_id`,
                `player_statustransfer_id`,
                `player_transfer_price`,
+               `statusrent_name`,
+               `statusteam_name`,
+               `statustransfer_name`,
                `surname_name`,
                `team_id`,
                `team_name`
@@ -28,6 +31,12 @@ $sql = "SELECT `name_name`,
         ON `name_id`=`player_name_id`
         LEFT JOIN `surname`
         ON `surname_id`=`player_surname_id`
+        LEFT JOIN `statustransfer`
+        ON `statustransfer_id`=`player_statustransfer_id`
+        LEFT JOIN `statusrent`
+        ON `statusrent_id`=`player_statusrent_id`
+        LEFT JOIN `statusteam`
+        ON `statusteam_id`=`player_statusteam_id`
         WHERE `player_id`='$get_num'
         LIMIT 1";
 $player_sql = $mysqli->query($sql);

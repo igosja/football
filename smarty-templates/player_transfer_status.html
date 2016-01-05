@@ -65,30 +65,40 @@
             <table class="center w100">
                 <tr>
                     <td class="w50">
-                        <select class="w100" id="status-transfer" data-player="{$num}">
-                            {section name=i loop=$statustransfer_array}
-                                <option value="{$statustransfer_array[i].statustransfer_id}"
-                                    {if ($statustransfer_array[i].statustransfer_id == $player_array.0.player_statustransfer_id)}
-                                        selected
-                                    {/if}
-                                >
-                                    {$statustransfer_array[i].statustransfer_name}
-                                </option>
-                            {/section}
-                        </select>
+                        {if (isset($authorization_team_id) &&
+                            $authorization_team_id == $team_id)}
+                            <select class="w100" id="status-transfer" data-player="{$num}">
+                                {section name=i loop=$statustransfer_array}
+                                    <option value="{$statustransfer_array[i].statustransfer_id}"
+                                        {if ($statustransfer_array[i].statustransfer_id == $player_array.0.player_statustransfer_id)}
+                                            selected
+                                        {/if}
+                                    >
+                                        {$statustransfer_array[i].statustransfer_name}
+                                    </option>
+                                {/section}
+                            </select>
+                        {else}
+                            <h5>{$player_array.0.statustransfer_name}</h5>
+                        {/if}
                     </td>
                     <td>
-                        <select class="w100" id="status-rent" data-player="{$num}">
-                            {section name=i loop=$statusrent_array}
-                                <option value="{$statusrent_array[i].statusrent_id}"
-                                    {if ($statusrent_array[i].statusrent_id == $player_array.0.player_statusrent_id)}
-                                        selected
-                                    {/if}
-                                >
-                                    {$statusrent_array[i].statusrent_name}
-                                </option>
-                            {/section}
-                        </select>
+                        {if (isset($authorization_team_id) &&
+                            $authorization_team_id == $team_id)}
+                            <select class="w100" id="status-rent" data-player="{$num}">
+                                {section name=i loop=$statusrent_array}
+                                    <option value="{$statusrent_array[i].statusrent_id}"
+                                        {if ($statusrent_array[i].statusrent_id == $player_array.0.player_statusrent_id)}
+                                            selected
+                                        {/if}
+                                    >
+                                        {$statusrent_array[i].statusrent_name}
+                                    </option>
+                                {/section}
+                            </select>
+                        {else}
+                            <h5>{$player_array.0.statusrent_name}</h5>
+                        {/if}
                     </td>
                 </tr>
                 <tr>
@@ -101,20 +111,30 @@
                 </tr>
                 <tr>
                     <td>
-                        <select class="w100" id="status-team" data-player="{$num}">
-                            {section name=i loop=$statusteam_array}
-                                <option value="{$statusteam_array[i].statusteam_id}"
-                                    {if ($statusteam_array[i].statusteam_id == $player_array.0.player_statusteam_id)}
-                                        selected
-                                    {/if}
-                                >
-                                    {$statusteam_array[i].statusteam_name}
-                                </option>
-                            {/section}
-                        </select>
+                        {if (isset($authorization_team_id) &&
+                            $authorization_team_id == $team_id)}
+                            <select class="w100" id="status-team" data-player="{$num}">
+                                {section name=i loop=$statusteam_array}
+                                    <option value="{$statusteam_array[i].statusteam_id}"
+                                        {if ($statusteam_array[i].statusteam_id == $player_array.0.player_statusteam_id)}
+                                            selected
+                                        {/if}
+                                    >
+                                        {$statusteam_array[i].statusteam_name}
+                                    </option>
+                                {/section}
+                            </select>
+                        {else}
+                            <h5>{$player_array.0.statusteam_name}</h5>
+                        {/if}
                     </td>
                     <td>
-                        <input class="w100" type="text" id="transfer-price" data-player="{$num}" value="{$player_array.0.player_transfer_price}" />
+                        {if (isset($authorization_team_id) &&
+                            $authorization_team_id == $team_id)}
+                            <input class="w100" type="text" id="transfer-price" data-player="{$num}" value="{$player_array.0.player_transfer_price}" />
+                        {else}
+                            <h5>{$player_array.0.player_transfer_price} $</h5>
+                        {/if}
                     </td>
                 </tr>
                 <tr>

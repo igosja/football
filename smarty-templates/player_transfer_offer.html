@@ -1,35 +1,42 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page" id="offer-info">
-            <p class="header">Предложение</p>
+            <p class="header">Сделать предложение</p>
             <table class="striped w100">
-                <tr>
-                    <td class="right">Вид предложения</td>
-                    <td class="w50">
-                        <select id="offer-type">
-                            {section name=i loop=$offertype_array}
-                                <option value="{$offertype_array[i].offertype_id}">
-                                    {$offertype_array[i].offertype_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="right">Выплата</td>
-                    <td>
-                        <input type="text" id="offer-price" value="{$player_array.0.player_transfer_price}">
-                    </td>
-                </tr>
-                <tr id="tr-offer-period" style="display:none;">
-                    <td class="right">Срок аренды (сезонов)</td>
-                    <td>
-                        <input type="text" id="offer-period" value="0">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="center"><button id="offer-submit" data-player="{$num}">Сделать предложение</button></td>
-                </tr>
+                {if (isset($authorization_team_id) &&
+                    $authorization_team_id != $team_id)}
+                    <tr>
+                        <td class="right">Вид предложения</td>
+                        <td class="w50">
+                            <select id="offer-type">
+                                {section name=i loop=$offertype_array}
+                                    <option value="{$offertype_array[i].offertype_id}">
+                                        {$offertype_array[i].offertype_name}
+                                    </option>
+                                {/section}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">Выплата</td>
+                        <td>
+                            <input type="text" id="offer-price" value="{$player_array.0.player_transfer_price}">
+                        </td>
+                    </tr>
+                    <tr id="tr-offer-period" style="display:none;">
+                        <td class="right">Срок аренды (сезонов)</td>
+                        <td>
+                            <input type="text" id="offer-period" value="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="center"><button id="offer-submit" data-player="{$num}">Сделать предложение</button></td>
+                    </tr>
+                {else}
+                    <tr>
+                        <td class="center"><h5>Вы не можете предложить контракт этому игроку</h5></td>
+                    </tr>
+                {/if}
             </table>
         </td>
         <td class="block-page w50">

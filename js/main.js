@@ -404,18 +404,34 @@ $(document).ready(function($)
         );
     });
 
-    $('#offer-price, #offer-type').on('change', function()
+    $('#offer-type').on('change', function()
+    //Переключение с трасферного предложения на арендное
+    {
+        var offer_type = $(this).val();
+
+        if (1 == offer_type)
+        {
+            $('#tr-offer-period').hide();
+        }
+        else
+        {
+            $('#tr-offer-period').show();
+        }
+    });
+
+    $('#offer-submit').on('click', function()
     //Стоимость трансферного предложения
     {
-        var player_id   = $(this).data('player');
+        var player_id   = $('#offer-submit').data('player');
         var price       = $('#offer-price').val();
         var offer_type  = $('#offer-type').val();
+        var period      = $('#offer-period').val();
 
         $.ajax
         (
             {
                 beforeSend: function(){$('#offer-info').addClass('loading');},
-                url: 'json.php?player_id=' + player_id + '&offer_price=' + price + '&offer_type=' + offer_type,
+                url: 'json.php?player_id=' + player_id + '&offer_price=' + price + '&offer_period=' + period + '&offer_type=' + offer_type,
                 dataType: "json",
                 success: function(data)
                 {
@@ -445,27 +461,6 @@ $(document).ready(function($)
                     $('.inbox-text').html(data.inbox_array[0].inbox_text);
                     $('.inbox-button').html(data.inbox_array[0].inbox_button);
                     $('#inbox-block').removeClass('loading');
-
-                    $('body #inbox-asktoplay-no').on('click', function()
-                    //Отказ сыграть товарищеский матч
-                    {
-                        var asktoplay   = $(this).data('id');
-                        var inbox_id     = $(this).data('inbox');
-
-                        $.ajax
-                        (
-                            {
-                                beforeSend: function(){$('#inbox-block').addClass('loading');},
-                                url: 'json.php?asktoplay_reject=' + asktoplay + '&asktoplay_inbox_id=' + inbox_id,
-                                dataType: "json",
-                                success: function(data)
-                                {
-                                    $('.inbox-button').empty();
-                                    $('#inbox-block').removeClass('loading');
-                                }
-                            }
-                        )
-                    });
                 }
             }
         );
