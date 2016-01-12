@@ -1,7 +1,6 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page">
-            <p class="header">{$head_array.0.forumthemegroup_name}</p>
             <table class="w100">
                 <tr>
                     <td>
@@ -34,26 +33,37 @@
             </table>
             <table class="forum-group w100">
                 <tr>
-                    <th>Темы</th>
-                    <th class="w10">Ответы</th>
+                    <th colspan="2">Темы</th>
+                    <th class="w8">Ответы</th>
                     <th class="w20">Последнее</th>
                 </tr>
                 {section name=i loop=$forum_array}
                     <tr>
+                        <td class="w1" rowspan="2">
+                            Picture
+                        </td>
                         <td>
-                            <strong>
-                                <a href="forum_theme.php?num={$forum_array[i].forumtheme_id}">
-                                    {$forum_array[i].forumtheme_name}
-                                </a>
-                            </strong>
-                            <br/>
+                            <a href="forum_theme.php?num={$forum_array[i].forumtheme_id}">
+                                {$forum_array[i].forumtheme_name}
+                            </a>
+                        </td>
+                        <td></td>
+                        <td>
+                            {$forum_array[i].post_login}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="center vcenter">{$forum_array[i].count_post}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
                             {$forum_array[i].user_login},
                             {$forum_array[i].forumtheme_date|date_format:"%H:%M %d.%m.%Y"}
                         </td>
-                        <td class="center vcenter">{$forum_array[i].count_post}</td>
+                        <td></td>
                         <td>
-                            {$forum_array[i].post_login}
-                            <br/>
                             {$forum_array[i].forumpost_date|date_format:"%H:%M %d.%m.%Y"}
                         </td>
                     </tr>

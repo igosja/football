@@ -71,7 +71,7 @@ $third_sql = $mysqli->query($sql);
 $third_array = $third_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('header_2_title', $tournament_name);
+$smarty->assign('header_title', $tournament_name);
 $smarty->assign('first_array', $first_array);
 $smarty->assign('second_array', $second_array);
 $smarty->assign('third_array', $third_array);

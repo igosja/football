@@ -38,6 +38,7 @@ $forum_sql = $mysqli->query($sql);
 
 $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
 
+$smarty->assign('header_title', 'Форум');
 $smarty->assign('forum_array', $forum_array);
 
 $smarty->display('main.html');

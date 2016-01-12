@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
 $error_message = 'Неправильная комбинация логин/пароль.';
 
@@ -72,8 +72,7 @@ if (isset($_POST['authorization_login']))
             $_SESSION['authorization_country_name'] = $authorization_country_name;
             $_SESSION['authorization_permission']   = $user_permission;
 
-            header('Location: profile_home_home.php');
-
+            redirect('profile_home_home.php');
             exit;
         }
     }
@@ -83,4 +82,6 @@ if (isset($_POST['authorization_login']))
     }
 }
 
-$smarty->display('main-1.html');
+$smarty->assign('header_title', 'Вход');
+
+$smarty->display('main.html');

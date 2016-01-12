@@ -12,7 +12,7 @@ $(document).ready(function($)
     $('#horizontal-menu-tr').on('click', 'a', function()
     //Переключалка меню справа сверху
     {
-        var horizontal_menu     = $('.horizontal-menu');
+        var horizontal_menu     = $('.horizontal-menu-second');
         var horizontal_menu_tr  = $('#horizontal-menu-tr');
         var id                  = this.id;
         var tr_id               = '#' + id + '-tr';
@@ -20,11 +20,11 @@ $(document).ready(function($)
         $(horizontal_menu_tr).find('a').removeClass();
         $('#' + id).addClass('active');
         $(horizontal_menu).addClass('none');
-        $(horizontal_menu).removeClass('horizontal-menu');
+        $(horizontal_menu).removeClass('horizontal-menu-second');
         $(tr_id).removeClass();
         $(horizontal_menu_tr).removeClass();
         $(horizontal_menu_tr).addClass('horizontal-menu');
-        $(tr_id).addClass('horizontal-menu');
+        $(tr_id).addClass('horizontal-menu-second');
     });
 
     $('.alert').delay(3000).fadeOut(); //Отключение всплывающих сообщений
@@ -985,7 +985,7 @@ $(document).ready(function($)
                             + data.invitee_array[i].team_name
                             + '</a></td><td class="center w30">'
                             + home_guest
-                            + '</td><td class="center w20"><a href="asktoplay.php?ok='
+                            + '</td><td class="center w20"><a href="?ok='
                             + data.invitee_array[i].asktoplay_id
                             + '&shedule='
                             + shedule_id
@@ -1100,7 +1100,7 @@ $(document).ready(function($)
                             + data.invitee_array[i].team_name
                             + '</a></td><td class="center w30">'
                             + home_guest
-                            + '</td><td class="center w20"><a href="asktoplay.php?ok='
+                            + '</td><td class="center w20"><a href="?ok='
                             + data.invitee_array[i].asktoplay_id
                             + '" class="link-img link-ok" /> <a href="javascript:;" data-delete="'
                             + data.invitee_array[i].asktoplay_id
@@ -1156,5 +1156,14 @@ $(document).ready(function($)
                 }
             }
         );
+    });
+
+    $('.rule').on('click', function()
+    //Правила
+    {
+        var rule_id = $(this).data('id');
+
+        $('.rule-text').hide();
+        $('#rule-' + rule_id).show();
     });
 });

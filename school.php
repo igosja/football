@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -30,15 +30,16 @@ $school_sql = $mysqli->query($sql);
 
 $school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
 
-if (isset($_GET['level']) && !$school_array[0]['building_end_date'])
+if (isset($_GET['level']) &&
+    !$school_array[0]['building_end_date'])
 {
-    $level        = (int) $_GET['level'];
-    $school_level = $school_array[0]['team_school_level'];
+    $level          = (int)$_GET['level'];
+    $school_level   = $school_array[0]['team_school_level'];
 
     if (1 == $level)
     {
-        $price        = pow($school_level + 1, 1.3) * 1000000;
-        $team_finance = $school_array[0]['team_finance'];
+        $price          = pow($school_level + 1, 1.3) * 1000000;
+        $team_finance   = $school_array[0]['team_finance'];
 
         if ($team_finance >= $price && $school_level < 10)
         {
@@ -104,6 +105,7 @@ if (isset($_GET['level']) && !$school_array[0]['building_end_date'])
     }
 }
 
+$smarty->assign('header_title', 'Строительство молодежной инфраструтуры');
 $smarty->assign('school_array', $school_array);
 
 $smarty->display('main.html');

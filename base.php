@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -30,17 +30,19 @@ $base_sql = $mysqli->query($sql);
 
 $base_array = $base_sql->fetch_all(MYSQLI_ASSOC);
 
-if (isset($_GET['level']) && !$base_array[0]['building_end_date'])
+if (isset($_GET['level']) &&
+    !$base_array[0]['building_end_date'])
 {
-    $level      = (int) $_GET['level'];
+    $level      = (int)$_GET['level'];
     $base_level = $base_array[0]['team_training_level'];
 
     if (1 == $level)
     {
-        $price        = pow($base_level + 1, 1.3) * 1000000;
-        $team_finance = $base_array[0]['team_finance'];
+        $price          = pow($base_level + 1, 1.3) * 1000000;
+        $team_finance   = $base_array[0]['team_finance'];
 
-        if ($team_finance >= $price && $base_level < 10)
+        if ($team_finance >= $price &&
+            $base_level < 10)
         {
             $sql = "INSERT INTO `building`
                     SET `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 30 DAY),
@@ -104,6 +106,7 @@ if (isset($_GET['level']) && !$base_array[0]['building_end_date'])
     }
 }
 
+$smarty->assign('header_title', $authorization_team_name);
 $smarty->assign('base_array', $base_array);
 
 $smarty->display('main.html');

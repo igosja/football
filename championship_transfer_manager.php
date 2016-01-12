@@ -4,11 +4,11 @@ include ('include/include.php');
 
 if (isset($_GET['num']))
 {
-        $get_num = (int) $_GET['num'];
+    $get_num = (int) $_GET['num'];
 }
 else
 {
-        $get_num = 1;
+    $get_num = 1;
 }
 
 $sql = "SELECT `tournament_name`
@@ -61,7 +61,7 @@ $manager_old_sql = $mysqli->query($sql);
 $manager_old_array = $manager_old_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('header_2_title', $tournament_name);
+$smarty->assign('header_title', $tournament_name);
 $smarty->assign('manager_new_array', $manager_new_array);
 $smarty->assign('manager_old_array', $manager_old_array);
 

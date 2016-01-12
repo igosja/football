@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `league_group`
         FROM `league`
@@ -12,8 +12,7 @@ $league_sql = $mysqli->query($sql);
 $count_league = $league_sql->num_rows;
 $league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
 
-for ($i=0; $i<$count_league; $i++)
-{
+for ($i = 0; $i < $count_league; $i++) {
     $group = $league_array[$i]['league_group'];
 
     $sql = "SELECT `league_id`
@@ -26,8 +25,7 @@ for ($i=0; $i<$count_league; $i++)
     $count_league = $league_sql->num_rows;
     $league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
 
-    for ($j=0; $j<$count_league; $j++)
-    {
+    for ($j = 0; $j < $count_league; $j++) {
         $league_id = $league_array[$j]['league_id'];
 
         $place = $j + 1;

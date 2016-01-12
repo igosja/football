@@ -30,7 +30,7 @@ $continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
 
 $continent_name = $continent_array[0]['continent_name'];
 
-$smarty->assign('header_2_title', $continent_name);
+$smarty->assign('header_title', $continent_name);
 $smarty->assign('num', $get_num);
 $smarty->assign('continent_name', $continent_name);
 

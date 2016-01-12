@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -34,12 +34,17 @@ $stadium_sql = $mysqli->query($sql);
 
 $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
 
-if (isset($_POST['length']) && isset($_POST['width']) && !$stadium_array[0]['building_end_date'])
+if (isset($_POST['length']) &&
+    isset($_POST['width']) &&
+    !$stadium_array[0]['building_end_date'])
 {
-    $length = (int) $_POST['length'];
-    $width  = (int) $_POST['width'];
+    $length = (int)$_POST['length'];
+    $width  = (int)$_POST['width'];
 
-    if (100 <= $length && 110 >= $length && 64 <= $width && 75 >= $width)
+    if (100 <= $length &&
+        110 >= $length &&
+        64 <= $width &&
+        75 >= $width)
     {
         $sql = "INSERT INTO `building`
                 SET `building_buildingtype_id`='5',
@@ -60,6 +65,7 @@ if (isset($_POST['length']) && isset($_POST['width']) && !$stadium_array[0]['bui
     }
 }
 
+$smarty->assign('header_title', $authorization_team_name);
 $smarty->assign('stadium_array', $stadium_array);
 
 $smarty->display('main.html');

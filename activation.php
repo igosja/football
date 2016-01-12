@@ -1,13 +1,13 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
 if (isset($_GET['id']))
 {
     $id     = (int) $_GET['id'];
     $code   = $_GET['code'];
     $check  = f_igosja_chiper_password($id);
-    
+
     if ($code == $check)
     {
         $sql = "UPDATE `user`
@@ -38,4 +38,6 @@ $sql = "DELETE FROM `user`
         AND `user_activation`='0'";
 $mysqli->query($sql);
 
-$smarty->display('main-1.html');
+$smarty->assign('header_title', 'Активация профиля');
+
+$smarty->display('main.html');

@@ -1,10 +1,10 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $get_num = (int)$_GET['num'];
 }
 else
 {
@@ -13,7 +13,7 @@ else
 
 if (isset($_GET['page']))
 {
-    $page = (int) $_GET['page'];
+    $page = (int)$_GET['page'];
 }
 else
 {
@@ -31,6 +31,8 @@ $sql = "SELECT `forumthemegroup_id`,
 $head_sql = $mysqli->query($sql);
 
 $head_array = $head_sql->fetch_all(MYSQLI_ASSOC);
+
+$header_title = $head_array[0]['forumthemegroup_name'];
 
 $sql = "SELECT SQL_CALC_FOUND_ROWS
                `count_post`,
@@ -78,9 +80,9 @@ $count_forum = $count_forum[0]['count_forum'];
 $count_forum = ceil($count_forum / $limit);
 
 $smarty->assign('num', $get_num);
+$smarty->assign('header_title', 'Форум');
 $smarty->assign('page', $page);
 $smarty->assign('count_forum', $count_forum);
-$smarty->assign('head_array', $head_array);
 $smarty->assign('forum_array', $forum_array);
 
 $smarty->display('main.html');

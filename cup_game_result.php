@@ -11,7 +11,28 @@ else
     $get_num = 1;
 }
 
-$sql = "SELECT `team_id`, `team_name`, `standing_place`
+$sql = "SELECT `tournament_name`
+        FROM `tournament`
+        WHERE `tournament_id`='$get_num'
+        LIMIT 1";
+$tournament_sql = $mysqli->query($sql);
+
+$count_tournament = $tournament_sql->num_rows;
+
+if (0 == $count_tournament)
+{
+    $smarty->display('wrong_page.html');
+
+    exit;
+}
+
+$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+
+$tournament_name = $tournament_array[0]['tournament_name'];
+
+$sql = "SELECT `team_id`,
+               `team_name`,
+               `standing_place`
         FROM `standing`
         LEFT JOIN `team`
         ON `standing_team_id`=`team_id`
@@ -22,7 +43,10 @@ $standing_sql = $mysqli->query($sql);
 
 $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `name_name`, `player_id`, `statisticplayer_goal`, `surname_name`
+$sql = "SELECT `name_name`,
+               `player_id`,
+               `statisticplayer_goal`,
+               `surname_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `statisticplayer_player_id`=`player_id`
@@ -37,7 +61,10 @@ $player_goal_sql = $mysqli->query($sql);
 
 $player_goal_array = $player_goal_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `name_name`, `player_id`, `statisticplayer_pass_scoring`, `surname_name`
+$sql = "SELECT `name_name`,
+               `player_id`,
+               `statisticplayer_pass_scoring`,
+               `surname_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `statisticplayer_player_id`=`player_id`
@@ -52,7 +79,10 @@ $player_pass_sql = $mysqli->query($sql);
 
 $player_pass_array = $player_pass_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `name_name`, `player_id`, `statisticplayer_mark`, `surname_name`
+$sql = "SELECT `name_name`,
+               `player_id`,
+               `statisticplayer_mark`,
+               `surname_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `statisticplayer_player_id`=`player_id`
@@ -68,6 +98,7 @@ $player_mark_sql = $mysqli->query($sql);
 $player_mark_array = $player_mark_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
+$smarty->assign('header_title', $tournament_name);
 $smarty->assign('standing_array', $standing_array);
 $smarty->assign('player_goal_array', $player_goal_array);
 $smarty->assign('player_pass_array', $player_pass_array);

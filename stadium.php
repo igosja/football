@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -34,16 +34,17 @@ $stadium_sql = $mysqli->query($sql);
 
 $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
 
-if (isset($_POST['capacity']) && !$stadium_array[0]['building_capacity'])
+if (isset($_POST['capacity']) &&
+    !$stadium_array[0]['building_capacity'])
 {
-    $new_capacity = (int) $_POST['capacity'];
+    $new_capacity = (int)$_POST['capacity'];
     $old_capacity = $stadium_array[0]['stadium_capacity'];
 
     if ($new_capacity > $old_capacity)
     {
-        $dif_capacity = $new_capacity - $old_capacity;
-        $price        = ($new_capacity + $dif_capacity) * 999;
-        $team_finance = $stadium_array[0]['team_finance'];
+        $dif_capacity   = $new_capacity - $old_capacity;
+        $price          = ($new_capacity + $dif_capacity) * 999;
+        $team_finance   = $stadium_array[0]['team_finance'];
 
         if ($team_finance >= $price)
         {
@@ -110,6 +111,7 @@ if (isset($_POST['capacity']) && !$stadium_array[0]['building_capacity'])
     }
 }
 
+$smarty->assign('header_title', $authorization_team_name);
 $smarty->assign('stadium_array', $stadium_array);
 
 $smarty->display('main.html');

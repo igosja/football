@@ -143,7 +143,7 @@ $nopass_sql = $mysqli->query($sql);
 $nopass_array = $nopass_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('header_2_title', $tournament_name);
+$smarty->assign('header_title', $tournament_name);
 $smarty->assign('goal_array', $goal_array);
 $smarty->assign('pass_array', $pass_array);
 $smarty->assign('red_array', $red_array);

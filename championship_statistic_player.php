@@ -239,7 +239,7 @@ $distance_sql = $mysqli->query($sql);
 $distance_array = $distance_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('header_2_title', $tournament_name);
+$smarty->assign('header_title', $tournament_name);
 $smarty->assign('game_array', $game_array);
 $smarty->assign('win_array', $win_array);
 $smarty->assign('best_array', $best_array);

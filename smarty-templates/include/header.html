@@ -23,7 +23,7 @@
         </script>
         <!--/LiveInternet-->
     {/literal}
-    <div class="header">
+    <div class="page-header">
         <table class="header-inner" cellspacing="0">
             <tr>
                 <td>
@@ -64,7 +64,8 @@
                                             </li>
                                         {/if}
                                     {/if}
-                                    <li><a href="forum.php" class="main-menu-last">Форум</a></li>
+                                    <li><a href="forum.php" class="main-menu-link">Форум</a></li>
+                                    <li><a href="rule.php" class="main-menu-last">Правила</a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -134,7 +135,7 @@
                                                 {section name=j loop=$horizontalmenu_array}
                                                     {if ($horizontalmenu_array[i].horizontalmenu_name == $horizontalmenu_array[j].horizontalmenu_name &&
                                                         $horizontalmenu_array[j].horizontalsubmenu_href == $chapter)}
-                                                        {assign var="class" value="horizontal-menu"}
+                                                        {assign var="class" value="horizontal-menu-second"}
                                                     {/if}
                                                 {/section}
                                                 class="{$class}"
@@ -181,3 +182,5 @@
             </tr>
         </table>
     </div>
+    <div class="header-button"></div>
+    <div class="page-content">

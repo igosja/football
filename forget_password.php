@@ -56,4 +56,6 @@ if (isset($_POST['forget_email']))
     }
 }
 
-$smarty->display('main-1.html');
+$smarty->assign('header_title', 'Восстановление пароля');
+
+$smarty->display('main.html');

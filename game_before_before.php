@@ -174,11 +174,7 @@ $standing_sql = $mysqli->query($sql);
 $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('header_2_home_id', $header_2_home_id);
-$smarty->assign('header_2_home_name', $header_2_home_name);
-$smarty->assign('header_2_guest_id', $header_2_guest_id);
-$smarty->assign('header_2_guest_name', $header_2_guest_name);
-$smarty->assign('header_2_score', $header_2_score);
+$smarty->assign('header_title', $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_guest_name);
 $smarty->assign('game_array', $game_array);
 $smarty->assign('home_latest_game_array', $home_latest_game_array);
 $smarty->assign('guest_latest_game_array', $guest_latest_game_array);

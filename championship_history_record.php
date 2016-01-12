@@ -108,7 +108,7 @@ $record_sql = $mysqli->query($sql);
 $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('header_2_title', $tournament_name);
+$smarty->assign('header_title', $tournament_name);
 $smarty->assign('record_array', $record_array);
 
 $smarty->display('main.html');

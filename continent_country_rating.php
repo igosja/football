@@ -45,7 +45,7 @@ $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_2_title', $continent_name);
+$smarty->assign('header_title', $continent_name);
 $smarty->assign('num', $get_num);
 $smarty->assign('country_array', $country_array);
 

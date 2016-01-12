@@ -1,7 +1,7 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
 session_destroy();
 
-header('Location: continent_review_profile.php');
+redirect('continent_review_profile.php');

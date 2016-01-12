@@ -56,7 +56,7 @@ $transfer_sql = $mysqli->query($sql);
 
 $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_2_title', $continent_name);
+$smarty->assign('header_title', $continent_name);
 $smarty->assign('num', $get_num);
 $smarty->assign('transfer_array', $transfer_array);
 

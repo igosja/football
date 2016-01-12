@@ -65,7 +65,7 @@ $transfer_sql = $mysqli->query($sql);
 $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('header_2_title', $tournament_name);
+$smarty->assign('header_title', $tournament_name);
 $smarty->assign('transfer_array', $transfer_array);
 
 $smarty->display('main.html');

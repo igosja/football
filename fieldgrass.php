@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -34,10 +34,11 @@ $stadium_sql = $mysqli->query($sql);
 
 $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
 
-if (isset($_GET['change']) && !$stadium_array[0]['building_end_date'])
+if (isset($_GET['change']) &&
+    !$stadium_array[0]['building_end_date'])
 {
-    $price        = 1000;
-    $team_finance = $stadium_array[0]['team_finance'];
+    $price          = 1000;
+    $team_finance   = $stadium_array[0]['team_finance'];
 
     if ($team_finance >= $price)
     {
@@ -92,6 +93,7 @@ if (isset($_GET['change']) && !$stadium_array[0]['building_end_date'])
     }
 }
 
+$smarty->assign('header_title', $authorization_team_name);
 $smarty->assign('stadium_array', $stadium_array);
 
 $smarty->display('main.html');

@@ -1,14 +1,114 @@
 body
 {
     background-color: #A2A5AE;
+    background-image: url('/img/background.png');
+    background-position: 50% 0%;
+    background-repeat: no-repeat;
     color: #010101;
     font-family: Tahoma, sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     margin: 0;
     padding: 0;
 }
 
-.header
+div
+{
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+h1
+{
+    font-size: 17px;
+}
+
+h2
+{
+    font-size: 16px;
+}
+
+h3
+{
+    font-size: 15px;
+}
+
+h4
+{
+    font-size: 14px;
+}
+
+h5
+{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+h6
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+img
+{
+    border: 0;
+}
+
+table
+{
+    border-spacing: 0;
+}
+
+td
+{
+    padding: 0;
+}
+
+p
+{
+    margin: 0;
+    padding: 0;
+}
+
+a
+{
+    color: #3B3A38;
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+button a
+{
+    text-decoration: none;
+}
+
+button, input, select, textarea
+{
+    background-color: #FDFDFD;
+    border: 1px solid #E1E2E4;
+    border-radius: 3px; 
+    color: #3B3A38;
+    font-family: Tahoma;
+    font-size: 11px;
+    padding: 3px;
+}
+
+.button-active
+{
+    background-color: #E1E2E4;
+}
+
+.page-header
 {
     background-color: #002F77;
     border-bottom: 4px solid #000000;
@@ -141,25 +241,57 @@ body
 
 .header-text
 {
+    bottom: 5px;
     color: #FFFFFF;
     font-family: Arial, sans-serif;
     font-size: 16px;
     font-style: italic;
+    font-weight: bold;
+    left: 5px;
+    position: relative;
 }
 
-.horizontal-menu-td
+.horizontal-menu-td,
+.horizontal-menu-td td
 {
     border-right: 1px solid #82C5E0;
 }
 
-.horizontal-menu-td:last-child
+.horizontal-menu-td:last-child,
+.horizontal-menu-td td:last-child
 {
     border-right: none;
 }
 
+.horizontal-menu-second
+{
+    margin-top: 9px;
+    position: absolute;
+}
+
+.horizontal-menu-second td
+{
+    background-color: #002F77;
+    padding: 2px;
+}
+
+.horizontal-menu-second td:first-child
+{
+    border-radius: 0 0 0 10px;
+}
+
+.horizontal-menu-td td
+{
+    padding-left: 3px;
+    padding-right: 6px;
+}
+
 .horizontal-menu a:link,
 .horizontal-menu a:active,
-.horizontal-menu a:visited
+.horizontal-menu a:visited,
+.horizontal-menu-second a:link,
+.horizontal-menu-second a:active,
+.horizontal-menu-second a:visited
 {
     color: #82C5E0;
     margin: 5px;
@@ -167,9 +299,241 @@ body
 }
 
 .horizontal-menu a:hover,
-.horizontal-menu a.active
+.horizontal-menu a.active,
+.horizontal-menu-second a:hover,
+.horizontal-menu-second a.active
 {
     color: #FFFFFF;
+}
+
+.header-button
+{
+    height: 70px;
+}
+
+.page-content
+{
+    margin: 0 auto;
+    width: 960px;
+}
+
+.footer
+{
+    color: #9CA2A5;
+    font-size: 11px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 5px;
+    min-width: 1024px;
+}
+
+.footer a
+{
+    color: #9CA2A5;
+}
+
+/*Блоки страницы*/
+.block-table
+{
+    background-color: #F5F5F5;
+    border-spacing: 0;
+}
+
+.block-table a
+{
+    color: #000000;
+}
+
+.block-table td
+{
+    position: relative;
+    vertical-align: top;
+}
+
+.block-page,
+.block-page-forum
+{
+    border: 1px solid #A2A5AE;
+    height: 100%;
+}
+
+.block-page
+{
+    padding: 5px;
+}
+
+.block-page-forum
+{
+    padding: 0;
+}
+
+.block-page .header,
+.block-page .header .active
+{
+    color: #3570BC;
+    font-size: 13px;
+    padding: 5px;
+}
+
+.block-page .header .finance-link
+{
+    font-size: 13px;
+    padding: 5px;
+}
+
+/*Горизонтальные полоски*/
+.progress
+{
+    border: 1px solid #D1D2D4;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.progress-bar
+{
+    background-color: #497CBA;
+    border-radius: 3px;
+}
+
+.progress-bar-red
+{
+    background-color: #B7373F;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.progress-bar-green
+{
+    background-color: #80AC60;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.progress-bar-yellow
+{
+    background-color: #C06232;
+    border-radius: 3px;
+    width: 100%;
+}
+
+/*Форум*/
+.forum-group
+{
+    margin-top: 5px;
+}
+
+.forum-group tr:nth-child(6n),
+.forum-group tr:nth-child(6n+5),
+.forum-group tr:nth-child(6n+1)
+{
+    background-color: #EBEBEB;
+}
+
+.forum-group th
+{
+    background-color: #EFEFF1;
+    color: #8C97A0;
+    font-weight: normal;
+}
+
+.forum-group td
+{
+    padding: 3px;
+}
+
+.forum-group td
+{
+    padding: 3px;
+}
+
+.forum-group strong, .forum-theme strong
+{
+    font-size: 12px;
+}
+
+.forum-theme
+{
+    border: 1px solid #3570BC;
+    border-radius: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.forum-theme th
+{
+    background-color: #3570BC;
+    color: #E1E2E4;
+    text-align: left;
+}
+
+.forum-theme td
+{
+    border-left: 1px solid #E1E2E4;
+    padding: 3px;
+}
+
+/*Полосатая таблица*/
+.striped td, th
+{
+    padding: 3px;
+    vertical-align: middle !important;
+}
+
+.striped th
+{
+    color: #8C97A0;
+    font-weight: normal;
+}
+
+.striped tr:nth-child(2n)
+{
+    background-color: #EBEBEB;
+}
+
+td.nopadding
+{
+    padding: 0;
+    vertical-align: middle !important;
+}
+
+/*Таблица с рамкой*/
+.bordered td, th
+{
+    padding: 3px;
+    vertical-align: middle !important;
+}
+
+/*Сообщения*/
+.info
+{
+    background-color: #BDE5F8;
+    border: 1px solid #00529B;
+    color: #00529B;
+    padding: 10px;
+}
+
+.success
+{
+    background-color: #DFF2BF;
+    border: 1px solid #4F8A10;
+    color: #4F8A10;
+    padding: 10px;
+}
+
+.warning
+{
+    background-color: #FEEFB3;
+    border: 1px solid #9F6000;
+    color: #9F6000;
+    padding: 10px;
+}
+
+.error
+{
+    background-color: #FFBABA;
+    border: 1px solid #D8000C;
+    color: #D8000C;
+    padding: 10px;
 }
 
 /*Выравнивание*/
@@ -310,4 +674,138 @@ body
 .w100p
 {
     width: 100px;
+}
+
+/*Ссылки с картинками*/
+.link-img
+{
+    background-color: #FDFDFD;
+    border: 1px solid #E1E2E4;
+    border-radius: 3px;
+    display: inline-block;
+    height: 15px;
+    padding: 3px;
+    width: 15px;
+}
+
+.link-img:hover
+{
+    background-color: #E1E2E4;
+}
+
+.link-home
+{
+    content: url('../img/icon/home.png');
+}
+
+.link-list
+{
+    content: url('../img/icon/list.png');
+}
+
+.link-pencil
+{
+    content: url('../img/icon/pencil.png');
+}
+
+.link-plus
+{
+    content: url('../img/icon/plus.png');
+}
+
+.link-delete
+{
+    content: url('../img/icon/delete.png');
+}
+
+.link-ok
+{
+    content: url('../img/icon/ok.png');
+}
+
+/*Флаги, эмблемы*/
+.img-12
+{
+    height: 12px;
+}
+
+.img-12
+{
+    height: 12px;
+}
+
+.img-20
+{
+    height: 20px;
+}
+
+.img-30
+{
+    height: 30px;
+}
+
+.img-50
+{
+    height: 50px;
+}
+
+.img-90
+{
+    height: 90px;
+}
+
+.img-120
+{
+    height: 120px;
+}
+
+.img-200
+{
+    height: 200px;
+}
+
+/*Цвета*/
+.grey
+{
+    color: #A0A0A0;
+}
+
+.blue
+{
+    color: #0026FF;
+}
+
+.green
+{
+    color: #4F8A10;
+}
+
+.red
+{
+    color: #D8000C;
+}
+
+.white
+{
+    color: #FEF7DE;
+}
+
+/*Аякс загрузка*/
+.loading:before
+{
+    background-image: url('/img/loading.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.loading
+{
+    opacity: 0.5;
 }

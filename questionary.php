@@ -1,16 +1,15 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
-if (isset($_POST['firstname']))
-{
-    $firstname  = $_POST['firstname'];
-    $lastname   = $_POST['lastname'];
-    $gender     = (int) $_POST['gender'];
-    $day        = (int) $_POST['birth']['day'];
-    $month      = (int) $_POST['birth']['month'];
-    $year       = (int) $_POST['birth']['year'];
-    $country_id = (int) $_POST['country'];
+if (isset($_POST['firstname'])) {
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $gender = (int)$_POST['gender'];
+    $day = (int)$_POST['birth']['day'];
+    $month = (int)$_POST['birth']['month'];
+    $year = (int)$_POST['birth']['year'];
+    $country_id = (int)$_POST['country'];
 
     $sql = "UPDATE `user`
             SET `user_firstname`=?,
@@ -27,8 +26,7 @@ if (isset($_POST['firstname']))
     $prepare->execute();
     $prepare->close();
 
-    if (!empty($_POST['password']))
-    {
+    if (!empty($_POST['password'])) {
         $password = f_igosja_chiper_password($_POST['password']);
 
         $sql = "UPDATE `user`

@@ -46,7 +46,7 @@ $stage_sql = $mysqli->query($sql);
 $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('header_2_title', $tournament_name);
+$smarty->assign('header_title', $tournament_name);
 $smarty->assign('stage_array', $stage_array);
 
 $smarty->display('main.html');

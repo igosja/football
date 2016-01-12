@@ -47,7 +47,7 @@ $team_sql = $mysqli->query($sql);
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_2_title', $continent_name);
+$smarty->assign('header_title', $continent_name);
 $smarty->assign('num', $get_num);
 $smarty->assign('team_array', $team_array);
 

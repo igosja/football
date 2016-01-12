@@ -118,12 +118,7 @@ $guest_player_sql = $mysqli->query($sql);
 $guest_player_array = $guest_player_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('header_2_home_id', $header_2_home_id);
-$smarty->assign('header_2_home_name', $header_2_home_name);
-$smarty->assign('header_2_guest_id', $header_2_guest_id);
-$smarty->assign('header_2_guest_name', $header_2_guest_name);
-$smarty->assign('header_2_score', $header_2_score);
-$smarty->assign('header_2_shootout', $header_2_shootout);
+$smarty->assign('header_title', $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name);
 $smarty->assign('game_array', $game_array);
 $smarty->assign('home_player_array', $home_player_array);
 $smarty->assign('guest_player_array', $guest_player_array);

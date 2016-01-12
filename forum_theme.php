@@ -1,26 +1,20 @@
 <?php
 
-include ('include/include.php');
+include('include/include.php');
 
-if (isset($_GET['num']))
-{
-    $get_num = (int) $_GET['num'];
-}
-else
-{
+if (isset($_GET['num'])) {
+    $get_num = (int)$_GET['num'];
+} else {
     $get_num = 1;
 }
 
-if (isset($_GET['page']))
-{
-    $page = (int) $_GET['page'];
-}
-else
-{
+if (isset($_GET['page'])) {
+    $page = (int)$_GET['page'];
+} else {
     $page = 1;
 }
 
-$limit  = 10;
+$limit = 10;
 $offset = ($page - 1) * $limit;
 
 $sql = "SELECT `city_name`,
@@ -76,13 +70,13 @@ $forum_sql = $mysqli->query($sql);
 $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT FOUND_ROWS() AS `count_forum`";
-
 $count_forum = $mysqli->query($sql);
 $count_forum = $count_forum->fetch_all(MYSQLI_ASSOC);
 $count_forum = $count_forum[0]['count_forum'];
 $count_forum = ceil($count_forum / $limit);
 
 $smarty->assign('num', $get_num);
+$smarty->assign('header_title', 'Форум');
 $smarty->assign('page', $page);
 $smarty->assign('count_forum', $count_forum);
 $smarty->assign('head_array', $head_array);

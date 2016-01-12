@@ -31,6 +31,6 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 $tournament_name = $tournament_array[0]['tournament_name'];
 
 $smarty->assign('num', $get_num);
-$smarty->assign('header_2_title', $tournament_name);
+$smarty->assign('header_title', $tournament_name);
 
 $smarty->display('main.html');
