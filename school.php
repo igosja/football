@@ -105,7 +105,7 @@ if (isset($_GET['level']) &&
     }
 }
 
-$smarty->assign('header_title', 'Строительство молодежной инфраструтуры');
+$smarty->assign('header_title', $authorization_team_name);
 $smarty->assign('school_array', $school_array);
 
 $smarty->display('main.html');

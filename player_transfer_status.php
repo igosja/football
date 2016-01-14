@@ -99,7 +99,7 @@ $statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('team_id', $team_id);
 $smarty->assign('team_name', $team_name);
-$smarty->assign('header_2_title', $header_2_title);
+$smarty->assign('header_title', $header_2_title);
 $smarty->assign('num', $get_num);
 $smarty->assign('player_array', $player_array);
 $smarty->assign('playeroffer_array', $playeroffer_array);

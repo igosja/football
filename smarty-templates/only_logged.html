@@ -1,11 +1,7 @@
 {capture name=tpl}
 {include file='include/header.html'}
-{include file='include/header-1.html'}
-{include file='include/header-4.html'}
 <p class="center warning">Эта страница доступна только зарегистрированным пользователям.</p>
 {include file='include/footer.html'}
 {/capture}
 
 {$smarty.capture.tpl|strip}
-
-{*debug*}

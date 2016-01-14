@@ -47,7 +47,7 @@ $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 $country_name = $country_array[0]['country_name'];
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $country_name);
+$smarty->assign('header_title', $country_name);
 $smarty->assign('country_array', $country_array);
 
 $smarty->display('main.html');

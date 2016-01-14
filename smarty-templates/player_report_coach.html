@@ -4,15 +4,11 @@
             <p class="header">Отчет</p>
             <table class="center w100">
                 <tr>
-                    <td class="w50">Текущая способность</td>
-                    <td>Потенциальная способность</td>
+                    <td>Потенциальные способности</td>
                 </tr>
                 <tr>
                     <td>
-                        {$player_array.0.player_ability_current|f_igosja_five_star:"20"}
-                    </td>
-                    <td>
-                        {$player_array.0.player_ability_max|f_igosja_five_star:"20"}
+                        {$player_array.0.player_ability|f_igosja_five_star:"20"}
                     </td>
                 </tr>
             </table>
@@ -39,7 +35,7 @@
                     <tr>
                         <td class="w50">{$player_array[i].role_name}</td>
                         <td class="center">
-                            {$player_array.0.player_ability_current|f_igosja_five_star:"12"}
+                            {$player_array.0.player_ability|f_igosja_five_star:"12"}
                         </td>
                     </tr>
                 {/section}

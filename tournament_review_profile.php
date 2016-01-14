@@ -34,7 +34,11 @@ elseif (TOURNAMENT_TYPE_CUP == $tournamenttype_id)
 elseif (TOURNAMENT_TYPE_CHAMPIONS_LEAGUE == $tournamenttype_id)
 {
     redirect('league_review_profile.php?num=' . $get_num);
-
+    exit();
+}
+elseif (TOURNAMENT_TYPE_WORLD_CUP == $tournamenttype_id)
+{
+    redirect('worldcup_review_profile.php?num=' . $get_num);
     exit();
 }
 

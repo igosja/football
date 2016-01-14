@@ -66,7 +66,7 @@ $sql = "SELECT ROUND(COUNT(DISTINCT `scout_player_id`)/`count_player`*100) AS `c
         ) AS `t1`
         ON `t1`.`player_country_id`=`country_id`
         LEFT JOIN `staff`
-        ON `scout_staff_id`=`staff_id`
+        ON `scout_team_id`=`staff_team_id`
         WHERE `staff_team_id`='$get_num'
         GROUP BY `player`.`player_country_id`
         ORDER BY `player`.`player_country_id` ASC";
@@ -75,7 +75,7 @@ $knowledge_sql = $mysqli->query($sql);
 $knowledge_array = $knowledge_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('scout_array', $scout_array);
 $smarty->assign('knowledge_array', $knowledge_array);
 

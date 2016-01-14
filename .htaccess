@@ -2,6 +2,7 @@ AddDefaultCharset UTF-8
 ErrorDocument 404 /continent_review_profile.php
 php_value date.timezone "Europe/Moscow"
 
+php_flag always_populate_raw_post_data Off
 php_flag display_startup_errors on
 php_flag display_errors on
 php_flag html_errors on

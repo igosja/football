@@ -151,7 +151,7 @@ $transfer_sql = $mysqli->query($sql);
 $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $country_name);
+$smarty->assign('header_title', $country_name);
 $smarty->assign('country_id', $get_num);
 $smarty->assign('top_team_array', $team_array);
 $smarty->assign('top_player_array', $player_array);

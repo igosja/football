@@ -265,7 +265,7 @@ $lineup_sql = $mysqli->query($sql);
 $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('player_array', $player_array);
 $smarty->assign('formation_array', $formation_array);
 $smarty->assign('gamemood_array', $gamemood_array);

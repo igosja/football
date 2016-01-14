@@ -80,7 +80,7 @@ $sql = "SELECT ROUND(COUNT(`scout_id`)/`count_player`*100) AS `count_scout`,
             ORDER BY `player_country_id` ASC
         ) AS `t1`
         ON `t1`.`player_country_id`=`country_id`
-        WHERE `scout_staff_id`='$get_num'
+        WHERE `scout_team_id`='$get_num'
         GROUP BY `player`.`player_country_id`
         ORDER BY `player`.`player_country_id` ASC";
 $scout_sql = $mysqli->query($sql);
@@ -90,11 +90,9 @@ $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
 $staff_name     = $staff_array[0]['name_name'];
 $staff_surname  = $staff_array[0]['surname_name'];
 $header_2_title = $staff_name . ' ' . $staff_surname;
-$header_2_post  = $staff_array[0]['staffpost_name'];
 
-$smarty->assign('header_2_title', $header_2_title);
-$smarty->assign('header_2_post', $header_2_post);
 $smarty->assign('num', $get_num);
+$smarty->assign('header_title', $header_2_title);
 $smarty->assign('staff_array', $staff_array);
 $smarty->assign('attribute_array', $attribute_array);
 $smarty->assign('scout_array', $scout_array);

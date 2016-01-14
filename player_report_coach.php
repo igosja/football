@@ -12,8 +12,7 @@ else
 }
 
 $sql = "SELECT `name_name`,
-               `player_ability_current`,
-               `player_ability_max`,
+               `player_ability`,
                `position_description`,
                `role_name`,
                `surname_name`,
@@ -58,7 +57,7 @@ $header_2_title = $player_name . ' ' . $player_surname;
 
 $smarty->assign('team_id', $team_id);
 $smarty->assign('team_name', $team_name);
-$smarty->assign('header_2_title', $header_2_title);
+$smarty->assign('header_itle', $header_2_title);
 $smarty->assign('num', $get_num);
 $smarty->assign('player_array', $player_array);
 

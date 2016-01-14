@@ -58,7 +58,7 @@ $building_sql = $mysqli->query($sql);
 $building_array = $building_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('team_array', $team_array);
 $smarty->assign('building_array', $building_array);
 

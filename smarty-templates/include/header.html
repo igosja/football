@@ -2,11 +2,11 @@
 <html>
 
 <head>
-    <title>В разработке</title>
+    <title>Виртуальная футбольная лига</title>
     <meta name="description" content="Футбольный онлайн менеджер" />
     <meta name="keywords" content="футбол, игра, менеджер, онлайн" />
     <meta charset="utf-8" />
-    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -18,10 +18,25 @@
     </noscript>
     {literal}
         <!--LiveInternet counter-->
-        <script type="text/javascript">
-        new Image().src = "//counter.yadro.ru/hit?r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"" : ";s"+screen.width+"*"+screen.height+"*" + (screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ";u"+escape(document.URL) +  ";" +Math.random();
+        <script type="text/javascript"><!--
+        new Image().src = "//counter.yadro.ru/hit?r"+
+        escape(document.referrer)+((typeof(screen)=="undefined")?"":
+        ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+        screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+        ";"+Math.random();//-->
         </script>
         <!--/LiveInternet-->
+        <!--GoogleAnalytics-->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-61508685-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        <!--/GoogleAnalytics-->
     {/literal}
     <div class="page-header">
         <table class="header-inner" cellspacing="0">
@@ -31,16 +46,13 @@
                         <tr>
                             <td>
                                 <ul class="main-menu">
-                                    <li><a href="/" class="main-menu-first">Главная</a></li>
                                     <li><a href="javascript:;" class="main-menu-link">Меню</a>
                                         <ul>
                                             <li><a href="continent_review_profile.php?num=1">Лига</a></li>
                                         </ul>
                                     </li>
-                                    {if 0 == $authorization_permission}
+                                    {if !isset($authorization_id)}
                                         <li><a href="login.php" class="main-menu-link">Войти</a></li>
-                                        <li><a href="registration.php" class="main-menu-link">Зарегестрироваться</a></li>
-                                        <li><a href="forget_password.php" class="main-menu-link">Забыли пароль?</a></li>
                                     {else}
                                         <li><a href="profile_home_home.php" class="main-menu-link">{$authorization_login}</a>
                                             <ul>
@@ -64,7 +76,12 @@
                                             </li>
                                         {/if}
                                     {/if}
-                                    <li><a href="forum.php" class="main-menu-link">Форум</a></li>
+                                    {if (1 == 0)}
+                                        <li><a href="forum.php" class="main-menu-link">Форум</a></li>
+                                    {/if}
+                                    {if isset($authorization_id)}
+                                        <li><a href="shop.php" class="main-menu-link">Магазин</a></li>
+                                    {/if}
                                     <li><a href="rule.php" class="main-menu-last">Правила</a></li>
                                 </ul>
                             </td>
@@ -72,10 +89,12 @@
                     </table>
                 </td>
                 <td rowspan="2">
-                    <img
-                        alt="Футбольная Лига"
-                        src="/img/logo.png"
-                    />
+                    <a href="/">
+                        <img
+                            alt="Футбольная Лига"
+                            src="/img/logo.png"
+                        />
+                    </a>
                 </td>
             </tr>
             <tr>
@@ -157,7 +176,7 @@
                                             (1 == $horizontalmenu_array[i].horizontalmenu_myteam &&
                                             !isset($smarty.get.num))))}
                                             <td>
-                                                <a href="{$horizontalmenu_array[i].horizontalsubmenu_href}?num={$num}"
+                                                <a href="{$horizontalmenu_array[i].horizontalsubmenu_href}{if (isset($smarty.get.num))}?num={$smarty.get.num}{/if}"
                                                     {if $horizontalmenu_array[i].horizontalsubmenu_href == $chapter}
                                                         class="active"
                                                     {/if}
@@ -182,5 +201,27 @@
             </tr>
         </table>
     </div>
-    <div class="header-button"></div>
+    <div class="header-button">
+        {if (isset($button_array))}
+            {section name=i loop=$button_array}
+                <a href="{$button_array[i].href}" class="{$button_array[i].class}">{$button_array[i].text}</a>
+            {/section}
+        {/if}
+    </div>
     <div class="page-content">
+    {if isset($alert_message)}
+        <p class="alert center {$alert_message.class}">{$alert_message.text}</p>
+    {/if}
+    {if isset($success_message)}
+        <p class="alert center success">{$success_message}</p>
+    {/if}
+    {if isset($error_message)}
+        <p class="alert center error">{$error_message}</p>
+    {/if}
+    {if isset($warning_message)}
+        <p class="alert center warning">{$warning_message}</p>
+    {/if}
+    {if isset($info_message)}
+        <p class="alert center info">{$info_message}</p>
+    {/if}
+    <p class="center info">Идет alfa тестирование</p>

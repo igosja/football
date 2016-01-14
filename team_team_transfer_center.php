@@ -220,7 +220,7 @@ $offer_to_me_sql = $mysqli->query($sql);
 $offer_to_me_array = $offer_to_me_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('transfer_array', $transfer_array);
 $smarty->assign('offer_from_me_array', $offer_from_me_array);
 $smarty->assign('offer_to_me_array', $offer_to_me_array);

@@ -2,13 +2,14 @@
 
 include('include/include.php');
 
-if (isset($_POST['firstname'])) {
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $gender = (int)$_POST['gender'];
-    $day = (int)$_POST['birth']['day'];
-    $month = (int)$_POST['birth']['month'];
-    $year = (int)$_POST['birth']['year'];
+if (isset($_POST['firstname']))
+{
+    $firstname  = $_POST['firstname'];
+    $lastname   = $_POST['lastname'];
+    $gender     = (int)$_POST['gender'];
+    $day        = (int)$_POST['birth']['day'];
+    $month      = (int)$_POST['birth']['month'];
+    $year       = (int)$_POST['birth']['year'];
     $country_id = (int)$_POST['country'];
 
     $sql = "UPDATE `user`
@@ -26,7 +27,8 @@ if (isset($_POST['firstname'])) {
     $prepare->execute();
     $prepare->close();
 
-    if (!empty($_POST['password'])) {
+    if (!empty($_POST['password']))
+    {
         $password = f_igosja_chiper_password($_POST['password']);
 
         $sql = "UPDATE `user`
@@ -62,7 +64,8 @@ $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
+$smarty->assign('header_title', $authorization_login);
 $smarty->assign('user_array', $user_array);
 $smarty->assign('country_array', $country_array);
 
-$smarty->display('main-1.html');
+$smarty->display('main.html');

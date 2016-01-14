@@ -12,6 +12,7 @@ else
 }
 
 $sql = "SELECT `name_name`,
+               `player_statustransfer_id`,
                `player_transfer_price`,
                `statusrent_name`,
                `statusteam_name`,
@@ -56,6 +57,7 @@ $header_2_title = $player_name . ' ' . $player_surname;
 $sql = "SELECT `offertype_id`,
                `offertype_name`
         FROM `offertype`
+        WHERE `offertype_status`='1'
         ORDER BY `offertype_id` ASC";
 $offertype_sql = $mysqli->query($sql);
 
@@ -63,7 +65,7 @@ $offertype_array = $offertype_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('team_id', $team_id);
 $smarty->assign('team_name', $team_name);
-$smarty->assign('header_2_title', $header_2_title);
+$smarty->assign('header_title', $header_2_title);
 $smarty->assign('num', $get_num);
 $smarty->assign('player_array', $player_array);
 $smarty->assign('offertype_array', $offertype_array);

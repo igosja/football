@@ -8,7 +8,7 @@ if (isset($authorization_country_id))
 }
 else
 {
-    $smarty->display('only_my_country.html');
+    $smarty->display('only_my_team.html');
     exit;
 }
 
@@ -86,7 +86,7 @@ $teaminstruction_sql = $mysqli->query($sql);
 $teaminstruction_array = $teaminstruction_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $country_name);
+$smarty->assign('header_title', $country_name);
 $smarty->assign('gamestyle_array', $gamestyle_array);
 $smarty->assign('gamemood_array', $gamemood_array);
 $smarty->assign('lineup_array', $lineup_array);

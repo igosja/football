@@ -1,3 +1,5 @@
 <?php
 
-header('Location: continent_review_profile.php');
+include ('include/include.php');
+
+$smarty->display('main.html');

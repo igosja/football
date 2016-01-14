@@ -81,7 +81,7 @@ $attribute_sql = $mysqli->query($sql);
 $gk_attribute_array = $attribute_sql->fetch_all(MYSQL_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('player_array', $player_array);
 $smarty->assign('position_array', $position_array);
 $smarty->assign('attribute_array', $attribute_array);

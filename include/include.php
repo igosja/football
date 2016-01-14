@@ -14,12 +14,55 @@ $chapter        = $file_name[1];
 $file_name      = end($file_name);
 $file_name      = explode('.', $file_name);
 $file_name      = $file_name[0];
-$header_2       = explode('_', $file_name);
-$header_2_block = $header_2[0];
+$button_array   = explode('_', $file_name);
 
-if (in_array($header_2_block, $HEADER_2_ARRAY))
+if (isset($button_array[0]) &&
+    isset($button_array[1]))
 {
-    $header_2_block = $header_2_block . '-' . $header_2[1];
+    if ('team' == $button_array[0] &&
+        'lineup' == $button_array[1])
+    {
+        $button_array = array
+        (
+            array('href' => 'team_team_review_profile.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Команда'),
+            array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Состав'),
+        );
+
+        $smarty->assign('button_array', $button_array);
+    }
+    elseif ('team' == $button_array[0] &&
+            'team' == $button_array[1])
+    {
+        $button_array = array
+        (
+            array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Команда'),
+            array('href' => 'team_lineup_team_player.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Состав'),
+        );
+
+        $smarty->assign('button_array', $button_array);
+    }
+    elseif ('national' == $button_array[0] &&
+            'lineup' == $button_array[1])
+    {
+        $button_array = array
+        (
+            array('href' => 'national_team_review_profile.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Команда'),
+            array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Состав'),
+        );
+
+        $smarty->assign('button_array', $button_array);
+    }
+    elseif ('national' == $button_array[0] &&
+            'team' == $button_array[1])
+    {
+        $button_array = array
+        (
+            array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Команда'),
+            array('href' => 'national_lineup_team_player.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Состав'),
+        );
+
+        $smarty->assign('button_array', $button_array);
+    }
 }
 
 $sql = "SELECT `season_id`
@@ -66,17 +109,20 @@ if ('admin' == $chapter)
 
 if (isset($_SESSION['message_class']))
 {
-    $smarty->assign($_SESSION['message_class'] . '_message', $_SESSION['message_text']);
+    $alert_message['class'] = $_SESSION['message_class'];
+    $alert_message['text']  = $_SESSION['message_text'];
+
+    $smarty->assign('alert_message', $alert_message);
 
     unset($_SESSION['message_class']);
     unset($_SESSION['message_text']);
 }
 
+$smarty->assign('header_title', 'Лига');
 $smarty->assign('main_menu_continent_array', $continent_array);
 $smarty->assign('horizontalmenu_array', $horizontalmenu_array);
 $smarty->assign('start_time', $start_time);
 $smarty->assign('chapter', $chapter);
-$smarty->assign('header_2_block', $header_2_block);
 $smarty->assign('tpl', $file_name);
 
 $sql = "SELECT `horizontalmenupage_authorization`,

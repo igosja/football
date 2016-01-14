@@ -5,7 +5,6 @@ include ('include/include.php');
 if (!isset($authorization_id))
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -102,7 +101,7 @@ $career_sql = $mysqli->query($sql);
 $career_array = $career_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $authorization_id);
-$smarty->assign('header_2_title', $authorization_login);
+$smarty->assign('header_title', $authorization_login);
 $smarty->assign('user_array', $user_array);
 $smarty->assign('career_array', $career_array);
 

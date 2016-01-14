@@ -426,6 +426,7 @@ $tournament_fact_sql = $mysqli->query($sql);
 $tournament_fact_array = $tournament_fact_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('team_name', $team_name);
 $smarty->assign('team_fact_array', $team_fact_array);
 $smarty->assign('tournament_array', $tournament_array);

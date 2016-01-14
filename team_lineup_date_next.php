@@ -132,6 +132,7 @@ for ($i=0; $i<$game; $i++)
 }
 
 $smarty->assign('num', $get_num);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('team_name', $team_name);
 $smarty->assign('game_array', $game_array);
 $smarty->assign('nearest_game_array', $nearest_game_array);

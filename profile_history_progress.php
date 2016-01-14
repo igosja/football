@@ -31,7 +31,7 @@ $progress_sql = $mysqli->query($sql);
 $progress_array = $progress_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $authorization_id);
-$smarty->assign('header_2_title', $authorization_login);
+$smarty->assign('header_title', $authorization_login);
 $smarty->assign('progress_array', $progress_array);
 
 $smarty->display('main.html');

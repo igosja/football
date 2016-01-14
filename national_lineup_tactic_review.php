@@ -151,7 +151,7 @@ if (isset($_POST['formation_id']))
             LIMIT 1";
     $mysqli->query($sql);
 
-    redirect('national_lineup_tactic_review.php');
+    redirect('national_lineup_tactic_review.php?num=' . $get_num);
 
     exit;
 }
@@ -258,7 +258,7 @@ $lineup_sql = $mysqli->query($sql);
 $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $country_name);
+$smarty->assign('header_title', $country_name);
 $smarty->assign('player_array', $player_array);
 $smarty->assign('formation_array', $formation_array);
 $smarty->assign('gamemood_array', $gamemood_array);

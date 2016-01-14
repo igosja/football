@@ -6,11 +6,11 @@
                 <tr>
                     <th>Имя</th>
                     <th class="w5">Позиция</th>
-                    <th colspan="2">Нац</th>
+                    <th class="w1">Нац</th>
+                    <th class="w5">Воз</th>
                     <th class="w5">Рост</th>
                     <th class="w5">Вес</th>
-                    <th class="w5">Воз</th>
-                    <th class="w5">Цена</th>
+                    <th class="w10">Цена</th>
                 </tr>
                 {section name=i loop=$player_array}
                     <tr>
@@ -20,21 +20,19 @@
                             </a>
                         </td>
                         <td class="center">{$player_array[i].position_name}</td>
-                        <td class="w1">
-                            <img
-                                alt="{$player_array[i].country_name}"
-                                class="img-12"
-                                src="img/flag/12/{$player_array[i].country_id}.png"
-                            />
-                        </td>
-                        <td class="w10">
+                        <td>
                             <a href="national_team_review_profile.php?num={$player_array[i].country_id}">
-                                {$player_array[i].country_name}
+                                <img
+                                    alt="{$player_array[i].country_name}"
+                                    class="img-12"
+                                    src="img/flag/12/{$player_array[i].country_id}.png"
+                                    title="{$player_array[i].country_name}"
+                                />
                             </a>
                         </td>
+                        <td class="center">{$player_array[i].player_age}</td>
                         <td class="center">{$player_array[i].player_height} см</td>
                         <td class="center">{$player_array[i].player_weight} кг</td>
-                        <td class="center">{$player_array[i].player_age}</td>
                         <td class="right">{$player_array[i].player_price|f_igosja_money}</td>
                     </tr>
                 {/section}

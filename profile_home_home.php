@@ -439,8 +439,7 @@ $tournament_sql = $mysqli->query($sql);
 $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $authorization_id);
-$smarty->assign('header_2_title', $authorization_login);
-$smarty->assign('authorization_team_id', $authorization_team_id);
+$smarty->assign('header_title', $authorization_login);
 $smarty->assign('next_array', $next_array);
 $smarty->assign('latest_array', $latest_array);
 $smarty->assign('nearest_array', $nearest_array);

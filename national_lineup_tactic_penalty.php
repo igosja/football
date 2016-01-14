@@ -8,7 +8,7 @@ if (isset($authorization_country_id))
 }
 else
 {
-    $smarty->display('only_my_country.html');
+    $smarty->display('only_my_team.html');
     exit;
 }
 
@@ -111,7 +111,7 @@ $penalty_sql = $mysqli->query($sql);
 $penalty_array = $penalty_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $country_name);
+$smarty->assign('header_title', $country_name);
 $smarty->assign('player_array', $player_array);
 $smarty->assign('penalty_array', $penalty_array);
 $smarty->assign('penaltyplayer_array', $penaltyplayer_array);

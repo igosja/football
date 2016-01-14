@@ -56,7 +56,7 @@ $manager_sql = $mysqli->query($sql);
 $manager_array = $manager_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $country_name);
+$smarty->assign('header_title', $country_name);
 $smarty->assign('tournament_array', $tournament_array);
 $smarty->assign('manager_array', $manager_array);
 

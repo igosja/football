@@ -135,7 +135,7 @@ $total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('team_id', $team_id);
 $smarty->assign('team_name', $team_name);
-$smarty->assign('header_2_title', $header_2_title);
+$smarty->assign('header_title', $header_2_title);
 $smarty->assign('num', $get_num);
 $smarty->assign('mark_array', $mark_array);
 $smarty->assign('game_array', $game_array);

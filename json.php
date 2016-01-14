@@ -120,7 +120,8 @@ if (isset($_GET['player_tactic_position_id']))
     $json_data['position']              = $lineup_array[0]['lineup_position'];
     $json_data['role_array']            = $role_array;
 }
- elseif (isset($_GET['player_tactic_position_id_national'])) {
+elseif (isset($_GET['player_tactic_position_id_national']))
+{
     $position_id = (int)$_GET['player_tactic_position_id_national'];
 
     $sql = "SELECT `position_name`
@@ -234,7 +235,9 @@ if (isset($_GET['player_tactic_position_id']))
     $json_data['mark'] = $lineup_array[0]['mark'];
     $json_data['position'] = $lineup_array[0]['lineup_position'];
     $json_data['role_array'] = $role_array;
-} elseif (isset($_GET['select_value'])) {
+}
+elseif (isset($_GET['select_value']))
+{
     $value = (int)$_GET['select_value'];
     $give = $_GET['select_give'];
     $need = $_GET['select_need'];
@@ -404,17 +407,6 @@ if (isset($_GET['player_tactic_position_id']))
 
     $sql = "UPDATE `player`
             SET `player_statusteam_id`='$statusteam_id'
-            WHERE `player_id`='$player_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['statusnational_id'])) {
-    $statusnational_id = (int)$_GET['statusnational_id'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `player`
-            SET `player_statusnational_id`='$statusnational_id'
             WHERE `player_id`='$player_id'
             LIMIT 1";
     $mysqli->query($sql);

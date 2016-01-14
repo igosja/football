@@ -219,7 +219,7 @@ $player_best_array = $player_best_sql->fetch_all(MYSQLI_ASSOC);
 $team_name = $team_array[0]['team_name'];
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('team_array', $team_array);
 $smarty->assign('count_game_array', $count_game_array);
 $smarty->assign('player_goal_array', $player_goal_array);

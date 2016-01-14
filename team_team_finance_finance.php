@@ -24,7 +24,6 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -78,9 +77,22 @@ $finance_sql = $mysqli->query($sql);
 
 $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
 
+$sql = "SELECT `historyfinanceteam_date`,
+               `historyfinanceteam_value`,
+               `historytext_name`
+        FROM `historyfinanceteam`
+        LEFT JOIN `historytext`
+        ON `historyfinanceteam_historytext_id`=`historytext_id`
+        WHERE `historyfinanceteam_team_id`='$get_num'
+        ORDER BY `historyfinanceteam_date` DESC";
+$history_sql = $mysqli->query($sql);
+
+$history_array = $history_sql->fetch_all(MYSQLI_ASSOC);
+
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('team_array', $team_array);
 $smarty->assign('finance_array', $finance_array);
+$smarty->assign('history_array', $history_array);
 
 $smarty->display('main.html');

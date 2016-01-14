@@ -241,7 +241,7 @@ $champions_out_sql = $mysqli->query($sql);
 $champions_out_array = $champions_out_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $country_name);
+$smarty->assign('header_title', $country_name);
 $smarty->assign('championship_array', $championship_array);
 $smarty->assign('championship_goal_array', $championship_goal_array);
 $smarty->assign('championship_pass_array', $championship_pass_array);

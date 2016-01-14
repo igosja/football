@@ -205,7 +205,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `playerposition_position_id`=`position_id`
         WHERE `player_team_id`!='$get_num'
         AND `playerposition_value`='100'
-        AND `player_statustransfer_id`!='3'
+        AND `player_statustransfer_id`='2'
         AND `player_age` BETWEEN '$sql_age_min' AND '$sql_age_max'
         AND `player_weight` BETWEEN '$sql_weight_min' AND '$sql_weight_max'
         AND `player_height` BETWEEN '$sql_height_min' AND '$sql_height_max'
@@ -250,7 +250,7 @@ $country_sql = $mysqli->query($sql);
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('player_array', $player_array);
 $smarty->assign('position_array', $position_array);
 $smarty->assign('country_array', $country_array);

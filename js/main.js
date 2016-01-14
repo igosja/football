@@ -528,6 +528,26 @@ $(document).ready(function($)
         );
     });
 
+    $('#gamestyle-select-national').on('change', function()
+    //Смена командного стиля игры
+    {
+        var style_id = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#tactic-block').addClass('loading');},
+                url: 'json.php?national_style_id=' + style_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    $('#gamestyle').html('<h6>' + data.gamestyle_array[0].gamestyle_name + '</h6>' + data.gamestyle_array[0].gamestyle_description);
+                    $('#tactic-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
     $('#gamemood-select').on('change', function()
     //Смена командного настроя на игру
     {
@@ -538,6 +558,26 @@ $(document).ready(function($)
             {
                 beforeSend: function(){$('#tactic-block').addClass('loading');},
                 url: 'json.php?mood_id=' + mood_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    $('#gamemood').html('<h6>' + data.gamemood_array[0].gamemood_name + '</h6>' + data.gamemood_array[0].gamemood_description);
+                    $('#tactic-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
+    $('#gamemood-select-national').on('change', function()
+    //Смена командного настроя на игру
+    {
+        var mood_id = $(this).val();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#tactic-block').addClass('loading');},
+                url: 'json.php?national_mood_id=' + mood_id,
                 dataType: "json",
                 success: function(data)
                 {
@@ -856,29 +896,6 @@ $(document).ready(function($)
         $('#finance-' + data_id).show();
     });
 
-    $('.status-national').on('change', function()
-    //Изменение трансферного статуса
-    {
-        var player_id   = $(this).data('player');
-        var status      = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#national-info').addClass('loading');},
-                url: 'json.php?player_id=' + player_id + '&statusnational_id=' + status,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#national-info').removeClass('loading');
-                    }
-                }
-            }
-        );
-    });
-
     if ($(select_on_page_array).is('.player-number'))
     //Загрузка номеров игроков
     {
@@ -890,8 +907,6 @@ $(document).ready(function($)
     {
         $('#player-info').addClass('loading');
 
-        player_number();
-
         var player_id   = $(this).data('player');
         var number      = $(this).val();
 
@@ -899,6 +914,30 @@ $(document).ready(function($)
         (
             {
                 url: 'json.php?player_id=' + player_id + '&number=' + number,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#player-info').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
+    $('.player-number-national').on('change', function()
+    //Смена номера игрока
+    {
+        $('#player-info').addClass('loading');
+
+        var player_id   = $(this).data('player');
+        var number      = $(this).val();
+
+        $.ajax
+        (
+            {
+                url: 'json.php?player_id=' + player_id + '&number_national=' + number,
                 dataType: "json",
                 success: function(data)
                 {
@@ -922,6 +961,29 @@ $(document).ready(function($)
         (
             {
                 url: 'json.php?instruction_id=' + instruction,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (1 == data.success)
+                    {
+                        $('#instruction-block').removeClass('loading');
+                    }
+                }
+            }
+        );
+    });
+
+    $('.instruction-checkbox-national').on('change', function()
+    //Смена командных инкструкций
+    {
+        $('#instruction-block').addClass('loading');
+
+        var instruction = $(this).val();
+
+        $.ajax
+        (
+            {
+                url: 'json.php?national_instruction_id=' + instruction,
                 dataType: "json",
                 success: function(data)
                 {
@@ -1153,6 +1215,27 @@ $(document).ready(function($)
                     $('#asktoplay').removeClass('loading');
 
                     asktoplay_delete();
+                }
+            }
+        );
+    });
+    
+    $('.player-national-include').on('click', function()
+    //Добавление игрока в сборную
+    {
+        var player_id = $(this).data('player');
+
+        $('#player-block').addClass('loading');
+
+        $.ajax
+        (
+            {
+                url: 'json.php?to_national_player_id=' + player_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    
+                    $('#player-block').removeClass('loading');
                 }
             }
         );

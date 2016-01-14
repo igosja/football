@@ -90,7 +90,7 @@ $game_sql = $mysqli->query($sql);
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_2_title', $header_2_title);
+$smarty->assign('header_title', $header_2_title);
 $smarty->assign('num', $get_num);
 $smarty->assign('referee_array', $referee_array);
 $smarty->assign('game_array', $game_array);

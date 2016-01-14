@@ -101,7 +101,7 @@ $transferhistory_buy_sql = $mysqli->query($sql);
 $transferhistory_buy_summ = $transferhistory_buy_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('transferhistory_buy_array', $transferhistory_buy_array);
 $smarty->assign('transferhistory_buy_summ', $transferhistory_buy_summ);
 $smarty->assign('transferhistory_sell_array', $transferhistory_sell_array);

@@ -9,9 +9,27 @@ if (isset($authorization_team_id))
 else
 {
     $smarty->display('only_my_team.html');
+    exit;
+}
+
+$sql = "SELECT `team_name`
+        FROM `team`
+        WHERE `team_id`='$get_num'
+        LIMIT 1";
+$team_sql = $mysqli->query($sql);
+
+$count_team = $team_sql->num_rows;
+
+if (0 == $count_team)
+{
+    $smarty->display('wrong_page.html');
 
     exit;
 }
+
+$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+
+$team_name = $team_array[0]['team_name'];
 
 if (isset($_GET['ok']))
 {
@@ -204,7 +222,7 @@ $cupparticipant_sql = $mysqli->query($sql);
 
 $cupparticipant_array = $cupparticipant_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_title', 'Товарищеские матчи');
+$smarty->assign('header_title', $team_name);
 $smarty->assign('shedule_array', $shedule_array);
 $smarty->assign('cupparticipant_array', $cupparticipant_array);
 

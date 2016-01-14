@@ -87,7 +87,7 @@ $country_sql = $mysqli->query($sql);
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $authorization_id);
-$smarty->assign('header_2_title', $authorization_login);
+$smarty->assign('header_title', $authorization_login);
 $smarty->assign('team_array', $team_array);
 $smarty->assign('country_array', $country_array);
 $smarty->assign('count_team', $count_team);

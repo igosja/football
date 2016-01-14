@@ -4,7 +4,8 @@
             <p class="header">Сделать предложение</p>
             <table class="striped w100">
                 {if (isset($authorization_team_id) &&
-                    $authorization_team_id != $team_id)}
+                    $authorization_team_id != $team_id &&
+                    3 != $player_array.0.player_statustransfer_id)}
                     <tr>
                         <td class="right">Вид предложения</td>
                         <td class="w50">

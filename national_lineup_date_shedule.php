@@ -33,7 +33,6 @@ $country_name = $country_array[0]['country_name'];
 $sql = "SELECT `game_home_country_id`,
                `game_id`,
                `game_played`,
-               `game_tv`,
                IF (`game_home_country_id`='$get_num', `game_guest_score`, `game_home_score`) AS `guest_score`,
                IF (`game_home_country_id`='$get_num', `game_home_score`, `game_guest_score`) AS `home_score`,
                `shedule_date`,
@@ -57,7 +56,7 @@ $game_sql = $mysqli->query($sql);
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $country_name);
+$smarty->assign('header_title', $country_name);
 $smarty->assign('game_array', $game_array);
 
 $smarty->display('main.html');

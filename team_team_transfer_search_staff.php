@@ -147,7 +147,7 @@ $country_sql = $mysqli->query($sql);
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('staff_array', $staff_array);
 $smarty->assign('staffpost_array', $staffpost_array);
 $smarty->assign('country_array', $country_array);

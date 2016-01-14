@@ -122,7 +122,7 @@ $lineup_sql = $mysqli->query($sql);
 $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
-$smarty->assign('team_name', $team_name);
+$smarty->assign('header_title', $team_name);
 $smarty->assign('lineup_array', $lineup_array);
 
 $smarty->display('main.html');

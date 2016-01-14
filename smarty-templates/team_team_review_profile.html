@@ -73,28 +73,34 @@
                 <tr>
                     <td>Лучший бомбардир</td>
                     <td class="right">
-                        <a href="player_home_profile.php?num={$player_goal_array.0.player_id}">
-                            {$player_goal_array.0.name_name} {$player_goal_array.0.surname_name}
-                        </a>
-                        ({$player_goal_array.0.goal})
+                        {if (isset($player_goal_array.0.player_id))}
+                            <a href="player_home_profile.php?num={$player_goal_array.0.player_id}">
+                                {$player_goal_array.0.name_name} {$player_goal_array.0.surname_name}
+                            </a>
+                            ({$player_goal_array.0.goal})
+                        {/if}
                     </td>
                 </tr>
                 <tr>
                     <td>Лучший асистент</td>
                     <td class="right">
-                        <a href="player_home_profile.php?num={$player_pass_array.0.player_id}">
-                            {$player_pass_array.0.name_name} {$player_pass_array.0.surname_name}
-                        </a>
-                        ({$player_pass_array.0.pass})
+                        {if (isset($player_pass_array.0.player_id))}
+                            <a href="player_home_profile.php?num={$player_pass_array.0.player_id}">
+                                {$player_pass_array.0.name_name} {$player_pass_array.0.surname_name}
+                            </a>
+                            ({$player_pass_array.0.pass})
+                        {/if}
                     </td>
                 </tr>
                 <tr>
                     <td>Наибольшее число раз ИМ</td>
                     <td class="right">
-                        <a href="player_home_profile.php?num={$player_best_array.0.player_id}">
-                            {$player_best_array.0.name_name} {$player_best_array.0.surname_name}
-                        </a>
-                        ({$player_best_array.0.best})
+                        {if (isset($player_best_array.0.player_id))}
+                            <a href="player_home_profile.php?num={$player_best_array.0.player_id}">
+                                {$player_best_array.0.name_name} {$player_best_array.0.surname_name}
+                            </a>
+                            ({$player_best_array.0.best})
+                        {/if}
                     </td>
                 </tr>
             </table>
