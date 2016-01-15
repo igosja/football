@@ -560,7 +560,9 @@ elseif (isset($_GET['select_value']))
     $mysqli->query($sql);
 
     $json_data['inbox_array'] = $inbox_array;
-} elseif (isset($_GET['note_id'])) {
+}
+elseif (isset($_GET['note_id']))
+{
     $note_id = (int)$_GET['note_id'];
 
     $sql = "SELECT `note_text`,
@@ -570,10 +572,17 @@ elseif (isset($_GET['select_value']))
             LIMIT 1";
     $note_sql = $mysqli->query($sql);
 
+    $count_note = $note_sql->num_rows;
     $note_array = $note_sql->fetch_all(MYSQLI_ASSOC);
 
+    if (1 == $count_note)
+    {
+        $note_array[0]['note_text_nl2br'] = nl2br($note_array[0]['note_text']);
+    }
+
     $json_data['note_array'] = $note_array;
-} elseif (isset($_GET['style_id'])) {
+}
+elseif (isset($_GET['style_id'])) {
     $style_id = (int)$_GET['style_id'];
 
     $sql = "UPDATE `lineupcurrent`

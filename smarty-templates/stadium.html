@@ -8,11 +8,15 @@
                     Строительство продлится до {$stadium_array.0.building_end_date|date_format:"d.m.Y"}
                 </p>
             {else}
-                <form method="POST" action="">
+                <form method="POST">
                     <table class="striped w100">
                         <tr>
                             <td class="right w50">Стадион</td>
                             <td>{$stadium_array.0.stadium_name}</td>
+                        </tr>
+                        <tr>
+                            <td class="right">Баланс клуба</td>
+                            <td>{$team_finance|f_igosja_money}</td>
                         </tr>
                         <tr>
                             <td class="right">Текущая вместимость</td>
@@ -21,7 +25,7 @@
                         <tr>
                             <td class="right">Новая вместимость</td>
                             <td>
-                                <input name="capacity" type="text" />
+                                <input name="data[capacity]" type="text" />
                             </td>
                         </tr>
                         <tr>

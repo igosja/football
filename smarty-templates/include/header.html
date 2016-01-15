@@ -18,15 +18,19 @@
     </noscript>
     {literal}
         <!--LiveInternet counter-->
-        <script type="text/javascript"><!--
-        new Image().src = "//counter.yadro.ru/hit?r"+
-        escape(document.referrer)+((typeof(screen)=="undefined")?"":
-        ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-        screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-        ";"+Math.random();//-->
+        <script type="text/javascript">
+            new Image().src = "//counter.yadro.ru/hit?r"
+                            + escape(document.referrer)
+                            + ((typeof(screen)=="undefined")?"" : ";s"
+                            + screen.width
+                            + "*"
+                            + screen.height
+                            + "*"
+                            + (screen.colorDepth?screen.colorDepth:screen.pixelDepth))
+                            + ";u"+escape(document.URL)
+                            +  ";" +Math.random();
         </script>
         <!--/LiveInternet-->
-        <!--GoogleAnalytics-->
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -212,16 +216,3 @@
     {if isset($alert_message)}
         <p class="alert center {$alert_message.class}">{$alert_message.text}</p>
     {/if}
-    {if isset($success_message)}
-        <p class="alert center success">{$success_message}</p>
-    {/if}
-    {if isset($error_message)}
-        <p class="alert center error">{$error_message}</p>
-    {/if}
-    {if isset($warning_message)}
-        <p class="alert center warning">{$warning_message}</p>
-    {/if}
-    {if isset($info_message)}
-        <p class="alert center info">{$info_message}</p>
-    {/if}
-    <p class="center info">Идет alfa тестирование</p>

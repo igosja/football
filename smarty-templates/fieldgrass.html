@@ -17,8 +17,19 @@
                         <td class="right">Состояние газона</td>
                         <td>{$stadium_array.0.stadiumquality_name}</td>
                     </tr>
+                        <td class="right">Стоимоть замены газона</td>
+                        <td>{$price|f_igosja_money}</td>
+                    </tr>
                     <tr>
-                        <td class="center" colspan="2"><a href="fieldgrass.php?change=1">Заменить газон</a></td>
+                        <td class="right">Баланс клуба</td>
+                        <td>{$team_finance|f_igosja_money}</td>
+                    </tr>
+                    <tr>
+                        <td class="center" colspan="2">
+                            <button>
+                                <a href="fieldgrass.php?change=1">Заменить газон</a>
+                            </button>
+                        </td>
                     </tr>
                 </table>
             {/if}

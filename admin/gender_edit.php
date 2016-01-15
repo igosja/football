@@ -1,0 +1,52 @@
+<?php
+
+include ('../include/include.php');
+
+if (isset($_GET['num']))
+{
+    $get_num = (int) $_GET['num'];
+}
+else
+{
+    $get_num = 1;
+}
+
+$sql = "SELECT `gender_name`
+        FROM `gender`
+        WHERE `gender_id`='$get_num'
+        LIMIT 1";
+$gender_sql = $mysqli->query($sql);
+
+$count_gender = $gender_sql->num_rows;
+
+if (0 == $count_gender)
+{
+    $smarty->display('wrong_page.html');
+    exit;
+}
+
+if (isset($_POST['gender_name']))
+{
+    $gender_name = $_POST['gender_name'];
+
+    $sql = "UPDATE `gender` 
+            SET `gender_name`=?
+            WHERE `gender_id`='$get_num'
+            LIMIT 1";
+    $prepare = $mysqli->prepare($sql);
+    $prepare->bind_param('s', $gender_name);
+    $prepare->execute();
+    $prepare->close();
+
+    redirect('gender_list.php');
+    exit;
+}
+
+$gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);
+
+$gender_name = $gender_array[0]['gender_name'];
+
+$smarty->assign('gender_name', $gender_name);
+$smarty->assign('tpl', 'gender_create');
+
+$smarty->display('admin_main.html');

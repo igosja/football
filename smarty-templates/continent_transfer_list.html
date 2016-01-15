@@ -2,6 +2,24 @@
     <tr>
         <td class="block-page">
             <p class="header">Трансферы</p>
+            <table class="w100">
+                <tr>
+                    <td class="right">
+                        <form method="GET" id="page-form">
+                            Старница:
+                            <select name="page" id="page-select">
+                                {section name=i loop=$count_page}
+                                    <option value="{$smarty.section.i.iteration}"
+                                        {if (isset($smarty.get.page) && $smarty.get.page == $smarty.section.i.iteration)}
+                                            selected
+                                        {/if}
+                                    >{$smarty.section.i.iteration}</option>
+                                {/section}
+                            </select>
+                        </form>
+                    </td>
+                </tr>
+            </table>
             <table class="striped w100">
                 <tr>
                     <th class="w10">Дата</th>
@@ -13,9 +31,7 @@
                 {section name=i loop=$transfer_array}
                     <tr>
                         <td class="center">
-                            <a href="player_home_profile.php?num=1">
-                                {$transfer_array[i].transferhistory_date|date_format:"%d.%m.%Y"}
-                            </a>
+                            {$transfer_array[i].transferhistory_date|date_format:"%d.%m.%Y"}
                         </td>
                         <td>
                             <a href="player_home_profile.php?num={$transfer_array[i].player_id}">

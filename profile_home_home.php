@@ -5,15 +5,14 @@ include ('include/include.php');
 if (!isset($authorization_id))
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
 if (!isset($authorization_team_id))
 {
-    if (isset($_POST['free_team']))
+    if (isset($_POST['data']))
     {
-        $team_id = (int) $_POST['free_team'];
+        $team_id = (int) $_POST['data']['team'];
 
         $sql = "SELECT `team_name`,
                        `team_user_id`
@@ -38,11 +37,12 @@ if (!isset($authorization_team_id))
 
             $team_name = $team_array[0]['team_name'];
 
-            $_SESSION['authorization_team_id']   = $team_id;
-            $_SESSION['authorization_team_name'] = $team_name;
+            $_SESSION['authorization_team_id']      = $team_id;
+            $_SESSION['authorization_team_name']    = $team_name;
+            $_SESSION['message_class']              = 'success';
+            $_SESSION['message_text']               = 'Вы успешно взяли команду под управление.';
 
             redirect('profile_home_home.php');
-
             exit();
         }
     }
@@ -72,10 +72,9 @@ if (!isset($authorization_team_id))
     $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
     $smarty->assign('team_array', $team_array);
-    $smarty->assign('header_2_title', $authorization_login);
+    $smarty->assign('header_title', $authorization_login);
 
     $smarty->display('main.html');
-
     exit;
 }
 

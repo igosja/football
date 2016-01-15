@@ -2,15 +2,15 @@
 
 include('include/include.php');
 
-if (isset($_POST['firstname']))
+if (isset($_POST['data']))
 {
-    $firstname  = $_POST['firstname'];
-    $lastname   = $_POST['lastname'];
-    $gender     = (int)$_POST['gender'];
-    $day        = (int)$_POST['birth']['day'];
-    $month      = (int)$_POST['birth']['month'];
-    $year       = (int)$_POST['birth']['year'];
-    $country_id = (int)$_POST['country'];
+    $firstname  = $_POST['data']['firstname'];
+    $lastname   = $_POST['data']['lastname'];
+    $gender     = (int)$_POST['data']['gender'];
+    $day        = (int)$_POST['data']['birth']['day'];
+    $month      = (int)$_POST['data']['birth']['month'];
+    $year       = (int)$_POST['data']['birth']['year'];
+    $country_id = (int)$_POST['data']['country'];
 
     $sql = "UPDATE `user`
             SET `user_firstname`=?,
@@ -38,7 +38,11 @@ if (isset($_POST['firstname']))
         $mysqli->query($sql);
     }
 
-    $smarty->assign('success_message', 'Данные успешно сохранены');
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Данные успешно сохранены';
+
+    redirect('questionary.php');
+    exit;
 }
 
 $sql = "SELECT `user_birth_day`,
@@ -64,8 +68,17 @@ $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
+$sql = "SELECT `gender_id`,
+               `gender_name`
+        FROM `gender`
+        ORDER BY `gender_id` ASC";
+$gender_sql = $mysqli->query($sql);
+
+$gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);
+
 $smarty->assign('header_title', $authorization_login);
 $smarty->assign('user_array', $user_array);
 $smarty->assign('country_array', $country_array);
+$smarty->assign('gender_array', $gender_array);
 
 $smarty->display('main.html');

@@ -87,7 +87,7 @@ a:hover
     text-decoration: underline;
 }
 
-button a
+button a:hover
 {
     text-decoration: none;
 }
@@ -101,11 +101,6 @@ button, input, select, textarea
     font-family: Tahoma;
     font-size: 11px;
     padding: 3px;
-}
-
-.button-active
-{
-    background-color: #E1E2E4;
 }
 
 .page-header
@@ -308,7 +303,7 @@ button, input, select, textarea
 
 .header-button
 {
-    height: 70px;
+    height: 30px;
     margin: 0 auto;
     width: 960px;
 }
@@ -317,12 +312,12 @@ button, input, select, textarea
 {
     background-color: #002F77;
     border: 1px solid #010101;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #82C5E0;
-    font-size: 20px;
-    height: 3.5em;
-    line-height: 3.5em;
-    padding: 20px;
+    font-size: 14px;
+    padding: 2px 7px 2px 7px;
+    position: relative;
+    top: 6px;
     text-decoration: none;
 }
 
@@ -737,6 +732,11 @@ td.nopadding
 .link-delete
 {
     content: url('../img/icon/delete.png');
+}
+
+.link-eye
+{
+    content: url('../img/icon/eye.png');
 }
 
 .link-ok

@@ -25,7 +25,7 @@
                         <form method="GET" id="page-form">
                             Старница:
                             <select name="page" id="page-select">
-                                {section name=i loop=$count_team}
+                                {section name=i loop=$count_page}
                                     <option value="{$smarty.section.i.iteration}"
                                         {if (isset($smarty.get.page) && $smarty.get.page == $smarty.section.i.iteration)}
                                             selected
@@ -33,7 +33,6 @@
                                     >{$smarty.section.i.iteration}</option>
                                 {/section}
                             </select>
-                            <input type="hidden" name="country" value="{if (isset($smarty.get.country))}{$smarty.get.country}{/if}" />
                         </form>
                     </td>
                 </tr>
@@ -42,7 +41,7 @@
                 <tr>
                     <th>Менеджер</th>
                     <th colspan="2">Команда</th>
-                    <th colspan="2">Страна</th>
+                    <th class="w1">Страна</th>
                     <th colspan="2">Турнир</th>
                     <th class="w10">Финансы</th>
                 </tr>
@@ -61,16 +60,13 @@
                                 {$team_array[i].team_name}
                             </a>
                         </td>
-                        <td class="w1">
-                            <img
-                                alt="{$team_array[i].country_name}"
-                                class="img-12"
-                                src="img/flag/12/{$team_array[i].country_id}.png"
-                            />
-                        </td>
-                        <td class="w10">
+                        <td class="center">
                             <a href="national_team_review_profile.php?num={$team_array[i].country_id}">
-                                {$team_array[i].country_name}
+                                <img
+                                    alt="{$team_array[i].country_name}"
+                                    class="img-12"
+                                    src="img/flag/12/{$team_array[i].country_id}.png"
+                                />
                             </a>
                         </td>
                         <td class="w1">
@@ -80,7 +76,7 @@
                                 src="img/tournament/12/{$team_array[i].tournament_id}.png"
                             />
                         </td>
-                        <td class="w15">
+                        <td class="w25">
                             <a href="tournament_review_profile.php?num={$team_array[i].tournament_id}">
                                 {$team_array[i].tournament_name}
                             </a>

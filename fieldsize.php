@@ -34,35 +34,37 @@ $stadium_sql = $mysqli->query($sql);
 
 $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
 
-if (isset($_POST['length']) &&
-    isset($_POST['width']) &&
+if (isset($_POST['data']) &&
     !$stadium_array[0]['building_end_date'])
 {
-    $length = (int)$_POST['length'];
-    $width  = (int)$_POST['width'];
+    $length = (int)$_POST['data']['length'];
+    $width  = (int)$_POST['data']['width'];
 
-    if (100 <= $length &&
-        110 >= $length &&
-        64 <= $width &&
-        75 >= $width)
+    if (100 > $length ||
+        110 < $length ||
+        64 > $width ||
+        75 < $width)
     {
-        $sql = "INSERT INTO `building`
-                SET `building_buildingtype_id`='5',
-                    `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 1 DAY),
-                    `building_length`='$length',
-                    `building_team_id`='$get_num',
-                    `building_width`='$width'";
-        $mysqli->query($sql);
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Не правильно введены размеры поля.';
 
-        redirect('team_team_information_condition.php?num=' . $get_num);
+        redirect('fieldsize.php?num=' . $get_num);
         exit;
     }
-    else
-    {
-        $error_message = 'Не правильно введены размеры поля';
 
-        $smarty->assign('error_message', $error_message);
-    }
+    $sql = "INSERT INTO `building`
+            SET `building_buildingtype_id`='5',
+                `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 1 DAY),
+                `building_length`='$length',
+                `building_team_id`='$get_num',
+                `building_width`='$width'";
+    $mysqli->query($sql);
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Работы по смене размеров поля начались успешно.';
+
+    redirect('team_team_information_condition.php?num=' . $get_num);
+    exit;
 }
 
 $smarty->assign('header_title', $authorization_team_name);

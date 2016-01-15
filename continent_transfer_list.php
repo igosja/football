@@ -30,7 +30,19 @@ $continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
 
 $continent_name = $continent_array[0]['continent_name'];
 
-$sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
+if (isset($_GET['page']))
+{
+    $page = (int) $_GET['page'];
+}
+else
+{
+    $page = 1;
+}
+
+$offset = ($page - 1) * 30;
+
+$sql = "SELECT SQL_CALC_FOUND_ROWS
+               `buyer`.`team_id` AS `buyer_id`,
                `buyer`.`team_name` AS `buyer_name`,
                `name_name`,
                `player_id`,
@@ -51,13 +63,21 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         LEFT JOIN `team` AS `seller`
         ON `seller`.`team_id`=`transferhistory_seller_id`
         WHERE `transferhistory_season_id`='$igosja_season_id'
-        ORDER BY `transferhistory_price` DESC";
+        ORDER BY `transferhistory_price` DESC, `transferhistory_id` ASC
+        LIMIT $offset, 30";
 $transfer_sql = $mysqli->query($sql);
 
 $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_title', $continent_name);
+$sql = "SELECT FOUND_ROWS() AS `count_page`";
+$count_page = $mysqli->query($sql);
+$count_page = $count_page->fetch_all(MYSQLI_ASSOC);
+$count_page = $count_page[0]['count_page'];
+$count_page = ceil($count_page / 30);
+
 $smarty->assign('num', $get_num);
+$smarty->assign('header_title', $continent_name);
 $smarty->assign('transfer_array', $transfer_array);
+$smarty->assign('count_page', $count_page);
 
 $smarty->display('main.html');

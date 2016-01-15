@@ -2,6 +2,24 @@
     <tr>
         <td class="block-page">
             <p class="header">Рейтинг</p>
+            <table class="w100">
+                <tr>
+                    <td class="right">
+                        <form method="GET" id="page-form">
+                            Старница:
+                            <select name="page" id="page-select">
+                                {section name=i loop=$count_page}
+                                    <option value="{$smarty.section.i.iteration}"
+                                        {if (isset($smarty.get.page) && $smarty.get.page == $smarty.section.i.iteration)}
+                                            selected
+                                        {/if}
+                                    >{$smarty.section.i.iteration}</option>
+                                {/section}
+                            </select>
+                        </form>
+                    </td>
+                </tr>
+            </table>
             <table class="striped w100">
                 <tr>
                     <th class="w1">Ранг</th>
@@ -11,7 +29,13 @@
                 </tr>
                 {section name=i loop=$team_array}
                     <tr>
-                        <td class="center">{$smarty.section.i.iteration}</td>
+                        <td class="center">
+                            {if (isset($smarty.get.page))}
+                                {$smarty.section.i.iteration + ($smarty.get.page - 1) * 30}
+                            {else}
+                                {$smarty.section.i.iteration}
+                            {/if}
+                        </td>
                         <td class="w1">
                             <img
                                 alt="{$team_array[i].team_name}"
@@ -38,7 +62,7 @@
                         </td>
                         <td class="center">
                             <div class="progress">
-                                <div class="progress-bar" style="width: {$team_array[i].team_reputation/$team_array.0.team_reputation*100}%">
+                                <div class="progress-bar" style="width: {$team_array[i].team_reputation / $best_team_array.0.team_reputation * 100}%">
                                     {$smarty.const.SPACE}
                                 </div>
                             </div>

@@ -7,37 +7,44 @@
                     <tr>
                         <td class="right">Имя</td>
                         <td class="left">
-                            <input name="firstname" type="text" value="{$user_array.0.user_firstname}" />
-                            <input name="lastname" type="text" value="{$user_array.0.user_lastname}" />
+                            <input name="data[firstname]" type="text" value="{$user_array.0.user_firstname}" />
+                            <input name="data[lastname]" type="text" value="{$user_array.0.user_lastname}" />
                         </td>
                     </tr>
                     <tr>
                         <td class="right">Пол</td>
                         <td class="left">
-                            <input name="gender" type="radio" value="1" {if (1 == $user_array.0.user_gender)}checked{/if} />
-                            Мужской
-                            <input name="gender" type="radio" value="2" {if (2 == $user_array.0.user_gender)}checked{/if} />
-                            Женский
+                            {section name=i loop=$gender_array}
+                                <input
+                                    name="data[gender]"
+                                    type="radio"
+                                    value="{$gender_array[i].gender_id}"
+                                    {if ($gender_array[i].gender_id == $user_array.0.user_gender)}
+                                        checked
+                                    {/if}
+                                />
+                                {$gender_array[i].gender_name}
+                            {/section}
                         </td>
                     </tr>
                     <tr>
                         <td class="right">Дата рождения</td>
                         <td class="left">
-                            <select name="birth[day]">
+                            <select name="data[birth][day]">
                                 {section name=i loop=31}
                                     <option value="{$smarty.section.i.iteration}"
                                         {if ($smarty.section.i.iteration == $user_array.0.user_birth_day)}selected{/if}
                                     >{$smarty.section.i.iteration}</option>
                                 {/section}
                             </select>
-                            <select name="birth[month]">
+                            <select name="data[birth][month]">
                                 {section name=i loop=12}
                                     <option value="{$smarty.section.i.iteration}"
                                         {if ($smarty.section.i.iteration == $user_array.0.user_birth_month)}selected{/if}
                                     >{$smarty.section.i.iteration}</option>
                                 {/section}
                             </select>
-                            <select name="birth[year]">
+                            <select name="data[birth][year]">
                                 {section name=i max=100 step=-1 loop=$smarty.now|date_format:"%Y"}
                                     <option value="{$smarty.section.i.index}"
                                         {if ($smarty.section.i.index == $user_array.0.user_birth_year)}selected{/if}
@@ -49,7 +56,7 @@
                     <tr>
                         <td class="right">Страна</td>
                         <td class="left">
-                            <select name="country">
+                            <select name="data[country]">
                                 {section name=i loop=$country_array}
                                     <option value="{$country_array[i].country_id}"
                                         {if ($country_array[i].country_id == $user_array.0.user_country_id)}
@@ -65,7 +72,7 @@
                     <tr>
                         <td class="right">Новый пароль</td>
                         <td class="left">
-                            <input name="password" type="text" />
+                            <input name="data[password]" type="text" />
                         </td>
                     </tr>
                     <tr>

@@ -49,7 +49,6 @@ $count_referee = $referee_sql->num_rows;
 if (0 == $count_referee)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 

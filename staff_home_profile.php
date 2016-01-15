@@ -41,7 +41,6 @@ $count_staff = $staff_sql->num_rows;
 if (0 == $count_staff)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -58,7 +57,7 @@ $sql = "SELECT `attributestaff_name`,
         LEFT JOIN `attributechapterstaff`
         ON `attributechapterstaff_id`=`attributestaff_attributechapterstaff_id`
         WHERE `staff_id`='$get_num'
-        ORDER BY `attributechapterstaff_id` ASC";
+        ORDER BY `attributechapterstaff_id` ASC, `attributestaff_id` ASC";
 $attribute_sql = $mysqli->query($sql);
 
 $attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);

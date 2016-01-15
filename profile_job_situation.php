@@ -9,7 +9,6 @@ if (isset($authorization_id))
 else
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -65,17 +64,17 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         WHERE `standing_season_id`='$igosja_season_id'
         AND `tournament_tournamenttype_id`='2'
         AND $sql_country
-        ORDER BY `user_id` ASC, `team_finance` DESC
+        ORDER BY `user_id` ASC, `team_finance` DESC, `team_id` ASC
         LIMIT $offset, 30";
 $team_sql = $mysqli->query($sql);
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT FOUND_ROWS() AS `count_team`";
-$count_team = $mysqli->query($sql);
-$count_team = $count_team->fetch_all(MYSQLI_ASSOC);
-$count_team = $count_team[0]['count_team'];
-$count_team = ceil($count_team / 30);
+$sql = "SELECT FOUND_ROWS() AS `count_page`";
+$count_page = $mysqli->query($sql);
+$count_page = $count_page->fetch_all(MYSQLI_ASSOC);
+$count_page = $count_page[0]['count_page'];
+$count_page = ceil($count_page / 30);
 
 $sql = "SELECT `country_id`,
                `country_name`
@@ -90,6 +89,6 @@ $smarty->assign('num', $authorization_id);
 $smarty->assign('header_title', $authorization_login);
 $smarty->assign('team_array', $team_array);
 $smarty->assign('country_array', $country_array);
-$smarty->assign('count_team', $count_team);
+$smarty->assign('count_page', $count_page);
 
 $smarty->display('main.html');

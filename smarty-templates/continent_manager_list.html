@@ -2,6 +2,24 @@
     <tr>
         <td class="block-page">
             <p class="header">Менеджеры</p>
+            <table class="w100">
+                <tr>
+                    <td class="right">
+                        <form method="GET" id="page-form">
+                            Старница:
+                            <select name="page" id="page-select">
+                                {section name=i loop=$count_page}
+                                    <option value="{$smarty.section.i.iteration}"
+                                        {if (isset($smarty.get.page) && $smarty.get.page == $smarty.section.i.iteration)}
+                                            selected
+                                        {/if}
+                                    >{$smarty.section.i.iteration}</option>
+                                {/section}
+                            </select>
+                        </form>
+                    </td>
+                </tr>
+            </table>
             <table class="striped w100">
                 <tr>
                     <th class="w1">Ранг</th>
@@ -12,7 +30,13 @@
                 </tr>
                 {section name=i loop=$user_array}
                     <tr>
-                        <td class="center">{$smarty.section.i.iteration}</td>
+                        <td class="center">
+                            {if (isset($smarty.get.page))}
+                                {$smarty.section.i.iteration + ($smarty.get.page - 1) * 30}
+                            {else}
+                                {$smarty.section.i.iteration}
+                            {/if}
+                        </td>
                         <td>
                             <a href="player_home_profile.php?num={$user_array[i].user_id}">
                                 {$user_array[i].user_login}

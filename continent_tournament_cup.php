@@ -22,7 +22,6 @@ $count_continent = $continent_sql->num_rows;
 if (0 == $count_continent)
 {
     $smarty->display('wrong_page.html');
-    
     exit;
 }
 

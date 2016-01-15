@@ -8,13 +8,16 @@
                 </tr>
                 {section name=i loop=$note_array}
                     <tr>
-                        <td class="note-view" data-id="{$note_array[i].note_id}">
-                            <span class="note-title">{$note_array[i].note_title}</span>
+                        <td>{$note_array[i].note_title}</td>
+                        <td class="right w10">
+                            <a href="javascript:;" class="note-view link-img link-eye" data-id="{$note_array[i].note_id}"></a>
+                            <a href="javascript:;" class="note-edit link-img link-pencil" data-id="{$note_array[i].note_id}"></a>
+                            <a href="profile_history_note.php?note={$note_array[i].note_id}" class="link-img link-delete"></a>
                         </td>
-                        <td class="right w20">
-                            <button class="note-edit" data-id="{$note_array[i].note_id}">Редактировать</button>
-                            <button class="note-delete" data-id="{$note_array[i].note_id}">Удалить</button>
-                        </td>
+                    </tr>
+                {sectionelse}
+                    <tr>
+                        <td colspan="2">Нет заметок</td>
                     </tr>
                 {/section}
             </table>
@@ -34,7 +37,7 @@
                     <td id="note-text"></td>
                 </tr>
             </table>
-            <form action="" method="POST" id="note-form" class="none">
+            <form method="POST" id="note-form" class="none">
                 <table class="w100">
                     <tr>
                         <td>

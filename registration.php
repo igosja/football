@@ -2,11 +2,22 @@
 
 include('include/include.php');
 
-if (isset($_POST['registration_login']))
+if (isset($_POST['data']))
 {
-    $registration_login     = $_POST['registration_login'];
-    $registration_email     = $_POST['registration_email'];
-    $registration_password  = $_POST['registration_password'];
+    $registration_login     = $_POST['data']['registration_login'];
+    $registration_email     = $_POST['data']['registration_email'];
+    $registration_password  = $_POST['data']['registration_password'];
+
+    if (empty($registration_login) ||
+        empty($registration_email) ||
+        empty($registration_password))
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Заполнены не все поля.';
+
+        redirect('registration.php');
+        exit;
+    }
 
     $sql = "SELECT `user_id`
             FROM `user`
@@ -22,39 +33,40 @@ if (isset($_POST['registration_login']))
 
     $prepare->close();
 
-    if (0 == $count_check)
+    if (0 != $count_check)
     {
-        $password = f_igosja_chiper_password($registration_password);
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Пользователь с таким логином/email-ом уже зарегистрирован.';
 
-        $sql = "INSERT INTO `user`
-                SET `user_login`=?,
-                    `user_email`=?,
-                    `user_password`=?,
-                    `user_registration_date`=SYSDATE()";
-        $prepare = $mysqli->prepare($sql);
-        $prepare->bind_param('sss', $registration_login, $registration_email, $password);
-        $prepare->execute();
-        $prepare->close();
-
-        $user_id    = $mysqli->insert_id;
-        $code       = f_igosja_chiper_password($user_id);
-        $href       = SITE_URL . '/activation.php?id=' . $user_id . '&code=' . $code;
-        $subject    = 'Регистрация в футбольном онлайн менеджере';
-        $message    = 'Для завершения регистрации перейдите по следующей ссылке - ' . $href;
-        $from       = 'From: admin@' . SITE_URL;
-        $mail       = mail($registration_email, $subject, $message, $from);
-
-        $success_message = 'Профиль создан успешно.<br/>
-                            Для завершения регистрации перейдите по ссылке, которая выслана вам на электронную почту.';
-
-        $smarty->assign('success_message', $success_message);
+        redirect('registration.php');
+        exit;
     }
-    else
-    {
-        $error_message = 'Пользователь с таким логином/email-ом уже зарегистрирован.';
 
-        $smarty->assign('error_message', $error_message);
-    }
+    $password = f_igosja_chiper_password($registration_password);
+
+    $sql = "INSERT INTO `user`
+            SET `user_login`=?,
+                `user_email`=?,
+                `user_password`=?,
+                `user_registration_date`=SYSDATE()";
+    $prepare = $mysqli->prepare($sql);
+    $prepare->bind_param('sss', $registration_login, $registration_email, $password);
+    $prepare->execute();
+    $prepare->close();
+
+    $user_id    = $mysqli->insert_id;
+    $code       = f_igosja_chiper_password($user_id);
+    $href       = SITE_URL . '/activation.php?id=' . $user_id . '&code=' . $code;
+    $subject    = 'Регистрация в футбольном онлайн менеджере';
+    $message    = 'Для завершения регистрации перейдите по следующей ссылке - ' . $href;
+    $from       = 'From: noreply@' . SITE_URL;
+    $mail       = mail($registration_email, $subject, $message, $from);
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Профиль создан успешно.<br/>Для завершения регистрации перейдите по ссылке, которая выслана вам на электронную почту.';
+
+    redirect('registration.php');
+    exit;
 }
 
 $smarty->assign('header_title', 'Регистрация');

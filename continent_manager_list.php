@@ -30,7 +30,19 @@ $continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
 
 $continent_name = $continent_array[0]['continent_name'];
 
-$sql = "SELECT `country_id`,
+if (isset($_GET['page']))
+{
+    $page = (int) $_GET['page'];
+}
+else
+{
+    $page = 1;
+}
+
+$offset = ($page - 1) * 30;
+
+$sql = "SELECT SQL_CALC_FOUND_ROWS
+               `country_id`,
                `country_name`,
                `team_id`,
                `team_name`,
@@ -43,13 +55,21 @@ $sql = "SELECT `country_id`,
         LEFT JOIN `country`
         ON `country_id`=`user_country_id`
         WHERE `user_id`!='0'
-        ORDER BY `user_reputation` DESC";
+        ORDER BY `user_reputation` DESC, `user_id` ASC
+        LIMIT $offset, 30";
 $user_sql = $mysqli->query($sql);
 
 $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_title', $continent_name);
+$sql = "SELECT FOUND_ROWS() AS `count_page`";
+$count_page = $mysqli->query($sql);
+$count_page = $count_page->fetch_all(MYSQLI_ASSOC);
+$count_page = $count_page[0]['count_page'];
+$count_page = ceil($count_page / 30);
+
 $smarty->assign('num', $get_num);
+$smarty->assign('header_title', $continent_name);
 $smarty->assign('user_array', $user_array);
+$smarty->assign('count_page', $count_page);
 
 $smarty->display('main.html');

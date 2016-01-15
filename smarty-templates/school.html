@@ -18,8 +18,16 @@
                         <td>{$school_array.0.team_school_level}</td>
                     </tr>
                     <tr>
-                        <td class="center"><a href="school.php?level=1">Увеличить уровень</a></td>
-                        <td class="center"><a href="school.php?level=0">Уменьшить уровень</a></td>
+                        <td class="right">Стоимоть строительства следующего уровня</td>
+                        <td>{$price|f_igosja_money}</td>
+                    </tr>
+                    <tr>
+                        <td class="right">Баланс клуба</td>
+                        <td>{$team_finance|f_igosja_money}</td>
+                    </tr>
+                    <tr>
+                        <td class="right"><button><a href="school.php?level=1">Увеличить уровень</a></button></td>
+                        <td><button><a href="school.php?level=0">Уменьшить уровень</a></button></td>
                     </tr>
                 </table>
             {/if}

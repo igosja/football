@@ -5,8 +5,8 @@
             <table class="bordered w100">
                 {section name=i loop=$rule_array}
                     <tr>
-                        <td class="bordered rule" data-id="{$rule_array[i].rule_id}">
-                            {$rule_array[i].rule_name}
+                        <td>
+                            <a href="javascript:;" class="bordered rule" data-id="{$rule_array[i].rule_id}">{$rule_array[i].rule_name}</a>
                         </td>
                     </tr>
                     <tr style="display: none;" id="rule-{$rule_array[i].rule_id}" class="rule-text">

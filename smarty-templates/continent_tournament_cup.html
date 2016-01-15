@@ -5,51 +5,51 @@
             <table class="w100">
                 <tr>
                     {section name=i loop=$tournament_array max=3}
-                    <td class="33">
-                        <table class="striped w100">
-                            <tr>
-                                <td class="center">
-                                    <img
-                                        alt="{$tournament_array[i].tournament_name}"
-                                        class="img-90"
-                                        src="img/tournament/90/{$tournament_array[i].tournament_id}.png"
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    <img
-                                        alt="{$tournament_array[i].country_name}"
-                                        class="img-12"
-                                        src="img/flag/12/{$tournament_array[i].country_id}.png"
-                                    />
-                                    {$tournament_array[i].country_name}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    <img
-                                        alt="{$tournament_array[i].tournament_name}"
-                                        class="img-12"
-                                        src="img/tournament/12/{$tournament_array[i].tournament_id}.png"
-                                    />
-                                    <a href="tournament_review_profile.php?num={$tournament_array[i].tournament_id}">
-                                        {$tournament_array[i].tournament_name}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    Текущий обладатель титула: -
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    Рейтинг: {$tournament_array[i].tournament_reputation|f_igosja_five_star:"12"}
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
+                        <td class="33">
+                            <table class="striped w100">
+                                <tr>
+                                    <td class="center">
+                                        <img
+                                            alt="{$tournament_array[i].tournament_name}"
+                                            class="img-90"
+                                            src="img/tournament/90/{$tournament_array[i].tournament_id}.png"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="center">
+                                        <img
+                                            alt="{$tournament_array[i].country_name}"
+                                            class="img-12"
+                                            src="img/flag/12/{$tournament_array[i].country_id}.png"
+                                        />
+                                        {$tournament_array[i].country_name}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="center">
+                                        <img
+                                            alt="{$tournament_array[i].tournament_name}"
+                                            class="img-12"
+                                            src="img/tournament/12/{$tournament_array[i].tournament_id}.png"
+                                        />
+                                        <a href="tournament_review_profile.php?num={$tournament_array[i].tournament_id}">
+                                            {$tournament_array[i].tournament_name}
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="center">
+                                        Текущий обладатель титула: -
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="center">
+                                        Рейтинг: {$tournament_array[i].tournament_reputation|f_igosja_five_star:"12"}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
                     {/section}
                 </tr>
             </table>

@@ -5,7 +5,6 @@ include ('include/include.php');
 if (!isset($authorization_id))
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -27,7 +26,7 @@ $career_array = $career_sql->fetch_all(MYSQLI_ASSOC);
 $sql = "SELECT `user_buy_max`,
                `user_buy_player`,
                `user_buy_price`,
-               `user_country`,
+               `user_national`,
                `user_sell_max`,
                `user_sell_player`,
                `user_sell_price`,
@@ -39,31 +38,6 @@ $sql = "SELECT `user_buy_max`,
         WHERE `user_id`='$authorization_id'
         LIMIT 1";
 $summary_sql = $mysqli->query($sql);
-
-$count_summary = $summary_sql->num_rows;
-
-if (0 == $count_summary)
-{
-    $sql = "INSERT INTO `user`
-            SET `user_user_id`='$authorization_id'";
-    $mysqli->query($sql);
-
-    $sql = "SELECT `user_buy_max`,
-                   `user_buy_player`,
-                   `user_buy_price`,
-                   `user_country`,
-                   `user_sell_max`,
-                   `user_sell_player`,
-                   `user_sell_price`,
-                   `user_team`,
-                   `user_team_time_max`,
-                   `user_team_time_min`,
-                   `user_trophy`
-            FROM `user`
-            WHERE `user_user_id`='$authorization_id'
-            LIMIT 1";
-    $summary_sql = $mysqli->query($sql);
-}
 
 $user_array = $summary_sql->fetch_all(MYSQLI_ASSOC);
 

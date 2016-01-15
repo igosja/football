@@ -5,7 +5,6 @@ include ('include/include.php');
 if (!isset($authorization_id))
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -37,8 +36,10 @@ if (isset($_POST['note_id']))
     $prepare->execute();
     $prepare->close();
 
-    redirect('profile_history_note.php');
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Данные успешно сохранены';
 
+    redirect('profile_history_note.php');
     exit;
 }
 elseif (isset($_GET['note']))
@@ -50,8 +51,10 @@ elseif (isset($_GET['note']))
             AND `note_id`='$note_id'";
     $mysqli->query($sql);
 
-    redirect('profile_history_note.php');
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Данные успешно удалены';
 
+    redirect('profile_history_note.php');
     exit;
 }
 

@@ -111,7 +111,7 @@ $(document).ready(function($)
                 success: function(data)
                 {
                     $('#note-title').html('<h1>' + data.note_array[0].note_title + '</h1>');
-                    $('#note-text').html(data.note_array[0].note_text);
+                    $('#note-text').html(data.note_array[0].note_text_nl2br);
 
                     $('#note-form').addClass('none');
                     $('#note-table').removeClass('none');
@@ -119,12 +119,6 @@ $(document).ready(function($)
                 }
             }
         );
-    });
-
-    $('.note-delete').on('click', function()
-    //Удаление заметки
-    {
-        window.location.href = '/profile_history_note.php?note=' + $(this).data('id');
     });
 
     if ($(input_on_page_array).is('#tactic-player-formation'))
@@ -1245,8 +1239,6 @@ $(document).ready(function($)
     //Правила
     {
         var rule_id = $(this).data('id');
-
-        $('.rule-text').hide();
-        $('#rule-' + rule_id).show();
+        $('#rule-' + rule_id).toggle('slow');
     });
 });

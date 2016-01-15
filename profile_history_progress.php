@@ -9,7 +9,6 @@ if (isset($authorization_id))
 else
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
