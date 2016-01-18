@@ -46,7 +46,7 @@
                 </tr>
                 {section name=i loop=$game_array}
                     <tr>
-                        <td>{$game_array[i].shedule_date|date_format:"%d.%m.%Y"}</td>
+                        <td>{$game_array[i].shedule_date|f_igosja_ufu_date}</td>
                         <td>
                             <a href="team_team_review_profile.php?num={$game_array[i].team_id}">
                                 {$game_array[i].team_name}

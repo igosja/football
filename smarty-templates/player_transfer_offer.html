@@ -1,50 +1,91 @@
 <table class="block-table w100">
     <tr>
-        <td class="block-page" id="offer-info">
+        <td class="block-page">
             <p class="header">Сделать предложение</p>
-            <table class="striped w100">
-                {if (isset($authorization_team_id) &&
-                    $authorization_team_id != $team_id &&
-                    3 != $player_array.0.player_statustransfer_id)}
-                    <tr>
-                        <td class="right">Вид предложения</td>
-                        <td class="w50">
-                            <select id="offer-type">
-                                {section name=i loop=$offertype_array}
-                                    <option value="{$offertype_array[i].offertype_id}">
-                                        {$offertype_array[i].offertype_name}
-                                    </option>
-                                {/section}
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="right">Выплата</td>
-                        <td>
-                            <input type="text" id="offer-price" value="{$player_array.0.player_transfer_price}">
-                        </td>
-                    </tr>
-                    <tr id="tr-offer-period" style="display:none;">
-                        <td class="right">Срок аренды (сезонов)</td>
-                        <td>
-                            <input type="text" id="offer-period" value="0">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="center"><button id="offer-submit" data-player="{$num}">Сделать предложение</button></td>
-                    </tr>
-                {else}
-                    <tr>
-                        <td class="center"><h5>Вы не можете предложить контракт этому игроку</h5></td>
-                    </tr>
-                {/if}
-            </table>
+            <form method="POST">
+                <table class="striped w100">
+                    {if (isset($transfer.0.team_id))}
+                        <tr>
+                            <td class="center">
+                                <h6>
+                                    Игрок уже согласовал свой трансфер в команду
+                                    <a href="team_team_review_profile.php?num={$transfer.0.team_id}">
+                                        {$transfer.0.team_name}
+                                    </a>
+                                </h6>
+                            </td>
+                        </tr>
+                    {elseif (3 == $player_array.0.player_statustransfer_id)}
+                        <tr>
+                            <td class="center">
+                                <h6>
+                                    Этот игрок не продается
+                                </h6>
+                            </td>
+                        </tr>
+                    {elseif (isset($authorization_team_id) &&
+                            $authorization_team_id == $player_array.0.team_id)}
+                        <tr>
+                            <td class="center">
+                                <h6>
+                                    Нельзя купить своего игрока
+                                </h6>
+                            </td>
+                        </tr>
+                    {elseif (!isset($authorization_team_id))}
+                        <tr>
+                            <td class="center">
+                                <h6>
+                                    Вы не можете предложить трансфер этому игроку
+                                </h6>
+                            </td>
+                        </tr>
+                    {else}
+                        <tr>
+                            <td class="right">Вид предложения</td>
+                            <td class="w50">
+                                <select name="data[offer_type]">
+                                    {section name=i loop=$offertype_array}
+                                        <option value="{$offertype_array[i].offertype_id}">
+                                            {$offertype_array[i].offertype_name}
+                                        </option>
+                                    {/section}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="right">Выплата</td>
+                            <td class="vcenter">
+                                <input name="data[offer_price]" type="text" value="{$player_array.0.player_transfer_price}"> $
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="center">
+                                <input type="submit" value="Сделать предложение">
+                            </td>
+                        </tr>
+                    {/if}
+                </table>
+            </form>
         </td>
         <td class="block-page w50">
             <p class="header">Информация</p>
             <table class="striped w100">
                 <tr>
-                    <td class="w50">Трансферный статус</td>
+                    <td class="w50">Команда</td>
+                    <td>
+                        <img
+                            alt="{$player_array.0.team_name}"
+                            class="img-12"
+                            src="img/team/12/{$player_array.0.team_id}.png"
+                        />
+                        <a href="team_team_review_profile.php?num={$player_array.0.team_id}">
+                            {$player_array.0.team_name}
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Трансферный статус</td>
                     <td>{$player_array.0.statustransfer_name}</td>
                 </tr>
                 <tr>

@@ -23,13 +23,95 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
+
+if (isset($_POST['data']))
+{
+    $data = $_POST['data'];
+
+    foreach ($data['corner_left'] as $key => $value)
+    {
+        $corner_left    = (int) $key;
+        $player_id      = (int) $value;
+
+        $sql = "UPDATE `team`
+                SET `team_corner_left_player_id_" . $corner_left . "`='$player_id'
+                WHERE `team_id`='$get_num'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    foreach ($data['corner_right'] as $key => $value)
+    {
+        $corner_right   = (int) $key;
+        $player_id      = (int) $value;
+
+        $sql = "UPDATE `team`
+                SET `team_corner_right_player_id_" . $corner_right . "`='$player_id'
+                WHERE `team_id`='$get_num'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    foreach ($data['freekick_left'] as $key => $value)
+    {
+        $freekick_left  = (int) $key;
+        $player_id      = (int) $value;
+
+        $sql = "UPDATE `team`
+                SET `team_freekick_left_player_id_" . $freekick_left . "`='$player_id'
+                WHERE `team_id`='$get_num'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    foreach ($data['freekick_right'] as $key => $value)
+    {
+        $freekick_right = (int) $key;
+        $player_id      = (int) $value;
+
+        $sql = "UPDATE `team`
+                SET `team_freekick_right_player_id_" . $freekick_right . "`='$player_id'
+                WHERE `team_id`='$get_num'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    foreach ($data['out_left'] as $key => $value)
+    {
+        $out_left   = (int) $key;
+        $player_id  = (int) $value;
+
+        $sql = "UPDATE `team`
+                SET `team_out_left_player_id_" . $out_left . "`='$player_id'
+                WHERE `team_id`='$get_num'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    foreach ($data['out_right'] as $key => $value)
+    {
+        $out_right  = (int) $key;
+        $player_id  = (int) $value;
+
+        $sql = "UPDATE `team`
+                SET `team_out_right_player_id_" . $out_right . "`='$player_id'
+                WHERE `team_id`='$get_num'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('team_lineup_tactic_standard.php?num=' . $get_num);
+    exit;
+}
 
 $sql = "SELECT `corner`,
                `free_kick`,

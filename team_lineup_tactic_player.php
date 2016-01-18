@@ -23,7 +23,26 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
+    exit;
+}
 
+if (isset($_POST['data']))
+{
+    $data = $_POST['data'];
+
+    $role_id        = (int) $data['role'];
+    $position_id    = (int) $data['position'];
+
+    $sql = "UPDATE `lineupcurrent`
+            SET `lineupcurrent_role_id_" . $position_id . "`='$role_id'
+            WHERE `lineupcurrent_team_id`='$get_num'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('team_lineup_tactic_player.php?num=' . $get_num);
     exit;
 }
 

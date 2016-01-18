@@ -22,7 +22,6 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -199,12 +198,9 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `team_id`=`player_team_id`
         LEFT JOIN `country`
         ON `player_country_id`=`country_id`
-        LEFT JOIN `playerposition`
-        ON `playerposition_player_id`=`player_id`
         LEFT JOIN `position`
-        ON `playerposition_position_id`=`position_id`
+        ON `player_position_id`=`position_id`
         WHERE `player_team_id`!='$get_num'
-        AND `playerposition_value`='100'
         AND `player_statustransfer_id`='2'
         AND `player_age` BETWEEN '$sql_age_min' AND '$sql_age_max'
         AND `player_weight` BETWEEN '$sql_weight_min' AND '$sql_weight_max'
@@ -214,7 +210,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         AND `surname_name` LIKE ?
         AND $sql_position
         AND $sql_country
-        ORDER BY `player_transfer_price` DESC
+        ORDER BY `player_transfer_price` DESC, `player_id` ASC
         LIMIT $offset, 30";
 $like    = '%' . $sql_surname . '%';
 $prepare = $mysqli->prepare($sql);

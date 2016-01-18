@@ -23,13 +23,35 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
+
+if (isset($_POST['data']))
+{
+    $data = $_POST['data'];
+
+    foreach ($data as $key => $value)
+    {
+        $penalty_id = (int) $key;
+        $player_id  = (int) $value;
+
+        $sql = "UPDATE `team`
+                SET `team_penalty_player_id_" . $penalty_id . "`='$player_id'
+                WHERE `team_id`='$get_num'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('team_lineup_tactic_penalty.php?num=' . $get_num);
+    exit;
+}
 
 $sql = "SELECT `composure`,
                `name_name`,
@@ -94,7 +116,7 @@ $sql = "SELECT `name_name`,
         ) AS `t2`
         ON `t2`.`playerattribute_player_id`=`player_id`
         WHERE `player_team_id`='$get_num'
-        ORDER BY `penalty` DESC, `composure` DESC";
+        ORDER BY `penalty` DESC, `composure` DESC, `player_id` ASC";
 $penaltyplayer_sql = $mysqli->query($sql);
 
 $penaltyplayer_array = $penaltyplayer_sql->fetch_all(MYSQLI_ASSOC);

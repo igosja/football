@@ -25,14 +25,22 @@
                                         </tr>
                                     </table>
                                 </td>
-                                <td class="center vcenter"><h5>{$position_array.0.position_description}</h5></td>
+                                <td class="center vcenter">
+                                    <h5>
+                                        {$position_array.0.position_description}
+                                    </h5>
+                                </td>
                                 <td class="w20">
                                     <table class="right w100">
                                         <tr>
                                             <td>Возраст</td>
                                         </tr>
                                         <tr>
-                                            <td><h6>{$player_array.0.player_age}</h6></td>
+                                            <td>
+                                                <h6>
+                                                    {$player_array.0.player_age}
+                                                </h6>
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -41,7 +49,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><h6>{$smarty.const.SPACE}</h6></td>
+                    <td>{$smarty.const.SPACE}</td>
                 </tr>
                 <tr>
                     <td class="center">
@@ -52,13 +60,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><h6>{$smarty.const.SPACE}</h6></td>
+                    <td>{$smarty.const.SPACE}</td>
                 </tr>
                 <tr>
                     <td>
                         <table class="center w100">
                             <tr>
-                                <td class="w50">
+                                <td class="vcenter w50">
                                     <table class="w100">
                                         <tr>
                                             <td>Игры: {$player_array.0.count_game}</td>
@@ -85,7 +93,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><h6>{$smarty.const.SPACE}</h6></td>
+                    <td>{$smarty.const.SPACE}</td>
                 </tr>
                 <tr>
                     <td>
@@ -102,7 +110,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><h6>{$smarty.const.SPACE}</h6></td>
+                    <td>{$smarty.const.SPACE}</td>
                 </tr>
                 <tr>
                     <td>
@@ -130,27 +138,27 @@
             <p class="header">Характеристики</p>
             <table class="w100">
                 <tr>
-                    {section name=i loop=$player_array}
-                        {if (!isset($player_array[i.index_prev].attributechapter_name) ||
-                             $player_array[i.index_prev].attributechapter_name != $player_array[i].attributechapter_name)}
+                    {section name=i loop=$attribute_array}
+                        {if (!isset($attribute_array[i.index_prev].attributechapter_name) ||
+                             $attribute_array[i.index_prev].attributechapter_name != $attribute_array[i].attributechapter_name)}
                             <td>
                                 <table class="striped w100">
                                     <tr>
-                                        <th colspan="2">{$player_array[i].attributechapter_name}</th>
+                                        <th colspan="2">{$attribute_array[i].attributechapter_name}</th>
                                     </tr>
                             {/if}
                                 <tr>
-                                    <td>{$player_array[i].attribute_name}</td>
+                                    <td>{$attribute_array[i].attribute_name}</td>
                                     <td class="w25">
                                         <div class="progress">
-                                            <div class="progress-bar" style="width: {$player_array[i].playerattribute_value}%">
+                                            <div class="progress-bar" style="width: {$attribute_array[i].playerattribute_value}%">
                                                 {$smarty.const.SPACE}
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-                            {if (!isset($player_array[i.index_next].attributechapter_name) ||
-                                $player_array[i.index_next].attributechapter_name != $player_array[i].attributechapter_name)}
+                            {if (!isset($attribute_array[i.index_next].attributechapter_name) ||
+                                $attribute_array[i.index_next].attributechapter_name != $attribute_array[i].attributechapter_name)}
                                 </table>
                             </td>
                         {/if}
@@ -169,6 +177,7 @@
                                 alt="{$position_array[i].position_description}"
                                 src="img/position/{$position_array[i].playerposition_value|f_igosja_position_icon}.png"
                                 style="position: absolute; bottom: {$position_array[i].position_coordinate_x*15-10}px; left: {1+$position_array[i].position_coordinate_y*15}px;"
+                                title="{$position_array[i].position_description}"
                             />
                         {/section}
                     </td>
@@ -180,7 +189,7 @@
                             </tr>
                             {section name=i loop=$position_array}
                                 <tr>
-                                    <td>{$position_array[i].position_description}</td>
+                                    <td>{$position_array[i].position_name}</td>
                                     <td class="right">{$position_array[i].playerposition_value} %</td>
                                 </tr>
                             {/section}
@@ -201,9 +210,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="progress">
-                            <div class="{$player_array.0.player_condition|f_igosja_progress_class}" style="width: {$player_array.0.player_condition}%">
-                                {$smarty.const.SPACE}
-                            </div>
+                            <div class="{$player_array.0.player_condition|f_igosja_progress_class}" style="width: {$player_array.0.player_condition}%"></div>
                         </div>
                     </td>
                 </tr>
@@ -217,9 +224,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="progress">
-                            <div class="{$player_array.0.player_practice|f_igosja_progress_class}" style="width: {$player_array.0.player_practice}%">
-                                {$smarty.const.SPACE}
-                            </div>
+                            <div class="{$player_array.0.player_practice|f_igosja_progress_class}" style="width: {$player_array.0.player_practice}%"></div>
                         </div>
                     </td>
                 </tr>

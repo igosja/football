@@ -52,8 +52,8 @@
             <table class="striped w100">
                 <tr>
                     <th>Имя</th>
-                    <th class="w10">Должность</th>
-                    <th colspan="2">Нац</th>
+                    <th class="w1">Нац</th>
+                    <th class="w15">Должность</th>
                     <th class="w10">Репутация</th>
                     <th class="w10">Зарплата</th>
                 </tr>
@@ -64,19 +64,17 @@
                                 {$staff_array[i].name_name} {$staff_array[i].surname_name}
                             </a>
                         </td>
-                        <td>{$staff_array[i].staffpost_name}</td>
-                        <td class="w1">
-                            <img
-                                alt="{$staff_array[i].country_name}"
-                                class="img-12"
-                                src="img/flag/12/{$staff_array[i].country_id}.png"
-                            />
-                        </td>
-                        <td class="w10">
+                        <td>
                             <a href="national_team_review_profile?num={$staff_array[i].country_id}">
-                                {$staff_array[i].country_name}
+                                <img
+                                    alt="{$staff_array[i].country_name}"
+                                    class="img-12"
+                                    src="img/flag/12/{$staff_array[i].country_id}.png"
+                                    title="{$staff_array[i].country_name}"
+                                />
                             </a>
                         </td>
+                        <td>{$staff_array[i].staffpost_name}</td>
                         <td class="center">{$staff_array[i].staff_reputation|f_igosja_five_star:"12"}</td>
                         <td class="right">{$staff_array[i].staff_salary|f_igosja_money}</td>
                     </tr>

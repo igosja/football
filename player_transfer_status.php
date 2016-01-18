@@ -12,6 +12,7 @@ else
 }
 
 $sql = "SELECT `name_name`,
+               `player_position_id`,
                `player_price`,
                `player_salary`,
                `player_statusrent_id`,
@@ -46,14 +47,109 @@ $count_player = $player_sql->num_rows;
 if (0 == $count_player)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-$team_id        = $player_array[0]['team_id'];
-$team_name      = $player_array[0]['team_name'];
+$team_id = $player_array[0]['team_id'];
+
+if (isset($_POST['data']) &&
+    $team_id == $authorization_team_id)
+{
+    $statusteam_id      = (int) $_POST['data']['statusteam'];
+    $statusrent_id      = (int) $_POST['data']['statusrent'];
+    $statustransfer_id  = (int) $_POST['data']['statustransfer'];
+    $transfer_price     = (int) $_POST['data']['transfer_price'];
+
+    if (2 == $statustransfer_id)
+    {
+        $sql = "SELECT COUNT(`player_id`) AS `count_player`
+                FROM `player`
+                WHERE `player_team_id`='$team_id'
+                AND `player_statustransfer_id`='2'
+                AND `player_id`!='$get_num'";
+        $count_sql = $mysqli->query($sql);
+
+        $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+        $count = $count_array[0]['count_player'];
+
+        if (5 <= $count)
+        {
+            $_SESSION['message_class']  = 'error';
+            $_SESSION['message_text']   = 'Нельзя выставить на трансфер более 5 игроков.';
+
+            redirect('player_transfer_status.php?num=' . $get_num);
+            exit;
+        }
+
+        $position_id = $player_array[0]['player_position_id'];
+
+        if (1 == $position_id)
+        {
+            $sql = "SELECT COUNT(`player_id`) AS `count_player`
+                    FROM `player`
+                    WHERE `player_team_id`='$team_id'
+                    AND `player_statustransfer_id`!='2'
+                    AND `player_position_id`='1'
+                    AND `player_id`!='$get_num'";
+            $count_sql = $mysqli->query($sql);
+
+            $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+            $count = $count_array[0]['count_player'];
+
+            if (2 > $count)
+            {
+                $_SESSION['message_class']  = 'error';
+                $_SESSION['message_text']   = 'В команде должно остаться не менее 2 вратарей.';
+
+                redirect('player_transfer_status.php?num=' . $get_num);
+                exit;
+            }
+        }
+        else
+        {
+            $sql = "SELECT COUNT(`player_id`) AS `count_player`
+                    FROM `player`
+                    WHERE `player_team_id`='$team_id'
+                    AND `player_statustransfer_id`!='2'
+                    AND `player_position_id`!='1'
+                    AND `player_id`!='$get_num'";
+            $count_sql = $mysqli->query($sql);
+
+            $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+            $count = $count_array[0]['count_player'];
+
+            if (16 > $count)
+            {
+                $_SESSION['message_class']  = 'error';
+                $_SESSION['message_text']   = 'В команде должно остаться не менее 16 полевых игроков.';
+
+                redirect('player_transfer_status.php?num=' . $get_num);
+                exit;
+            }
+        }
+    }
+
+    $sql = "UPDATE `player`
+            SET `player_statustransfer_id`='$statustransfer_id',
+                `player_statusrent_id`='$statusrent_id',
+                `player_statusteam_id`='$statusteam_id',
+                `player_transfer_price`='$transfer_price'
+            WHERE `player_id`='$get_num'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('player_transfer_status.php?num=' . $get_num);
+    exit;
+}
+
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
 $header_2_title = $player_name . ' ' . $player_surname;
@@ -92,15 +188,14 @@ $statustransfer_array = $statustransfer_sql->fetch_all(MYSQLI_ASSOC);
 $sql = "SELECT `statusrent_id`,
                `statusrent_name`
         FROM `statusrent`
+        WHERE `statusrent_status`='1'
         ORDER BY `statusrent_id` ASC";
 $statusrent_sql = $mysqli->query($sql);
 
 $statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('team_id', $team_id);
-$smarty->assign('team_name', $team_name);
-$smarty->assign('header_title', $header_2_title);
 $smarty->assign('num', $get_num);
+$smarty->assign('header_title', $header_2_title);
 $smarty->assign('player_array', $player_array);
 $smarty->assign('playeroffer_array', $playeroffer_array);
 $smarty->assign('statusteam_array', $statusteam_array);

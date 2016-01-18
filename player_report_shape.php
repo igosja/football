@@ -31,14 +31,11 @@ $count_player = $player_sql->num_rows;
 if (0 == $count_player)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-$team_id        = $player_array[0]['team_id'];
-$team_name      = $player_array[0]['team_name'];
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
 $header_2_title = $player_name . ' ' . $player_surname;
@@ -133,10 +130,8 @@ $total_statistic_sql = $mysqli->query($sql);
 
 $total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('team_id', $team_id);
-$smarty->assign('team_name', $team_name);
-$smarty->assign('header_title', $header_2_title);
 $smarty->assign('num', $get_num);
+$smarty->assign('header_title', $header_2_title);
 $smarty->assign('mark_array', $mark_array);
 $smarty->assign('game_array', $game_array);
 $smarty->assign('statistic_array', $statistic_array);

@@ -28,6 +28,7 @@ $sql = "SELECT `captain_country_id`,
                `tournament_name`,
                `user_country_id`,
                `user_country_name`,
+               `user_id`,
                `user_login`,
                `vicecaptain_country_id`,
                `vicecaptain_country_name`,
@@ -90,7 +91,7 @@ $sql = "SELECT `captain_country_id`,
         ) AS `t3`
         ON `vicecaptain_id`=`team_captain_player_id_2`
         WHERE `team_id`='$get_num'
-        AND `tournament_tournamenttype_id`='2'
+        AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONSHIP . "'
         AND `standing_season_id`='$igosja_season_id'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
@@ -100,7 +101,6 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 

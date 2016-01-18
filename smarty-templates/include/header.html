@@ -53,6 +53,8 @@
                                     <li><a href="javascript:;" class="main-menu-link">Меню</a>
                                         <ul>
                                             <li><a href="continent_review_profile.php?num=1">Лига</a></li>
+                                            <li><a href="worldcup_review_profile.php?num={$smarty.const.TOURNAMENT_WORLD_CUP}">Чемпионат мира</a></li>
+                                            <li><a href="league_review_profile.php?num={$smarty.const.TOURNAMENT_CHAMPIONS_LEAGUE}">Лига чемпионов</a></li>
                                         </ul>
                                     </li>
                                     {if !isset($authorization_id)}

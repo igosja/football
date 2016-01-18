@@ -23,13 +23,35 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
+
+if (isset($_POST['data']))
+{
+    $data = $_POST['data'];
+
+    foreach ($data as $key => $value)
+    {
+        $player_id  = (int) $key;
+        $number     = (int) $value;
+
+        $sql = "UPDATE `player`
+                SET `player_number`='$number'
+                WHERE `player_id`='$player_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('team_lineup_team_number.php?num=' . $get_num);
+    exit;
+}
 
 $sql = "SELECT `country_id`,
                `country_name`,
@@ -48,11 +70,9 @@ $sql = "SELECT `country_id`,
                `surname_name`,
                `team_id`,
                `team_name`
-        FROM `playerposition`
+        FROM `player`
         LEFT JOIN `position`
-        ON `playerposition_position_id`=`position_id`
-        LEFT JOIN `player`
-        ON `playerposition_player_id`=`player_id`
+        ON `player_position_id`=`position_id`
         LEFT JOIN `name`
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
@@ -64,7 +84,7 @@ $sql = "SELECT `country_id`,
         LEFT JOIN `country`
         ON `player_country_id`=`country_id`
         WHERE `team_id`='$get_num'
-        AND `playerposition_value`='100'";
+        ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);

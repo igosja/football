@@ -23,13 +23,35 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
+
+if (isset($_POST['data']))
+{
+    $data = $_POST['data'];
+
+    foreach ($data as $key => $value)
+    {
+        $captain_id = (int) $key;
+        $player_id  = (int) $value;
+
+        $sql = "UPDATE `team`
+                SET `team_captain_player_id_" . $captain_id . "`='$player_id'
+                WHERE `team_id`='$get_num'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('team_lineup_tactic_captain.php?num=' . $get_num);
+    exit;
+}
 
 $sql = "SELECT `leader`,
                `name_name`,
@@ -50,12 +72,9 @@ $sql = "SELECT `leader`,
             WHERE `playerattribute_attribute_id`='22'
         ) AS `t1`
         ON `playerattribute_player_id`=`player_id`
-        LEFT JOIN `playerposition`
-        ON `playerposition_player_id`=`player_id`
         LEFT JOIN `position`
-        ON `playerposition_position_id`=`position_id`
+        ON `player_position_id`=`position_id`
         WHERE `player_team_id`='$get_num'
-        AND `playerposition_value`='100'
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
@@ -79,7 +98,7 @@ $sql = "SELECT `leader`,
         ) AS `t1`
         ON `playerattribute_player_id`=`player_id`
         WHERE `player_team_id`='$get_num'
-        ORDER BY `leader` DESC";
+        ORDER BY `leader` DESC, `player_id` ASC";
 $leader_sql = $mysqli->query($sql);
 
 $leader_array = $leader_sql->fetch_all(MYSQLI_ASSOC);

@@ -100,7 +100,16 @@ button, input, select, textarea
     color: #3B3A38;
     font-family: Tahoma;
     font-size: 11px;
+}
+
+button, input, textarea
+{
     padding: 3px;
+}
+
+button, input, select
+{
+    padding: 2px 3px 2px 3px;
 }
 
 .page-header
@@ -128,6 +137,7 @@ button, input, select, textarea
 .main-menu
 {
     line-height: 35px;
+    z-index: 1;
 }
 
 .main-menu ul
@@ -400,35 +410,43 @@ button, input, select, textarea
 /*Горизонтальные полоски*/
 .progress
 {
+    background-color: #F5F5F5;
     border: 1px solid #D1D2D4;
     border-radius: 3px;
     width: 100%;
+    height: 12px;
+    overflow: hidden;
+}
+
+.progress-bar,
+.progress-bar-red,
+.progress-bar-green,
+.progress-bar-yellow
+{
+    height: 100%;
 }
 
 .progress-bar
 {
     background-color: #497CBA;
-    border-radius: 3px;
+    width: 100%;
 }
 
 .progress-bar-red
 {
     background-color: #B7373F;
-    border-radius: 3px;
     width: 100%;
 }
 
 .progress-bar-green
 {
     background-color: #80AC60;
-    border-radius: 3px;
     width: 100%;
 }
 
 .progress-bar-yellow
 {
     background-color: #C06232;
-    border-radius: 3px;
     width: 100%;
 }
 

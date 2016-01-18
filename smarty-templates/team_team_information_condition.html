@@ -69,7 +69,7 @@
                     <td>Запланированное работы</td>
                     <td>
                         {section name=i loop=$building_array}
-                            {$building_array[i].buildingtype_name} (дата заврешения - {$building_array[i].building_end_date|date_format:"d.m.Y"})<br/>
+                            {$building_array[i].buildingtype_name} (дата заврешения - {$building_array[i].building_end_date|f_igosja_ufu_date})<br/>
                         {/section}
                     </td>
                 </tr>

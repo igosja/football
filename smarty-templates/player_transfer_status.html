@@ -11,7 +11,6 @@
                             class="img-50"
                             src="img/team/50/{$player_array.0.team_id}.png"
                         />
-                            
                     </td>
                 </tr>
                 <tr>
@@ -60,88 +59,106 @@
         </td>
     </tr>
     <tr>
-        <td class="block-page" id="transfer-info">
+        <td class="block-page">
             <p class="header">Трансферная информация</p>
-            <table class="center w100">
-                <tr>
-                    <td class="w50">
-                        {if (isset($authorization_team_id) &&
-                            $authorization_team_id == $team_id)}
-                            <select class="w100" id="status-transfer" data-player="{$num}">
-                                {section name=i loop=$statustransfer_array}
-                                    <option value="{$statustransfer_array[i].statustransfer_id}"
-                                        {if ($statustransfer_array[i].statustransfer_id == $player_array.0.player_statustransfer_id)}
-                                            selected
-                                        {/if}
-                                    >
-                                        {$statustransfer_array[i].statustransfer_name}
-                                    </option>
-                                {/section}
-                            </select>
-                        {else}
-                            <h5>{$player_array.0.statustransfer_name}</h5>
-                        {/if}
-                    </td>
-                    <td>
-                        {if (isset($authorization_team_id) &&
-                            $authorization_team_id == $team_id)}
-                            <select class="w100" id="status-rent" data-player="{$num}">
-                                {section name=i loop=$statusrent_array}
-                                    <option value="{$statusrent_array[i].statusrent_id}"
-                                        {if ($statusrent_array[i].statusrent_id == $player_array.0.player_statusrent_id)}
-                                            selected
-                                        {/if}
-                                    >
-                                        {$statusrent_array[i].statusrent_name}
-                                    </option>
-                                {/section}
-                            </select>
-                        {else}
-                            <h5>{$player_array.0.statusrent_name}</h5>
-                        {/if}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Трасферный статус</td>
-                    <td>Арендный статус</td>
-                </tr>
-                <tr>
-                    <td>{$smarty.const.SPACE}</td>
-                    <td>{$smarty.const.SPACE}</td>
-                </tr>
-                <tr>
-                    <td>
-                        {if (isset($authorization_team_id) &&
-                            $authorization_team_id == $team_id)}
-                            <select class="w100" id="status-team" data-player="{$num}">
-                                {section name=i loop=$statusteam_array}
-                                    <option value="{$statusteam_array[i].statusteam_id}"
-                                        {if ($statusteam_array[i].statusteam_id == $player_array.0.player_statusteam_id)}
-                                            selected
-                                        {/if}
-                                    >
-                                        {$statusteam_array[i].statusteam_name}
-                                    </option>
-                                {/section}
-                            </select>
-                        {else}
-                            <h5>{$player_array.0.statusteam_name}</h5>
-                        {/if}
-                    </td>
-                    <td>
-                        {if (isset($authorization_team_id) &&
-                            $authorization_team_id == $team_id)}
-                            <input class="w100" type="text" id="transfer-price" data-player="{$num}" value="{$player_array.0.player_transfer_price}" />
-                        {else}
-                            <h5>{$player_array.0.player_transfer_price} $</h5>
-                        {/if}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Командный статус</td>
-                    <td>Запрашиваемая цена трансфера</td>
-                </tr>
-            </table>
+            <form method="POST">
+                <table class="center w100">
+                    <tr>
+                        <td class="w50">
+                            {if (isset($authorization_team_id) &&
+                                $authorization_team_id == $player_array.0.team_id)}
+                                <select class="w100" name="data[statustransfer]" id="status-transfer" data-player="{$num}">
+                                    {section name=i loop=$statustransfer_array}
+                                        <option value="{$statustransfer_array[i].statustransfer_id}"
+                                            {if ($statustransfer_array[i].statustransfer_id == $player_array.0.player_statustransfer_id)}
+                                                selected
+                                            {/if}
+                                        >
+                                            {$statustransfer_array[i].statustransfer_name}
+                                        </option>
+                                    {/section}
+                                </select>
+                            {else}
+                                <h5>{$player_array.0.statustransfer_name}</h5>
+                            {/if}
+                        </td>
+                        <td>
+                            {if (isset($authorization_team_id) &&
+                                $authorization_team_id == $player_array.0.team_id)}
+                                <select class="w100" name="data[statusrent]" id="status-rent" data-player="{$num}">
+                                    {section name=i loop=$statusrent_array}
+                                        <option value="{$statusrent_array[i].statusrent_id}"
+                                            {if ($statusrent_array[i].statusrent_id == $player_array.0.player_statusrent_id)}
+                                                selected
+                                            {/if}
+                                        >
+                                            {$statusrent_array[i].statusrent_name}
+                                        </option>
+                                    {/section}
+                                </select>
+                            {else}
+                                <h5>{$player_array.0.statusrent_name}</h5>
+                            {/if}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Трасферный статус</td>
+                        <td>Арендный статус</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{$smarty.const.SPACE}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {if (isset($authorization_team_id) &&
+                                $authorization_team_id == $player_array.0.team_id)}
+                                <select class="w100" name="data[statusteam]" id="status-team" data-player="{$num}">
+                                    {section name=i loop=$statusteam_array}
+                                        <option value="{$statusteam_array[i].statusteam_id}"
+                                            {if ($statusteam_array[i].statusteam_id == $player_array.0.player_statusteam_id)}
+                                                selected
+                                            {/if}
+                                        >
+                                            {$statusteam_array[i].statusteam_name}
+                                        </option>
+                                    {/section}
+                                </select>
+                            {else}
+                                <h5>{$player_array.0.statusteam_name}</h5>
+                            {/if}
+                        </td>
+                        <td class="vcenter">
+                            {if (isset($authorization_team_id) &&
+                                $authorization_team_id == $player_array.0.team_id)}
+                                <input
+                                    name="data[transfer_price]"
+                                    type="text"
+                                    id="transfer-price"
+                                    data-player="{$num}"
+                                    value="{$player_array.0.player_transfer_price}"
+                                /> $
+                            {else}
+                                <h5>{$player_array.0.player_transfer_price} $</h5>
+                            {/if}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Командный статус</td>
+                        <td>Запрашиваемая цена трансфера</td>
+                    </tr>
+                    {if (isset($authorization_team_id) &&
+                        $authorization_team_id == $player_array.0.team_id)}
+                        <tr>
+                            <td colspan="2">{$smarty.const.SPACE}</td>
+                        </tr>
+                        <tr>
+                            <td class="center" colspan="2">
+                                <input type="submit" value="Сохранить">
+                            </td>
+                        </tr>
+                    {/if}
+                </table>
+            </form>
         </td>
     </tr>
 </table>

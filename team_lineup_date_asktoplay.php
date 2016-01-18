@@ -23,7 +23,6 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -59,7 +58,10 @@ if (isset($_GET['ok']))
                 WHERE `inbox_asktoplay_id`='$askroplay_id'";
         $mysqli->query($sql);
 
-        redirect('asktoplay.php');
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Вы уже играете матч в этот день.';
+
+        redirect('team_lineup_date_asktoplay.php?num=' . $get_num);
         exit;
     }
 
@@ -85,7 +87,10 @@ if (isset($_GET['ok']))
                 WHERE `inbox_asktoplay_id`='$askroplay_id'";
         $mysqli->query($sql);
 
-        redirect('asktoplay.php');
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Ваш соперник уже играет матч в этот день.';
+
+        redirect('team_lineup_date_asktoplay.php?num=' . $get_num);
         exit;
     }
 
@@ -146,6 +151,10 @@ if (isset($_GET['ok']))
             $sql = "DELETE FROM `inbox`
                     WHERE `inbox_asktoplay_id`='$asktoplay_id'";
             $mysqli->query($sql);
+
+            $sql = "DELETE FROM `asktoplay`
+                    WHERE `asktoplay_id`='$asktoplay_id'";
+            $mysqli->query($sql);
         }
 
         $sql = "SELECT `asktoplay_id`
@@ -165,9 +174,16 @@ if (isset($_GET['ok']))
             $sql = "DELETE FROM `inbox`
                     WHERE `inbox_asktoplay_id`='$asktoplay_id'";
             $mysqli->query($sql);
+
+            $sql = "DELETE FROM `asktoplay`
+                    WHERE `asktoplay_id`='$asktoplay_id'";
+            $mysqli->query($sql);
         }
 
-        redirect('asktoplay.php');
+        $_SESSION['message_class']  = 'success';
+        $_SESSION['message_text']   = 'Матч успешно организован.';
+
+        redirect('team_lineup_date_asktoplay.php?num=' . $get_num);
         exit;
     }
 }

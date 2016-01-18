@@ -379,61 +379,6 @@ elseif (isset($_GET['select_value']))
     }
 
     $json_data['game_array'] = $game_array;
-} elseif (isset($_GET['statustransfer_id'])) {
-    $statustransfer_id = (int)$_GET['statustransfer_id'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `player`
-            SET `player_statustransfer_id`='$statustransfer_id'
-            WHERE `player_id`='$player_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['statusrent_id'])) {
-    $statusrent_id = (int)$_GET['statusrent_id'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `player`
-            SET `player_statusrent_id`='$statusrent_id'
-            WHERE `player_id`='$player_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['statusteam_id'])) {
-    $statusteam_id = (int)$_GET['statusteam_id'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `player`
-            SET `player_statusteam_id`='$statusteam_id'
-            WHERE `player_id`='$player_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['transfer_price'])) {
-    $transfer_price = (int)$_GET['transfer_price'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `player`
-            SET `player_transfer_price`='$transfer_price'
-            WHERE `player_id`='$player_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['number'])) {
-    $number = (int)$_GET['number'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `player`
-            SET `player_number`='$number'
-            WHERE `player_id`='$player_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
 } elseif (isset($_GET['number_national'])) {
     $number = (int)$_GET['number_national'];
     $player_id = (int)$_GET['player_id'];
@@ -443,89 +388,6 @@ elseif (isset($_GET['select_value']))
             WHERE `player_id`='$player_id'
             LIMIT 1";
     $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['offer_price'])) {
-    $offer_price = (int)$_GET['offer_price'];
-    $offer_type = (int)$_GET['offer_type'];
-    $offer_period = (int)$_GET['offer_period'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "SELECT `playeroffer_id`
-            FROM `playeroffer`
-            WHERE `playeroffer_player_id`='$player_id'
-            AND `playeroffer_team_id`='$authorization_team_id'
-            AND `playeroffer_offertype_id`='$offer_type'
-            LIMIT 1";
-    $check_sql = $mysqli->query($sql);
-
-    $count_check = $check_sql->num_rows;
-
-    if (0 == $count_check) {
-        $sql = "INSERT INTO `playeroffer`
-                SET `playeroffer_player_id`='$player_id',
-                    `playeroffer_offertype_id`='$offer_type',
-                    `playeroffer_period`='$offer_period',
-                    `playeroffer_price`='$offer_price',
-                    `playeroffer_team_id`='$authorization_team_id',
-                    `playeroffer_date`=SYSDATE()";
-        $mysqli->query($sql);
-
-        $playeroffer_id = $mysqli->insert_id;
-
-        $sql = "SELECT `name_name`,
-                       `surname_name`,
-                       `team_user_id`
-                FROM `player`
-                LEFT JOIN `name`
-                ON `name_id`=`player_name_id`
-                LEFT JOIN `surname`
-                ON `surname_id`=`player_surname_id`
-                LEFT JOIN `team`
-                ON `team_id`=`player_team_id`
-                WHERE `player_id`='$player_id'
-                LIMIT 1";
-        $player_sql = $mysqli->query($sql);
-
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
-
-        $name = $player_array[0]['name_name'];
-        $surname = $player_array[0]['surname_name'];
-        $player_name = $name . ' ' . $surname;
-        $user_id = $player_array[0]['team_user_id'];
-
-        $sql = "SELECT `inboxtheme_name`,
-                       `inboxtheme_text`
-                FROM `inboxtheme`
-                WHERE `inboxtheme_id`='" . INBOXTHEME_TRANSFER . "'
-                LIMIT 1";
-        $inboxtheme_sql = $mysqli->query($sql);
-
-        $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
-
-        $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
-        $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
-        $inboxtheme_text = sprintf($inboxtheme_text, $authorization_team_name, $player_name);
-
-        $sql = "INSERT INTO `inbox`
-                SET `inbox_date`=CURDATE(),
-                    `inbox_inboxtheme_id`='" . INBOXTHEME_TRANSFER . "',
-                    `inbox_playeroffer_id`='$playeroffer_id',
-                    `inbox_title`='$inboxtheme_name',
-                    `inbox_text`='$inboxtheme_text',
-                    `inbox_user_id`='$user_id'";
-        $mysqli->query($sql);
-    } else {
-        $sql = "UPDATE `playeroffer`
-                SET `playeroffer_offertype_id`='$offer_type',
-                    `playeroffer_period`='$offer_period',
-                    `playeroffer_price`='$offer_price',
-                    `playeroffer_date`=SYSDATE()
-                WHERE `playeroffer_player_id`='$player_id'
-                AND `playeroffer_team_id`='$authorization_team_id'
-                LIMIT 1";
-        $mysqli->query($sql);
-    }
 
     $json_data['success'] = 1;
 } elseif (isset($_GET['inbox_id'])) {
@@ -581,26 +443,6 @@ elseif (isset($_GET['note_id']))
     }
 
     $json_data['note_array'] = $note_array;
-}
-elseif (isset($_GET['style_id'])) {
-    $style_id = (int)$_GET['style_id'];
-
-    $sql = "UPDATE `lineupcurrent`
-            SET `lineupcurrent_gamestyle_id`='$style_id'
-            WHERE `lineupcurrent_team_id`='$authorization_team_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $sql = "SELECT `gamestyle_description`,
-                   `gamestyle_name`
-            FROM `gamestyle`
-            WHERE `gamestyle_id`='$style_id'
-            LIMIT 1";
-    $gamestyle_sql = $mysqli->query($sql);
-
-    $gamestyle_array = $gamestyle_sql->fetch_all(MYSQLI_ASSOC);
-
-    $json_data['gamestyle_array'] = $gamestyle_array;
 } elseif (isset($_GET['national_style_id'])) {
     $style_id = (int)$_GET['national_style_id'];
 
@@ -620,25 +462,6 @@ elseif (isset($_GET['style_id'])) {
     $gamestyle_array = $gamestyle_sql->fetch_all(MYSQLI_ASSOC);
 
     $json_data['gamestyle_array'] = $gamestyle_array;
-} elseif (isset($_GET['mood_id'])) {
-    $mood_id = (int)$_GET['mood_id'];
-
-    $sql = "UPDATE `lineupcurrent`
-            SET `lineupcurrent_gamemood_id`='$mood_id'
-            WHERE `lineupcurrent_team_id`='$authorization_team_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $sql = "SELECT `gamemood_description`,
-                   `gamemood_name`
-            FROM `gamemood`
-            WHERE `gamemood_id`='$mood_id'
-            LIMIT 1";
-    $gamemood_sql = $mysqli->query($sql);
-
-    $gamemood_array = $gamemood_sql->fetch_all(MYSQLI_ASSOC);
-
-    $json_data['gamemood_array'] = $gamemood_array;
 } elseif (isset($_GET['national_mood_id'])) {
     $mood_id = (int)$_GET['national_mood_id'];
 
@@ -658,17 +481,6 @@ elseif (isset($_GET['style_id'])) {
     $gamemood_array = $gamemood_sql->fetch_all(MYSQLI_ASSOC);
 
     $json_data['gamemood_array'] = $gamemood_array;
-} elseif (isset($_GET['penalty_id'])) {
-    $penalty_id = (int)$_GET['penalty_id'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `team`
-            SET `team_penalty_player_id_" . $penalty_id . "`='$player_id'
-            WHERE `team_id`='$authorization_team_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
 } elseif (isset($_GET['penalty_id_national'])) {
     $penalty_id = (int)$_GET['penalty_id_national'];
     $player_id = (int)$_GET['player_id'];
@@ -676,17 +488,6 @@ elseif (isset($_GET['style_id'])) {
     $sql = "UPDATE `country`
             SET `country_penalty_player_id_" . $penalty_id . "`='$player_id'
             WHERE `country_id`='$authorization_country_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['captain_id'])) {
-    $captain_id = (int)$_GET['captain_id'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `team`
-            SET `team_captain_player_id_" . $captain_id . "`='$player_id'
-            WHERE `team_id`='$authorization_team_id'
             LIMIT 1";
     $mysqli->query($sql);
 
@@ -702,17 +503,6 @@ elseif (isset($_GET['style_id'])) {
     $mysqli->query($sql);
 
     $json_data['success'] = 1;
-} elseif (isset($_GET['corner_left'])) {
-    $corner_left = (int)$_GET['corner_left'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `team`
-            SET `team_corner_left_player_id_" . $corner_left . "`='$player_id'
-            WHERE `team_id`='$authorization_team_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
 } elseif (isset($_GET['corner_left_national'])) {
     $corner_left = (int)$_GET['corner_left_national'];
     $player_id = (int)$_GET['player_id'];
@@ -720,17 +510,6 @@ elseif (isset($_GET['style_id'])) {
     $sql = "UPDATE `country`
             SET `country_corner_left_player_id_" . $corner_left . "`='$player_id'
             WHERE `country_id`='$authorization_country_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['corner_right'])) {
-    $corner_right = (int)$_GET['corner_right'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `team`
-            SET `team_corner_right_player_id_" . $corner_right . "`='$player_id'
-            WHERE `team_id`='$authorization_team_id'
             LIMIT 1";
     $mysqli->query($sql);
 
@@ -746,17 +525,6 @@ elseif (isset($_GET['style_id'])) {
     $mysqli->query($sql);
 
     $json_data['success'] = 1;
-} elseif (isset($_GET['freekick_left'])) {
-    $freekick_left = (int)$_GET['freekick_left'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `team`
-            SET `team_freekick_left_player_id_" . $freekick_left . "`='$player_id'
-            WHERE `team_id`='$authorization_team_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
 } elseif (isset($_GET['freekick_left_national'])) {
     $freekick_left = (int)$_GET['freekick_left_national'];
     $player_id = (int)$_GET['player_id'];
@@ -764,17 +532,6 @@ elseif (isset($_GET['style_id'])) {
     $sql = "UPDATE `country`
             SET `country_freekick_left_player_id_" . $freekick_left . "`='$player_id'
             WHERE `country_id`='$authorization_country_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['freekick_right'])) {
-    $freekick_right = (int)$_GET['freekick_right'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `team`
-            SET `team_freekick_right_player_id_" . $freekick_right . "`='$player_id'
-            WHERE `team_id`='$authorization_team_id'
             LIMIT 1";
     $mysqli->query($sql);
 
@@ -790,17 +547,6 @@ elseif (isset($_GET['style_id'])) {
     $mysqli->query($sql);
 
     $json_data['success'] = 1;
-} elseif (isset($_GET['out_left'])) {
-    $out_left = (int)$_GET['out_left'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `team`
-            SET `team_out_left_player_id_" . $out_left . "`='$player_id'
-            WHERE `team_id`='$authorization_team_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
 } elseif (isset($_GET['out_left_national'])) {
     $out_left = (int)$_GET['out_left_national'];
     $player_id = (int)$_GET['player_id'];
@@ -812,17 +558,6 @@ elseif (isset($_GET['style_id'])) {
     $mysqli->query($sql);
 
     $json_data['success'] = 1;
-} elseif (isset($_GET['out_right'])) {
-    $out_right = (int)$_GET['out_right'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `team`
-            SET `team_out_right_player_id_" . $out_right . "`='$player_id'
-            WHERE `team_id`='$authorization_team_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
 } elseif (isset($_GET['out_right_national'])) {
     $out_right = (int)$_GET['out_right_national'];
     $player_id = (int)$_GET['player_id'];
@@ -830,39 +565,6 @@ elseif (isset($_GET['style_id'])) {
     $sql = "UPDATE `country`
             SET `country_out_right_player_id_" . $out_right . "`='$player_id'
             WHERE `country_id`='$authorization_country_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['training_position_id'])) {
-    $position_id = (int)$_GET['training_position_id'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `player`
-            SET `player_training_position_id`='$position_id'
-            WHERE `player_id`='$player_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['training_attribute_id'])) {
-    $attribute_id = (int)$_GET['training_attribute_id'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `player`
-            SET `player_training_attribute_id`='$attribute_id'
-            WHERE `player_id`='$player_id'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $json_data['success'] = 1;
-} elseif (isset($_GET['training_intensity'])) {
-    $intensity = (int)$_GET['training_intensity'];
-    $player_id = (int)$_GET['player_id'];
-
-    $sql = "UPDATE `player`
-            SET `player_training_intensity`='$intensity'
-            WHERE `player_id`='$player_id'
             LIMIT 1";
     $mysqli->query($sql);
 
@@ -943,10 +645,13 @@ elseif (isset($_GET['style_id'])) {
     }
 
     $json_data['success'] = 1;
-} elseif (isset($_GET['asktoplay'])) {
+}
+elseif (isset($_GET['asktoplay']))
+{
     $shedule_id = (int)$_GET['asktoplay'];
 
-    if (isset($_GET['delete'])) {
+    if (isset($_GET['delete']))
+    {
         $delete = (int)$_GET['delete'];
 
         $sql = "SELECT COUNT(`asktoplay_id`) AS `count`
@@ -960,7 +665,8 @@ elseif (isset($_GET['style_id'])) {
         $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
         $count_check = $check_array[0]['count'];
 
-        if (0 != $count_check) {
+        if (0 != $count_check)
+        {
             $sql = "DELETE FROM `asktoplay`
                     WHERE `asktoplay_id`='$delete'
                     LIMIT 1";
@@ -971,9 +677,11 @@ elseif (isset($_GET['style_id'])) {
                     LIMIT 1";
             $mysqli->query($sql);
         }
-    } elseif (isset($_GET['invite'])) {
+    }
+    elseif (isset($_GET['invite']))
+    {
         $invite = (int)$_GET['invite'];
-        $home = (int)$_GET['home'];
+        $home   = (int)$_GET['home'];
 
         $sql = "SELECT COUNT(`game_id`) AS `count`
                 FROM `game`
@@ -985,7 +693,8 @@ elseif (isset($_GET['style_id'])) {
         $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
         $count_check = $check_array[0]['count'];
 
-        if (0 == $count_check) {
+        if (0 == $count_check)
+        {
             $sql = "INSERT INTO `asktoplay`
                     SET `asktoplay_invitee_team_id`='$invite',
                         `asktoplay_inviter_team_id`='$authorization_team_id',
@@ -1004,10 +713,11 @@ elseif (isset($_GET['style_id'])) {
 
             $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
-            $team_name = $team_array[0]['team_name'];
-            $user_id = $team_array[0]['team_user_id'];
+            $team_name  = $team_array[0]['team_name'];
+            $user_id    = $team_array[0]['team_user_id'];
 
-            if (1 == $home) {
+            if (1 == $home)
+            {
                 $sql = "SELECT `city_name`,
                                `stadium_name`
                         FROM `team`
@@ -1017,7 +727,9 @@ elseif (isset($_GET['style_id'])) {
                         ON `city_id`=`team_city_id`
                         WHERE `team_id`='$authorization_team_id'
                         LIMIT 1";
-            } else {
+            }
+            else
+            {
                 $sql = "SELECT `city_name`,
                                `stadium_name`
                         FROM `team`
@@ -1033,8 +745,8 @@ elseif (isset($_GET['style_id'])) {
 
             $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
 
-            $city_name = $stadium_array[0]['city_name'];
-            $stadium_name = $stadium_array[0]['stadium_name'];
+            $city_name      = $stadium_array[0]['city_name'];
+            $stadium_name   = $stadium_array[0]['stadium_name'];
 
             $sql = "SELECT `shedule_date`
                     FROM `shedule`
@@ -1079,15 +791,18 @@ elseif (isset($_GET['style_id'])) {
 
     $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
-    $shedule_date = date('d.m.Y', strtotime($shedule_array[0]['shedule_date']));
-    $tournamenttype_id = $shedule_array[0]['shedule_tournamenttype_id'];
+    $shedule_date       = date('d.m.Y', strtotime($shedule_array[0]['shedule_date']));
+    $tournamenttype_id  = $shedule_array[0]['shedule_tournamenttype_id'];
 
-    if (TOURNAMENT_TYPE_CUP == $tournamenttype_id) {
+    if (TOURNAMENT_TYPE_CUP == $tournamenttype_id)
+    {
         $addition_sql_1 = "LEFT JOIN `cupparticipant`
-                            ON `cupparticipant_team_id`=`team_id`";
+                           ON `cupparticipant_team_id`=`team_id`";
         $addition_sql_2 = "AND `cupparticipant_season_id`='$igosja_season_id'
-                            AND `cupparticipant_out`!='0'";
-    } else {
+                           AND `cupparticipant_out`!='0'";
+    }
+    else
+    {
         $addition_sql_1 = $addition_sql_2 = '';
     }
 
@@ -1146,19 +861,14 @@ elseif (isset($_GET['style_id'])) {
 
     $inviter_array = $inviter_sql->fetch_all(MYSQLI_ASSOC);
 
-    $json_data['shedule_date'] = $shedule_date;
-    $json_data['team_array'] = $team_array;
+    $json_data['shedule_date']  = $shedule_date;
+    $json_data['num']           = $authorization_team_id;
+    $json_data['team_array']    = $team_array;
     $json_data['invitee_array'] = $invitee_array;
     $json_data['inviter_array'] = $inviter_array;
-} elseif (isset($_GET['change_role_id'])) {
+}
+elseif (isset($_GET['change_role_id'])) {
     $role_id = (int)$_GET['change_role_id'];
-    $position_id = (int)$_GET['position_id'];
-
-    $sql = "UPDATE `lineupcurrent`
-            SET `lineupcurrent_role_id_" . $position_id . "`='$role_id'
-            WHERE `lineupcurrent_team_id`='$authorization_team_id'
-            LIMIT 1";
-    $mysqli->query($sql);
 
     $sql = "SELECT `role_description`
             FROM `role`

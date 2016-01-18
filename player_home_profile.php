@@ -11,9 +11,7 @@ else
     $get_num = 1;
 }
 
-$sql = "SELECT `attribute_name`,
-               `attributechapter_name`,
-               `count_game`,
+$sql = "SELECT `count_game`,
                `count_goal`,
                `count_pass`,
                `country_id`,
@@ -31,7 +29,6 @@ $sql = "SELECT `attribute_name`,
                `player_price`,
                `player_salary`,
                `player_weight`,
-               `playerattribute_value`,
                `surname_name`,
                `team_id`,
                `team_name`
@@ -42,12 +39,6 @@ $sql = "SELECT `attribute_name`,
         ON `name_id`=`player_name_id`
         LEFT JOIN `surname`
         ON `surname_id`=`player_surname_id`
-        LEFT JOIN `playerattribute`
-        ON `playerattribute_player_id`=`player_id`
-        LEFT JOIN `attribute`
-        ON `attribute_id`=`playerattribute_attribute_id`
-        LEFT JOIN `attributechapter`
-        ON `attributechapter_id`=`attribute_attributechapter_id`
         LEFT JOIN `mood`
         ON `player_mood_id`=`mood_id`
         LEFT JOIN `country`
@@ -63,7 +54,8 @@ $sql = "SELECT `attribute_name`,
             AND `statisticplayer_season_id`='$igosja_season_id'
         ) AS `t2`
         ON `player_id`=`statisticplayer_player_id`
-        WHERE `player_id`='$get_num'";
+        WHERE `player_id`='$get_num'
+        LIMIT 1";
 $player_sql = $mysqli->query($sql);
 
 $count_player = $player_sql->num_rows;
@@ -71,7 +63,6 @@ $count_player = $player_sql->num_rows;
 if (0 == $count_player)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -83,10 +74,25 @@ $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
 $header_2_title = $player_name . ' ' . $player_surname;
 
+$sql = "SELECT `attribute_name`,
+               `attributechapter_name`,
+               `playerattribute_value`
+        FROM `playerattribute`
+        LEFT JOIN `attribute`
+        ON `attribute_id`=`playerattribute_attribute_id`
+        LEFT JOIN `attributechapter`
+        ON `attributechapter_id`=`attribute_attributechapter_id`
+        WHERE `playerattribute_player_id`='$get_num'
+        ORDER BY `attributechapter_id` ASC, `attribute_id` ASC";
+$attribute_sql = $mysqli->query($sql);
+
+$attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+
 $sql = "SELECT `playerposition_value`,
                `position_coordinate_x`,
                `position_coordinate_y`,
-               `position_description`
+               `position_description`,
+               `position_name`
         FROM `playerposition`
         LEFT JOIN `position`
         ON `position_id`=`playerposition_position_id`
@@ -135,6 +141,7 @@ $smarty->assign('team_name', $team_name);
 $smarty->assign('header_title', $header_2_title);
 $smarty->assign('num', $get_num);
 $smarty->assign('player_array', $player_array);
+$smarty->assign('attribute_array', $attribute_array);
 $smarty->assign('position_array', $position_array);
 $smarty->assign('last_five_array', $last_five_array);
 $smarty->assign('disqualification_array', $disqualification_array);

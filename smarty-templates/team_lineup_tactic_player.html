@@ -6,17 +6,25 @@
             <img src="img/field/tactic-player.png" />
             <input type="hidden" value="{$lineup_array.0.lineupcurrent_formation_id}" name="formation_id" id="tactic-player-formation">
         </td>
-        <td class="block-page w45" rowspan="2" id="position-block">
-            <p class="header">Позиция <span id="position-name"></span></p>
-            <table>
-                <tr>
-                    <td id="role-name"></td>
-                </tr>
-            </table>
-            <p id="role-description"></p>
+        <td class="block-page w45" rowspan="2">
+            <p class="header">
+                Позиция <span id="position-name"></span>
+            </p>
+            <form method="POST">
+                <p id="role-name"></p>
+                <br />
+                <p id="role-description"></p>
+                <input id="player-position" name="data[position]" type="hidden" value="" />
+                <br />
+                <p class="center" id="submit-role" style="display: none;">
+                    <input type="submit" value="Сохранить" />
+                </p>
+            </form>
         </td>
         <td class="block-page">
-            <p class="header"><span id="player-name"></span></p>
+            <p class="header">
+                <span id="player-name"></span>
+            </p>
             <table class="none striped w100" id="player-table">
                 <tr>
                     <td>Игрок</td>

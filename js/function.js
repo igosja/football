@@ -114,7 +114,6 @@ function tactic_player_field()
 //Построение на поле на странице индивидуальных заданий игрокам
 {
     var formation = $('#tactic-player-formation').val();
-    console.log(formation);
     formation = parseInt(formation);
     formation--;
     formation = formation_array[formation];
@@ -157,26 +156,11 @@ function tactic_name(player_select)
 
     for (var j=0; j<role_select_array.length; j++)
     {
-        role_select = role_select +
-            '<option value="' + role_select_array[j][0] + '">' + role_select_array[j][1] + '</option>';
+        role_select = role_select + '<option value="' + role_select_array[j][0] + '">' + role_select_array[j][1] + '</option>';
     }
 
     $(player_select).parent().parent().find('.role-select').empty();
     $(player_select).parent().parent().find('.role-select').html(role_select);
-
-    var player_name_array = $('.tactic-name');
-
-    for (var i=0; i<player_name_array.length; i++)
-    {
-        $(player_name_array[i]).empty();
-    }
-
-    var player_role_array = $('.tactic-role');
-
-    for (i=0; i<player_role_array.length; i++)
-    {
-        $(player_role_array[i]).empty();
-    }
 
     var input_hidden = $('.hidden');
 
@@ -192,10 +176,9 @@ function tactic_name(player_select)
     for (i=0; i<player_select_array.length; i++)
     {
         var select_value    = $(player_select_array[i]).val();
-        var player_name     = $(player_select_array[i]).data('name');
         var player_id       = $(player_select_array[i]).data('id');
-        var select_array    = $('option',player_select_array[i]);
-        var selected_item   = $('option:selected',player_select_array[i]);
+        var select_array    = $('option', player_select_array[i]);
+        var selected_item   = $('option:selected', player_select_array[i]);
         var select_index    = select_array.index(selected_item);
 
         if (0 < select_index)
@@ -208,18 +191,13 @@ function tactic_name(player_select)
         }
 
         select_value_array.push(select_value);
-
-        $('#tactic-name-' + select_value).text(player_name);
     }
 
     role_select_array = $('.role-select');
 
     for (i=0; i<role_select_array.length; i++)
     {
-        select_value     = $(role_select_array[i]).parent().parent().find('.position-select').val();
-        var role_name    = $('option:selected',role_select_array[i]).text();
-
-        $('#tactic-role-' + select_value).text(role_name);
+        select_value = $(role_select_array[i]).parent().parent().find('.position-select').val();
     }
 
     var player_option_array = $('.position-option');
@@ -241,6 +219,13 @@ function tactic_name(player_select)
 function tactic_field()
 //Изменение положения футболок на поле при отправке состава
 {
+    var input_hidden = $('.hidden');
+
+    for (i=0; i<input_hidden.length; i++)
+    {
+        $(input_hidden[i]).val('');
+    }
+
     var formation = $('#tactic-select').val();
     formation = parseInt(formation);
     formation--;
@@ -262,13 +247,15 @@ function tactic_field()
         var coordinate  = coordinate_array[position];
         var icon_width  = coordinate[0];
         var icon_length = coordinate[1];
-        icon_width      = parseInt(icon_width) * 61;
-        icon_length     = parseInt(icon_length) * 18 + 3;
+        icon_width      = parseInt(icon_width) * 25;
+        icon_length     = parseInt(icon_length) * 11 + 107;
         position        = position_array[position];
-        var icon_img    = '<table class="w100p" style="position: absolute; top: ' + icon_width + 'px; left: ' + icon_length + 'px;">' +
-            '<tr><td class="center" colspan="2"><img alt="" class="img-30" src="img/shirt.png" /></td></tr>' +
-            '<tr><td class="center tactic-name white" id="tactic-name-' + position[0] + '"></td></tr>' +
-            '<tr><td class="center tactic-role white" id="tactic-role-' + position[0] + '"></td></tr></table>';
+        var icon_img    = '<table class="w100p" style="position: absolute; top: '
+                        + icon_width
+                        + 'px; left: '
+                        + icon_length
+                        + 'px;">'
+                        + '<tr><td class="center"><img alt="" class="img-20" src="img/shirt.png" /></td></tr></table>';
 
         $(field_icon).append(icon_img);
         $(position_select_array).append('<option value="' + position[0] + '" class="position-option">' + position[1] + '</option>');
@@ -276,20 +263,6 @@ function tactic_field()
 
     for (i=0; i<substitution_array.length; i++)
     {
-        var position    = substitution_array[i][0];
-        position        = parseInt(position);
-        position        = position + 11;
-        var coordinate  = coordinate_array[position];
-        var icon_width  = coordinate[0];
-        var icon_length = coordinate[1];
-        icon_width      = parseInt(icon_width) * 61;
-        icon_length     = parseInt(icon_length) * 18 + 3;
-        position        = substitution_array[i];
-        var icon_img    = '<table class="w100p" style="position: absolute; top: ' + icon_width + 'px; left: ' + icon_length + 'px;">' +
-            '<tr><td class="center" colspan="2"><img alt="" class="img-30" src="img/shirt.png" /></td></tr>' +
-            '<tr><td class="center tactic-name white" id="tactic-name-' + position[0] + '"></td></tr></table>';
-
-        $(field_icon).append(icon_img);
         $(position_select_array).append('<option value="' + substitution_array[i][0] + '" class="position-option">' + substitution_array[i][1] + '</option>');
     }
 
@@ -312,13 +285,6 @@ function tactic_field()
         {
             $(role_select_array[i]).find('[value=' + data_role + ']').prop('selected', true);
         }
-    }
-
-    var input_hidden = $('.hidden');
-
-    for (i=0; i<input_hidden.length; i++)
-    {
-        $(input_hidden[i]).val('');
     }
 }
 

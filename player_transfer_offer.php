@@ -11,6 +11,17 @@ else
     $get_num = 1;
 }
 
+$sql = "SELECT `team_id`,
+               `team_name`
+        FROM `transfer`
+        LEFT JOIN `team`
+        ON `transfer_buyer_id`=`team_id`
+        WHERE `transfer_player_id`='$get_num'
+        LIMIT 1";
+$transfer_sql = $mysqli->query($sql);
+
+$transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
+
 $sql = "SELECT `name_name`,
                `player_statustransfer_id`,
                `player_transfer_price`,
@@ -48,8 +59,136 @@ if (0 == $count_player)
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-$team_id        = $player_array[0]['team_id'];
-$team_name      = $player_array[0]['team_name'];
+if (isset($_POST['data']))
+{
+    $offer_price    = (int) $_POST['data']['offer_price'];
+    $offer_type     = (int) $_POST['data']['offer_type'];
+
+    $sql = "SELECT `team_finance`
+            FROM `team`
+            WHERE `team_id`='$authorization_team_id'
+            LIMIT 1";
+    $finance_sql = $mysqli->query($sql);
+
+    $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
+
+    $team_finance = $finance_array[0]['team_finance'];
+
+    if ($offer_price > $team_finance)
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'У вашего клуба недостаточно денег для проведения этой сделки.';
+
+        redirect('player_transfer_offer.php?num=' . $get_num);
+        exit;
+    }
+
+    $team_id = $player_array[0]['team_id'];
+
+    if ($team_id == $authorization_team_id)
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Нельзя купить своего игрока.';
+
+        redirect('player_transfer_offer.php?num=' . $get_num);
+        exit;
+    }
+
+    $statustransfer_id = $player_array[0]['player_statustransfer_id'];
+
+    if (3 == $statustransfer_id)
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Этот игрок не продается.';
+
+        redirect('player_transfer_offer.php?num=' . $get_num);
+        exit;
+    }
+
+    $sql = "SELECT `playeroffer_id`
+            FROM `playeroffer`
+            WHERE `playeroffer_player_id`='$get_num'
+            AND `playeroffer_team_id`='$authorization_team_id'
+            AND `playeroffer_offertype_id`='$offer_type'
+            LIMIT 1";
+    $check_sql = $mysqli->query($sql);
+
+    $count_check = $check_sql->num_rows;
+
+    if (0 == $count_check)
+    {
+        $sql = "INSERT INTO `playeroffer`
+                SET `playeroffer_player_id`='$get_num',
+                    `playeroffer_offertype_id`='$offer_type',
+                    `playeroffer_price`='$offer_price',
+                    `playeroffer_team_id`='$authorization_team_id',
+                    `playeroffer_date`=SYSDATE()";
+        $mysqli->query($sql);
+
+        $playeroffer_id = $mysqli->insert_id;
+
+        $sql = "SELECT `name_name`,
+                       `surname_name`,
+                       `team_user_id`
+                FROM `player`
+                LEFT JOIN `name`
+                ON `name_id`=`player_name_id`
+                LEFT JOIN `surname`
+                ON `surname_id`=`player_surname_id`
+                LEFT JOIN `team`
+                ON `team_id`=`player_team_id`
+                WHERE `player_id`='$player_id'
+                LIMIT 1";
+        $player_sql = $mysqli->query($sql);
+
+        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+        $name           = $player_array[0]['name_name'];
+        $surname        = $player_array[0]['surname_name'];
+        $player_name    = $name . ' ' . $surname;
+        $user_id        = $player_array[0]['team_user_id'];
+
+        $sql = "SELECT `inboxtheme_name`,
+                       `inboxtheme_text`
+                FROM `inboxtheme`
+                WHERE `inboxtheme_id`='" . INBOXTHEME_TRANSFER . "'
+                LIMIT 1";
+        $inboxtheme_sql = $mysqli->query($sql);
+
+        $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+
+        $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
+        $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
+        $inboxtheme_text = sprintf($inboxtheme_text, $authorization_team_name, $player_name);
+
+        $sql = "INSERT INTO `inbox`
+                SET `inbox_date`=CURDATE(),
+                    `inbox_inboxtheme_id`='" . INBOXTHEME_TRANSFER . "',
+                    `inbox_playeroffer_id`='$playeroffer_id',
+                    `inbox_title`='$inboxtheme_name',
+                    `inbox_text`='$inboxtheme_text',
+                    `inbox_user_id`='$user_id'";
+        $mysqli->query($sql);
+    }
+    else
+    {
+        $sql = "UPDATE `playeroffer`
+                SET `playeroffer_offertype_id`='$offer_type',
+                    `playeroffer_price`='$offer_price',
+                    `playeroffer_date`=SYSDATE()
+                WHERE `playeroffer_player_id`='$get_num'
+                AND `playeroffer_team_id`='$authorization_team_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Ваше предложение успешно сохранено.';
+
+    redirect('player_transfer_offer.php?num=' . $get_num);
+    exit;
+}
+
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
 $header_2_title = $player_name . ' ' . $player_surname;
@@ -63,11 +202,10 @@ $offertype_sql = $mysqli->query($sql);
 
 $offertype_array = $offertype_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('team_id', $team_id);
-$smarty->assign('team_name', $team_name);
 $smarty->assign('header_title', $header_2_title);
 $smarty->assign('num', $get_num);
 $smarty->assign('player_array', $player_array);
+$smarty->assign('transfer_array', $transfer_array);
 $smarty->assign('offertype_array', $offertype_array);
 
 $smarty->display('main.html');

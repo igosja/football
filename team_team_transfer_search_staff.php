@@ -22,7 +22,6 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -108,11 +107,11 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `country_id`=`staff_country_id`
         LEFT JOIN `staffpost`
         ON `staffpost_id`=`staff_staffpost_id`
-        WHERE `staff_team_id`!='0'
+        WHERE `staff_team_id`='0'
         AND $sql_country
         AND $sql_position
         AND `surname_name` LIKE ?
-        ORDER BY `staff_reputation` DESC
+        ORDER BY `staff_reputation` DESC, `staff_id` ASC
         LIMIT $offset, 30";
 $like    = '%' . $sql_surname . '%';
 $prepare = $mysqli->prepare($sql);

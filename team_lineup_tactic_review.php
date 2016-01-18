@@ -23,7 +23,6 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -42,6 +41,10 @@ if (0 == $count_lineupcurrent)
             SET `lineupcurrent_team_id`='$get_num'";
     $mysqli->query($sql);
 }
+
+$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+
+$team_name = $team_array[0]['team_name'];
 
 if (isset($_POST['formation_id']))
 {
@@ -151,14 +154,12 @@ if (isset($_POST['formation_id']))
             LIMIT 1";
     $mysqli->query($sql);
 
-    redirect('team_lineup_tactic_review.php?num=' . $get_num);
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
+    redirect('team_lineup_tactic_review.php?num=' . $get_num);
     exit;
 }
-
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
-
-$team_name = $team_array[0]['team_name'];
 
 $sql = "SELECT `name_name`,
                `player_condition`,
@@ -168,11 +169,9 @@ $sql = "SELECT `name_name`,
                `surname_name`,
                `team_id`,
                `team_name`
-        FROM `playerposition`
+        FROM `player`
         LEFT JOIN `position`
-        ON `playerposition_position_id`=`position_id`
-        LEFT JOIN `player`
-        ON `playerposition_player_id`=`player_id`
+        ON `player_position_id`=`position_id`
         LEFT JOIN `name`
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
@@ -180,7 +179,6 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
         WHERE `team_id`='$get_num'
-        AND `playerposition_value`='100'
         ORDER BY `position_id` ASC";
 $player_sql = $mysqli->query($sql);
 

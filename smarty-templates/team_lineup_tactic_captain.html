@@ -1,6 +1,6 @@
 <table class="block-table w100">
     <tr>
-        <td class="block-page w50">
+        <td class="block-page">
             <p class="header">Игроки</p>
             <table class="striped w100">
                 <tr>
@@ -23,95 +23,102 @@
                 {/section}
             </table>
         </td>
-        <td class="block-page" id="player-block">
+        <td class="block-page w50">
             <p class="header">Капитаны</p>
-            <table class="w100">
-                <tr>
-                    <td class="w50">Капитан</td>
-                    <td>
-                        <select data-id="1" id="select-captain-1" class="select-captain">
-                            <option value="0">-</option>
-                            {section name=i loop=$leader_array}
-                                <option value="{$leader_array[i].player_id}"
-                                    {if $captain_array.0.team_captain_player_id_1 == $leader_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$leader_array[i].name_name} {$leader_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Вице-капитан</td>
-                    <td>
-                        <select data-id="2" id="select-captain-2" class="select-captain">
-                            <option value="0">-</option>
-                            {section name=i loop=$leader_array}
-                                <option value="{$leader_array[i].player_id}"
-                                    {if $captain_array.0.team_captain_player_id_2 == $leader_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$leader_array[i].name_name} {$leader_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Первый заместитель</td>
-                    <td>
-                        <select data-id="3" id="select-captain-3" class="select-captain">
-                            <option value="0">-</option>
-                            {section name=i loop=$leader_array}
-                                <option value="{$leader_array[i].player_id}"
-                                    {if $captain_array.0.team_captain_player_id_3 == $leader_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$leader_array[i].name_name} {$leader_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Второй заместитель</td>
-                    <td>
-                        <select data-id="4" id="select-captain-4" class="select-captain">
-                            <option value="0">-</option>
-                            {section name=i loop=$leader_array}
-                                <option value="{$leader_array[i].player_id}"
-                                    {if $captain_array.0.team_captain_player_id_4 == $leader_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$leader_array[i].name_name} {$leader_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Третий заместитель</td>
-                    <td>
-                        <select data-id="5" id="select-captain-5" class="select-captain">
-                            <option value="0">-</option>
-                            {section name=i loop=$leader_array}
-                                <option value="{$leader_array[i].player_id}"
-                                    {if $captain_array.0.team_captain_player_id_5 == $leader_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$leader_array[i].name_name} {$leader_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-            </table>
+            <form method="POST">
+                <table class="striped w100">
+                    <tr>
+                        <td class="w35">Капитан</td>
+                        <td class="nopadding">
+                            <select id="select-captain-1" class="select-captain w100" name="data[1]">
+                                <option value="0">-</option>
+                                {section name=i loop=$leader_array}
+                                    <option value="{$leader_array[i].player_id}"
+                                        {if $captain_array.0.team_captain_player_id_1 == $leader_array[i].player_id}
+                                            selected
+                                        {/if}
+                                    >
+                                        {$leader_array[i].name_name} {$leader_array[i].surname_name}
+                                    </option>
+                                {/section}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Вице-капитан</td>
+                        <td class="nopadding">
+                            <select id="select-captain-2" class="select-captain w100" name="data[2]">
+                                <option value="0">-</option>
+                                {section name=i loop=$leader_array}
+                                    <option value="{$leader_array[i].player_id}"
+                                        {if $captain_array.0.team_captain_player_id_2 == $leader_array[i].player_id}
+                                            selected
+                                        {/if}
+                                    >
+                                        {$leader_array[i].name_name} {$leader_array[i].surname_name}
+                                    </option>
+                                {/section}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Первый заместитель</td>
+                        <td class="nopadding">
+                            <select id="select-captain-3" class="select-captain w100" name="data[3]">
+                                <option value="0">-</option>
+                                {section name=i loop=$leader_array}
+                                    <option value="{$leader_array[i].player_id}"
+                                        {if $captain_array.0.team_captain_player_id_3 == $leader_array[i].player_id}
+                                            selected
+                                        {/if}
+                                    >
+                                        {$leader_array[i].name_name} {$leader_array[i].surname_name}
+                                    </option>
+                                {/section}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Второй заместитель</td>
+                        <td class="nopadding">
+                            <select id="select-captain-4" class="select-captain w100" name="data[4]">
+                                <option value="0">-</option>
+                                {section name=i loop=$leader_array}
+                                    <option value="{$leader_array[i].player_id}"
+                                        {if $captain_array.0.team_captain_player_id_4 == $leader_array[i].player_id}
+                                            selected
+                                        {/if}
+                                    >
+                                        {$leader_array[i].name_name} {$leader_array[i].surname_name}
+                                    </option>
+                                {/section}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Третий заместитель</td>
+                        <td class="nopadding">
+                            <select id="select-captain-5" class="select-captain w100" name="data[5]">
+                                <option value="0">-</option>
+                                {section name=i loop=$leader_array}
+                                    <option value="{$leader_array[i].player_id}"
+                                        {if $captain_array.0.team_captain_player_id_5 == $leader_array[i].player_id}
+                                            selected
+                                        {/if}
+                                    >
+                                        {$leader_array[i].name_name} {$leader_array[i].surname_name}
+                                    </option>
+                                {/section}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="center" colspan="2">
+                            <input type="submit" value="Сохранить" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </td>
     </tr>
 </table>

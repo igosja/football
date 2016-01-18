@@ -1,11 +1,11 @@
 <table class="block-table w100">
     <tr>
-        <td class="block-page w40">
+        <td class="block-page w50" rowspan="2">
             <p class="header">Игроки</p>
             <table class="striped w100">
                 <tr>
-                    <th class="w1"></th>
-                    <th class="w1"></th>
+                    <th class="w13"></th>
+                    <th class="w13"></th>
                     <th>Имя</th>
                     <th class="w15">Позиция</th>
                     <th class="w15">Кондиции</th>
@@ -15,8 +15,7 @@
                     <tr>
                         <td class="nopadding">
                             <select
-                                class="position-select"
-                                data-name="{$player_array[i].surname_name}"
+                                class="position-select w100"
                                 data-id="{$player_array[i].player_id}"
                                 data-position="{if
                                 ($lineup_array.0.lineupcurrent_player_id_1 == $player_array[i].player_id)
@@ -59,7 +58,7 @@
                         </td>
                         <td class="nopadding">
                             <select
-                                class="role-select"
+                                class="role-select w100"
                                 data-role="{if
                                 ($lineup_array.0.lineupcurrent_player_id_1 == $player_array[i].player_id)
                                 }{$lineup_array.0.lineupcurrent_role_id_1}{elseif
@@ -97,12 +96,14 @@
                 {/section}
             </table>
         </td>
-        <td class="block-page w1">
+        <td class="block-page center">
             <div id="field-icon" class="relative"></div>
-            <img alt="" src="img/field/tactic.png" />
+            <img src="img/field/tactic-player.png" />
         </td>
+    </tr>
+    <tr>
         <td class="block-page">
-            <form action="" method="POST">
+            <form method="POST">
                 <table class="w100">
                     <tr>
                         <td>

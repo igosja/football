@@ -139,7 +139,7 @@ $(document).ready(function($)
                 dataType: "json",
                 success: function(data)
                 {
-                    var role_select = '<select id="role-id" data-position="' + data.position + '">';
+                    var role_select = '<select id="role-id" name="data[role]">';
 
                     for (var i=0; i<data.role_array.length; i++)
                     {
@@ -164,23 +164,22 @@ $(document).ready(function($)
                     $('#role-name').html(role_select);
                     $('#role-description').html(data.role_description);
                     $('#player-table').removeClass('none');
+                    $('#player-position').val(data.position);
+                    $('#submit-role').show();
 
                     $('#role-id').on('change', function()
-                    //Смена роли игрока
+                        //Смена роли игрока
                     {
                         var role_id = $(this).val();
-                        var position_id = $(this).data('position');
 
                         $.ajax
                         (
                             {
-                                beforeSend: function(){$('#position-block').addClass('loading');},
                                 url: 'json.php?change_role_id=' + role_id + '&position_id=' + position_id,
                                 dataType: "json",
                                 success: function(data)
                                 {
                                     $('#role-description').html(data.role_array[0].role_description);
-                                    $('#position-block').removeClass('loading');
                                 }
                             }
                         );
@@ -306,138 +305,6 @@ $(document).ready(function($)
         );
     });
 
-    $('#status-transfer').on('change', function()
-    //Изменение трансферного статуса
-    {
-        var player_id   = $(this).data('player');
-        var status      = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#transfer-info').addClass('loading');},
-                url: 'json.php?player_id=' + player_id + '&statustransfer_id=' + status,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#transfer-info').removeClass('loading');
-                    }
-                }
-            }
-        );
-    });
-
-    $('#status-rent').on('change', function()
-    //Изменение арендного статуса
-    {
-        var player_id   = $(this).data('player');
-        var status      = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#transfer-info').addClass('loading');},
-                url: 'json.php?player_id=' + player_id + '&statusrent_id=' + status,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#transfer-info').removeClass('loading');
-                    }
-                }
-            }
-        );
-    });
-
-    $('#status-team').on('change', function()
-    //Изменение командного статуса
-    {
-        var player_id   = $(this).data('player');
-        var status      = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#transfer-info').addClass('loading');},
-                url: 'json.php?player_id=' + player_id + '&statusteam_id=' + status,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#transfer-info').removeClass('loading');
-                    }
-                }
-            }
-        );
-    });
-
-    $('#transfer-price').on('change', function()
-    //Изменение трансферной цены
-    {
-        var player_id   = $(this).data('player');
-        var price       = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#transfer-info').addClass('loading');},
-                url: 'json.php?player_id=' + player_id + '&transfer_price=' + price,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#transfer-info').removeClass('loading');
-                    }
-                }
-            }
-        );
-    });
-
-    $('#offer-type').on('change', function()
-    //Переключение с трасферного предложения на арендное
-    {
-        var offer_type = $(this).val();
-
-        if (1 == offer_type)
-        {
-            $('#tr-offer-period').hide();
-        }
-        else
-        {
-            $('#tr-offer-period').show();
-        }
-    });
-
-    $('#offer-submit').on('click', function()
-    //Стоимость трансферного предложения
-    {
-        var player_id   = $('#offer-submit').data('player');
-        var price       = $('#offer-price').val();
-        var offer_type  = $('#offer-type').val();
-        var period      = $('#offer-period').val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#offer-info').addClass('loading');},
-                url: 'json.php?player_id=' + player_id + '&offer_price=' + price + '&offer_period=' + period + '&offer_type=' + offer_type,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#offer-info').removeClass('loading');
-                    }
-                }
-            }
-        );
-    });
-
     $('.inbox-title').on('click', function()
     //Текст новости
     {
@@ -485,11 +352,7 @@ $(document).ready(function($)
 
         for (var i=0; i<role_select_array.length; i++)
         {
-            var select_value = $(role_select_array[i]).parent().parent().find('.position-select').val();
-            var role_name    = $('option:selected',role_select_array[i]).text();
             var role_value   = $(role_select_array[i]).val();
-
-            $('#tactic-role-' + select_value).text(role_name);
 
             var select_array    = $(role_select_array[i]).parent().parent().find('option', '.position-select');
             var selected_item   = $(role_select_array[i]).parent().parent().find('option:selected', '.position-select');
@@ -507,19 +370,8 @@ $(document).ready(function($)
     {
         var style_id = $(this).val();
 
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#tactic-block').addClass('loading');},
-                url: 'json.php?style_id=' + style_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    $('#gamestyle').html('<h6>' + data.gamestyle_array[0].gamestyle_name + '</h6>' + data.gamestyle_array[0].gamestyle_description);
-                    $('#tactic-block').removeClass('loading');
-                }
-            }
-        );
+        $('.gamestyle-td').hide();
+        $('#gamestyle-' + style_id).show();
     });
 
     $('#gamestyle-select-national').on('change', function()
@@ -547,19 +399,8 @@ $(document).ready(function($)
     {
         var mood_id = $(this).val();
 
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#tactic-block').addClass('loading');},
-                url: 'json.php?mood_id=' + mood_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    $('#gamemood').html('<h6>' + data.gamemood_array[0].gamemood_name + '</h6>' + data.gamemood_array[0].gamemood_description);
-                    $('#tactic-block').removeClass('loading');
-                }
-            }
-        );
+        $('.gamemood-td').hide();
+        $('#gamemood-' + mood_id).show();
     });
 
     $('#gamemood-select-national').on('change', function()
@@ -592,94 +433,6 @@ $(document).ready(function($)
     //Выбор капитана
     {
         captain_select();
-
-        var captain_id = $(this).data('id');
-        var player_id  = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#player-block').addClass('loading');},
-                url: 'json.php?captain_id=' + captain_id + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#player-block').removeClass('loading');
-                    }
-                }
-            }
-        );
-    });
-
-    $('.training-position').on('change', function()
-    //Тренировка новой позиции
-    {
-        var player_id   = $(this).data('player');
-        var position_id = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#training-block').addClass('loading');},
-                url: 'json.php?training_position_id=' + position_id + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#training-block').removeClass('loading');
-                    }
-                }
-            }
-        );
-    });
-
-    $('.training-attribute').on('change', function()
-    //Тренировка характеристики игока
-    {
-        var player_id   = $(this).data('player');
-        var attribute_id = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#training-block').addClass('loading');},
-                url: 'json.php?training_attribute_id=' + attribute_id + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#training-block').removeClass('loading');
-                    }
-                }
-            }
-        );
-    });
-
-    $('.training-intensity').on('change', function()
-    //Тренировка характеристики игока
-    {
-        var player_id = $(this).data('player');
-        var intensity = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#training-block').addClass('loading');},
-                url: 'json.php?training_intensity=' + intensity + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#training-block').removeClass('loading');
-                    }
-                }
-            }
-        );
     });
 
     if ($(select_on_page_array).is('#select-penalty-1'))
@@ -692,25 +445,6 @@ $(document).ready(function($)
     //Выбор пенальтистов
     {
         penalty_select();
-
-        var penalty_id = $(this).data('id');
-        var player_id  = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#player-block').addClass('loading');},
-                url: 'json.php?penalty_id=' + penalty_id + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#player-block').removeClass('loading');
-                    }
-                }
-            }
-        );
     });
 
     if ($(select_on_page_array).is('#select-corner-left-1'))
@@ -728,150 +462,36 @@ $(document).ready(function($)
     //Выбор исполнителей стандартов
     {
         corner_left_select();
-
-        var standard_id     = $(this).data('id');
-        var player_id       = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#corner-block').addClass('loading');},
-                url: 'json.php?corner_left=' + standard_id + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#corner-block').removeClass('loading');
-                    }
-                }
-            }
-        );
     });
 
     $('.select-corner-right').on('change', function()
     //Выбор исполнителей стандартов
     {
         corner_right_select();
-
-        var standard_id     = $(this).data('id');
-        var player_id       = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#corner-block').addClass('loading');},
-                url: 'json.php?corner_right=' + standard_id + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#corner-block').removeClass('loading');
-                    }
-                }
-            }
-        );
     });
 
     $('.select-freekick-left').on('change', function()
     //Выбор исполнителей стандартов
     {
         freekick_left_select();
-
-        var standard_id     = $(this).data('id');
-        var player_id       = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#freekick-block').addClass('loading');},
-                url: 'json.php?freekick_left=' + standard_id + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#freekick-block').removeClass('loading');
-                    }
-                }
-            }
-        );
     });
 
     $('.select-freekick-right').on('change', function()
     //Выбор исполнителей стандартов
     {
         freekick_right_select();
-
-        var standard_id     = $(this).data('id');
-        var player_id       = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#freekick-block').addClass('loading');},
-                url: 'json.php?freekick_right=' + standard_id + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#freekick-block').removeClass('loading');
-                    }
-                }
-            }
-        );
     });
 
     $('.select-out-left').on('change', function()
     //Выбор исполнителей стандартов
     {
         out_left_select();
-
-        var standard_id     = $(this).data('id');
-        var player_id       = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#out-block').addClass('loading');},
-                url: 'json.php?out_left=' + standard_id + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#out-block').removeClass('loading');
-                    }
-                }
-            }
-        );
     });
 
     $('.select-out-right').on('change', function()
     //Выбор исполнителей стандартов
     {
         out_right_select();
-
-        var standard_id     = $(this).data('id');
-        var player_id       = $(this).val();
-
-        $.ajax
-        (
-            {
-                beforeSend: function(){$('#out-block').addClass('loading');},
-                url: 'json.php?out_right=' + standard_id + '&player_id=' + player_id,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#out-block').removeClass('loading');
-                    }
-                }
-            }
-        );
     });
 
     $('#page-select').on('change', function()
@@ -888,36 +508,6 @@ $(document).ready(function($)
         $(this).addClass('active');
         $('.striped').hide();
         $('#finance-' + data_id).show();
-    });
-
-    if ($(select_on_page_array).is('.player-number'))
-    //Загрузка номеров игроков
-    {
-        player_number();
-    }
-
-    $('.player-number').on('change', function()
-    //Смена номера игрока
-    {
-        $('#player-info').addClass('loading');
-
-        var player_id   = $(this).data('player');
-        var number      = $(this).val();
-
-        $.ajax
-        (
-            {
-                url: 'json.php?player_id=' + player_id + '&number=' + number,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#player-info').removeClass('loading');
-                    }
-                }
-            }
-        );
     });
 
     $('.player-number-national').on('change', function()
@@ -1041,7 +631,9 @@ $(document).ready(function($)
                             + data.invitee_array[i].team_name
                             + '</a></td><td class="center w30">'
                             + home_guest
-                            + '</td><td class="center w20"><a href="?ok='
+                            + '</td><td class="center w20"><a href="?num='
+                            + data.num
+                            + '&ok='
                             + data.invitee_array[i].asktoplay_id
                             + '&shedule='
                             + shedule_id

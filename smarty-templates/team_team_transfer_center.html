@@ -7,7 +7,7 @@
                     <th colspan="8">Сделки, которые будут оформлены в ближайшее трансферное окно</th>
                 </tr>
                 <tr>
-                    <th class="w5"></th>
+                    <th class="w1"></th>
                     <th>Имя игрока</th>
                     <th colspan="2">Клуб</th>
                     <th colspan="2">Лига</th>
@@ -16,20 +16,11 @@
                 </tr>
                 {section name=i loop=$transfer_array}
                     <tr>
-                        <td class="center
-                            {if $num == $transfer_array[i].transfer_buyer_id}
-                                green
-                            {else}
-                                red
-                            {/if}"
-                        >
-                            <b>
-                                {if $num == $transfer_array[i].transfer_buyer_id}
-                                    >
-                                {else}
-                                    <
-                                {/if}
-                            </b>
+                        <td class="center">
+                            <img
+                                class="img-12"
+                                src="img/arrow/{if $num == $transfer_array[i].transfer_buyer_id}red{else}green{/if}.png"
+                            />
                         </td>
                         <td>
                             <a href="player_home_profile.php?num={$transfer_array[i].player_id}">
@@ -43,7 +34,7 @@
                                 src="img/team/12/{$transfer_array[i].team_id}.png"
                             />
                         </td>
-                        <td class="w10">
+                        <td class="w20">
                             <a href="team_team_review_profile.php?num={$transfer_array[i].team_id}">
                                 {$transfer_array[i].team_name}
                             </a>
@@ -55,16 +46,13 @@
                                 src="img/tournament/12/{$transfer_array[i].tournament_id}.png"
                             />
                         </td>
-                        <td class="w10">
+                        <td class="w20">
                             <a href="tournament_review_profile.php?num={$transfer_array[i].tournament_id}">
                                 {$transfer_array[i].tournament_name}
                             </a>
                         </td>
                         <td class="center">
                             {$transfer_array[i].offertype_name}
-                            {if (2 == $transfer_array[i].offertype_id)}
-                                (сезонов: {$transfer_array[i].transfer_period})
-                            {/if}
                         </td>
                         <td class="right">{$transfer_array[i].transfer_price|f_igosja_money}</td>
                     </tr>
@@ -96,7 +84,7 @@
                                 src="img/team/12/{$offer_from_me_array[i].team_id}.png"
                             />
                         </td>
-                        <td class="w10">
+                        <td class="w20">
                             <a href="team_team_review_profile.php?num={$offer_from_me_array[i].team_id}">
                                 {$offer_from_me_array[i].team_name}
                             </a>
@@ -108,20 +96,17 @@
                                 src="img/tournament/12/{$offer_from_me_array[i].tournament_id}.png"
                             />
                         </td>
-                        <td class="w10">
+                        <td class="w20">
                             <a href="tournament_review_profile.php?num={$offer_from_me_array[i].tournament_id}">
                                 {$offer_from_me_array[i].tournament_name}
                             </a>
                         </td>
                         <td class="center">
                             {$offer_from_me_array[i].offertype_name}
-                            {if (2 == $offer_from_me_array[i].offertype_id)}
-                                (сезонов: {$offer_from_me_array[i].playeroffer_period})
-                            {/if}
                         </td>
                         <td class="right">{$offer_from_me_array[i].playeroffer_price|f_igosja_money}</td>
                         <td class="center">
-                            <a href="team_team_transfer_center.php?from_del={$offer_from_me_array[i].playeroffer_id}" class="link-img link-delete"></a>
+                            <a href="team_team_transfer_center.php?num={$num}&from_del={$offer_from_me_array[i].playeroffer_id}" class="link-img link-delete"></a>
                         </td>
                     </tr>
                 {/section}
@@ -152,7 +137,7 @@
                                 src="img/team/12/{$offer_to_me_array[i].team_id}.png"
                             />
                         </td>
-                        <td class="w10">
+                        <td class="w20">
                             <a href="team_team_review_profile.php?num={$offer_to_me_array[i].team_id}">
                                 {$offer_to_me_array[i].team_name}
                             </a>
@@ -164,21 +149,18 @@
                                 src="img/tournament/12/{$offer_to_me_array[i].tournament_id}.png"
                             />
                         </td>
-                        <td class="w10">
+                        <td class="w20">
                             <a href="tournament_review_profile.php?num={$offer_to_me_array[i].tournament_id}">
                                 {$offer_to_me_array[i].tournament_name}
                             </a>
                         </td>
                         <td class="center">
                             {$offer_to_me_array[i].offertype_name}
-                            {if (2 == $offer_to_me_array[i].offertype_id)}
-                                (сезонов: {$offer_to_me_array[i].playeroffer_period})
-                            {/if}
                         </td>
                         <td class="right">{$offer_to_me_array[i].playeroffer_price|f_igosja_money}</td>
                         <td class="center">
-                            <a href="team_team_transfer_center.php?to_ok={$offer_to_me_array[i].playeroffer_id}" class="link-img link-ok"></a>
-                            <a href="team_team_transfer_center.php?to_del={$offer_to_me_array[i].playeroffer_id}" class="link-img link-delete"></a>
+                            <a href="team_team_transfer_center.php?num={$num}&to_ok={$offer_to_me_array[i].playeroffer_id}" class="link-img link-ok"></a>
+                            <a href="team_team_transfer_center.php?num={$num}&to_del={$offer_to_me_array[i].playeroffer_id}" class="link-img link-delete"></a>
                         </td>
                     </tr>
                 {/section}

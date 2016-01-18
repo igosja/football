@@ -64,6 +64,13 @@ if (isset($_GET['level']) &&
                     `building_team_id`='$get_num'";
         $mysqli->query($sql);
 
+        $sql = "INSERT INTO `historyfinanceteam`
+                SET `historyfinanceteam_date`=SYSDATE(),
+                    `historyfinanceteam_historytext_id`='4',
+                    `historyfinanceteam_team_id`='$get_num',
+                    `historyfinanceteam_value`='$price'";
+        $mysqli->query($sql);
+
         $sql = "UPDATE `team`
                 SET `team_finance`=`team_finance`-'$price'
                 WHERE `team_id`='$get_num'

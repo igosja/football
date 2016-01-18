@@ -6,8 +6,8 @@
                 <tr>
                     <th class="w10">Дата</th>
                     <th colspan="2">Соперник</th>
-                    <th class="w15">Турнир</th>
-                    <th class="w15">Доступность</th>
+                    <th colspan="2">Турнир</th>
+                    <th class="w25">Доступность</th>
                 </tr>
                 {section name=i loop=$shedule_array}
                     <tr>
@@ -28,7 +28,16 @@
                                 </a>
                             {/if}
                         </td>
-                        <td class="w20">
+                        <td class="w1">
+                            {if ($shedule_array[i].team_id)}
+                                <img
+                                    alt="{$shedule_array[i].tournament_name}"
+                                    class="img-12"
+                                    src="img/tournament/12/{$shedule_array[i].tournament_id}.png"
+                                />
+                            {/if}
+                        </td>
+                        <td class="w25">
                             {if ($shedule_array[i].team_id)}
                                 <a href="tournament_review_profile.php?num={$shedule_array[i].tournament_id}">
                                     {$shedule_array[i].tournament_name}
@@ -54,7 +63,7 @@
                 {/section}
             </table>
         </td>
-        <td class="block-page w25" id="asktoplay">
+        <td class="block-page w35" id="asktoplay">
             <p class="header">Организовать товарищеский матч</p>
             <table class="striped w100" id="asktoplay-table" style="display:none;">
                 <tr>
@@ -84,7 +93,9 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="center">
-                        <a href="javascript:;" id="asktoplay-submit" data-shedule="">Отправить приглашение</a>
+                        <button id="asktoplay-submit" data-shedule="">
+                            Отправить приглашение
+                        </button>
                     </td>
                 </tr>
             </table>

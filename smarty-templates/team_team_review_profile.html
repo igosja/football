@@ -146,7 +146,11 @@
             <table class="striped w100">
                 <tr>
                     <td>Менеджер</td>
-                    <td><a href="coach_home_profile.php?num=1">{$team_array.0.user_login}</a></td>
+                    <td>
+                        <a href="profile_home_home.php?num={$team_array.0.user_id}">
+                            {$team_array.0.user_login}
+                        </a>
+                    </td>
                     <td class="w1">
                         <img
                             alt="{$team_array.0.user_country_name}"
@@ -164,7 +168,7 @@
                     <td>Капитан</td>
                     <td>
                         <a href="player_home_profile.php?num={$team_array.0.captain_id}">
-                            {$team_array.0.captain_name} {$team_array.0.captain_name}
+                            {$team_array.0.captain_name} {$team_array.0.captain_surname}
                         </a>
                     </td>
                     <td>
@@ -184,7 +188,7 @@
                     <td>Вице-капитан</td>
                     <td>
                         <a href="player_home_profile.php?num={$team_array.0.vicecaptain_id}">
-                            {$team_array.0.vicecaptain_name} {$team_array.0.vicecaptain_name}
+                            {$team_array.0.vicecaptain_name} {$team_array.0.vicecaptain_surname}
                         </a>
                     </td>
                     <td>

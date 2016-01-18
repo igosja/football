@@ -4,15 +4,14 @@
             <p class="header">Персонал</p>
             <table class="striped w100">
                 <tr>
-                    <th class="w20">Должность</th>
                     <th>Имя</th>
                     <th class="w1">Нац</th>
+                    <th class="w20">Должность</th>
                     <th class="w10">Репутация</th>
                     <th class="w10">Зарплата</th>
                 </tr>
                 {section name=i loop=$staff_array}
                     <tr>
-                        <td>{$staff_array[i].staffpost_name}</td>
                         <td>
                             <a href="staff_home_profile.php?num={$staff_array[i].staff_id}">
                                 {$staff_array[i].name_name} {$staff_array[i].surname_name}
@@ -28,8 +27,9 @@
                                 />
                             </a>
                         </td>
+                        <td>{$staff_array[i].staffpost_name}</td>
                         <td class="center">{$staff_array[i].staff_reputation|f_igosja_five_star:12}</td>
-                        <td class="right">{$staff_array[i].staff_salary|f_igosja_money:12}</td>
+                        <td class="right">{$staff_array[i].staff_salary|f_igosja_money}</td>
                     </tr>
                 {/section}
             </table>

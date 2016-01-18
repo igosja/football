@@ -23,13 +23,39 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
+
+if (isset($_POST['data']))
+{
+    $data = $_POST['data'];
+
+    foreach ($data as $key => $value)
+    {
+        $player_id      = (int) $key;
+        $position_id    = (int) $value['position'];
+        $attribute_id   = (int) $value['attribute'];
+        $intensity      = (int) $value['intensity'];
+
+        $sql = "UPDATE `player`
+                SET `player_training_position_id`='$position_id',
+                    `player_training_attribute_id`='$attribute_id',
+                    `player_training_intensity`='$intensity'
+                WHERE `player_id`='$player_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('team_lineup_training_review.php?num=' . $get_num);
+    exit;
+}
 
 $sql = "SELECT `name_name`,
                `player_condition`,
@@ -45,13 +71,10 @@ $sql = "SELECT `name_name`,
         ON `name_id`=`player_name_id`
         LEFT JOIN `surname`
         ON `surname_id`=`player_surname_id`
-        LEFT JOIN `playerposition`
-        ON `playerposition_player_id`=`player_id`
         LEFT JOIN `position`
-        ON `position_id`=`playerposition_position_id`
-        WHERE `playerposition_value`='100'
-        AND `player_team_id`='$get_num'
-        ORDER BY `position_id` ASC";
+        ON `position_id`=`player_position_id`
+        WHERE `player_team_id`='$get_num'
+        ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);

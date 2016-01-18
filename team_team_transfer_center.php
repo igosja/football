@@ -23,7 +23,6 @@ $count_team = $team_sql->num_rows;
 if (0 == $count_team)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -45,7 +44,10 @@ if (isset($_GET['from_del']))
             LIMIT 1";
     $mysqli->query($sql);
 
-    redirect('team_team_transfer_center.php');
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Предложение успешно удалено.';
+
+    redirect('team_team_transfer_center.php?num=' . $get_num);
     exit;
 }
 elseif (isset($_GET['to_del']))
@@ -65,12 +67,92 @@ elseif (isset($_GET['to_del']))
             LIMIT 1";
     $mysqli->query($sql);
 
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Предложение успешно удалено.';
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Предложение успешно удалено.';
+
     redirect('team_team_transfer_center.php');
     exit;
 }
 elseif (isset($_GET['to_ok']))
 {
     $ok = (int) $_GET['to_ok'];
+
+    $sql = "SELECT COUNT(`playeroffer_id`) AS `count`
+            FROM `playeroffer`
+            WHERE `playeroffer_id`='$ok'";
+    $count_sql = $mysqli->query($sql);
+
+    $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+    $count = $count_array[0]['count'];
+
+    if (0 == $count)
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Такая заявка не найдена.';
+
+        redirect('team_team_transfer_center.php?num=' . $get_num);
+        exit;
+    }
+
+    $sql = "SELECT COUNT(`transfer_id`) AS `count`
+            FROM `transfer`
+            WHERE `transfer_player_id`=
+            (
+                SELECT `playeroffer_player_id`
+                FROM `playeroffer`
+                WHERE `playeroffer_id`='$ok'
+            )";
+    $count_sql = $mysqli->query($sql);
+
+    $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+    $count = $count_array[0]['count'];
+
+    if (0 != $count)
+    {
+        $sql = "SELECT `playeroffer_player_id`
+                FROM `playeroffer`
+                WHERE `playeroffer_id`='$ok'
+                LIMIT 1";
+        $player_sql = $mysqli->query($sql);
+
+        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+        $player_id = $player_array[0]['playeroffer_player_id'];
+
+        $sql = "SELECT `playeroffer_id`
+                FROM `playeroffer`
+                WHERE `playeroffer_player_id`='$player_id'
+                ORDER BY `playeroffer_id` ASC";
+        $playeroffer_sql = $mysqli->query($sql);
+
+        $count_playeroffer = $playeroffer_sql->num_rows;
+        $playeroffer_array = $playeroffer_sql->fetch_all(MYSQLI_ASSOC);
+
+        for ($i=0; $i<$count_playeroffer; $i++)
+        {
+            $playeroffer_id = $playeroffer_array[$i]['playeroffer_id'];
+
+            $sql = "DELETE FROM `playeroffer`
+                    WHERE `playeroffer_id`='$playeroffer_id'";
+            $mysqli->query($sql);
+
+            $sql = "DELETE FROM `inbox`
+                    WHERE `inbox_playeroffer_id`='$playeroffer_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+        }
+
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Трансфер этого игрока уже согласован.';
+
+        redirect('team_team_transfer_center.php?num=' . $get_num);
+        exit;
+    }
 
     $sql = "INSERT INTO `transfer`
             (
@@ -109,7 +191,10 @@ elseif (isset($_GET['to_ok']))
             LIMIT 1";
     $mysqli->query($sql);
 
-    redirect('team_team_transfer_center.php');
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Предложение успешно принято.';
+
+    redirect('team_team_transfer_center.php?num=' . $get_num);
     exit;
 }
 
@@ -123,7 +208,6 @@ $sql = "SELECT `name_name`,
                `tournament_id`,
                `tournament_name`,
                `transfer_buyer_id`,
-               `transfer_period`,
                `transfer_price`
         FROM `transfer`
         LEFT JOIN `player`
@@ -154,7 +238,6 @@ $sql = "SELECT `name_name`,
                `offertype_name`,
                `player_id`,
                `playeroffer_id`,
-               `playeroffer_period`,
                `playeroffer_price`,
                `surname_name`,
                `team_id`,
@@ -189,7 +272,6 @@ $sql = "SELECT `name_name`,
                `offertype_name`,
                `player_id`,
                `playeroffer_id`,
-               `playeroffer_period`,
                `playeroffer_price`,
                `surname_name`,
                `team_id`,

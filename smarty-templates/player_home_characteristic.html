@@ -20,37 +20,37 @@
                                             src="img/flag/12/{$player_array.0.country_id}.png"
                                         />
                                         {$player_array.0.country_name}
-                                        <br>
-                                        Не вызывался
                                     </a>
+                                    <br />
+                                    Не вызывался
                                 </td>
                                 <td>
-                                    {$player_array.0.player_age} лет
-                                    <br>
+                                    {$player_array.0.player_age}
+                                    <br />
                                     Возраст
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     {$player_array.0.player_height} см
-                                    <br>
+                                    <br />
                                     {$player_array.0.player_weight} кг
                                 </td>
                                 <td>
                                     {$player_array.0.player_leg_left|f_igosja_leg_name:$player_array.0.player_leg_right}
-                                    <br>
+                                    <br />
                                     Рабочая нога
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     {$player_array.0.player_salary|f_igosja_money} в день
-                                    <br>
+                                    <br />
                                     Зарплата
                                 </td>
                                 <td>
                                     {$player_array.0.player_price|f_igosja_money}
-                                    <br>
+                                    <br />
                                     Стоимость
                                 </td>
                             </tr>
@@ -71,26 +71,26 @@
             <p class="header">Характеристики</p>
             <table class="w100">
                 <tr>
-                    {section name=i loop=$player_array}
-                        {if (!isset($player_array[i.index_prev].attributechapter_name) ||
-                             $player_array[i.index_prev].attributechapter_name != $player_array[i].attributechapter_name)}
+                    {section name=i loop=$attribute_array}
+                        {if (!isset($attribute_array[i.index_prev].attributechapter_name) ||
+                             $attribute_array[i.index_prev].attributechapter_name != $attribute_array[i].attributechapter_name)}
                             <td>
                                 <table class="striped w100">
                                     <tr>
-                                        <th colspan="2">{$player_array[i].attributechapter_name}</th>
+                                        <th colspan="2">{$attribute_array[i].attributechapter_name}</th>
                                     </tr>
                         {/if}
                             <tr>
-                                <td>{$player_array[i].attribute_name}</td>
+                                <td>{$attribute_array[i].attribute_name}</td>
                                 <td class="w33">
                                     <div class="progress">
-                                        <div class="progress-bar" style="width: {$player_array[i].playerattribute_value}%">
+                                        <div class="progress-bar" style="width: {$attribute_array[i].playerattribute_value}%">
                                             {$smarty.const.SPACE}
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                        {if (!isset($player_array[i.index_next].attributechapter_name))}
+                        {if (!isset($attribute_array[i.index_next].attributechapter_name))}
                             <tr>
                                 <td>Кондиции</td>
                                 <td>
@@ -131,8 +131,8 @@
                                 <td>{$player_array.0.player_leg_left|f_igosja_leg_name:$player_array.0.player_leg_right}</td>
                             </tr>
                         {/if}
-                        {if (!isset($player_array[i.index_next].attributechapter_name) ||
-                             $player_array[i.index_next].attributechapter_name != $player_array[i].attributechapter_name)}
+                        {if (!isset($attribute_array[i.index_next].attributechapter_name) ||
+                             $attribute_array[i.index_next].attributechapter_name != $attribute_array[i].attributechapter_name)}
                                 </table>
                             </td>
                         {/if}
