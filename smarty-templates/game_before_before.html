@@ -105,20 +105,34 @@
             <table class="striped w100">
                 <tr>
                     <td>Отработал матчей в этом сезоне</td>
-                    <td class="right">{$game_array.0.statisticreferee_game}</td>
+                    <td class="right">
+                        {if (isset($referee_array.0.statisticreferee_game))}
+                            {$referee_array.0.statisticreferee_game}
+                        {else}
+                            0
+                        {/if}
+                    </td>
                 </tr>
                 <tr>
                     <td>Показал желтых карточек</td>
                     <td class="right">
-                        {$game_array.0.statisticreferee_yellow}
-                        ({($game_array.0.statisticreferee_yellow/$game_array.0.statisticreferee_game)|round:1}/матч)
+                        {if (isset($referee_array.0.statisticreferee_yellow))}
+                            {$referee_array.0.statisticreferee_yellow}
+                            ({($referee_array.0.statisticreferee_yellow/$game_array.0.statisticreferee_game)|round:1}/матч)
+                        {else}
+                            0
+                        {/if}
                     </td>
                 </tr>
                 <tr>
                     <td>Показал красных карточек</td>
                     <td class="right">
-                        {$game_array.0.statisticreferee_red}
-                        ({($game_array.0.statisticreferee_red/$game_array.0.statisticreferee_game)|round:1}/матч)
+                        {if (isset($referee_array.0.statisticreferee_red))}
+                            {$referee_array.0.statisticreferee_red}
+                            ({($referee_array.0.statisticreferee_red/$game_array.0.statisticreferee_game)|round:1}/матч)
+                        {else}
+                            0
+                        {/if}
                     </td>
                 </tr>
             </table>

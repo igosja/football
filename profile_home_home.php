@@ -137,6 +137,7 @@ $latest_array = array_reverse($latest_array);
 
 $sql = "SELECT `game_home_team_id`,
                `game_id`,
+               `lineupmain_id`,
                `shedule_date`,
                `team_id`,
                `team_name`,
@@ -148,6 +149,9 @@ $sql = "SELECT `game_home_team_id`,
         ON IF (`game_home_team_id`='$authorization_team_id', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
         LEFT JOIN `tournament`
         ON `game_tournament_id`=`tournament_id`
+        LEFT JOIN `lineupmain`
+        ON (`lineupmain_game_id`=`game_id`
+        AND `lineupmain_team_id`='$authorization_team_id')
         WHERE (`game_home_team_id`='$authorization_team_id'
         OR `game_guest_team_id`='$authorization_team_id')
         AND `game_played`='0'

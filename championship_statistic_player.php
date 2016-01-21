@@ -22,7 +22,6 @@ $count_tournament = $tournament_sql->num_rows;
 if (0 == $count_tournament)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -30,10 +29,10 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$sql = "SELECT `player_id`,
-               `name_name`,
-               `surname_name`,
+$sql = "SELECT `name_name`,
+               `player_id`,
                `statisticplayer_game`,
+               `surname_name`,
                `team_id`,
                `team_name`
         FROM `statisticplayer`
@@ -53,10 +52,10 @@ $game_sql = $mysqli->query($sql);
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `player_id`,
-               `name_name`,
-               `surname_name`,
+$sql = "SELECT `name_name`,
+               `player_id`,
                `statisticplayer_win`,
+               `surname_name`,
                `team_id`,
                `team_name`
         FROM `statisticplayer`
@@ -76,10 +75,10 @@ $win_sql = $mysqli->query($sql);
 
 $win_array = $win_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `player_id`,
-               `name_name`,
-               `surname_name`,
+$sql = "SELECT `name_name`,
+               `player_id`,
                `statisticplayer_best`,
+               `surname_name`,
                `team_id`,
                `team_name`
         FROM `statisticplayer`
@@ -99,10 +98,10 @@ $best_sql = $mysqli->query($sql);
 
 $best_array = $best_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `player_id`,
-               `name_name`,
-               `surname_name`,
+$sql = "SELECT `name_name`,
+               `player_id`,
                `statisticplayer_goal`,
+               `surname_name`,
                `team_id`,
                `team_name`
         FROM `statisticplayer`
@@ -122,10 +121,10 @@ $goal_sql = $mysqli->query($sql);
 
 $goal_array = $goal_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `player_id`,
-               `name_name`,
-               `surname_name`,
+$sql = "SELECT `name_name`,
+               `player_id`,
                `statisticplayer_pass_scoring`,
+               `surname_name`,
                `team_id`,
                `team_name`
         FROM `statisticplayer`
@@ -145,10 +144,10 @@ $pass_sql = $mysqli->query($sql);
 
 $pass_array = $pass_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `player_id`,
-               `name_name`,
-               `surname_name`,
+$sql = "SELECT `name_name`,
+               `player_id`,
                ROUND(`statisticplayer_ontarget`/`statisticplayer_shot`*'100','0') AS `statisticplayer_shot`,
+               `surname_name`,
                `team_id`,
                `team_name`
         FROM `statisticplayer`
@@ -169,10 +168,10 @@ $shot_sql = $mysqli->query($sql);
 
 $shot_array = $shot_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `player_id`,
-               `name_name`,
-               `surname_name`,
+$sql = "SELECT `name_name`,
+               `player_id`,
                `statisticplayer_red`,
+               `surname_name`,
                `team_id`,
                `team_name`
         FROM `statisticplayer`
@@ -192,10 +191,10 @@ $red_sql = $mysqli->query($sql);
 
 $red_array = $red_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `player_id`,
-               `name_name`,
-               `surname_name`,
+$sql = "SELECT `name_name`,
+               `player_id`,
                `statisticplayer_yellow`,
+               `surname_name`,
                `team_id`,
                `team_name`
         FROM `statisticplayer`
@@ -215,10 +214,10 @@ $yellow_sql = $mysqli->query($sql);
 
 $yellow_array = $yellow_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `player_id`,
-               `name_name`,
-               `surname_name`,
+$sql = "SELECT `name_name`,
+               `player_id`,
                `statisticplayer_distance`,
+               `surname_name`,
                `team_id`,
                `team_name`
         FROM `statisticplayer`

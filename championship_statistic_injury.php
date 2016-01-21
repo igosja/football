@@ -22,7 +22,6 @@ $count_tournament = $tournament_sql->num_rows;
 if (0 == $count_tournament)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -30,7 +29,7 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$sql = "SELECT DATEDIFF(`injury_end_date`,SYSDATE()) AS `day`,
+$sql = "SELECT DATEDIFF(`injury_end_date`, SYSDATE()) AS `day`,
                `injurytype_name`,
                `name_name`,
                `player_id`,

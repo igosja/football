@@ -63,7 +63,6 @@ $(document).ready(function($)
         );
     });
 
-    //Записная книжка менеджера
     $('#note-create').on('click', function()
     //Создание заметки
     {
@@ -131,11 +130,12 @@ $(document).ready(function($)
     //Роль игрока при редактировании индивидуальной тактики
     {
         var position_id = $(this).data('position');
+        var game_id     = $('#tactic-player-game').val();
 
         $.ajax
         (
             {
-                url: 'json.php?player_tactic_position_id=' + position_id,
+                url: 'json.php?player_tactic_position_id=' + position_id + '&game_id=' + game_id,
                 dataType: "json",
                 success: function(data)
                 {
@@ -168,7 +168,7 @@ $(document).ready(function($)
                     $('#submit-role').show();
 
                     $('#role-id').on('change', function()
-                        //Смена роли игрока
+                    //Смена роли игрока
                     {
                         var role_id = $(this).val();
 
@@ -328,7 +328,7 @@ $(document).ready(function($)
     });
 
     if ($(select_on_page_array).is('#tactic-select'))
-    //Загрузка страницы такстики
+    //Загрузка страницы тактики
     {
         tactic_field();
     }
@@ -534,29 +534,6 @@ $(document).ready(function($)
         );
     });
 
-    $('.instruction-checkbox').on('change', function()
-    //Смена командных инкструкций
-    {
-        $('#instruction-block').addClass('loading');
-
-        var instruction = $(this).val();
-
-        $.ajax
-        (
-            {
-                url: 'json.php?instruction_id=' + instruction,
-                dataType: "json",
-                success: function(data)
-                {
-                    if (1 == data.success)
-                    {
-                        $('#instruction-block').removeClass('loading');
-                    }
-                }
-            }
-        );
-    });
-
     $('.instruction-checkbox-national').on('change', function()
     //Смена командных инкструкций
     {
@@ -583,13 +560,12 @@ $(document).ready(function($)
     $('.asktoplay-link').on('click', function()
     //Просмотр инфо о доступном дне для тов матчей
     {
-        $('#asktoplay').addClass('loading');
-
         var shedule_id = $(this).data('shedule');
 
         $.ajax
         (
             {
+                beforeSend: function(){$('#asktoplay').addClass('loading');},
                 url: 'json.php?asktoplay=' + shedule_id,
                 dataType: "json",
                 success: function(data)

@@ -22,7 +22,6 @@ $count_tournament = $tournament_sql->num_rows;
 if (0 == $count_tournament)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -30,9 +29,9 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$sql = "SELECT `team_id`,
-               `team_name`,
-               `statisticteam_goal`
+$sql = "SELECT `statisticteam_goal`,
+               `team_id`,
+               `team_name`
         FROM `statisticteam`
         LEFT JOIN `team`
         ON `team_id`=`statisticteam_team_id`
@@ -44,9 +43,9 @@ $goal_sql = $mysqli->query($sql);
 
 $goal_array = $goal_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `team_id`,
-               `team_name`,
-               `statisticteam_pass`
+$sql = "SELECT `statisticteam_pass`,
+               `team_id`,
+               `team_name`
         FROM `statisticteam`
         LEFT JOIN `team`
         ON `team_id`=`statisticteam_team_id`
@@ -58,9 +57,9 @@ $pass_sql = $mysqli->query($sql);
 
 $pass_array = $pass_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `team_id`,
-               `team_name`,
-               `statisticteam_red`
+$sql = "SELECT `statisticteam_red`,
+               `team_id`,
+               `team_name`
         FROM `statisticteam`
         LEFT JOIN `team`
         ON `team_id`=`statisticteam_team_id`
@@ -72,9 +71,9 @@ $red_sql = $mysqli->query($sql);
 
 $red_array = $red_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `team_id`,
-               `team_name`,
-               `statisticteam_yellow`
+$sql = "SELECT `statisticteam_yellow`,
+               `team_id`,
+               `team_name`
         FROM `statisticteam`
         LEFT JOIN `team`
         ON `team_id`=`statisticteam_team_id`
@@ -100,9 +99,9 @@ $win_sql = $mysqli->query($sql);
 
 $win_array = $win_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `team_id`,
-               `team_name`,
-               `series_value`
+$sql = "SELECT `series_value`,
+               `team_id`,
+               `team_name`
         FROM `series`
         LEFT JOIN `team`
         ON `team_id`=`series_team_id`
@@ -114,9 +113,9 @@ $no_loose_sql = $mysqli->query($sql);
 
 $no_loose_array = $no_loose_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `team_id`,
-               `team_name`,
-               `series_value`
+$sql = "SELECT `series_value`,
+               `team_id`,
+               `team_name`
         FROM `series`
         LEFT JOIN `team`
         ON `team_id`=`series_team_id`
@@ -128,9 +127,9 @@ $loose_sql = $mysqli->query($sql);
 
 $loose_array = $loose_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `team_id`,
-               `team_name`,
-               `series_value`
+$sql = "SELECT `series_value`,
+               `team_id`,
+               `team_name`
         FROM `series`
         LEFT JOIN `team`
         ON `team_id`=`series_team_id`

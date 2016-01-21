@@ -115,8 +115,12 @@
                                 </a>
                             </td>
                             <td class="right">
-                                <a href="team_lineup_tactic_review.php?num={$authorization_team_id}">
-                                    Ред
+                                <a href="team_lineup_tactic_review.php?num={$authorization_team_id}&game={$nearest_array[i].game_id}">
+                                    {if ($nearest_array[i].lineupmain_id)}
+                                        Редактировать
+                                    {else}
+                                        Отправить
+                                    {/if}
                                 </a>
                             </td>
                         </tr>

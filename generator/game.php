@@ -88,6 +88,27 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `referee`";
 $mysqli->query($sql);
 
+$sql = "TRUNCATE `playeroffer`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `transfer`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `history`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `transferhistory`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `trophyplayer`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `inbox`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `asktoplay`";
+$mysqli->query($sql);
+
 $sql = "INSERT INTO `player`
         SET `player_id`='0'";
 $mysqli->query($sql);
@@ -687,6 +708,18 @@ for ($i=0; $i<$count_country; $i++)
             WHERE `city_country_id`='$country_id'";
     $mysqli->query($sql);
 
+    $sql = "SELECT `shedule_id`
+            FROM `shedule`
+            WHERE `shedule_tournamenttype_id`='" . TOURNAMENT_TYPE_CUP . "'
+            ORDER BY `shedule_date` ASC
+            LIMIT 2";
+    $shedule_sql = $mysqli->query($sql);
+
+    $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+
+    $shedule_id_1 = $shedule_array[0]['shedule_id'];
+    $shedule_id_2 = $shedule_array[1]['shedule_id'];
+
     $sql = "SELECT `cupparticipant_team_id`
             FROM `cupparticipant`
             WHERE `cupparticipant_tournament_id`='$tournament_id'
@@ -712,7 +745,7 @@ for ($i=0; $i<$count_country; $i++)
                     `game_referee_id`='$referee_id_1',
                     `game_stadium_id`='$team_1',
                     `game_stage_id`='45',
-                    `game_shedule_id`='1',
+                    `game_shedule_id`='$shedule_id_1',
                     `game_temperature`='15'+RAND()*'15',
                     `game_tournament_id`='$tournament_id',
                     `game_weather_id`='1'+RAND()*'3'";
@@ -727,7 +760,7 @@ for ($i=0; $i<$count_country; $i++)
                     `game_referee_id`='$referee_id_2',
                     `game_stadium_id`='$team_2',
                     `game_stage_id`='45',
-                    `game_shedule_id`='2',
+                    `game_shedule_id`='$shedule_id_2',
                     `game_temperature`='15'+RAND()*'15',
                     `game_tournament_id`='$tournament_id',
                     `game_weather_id`='1'+RAND()*'3'";

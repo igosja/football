@@ -1,5 +1,34 @@
 <?php
 
+function f_igosja_generator_asktoplay_delete()
+//Удаляем заявки на товарищеские матчи на текущий день
+{
+    global $mysqli;
+
+    $sql = "SELECT `asktoplay_id`
+            FROM `asktoplay`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`asktoplay_shedule_id`
+            WHERE `shedule_date`=CURDATE()";
+    $asktoplay_sql = $mysqli->query($sql);
+
+    $count_asktoplay = $asktoplay_sql->num_rows;
+    $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
+
+    for ($i=0; $i<$count_asktoplay; $i++)
+    {
+        $asktoplay_id = $asktoplay_array[$i]['asktoplay_id'];
+
+        $sql = "DELETE FROM `asktoplay`
+                WHERE `asktoplay_id`='$asktoplay_id'";
+        $mysqli->query($sql);
+
+        $sql = "DELETE FROM `inbox`
+                WHERE `inbox_asktoplay_id`='$asktoplay_id'";
+        $mysqli->query($sql);
+    }
+}
+
 function f_igosja_generator_lineup_current_create()
 //Создинае составов в командах, где их нет
 {
@@ -37,7 +66,10 @@ function f_igosja_generator_lineup_current_create()
 
             if (0 != $home_team_id)
             {
-                $sql_insert[] = "('$home_team_id')";
+                $sql_insert[] = "('$home_team_id', '1', '19', '4', '3', '0', '0', '0', '0', '0', '0', '0', '0',
+                                '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '3', '4', '6', '7', '13',
+                                '14', '16', '17', '23', '25', '26', '27', '28', '29', '30', '31', '32', '1',
+                                '5', '9', '9', '5', '18', '21', '21', '18', '30', '30')";
             }
         }
 
@@ -47,7 +79,10 @@ function f_igosja_generator_lineup_current_create()
 
             if (0 != $guest_team_id)
             {
-                $sql_insert[]  = "('$guest_team_id')";
+                $sql_insert[]  = "('$guest_team_id', '1', '19', '4', '3', '0', '0', '0', '0', '0', '0', '0', '0',
+                                '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '3', '4', '6', '7', '13',
+                                '14', '16', '17', '23', '25', '26', '27', '28', '29', '30', '31', '32', '1',
+                                '5', '9', '9', '5', '18', '21', '21', '18', '30', '30')";
             }
         }
 
@@ -63,7 +98,61 @@ function f_igosja_generator_lineup_current_create()
     {
         $sql_insert = implode(',', $sql_insert);
 
-        $sql = "INSERT INTO `lineupcurrent` (`lineupcurrent_team_id`)
+        $sql = "INSERT INTO `lineupcurrent`
+                            (
+                                `lineupcurrent_team_id`,
+                                `lineupcurrent_auto`,
+                                `lineupcurrent_formation_id`,
+                                `lineupcurrent_gamemood_id`,
+                                `lineupcurrent_gamestyle_id`,
+                                `lineupcurrent_player_id_1`,
+                                `lineupcurrent_player_id_2`,
+                                `lineupcurrent_player_id_3`,
+                                `lineupcurrent_player_id_4`,
+                                `lineupcurrent_player_id_5`,
+                                `lineupcurrent_player_id_6`,
+                                `lineupcurrent_player_id_7`,
+                                `lineupcurrent_player_id_8`,
+                                `lineupcurrent_player_id_9`,
+                                `lineupcurrent_player_id_10`,
+                                `lineupcurrent_player_id_11`,
+                                `lineupcurrent_player_id_12`,
+                                `lineupcurrent_player_id_13`,
+                                `lineupcurrent_player_id_14`,
+                                `lineupcurrent_player_id_15`,
+                                `lineupcurrent_player_id_16`,
+                                `lineupcurrent_player_id_17`,
+                                `lineupcurrent_player_id_18`,
+                                `lineupcurrent_position_id_1`,
+                                `lineupcurrent_position_id_2`,
+                                `lineupcurrent_position_id_3`,
+                                `lineupcurrent_position_id_4`,
+                                `lineupcurrent_position_id_5`,
+                                `lineupcurrent_position_id_6`,
+                                `lineupcurrent_position_id_7`,
+                                `lineupcurrent_position_id_8`,
+                                `lineupcurrent_position_id_9`,
+                                `lineupcurrent_position_id_10`,
+                                `lineupcurrent_position_id_11`,
+                                `lineupcurrent_position_id_12`,
+                                `lineupcurrent_position_id_13`,
+                                `lineupcurrent_position_id_14`,
+                                `lineupcurrent_position_id_15`,
+                                `lineupcurrent_position_id_16`,
+                                `lineupcurrent_position_id_17`,
+                                `lineupcurrent_position_id_18`,
+                                `lineupcurrent_role_id_1`,
+                                `lineupcurrent_role_id_2`,
+                                `lineupcurrent_role_id_3`,
+                                `lineupcurrent_role_id_4`,
+                                `lineupcurrent_role_id_5`,
+                                `lineupcurrent_role_id_6`,
+                                `lineupcurrent_role_id_7`,
+                                `lineupcurrent_role_id_8`,
+                                `lineupcurrent_role_id_9`,
+                                `lineupcurrent_role_id_10`,
+                                `lineupcurrent_role_id_11`
+                            )
                 VALUES " . $sql_insert . ";";
         $mysqli->query($sql);
     }
@@ -181,7 +270,7 @@ function f_igosja_generator_lineup_current_check_and_fill()
                 $visit = 'guest_last_visit';
             }
 
-            $team_id        = $game_array[$i][$team];
+            $team_id = $game_array[$i][$team];
 
             if (0 != $team_id)
             {
@@ -1169,7 +1258,7 @@ function f_igosja_generator_visitor()
             ON `game_guest_team_id`=`guest`.`team_id`
             LEFT JOIN `stadium`
             ON `stadium_id`=`game_stadium_id`
-            SET `game_visitor`=IF(ROUND((`home`.`team_visitor`+`guest`.`team_visitor`)*`tournament_visitor`)>`stadium_capacity`,`stadium_capacity`,ROUND(`home`.`team_visitor`+`guest`.`team_visitor`)*`tournamenttypet_visitor`),
+            SET `game_visitor`=IF(ROUND((`home`.`team_visitor`+`guest`.`team_visitor`)*`tournamenttype_visitor`)>`stadium_capacity`,`stadium_capacity`,ROUND(`home`.`team_visitor`+`guest`.`team_visitor`)*`tournamenttype_visitor`),
                 `game_ticket_price`=IF(ROUND(`stadium_capacity`/'1000')>'10',ROUND(`stadium_capacity`/'1000'),'10')
             WHERE `shedule_date`=CURDATE()
             AND `game_played`='0'
@@ -1185,7 +1274,7 @@ function f_igosja_generator_visitor()
             ON `tournamenttype_id`=`tournament_tournamenttype_id`
             LEFT JOIN `stadium`
             ON `stadium_id`=`game_stadium_id`
-            SET `game_visitor`=IF(ROUND('50000'*`tournament_visitor`)>`stadium_capacity`, `stadium_capacity`, ROUND('50000')*`tournamenttype_visitor`),
+            SET `game_visitor`=IF(ROUND('50000'*`tournamenttype_visitor`)>`stadium_capacity`, `stadium_capacity`, ROUND('50000')*`tournamenttype_visitor`),
                 `game_ticket_price`=IF(ROUND(`stadium_capacity`/'1000')>'10',ROUND(`stadium_capacity`/'1000'),'10')
             WHERE `shedule_date`=CURDATE()
             AND `game_played`='0'
@@ -1207,7 +1296,7 @@ function f_igosja_generator_game_result()
     $koef_2 = 100000;
     $koef_3 = 100000;
     $koef_4 = 100000;
-    $koef_5 = 10000;
+    $koef_5 = 50000;
 
     $sql = "SELECT `game_id`,
                    `game_guest_country_id`,

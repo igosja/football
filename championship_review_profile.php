@@ -22,7 +22,6 @@ $count_tournament = $tournament_sql->num_rows;
 if (0 == $count_tournament)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -34,7 +33,6 @@ $today = date('Y-m-d');
 
 $sql = "SELECT `team_id`,
                `team_name`,
-               `standing_score`-`standing_pass` AS `standing_difference`,
                `standing_draw`,
                `standing_game`,
                `standing_loose`,

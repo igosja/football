@@ -133,7 +133,7 @@ button, input, select
     padding: 0;
 }
 
-/*Главное меню*/
+/*Р“Р»Р°РІРЅРѕРµ РјРµРЅСЋ*/
 .main-menu
 {
     line-height: 35px;
@@ -358,7 +358,7 @@ button, input, select
     color: #9CA2A5;
 }
 
-/*Блоки страницы*/
+/*Р‘Р»РѕРєРё СЃС‚СЂР°РЅРёС†С‹*/
 .block-table
 {
     background-color: #F5F5F5;
@@ -407,7 +407,7 @@ button, input, select
     padding: 5px;
 }
 
-/*Горизонтальные полоски*/
+/*Р“РѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ РїРѕР»РѕСЃРєРё*/
 .progress
 {
     background-color: #F5F5F5;
@@ -450,7 +450,7 @@ button, input, select
     width: 100%;
 }
 
-/*Форум*/
+/*Р¤РѕСЂСѓРј*/
 .forum-group
 {
     margin-top: 5px;
@@ -506,7 +506,7 @@ button, input, select
     padding: 3px;
 }
 
-/*Полосатая таблица*/
+/*РџРѕР»РѕСЃР°С‚Р°СЏ С‚Р°Р±Р»РёС†Р°*/
 .striped td, th
 {
     padding: 3px;
@@ -524,20 +524,25 @@ button, input, select
     background-color: #EBEBEB;
 }
 
+.striped tr.current
+{
+    background-color: #BBBBFF;
+}
+
 td.nopadding
 {
     padding: 0;
     vertical-align: middle !important;
 }
 
-/*Таблица с рамкой*/
+/*РўР°Р±Р»РёС†Р° СЃ СЂР°РјРєРѕР№*/
 .bordered td, th
 {
     padding: 3px;
     vertical-align: middle !important;
 }
 
-/*Сообщения*/
+/*РЎРѕРѕР±С‰РµРЅРёСЏ*/
 .info
 {
     background-color: #BDE5F8;
@@ -570,7 +575,7 @@ td.nopadding
     padding: 10px;
 }
 
-/*Выравнивание*/
+/*Р’С‹СЂР°РІРЅРёРІР°РЅРёРµ*/
 .left
 {
     text-align: left;
@@ -608,13 +613,13 @@ td.nopadding
     float: right;
 }
 
-/*Позиционирование*/
+/*РџРѕР·РёС†РёРѕРЅРёСЂРѕРІР°РЅРёРµ*/
 .relative
 {
     position: relative;
 }
 
-/*Ширина*/
+/*РЁРёСЂРёРЅР°*/
 .h20
 {
     height: 20px;
@@ -710,7 +715,7 @@ td.nopadding
     width: 100px;
 }
 
-/*Ссылки с картинками*/
+/*РЎСЃС‹Р»РєРё СЃ РєР°СЂС‚РёРЅРєР°РјРё*/
 .link-img
 {
     background-color: #FDFDFD;
@@ -762,7 +767,7 @@ td.nopadding
     content: url('../img/icon/ok.png');
 }
 
-/*Флаги, эмблемы*/
+/*Р¤Р»Р°РіРё, СЌРјР±Р»РµРјС‹*/
 .img-12
 {
     height: 12px;
@@ -803,7 +808,7 @@ td.nopadding
     height: 200px;
 }
 
-/*Цвета*/
+/*Р¦РІРµС‚Р°*/
 .grey,
 .grey a
 {
@@ -830,7 +835,7 @@ td.nopadding
     color: #FEF7DE;
 }
 
-/*Аякс загрузка*/
+/*РђСЏРєСЃ Р·Р°РіСЂСѓР·РєР°*/
 .loading:before
 {
     background-image: url('/img/loading.gif');

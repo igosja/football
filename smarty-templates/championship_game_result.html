@@ -20,7 +20,6 @@
             <table class="striped w100" id="tournament-game">
                 {section name=i loop=$game_array}
                     <tr>
-                        <td class="w1">1</td>
                         <td class="w45 right">
                             <a href="team_team_review_profile.php?num={$game_array[i].game_home_team_id}">
                                 {$game_array[i].home_team_name}
@@ -52,7 +51,6 @@
                                 {$game_array[i].guest_team_name}
                             </a>
                         </td>
-                        <td class="w1">1</td>
                     </tr>
                 {/section}
             </table>

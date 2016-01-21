@@ -1,6 +1,6 @@
 <table class="block-table w100">
     <tr>
-        <td rowspan="2" class="block-page w30">
+        <td rowspan="2" class="block-page">
             <p class="header">Турнирная таблица</p>
             <table class="striped w100">
                 <tr>
@@ -10,13 +10,18 @@
                     <th class="w8">В</th>
                     <th class="w8">Н</th>
                     <th class="w8">П</th>
-                    <th class="w8">+/-</th>
                     <th class="w8">О</th>
                 </tr>
                 {section name=i loop=$standing_array}
                     <tr>
                         <td class="center">{$standing_array[i].standing_place}</td>
-                        <td class="w1"><img src="img/team/12/{$standing_array[i].team_id}.png" class="img-12" alt="" /></td>
+                        <td class="w1">
+                            <img
+                                alt="{$standing_array[i].team_name}"
+                                class="img-12"
+                                src="img/team/12/{$standing_array[i].team_id}.png"
+                            />
+                        </td>
                         <td>
                             <a href="team_team_review_profile.php?num={$standing_array[i].team_id}">
                                 {$standing_array[i].team_name}
@@ -26,7 +31,6 @@
                         <td class="center">{$standing_array[i].standing_win}</td>
                         <td class="center">{$standing_array[i].standing_draw}</td>
                         <td class="center">{$standing_array[i].standing_loose}</td>
-                        <td class="center">{$standing_array[i].standing_difference}</td>
                         <td class="center">{$standing_array[i].standing_point}</td>
                     </tr>
                 {/section}
@@ -34,15 +38,34 @@
         </td>
         <td class="block-page w35" id="game-block">
             <p class="header">Матчи</p>
-            <p class="center">
-                <a href="javascript:;" id="tournament-game-prev" data-tournament="{$num}" data-shedule="{$game_array.0.shedule_id}">
-                    <
-                </a>
-                <span id="shedule-date">{$game_array.0.shedule_day}, {$game_array.0.shedule_date|date_format:"%d.%m.%Y"}</span>
-                <a href="javascript:;" id="tournament-game-next" data-tournament="{$num}" data-shedule="{$game_array.0.shedule_id}">
-                    >
-                </a>
-            </p>
+            <table class="center striped vcenter">
+                <tr>
+                    <td>
+                        <img
+                            alt="Предыдущие"
+                            class="img-12"
+                            data-tournament="{$num}"
+                            data-shedule="{$game_array.0.shedule_id}"
+                            id="tournament-game-prev"
+                            src="img/arrow/left.png"
+                        />
+                    </td>
+                    <td id="shedule-date">
+                        {$game_array.0.shedule_day},
+                        {$game_array.0.shedule_date|date_format:"%d.%m.%Y"}
+                    </td>
+                    <td>
+                        <img
+                            alt="Следующие"
+                            class="img-12"
+                            data-tournament="{$num}"
+                            data-shedule="{$game_array.0.shedule_id}"
+                            id="tournament-game-next"
+                            src="img/arrow/right.png"
+                        />
+                    </td>
+                </tr>
+            </table>
             <table class="striped w100" id="tournament-game">
                 {section name=i loop=$game_array}
                     <tr>
@@ -67,7 +90,7 @@
                 {/section}
             </table>
         </td>
-        <td class="block-page w35">
+        <td class="block-page w30">
             <p class="header">Предыдущие победители</p>
             <table class="striped w100">
                 {section name=i loop=$winner_array}

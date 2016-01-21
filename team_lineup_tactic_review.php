@@ -26,140 +26,172 @@ if (0 == $count_team)
     exit;
 }
 
-$sql = "SELECT COUNT(`lineupcurrent_id`) AS `count`
-        FROM `lineupcurrent`
-        WHERE `lineupcurrent_team_id`='$get_num'";
-$lineupcurrent_sql = $mysqli->query($sql);
-
-$lineupcurrent_array = $lineupcurrent_sql->fetch_all(MYSQLI_ASSOC);
-
-$count_lineupcurrent = $lineupcurrent_array[0]['count'];
-
-if (0 == $count_lineupcurrent)
+if (isset($_GET['game']))
 {
-    $sql = "INSERT INTO `lineupcurrent`
-            SET `lineupcurrent_team_id`='$get_num'";
-    $mysqli->query($sql);
+    $game_id = (int) $_GET['game'];
+}
+else
+{
+    $sql = "SELECT `game_id`
+            FROM `game`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            WHERE (`game_home_team_id`='$authorization_team_id'
+            OR `game_guest_team_id`='$authorization_team_id')
+            AND `game_played`='0'
+            ORDER BY `shedule_date` ASC
+            LIMIT 1";
+    $game_sql = $mysqli->query($sql);
+
+    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+
+    if (isset($game_array[0]['game_id']))
+    {
+        $game_id = $game_array[0]['game_id'];
+    }
+    else
+    {
+        $game_id = 0;
+    }
+}
+
+$sql = "SELECT COUNT(`game_id`) AS `count`
+        FROM `game`
+        WHERE `game_id`='$game_id'
+        AND (`game_home_team_id`='$authorization_team_id'
+        OR `game_guest_team_id`='$authorization_team_id')";
+$count_sql = $mysqli->query($sql);
+
+$count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+$count_game = $count_array[0]['count'];
+
+if (0 == $count_game)
+{
+    $smarty->display('wrong_page.html');
+    exit;
 }
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
 
-if (isset($_POST['formation_id']))
+if (isset($_POST['data']))
 {
-    $formation_id                   = (int) $_POST['formation_id'];
-    $gamemood_id                    = (int) $_POST['gamemood_id'];
-    $gamestyle_id                   = (int) $_POST['gamestyle_id'];
-    $lineupcurrent_player_id_1      = (int) $_POST['player_1'];
-    $lineupcurrent_player_id_2      = (int) $_POST['player_2'];
-    $lineupcurrent_player_id_3      = (int) $_POST['player_3'];
-    $lineupcurrent_player_id_4      = (int) $_POST['player_4'];
-    $lineupcurrent_player_id_5      = (int) $_POST['player_5'];
-    $lineupcurrent_player_id_6      = (int) $_POST['player_6'];
-    $lineupcurrent_player_id_7      = (int) $_POST['player_7'];
-    $lineupcurrent_player_id_8      = (int) $_POST['player_8'];
-    $lineupcurrent_player_id_9      = (int) $_POST['player_9'];
-    $lineupcurrent_player_id_10     = (int) $_POST['player_10'];
-    $lineupcurrent_player_id_11     = (int) $_POST['player_11'];
-    $lineupcurrent_player_id_12     = (int) $_POST['player_12'];
-    $lineupcurrent_player_id_13     = (int) $_POST['player_13'];
-    $lineupcurrent_player_id_14     = (int) $_POST['player_14'];
-    $lineupcurrent_player_id_15     = (int) $_POST['player_15'];
-    $lineupcurrent_player_id_16     = (int) $_POST['player_16'];
-    $lineupcurrent_player_id_17     = (int) $_POST['player_17'];
-    $lineupcurrent_player_id_18     = (int) $_POST['player_18'];
-    $lineupcurrent_position_id_1    = (int) $_POST['position_1'];
-    $lineupcurrent_position_id_2    = (int) $_POST['position_2'];
-    $lineupcurrent_position_id_3    = (int) $_POST['position_3'];
-    $lineupcurrent_position_id_4    = (int) $_POST['position_4'];
-    $lineupcurrent_position_id_5    = (int) $_POST['position_5'];
-    $lineupcurrent_position_id_6    = (int) $_POST['position_6'];
-    $lineupcurrent_position_id_7    = (int) $_POST['position_7'];
-    $lineupcurrent_position_id_8    = (int) $_POST['position_8'];
-    $lineupcurrent_position_id_9    = (int) $_POST['position_9'];
-    $lineupcurrent_position_id_10   = (int) $_POST['position_10'];
-    $lineupcurrent_position_id_11   = (int) $_POST['position_11'];
-    $lineupcurrent_position_id_12   = (int) $_POST['position_12'];
-    $lineupcurrent_position_id_13   = (int) $_POST['position_13'];
-    $lineupcurrent_position_id_14   = (int) $_POST['position_14'];
-    $lineupcurrent_position_id_15   = (int) $_POST['position_15'];
-    $lineupcurrent_position_id_16   = (int) $_POST['position_16'];
-    $lineupcurrent_position_id_17   = (int) $_POST['position_17'];
-    $lineupcurrent_position_id_18   = (int) $_POST['position_18'];
-    $lineupcurrent_role_id_1        = (int) $_POST['role_1'];
-    $lineupcurrent_role_id_2        = (int) $_POST['role_2'];
-    $lineupcurrent_role_id_3        = (int) $_POST['role_3'];
-    $lineupcurrent_role_id_4        = (int) $_POST['role_4'];
-    $lineupcurrent_role_id_5        = (int) $_POST['role_5'];
-    $lineupcurrent_role_id_6        = (int) $_POST['role_6'];
-    $lineupcurrent_role_id_7        = (int) $_POST['role_7'];
-    $lineupcurrent_role_id_8        = (int) $_POST['role_8'];
-    $lineupcurrent_role_id_9        = (int) $_POST['role_9'];
-    $lineupcurrent_role_id_10       = (int) $_POST['role_10'];
-    $lineupcurrent_role_id_11       = (int) $_POST['role_11'];
+    $data = $_POST['data'];
 
-    $sql = "UPDATE `lineupcurrent`
-            SET `lineupcurrent_formation_id`='$formation_id',
-                `lineupcurrent_gamemood_id`='$gamemood_id',
-                `lineupcurrent_gamestyle_id`='$gamestyle_id',
-                `lineupcurrent_player_id_1`='$lineupcurrent_player_id_1',
-                `lineupcurrent_player_id_2`='$lineupcurrent_player_id_2',
-                `lineupcurrent_player_id_3`='$lineupcurrent_player_id_3',
-                `lineupcurrent_player_id_4`='$lineupcurrent_player_id_4',
-                `lineupcurrent_player_id_5`='$lineupcurrent_player_id_5',
-                `lineupcurrent_player_id_6`='$lineupcurrent_player_id_6',
-                `lineupcurrent_player_id_7`='$lineupcurrent_player_id_7',
-                `lineupcurrent_player_id_8`='$lineupcurrent_player_id_8',
-                `lineupcurrent_player_id_9`='$lineupcurrent_player_id_9',
-                `lineupcurrent_player_id_10`='$lineupcurrent_player_id_10',
-                `lineupcurrent_player_id_11`='$lineupcurrent_player_id_11',
-                `lineupcurrent_player_id_12`='$lineupcurrent_player_id_12',
-                `lineupcurrent_player_id_13`='$lineupcurrent_player_id_13',
-                `lineupcurrent_player_id_14`='$lineupcurrent_player_id_14',
-                `lineupcurrent_player_id_15`='$lineupcurrent_player_id_15',
-                `lineupcurrent_player_id_16`='$lineupcurrent_player_id_16',
-                `lineupcurrent_player_id_17`='$lineupcurrent_player_id_17',
-                `lineupcurrent_player_id_18`='$lineupcurrent_player_id_18',
-                `lineupcurrent_position_id_1`='$lineupcurrent_position_id_1',
-                `lineupcurrent_position_id_2`='$lineupcurrent_position_id_2',
-                `lineupcurrent_position_id_3`='$lineupcurrent_position_id_3',
-                `lineupcurrent_position_id_4`='$lineupcurrent_position_id_4',
-                `lineupcurrent_position_id_5`='$lineupcurrent_position_id_5',
-                `lineupcurrent_position_id_6`='$lineupcurrent_position_id_6',
-                `lineupcurrent_position_id_7`='$lineupcurrent_position_id_7',
-                `lineupcurrent_position_id_8`='$lineupcurrent_position_id_8',
-                `lineupcurrent_position_id_9`='$lineupcurrent_position_id_9',
-                `lineupcurrent_position_id_10`='$lineupcurrent_position_id_10',
-                `lineupcurrent_position_id_11`='$lineupcurrent_position_id_11',
-                `lineupcurrent_position_id_12`='$lineupcurrent_position_id_12',
-                `lineupcurrent_position_id_13`='$lineupcurrent_position_id_13',
-                `lineupcurrent_position_id_14`='$lineupcurrent_position_id_14',
-                `lineupcurrent_position_id_15`='$lineupcurrent_position_id_15',
-                `lineupcurrent_position_id_16`='$lineupcurrent_position_id_16',
-                `lineupcurrent_position_id_17`='$lineupcurrent_position_id_17',
-                `lineupcurrent_position_id_18`='$lineupcurrent_position_id_18',
-                `lineupcurrent_role_id_1`='$lineupcurrent_role_id_1',
-                `lineupcurrent_role_id_2`='$lineupcurrent_role_id_2',
-                `lineupcurrent_role_id_3`='$lineupcurrent_role_id_3',
-                `lineupcurrent_role_id_4`='$lineupcurrent_role_id_4',
-                `lineupcurrent_role_id_5`='$lineupcurrent_role_id_5',
-                `lineupcurrent_role_id_6`='$lineupcurrent_role_id_6',
-                `lineupcurrent_role_id_7`='$lineupcurrent_role_id_7',
-                `lineupcurrent_role_id_8`='$lineupcurrent_role_id_8',
-                `lineupcurrent_role_id_9`='$lineupcurrent_role_id_9',
-                `lineupcurrent_role_id_10`='$lineupcurrent_role_id_10',
-                `lineupcurrent_role_id_11`='$lineupcurrent_role_id_11'
-            WHERE `lineupcurrent_team_id`='$get_num'
-            LIMIT 1";
+    $formation_id   = (int) $data['formation_id'];
+    $gamemood_id    = (int) $data['gamemood_id'];
+    $gamestyle_id   = (int) $data['gamestyle_id'];
+
+    for ($i=1; $i<=18; $i++)
+    {
+        $lineup     = 'lineup_' . $i;
+        $$lineup    = (int) $data['lineup_' . $i];
+        $player     = 'lineup_player_id_' . $i;
+        $$player    = (int) $data['player_' . $i];
+        $position   = 'lineup_position_id_' . $i;
+        $$position  = (int) $data['position_' . $i];
+        $role       = 'lineup_role_id_' . $i;
+        $$role      = (int) $data['role_' . $i];
+
+        $sql = "SELECT `lineup_id`
+                FROM `lineup`
+                WHERE `lineup_id`='" . $$lineup . "'
+                LIMIT 1";
+        $lineup_sql = $mysqli->query($sql);
+
+        $count_lineup = $lineup_sql->num_rows;
+
+        if (0 == $count_lineup)
+        {
+            $sql = "INSERT INTO `lineup`
+                    SET `lineup_player_id`='" . $$player . "',
+                        `lineup_position_id`='" . $$position . "',
+                        `lineup_role_id`='" . $$role . "',
+                        `lineup_team_id`='$get_num',
+                        `lineup_game_id`='$game_id'";
+        }
+        else
+        {
+            $sql = "UPDATE `lineup`
+                    SET `lineup_player_id`='" . $$player . "',
+                        `lineup_position_id`='" . $$position . "',
+                        `lineup_role_id`='" . $$role . "'
+                    WHERE `lineup_id`='" . $$lineup . "'
+                    LIMIT 1";
+        }
+
+        $mysqli->query($sql);
+    }
+
+    $sql = "SELECT COUNT(`lineupmain_id`) AS `count`
+            FROM `lineupmain`
+            WHERE `lineupmain_game_id`='$game_id'
+            AND `lineupmain_team_id`='$get_num'";
+    $count_sql = $mysqli->query($sql);
+
+    $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+    $count_lineup = $count_array[0]['count'];
+
+    if (0 == $count_lineup)
+    {
+        $sql = "INSERT INTO `lineupmain`
+                SET `lineupmain_formation_id`='$formation_id',
+                    `lineupmain_gamemood_id`='$gamemood_id',
+                    `lineupmain_gamestyle_id`='$gamestyle_id',
+                    `lineupmain_team_id`='$get_num',
+                    `lineupmain_game_id`='$game_id'";
+    }
+    else
+    {
+        $sql = "UPDATE `lineupmain`
+                SET `lineupmain_formation_id`='$formation_id',
+                    `lineupmain_gamemood_id`='$gamemood_id',
+                    `lineupmain_gamestyle_id`='$gamestyle_id'
+                WHERE `lineupmain_team_id`='$get_num'
+                AND `lineupmain_game_id`='$game_id'
+                LIMIT 1";
+    }
+
     $mysqli->query($sql);
 
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
-    redirect('team_lineup_tactic_review.php?num=' . $get_num);
+    redirect('team_lineup_tactic_review.php?num=' . $get_num . '&game=' . $game_id);
     exit;
 }
+
+$sql = "SELECT `game_home_team_id`,
+               `game_id`,
+               `game_temperature`,
+               `game_weather_id`,
+               `lineupmain_id`,
+               `shedule_date`,
+               `team_id`,
+               `team_name`,
+               `tournament_id`,
+               `tournament_name`
+        FROM `game`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `team`
+        ON IF (`game_home_team_id`='$get_num', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
+        LEFT JOIN `tournament`
+        ON `game_tournament_id`=`tournament_id`
+        LEFT JOIN `lineupmain`
+        ON (`lineupmain_game_id`=`game_id`
+        AND `lineupmain_team_id`='$get_num')
+        WHERE (`game_home_team_id`='$get_num'
+        OR `game_guest_team_id`='$get_num')
+        AND `game_played`='0'
+        ORDER BY `shedule_date` ASC
+        LIMIT 5";
+$nearest_sql = $mysqli->query($sql);
+
+$nearest_array = $nearest_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `name_name`,
                `player_condition`,
@@ -179,7 +211,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
         WHERE `team_id`='$get_num'
-        ORDER BY `position_id` ASC";
+        ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
@@ -205,69 +237,38 @@ $gamestyle_sql = $mysqli->query($sql);
 
 $gamestyle_array = $gamestyle_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `lineupcurrent_formation_id`,
-               `lineupcurrent_gamemood_id`,
-               `lineupcurrent_gamestyle_id`,
-               `lineupcurrent_player_id_1`,
-               `lineupcurrent_player_id_2`,
-               `lineupcurrent_player_id_3`,
-               `lineupcurrent_player_id_4`,
-               `lineupcurrent_player_id_5`,
-               `lineupcurrent_player_id_6`,
-               `lineupcurrent_player_id_7`,
-               `lineupcurrent_player_id_8`,
-               `lineupcurrent_player_id_9`,
-               `lineupcurrent_player_id_10`,
-               `lineupcurrent_player_id_11`,
-               `lineupcurrent_player_id_12`,
-               `lineupcurrent_player_id_13`,
-               `lineupcurrent_player_id_14`,
-               `lineupcurrent_player_id_15`,
-               `lineupcurrent_player_id_16`,
-               `lineupcurrent_player_id_17`,
-               `lineupcurrent_player_id_18`,
-               `lineupcurrent_position_id_1`,
-               `lineupcurrent_position_id_2`,
-               `lineupcurrent_position_id_3`,
-               `lineupcurrent_position_id_4`,
-               `lineupcurrent_position_id_5`,
-               `lineupcurrent_position_id_6`,
-               `lineupcurrent_position_id_7`,
-               `lineupcurrent_position_id_8`,
-               `lineupcurrent_position_id_9`,
-               `lineupcurrent_position_id_10`,
-               `lineupcurrent_position_id_11`,
-               `lineupcurrent_position_id_12`,
-               `lineupcurrent_position_id_13`,
-               `lineupcurrent_position_id_14`,
-               `lineupcurrent_position_id_15`,
-               `lineupcurrent_position_id_16`,
-               `lineupcurrent_position_id_17`,
-               `lineupcurrent_position_id_18`,
-               `lineupcurrent_role_id_1`,
-               `lineupcurrent_role_id_2`,
-               `lineupcurrent_role_id_3`,
-               `lineupcurrent_role_id_4`,
-               `lineupcurrent_role_id_5`,
-               `lineupcurrent_role_id_6`,
-               `lineupcurrent_role_id_7`,
-               `lineupcurrent_role_id_8`,
-               `lineupcurrent_role_id_9`,
-               `lineupcurrent_role_id_10`,
-               `lineupcurrent_role_id_11`
-        FROM `lineupcurrent`
-        WHERE `lineupcurrent_team_id`='$get_num'
+$sql = "SELECT `lineupmain_formation_id`,
+               `lineupmain_gamemood_id`,
+               `lineupmain_gamestyle_id`
+        FROM `lineupmain`
+        WHERE `lineupmain_team_id`='$get_num'
+        AND `lineupmain_game_id`='$game_id'
         LIMIT 1";
+$lineupmain_sql = $mysqli->query($sql);
+
+$lineupmain_array = $lineupmain_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `lineup_id`,
+               `lineup_player_id`,
+               `lineup_position_id`,
+               `lineup_role_id`
+        FROM `lineup`
+        WHERE `lineup_team_id`='$get_num'
+        AND `lineup_game_id`='$game_id'
+        ORDER BY `lineup_id` ASC";
 $lineup_sql = $mysqli->query($sql);
 
 $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('num', $get_num);
+$smarty->assign('game_id', $game_id);
 $smarty->assign('header_title', $team_name);
+$smarty->assign('nearest_array', $nearest_array);
 $smarty->assign('player_array', $player_array);
 $smarty->assign('formation_array', $formation_array);
 $smarty->assign('gamemood_array', $gamemood_array);
 $smarty->assign('gamestyle_array', $gamestyle_array);
+$smarty->assign('lineupmain_array', $lineupmain_array);
 $smarty->assign('lineup_array', $lineup_array);
 
 $smarty->display('main.html');

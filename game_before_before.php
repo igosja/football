@@ -26,9 +26,6 @@ $sql = "SELECT `city_name`,
                `stadium_capacity`,
                `stadium_name`,
                `stadiumquality_name`,
-               `statisticreferee_game`,
-               `statisticreferee_red`,
-               `statisticreferee_yellow`,
                `surname_name`,
                `tournament_id`,
                `tournament_name`
@@ -55,10 +52,7 @@ $sql = "SELECT `city_name`,
         ON `t3`.`team_id`=`stadium_team_id`
         LEFT JOIN `city`
         ON `city_id`=`t3`.`team_city_id`
-        LEFT JOIN `statisticreferee`
-        ON `referee_id`=`statisticreferee_referee_id`
         WHERE `game_id`='$get_num'
-        AND `statisticreferee_season_id`='$igosja_season_id'
         LIMIT 1";
 $game_sql = $mysqli->query($sql);
 
@@ -67,7 +61,6 @@ $count_game = $game_sql->num_rows;
 if (0 == $count_game)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -82,11 +75,23 @@ $header_2_guest_name  = $game_array[0]['game_guest_team_name'];
 if (1 == $game_played)
 {
     redirect('game_review_main.php?num=' . $get_num);
-
     exit;
 }
 
 $header_2_score = '-';
+
+$sql = "SELECT `statisticreferee_game`,
+               `statisticreferee_red`,
+               `statisticreferee_yellow`
+        FROM `game`
+        LEFT JOIN `statisticreferee`
+        ON `game_referee_id`=`statisticreferee_referee_id`
+        WHERE `game_id`='$get_num'
+        AND `statisticreferee_season_id`='$igosja_season_id'
+        LIMIT 1";
+$referee_sql = $mysqli->query($sql);
+
+$referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `game_guest_score`,
                `game_guest_team_id`,
@@ -179,6 +184,7 @@ $smarty->assign('game_array', $game_array);
 $smarty->assign('home_latest_game_array', $home_latest_game_array);
 $smarty->assign('guest_latest_game_array', $guest_latest_game_array);
 $smarty->assign('standing_array', $standing_array);
+$smarty->assign('referee_array', $referee_array);
 $smarty->assign('last_array', $last_array);
 
 $smarty->display('main.html');

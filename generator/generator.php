@@ -5,6 +5,7 @@ set_time_limit(0);
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 include ($_SERVER['DOCUMENT_ROOT'] . '/generator/function.php');
 
+f_igosja_generator_asktoplay_delete();
 f_igosja_generator_lineup_current_create();
 f_igosja_generator_lineup_current_check_and_fill();
 f_igosja_generator_lineup_current_to_lineup();
