@@ -9,20 +9,13 @@ if (isset($_GET['player_tactic_position_id']))
     $position_id = (int) $_GET['player_tactic_position_id'];
     $game_id     = (int) $_GET['game_id'];
 
-    $sql = "SELECT `position_name`
-            FROM `position`
-            WHERE `position_id`='$position_id'
-            LIMIT 1";
-    $position_sql = $mysqli->query($sql);
-
-    $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
-
     $sql = "SELECT `count_game`,
-                   `lineup_position`,
+                   `lineup_id`,
                    `mark`,
                    `name_name`,
                    `player_id`,
                    `position_description`,
+                   `position_name`,
                    `role_description`,
                    `role_id`,
                    `surname_name`
@@ -37,49 +30,13 @@ if (isset($_GET['player_tactic_position_id']))
             ON `position_id`=`playerposition_position_id`
             INNER JOIN
             (
-                SELECT
-                    IF ('$position_id'=`lineupcurrent_position_id_1`,  `lineupcurrent_player_id_1`,
-                    IF ('$position_id'=`lineupcurrent_position_id_2`,  `lineupcurrent_player_id_2`,
-                    IF ('$position_id'=`lineupcurrent_position_id_3`,  `lineupcurrent_player_id_3`,
-                    IF ('$position_id'=`lineupcurrent_position_id_4`,  `lineupcurrent_player_id_4`,
-                    IF ('$position_id'=`lineupcurrent_position_id_5`,  `lineupcurrent_player_id_5`,
-                    IF ('$position_id'=`lineupcurrent_position_id_6`,  `lineupcurrent_player_id_6`,
-                    IF ('$position_id'=`lineupcurrent_position_id_7`,  `lineupcurrent_player_id_7`,
-                    IF ('$position_id'=`lineupcurrent_position_id_8`,  `lineupcurrent_player_id_8`,
-                    IF ('$position_id'=`lineupcurrent_position_id_9`,  `lineupcurrent_player_id_9`,
-                    IF ('$position_id'=`lineupcurrent_position_id_10`, `lineupcurrent_player_id_10`,
-                    IF ('$position_id'=`lineupcurrent_position_id_11`, `lineupcurrent_player_id_11`,
-                        0
-                    ))))))))))) AS `lineup_player_id`,
-                    IF ('$position_id'=`lineupcurrent_position_id_1`,  `lineupcurrent_role_id_1`,
-                    IF ('$position_id'=`lineupcurrent_position_id_2`,  `lineupcurrent_role_id_2`,
-                    IF ('$position_id'=`lineupcurrent_position_id_3`,  `lineupcurrent_role_id_3`,
-                    IF ('$position_id'=`lineupcurrent_position_id_4`,  `lineupcurrent_role_id_4`,
-                    IF ('$position_id'=`lineupcurrent_position_id_5`,  `lineupcurrent_role_id_5`,
-                    IF ('$position_id'=`lineupcurrent_position_id_6`,  `lineupcurrent_role_id_6`,
-                    IF ('$position_id'=`lineupcurrent_position_id_7`,  `lineupcurrent_role_id_7`,
-                    IF ('$position_id'=`lineupcurrent_position_id_8`,  `lineupcurrent_role_id_8`,
-                    IF ('$position_id'=`lineupcurrent_position_id_9`,  `lineupcurrent_role_id_9`,
-                    IF ('$position_id'=`lineupcurrent_position_id_10`, `lineupcurrent_role_id_10`,
-                    IF ('$position_id'=`lineupcurrent_position_id_11`, `lineupcurrent_role_id_11`,
-                        0
-                    ))))))))))) AS `lineup_role_id`,
-                    IF ('$position_id'=`lineupcurrent_position_id_1`,  '1',
-                    IF ('$position_id'=`lineupcurrent_position_id_2`,  '2',
-                    IF ('$position_id'=`lineupcurrent_position_id_3`,  '3',
-                    IF ('$position_id'=`lineupcurrent_position_id_4`,  '4',
-                    IF ('$position_id'=`lineupcurrent_position_id_5`,  '5',
-                    IF ('$position_id'=`lineupcurrent_position_id_6`,  '6',
-                    IF ('$position_id'=`lineupcurrent_position_id_7`,  '7',
-                    IF ('$position_id'=`lineupcurrent_position_id_8`,  '8',
-                    IF ('$position_id'=`lineupcurrent_position_id_9`,  '9',
-                    IF ('$position_id'=`lineupcurrent_position_id_10`, '10',
-                    IF ('$position_id'=`lineupcurrent_position_id_11`, '11',
-                        0
-                    ))))))))))) AS `lineup_position`
-                FROM `lineupcurrent`
-                WHERE `lineupcurrent_team_id`='$authorization_team_id'
-                AND `lineupcurrent_game_id`='$game_id'
+                SELECT `lineup_id`,
+                       `lineup_player_id`,
+                       `lineup_role_id`
+                FROM `lineup`
+                WHERE `lineup_team_id`='$authorization_team_id'
+                AND `lineup_game_id`='$game_id'
+                AND `lineup_position_id`='$position_id'
                 LIMIT 1
             ) AS `t1`
             ON `lineup_player_id`=`player_id`
@@ -112,14 +69,14 @@ if (isset($_GET['player_tactic_position_id']))
 
     $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
 
-    $json_data['position_name']         = $position_array[0]['position_name'];
+    $json_data['lineup_id']             = $lineup_array[0]['lineup_id'];
+    $json_data['position_name']         = $lineup_array[0]['position_name'];
     $json_data['position_description']  = $lineup_array[0]['position_description'];
     $json_data['player_name']           = $lineup_array[0]['name_name'] . ' ' . $lineup_array[0]['surname_name'];
     $json_data['role_id']               = $lineup_array[0]['role_id'];
     $json_data['role_description']      = $lineup_array[0]['role_description'];
     $json_data['game']                  = $lineup_array[0]['count_game'];
     $json_data['mark']                  = $lineup_array[0]['mark'];
-    $json_data['position']              = $lineup_array[0]['lineup_position'];
     $json_data['role_array']            = $role_array;
 }
 elseif (isset($_GET['player_tactic_position_id_national']))

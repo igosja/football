@@ -36,8 +36,8 @@ else
             FROM `game`
             LEFT JOIN `shedule`
             ON `shedule_id`=`game_shedule_id`
-            WHERE (`game_home_team_id`='$authorization_team_id'
-            OR `game_guest_team_id`='$authorization_team_id')
+            WHERE (`game_home_team_id`='$get_num'
+            OR `game_guest_team_id`='$get_num')
             AND `game_played`='0'
             ORDER BY `shedule_date` ASC
             LIMIT 1";
@@ -51,15 +51,16 @@ else
     }
     else
     {
-        $game_id = 0;
+        $smarty->display('no_game.html');
+        exit;
     }
 }
 
 $sql = "SELECT COUNT(`game_id`) AS `count`
         FROM `game`
         WHERE `game_id`='$game_id'
-        AND (`game_home_team_id`='$authorization_team_id'
-        OR `game_guest_team_id`='$authorization_team_id')";
+        AND (`game_home_team_id`='$get_num'
+        OR `game_guest_team_id`='$get_num')";
 $count_sql = $mysqli->query($sql);
 
 $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
@@ -68,7 +69,7 @@ $count_game = $count_array[0]['count'];
 
 if (0 == $count_game)
 {
-    $smarty->display('wrong_page.html');
+    $smarty->display('only_my_game.html');
     exit;
 }
 

@@ -164,7 +164,7 @@ $(document).ready(function($)
                     $('#role-name').html(role_select);
                     $('#role-description').html(data.role_description);
                     $('#player-table').removeClass('none');
-                    $('#player-position').val(data.position);
+                    $('#lineup-id').val(data.lineup_id);
                     $('#submit-role').show();
 
                     $('#role-id').on('change', function()
