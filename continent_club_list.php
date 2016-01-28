@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -65,6 +65,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         LIMIT $offset, 30";
 $team_sql = $mysqli->query($sql);
 
+$count_team = $team_sql->num_rows;
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT FOUND_ROWS() AS `count_page`";
@@ -73,10 +74,7 @@ $count_page = $count_page->fetch_all(MYSQLI_ASSOC);
 $count_page = $count_page[0]['count_page'];
 $count_page = ceil($count_page / 30);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $continent_name);
-$smarty->assign('team_array', $team_array);
-$smarty->assign('best_team_array', $best_team_array);
-$smarty->assign('count_page', $count_page);
+$num            = $get_num;
+$header_title   = $continent_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

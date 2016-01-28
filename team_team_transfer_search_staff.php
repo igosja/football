@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -122,11 +122,11 @@ $prepare->close();
 
 $staff_array = $staff_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT FOUND_ROWS() AS `count_staff`";
-$count_staff = $mysqli->query($sql);
-$count_staff = $count_staff->fetch_all(MYSQLI_ASSOC);
-$count_staff = $count_staff[0]['count_staff'];
-$count_staff = ceil($count_staff / 30);
+$sql = "SELECT FOUND_ROWS() AS `count`";
+$count_page = $mysqli->query($sql);
+$count_page = $count_page->fetch_all(MYSQLI_ASSOC);
+$count_page = $count_page[0]['count'];
+$count_page = ceil($count_page / 30);
 
 $sql = "SELECT `staffpost_id`,
                `staffpost_name`
@@ -145,11 +145,7 @@ $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $team_name);
-$smarty->assign('staff_array', $staff_array);
-$smarty->assign('staffpost_array', $staffpost_array);
-$smarty->assign('country_array', $country_array);
-$smarty->assign('count_staff', $count_staff);
+$num            = $get_num;
+$header_title   = $team_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -46,7 +46,7 @@ $count_player = $player_sql->num_rows;
 
 if (0 == $count_player)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -152,7 +152,6 @@ if (isset($_POST['data']) &&
 
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
-$header_2_title = $player_name . ' ' . $player_surname;
 
 $sql = "SELECT `team_id`,
                `team_name`,
@@ -194,12 +193,7 @@ $statusrent_sql = $mysqli->query($sql);
 
 $statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $header_2_title);
-$smarty->assign('player_array', $player_array);
-$smarty->assign('playeroffer_array', $playeroffer_array);
-$smarty->assign('statusteam_array', $statusteam_array);
-$smarty->assign('statustransfer_array', $statustransfer_array);
-$smarty->assign('statusrent_array', $statusrent_array);
+$num            = $get_num;
+$header_title   = $player_name . ' ' . $player_surname;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

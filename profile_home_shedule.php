@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_id))
 }
 else
 {
-    $smarty->display('wrong_page.html');
+    $smarty->display($_SERVER['DOCUMENT_ROOT'] . '/wrong_page.html');
     exit;
 }
 
@@ -35,8 +35,7 @@ $shedule_sql = $mysqli->query($sql);
 
 $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $authorization_id);
-$smarty->assign('header_title', $authorization_login);
-$smarty->assign('shedule_array', $shedule_array);
+$num            = $authorization_id;
+$header_title   = $authorization_login;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

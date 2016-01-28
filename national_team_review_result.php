@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -20,8 +20,7 @@ $count_country = $country_sql->num_rows;
 
 if (0 == $count_country)
 {
-    $smarty->display('wrong_page.html');
-
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -240,17 +239,7 @@ $champions_out_sql = $mysqli->query($sql);
 
 $champions_out_array = $champions_out_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $country_name);
-$smarty->assign('championship_array', $championship_array);
-$smarty->assign('championship_goal_array', $championship_goal_array);
-$smarty->assign('championship_pass_array', $championship_pass_array);
-$smarty->assign('championship_mark_array', $championship_mark_array);
-$smarty->assign('cup_array', $cup_array);
-$smarty->assign('cup_goal_array', $cup_goal_array);
-$smarty->assign('cup_pass_array', $cup_pass_array);
-$smarty->assign('cup_mark_array', $cup_mark_array);
-$smarty->assign('champions_qualify_array', $champions_qualify_array);
-$smarty->assign('champions_out_array', $champions_out_array);
+$num            = $get_num;
+$header_title   = $country_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

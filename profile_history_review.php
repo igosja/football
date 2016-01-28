@@ -1,10 +1,14 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
-if (!isset($authorization_id))
+if (isset($authorization_id))
 {
-    $smarty->display('wrong_page.html');
+    $get_num = $authorization_id;
+}
+else
+{
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -18,7 +22,7 @@ $sql = "SELECT SUM(`statisticuser_draw`) AS `draw`,
         FROM `statisticuser`
         LEFT JOIN `user`
         ON `user_id`=`statisticuser_user_id`
-        WHERE `statisticuser_user_id`='$authorization_id'";
+        WHERE `statisticuser_user_id`='$get_num'";
 $career_sql = $mysqli->query($sql);
 
 $career_array = $career_sql->fetch_all(MYSQLI_ASSOC);
@@ -35,15 +39,13 @@ $sql = "SELECT `user_buy_max`,
                `user_team_time_min`,
                `user_trophy`
         FROM `user`
-        WHERE `user_id`='$authorization_id'
+        WHERE `user_id`='$get_num'
         LIMIT 1";
 $summary_sql = $mysqli->query($sql);
 
 $user_array = $summary_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $authorization_id);
-$smarty->assign('header_title', $authorization_login);
-$smarty->assign('career_array', $career_array);
-$smarty->assign('user_array', $user_array);
+$num            = $authorization_id;
+$header_title   = $authorization_login;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

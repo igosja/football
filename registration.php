@@ -1,6 +1,6 @@
 <?php
 
-include('include/include.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_POST['data']))
 {
@@ -69,6 +69,6 @@ if (isset($_POST['data']))
     exit;
 }
 
-$smarty->assign('header_title', 'Регистрация');
+$header_title = 'Регистрация';
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

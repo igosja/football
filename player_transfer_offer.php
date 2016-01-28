@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -52,8 +52,7 @@ $count_player = $player_sql->num_rows;
 
 if (0 == $count_player)
 {
-    $smarty->display('wrong_page.html');
-
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -191,7 +190,6 @@ if (isset($_POST['data']))
 
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
-$header_2_title = $player_name . ' ' . $player_surname;
 
 $sql = "SELECT `offertype_id`,
                `offertype_name`
@@ -202,10 +200,8 @@ $offertype_sql = $mysqli->query($sql);
 
 $offertype_array = $offertype_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_title', $header_2_title);
-$smarty->assign('num', $get_num);
-$smarty->assign('player_array', $player_array);
-$smarty->assign('transfer_array', $transfer_array);
-$smarty->assign('offertype_array', $offertype_array);
 
-$smarty->display('main.html');
+$num            = $get_num;
+$header_title   = $player_name . ' ' . $player_surname;
+
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

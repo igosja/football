@@ -1,11 +1,11 @@
 <?php
 
 $host       = 'lion.beget.ru';
-//$host       = 'localhost';
+// $host       = 'localhost';
 $user       = 'igosja_fm';
-//$user       = 'root';
+// $user       = 'root';
 $password   = '66xM6RQ51D';
-//$password   = '';
+// $password   = '';
 $database   = 'igosja_fm';
 
 $mysqli = new mysqli($host, $user, $password, $database);

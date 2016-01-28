@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -48,7 +48,7 @@ $count_referee = $referee_sql->num_rows;
 
 if (0 == $count_referee)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -56,7 +56,6 @@ $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
 
 $referee_name    = $referee_array[0]['name_name'];
 $referee_surname = $referee_array[0]['surname_name'];
-$header_2_title  = $referee_name . ' ' . $referee_surname;
 
 $sql = "SELECT `game_guest_team_id`,
                `game_guest_score`,
@@ -89,9 +88,7 @@ $game_sql = $mysqli->query($sql);
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_title', $header_2_title);
-$smarty->assign('num', $get_num);
-$smarty->assign('referee_array', $referee_array);
-$smarty->assign('game_array', $game_array);
+$num            = $get_num;
+$header_title   = $referee_name . ' ' . $referee_surname;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

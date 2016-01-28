@@ -2,66 +2,57 @@
 
 $start_time = microtime(true);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/smarty.php');
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/constants.php');
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/database.php');
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/function.php');
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/session.php');
 
-$file_name      = $_SERVER['PHP_SELF'];
-$file_name      = explode('/', $file_name);
-$chapter        = $file_name[1];
-$file_name      = end($file_name);
-$file_name      = explode('.', $file_name);
-$file_name      = $file_name[0];
-$button_array   = explode('_', $file_name);
+$file_name  = $_SERVER['PHP_SELF'];
+$file_name  = explode('/', $file_name);
+$chapter    = $file_name[1];
+$file_name  = end($file_name);
+$file_name  = explode('.', $file_name);
+$file_name  = $file_name[0];
+$button     = explode('_', $file_name);
 
-if (isset($button_array[0]) &&
-    isset($button_array[1]))
+if (isset($button[0]) &&
+    isset($button[1]))
 {
-    if ('team' == $button_array[0] &&
-        'lineup' == $button_array[1])
+    if ('team' == $button[0] &&
+        'lineup' == $button[1])
     {
         $button_array = array
         (
             array('href' => 'team_team_review_profile.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Команда'),
             array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Состав'),
         );
-
-        $smarty->assign('button_array', $button_array);
     }
-    elseif ('team' == $button_array[0] &&
-            'team' == $button_array[1])
+    elseif ('team' == $button[0] &&
+            'team' == $button[1])
     {
         $button_array = array
         (
             array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Команда'),
             array('href' => 'team_lineup_team_player.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Состав'),
         );
-
-        $smarty->assign('button_array', $button_array);
     }
-    elseif ('national' == $button_array[0] &&
-            'lineup' == $button_array[1])
+    elseif ('national' == $button[0] &&
+            'lineup' == $button[1])
     {
         $button_array = array
         (
             array('href' => 'national_team_review_profile.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Команда'),
             array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Состав'),
         );
-
-        $smarty->assign('button_array', $button_array);
     }
-    elseif ('national' == $button_array[0] &&
-            'team' == $button_array[1])
+    elseif ('national' == $button[0] &&
+            'team' == $button[1])
     {
         $button_array = array
         (
             array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Команда'),
             array('href' => 'national_lineup_team_player.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Состав'),
         );
-
-        $smarty->assign('button_array', $button_array);
     }
 }
 
@@ -112,18 +103,12 @@ if (isset($_SESSION['message_class']))
     $alert_message['class'] = $_SESSION['message_class'];
     $alert_message['text']  = $_SESSION['message_text'];
 
-    $smarty->assign('alert_message', $alert_message);
-
     unset($_SESSION['message_class']);
     unset($_SESSION['message_text']);
 }
 
-$smarty->assign('header_title', 'Лига');
-$smarty->assign('main_menu_continent_array', $continent_array);
-$smarty->assign('horizontalmenu_array', $horizontalmenu_array);
-$smarty->assign('start_time', $start_time);
-$smarty->assign('chapter', $chapter);
-$smarty->assign('tpl', $file_name);
+$header_title = 'Лига';
+$tpl = $file_name;
 
 $sql = "SELECT `horizontalmenupage_authorization`,
                `horizontalmenupage_myteam`

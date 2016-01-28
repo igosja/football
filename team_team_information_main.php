@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -63,7 +63,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -71,8 +71,7 @@ $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $team_name);
-$smarty->assign('team_array', $team_array);
+$num            = $get_num;
+$header_title   = $team_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

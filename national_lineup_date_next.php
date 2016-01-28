@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_country = $country_sql->num_rows;
 
 if (0 == $count_country)
 {
-    $smarty->display('wrong_page.html');
-
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -44,6 +43,14 @@ $sql = "SELECT `game_id`,
         ORDER BY `shedule_date` ASC
         LIMIT 1";
 $nearest_game_sql = $mysqli->query($sql);
+
+$count_nearest_game = $nearest_game_sql->num_rows;
+
+if (0 == $count_nearest_game)
+{
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.html');
+    exit;
+}
 
 $nearest_game_array = $nearest_game_sql->fetch_all(MYSQLI_ASSOC);
 
@@ -131,16 +138,7 @@ for ($i=0; $i<$game; $i++)
     }
 }
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $country_name);
-$smarty->assign('team_name', $country_name);
-$smarty->assign('game_array', $game_array);
-$smarty->assign('nearest_game_array', $nearest_game_array);
-$smarty->assign('game', $game);
-$smarty->assign('win', $win);
-$smarty->assign('draw', $draw);
-$smarty->assign('loose', $loose);
-$smarty->assign('score', $score);
-$smarty->assign('pass', $pass);
+$num            = $get_num;
+$header_title   = $country_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

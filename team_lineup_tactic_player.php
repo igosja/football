@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -22,7 +22,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -51,7 +51,7 @@ else
     }
     else
     {
-        $smarty->display('no_game.html');
+        include($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.html');
         exit;
     }
 }
@@ -69,7 +69,7 @@ $count_game = $count_array[0]['count'];
 
 if (0 == $count_game)
 {
-    $smarty->display('only_my_game.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_game.html');
     exit;
 }
 
@@ -90,7 +90,7 @@ $count_game = $count_array[0]['count'];
 
 if (0 == $count_game)
 {
-    $smarty->display('lineup_first.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/lineup_first.html');
     exit;
 }
 
@@ -153,10 +153,7 @@ $lineup_sql = $mysqli->query($sql);
 
 $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('game_id', $game_id);
-$smarty->assign('nearest_array', $nearest_array);
-$smarty->assign('header_title', $team_name);
-$smarty->assign('lineup_array', $lineup_array);
+$num            = $get_num;
+$header_title   = $team_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

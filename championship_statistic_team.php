@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -141,15 +141,7 @@ $nopass_sql = $mysqli->query($sql);
 
 $nopass_array = $nopass_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $tournament_name);
-$smarty->assign('goal_array', $goal_array);
-$smarty->assign('pass_array', $pass_array);
-$smarty->assign('red_array', $red_array);
-$smarty->assign('yellow_array', $yellow_array);
-$smarty->assign('win_array', $win_array);
-$smarty->assign('no_loose_array', $no_loose_array);
-$smarty->assign('loose_array', $loose_array);
-$smarty->assign('nopass_array', $nopass_array);
+$num            = $get_num;
+$header_title   = $tournament_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

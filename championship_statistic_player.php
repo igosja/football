@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -237,16 +237,7 @@ $distance_sql = $mysqli->query($sql);
 
 $distance_array = $distance_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $tournament_name);
-$smarty->assign('game_array', $game_array);
-$smarty->assign('win_array', $win_array);
-$smarty->assign('best_array', $best_array);
-$smarty->assign('goal_array', $goal_array);
-$smarty->assign('pass_array', $pass_array);
-$smarty->assign('shot_array', $shot_array);
-$smarty->assign('red_array', $red_array);
-$smarty->assign('yellow_array', $yellow_array);
-$smarty->assign('distance_array', $distance_array);
+$num            = $get_num;
+$header_title   = $tournament_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

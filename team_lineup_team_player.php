@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -59,13 +59,12 @@ $sql = "SELECT `country_id`,
         LEFT JOIN `country`
         ON `player_country_id`=`country_id`
         WHERE `team_id`='$get_num'
-        ORDER BY `position_id` ASC";
+        ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $team_name);
-$smarty->assign('player_array', $player_array);
+$num            = $get_num;
+$header_title   = $team_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

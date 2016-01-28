@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -34,8 +34,7 @@ $count_game = $game_sql->num_rows;
 
 if (0 == $count_game)
 {
-    $smarty->display('wrong_page.html');
-
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -50,7 +49,6 @@ $header_2_guest_name  = $game_array[0]['game_guest_team_name'];
 if (0 == $game_played)
 {
     redirect('game_before_before.php?num=' . $get_num);
-
     exit;
 }
 
@@ -117,10 +115,7 @@ $guest_player_sql = $mysqli->query($sql);
 
 $guest_player_array = $guest_player_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name);
-$smarty->assign('game_array', $game_array);
-$smarty->assign('home_player_array', $home_player_array);
-$smarty->assign('guest_player_array', $guest_player_array);
+$num            = $get_num;
+$header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

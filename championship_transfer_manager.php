@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -59,9 +59,7 @@ $manager_old_sql = $mysqli->query($sql);
 
 $manager_old_array = $manager_old_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $tournament_name);
-$smarty->assign('manager_new_array', $manager_new_array);
-$smarty->assign('manager_old_array', $manager_old_array);
+$num            = $get_num;
+$header_title   = $tournament_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

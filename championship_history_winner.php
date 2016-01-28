@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -41,6 +41,7 @@ $sql = "SELECT `standing_season_id`,
         ORDER BY `standing_season_id` DESC";
 $first_sql = $mysqli->query($sql);
 
+$count_first = $first_sql->num_rows;
 $first_array = $first_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `team_id`,
@@ -69,10 +70,7 @@ $third_sql = $mysqli->query($sql);
 
 $third_array = $third_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $tournament_name);
-$smarty->assign('first_array', $first_array);
-$smarty->assign('second_array', $second_array);
-$smarty->assign('third_array', $third_array);
+$num            = $get_num;
+$header_title   = $tournament_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

@@ -1,10 +1,14 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
-if (!isset($authorization_id))
+if (isset($authorization_id))
 {
-    $smarty->display('wrong_page.html');
+    $get_num = $authorization_id;
+}
+else
+{
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -71,10 +75,10 @@ if (!isset($authorization_team_id))
 
     $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
-    $smarty->assign('team_array', $team_array);
-    $smarty->assign('header_title', $authorization_login);
+    $num            = $authorization_id;
+    $header_title   = $authorization_login;
 
-    $smarty->display('main.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
     exit;
 }
 
@@ -441,16 +445,7 @@ $tournament_sql = $mysqli->query($sql);
 
 $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $authorization_id);
-$smarty->assign('header_title', $authorization_login);
-$smarty->assign('next_array', $next_array);
-$smarty->assign('latest_array', $latest_array);
-$smarty->assign('nearest_array', $nearest_array);
-$smarty->assign('standing_array', $standing_array);
-$smarty->assign('statistic_team_array', $statistic_team_array);
-$smarty->assign('statistic_player_array', $statistic_player_array);
-$smarty->assign('finance_array', $finance_array);
-$smarty->assign('tournament_array', $tournament_array);
-$smarty->assign('injury_array', $injury_array);
+$num            = $authorization_id;
+$header_title   = $authorization_login;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

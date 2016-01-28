@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_id))
 }
 else
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -16,14 +16,13 @@ $sql = "SELECT `inbox_id`,
                `inbox_date`,
                `inbox_title`
         FROM `inbox`
-        WHERE `inbox_user_id`='$authorization_id'
+        WHERE `inbox_user_id`='$get_num'
         ORDER BY `inbox_date` DESC";
 $inbox_sql = $mysqli->query($sql);
 
 $inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $authorization_id);
-$smarty->assign('header_title', $authorization_login);
-$smarty->assign('inbox_array', $inbox_array);
+$num            = $authorization_id;
+$header_title   = $authorization_login;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

@@ -1,10 +1,10 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (!isset($authorization_id))
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -67,8 +67,7 @@ $note_sql = $mysqli->query($sql);
 
 $note_array = $note_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $authorization_id);
-$smarty->assign('header_title', $authorization_login);
-$smarty->assign('note_array', $note_array);
+$num            = $authorization_id;
+$header_title   = $authorization_login;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

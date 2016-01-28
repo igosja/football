@@ -1,6 +1,6 @@
 <?php
 
-include('include/include.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    $smarty->display('only_my_team.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
     exit;
 }
 
@@ -124,8 +124,6 @@ if (isset($_POST['data']) &&
     exit;
 }
 
-$smarty->assign('header_title', $authorization_team_name);
-$smarty->assign('stadium_array', $stadium_array);
-$smarty->assign('team_finance', $team_finance);
+$header_title = $authorization_team_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

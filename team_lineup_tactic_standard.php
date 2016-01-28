@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    $smarty->display('only_my_team.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
     exit;
 }
 
@@ -22,7 +22,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -262,12 +262,7 @@ $standard_sql = $mysqli->query($sql);
 
 $standard_array = $standard_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $team_name);
-$smarty->assign('player_array', $player_array);
-$smarty->assign('corner_array', $corner_array);
-$smarty->assign('freekick_array', $freekick_array);
-$smarty->assign('out_array', $out_array);
-$smarty->assign('standard_array', $standard_array);
+$num            = $get_num;
+$header_title   = $team_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

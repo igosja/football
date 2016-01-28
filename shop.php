@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_id))
 }
 else
 {
-    $smarty->display('only_logged.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_logged.html');
     exit;
 }
 
@@ -66,7 +66,8 @@ elseif (isset($_POST['data']))
         'OutSumCurrency'    => $out_currency,
         'SignatureValue'    => $crc
     );
-    $url    = 'https://auth.robokassa.ru/Merchant/Index.aspx?' . http_build_query($params);;
+
+    $url = 'https://auth.robokassa.ru/Merchant/Index.aspx?' . http_build_query($params);;
 
     redirect($url);
     exit;
@@ -80,8 +81,7 @@ $user_sql = $mysqli->query($sql);
 
 $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $authorization_id);
-$smarty->assign('header_title', 'Магазин');
-$smarty->assign('user_array', $user_array);
+$num            = $authorization_id;
+$header_title   = 'Магазин';
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

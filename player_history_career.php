@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -30,8 +30,7 @@ $count_player = $player_sql->num_rows;
 
 if (0 == $count_player)
 {
-    $smarty->display('wrong_page.html');
-
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -41,7 +40,6 @@ $team_id        = $player_array[0]['team_id'];
 $team_name      = $player_array[0]['team_name'];
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
-$header_2_title = $player_name . ' ' . $player_surname;
 
 $sql = "SELECT `statisticplayer_best`,
                `statisticplayer_game`,
@@ -107,12 +105,7 @@ $total_statistic_sql = $mysqli->query($sql);
 
 $total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('team_id', $team_id);
-$smarty->assign('team_name', $team_name);
-$smarty->assign('header_title', $header_2_title);
-$smarty->assign('num', $get_num);
-$smarty->assign('season_statistic_array', $season_statistic_array);
-$smarty->assign('statistic_array', $statistic_array);
-$smarty->assign('total_statistic_array', $total_statistic_array);
+$num            = $get_num;
+$header_title   = $player_name . ' ' . $player_surname;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    $smarty->display('only_my_team.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
     exit;
 }
 
@@ -22,7 +22,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -32,8 +32,8 @@ if (isset($_POST['data']))
 
     foreach ($data as $key => $value)
     {
-        $statusnational_id  = (int)$value;
-        $player_id          = (int)$key;
+        $statusnational_id  = (int) $value;
+        $player_id          = (int) $key;
 
         $sql = "UPDATE `player`
                 SET `player_statusnational_id`='$statusnational_id'
@@ -90,9 +90,7 @@ $statusnational_sql = $mysqli->query($sql);
 
 $statusnational_array = $statusnational_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $team_name);
-$smarty->assign('player_array', $player_array);
-$smarty->assign('statusnational_array', $statusnational_array);
+$num            = $get_num;
+$header_title   = $team_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

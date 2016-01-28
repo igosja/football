@@ -1,16 +1,16 @@
 <?php
 
-include('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_POST['data']))
 {
     $firstname  = $_POST['data']['firstname'];
     $lastname   = $_POST['data']['lastname'];
-    $gender     = (int)$_POST['data']['gender'];
-    $day        = (int)$_POST['data']['birth']['day'];
-    $month      = (int)$_POST['data']['birth']['month'];
-    $year       = (int)$_POST['data']['birth']['year'];
-    $country_id = (int)$_POST['data']['country'];
+    $gender     = (int) $_POST['data']['gender'];
+    $day        = (int) $_POST['data']['birth']['day'];
+    $month      = (int) $_POST['data']['birth']['month'];
+    $year       = (int) $_POST['data']['birth']['year'];
+    $country_id = (int) $_POST['data']['country'];
 
     $sql = "UPDATE `user`
             SET `user_firstname`=?,
@@ -76,9 +76,6 @@ $gender_sql = $mysqli->query($sql);
 
 $gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_title', $authorization_login);
-$smarty->assign('user_array', $user_array);
-$smarty->assign('country_array', $country_array);
-$smarty->assign('gender_array', $gender_array);
+$header_title = $authorization_login;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

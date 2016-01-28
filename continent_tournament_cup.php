@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -41,13 +41,12 @@ $sql = "SELECT `country_id`,
         ON `tournament_country_id`=`country_id`
         WHERE `country_continent_id`='$get_num'
         AND `tournament_tournamenttype_id`='3'
-        ORDER BY `tournament_reputation` DESC";
+        ORDER BY `tournament_reputation` DESC, `tournament_id` ASC";
 $tournament_sql = $mysqli->query($sql);
 
 $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_title', $continent_name);
-$smarty->assign('num', $get_num);
-$smarty->assign('tournament_array', $tournament_array);
+$num            = $get_num;
+$header_title   = $continent_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

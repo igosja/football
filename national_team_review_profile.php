@@ -34,7 +34,7 @@ $sql = "SELECT `t1`.`country_name` AS `country_name`,
         LEFT JOIN `country` AS `t2`
         ON `user_country_id`=`t2`.`country_id`
         WHERE `t1`.`country_id`='$get_num'
-        ORDER BY `stadium_capacity` DESC
+        ORDER BY `stadium_capacity` DESC, `stadium_id` ASC
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
 
@@ -42,8 +42,7 @@ $count_country = $country_sql->num_rows;
 
 if (0 == $count_country)
 {
-    $smarty->display('wrong_page.html');
-
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -62,6 +61,7 @@ $sql = "SELECT `country_id`,
         ON `city_country_id`=`country_id`
         WHERE `country_id`='$get_num'
         AND `team_id`!='0'
+        ORDER BY `team_reputation` DESC, `team_id` ASC
         LIMIT 7";
 $team_sql = $mysqli->query($sql);
 
@@ -85,6 +85,7 @@ $sql = "SELECT `name_name`,
         ON `city_country_id`=`country_id`
         WHERE `country_id`='$get_num'
         AND `team_id`!='0'
+        ORDER BY `player_reputation` DESC, `player_id` ASC
         LIMIT 7";
 $player_sql = $mysqli->query($sql);
 
@@ -144,20 +145,13 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         WHERE `transferhistory_season_id`='$igosja_season_id'
         AND (`seller_city`.`city_country_id`='$get_num'
         OR `buyer_city`.`city_country_id`='$get_num')
-        ORDER BY `transferhistory_price` DESC
+        ORDER BY `transferhistory_price` DESC, `transferhistory_id` ASC
         LIMIT 10";
 $transfer_sql = $mysqli->query($sql);
 
 $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $country_name);
-$smarty->assign('country_id', $get_num);
-$smarty->assign('top_team_array', $team_array);
-$smarty->assign('top_player_array', $player_array);
-$smarty->assign('country_array', $country_array);
-$smarty->assign('nearest_game_array', $nearest_game_array);
-$smarty->assign('transfer_array', $transfer_array);
-$smarty->assign('rating_array', $rating_array);
+$num            = $get_num;
+$header_title   = $country_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

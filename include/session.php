@@ -21,13 +21,6 @@ if (isset($_SESSION['authorization_id']))
             LIMIT 1";
     $mysqli->query($sql);
 
-    $smarty->assign('authorization_id', $authorization_id);
-    $smarty->assign('authorization_login', $authorization_login);
-    $smarty->assign('authorization_team_id', $authorization_team_id);
-    $smarty->assign('authorization_team_name', $authorization_team_name);
-    $smarty->assign('authorization_country_id', $authorization_country_id);
-    $smarty->assign('authorization_country_name', $authorization_country_name);
-
     $sql = "SELECT COUNT(`inbox_id`) AS `count_inbox`
             FROM `inbox`
             WHERE `inbox_user_id`='$authorization_id'
@@ -37,8 +30,4 @@ if (isset($_SESSION['authorization_id']))
     $message_array = $message_sql->fetch_all(MYSQLI_ASSOC);
 
     $count_message = $message_array[0]['count_inbox'];
-
-    $smarty->assign('count_message', $count_message);
 }
-
-$smarty->assign('authorization_permission', $authorization_permission);

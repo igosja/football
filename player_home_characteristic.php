@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -65,7 +65,7 @@ $count_player = $player_sql->num_rows;
 
 if (0 == $count_player)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -73,7 +73,6 @@ $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
-$header_2_title = $player_name . ' ' . $player_surname;
 
 $sql = "SELECT `attribute_name`,
                `attributechapter_name`,
@@ -87,6 +86,7 @@ $sql = "SELECT `attribute_name`,
         ORDER BY `attributechapter_id` ASC, `attribute_id` ASC";
 $attribute_sql = $mysqli->query($sql);
 
+$count_attribute = $attribute_sql->num_rows;
 $attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `statisticplayer_best`,
@@ -134,11 +134,7 @@ $total_statistic_sql = $mysqli->query($sql);
 
 $total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_title', $header_2_title);
-$smarty->assign('num', $get_num);
-$smarty->assign('player_array', $player_array);
-$smarty->assign('attribute_array', $attribute_array);
-$smarty->assign('statistic_array', $statistic_array);
-$smarty->assign('total_statistic_array', $total_statistic_array);
+$num            = $get_num;
+$header_title   = $player_name . ' ' . $player_surname;;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

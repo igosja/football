@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -40,7 +40,7 @@ $count_staff = $staff_sql->num_rows;
 
 if (0 == $count_staff)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -60,6 +60,7 @@ $sql = "SELECT `attributestaff_name`,
         ORDER BY `attributechapterstaff_id` ASC, `attributestaff_id` ASC";
 $attribute_sql = $mysqli->query($sql);
 
+$count_attribute = $attribute_sql->num_rows;
 $attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT ROUND(COUNT(`scout_id`)/`count_player`*100) AS `count_scout`,
@@ -88,12 +89,8 @@ $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
 
 $staff_name     = $staff_array[0]['name_name'];
 $staff_surname  = $staff_array[0]['surname_name'];
-$header_2_title = $staff_name . ' ' . $staff_surname;
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $header_2_title);
-$smarty->assign('staff_array', $staff_array);
-$smarty->assign('attribute_array', $attribute_array);
-$smarty->assign('scout_array', $scout_array);
+$num            = $get_num;
+$header_title   = $staff_name . ' ' . $staff_surname;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

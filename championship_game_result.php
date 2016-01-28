@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -47,6 +47,22 @@ else
             ORDER BY `shedule_date` DESC
             LIMIT 1";
     $stage_sql = $mysqli->query($sql);
+
+    $count_stage = $stage_sql->num_rows;
+
+    if (0 == $count_stage)
+    {
+        $sql = "SELECT `game_stage_id`
+                FROM `shedule`
+                LEFT JOIN `game`
+                ON `game_shedule_id`=`shedule_id`
+                WHERE `shedule_date`>'$today'
+                AND `game_tournament_id`='$get_num'
+                AND `shedule_season_id`='$igosja_season_id'
+                ORDER BY `shedule_date` ASC
+                LIMIT 1";
+        $stage_sql = $mysqli->query($sql);
+    }
 
     $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
 
@@ -89,9 +105,7 @@ $stage_sql = $mysqli->query($sql);
 
 $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $tournament_name);
-$smarty->assign('game_array', $game_array);
-$smarty->assign('stage_array', $stage_array);
+$num            = $get_num;
+$header_title   = $tournament_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

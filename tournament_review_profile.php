@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . 'include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -42,4 +42,4 @@ elseif (TOURNAMENT_TYPE_WORLD_CUP == $tournamenttype_id)
     exit();
 }
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

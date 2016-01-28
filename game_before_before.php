@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -60,7 +60,7 @@ $count_game = $game_sql->num_rows;
 
 if (0 == $count_game)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -178,13 +178,7 @@ $standing_sql = $mysqli->query($sql);
 
 $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_guest_name);
-$smarty->assign('game_array', $game_array);
-$smarty->assign('home_latest_game_array', $home_latest_game_array);
-$smarty->assign('guest_latest_game_array', $guest_latest_game_array);
-$smarty->assign('standing_array', $standing_array);
-$smarty->assign('referee_array', $referee_array);
-$smarty->assign('last_array', $last_array);
+$num            = $get_num;
+$header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_guest_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

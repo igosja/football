@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    $smarty->display('only_my_team.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
     exit;
 }
 
@@ -22,7 +22,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    $smarty->display('wrong_page.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -51,7 +51,7 @@ else
     }
     else
     {
-        $smarty->display('no_game.html');
+        include($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.html');
         exit;
     }
 }
@@ -69,7 +69,7 @@ $count_game = $count_array[0]['count'];
 
 if (0 == $count_game)
 {
-    $smarty->display('only_my_game.html');
+    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_game.html');
     exit;
 }
 
@@ -230,6 +230,7 @@ $sql = "SELECT `instruction_id`,
         ORDER BY `instructionchapter_id` ASC, `instruction_id` ASC";
 $instruction_sql = $mysqli->query($sql);
 
+$count_instruction = $instruction_sql->num_rows;
 $instruction_array = $instruction_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `teaminstruction_instruction_id`
@@ -242,14 +243,7 @@ $teaminstruction_sql = $mysqli->query($sql);
 
 $teaminstruction_array = $teaminstruction_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $team_name);
-$smarty->assign('game_id', $game_id);
-$smarty->assign('nearest_array', $nearest_array);
-$smarty->assign('gamestyle_array', $gamestyle_array);
-$smarty->assign('gamemood_array', $gamemood_array);
-$smarty->assign('lineup_array', $lineup_array);
-$smarty->assign('instruction_array', $instruction_array);
-$smarty->assign('teaminstruction_array', $teaminstruction_array);
+$num            = $get_num;
+$header_title   = $team_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

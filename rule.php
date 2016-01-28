@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `rule_id`,
                `rule_name`,
@@ -11,7 +11,6 @@ $rule_sql = $mysqli->query($sql);
 
 $rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('header_title', 'Правила');
-$smarty->assign('rule_array', $rule_array);
+$header_title = 'Правила';
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

@@ -1,6 +1,6 @@
 <?php
 
-include('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -103,9 +103,7 @@ if (isset($_GET['change']) &&
     exit;
 }
 
-$smarty->assign('header_title', $authorization_team_name);
-$smarty->assign('stadium_array', $stadium_array);
-$smarty->assign('price', $price);
-$smarty->assign('team_finance', $team_finance);
+$num            = $get_num;
+$header_title   = $authorization_team_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

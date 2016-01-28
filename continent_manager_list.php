@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -22,7 +22,6 @@ $count_continent = $continent_sql->num_rows;
 if (0 == $count_continent)
 {
     $smarty->display('wrong_page.html');
-
     exit;
 }
 
@@ -59,6 +58,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         LIMIT $offset, 30";
 $user_sql = $mysqli->query($sql);
 
+$count_user = $user_sql->num_rows;
 $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT FOUND_ROWS() AS `count_page`";
@@ -67,9 +67,7 @@ $count_page = $count_page->fetch_all(MYSQLI_ASSOC);
 $count_page = $count_page[0]['count_page'];
 $count_page = ceil($count_page / 30);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $continent_name);
-$smarty->assign('user_array', $user_array);
-$smarty->assign('count_page', $count_page);
+$num            = $get_num;
+$header_title   = $continent_name;
 
-$smarty->display('main.html');
+include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
