@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    $smarty->display('only_my_team.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/only_my_team.html');
     exit;
 }
 
@@ -37,8 +37,8 @@ $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
 if (isset($_POST['data']) &&
     !$stadium_array[0]['building_end_date'])
 {
-    $length = (int)$_POST['data']['length'];
-    $width  = (int)$_POST['data']['width'];
+    $length = (int) $_POST['data']['length'];
+    $width  = (int) $_POST['data']['width'];
 
     if (100 > $length ||
         110 < $length ||

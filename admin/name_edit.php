@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -23,7 +23,7 @@ $count_name = $name_sql->num_rows;
 
 if (0 == $count_name)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
 
     exit;
 }
@@ -81,4 +81,4 @@ $smarty->assign('name_name', $name_name);
 $smarty->assign('country_array', $country_array);
 $smarty->assign('tpl', 'name_create');
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

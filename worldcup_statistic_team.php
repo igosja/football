@@ -73,4 +73,4 @@ $smarty->assign('player_goal_array', $player_goal_array);
 $smarty->assign('player_pass_array', $player_pass_array);
 $smarty->assign('player_mark_array', $player_mark_array);
 
-$smarty->display('main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/main.html');

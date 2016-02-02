@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
     exit;
 }
 

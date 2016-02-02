@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `statusnational_id`, `statusnational_name`
         FROM `statusnational`
@@ -11,4 +11,4 @@ $statusnational_array = $statusnational_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('statusnational_array', $statusnational_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

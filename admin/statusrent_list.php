@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `statusrent_id`, `statusrent_name`
         FROM `statusrent`
@@ -11,4 +11,4 @@ $statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('statusrent_array', $statusrent_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

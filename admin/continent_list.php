@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `continent_id`, `continent_name`, `count_city`, `count_country`, `count_team`
         FROM `continent` AS `t1`
@@ -37,4 +37,4 @@ $continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('continent_array', $continent_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

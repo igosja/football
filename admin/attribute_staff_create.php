@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_POST['chapter_id']))
 {
@@ -29,4 +29,4 @@ $chapter_array = $chapter_sql->fetch_all(MYSQL_ASSOC);
 
 $smarty->assign('chapter_array', $chapter_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

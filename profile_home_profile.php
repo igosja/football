@@ -23,10 +23,7 @@ $sql = "SELECT `country_id`,
                `statisticuser_pass`,
                `statisticuser_score`,
                `statisticuser_win`,
-               `user_fidelity`,
-               `user_local_player`,
-               `user_reputation`,
-               `user_tactic_stability`
+               `user_reputation`
         FROM `user`
         LEFT JOIN `country`
         ON `user_country_id`=`country_id`

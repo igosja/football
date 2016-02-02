@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_POST['menu_id']))
 {
@@ -41,4 +41,4 @@ $horizontalmenu_array = $horizontalmenu_sql->fetch_all(MYSQLI_ASSOC);
 $smarty->assign('horizontalmenuchapter_array', $horizontalmenuchapter_array);
 $smarty->assign('horizontalmenu_array', $horizontalmenu_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

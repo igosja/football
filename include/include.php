@@ -107,8 +107,8 @@ if (isset($_SESSION['message_class']))
     unset($_SESSION['message_text']);
 }
 
-$header_title = 'Лига';
-$tpl = $file_name;
+$header_title   = 'Лига';
+$tpl            = $file_name;
 
 $sql = "SELECT `horizontalmenupage_authorization`,
                `horizontalmenupage_myteam`
@@ -131,6 +131,6 @@ else
 if (1 == $page_authorization &&
     !isset($authorization_id))
 {
-    $smarty->display('only_logged.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/only_logged.html');
     exit;
 }

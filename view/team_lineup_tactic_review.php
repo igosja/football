@@ -193,7 +193,7 @@
                                     value=""
                                 />
                                 <input
-                                    id="input-player-<?php print $i; ?>}"
+                                    id="input-player-<?php print $i; ?>"
                                     name="data[player_<?php print $i; ?>]"
                                     type="hidden"
                                     value=""

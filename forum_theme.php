@@ -3,13 +3,13 @@
 include('include/include.php');
 
 if (isset($_GET['num'])) {
-    $get_num = (int)$_GET['num'];
+    $get_num = (int) $_GET['num'];
 } else {
     $get_num = 1;
 }
 
 if (isset($_GET['page'])) {
-    $page = (int)$_GET['page'];
+    $page = (int) $_GET['page'];
 } else {
     $page = 1;
 }
@@ -82,4 +82,4 @@ $smarty->assign('count_forum', $count_forum);
 $smarty->assign('head_array', $head_array);
 $smarty->assign('forum_array', $forum_array);
 
-$smarty->display('main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/main.html');

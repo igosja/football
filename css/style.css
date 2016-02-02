@@ -407,6 +407,19 @@ button, input, select
     padding: 5px;
 }
 
+.inbox-sup
+{
+    background: #F61B18;
+    border-radius: 3px;
+    color: #000;
+    font-size: 75%;
+    line-height: 0;
+    padding: 1px 3px;
+    position: relative;
+    top: -0.5em;
+    vertical-align: baseline;
+}
+
 /*Горизонтальные полоски*/
 .progress
 {
@@ -574,6 +587,12 @@ td.nopadding
     border: 1px solid #D8000C;
     color: #D8000C;
     padding: 10px;
+}
+
+/*Оформление текста*/
+.strong
+{
+    font-weight: bold;
 }
 
 /*Выравнивание*/

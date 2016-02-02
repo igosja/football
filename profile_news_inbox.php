@@ -14,6 +14,7 @@ else
 
 $sql = "SELECT `inbox_id`,
                `inbox_date`,
+               `inbox_read`,
                `inbox_title`
         FROM `inbox`
         WHERE `inbox_user_id`='$get_num'

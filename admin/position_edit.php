@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_position = $position_sql->num_rows;
 
 if (0 == $count_position)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
 
     exit;
 }
@@ -100,4 +100,4 @@ $smarty->assign('role_array', $role_array);
 $smarty->assign('positionrole_array', $positionrole_array);
 $smarty->assign('tpl', 'position_create');
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

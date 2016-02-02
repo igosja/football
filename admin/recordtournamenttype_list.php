@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `recordtournamenttype_id`, `recordtournamenttype_name`
         FROM `recordtournamenttype`
@@ -11,4 +11,4 @@ $recordtournamenttype_array = $recordtournamenttype_sql->fetch_all(MYSQLI_ASSOC)
 
 $smarty->assign('recordtournamenttype_array', $recordtournamenttype_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

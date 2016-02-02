@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['continent_id']))
 {
@@ -66,4 +66,4 @@ $city_array = $city_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('city_array', $city_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

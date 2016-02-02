@@ -52,8 +52,14 @@
                             + data.invitee_array[i].team_name
                             + '</a></td><td class="center w30">'
                             + home_guest
-                            + '</td><td class="center w20"><a href="asktoplay.php?ok='
+                            + '</td><td class="center w20"><a href="?num='
+                            + data.num
+                            + '&ok='
                             + data.invitee_array[i].asktoplay_id
+                            + '&shedule='
+                            + shedule_id
+                            + '&team='
+                            + data.invitee_array[i].team_id
                             + '" class="link-img link-ok" /> <a href="javascript:;" data-delete="'
                             + data.invitee_array[i].asktoplay_id
                             + '" data-shedule="'

@@ -71,7 +71,9 @@
                                                     class="img-12"
                                                     src="img/envelope.png"
                                                 />
-                                                <?php if (isset($count_message) && 0 < $count_message) { print $count_message; } ?>
+                                                <?php if (isset($count_message) && 0 < $count_message) { ?>
+                                                    <sup class="inbox-sup"><?php print $count_message; ?></sup>
+                                                <?php } ?>
                                             </a>
                                         </li>
                                         <?php if (isset($authorization_team_id)) { ?>

@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `gender_id`,
                `gender_name`
@@ -12,4 +12,4 @@ $gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('gender_array', $gender_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

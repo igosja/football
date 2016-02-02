@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `newstheme_id`, `newstheme_name`
         FROM `newstheme`
@@ -11,4 +11,4 @@ $newstheme_array = $newstheme_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('newstheme_array', $newstheme_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

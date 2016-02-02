@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['continent_id']))
 {
@@ -74,4 +74,4 @@ $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('team_array', $team_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

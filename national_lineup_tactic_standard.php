@@ -8,7 +8,7 @@ if (isset($authorization_country_id))
 }
 else
 {
-    $smarty->display('only_my_team.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/only_my_team.html');
     exit;
 }
 
@@ -22,7 +22,7 @@ $count_country = $country_sql->num_rows;
 
 if (0 == $count_country)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
 
     exit;
 }
@@ -186,4 +186,4 @@ $smarty->assign('freekick_array', $freekick_array);
 $smarty->assign('out_array', $out_array);
 $smarty->assign('standard_array', $standard_array);
 
-$smarty->display('main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/main.html');

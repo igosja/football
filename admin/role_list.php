@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `role_id`, `role_name`, `role_short`
         FROM `role`
@@ -11,4 +11,4 @@ $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('role_array', $role_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

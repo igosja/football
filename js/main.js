@@ -309,6 +309,7 @@ $(document).ready(function($)
     //Текст новости
     {
         var inbox_id = $(this).data('id');
+        $(this).removeClass('strong');
 
         $.ajax
         (

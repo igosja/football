@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `day_id`
         FROM `day`
@@ -11,4 +11,4 @@ $day_array = $day_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('day_array', $day_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

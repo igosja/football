@@ -4,19 +4,13 @@ set_time_limit(0);
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
-$sql = "TRUNCATE `player`";
+$sql = "TRUNCATE `asktoplay`";
 $mysqli->query($sql);
 
-$sql = "TRUNCATE `playerattribute`";
+$sql = "TRUNCATE `building`";
 $mysqli->query($sql);
 
-$sql = "TRUNCATE `playerposition`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `standing`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `broadcasting`";
+$sql = "TRUNCATE `cupparticipant`";
 $mysqli->query($sql);
 
 $sql = "TRUNCATE `disqualification`";
@@ -25,13 +19,52 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `event`";
 $mysqli->query($sql);
 
+$sql = "TRUNCATE `finance`";
+$mysqli->query($sql);
+
 $sql = "TRUNCATE `game`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `history`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `historyfinanceteam`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `historyfinanceuser`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `inbox`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `injury`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `league`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `leagueparticipant`";
 $mysqli->query($sql);
 
 $sql = "TRUNCATE `lineup`";
 $mysqli->query($sql);
 
-$sql = "TRUNCATE `lineupcurrent`";
+$sql = "TRUNCATE `lineupmain`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `player`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `playerattribute`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `playeroffer`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `playerposition`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `recordcountry`";
 $mysqli->query($sql);
 
 $sql = "TRUNCATE `recordteam`";
@@ -40,10 +73,31 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `recordtournament`";
 $mysqli->query($sql);
 
+$sql = "TRUNCATE `referee`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `rent`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `robokassa`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `scout`";
+$mysqli->query($sql);
+
 $sql = "TRUNCATE `series`";
 $mysqli->query($sql);
 
 $sql = "TRUNCATE `shedule`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `staff`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `staffattribute`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `standing`";
 $mysqli->query($sql);
 
 $sql = "TRUNCATE `standinghistory`";
@@ -61,40 +115,13 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `statisticuser`";
 $mysqli->query($sql);
 
-$sql = "TRUNCATE `finance`";
+$sql = "TRUNCATE `teaminstruction`";
 $mysqli->query($sql);
 
-$sql = "TRUNCATE `staff`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `staffattribute`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `cupparticipant`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `leagueparticipant`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `league`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `scout`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `worldcup`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `referee`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `playeroffer`";
+$sql = "TRUNCATE `training`";
 $mysqli->query($sql);
 
 $sql = "TRUNCATE `transfer`";
-$mysqli->query($sql);
-
-$sql = "TRUNCATE `history`";
 $mysqli->query($sql);
 
 $sql = "TRUNCATE `transferhistory`";
@@ -103,10 +130,16 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `trophyplayer`";
 $mysqli->query($sql);
 
-$sql = "TRUNCATE `inbox`";
+$sql = "TRUNCATE `userformation`";
 $mysqli->query($sql);
 
-$sql = "TRUNCATE `asktoplay`";
+$sql = "TRUNCATE `usergamemood`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `usergamestyle`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `worldcup`";
 $mysqli->query($sql);
 
 $sql = "INSERT INTO `player`
@@ -122,12 +155,36 @@ $mysqli->query($sql);
 $sql = "ALTER TABLE `player` AUTO_INCREMENT=1";
 $mysqli->query($sql);
 
+$sql = "UPDATE `user`
+        SET `user_reputation`='0'
+        WHERE `user_id`!='0'";
+$mysqli->query($sql);
+
+$sql = "UPDATE `country`
+        SET `country_user_id`='0'
+        WHERE `country_user_id`!='0'";
+$mysqli->query($sql);
+
+$sql = "UPDATE `tournament`
+        SET `tournament_reputation`='0'
+        WHERE `tournament_id`!='0'";
+$mysqli->query($sql);
+
 $sql = "UPDATE `team`
         SET `team_finance`='0',
+            `team_price`='0',
             `team_school_level`='1',
-            `team_training_level`='1'
-        WHERE `team_id`!='0'
-        ORDER BY `team_id` ASC";
+            `team_training_level`='1',
+            `team_user_id`='0'
+        WHERE `team_id`!='0'";
+$mysqli->query($sql);
+
+$sql = "UPDATE `stadium`
+        SET `stadium_capacity`='100',
+            `stadium_length`='105',
+            `stadium_stadiumquality_id`='1',
+            `stadium_width`='68'
+        WHERE `stadium_team_id`!='0'";
 $mysqli->query($sql);
 
 $sql = "SELECT `team_id`

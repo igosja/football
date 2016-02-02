@@ -21,7 +21,7 @@ $count_continent = $continent_sql->num_rows;
 
 if (0 == $count_continent)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
     exit;
 }
 
@@ -41,7 +41,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `city_country_id`=`country_id`
         WHERE `country_continent_id`='$get_num'
         AND `team_id`!='0'
-        ORDER BY `team_reputation` DESC
+        ORDER BY `team_reputation` DESC, `team_id` ASC
         LIMIT 10";
 $team_sql = $mysqli->query($sql);
 
@@ -88,7 +88,7 @@ $sql = "SELECT `name_name`,
         ON `city_country_id`=`country_id`
         WHERE `country_continent_id`='$get_num'
         AND `team_id`!='0'
-        ORDER BY `player_reputation` DESC
+        ORDER BY `player_reputation` DESC, `player_id` ASC
         LIMIT 10";
 $player_sql = $mysqli->query($sql);
 

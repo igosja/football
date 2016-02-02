@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `historytext_id`, `historytext_name`
         FROM `historytext`
@@ -11,4 +11,4 @@ $historytext_array = $historytext_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('historytext_array', $historytext_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

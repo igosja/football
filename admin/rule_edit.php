@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -22,7 +22,7 @@ $count_rule = $rule_sql->num_rows;
 
 if (0 == $count_rule)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
 
     exit;
 }
@@ -56,4 +56,4 @@ $smarty->assign('rule_name', $rule_name);
 $smarty->assign('rule_text', $rule_text);
 $smarty->assign('tpl', 'rule_create');
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

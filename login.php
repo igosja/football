@@ -75,12 +75,6 @@ if (isset($_POST['data']))
 
     $_SESSION['authorization_id']           = $user_id;
     $_SESSION['authorization_login']        = $authorization_login;
-    $_SESSION['authorization_password']     = $authorization_password;
-    $_SESSION['authorization_team_id']      = $authorization_team_id;
-    $_SESSION['authorization_team_name']    = $authorization_team_name;
-    $_SESSION['authorization_country_id']   = $authorization_country_id;
-    $_SESSION['authorization_country_name'] = $authorization_country_name;
-    $_SESSION['authorization_permission']   = $user_permission;
 
     redirect('profile_home_home.php');
     exit;

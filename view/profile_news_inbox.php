@@ -5,9 +5,9 @@
             <table class="striped w100">
                 <?php foreach ($inbox_array as $item) { ?>
                     <tr>
-                        <td class="inbox-title" data-id="<?php print $item['inbox_id']; ?>">
+                        <td class="inbox-title <?php if (0 == $item['inbox_read']) { ?>strong<?php } ?>" data-id="<?php print $item['inbox_id']; ?>">
                             <?php print $item['inbox_title']; ?>
-                            <p class="grey"><?php print f_igosja_ugu_date($item['inbox_date']); ?></p>
+                            <p class="grey"><?php print f_igosja_ufu_date($item['inbox_date']); ?></p>
                         </td>
                     </tr>
                 <?php } ?>

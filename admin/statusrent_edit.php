@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_statusrent = $statusrent_sql->num_rows;
 
 if (0 == $count_statusrent)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $statusrent_name = $statusrent_array[0]['statusrent_name'];
 $smarty->assign('statusrent_name', $statusrent_name);
 $smarty->assign('tpl', 'statusrent_create');
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

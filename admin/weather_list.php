@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `weather_id`, `weather_name`
         FROM `weather`
@@ -11,4 +11,4 @@ $weather_array = $weather_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('weather_array', $weather_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

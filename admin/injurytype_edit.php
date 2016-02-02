@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_injurytype = $injurytype_sql->num_rows;
 
 if (0 == $count_injurytype)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
 
     exit;
 }
@@ -55,4 +55,4 @@ $smarty->assign('injurytype_day', $injurytype_day);
 $smarty->assign('injurytype_name', $injurytype_name);
 $smarty->assign('tpl', 'injurytype_create');
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

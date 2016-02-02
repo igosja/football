@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `attributechapterstaff_id`, `attributechapterstaff_name`, `count_attributestaff`
         FROM `attributechapterstaff` AS `t1`
@@ -18,6 +18,6 @@ $chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('chapter_array', $chapter_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
 
 ?>

@@ -30,39 +30,43 @@
                 </tr>
             </table>
         </td>
-        <td class="block-page w35">
-            <p class="header">Характеристики</p>
+        <td class="block-page w35" rowspan="2">
+            <p class="header">Статистика карьеры</p>
             <table class="striped w100">
                 <tr>
-                    <td class="w50">Репутация</td>
-                    <td>Верность команде</td>
+                    <td class="w25"></td>
+                    <td class="w25"></td>
+                    <td class="w25"></td>
+                    <td class="w25"></td>
                 </tr>
                 <tr>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: <?php print $user_array[0]['user_reputation']; ?>%"></div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: <?php print $user_array[0]['user_fidelity']; ?>%"></div>
-                        </div>
-                    </td>
+                    <td class="w25">Матчей</td>
+                    <td class="right w25"><?php print $user_array[0]['statisticuser_game']; ?></td>
+                    <td class="w25">Забито</td>
+                    <td class="right"><?php print $user_array[0]['statisticuser_score']; ?></td>
                 </tr>
                 <tr>
-                    <td>Тактическое постоянство</td>
-                    <td>Предпочтение нац. игрокам</td>
+                    <td>Выигрыши</td>
+                    <td class="right"><?php print $user_array[0]['statisticuser_win']; ?></td>
+                    <td>Пропущено</td>
+                    <td class="right"><?php print $user_array[0]['statisticuser_pass']; ?></td>
                 </tr>
                 <tr>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: <?php print $user_array[0]['user_tactic_stability']; ?>%"></div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: <?php print $user_array[0]['user_local_player']; ?>%"></div>
-                        </div>
+                    <td>Ничьи</td>
+                    <td class="right"><?php print $user_array[0]['statisticuser_draw']; ?></td>
+                    <td>Разница</td>
+                    <td class="right"><?php print $user_array[0]['statisticuser_score'] - $user_array[0]['statisticuser_pass']; ?></td>
+                </tr>
+                <tr>
+                    <td>Поражения</td>
+                    <td class="right"><?php print $user_array[0]['statisticuser_loose']; ?></td>
+                    <td>Побед</td>
+                    <td class="right">
+                        <?php if (0 == $user_array[0]['statisticuser_game']) { ?>
+                        0
+                        <?php } else { ?>
+                        <?php print round($user_array[0]['statisticuser_win'] / $user_array[0]['statisticuser_game'] * 100); ?>
+                        <?php } ?> %
                     </td>
                 </tr>
             </table>
@@ -121,49 +125,6 @@
                 <tr>
                     <td>Настрой на игру</td>
                     <td><?php print $user_array[0]['gamemood_name']; ?></td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td class="block-page">
-            <p class="header">Статистика карьеры</p>
-            <table class="striped w100">
-                <tr>
-                    <td class="w25"></td>
-                    <td class="w25"></td>
-                    <td class="w25"></td>
-                    <td class="w25"></td>
-                </tr>
-                <tr>
-                    <td class="w25">Матчей</td>
-                    <td class="right w25"><?php print $user_array[0]['statisticuser_game']; ?></td>
-                    <td class="w25">Забито</td>
-                    <td class="right"><?php print $user_array[0]['statisticuser_score']; ?></td>
-                </tr>
-                <tr>
-                    <td>Выигрыши</td>
-                    <td class="right"><?php print $user_array[0]['statisticuser_win']; ?></td>
-                    <td>Пропущено</td>
-                    <td class="right"><?php print $user_array[0]['statisticuser_pass']; ?></td>
-                </tr>
-                <tr>
-                    <td>Ничьи</td>
-                    <td class="right"><?php print $user_array[0]['statisticuser_draw']; ?></td>
-                    <td>Разница</td>
-                    <td class="right"><?php print $user_array[0]['statisticuser_score'] - $user_array[0]['statisticuser_pass']; ?></td>
-                </tr>
-                <tr>
-                    <td>Поражения</td>
-                    <td class="right"><?php print $user_array[0]['statisticuser_loose']; ?></td>
-                    <td>Побед</td>
-                    <td class="right">
-                        <?php if (0 == $user_array[0]['statisticuser_game']) { ?>
-                            0
-                        <?php } else { ?>
-                            <?php print round($user_array[0]['statisticuser_win'] / $user_array[0]['statisticuser_game'] * 100); ?>
-                        <?php } ?> %
-                    </td>
                 </tr>
             </table>
         </td>

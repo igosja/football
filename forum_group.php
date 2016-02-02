@@ -4,7 +4,7 @@ include('include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int)$_GET['num'];
+    $get_num = (int) $_GET['num'];
 }
 else
 {
@@ -13,7 +13,7 @@ else
 
 if (isset($_GET['page']))
 {
-    $page = (int)$_GET['page'];
+    $page = (int) $_GET['page'];
 }
 else
 {
@@ -85,4 +85,4 @@ $smarty->assign('page', $page);
 $smarty->assign('count_forum', $count_forum);
 $smarty->assign('forum_array', $forum_array);
 
-$smarty->display('main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/main.html');

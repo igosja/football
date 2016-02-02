@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `stadiumquality_id`, `stadiumquality_name`
         FROM `stadiumquality`
@@ -11,4 +11,4 @@ $stadiumquality_array = $stadiumquality_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('stadiumquality_array', $stadiumquality_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

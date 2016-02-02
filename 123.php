@@ -2,13 +2,12 @@
 
 include($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
-$sql = "TRUNCATE `ratingcountry`";
-$mysqli->query($sql);
+$dir    = $_SERVER['DOCUMENT_ROOT'] . '/view/admin';
+$files  = scandir($dir);
+$files  = array_slice($files, 3);
 
-$sql = "INSERT INTO `ratingcountry` (`ratingcountry_country_id`)
-        SELECT `city_country_id`
-        FROM `city`
-        WHERE `city_id`!='0'
-        GROUP BY `city_country_id`
-        ORDER BY `city_country_id` ASC";
-$mysqli->query($sql);
+foreach ($files as $file)
+{
+    $file_name = explode('.', $file);
+    rename($dir . '/' . $file_name[0] . '.' . $file_name[1], $dir . '/' . $file_name[0] . '.php');
+}

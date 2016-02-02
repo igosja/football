@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `surname_id`, `surname_name`
         FROM `surname`
@@ -11,4 +11,4 @@ $surname_array = $surname_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('surname_array', $surname_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

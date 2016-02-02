@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `eventtype_id`, `eventtype_name`
         FROM `eventtype`
@@ -11,4 +11,4 @@ $eventtype_array = $eventtype_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('eventtype_array', $eventtype_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

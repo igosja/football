@@ -218,7 +218,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="progress">
-                            <div class="<?php print $player_array[0]['player_condition|f_igosja_progress_class']; ?>" style="width: <?php print $player_array[0]['player_condition']; ?>%"></div>
+                            <div class="<?php print f_igosja_progress_class($player_array[0]['player_condition']); ?>" style="width: <?php print $player_array[0]['player_condition']; ?>%"></div>
                         </div>
                     </td>
                 </tr>
@@ -232,7 +232,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="progress">
-                            <div class="<?php print $player_array[0]['player_practice|f_igosja_progress_class']; ?>" style="width: <?php print $player_array[0]['player_practice']; ?>%"></div>
+                            <div class="<?php print f_igosja_progress_class($player_array[0]['player_practice']); ?>" style="width: <?php print $player_array[0]['player_practice']; ?>%"></div>
                         </div>
                     </td>
                 </tr>

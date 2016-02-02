@@ -41,8 +41,6 @@ if (!isset($authorization_team_id))
 
             $team_name = $team_array[0]['team_name'];
 
-            $_SESSION['authorization_team_id']      = $team_id;
-            $_SESSION['authorization_team_name']    = $team_name;
             $_SESSION['message_class']              = 'success';
             $_SESSION['message_text']               = 'Вы успешно взяли команду под управление.';
 

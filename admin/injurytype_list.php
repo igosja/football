@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `injurytype_id`, `injurytype_day`, `injurytype_name`
         FROM `injurytype`
@@ -11,4 +11,4 @@ $injurytype_array = $injurytype_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('injurytype_array', $injurytype_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

@@ -58,4 +58,4 @@ $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
 $smarty->assign('header_title', 'Форум');
 $smarty->assign('forum_array', $forum_array);
 
-$smarty->display('main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/main.html');

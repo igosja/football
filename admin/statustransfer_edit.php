@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_statustransfer = $statustransfer_sql->num_rows;
 
 if (0 == $count_statustransfer)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $statustransfer_name = $statustransfer_array[0]['statustransfer_name'];
 $smarty->assign('statustransfer_name', $statustransfer_name);
 $smarty->assign('tpl', 'statustransfer_create');
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

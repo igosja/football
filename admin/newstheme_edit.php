@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -22,7 +22,7 @@ $count_newstheme = $newstheme_sql->num_rows;
 
 if (0 == $count_newstheme)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
 
     exit;
 }
@@ -56,4 +56,4 @@ $smarty->assign('newstheme_name', $newstheme_name);
 $smarty->assign('newstheme_text', $newstheme_text);
 $smarty->assign('tpl', 'newstheme_create');
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

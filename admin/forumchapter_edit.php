@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_chapter = $chapter_sql->num_rows;
 
 if (0 == $count_chapter)
 {
-    $smarty->display('wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $chapter_name = $chapter_array[0]['forumchapter_name'];
 $smarty->assign('chapter_name', $chapter_name);
 $smarty->assign('tpl', 'forumchapter_create');
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

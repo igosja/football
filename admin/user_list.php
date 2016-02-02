@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `user_id`, `user_last_visit`, `user_login`
         FROM `user`
@@ -11,4 +11,4 @@ $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('user_array', $user_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

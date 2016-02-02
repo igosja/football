@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_horizontalmenuchapter = $horizontalmenuchapter_sql->num_rows;
 
 if (0 == $count_horizontalmenuchapter)
 {
-    $smarty->display('wrong_horizontalmenuchapter.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_horizontalmenuchapter.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $horizontalmenuchapter_name = $horizontalmenuchapter_array[0]['horizontalmenucha
 $smarty->assign('horizontalmenuchapter_name', $horizontalmenuchapter_name);
 $smarty->assign('tpl', 'horizontalmenuchapter_create');
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

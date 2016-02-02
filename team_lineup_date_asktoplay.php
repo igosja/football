@@ -32,9 +32,9 @@ $team_name = $team_array[0]['team_name'];
 
 if (isset($_GET['ok']))
 {
-    $askroplay_id   = (int)$_GET['ok'];
-    $shedule_id     = (int)$_GET['shedule'];
-    $team_id        = (int)$_GET['team'];
+    $askroplay_id   = (int) $_GET['ok'];
+    $shedule_id     = (int) $_GET['shedule'];
+    $team_id        = (int) $_GET['team'];
 
     $sql = "SELECT COUNT(`game_id`) AS `count`
             FROM `game`
@@ -52,10 +52,6 @@ if (isset($_GET['ok']))
                 WHERE (`asktoplay_invitee_team_id`='$get_num'
                 OR `asktoplay_inviter_team_id`='$get_num')
                 AND `asktoplay_shedule_id`='$shedule_id'";
-        $mysqli->query($sql);
-
-        $sql = "DELETE FROM `inbox`
-                WHERE `inbox_asktoplay_id`='$askroplay_id'";
         $mysqli->query($sql);
 
         $_SESSION['message_class']  = 'error';
@@ -94,8 +90,11 @@ if (isset($_GET['ok']))
         exit;
     }
 
-    $sql = "SELECT `asktoplay_home`
+    $sql = "SELECT `asktoplay_home`,
+                   `team_user_id`
             FROM `asktoplay`
+            LEFT JOIN `team`
+            ON `team_id`=`asktoplay_inviter_team_id`
             WHERE `asktoplay_invitee_team_id`='$get_num'
             AND `asktoplay_inviter_team_id`='$team_id'
             AND `asktoplay_shedule_id`='$shedule_id'
@@ -109,6 +108,7 @@ if (isset($_GET['ok']))
         $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
 
         $asktoplay_home = $asktoplay_array[0]['asktoplay_home'];
+        $user_id        = $asktoplay_array[0]['team_user_id'];
 
         if (1 == $asktoplay_home)
         {
@@ -133,8 +133,46 @@ if (isset($_GET['ok']))
 
         $mysqli->query($sql);
 
-        $sql = "SELECT `asktoplay_id`
+        $sql = "SELECT `inboxtheme_name`,
+                       `inboxtheme_text`
+                FROM `inboxtheme`
+                WHERE `inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_YES . "'
+                LIMIT 1";
+        $inboxtheme_sql = $mysqli->query($sql);
+
+        $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+
+        $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
+        $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
+        $inboxtheme_text = sprintf($inboxtheme_text, $authorization_team_name);
+
+        $sql = "INSERT INTO `inbox`
+                SET `inbox_asktoplay_id`='$askroplay_id',
+                    `inbox_date`=CURDATE(),
+                    `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_YES . "',
+                    `inbox_title`='$inboxtheme_name',
+                    `inbox_text`='$inboxtheme_text',
+                    `inbox_user_id`='$user_id'";
+        $mysqli->query($sql);
+
+        $sql = "SELECT `inboxtheme_name`,
+                       `inboxtheme_text`
+                FROM `inboxtheme`
+                WHERE `inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_NO . "'
+                LIMIT 1";
+        $inboxtheme_sql = $mysqli->query($sql);
+
+        $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+
+        $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
+        $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
+        $inboxtheme_text = sprintf($inboxtheme_text, $authorization_team_name);
+
+        $sql = "SELECT `asktoplay_id`,
+                       `team_user_id`
                 FROM `asktoplay`
+                LEFT JOIN `team`
+                ON `team_id`=`asktoplay_inviter_team_id`
                 WHERE (`asktoplay_invitee_team_id`='$get_num'
                 OR `asktoplay_inviter_team_id`='$get_num')
                 AND `asktoplay_shedule_id`='$shedule_id'";
@@ -147,14 +185,23 @@ if (isset($_GET['ok']))
         for ($i=0; $i<$count_asktoplay; $i++)
         {
             $asktoplay_id = $asktoplay_array[$i]['asktoplay_id'];
-
-            $sql = "DELETE FROM `inbox`
-                    WHERE `inbox_asktoplay_id`='$asktoplay_id'";
-            $mysqli->query($sql);
+            $user_id      = $asktoplay_array[$i]['team_user_id'];
 
             $sql = "DELETE FROM `asktoplay`
                     WHERE `asktoplay_id`='$asktoplay_id'";
             $mysqli->query($sql);
+
+            if($authorization_user_id != $user_id)
+            {
+                $sql = "INSERT INTO `inbox`
+                        SET `inbox_asktoplay_id`='$askroplay_id',
+                            `inbox_date`=CURDATE(),
+                            `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_YES . "',
+                            `inbox_title`='$inboxtheme_name',
+                            `inbox_text`='$inboxtheme_text',
+                            `inbox_user_id`='$user_id'";
+                $mysqli->query($sql);
+            }
         }
 
         $sql = "SELECT `asktoplay_id`
@@ -168,12 +215,9 @@ if (isset($_GET['ok']))
 
         $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
 
-        for ($i = 0; $i < $count_asktoplay; $i++) {
+        for ($i=0; $i<$count_asktoplay; $i++)
+        {
             $asktoplay_id = $asktoplay_array[$i]['asktoplay_id'];
-
-            $sql = "DELETE FROM `inbox`
-                    WHERE `inbox_asktoplay_id`='$asktoplay_id'";
-            $mysqli->query($sql);
 
             $sql = "DELETE FROM `asktoplay`
                     WHERE `asktoplay_id`='$asktoplay_id'";

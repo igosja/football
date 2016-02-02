@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    $smarty->display('only_my_team.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/only_my_team.html');
     exit;
 }
 

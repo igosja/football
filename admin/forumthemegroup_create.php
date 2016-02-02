@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_POST['chapter_name']))
 {
@@ -31,4 +31,4 @@ $forumchapter_array = $forumchapter_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('forumchapter_array', $forumchapter_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

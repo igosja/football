@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `rule_id`,
                `rule_name`
@@ -12,4 +12,4 @@ $rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('rule_array', $rule_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

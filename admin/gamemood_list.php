@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `gamemood_id`, `gamemood_name`
         FROM `gamemood`
@@ -11,4 +11,4 @@ $gamemood_array = $gamemood_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('gamemood_array', $gamemood_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');

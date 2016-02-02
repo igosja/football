@@ -81,7 +81,7 @@ if (isset($_GET['player_tactic_position_id']))
 }
 elseif (isset($_GET['player_tactic_position_id_national']))
 {
-    $position_id = (int)$_GET['player_tactic_position_id_national'];
+    $position_id = (int) $_GET['player_tactic_position_id_national'];
 
     $sql = "SELECT `position_name`
             FROM `position`
@@ -197,7 +197,7 @@ elseif (isset($_GET['player_tactic_position_id_national']))
 }
 elseif (isset($_GET['select_value']))
 {
-    $value      = (int)$_GET['select_value'];
+    $value      = (int) $_GET['select_value'];
     $give       = $_GET['select_give'];
     $need       = $_GET['select_need'];
     $need_id    = $need . '_id';
@@ -429,8 +429,8 @@ elseif (isset($_GET['shedule_next']))
 
     $json_data['game_array'] = $game_array;
 } elseif (isset($_GET['number_national'])) {
-    $number = (int)$_GET['number_national'];
-    $player_id = (int)$_GET['player_id'];
+    $number = (int) $_GET['number_national'];
+    $player_id = (int) $_GET['player_id'];
 
     $sql = "UPDATE `player`
             SET `player_number_national`='$number'
@@ -442,7 +442,7 @@ elseif (isset($_GET['shedule_next']))
 }
 elseif (isset($_GET['inbox_id']))
 {
-    $inbox_id = (int)$_GET['inbox_id'];
+    $inbox_id = (int) $_GET['inbox_id'];
 
     $sql = "SELECT `inbox_asktoplay_id`,
                    `inbox_inboxtheme_id`,
@@ -458,7 +458,7 @@ elseif (isset($_GET['inbox_id']))
     $inboxtheme_id  = $inbox_array[0]['inbox_inboxtheme_id'];
     $asktoplay_id   = $inbox_array[0]['inbox_asktoplay_id'];
 
-    if (INBOXTHEME_ASKTOPLAY == $inboxtheme_id)
+    if (in_array($inboxtheme_id, array(INBOXTHEME_ASKTOPLAY, INBOXTHEME_ASKTOPLAY_YES, INBOXTHEME_ASKTOPLAY_NO)))
     {
         $inbox_array[0]['inbox_button'] = '<button><a href="team_lineup_date_asktoplay.php?num=' . $authorization_team_id . '">Подробнее</a></button>';
     }
@@ -481,7 +481,7 @@ elseif (isset($_GET['inbox_id']))
 }
 elseif (isset($_GET['note_id']))
 {
-    $note_id = (int)$_GET['note_id'];
+    $note_id = (int) $_GET['note_id'];
 
     $sql = "SELECT `note_text`,
                    `note_title`
@@ -502,7 +502,7 @@ elseif (isset($_GET['note_id']))
 }
 elseif (isset($_GET['national_style_id']))
 {
-    $style_id = (int)$_GET['national_style_id'];
+    $style_id = (int) $_GET['national_style_id'];
 
     $sql = "UPDATE `lineupcurrent`
             SET `lineupcurrent_gamestyle_id`='$style_id'
@@ -523,7 +523,7 @@ elseif (isset($_GET['national_style_id']))
 }
 elseif (isset($_GET['national_mood_id']))
 {
-    $mood_id = (int)$_GET['national_mood_id'];
+    $mood_id = (int) $_GET['national_mood_id'];
 
     $sql = "UPDATE `lineupcurrent`
             SET `lineupcurrent_gamemood_id`='$mood_id'
@@ -544,8 +544,8 @@ elseif (isset($_GET['national_mood_id']))
 }
 elseif (isset($_GET['penalty_id_national']))
 {
-    $penalty_id = (int)$_GET['penalty_id_national'];
-    $player_id = (int)$_GET['player_id'];
+    $penalty_id = (int) $_GET['penalty_id_national'];
+    $player_id = (int) $_GET['player_id'];
 
     $sql = "UPDATE `country`
             SET `country_penalty_player_id_" . $penalty_id . "`='$player_id'
@@ -557,8 +557,8 @@ elseif (isset($_GET['penalty_id_national']))
 }
 elseif (isset($_GET['captain_id_national']))
 {
-    $captain_id = (int)$_GET['captain_id_national'];
-    $player_id = (int)$_GET['player_id'];
+    $captain_id = (int) $_GET['captain_id_national'];
+    $player_id = (int) $_GET['player_id'];
 
     $sql = "UPDATE `country`
             SET `country_captain_player_id_" . $captain_id . "`='$player_id'
@@ -570,8 +570,8 @@ elseif (isset($_GET['captain_id_national']))
 }
 elseif (isset($_GET['corner_left_national']))
 {
-    $corner_left = (int)$_GET['corner_left_national'];
-    $player_id = (int)$_GET['player_id'];
+    $corner_left = (int) $_GET['corner_left_national'];
+    $player_id = (int) $_GET['player_id'];
 
     $sql = "UPDATE `country`
             SET `country_corner_left_player_id_" . $corner_left . "`='$player_id'
@@ -583,8 +583,8 @@ elseif (isset($_GET['corner_left_national']))
 }
 elseif (isset($_GET['corner_right_national']))
 {
-    $corner_right = (int)$_GET['corner_right_national'];
-    $player_id = (int)$_GET['player_id'];
+    $corner_right = (int) $_GET['corner_right_national'];
+    $player_id = (int) $_GET['player_id'];
 
     $sql = "UPDATE `country`
             SET `country_corner_right_player_id_" . $corner_right . "`='$player_id'
@@ -596,8 +596,8 @@ elseif (isset($_GET['corner_right_national']))
 }
 elseif (isset($_GET['freekick_left_national']))
 {
-    $freekick_left = (int)$_GET['freekick_left_national'];
-    $player_id = (int)$_GET['player_id'];
+    $freekick_left = (int) $_GET['freekick_left_national'];
+    $player_id = (int) $_GET['player_id'];
 
     $sql = "UPDATE `country`
             SET `country_freekick_left_player_id_" . $freekick_left . "`='$player_id'
@@ -609,8 +609,8 @@ elseif (isset($_GET['freekick_left_national']))
 }
 elseif (isset($_GET['freekick_right_national']))
 {
-    $freekick_right = (int)$_GET['freekick_right_national'];
-    $player_id = (int)$_GET['player_id'];
+    $freekick_right = (int) $_GET['freekick_right_national'];
+    $player_id = (int) $_GET['player_id'];
 
     $sql = "UPDATE `country`
             SET `country_freekick_right_player_id_" . $freekick_right . "`='$player_id'
@@ -622,8 +622,8 @@ elseif (isset($_GET['freekick_right_national']))
 }
 elseif (isset($_GET['out_left_national']))
 {
-    $out_left = (int)$_GET['out_left_national'];
-    $player_id = (int)$_GET['player_id'];
+    $out_left = (int) $_GET['out_left_national'];
+    $player_id = (int) $_GET['player_id'];
 
     $sql = "UPDATE `country`
             SET `country_out_left_player_id_" . $out_left . "`='$player_id'
@@ -635,8 +635,8 @@ elseif (isset($_GET['out_left_national']))
 }
 elseif (isset($_GET['out_right_national']))
 {
-    $out_right = (int)$_GET['out_right_national'];
-    $player_id = (int)$_GET['player_id'];
+    $out_right = (int) $_GET['out_right_national'];
+    $player_id = (int) $_GET['player_id'];
 
     $sql = "UPDATE `country`
             SET `country_out_right_player_id_" . $out_right . "`='$player_id'
@@ -648,7 +648,7 @@ elseif (isset($_GET['out_right_national']))
 }
 elseif (isset($_GET['national_instruction_id']))
 {
-    $instruction_id = (int)$_GET['national_instruction_id'];
+    $instruction_id = (int) $_GET['national_instruction_id'];
 
     $sql = "SELECT `teaminstruction_id`,
                    `teaminstruction_status`
@@ -688,40 +688,63 @@ elseif (isset($_GET['national_instruction_id']))
 }
 elseif (isset($_GET['asktoplay']))
 {
-    $shedule_id = (int)$_GET['asktoplay'];
+    $shedule_id = (int) $_GET['asktoplay'];
 
     if (isset($_GET['delete']))
     {
-        $delete = (int)$_GET['delete'];
+        $delete = (int) $_GET['delete'];
 
-        $sql = "SELECT COUNT(`asktoplay_id`) AS `count`
+        $sql = "SELECT `team_user_id`
                 FROM `asktoplay`
+                LEFT JOIN `team`
+                ON `team_id`=`asktoplay_inviter_team_id`
                 WHERE `asktoplay_shedule_id`='$shedule_id'
                 AND `asktoplay_id`='$delete'
                 AND (`asktoplay_invitee_team_id`='$authorization_team_id'
-                OR `asktoplay_inviter_team_id`='$authorization_team_id')";
-        $check_sql = $mysqli->query($sql);
+                OR `asktoplay_inviter_team_id`='$authorization_team_id')
+                LIMIT 1";
+        $asktoplay_sql = $mysqli->query($sql);
 
-        $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
-        $count_check = $check_array[0]['count'];
+        $count_asktoplay = $asktoplay_sql->num_rows;
 
-        if (0 != $count_check)
+        if (0 != $count_asktoplay)
         {
-            $sql = "DELETE FROM `asktoplay`
-                    WHERE `asktoplay_id`='$delete'
+            $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
+
+            $user_id = $asktoplay_array[0]['team_user_id'];
+
+            $sql = "SELECT `inboxtheme_name`,
+                           `inboxtheme_text`
+                    FROM `inboxtheme`
+                    WHERE `inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_NO . "'
                     LIMIT 1";
+            $inboxtheme_sql = $mysqli->query($sql);
+
+            $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+
+            $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
+            $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
+            $inboxtheme_text = sprintf($inboxtheme_text, $authorization_team_name);
+
+            $sql = "INSERT INTO `inbox`
+                    SET `inbox_asktoplay_id`='$delete',
+                        `inbox_date`=CURDATE(),
+                        `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_NO . "',
+                        `inbox_title`='$inboxtheme_name',
+                        `inbox_text`='$inboxtheme_text',
+                        `inbox_user_id`='$user_id'";
             $mysqli->query($sql);
 
-            $sql = "DELETE FROM `inbox`
-                    WHERE `inbox_asktoplay_id`='$delete'
+            $sql = "DELETE FROM `asktoplay`
+                    WHERE `asktoplay_id`='$delete'
                     LIMIT 1";
             $mysqli->query($sql);
         }
     }
     elseif (isset($_GET['invite']))
     {
-        $invite = (int)$_GET['invite'];
-        $home   = (int)$_GET['home'];
+        $invite = (int) $_GET['invite'];
+        $home   = (int) $_GET['home'];
 
         $sql = "SELECT COUNT(`game_id`) AS `count`
                 FROM `game`
@@ -909,7 +932,7 @@ elseif (isset($_GET['asktoplay']))
 }
 elseif (isset($_GET['change_role_id']))
 {
-    $role_id = (int)$_GET['change_role_id'];
+    $role_id = (int) $_GET['change_role_id'];
 
     $sql = "SELECT `role_description`
             FROM `role`
@@ -923,8 +946,8 @@ elseif (isset($_GET['change_role_id']))
 }
 elseif (isset($_GET['change_role_id_national']))
 {
-    $role_id = (int)$_GET['change_role_id_national'];
-    $position_id = (int)$_GET['position_id'];
+    $role_id = (int) $_GET['change_role_id_national'];
+    $position_id = (int) $_GET['position_id'];
 
     $sql = "UPDATE `lineupcurrent`
             SET `lineupcurrent_role_id_" . $position_id . "`='$role_id'
@@ -944,7 +967,7 @@ elseif (isset($_GET['change_role_id_national']))
 }
 elseif (isset($_GET['to_national_player_id']))
 {
-    $player_id = (int)$_GET['to_national_player_id'];
+    $player_id = (int) $_GET['to_national_player_id'];
 
     $sql = "SELECT `player_national_id`
             FROM `player`

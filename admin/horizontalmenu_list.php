@@ -1,6 +1,6 @@
 <?php
 
-include ('../include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `horizontalmenu_id`, `horizontalmenu_name`, `horizontalmenuchapter_name`
         FROM `horizontalmenu`
@@ -13,4 +13,4 @@ $menu_array = $menu_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('menu_array', $menu_array);
 
-$smarty->display('admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
