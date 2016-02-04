@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Позиция</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="position_name" 
                                 type="text" 
@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <td>Описание</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="position_description" 
                                 type="text" 
@@ -30,7 +30,7 @@
                     </tr>
                     <tr>
                         <td>Координата "x" по сетке 5x7</td>
-                        <td class="left">
+                        <td>
                             <input
                                 name="position_coordinate_x"
                                 type="text"
@@ -40,7 +40,7 @@
                     </tr>
                     <tr>
                         <td>Координата "y" по сетке 5x7</td>
-                        <td class="left">
+                        <td>
                             <input
                                 name="position_coordinate_y"
                                 type="text"
@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <td>Описание</td>
-                        <td class="left">
+                        <td>
                             <input
                                 name="position_description"
                                 type="text"
@@ -60,7 +60,7 @@
                     </tr>
                     <tr>
                         <td>Статус</td>
-                        <td class="left">
+                        <td>
                             <select name="position_available">
                                 <option value="1"
                                     {if (isset($position_available) && 1 == $position_available)}selected{/if}
@@ -77,7 +77,7 @@
                     </tr>
                     <tr>
                         <td>Роли</td>
-                        <td class="left">
+                        <td>
                             <table>
                                 {section name=i loop=$role_array}
                                     <tr>

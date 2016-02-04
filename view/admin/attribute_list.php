@@ -15,12 +15,12 @@
                 </tr>
                 {section name=i loop=$attribute_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="attribute_list.php?chapter_id={$attribute_array[i].attribute_id}">
                                 {$attribute_array[i].attribute_name}
                             </a>
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="attribute.php?num={$attribute_array[i].attributechapter_id}">
                                 {$attribute_array[i].attributechapter_name}
                             </a>

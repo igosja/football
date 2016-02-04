@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Роль</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="role_name" 
                                 type="text" 
@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <td>Сокращение</td>
-                        <td class="left">
+                        <td>
                             <input
                                 name="role_short" 
                                 type="text" 
@@ -30,7 +30,7 @@
                     </tr>
                     <tr>
                         <td>Описание</td>
-                        <td class="left">
+                        <td>
                             <textarea name="role_description" rows="5" cols="100">{if (isset($role_description))}{$role_description}{/if}</textarea>
                         </td>
                     </tr>

@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$gamemood_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="gamemood.php?num={$gamemood_array[i].gamemood_id}">
                                 {$gamemood_array[i].gamemood_name}
                             </a>

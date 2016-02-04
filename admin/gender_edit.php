@@ -21,7 +21,7 @@ $count_gender = $gender_sql->num_rows;
 
 if (0 == $count_gender)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -49,4 +49,4 @@ $gender_name = $gender_array[0]['gender_name'];
 $smarty->assign('gender_name', $gender_name);
 $smarty->assign('tpl', 'gender_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

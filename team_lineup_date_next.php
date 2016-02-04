@@ -21,7 +21,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -77,7 +77,7 @@ $game_sql = $mysqli->query($sql);
 
 $game = $game_sql->num_rows;
 
-$game_array = $game_sql->fetch_all(MYSQL_ASSOC);
+$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
 $win    = 0;
 $draw   = 0;
@@ -133,4 +133,4 @@ for ($i=0; $i<$game; $i++)
 $num            = $get_num;
 $header_title   = $team_name;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

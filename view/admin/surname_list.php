@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$surname_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="surname.php?num={$surname_array[i].surname_id}">
                                 {$surname_array[i].surname_name}
                             </a>

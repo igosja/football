@@ -21,7 +21,7 @@ $count_country = $country_sql->num_rows;
 
 if (0 == $count_country)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -78,4 +78,4 @@ $smarty->assign('continent_id', $continent_id);
 $smarty->assign('continent_array', $continent_array);
 $smarty->assign('tpl', 'country_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

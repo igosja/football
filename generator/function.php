@@ -9058,7 +9058,7 @@ function f_igosja_generator_user_reputation()
     $count_game = $game_sql->num_rows;
     $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-    for ($i=0; $i< $count_game; $i++)
+    for ($i=0; $i<$count_game; $i++)
     {
         $home_reputation    = $game_array[$i]['home_reputation'];
         $home_score         = $game_array[$i]['game_home_score'];
@@ -9127,6 +9127,11 @@ function f_igosja_generator_user_reputation()
                     LIMIT 1";
             $mysqli->query($sql);
         }
+
+        usleep(1);
+
+        print '.';
+        flush();
     }
 
     $sql = "UPDATE `user`
@@ -9140,6 +9145,35 @@ function f_igosja_generator_user_reputation()
             WHERE `user_reputation`<'0'
             LIMIT 1";
     $mysqli->query($sql);
+}
+
+function f_igosja_generator_user_time_in_club()
+//Наибольшее время в клубе
+{
+    global $mysqli;
+
+    $sql = "UPDATE `team`
+            LEFT JOIN
+            (
+                SELECT DATEDIFF(CURDATE(), MAX(`history_date`)) AS `day`,
+                       MAX(`history_date`) AS `history_date`,
+                       `history_user_id`
+                FROM `history`
+                WHERE `history_historytext_id`='1'
+                GROUP BY `history_user_id`
+                ORDER BY `history_id` ASC
+            ) AS `t1`
+            ON `history_user_id`=`team_user_id`
+            LEFT JOIN `user`
+            ON `user_id`=`team_user_id`
+            SET `user_team_time_max`=IF (`user_team_time_max`>`day`, `user_team_time_max`, `day`)
+            WHERE `team_user_id`!='0'";
+    $mysqli->query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }
 
 function f_igosja_generator_finance()

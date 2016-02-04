@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Название</td>
-                        <td class="left">
+                        <td>
                             <input name="statusteam_name" type="text" value="{if (isset($statusteam_name))}{$statusteam_name}{/if}"/>
                         </td>
                     </tr>

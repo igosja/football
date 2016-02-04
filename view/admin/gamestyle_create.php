@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Настрой</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="gamestyle_name" 
                                 type="text" 
@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <td>Описание</td>
-                        <td class="left">
+                        <td>
                             <textarea name="gamestyle_description" rows="10">
                                 {if (isset($gamestyle_description))}{$gamestyle_description}{/if}
                             </textarea>

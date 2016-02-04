@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$historytext_array}
                     <tr>
-                        <td class="left">{$historytext_array[i].historytext_name}</td>
+                        <td>{$historytext_array[i].historytext_name}</td>
                         <td>
                             <a href="historytext_edit.php?num={$historytext_array[i].historytext_id}" class="link-img link-pencil"></a>
                         </td>

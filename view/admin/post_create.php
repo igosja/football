@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Должность</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="post_name" 
                                 type="text" 

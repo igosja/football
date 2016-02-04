@@ -1,6 +1,6 @@
 <?php
 
-include($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $dir    = $_SERVER['DOCUMENT_ROOT'] . '/view/admin';
 $files  = scandir($dir);

@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Травма</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="injurytype_name" 
                                 type="text" 
@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <td>Длительность, дней</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="injurytype_day" 
                                 type="text" 

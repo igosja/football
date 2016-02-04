@@ -21,7 +21,7 @@ $count_instruction = $instruction_sql->num_rows;
 
 if (0 == $count_instruction)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -56,11 +56,11 @@ $sql = "SELECT `instructionchapter_id`, `instructionchapter_name`
         ORDER BY `instructionchapter_id` ASC";
 $chapter_sql = $mysqli->query($sql);
 
-$chapter_array = $chapter_sql->fetch_all(MYSQL_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('chapter_array', $chapter_array);
 $smarty->assign('instruction_name', $instruction_name);
 $smarty->assign('chapter_id', $chapter_id);
 $smarty->assign('tpl', 'instruction_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$newstheme_array}
                     <tr>
-                        <td class="left">{$newstheme_array[i].newstheme_name}</td>
+                        <td>{$newstheme_array[i].newstheme_name}</td>
                         <td>
                             <a href="newstheme_edit.php?num={$newstheme_array[i].newstheme_id}" class="link-img link-pencil"></a>
                         </td>

@@ -7,8 +7,8 @@ $authorization_permission = 0;
 
 if (isset($_SESSION['authorization_id']))
 {
-    $authorization_id           = $_SESSION['authorization_id'];
-    $authorization_login        = $_SESSION['authorization_login'];
+    $authorization_id       = $_SESSION['authorization_id'];
+    $authorization_login    = $_SESSION['authorization_login'];
 
     $sql = "SELECT `country_id`,
                    `country_name`,
@@ -40,7 +40,7 @@ if (isset($_SESSION['authorization_id']))
     $authorization_team_name    = $user_array[0]['team_name'];
     $authorization_country_id   = $user_array[0]['country_id'];
     $authorization_country_name = $user_array[0]['country_name'];
-    $user_permission            = $user_array[0]['userrole_permission'];
+    $authorization_permission   = $user_array[0]['userrole_permission'];
 
     $sql = "UPDATE `user`
             SET `user_last_visit`=SYSDATE()

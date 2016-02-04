@@ -21,7 +21,7 @@ $count_city = $city_sql->num_rows;
 
 if (0 == $count_city)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -62,4 +62,4 @@ $smarty->assign('country_id', $country_id);
 $smarty->assign('country_array', $country_array);
 $smarty->assign('tpl', 'city_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$eventtype_array}
                     <tr>
-                        <td class="left">{$eventtype_array[i].eventtype_name}</td>
+                        <td>{$eventtype_array[i].eventtype_name}</td>
                         <td>
                             <a href="eventtype_edit.php?num={$eventtype_array[i].eventtype_id}" class="link-img link-pencil"></a>
                         </td>

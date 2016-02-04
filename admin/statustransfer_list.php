@@ -11,4 +11,4 @@ $statustransfer_array = $statustransfer_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('statustransfer_array', $statustransfer_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

@@ -7,6 +7,7 @@
     <meta name="keywords" content="футбол, игра, менеджер, онлайн" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/css/autocomplete.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -254,6 +255,6 @@
         <?php } ?>
     </div>
     <div class="page-content">
-    <?php if (isset($alert_message)) { ?>
-        <p class="alert center <?php print $alert_message['class']; ?>"><?php print $alert_message['text']; ?></p>
-    <?php } ?>
+        <?php if (isset($alert_message)) { ?>
+            <p class="alert center <?php print $alert_message['class']; ?>"><?php print $alert_message['text']; ?></p>
+        <?php } ?>

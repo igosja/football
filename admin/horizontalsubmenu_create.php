@@ -18,7 +18,6 @@ if (isset($_POST['menu_id']))
     $prepare->close();
 
     redirect('horizontalsubmenu_list.php');
-
     exit;
 }
 
@@ -38,7 +37,4 @@ $horizontalmenu_sql = $mysqli->query($sql);
 
 $horizontalmenu_array = $horizontalmenu_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('horizontalmenuchapter_array', $horizontalmenuchapter_array);
-$smarty->assign('horizontalmenu_array', $horizontalmenu_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

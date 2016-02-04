@@ -131,6 +131,6 @@ else
 if (1 == $page_authorization &&
     !isset($authorization_id))
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/only_logged.html');
+    $smarty->display('only_logged.html');
     exit;
 }

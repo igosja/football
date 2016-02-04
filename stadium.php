@@ -1,6 +1,6 @@
 <?php
 
-include($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
     exit;
 }
 
@@ -126,4 +126,4 @@ if (isset($_POST['data']) &&
 
 $header_title = $authorization_team_name;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

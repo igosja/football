@@ -21,7 +21,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -427,4 +427,4 @@ $tournament_fact_array = $tournament_fact_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $team_name;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

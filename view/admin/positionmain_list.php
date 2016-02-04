@@ -20,7 +20,7 @@
                                     {/if}
                                 />
                             </td>
-                            <td class="left">
+                            <td>
                                 {$position_array[i].position_description}
                             </td>
                         </tr>

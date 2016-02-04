@@ -1,33 +1,42 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Страницы сайта</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="horizontalmenupage_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th>Страница</th>
-                    <th>Раздел меню</th>
-                    <th>Действия</th>
-                </tr>
-                {section name=i loop=$horizontalmenupage_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Страницы сайта</h1>
+        <button type="button" class="btn btn-default">
+            <a href="horizontalmenupage_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td class="left">
-                            <a href="horizontalmenupage.php?num={$horizontalmenupage_array[i].horizontalmenupage_id}">
-                                {$horizontalmenupage_array[i].horizontalmenupage_name}
-                            </a>
-                        </td>
-                        <td class="left">
-                            {$horizontalmenupage_array[i].horizontalmenuchapter_name}
-                        </td>
-                        <td>
-                            <a href="horizontalmenupage_edit.php?num={$horizontalmenupage_array[i].horizontalmenupage_id}" class="link-img link-pencil"></a>
-                        </td>
+                        <th>Страница</th>
+                        <th>Раздел меню</th>
+                        <th class="col-lg-1"></th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($horizontalmenupage_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="horizontalmenupage.php?num=<?php print $item['horizontalmenupage_id']; ?>">
+                                    <?php print $item['horizontalmenupage_name']; ?>
+                                </a>
+                            </td>
+                            <td><?php print $item['horizontalmenuchapter_name']; ?></td>
+                            <td>
+                                <a href="horizontalmenupage_edit.php?num=<?php print $item['horizontalmenupage_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

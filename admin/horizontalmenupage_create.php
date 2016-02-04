@@ -4,8 +4,8 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_POST['horizontalmenupage_name']))
 {
-    $horizontalmenupage_name  = $_POST['horizontalmenupage_name'];
-    $chapter_id = (int) $_POST['chapter_id'];
+    $horizontalmenupage_name    = $_POST['horizontalmenupage_name'];
+    $chapter_id                 = (int) $_POST['chapter_id'];
 
     $sql = "INSERT INTO `horizontalmenupage`
             SET `horizontalmenupage_name`=?,
@@ -16,7 +16,6 @@ if (isset($_POST['horizontalmenupage_name']))
     $prepare->close();
 
     redirect('horizontalmenupage_list.php');
-
     exit;
 }
 
@@ -27,6 +26,4 @@ $chapter_sql = $mysqli->query($sql);
 
 $chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('chapter_array', $chapter_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

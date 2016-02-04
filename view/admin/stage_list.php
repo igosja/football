@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$stage_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="stage.php?num={$stage_array[i].stage_id}">
                                 {$stage_array[i].stage_name}
                             </a>

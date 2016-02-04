@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Название</td>
-                        <td class="left">
+                        <td>
                             <input name="recordtournamenttype_name" type="text" value="{if (isset($recordtournamenttype_name))}{$recordtournamenttype_name}{/if}"/>
                         </td>
                     </tr>

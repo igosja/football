@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Погода</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="weather_name" 
                                 type="text" 
@@ -20,13 +20,13 @@
                     </tr>
                     <tr>
                         <td>Картинка (25x25, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="weather_logo" type="file"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Картинка (12x12, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="weather_logo_12" type="file"/>
                         </td>
                     </tr>

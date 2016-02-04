@@ -1,45 +1,5 @@
 <?php
 
-function f_igosja_draw_diagram($data_array, $img)
-//Прописовка круговой диаграммы
-{
-    $color_array = array
-    (
-        imagecolorallocate($img,  61, 145,  67),
-        imagecolorallocate($img, 222, 164,   9),
-        imagecolorallocate($img, 216,  80,  26),
-        imagecolorallocate($img, 214,  14,   6),
-        imagecolorallocate($img, 193, 223, 243),
-        imagecolorallocate($img,  51,  53,  56),
-        imagecolorallocate($img, 190, 198, 204),
-    );
-
-    $count_data = count($data_array);
-    $sum_data   = array_sum($data_array);
-
-    if (0 == $sum_data)
-    {
-        $sum_data = 1;
-    }
-
-    $end_angle  = floor(0 + (($data_array[0] * 100) / $sum_data) * 360 / 100);
-    $center_x   = 200;
-    $center_y   = 200;
-    $radius     = 200;
-
-    imagefilledarc($img, $center_x, $center_y, $radius * 2, $radius * 2, 0, $end_angle, $color_array[0], IMG_ARC_PIE);
-
-    for ($i=1; $i<$count_data; $i++)
-    {
-        $begin_angle = $end_angle;
-        $end_angle   = floor($begin_angle + (($data_array[$i] * 100) / $sum_data) * 360 / 100);
-
-        imagefilledarc($img, $center_x, $center_y, $radius * 2, $radius * 2, $begin_angle, $end_angle, $color_array[$i], IMG_ARC_PIE);
-    }
-
-    imagefilledarc($img, $center_x, $center_y, $radius * 2, $radius * 2, $end_angle, 360, $color_array[$count_data-1], IMG_ARC_PIE);
-}
-
 function redirect($location)
 //Перенаправление
 {
@@ -145,8 +105,7 @@ function f_igosja_admin_permission($permission)
     }
     else
     {
-        header('Location: /index.php');
-
+        redirect('/admin_login.php');
         exit;
     }
 }

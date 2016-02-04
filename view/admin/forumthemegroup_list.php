@@ -16,12 +16,12 @@
                 </tr>
                 {section name=i loop=$chapter_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="forumthemegroup.php?num={$chapter_array[i].forumthemegroup_id}">
                                 {$chapter_array[i].forumthemegroup_name}
                             </a>
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="forumchapter.php?num={$chapter_array[i].forumchapter_id}">
                                 {$chapter_array[i].forumchapter_name}
                             </a>

@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$statusteam_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="statusteam.php?num={$statusteam_array[i].statusteam_id}">
                                 {$statusteam_array[i].statusteam_name}
                             </a>

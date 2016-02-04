@@ -8,7 +8,7 @@ if (isset($authorization_id))
 }
 else
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -39,10 +39,16 @@ if (!isset($authorization_team_id))
 
             f_igosja_history(1, $authorization_id, 0, $team_id);
 
+            $sql = "UPDATE `user`
+                    SET `user_team`=`user_team`+'1'
+                    WHERE `user_id`='$user_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
             $team_name = $team_array[0]['team_name'];
 
-            $_SESSION['message_class']              = 'success';
-            $_SESSION['message_text']               = 'Вы успешно взяли команду под управление.';
+            $_SESSION['message_class']  = 'success';
+            $_SESSION['message_text']   = 'Вы успешно взяли команду ' . $team_name . ' под управление.';
 
             redirect('profile_home_home.php');
             exit();
@@ -76,7 +82,7 @@ if (!isset($authorization_team_id))
     $num            = $authorization_id;
     $header_title   = $authorization_login;
 
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
     exit;
 }
 
@@ -446,4 +452,4 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $authorization_id;
 $header_title   = $authorization_login;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

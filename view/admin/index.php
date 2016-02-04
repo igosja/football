@@ -1,102 +1,512 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Пользователи</p>
-            <p class="justify"><a href="user_list.php">Список</a></p>
-            <p class="justify"><a href="gender_list.php">Пол</a></p>
-        </td>
-        <td class="block-page w20">
-            <p class="header center">Команды</p>
-            <p class="justify"><a href="continent_list.php">Континенты</a></p>
-            <p class="justify"><a href="country_list.php">Страны</a></p>
-            <p class="justify"><a href="city_list.php">Города</a></p>
-            <p class="justify"><a href="team_list.php">Команды</a></p>
-            <p class="justify"><a href="stadiumquality_list.php">Состояние газона</a></p>
-        </td>
-        <td class="block-page w20">
-            <p class="header center">Игроки</p>
-            <p class="justify"><a href="name_list.php">Имена</a></p>
-            <p class="justify"><a href="surname_list.php">Фамилии</a></p>
-            <p class="justify"><a href="attributechapter_list.php">Группы характеристик</a></p>
-            <p class="justify"><a href="attribute_list.php">Характеристики</a></p>
-            <p class="justify"><a href="mood_list.php">Настроение</a></p>
-            <p class="justify"><a href="gameready_list.php">Готовность к матчу</a></p>
-            <p class="justify"><a href="statusteam_list.php">Командный статус</a></p>
-            <p class="justify"><a href="statusrent_list.php">Арендный статус</a></p>
-            <p class="justify"><a href="statustransfer_list.php">Трансферный статус</a></p>
-            <p class="justify"><a href="statusnational_list.php">Доступность для сборной</a></p>
-        </td>
-        <td class="block-page w20">
-            <p class="header center">Тактика</p>
-            <p class="justify"><a href="gamestyle_list.php">Стиль игры</a></p>
-            <p class="justify"><a href="gamemood_list.php">Настрой на игру</a></p>
-            <p class="justify"><a href="instructionchapter_list.php">Группы инструкций</a></p>
-            <p class="justify"><a href="instruction_list.php">Инструкции команде</a></p>
-            <p class="justify"><a href="formation_list.php">Расстановки команд</a></p>
-            <p class="justify"><a href="position_list.php">Позиции на поле</a></p>
-            <p class="justify"><a href="positionmain_list.php">Главные позиции</a></p>
-            <p class="justify"><a href="positioncreate_list.php">Позиции при создании команды</a></p>
-            <p class="justify"><a href="role_list.php">Роли игроков</a></p>
-        </td>
-        <td class="block-page w20">
-            <p class="header center">Горизонтальное меню</p>
-            <p class="justify"><a href="horizontalmenupage_list.php">Страницы</a></p>
-            <p class="justify"><a href="horizontalmenuchapter_list.php">Разделы</a></p>
-            <p class="justify"><a href="horizontalmenu_list.php">Первая строка меню</a></p>
-            <p class="justify"><a href="horizontalsubmenu_list.php">Вторая строка меню</a></p>
-        </td>
-    </tr>
-    <tr>
-        <td class="block-page">
-            <p class="header center">Расписание</p>
-            <p class="justify"><a href="day_list.php">Игровые дни</a></p>
-        </td>
-        <td class="block-page">
-            <p class="header center">Турниры</p>
-            <p class="justify"><a href="tournamenttype_list.php">Типы турниров</a></p>
-            <p class="justify"><a href="tournament_list.php">Турниры</a></p>
-            <p class="justify"><a href="stage_list.php">Стадии</a></p>
-        </td>
-        <td class="block-page">
-            <p class="header center">Персонал</p>
-            <p class="justify"><a href="post_list.php">Должности</a></p>
-            <p class="justify"><a href="attributechapter_staff_list.php">Группы характеристик</a></p>
-            <p class="justify"><a href="attribute_staff_list.php">Характеристики</a></p>
-        </td>
-        <td class="block-page">
-            <p class="header center">История действий</p>
-            <p class="justify"><a href="historytext_list.php">Варианты действий</a></p>
-        </td>
-        <td class="block-page">
-            <p class="header center">События матча</p>
-            <p class="justify"><a href="eventtype_list.php">Варианты событий</a></p>
-            <p class="justify"><a href="weather_list.php">Погода</a></p>
-            <p class="justify"><a href="injurytype_list.php">Травмы</a></p>
-        </td>
-    </tr>
-    <tr>
-        <td class="block-page">
-            <p class="header center">Сделки</p>
-            <p class="justify"><a href="offertype_list.php">Виды сделок</a></p>
-        </td>
-        <td class="block-page">
-            <p class="header center">Рекорды</p>
-            <p class="justify"><a href="seriestype_list.php">Серии матчей</a></p>
-            <p class="justify"><a href="recordtournamenttype_list.php">Турнирные рекорды</a></p>
-            <p class="justify"><a href="recordteamtype_list.php">Командные рекорды</a></p>
-        </td>
-        <td class="block-page">
-            <p class="header center">Новости</p>
-            <p class="justify"><a href="inboxtheme_list.php">Темы новостных сообщений</a></p>
-        </td>
-        <td class="block-page">
-            <p class="header center">Форум</p>
-            <p class="justify"><a href="forumchapter_list.php">Разделы</a></p>
-            <p class="justify"><a href="forumthemegroup_list.php">Форумы</a></p>
-        </td>
-        <td class="block-page">
-            <p class="header center">Правила</p>
-            <p class="justify"><a href="rule_list.php">Правила</a></p>
-        </td>
-    </tr>
-</table>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Администртивный раздел</h1>
+    </div>
+</div>
+<div class="row">
+    <?php if (0 != $count_support) { ?>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php print $count_support?></div>
+                            <div>Новые вопросы в ТП!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="support_list.php">
+                    <div class="panel-footer">
+                        <span class="pull-left">Детальнее</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    <?php } ?>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">12</div>
+                        <div>New Tasks!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-shopping-cart fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">124</div>
+                        <div>New Orders!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-support fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">13</div>
+                        <div>Support Tickets!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Area Chart Example
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li><a href="#">Action</a>
+                            </li>
+                            <li><a href="#">Another action</a>
+                            </li>
+                            <li><a href="#">Something else here</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="morris-area-chart"></div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Bar Chart Example
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li><a href="#">Action</a>
+                            </li>
+                            <li><a href="#">Another action</a>
+                            </li>
+                            <li><a href="#">Something else here</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>3326</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:29 PM</td>
+                                    <td>$321.33</td>
+                                </tr>
+                                <tr>
+                                    <td>3325</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:20 PM</td>
+                                    <td>$234.34</td>
+                                </tr>
+                                <tr>
+                                    <td>3324</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:03 PM</td>
+                                    <td>$724.17</td>
+                                </tr>
+                                <tr>
+                                    <td>3323</td>
+                                    <td>10/21/2013</td>
+                                    <td>3:00 PM</td>
+                                    <td>$23.71</td>
+                                </tr>
+                                <tr>
+                                    <td>3322</td>
+                                    <td>10/21/2013</td>
+                                    <td>2:49 PM</td>
+                                    <td>$8345.23</td>
+                                </tr>
+                                <tr>
+                                    <td>3321</td>
+                                    <td>10/21/2013</td>
+                                    <td>2:23 PM</td>
+                                    <td>$245.12</td>
+                                </tr>
+                                <tr>
+                                    <td>3320</td>
+                                    <td>10/21/2013</td>
+                                    <td>2:15 PM</td>
+                                    <td>$5663.54</td>
+                                </tr>
+                                <tr>
+                                    <td>3319</td>
+                                    <td>10/21/2013</td>
+                                    <td>2:13 PM</td>
+                                    <td>$943.45</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div id="morris-bar-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
+            </div>
+            <div class="panel-body">
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-badge"><i class="fa fa-check"></i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago via Twitter</small>
+                                </p>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-badge warning"><i class="fa fa-credit-card"></i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolorem quibusdam, tenetur commodi provident cumque magni voluptatem libero, quis rerum. Fugiat esse debitis optio, tempore. Animi officiis alias, officia repellendus.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium maiores odit qui est tempora eos, nostrum provident explicabo dignissimos debitis vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-badge danger"><i class="fa fa-bomb"></i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus numquam facilis enim eaque, tenetur nam id qui vel velit similique nihil iure molestias aliquam, voluptatem totam quaerat, magni commodi quisquam.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates est quaerat asperiores sapiente, eligendi, nihil. Itaque quos, alias sapiente rerum quas odit! Aperiam officiis quidem delectus libero, omnis ut debitis!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-badge info"><i class="fa fa-save"></i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis minus modi quam ipsum alias at est molestiae excepturi delectus nesciunt, quibusdam debitis amet, beatae consequuntur impedit nulla qui! Laborum, atque.</p>
+                                <hr>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-gear"></i>  <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Action</a>
+                                        </li>
+                                        <li><a href="#">Another action</a>
+                                        </li>
+                                        <li><a href="#">Something else here</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi fuga odio quibusdam. Iure expedita, incidunt unde quis nam! Quod, quisquam. Officia quam qui adipisci quas consequuntur nostrum sequi. Consequuntur, commodi.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt obcaecati, quaerat tempore officia voluptas debitis consectetur culpa amet, accusamus dolorum fugiat, animi dicta aperiam, enim incidunt quisquam maxime neque eaque.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bell fa-fw"></i> Notifications Panel
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-comment fa-fw"></i> New Comment
+                                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                        <span class="pull-right text-muted small"><em>27 minutes ago</em>
+                                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-tasks fa-fw"></i> New Task
+                                        <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small"><em>11:32 AM</em>
+                                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-bolt fa-fw"></i> Server Crashed!
+                                        <span class="pull-right text-muted small"><em>11:13 AM</em>
+                                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-warning fa-fw"></i> Server Not Responding
+                                        <span class="pull-right text-muted small"><em>10:57 AM</em>
+                                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
+                                        <span class="pull-right text-muted small"><em>9:49 AM</em>
+                                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-money fa-fw"></i> Payment Received
+                                        <span class="pull-right text-muted small"><em>Yesterday</em>
+                                        </span>
+                    </a>
+                </div>
+                <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Donut Chart Example
+            </div>
+            <div class="panel-body">
+                <div id="morris-donut-chart"></div>
+                <a href="#" class="btn btn-default btn-block">View Details</a>
+            </div>
+        </div>
+        <div class="chat-panel panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-comments fa-fw"></i>
+                Chat
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu slidedown">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-refresh fa-fw"></i> Refresh
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-check-circle fa-fw"></i> Available
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-times fa-fw"></i> Busy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-clock-o fa-fw"></i> Away
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-sign-out fa-fw"></i> Sign Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ul class="chat">
+                    <li class="left clearfix">
+                                        <span class="chat-img pull-left">
+                                            <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">Jack Sparrow</strong>
+                                <small class="pull-right text-muted">
+                                    <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                                </small>
+                            </div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="right clearfix">
+                                        <span class="chat-img pull-right">
+                                            <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+                                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <small class=" text-muted">
+                                    <i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small>
+                                <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                            </div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="left clearfix">
+                                        <span class="chat-img pull-left">
+                                            <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">Jack Sparrow</strong>
+                                <small class="pull-right text-muted">
+                                    <i class="fa fa-clock-o fa-fw"></i> 14 mins ago</small>
+                            </div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="right clearfix">
+                                        <span class="chat-img pull-right">
+                                            <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+                                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <small class=" text-muted">
+                                    <i class="fa fa-clock-o fa-fw"></i> 15 mins ago</small>
+                                <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                            </div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                    <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-warning btn-sm" id="btn-chat">
+                                            Send
+                                        </button>
+                                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Действие</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="historytext_name" 
                                 type="text" 

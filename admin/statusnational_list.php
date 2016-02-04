@@ -11,4 +11,4 @@ $statusnational_array = $statusnational_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('statusnational_array', $statusnational_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

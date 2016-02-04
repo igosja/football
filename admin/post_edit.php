@@ -21,7 +21,7 @@ $count_post = $post_sql->num_rows;
 
 if (0 == $count_post)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $post_name = $post_array[0]['staffpost_name'];
 $smarty->assign('post_name', $post_name);
 $smarty->assign('tpl', 'post_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

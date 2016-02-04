@@ -10,13 +10,13 @@
                 <table class="center striped">
                     <tr>
                         <td>Название</td>
-                        <td class="left">
+                        <td>
                             <input name="tournamenttype_name" type="text" value="{if (isset($tournamenttype_name))}{$tournamenttype_name}{/if}"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Посещаемость</td>
-                        <td class="left">
+                        <td>
                             <input name="tournamenttype_visitor" type="text" value="{if (isset($tournamenttype_visitor))}{$tournamenttype_visitor}{else}0{/if}"/>
                         </td>
                     </tr>

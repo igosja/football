@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$statustransfer_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="statustransfer.php?num={$statustransfer_array[i].statustransfer_id}">
                                 {$statustransfer_array[i].statustransfer_name}
                             </a>

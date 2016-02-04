@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$horizontalmenuchapter_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="horizontalmenuchapter.php?num={$horizontalmenuchapter_array[i].horizontalmenuchapter_id}">
                                 {$horizontalmenuchapter_array[i].horizontalmenuchapter_name}
                             </a>

@@ -48,7 +48,7 @@ $count_referee = $referee_sql->num_rows;
 
 if (0 == $count_referee)
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -91,4 +91,4 @@ $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $referee_name . ' ' . $referee_surname;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

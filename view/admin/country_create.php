@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Континент</td>
-                        <td class="left">
+                        <td>
                             <select name="continent_id">
                                 {section name=i loop=$continent_array}
                                     <option value="{$continent_array[i].continent_id}"
@@ -26,25 +26,25 @@
                     </tr>
                     <tr>
                         <td>Страна</td>
-                        <td class="left">
+                        <td>
                             <input name="country_name" type="text" value="{if (isset($country_name))}{$country_name}{/if}"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Флаг (135x90, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="country_flag_90" type="file"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Флаг (75x50, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="country_flag_50" type="file"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Флаг (18x12, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="country_flag_12" type="file"/>
                         </td>
                     </tr>

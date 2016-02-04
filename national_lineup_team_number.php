@@ -8,7 +8,7 @@ if (isset($authorization_country_id))
 }
 else
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/only_my_team.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
     exit;
 }
 
@@ -22,7 +22,7 @@ $count_country = $country_sql->num_rows;
 
 if (0 == $count_country)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     
     exit;
 }
@@ -68,4 +68,4 @@ $smarty->assign('num', $get_num);
 $smarty->assign('header_title', $country_name);
 $smarty->assign('player_array', $player_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.html');

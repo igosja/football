@@ -10,13 +10,13 @@
                 <table class="center striped">
                     <tr>
                         <td>Континент</td>
-                        <td class="left">
+                        <td>
                             <input name="continent_name" type="text" value="{if (isset($continent_name))}{$continent_name}{/if}"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Эмблема (160x110, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="continent_logo" type="file"/>
                         </td>
                     </tr>

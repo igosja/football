@@ -23,7 +23,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -96,4 +96,4 @@ $smarty->assign('city_id', $city_id);
 $smarty->assign('city_array', $city_array);
 $smarty->assign('tpl', 'team_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

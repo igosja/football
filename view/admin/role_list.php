@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$role_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="role.php?num={$role_array[i].role_id}">
                                 {$role_array[i].role_short} - {$role_array[i].role_name}
                             </a>

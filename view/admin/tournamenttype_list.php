@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$tournamenttype_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             {$tournamenttype_array[i].tournamenttype_name}
                         </td>
                         <td>

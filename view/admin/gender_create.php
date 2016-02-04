@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Пол</td>
-                        <td class="left">
+                        <td>
                             <input name="gender_name" type="text" value="{if (isset($gender_name))}{$gender_name}{/if}"/>
                         </td>
                     </tr>

@@ -3,6 +3,12 @@ $(document).ready(function($)
     var select_on_page_array = $('select');
     var input_on_page_array  = $('input');
 
+    if ($(select_on_page_array).is('#autocomplete'))
+    //Автозаполнение
+    {
+        $('#autocomplete').editableSelect();
+    }
+
     $('#tournament-stage-select').on('change',function()
     //Смена тура турнира на странице результатов
     {
@@ -28,40 +34,6 @@ $(document).ready(function($)
     });
 
     $('.alert').delay(3000).fadeOut(); //Отключение всплывающих сообщений
-
-    $('#select-ajax-give-1').change(function()
-    //Зависимые селекты
-    {
-        var ajax_give_2     = $("#select-ajax-give-2");
-        var option_selected = $(this).find("option:selected");
-        var value_select    = $(option_selected).val();
-        var give            = $(option_selected).attr("data-give");
-        var need            = $(option_selected).attr("data-need");
-
-        $.ajax
-        (
-            {
-                url: '/json.php?select_value=' + value_select + '&select_give=' + give + '&select_need=' + need,
-                dataType: "json",
-                success: function(data)
-                {
-                    var select = '';
-
-                    for (var i=0; i<data.select_array.length; i++)
-                    {
-                        select = select
-                               + '<option value="'
-                               + data.select_array[i].value
-                               + '">'
-                               + data.select_array[i].text
-                               + '</option>';
-                    }
-
-                    $(ajax_give_2).html(select);
-                }
-            }
-        );
-    });
 
     $('#note-create').on('click', function()
     //Создание заметки
@@ -305,6 +277,15 @@ $(document).ready(function($)
         );
     });
 
+    $('#outbox-create').on('click', function()
+        //Написать личное сообщение
+    {
+        $('.inbox-header').empty();
+        $('.inbox-text').empty();
+        $('.inbox-button').empty();
+        $('#outbox-form').show();
+    });
+
     $('.inbox-title').on('click', function()
     //Текст новости
     {
@@ -316,6 +297,29 @@ $(document).ready(function($)
             {
                 beforeSend: function(){$('#inbox-block').addClass('loading');},
                 url: 'json.php?inbox_id=' + inbox_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    $('.inbox-header').html(data.inbox_array[0].inbox_title);
+                    $('.inbox-text').html(data.inbox_array[0].inbox_text);
+                    $('.inbox-button').html(data.inbox_array[0].inbox_button);
+                    $('#inbox-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
+    $('.outbox-title').on('click', function()
+    //Текст новости
+    {
+        var inbox_id = $(this).data('id');
+        $('#outbox-form').hide();
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#inbox-block').addClass('loading');},
+                url: 'json.php?outbox_id=' + inbox_id,
                 dataType: "json",
                 success: function(data)
                 {

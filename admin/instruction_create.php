@@ -25,8 +25,8 @@ $sql = "SELECT `instructionchapter_id`, `instructionchapter_name`
         ORDER BY `instructionchapter_id` ASC";
 $chapter_sql = $mysqli->query($sql);
 
-$chapter_array = $chapter_sql->fetch_all(MYSQL_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('chapter_array', $chapter_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

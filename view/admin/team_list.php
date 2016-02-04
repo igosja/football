@@ -21,15 +21,15 @@
                         <td>
                             <img alt="" src="/img/team/12/{$team_array[i].team_id}.png" class="img-12"/>
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="continent.php?num={$team_array[i].team_id}">
                                 {$team_array[i].team_name}
                             </a>
                         </td>
-                        <td class="left">
+                        <td>
                             {$team_array[i].stadium_name}
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="city.php?num={$team_array[i].city_id}">
                                 {$team_array[i].city_name}
                             </a>
@@ -37,12 +37,12 @@
                         <td>
                             <img alt="" src="/img/flag/12/{$team_array[i].country_id}.png" class="img-12"/>
                         </td>
-                        <td class="left"
+                        <td
                             <a href="continent.php?num={$team_array[i].country_id}">
                                 {$team_array[i].country_name}
                             </a>
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="continent.php?num={$team_array[i].continent_id}">
                                 {$team_array[i].continent_name}
                             </a>

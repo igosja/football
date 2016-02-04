@@ -12,7 +12,7 @@
                         <th class="w5">Воз</th>
                         <th class="w5">Вес</th>
                         <th class="w5">Рост</th>
-                        <th class="w10">Настроение</th>
+                        <th class="w15">Настроение</th>
                         <th class="w5">Конд</th>
                         <th class="w5">Фит</th>
                         <th class="w10">Зарплата</th>

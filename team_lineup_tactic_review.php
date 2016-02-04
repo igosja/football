@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
     exit;
 }
 
@@ -22,7 +22,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -51,7 +51,7 @@ else
     }
     else
     {
-        include($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.html');
+        include ($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.html');
         exit;
     }
 }
@@ -69,7 +69,7 @@ $count_game = $count_array[0]['count'];
 
 if (0 == $count_game)
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_game.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_game.html');
     exit;
 }
 
@@ -265,4 +265,4 @@ $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $team_name;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

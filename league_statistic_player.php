@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -93,4 +93,4 @@ $smarty->assign('player_goal_array', $player_goal_array);
 $smarty->assign('player_pass_array', $player_pass_array);
 $smarty->assign('player_mark_array', $player_mark_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.html');

@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/only_my_team.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
     exit;
 }
 
@@ -106,4 +106,4 @@ if (isset($_GET['change']) &&
 $num            = $get_num;
 $header_title   = $authorization_team_name;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

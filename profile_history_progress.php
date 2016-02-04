@@ -8,7 +8,7 @@ if (isset($authorization_id))
 }
 else
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -32,4 +32,4 @@ $progress_array = $progress_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $authorization_id;
 $header_title   = $authorization_login;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

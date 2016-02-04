@@ -19,7 +19,7 @@
                         <td>
                             <img alt="" src="../img/continent/{$continent_array[i].continent_id}.png" class="img-12"/>
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="continent.php?num={$continent_array[i].continent_id}">
                                 {$continent_array[i].continent_name}
                             </a>

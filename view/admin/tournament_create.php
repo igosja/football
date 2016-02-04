@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Тип</td>
-                        <td class="left">
+                        <td>
                             <select name="tournamenttype_id" id="tournament-type">
                                 {section name=i loop=$tournamenttype_array}
                                     <option value="{$tournamenttype_array[i].tournamenttype_id}"
@@ -26,19 +26,19 @@
                     </tr>
                     <tr>
                         <td>Название</td>
-                        <td class="left">
+                        <td>
                             <input name="tournament_name" type="text" value="{if (isset($tournament_name))}{$tournament_name}{/if}"/>
                         </td>
                     </tr>
                     <tr id="tournament-level">
                         <td>Уровень</td>
-                        <td class="left">
+                        <td>
                             <input name="tournament_level" type="text" value="{if (isset($tournament_level))}{$tournament_level}{else}1{/if}"/>
                         </td>
                     </tr>
                     <tr id="tournament-name">
                         <td>Страна</td>
-                        <td class="left">
+                        <td>
                             <select name="country_id">
                                 {section name=i loop=$country_array}
                                     <option value="{$country_array[i].country_id}"
@@ -52,19 +52,19 @@
                     </tr>
                     <tr>
                         <td>Эмблема (90x90, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="tournament_logo_90" type="file"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Эмблема (50x50, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="tournament_logo_50" type="file"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Эмблема (12x12, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="tournament_logo_12" type="file"/>
                         </td>
                     </tr>

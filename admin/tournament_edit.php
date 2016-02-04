@@ -24,7 +24,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -98,4 +98,4 @@ $smarty->assign('country_array', $country_array);
 $smarty->assign('tournamenttype_array', $tournamenttype_array);
 $smarty->assign('tpl', 'tournament_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

@@ -21,7 +21,7 @@ $count_statusnational = $statusnational_sql->num_rows;
 
 if (0 == $count_statusnational)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $statusnational_name = $statusnational_array[0]['statusnational_name'];
 $smarty->assign('statusnational_name', $statusnational_name);
 $smarty->assign('tpl', 'statusnational_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

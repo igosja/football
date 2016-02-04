@@ -1,68 +1,89 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Редактирование второй строки меню</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="horizontalsubmenu_list.php" class="link-img link-list"></a>
-            </p>
-            <form action="" method="POST">
-                <table class="center striped">
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Редактирование второй строки меню</h1>
+        <button type="button" class="btn btn-default">
+            <a href="horizontalsubmenu_list.php">
+                <i class="fa fa-list"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<form method="POST">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="dataTable_wrapper">
+                <table class="table table-striped table-bordered">
                     <tr>
                         <td>Страница</td>
-                        <td class="left">
-                            <select name="horizontalmenuchapter_id" id="select-ajax-give-1">
-                                {section name=i loop=$horizontalmenuchapter_array}
-                                    <option 
-                                        value="{$horizontalmenuchapter_array[i].horizontalmenuchapter_id}"
-                                        data-give="horizontalmenuchapter"
-                                        data-need="horizontalmenu"
-                                        {if (isset($page_id) && $page_id == $horizontalmenuchapter_array[i].horizontalmenuchapter_id)}
+                        <td>
+                            <select
+                                class="form-control"
+                                id="select-ajax-give-1"
+                                name="horizontalmenuchapter_id"
+                                data-give="horizontalmenuchapter"
+                                data-need="horizontalmenu"
+                            >
+                                <?php foreach ($horizontalmenuchapter_array as $item) { ?>
+                                    <option value="<?php print $item['horizontalmenuchapter_id']; ?>"
+                                        <?php if (isset($page_id) && $page_id == $item['horizontalmenuchapter_id']) { ?>
                                             selected
-                                        {/if}
+                                        <?php } ?>
                                     >
-                                        {$horizontalmenuchapter_array[i].horizontalmenuchapter_name}
+                                        <?php print $item['horizontalmenuchapter_name']; ?>
                                     </option>
-                                {/section}
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Родитель</td>
-                        <td class="left">
-                            <select name="menu_id" id="select-ajax-give-2">
-                                {section name=i loop=$horizontalmenu_array}
-                                    <option 
-                                        value="{$horizontalmenu_array[i].horizontalmenu_id}"
-                                        {if (isset($parent_id) && $parent_id == $horizontalmenu_array[i].horizontalmenu_id)}
+                        <td>
+                            <select
+                                class="form-control"
+                                id="select-ajax-give-2"
+                                name="menu_id"
+                            >
+                                <?php foreach ($horizontalmenu_array as $item) { ?>
+                                    <option value="<?php print $item['horizontalmenu_id']; ?>"
+                                        <?php if (isset($parent_id) && $parent_id == $item['horizontalmenu_id']) { ?>
                                             selected
-                                        {/if}
+                                        <?php } ?>
                                     >
-                                        {$horizontalmenu_array[i].horizontalmenu_name}
+                                        <?php print $item['horizontalmenu_name']; ?>
                                     </option>
-                                {/section}
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Название</td>
-                        <td class="left">
-                            <input name="menu_name" type="text" value="{if (isset($menu_name))}{$menu_name}{/if}"/>
+                        <td>
+                            <input
+                                class="form-control"
+                                name="menu_name"
+                                type="text"
+                                value="<?php if (isset($menu_name)) { print $menu_name; } ?>"
+                            />
                         </td>
                     </tr>
                     <tr>
                         <td>Ссылка</td>
-                        <td class="left">
-                            <input name="menu_href" type="text" value="{if (isset($menu_href))}{$menu_href}{/if}"/>
+                        <td>
+                            <input
+                                class="form-control"
+                                name="menu_href"
+                                type="text"
+                                value="<?php if (isset($menu_href)) { print $menu_href; } ?>"
+                            />
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Сохранить"/>
+                        <td colspan="2" class="text-center">
+                            <input class="btn btn-default" type="submit" value="Сохранить" />
                         </td>
                     </tr>
                 </table>
-            </form>
-        </td>
-    </tr>
-</table>
+            </div>
+        </div>
+    </div>
+</form>

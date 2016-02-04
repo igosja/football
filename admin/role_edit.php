@@ -21,7 +21,7 @@ $count_role = $role_sql->num_rows;
 
 if (0 == $count_role)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -59,4 +59,4 @@ $smarty->assign('role_description', $role_description);
 $smarty->assign('role_short', $role_short);
 $smarty->assign('tpl', 'role_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

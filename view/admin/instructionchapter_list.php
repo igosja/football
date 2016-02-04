@@ -14,7 +14,7 @@
                 </tr>
                 {section name=i loop=$chapter_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="instructionchapter.php?num={$chapter_array[i].instructionchapter_id}">
                                 {$chapter_array[i].instructionchapter_name}
                             </a>

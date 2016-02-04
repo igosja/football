@@ -10,19 +10,19 @@
                 <table class="center striped">
                     <tr>
                         <td>Группа</td>
-                        <td class="left">
+                        <td>
                             <input name="chapter_name" type="text" value="{if (isset($chapter_name))}{$chapter_name}{/if}"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Описание</td>
-                        <td class="left">
+                        <td>
                             <input name="chapter_description" type="text" value="{if (isset($chapter_description))}{$chapter_description}{/if}"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Раздел</td>
-                        <td class="left">
+                        <td>
                             <select name="chapter_id">
                                 {section name=i loop=$forumchapter_array}
                                     <option value="{$forumchapter_array[i].forumchapter_id}"

@@ -21,7 +21,7 @@ $count_recordteamtype = $recordteamtype_sql->num_rows;
 
 if (0 == $count_recordteamtype)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $recordteamtype_name = $recordteamtype_array[0]['recordteamtype_name'];
 $smarty->assign('recordteamtype_name', $recordteamtype_name);
 $smarty->assign('tpl', 'recordteamtype_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

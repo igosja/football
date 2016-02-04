@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$gamestyle_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="gamestyle.php?num={$gamestyle_array[i].gamestyle_id}">
                                 {$gamestyle_array[i].gamestyle_name}
                             </a>

@@ -14,8 +14,8 @@
                 </tr>
                 {section name=i loop=$menu_array}
                     <tr>
-                        <td class="left">{$menu_array[i].horizontalmenu_name}</td>
-                        <td class="left">{$menu_array[i].horizontalmenuchapter_name}</td>
+                        <td>{$menu_array[i].horizontalmenu_name}</td>
+                        <td>{$menu_array[i].horizontalmenuchapter_name}</td>
                         <td>
                             <a href="horizontalmenu_edit.php?num={$menu_array[i].horizontalmenu_id}" class="link-img link-pencil"></a>
                         </td>

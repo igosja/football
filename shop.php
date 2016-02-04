@@ -8,7 +8,7 @@ if (isset($authorization_id))
 }
 else
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/only_logged.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_logged.html');
     exit;
 }
 
@@ -84,4 +84,4 @@ $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $authorization_id;
 $header_title   = 'Магазин';
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

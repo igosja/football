@@ -21,7 +21,7 @@ $count_mood = $mood_sql->num_rows;
 
 if (0 == $count_mood)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -56,4 +56,4 @@ $mood_name = $mood_array[0]['mood_name'];
 $smarty->assign('mood_name', $mood_name);
 $smarty->assign('tpl', 'mood_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

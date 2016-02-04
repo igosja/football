@@ -21,7 +21,7 @@ $count_continent = $continent_sql->num_rows;
 
 if (0 == $count_continent)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -56,4 +56,4 @@ $continent_name = $continent_array[0]['continent_name'];
 $smarty->assign('continent_name', $continent_name);
 $smarty->assign('tpl', 'continent_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

@@ -13,4 +13,4 @@ $rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);
 
 $header_title = 'Правила';
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

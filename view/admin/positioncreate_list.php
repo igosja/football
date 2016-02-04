@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$position_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="position.php?num={$position_array[i].position_id}">
                                 {$position_array[i].position_description}
                             </a>

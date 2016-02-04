@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Раздел</td>
-                        <td class="left">
+                        <td>
                             <select name="horizontalmenuchapter_id">
                                 {section name=i loop=$horizontalmenuchapter_array}
                                     <option 
@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
                         <td>Название</td>
-                        <td class="left">
+                        <td>
                             <input name="menu_name" type="text" value="{if (isset($menu_name))}{$menu_name}{/if}"/>
                         </td>
                     </tr>

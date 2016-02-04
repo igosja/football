@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Действие</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="eventtype_name" 
                                 type="text" 
@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <td>Картинка (15x15, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="eventtype_logo" type="file"/>
                         </td>
                     </tr>

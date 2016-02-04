@@ -42,4 +42,4 @@ elseif (TOURNAMENT_TYPE_WORLD_CUP == $tournamenttype_id)
     exit();
 }
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

@@ -9,6 +9,4 @@ $inboxtheme_sql = $mysqli->query($sql);
 
 $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('inboxtheme_array', $inboxtheme_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

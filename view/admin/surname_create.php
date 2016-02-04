@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Страна</td>
-                        <td class="left">
+                        <td>
                             <select name="country_id">
                                 {section name=i loop=$country_array}
                                     <option value="{$country_array[i].country_id}"
@@ -26,7 +26,7 @@
                     </tr>
                     <tr>
                         <td>Фамилии (через "," без пробелов)</td>
-                        <td class="left">
+                        <td>
                             <textarea
                                 class="w100"
                                 name="surname_name"

@@ -112,6 +112,11 @@ button, input, select
     padding: 2px 3px 2px 3px;
 }
 
+textarea
+{
+    resize: none;
+}
+
 .page-header
 {
     background-color: #002F77;
@@ -633,10 +638,15 @@ td.nopadding
     float: right;
 }
 
-/*Позиционирование*/
 .relative
 {
     position: relative;
+}
+
+.overflow
+{
+    height: 70vh;
+    overflow: auto;
 }
 
 /*Ширина*/
@@ -723,6 +733,11 @@ td.nopadding
 .w70
 {
     width: 70%;
+}
+
+.w98
+{
+    width: 98%;
 }
 
 .w100

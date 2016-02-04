@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Группа</td>
-                        <td class="left">
+                        <td>
                             <select name="chapter_id">
                                 {section name=i loop=$chapter_array}
                                     <option value="{$chapter_array[i].attributechapter_id}"
@@ -26,7 +26,7 @@
                     </tr>
                     <tr>
                         <td>Харатеристика</td>
-                        <td class="left">
+                        <td>
                             <input name="attribute_name" type="text" value="{if (isset($attribute_name))}{$attribute_name}{/if}"/>
                         </td>
                     </tr>

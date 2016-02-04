@@ -10,7 +10,7 @@
                 <table class="center striped w50">
                     <tr>
                         <td>Тема</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 class="w100"
                                 name="newstheme_name" 
@@ -21,7 +21,7 @@
                     </tr>
                     <tr>
                         <td>Текст</td>
-                        <td class="left">
+                        <td>
                             <textarea 
                                 class="w100"
                                 name="newstheme_text" 

@@ -17,7 +17,7 @@
                 </tr>
                 {section name=i loop=$city_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="city.php?num={$city_array[i].city_id}">
                                 {$city_array[i].city_name}
                             </a>
@@ -30,12 +30,12 @@
                         <td>
                             <img alt="" src="/img/flag/12/{$city_array[i].country_id}.png" class="img-12"/>
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="continent.php?num={$city_array[i].country_id}">
                                 {$city_array[i].country_name}
                             </a>
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="continent.php?num={$city_array[i].continent_id}">
                                 {$city_array[i].continent_name}
                             </a>

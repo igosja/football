@@ -59,4 +59,4 @@ if (isset($_POST['data']))
 
 $header_title = 'Восстановление пароля';
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

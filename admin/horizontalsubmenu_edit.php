@@ -23,8 +23,7 @@ $count_menu = $menu_sql->num_rows;
 
 if (0 == $count_menu)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
-
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -46,7 +45,6 @@ if (isset($_POST['menu_id']))
     $prepare->close();
 
     redirect('horizontalsubmenu_list.php');
-
     exit;
 }
 
@@ -71,12 +69,6 @@ $horizontalmenu_sql = $mysqli->query($sql);
 
 $horizontalmenu_array = $horizontalmenu_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('horizontalmenuchapter_array', $horizontalmenuchapter_array);
-$smarty->assign('horizontalmenu_array', $horizontalmenu_array);
-$smarty->assign('page_id', $page_id);
-$smarty->assign('parent_id', $parent_id);
-$smarty->assign('menu_name', $menu_name);
-$smarty->assign('menu_href', $menu_href);
-$smarty->assign('tpl', 'horizontalsubmenu_create');
+$tpl = 'horizontalsubmenu_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

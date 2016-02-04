@@ -1,6 +1,6 @@
 <?php
 
-include('include/include.php');
+include ('include/include.php');
 
 if (isset($_GET['num'])) {
     $get_num = (int) $_GET['num'];
@@ -82,4 +82,4 @@ $smarty->assign('count_forum', $count_forum);
 $smarty->assign('head_array', $head_array);
 $smarty->assign('forum_array', $forum_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.html');

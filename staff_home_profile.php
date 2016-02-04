@@ -40,7 +40,7 @@ $count_staff = $staff_sql->num_rows;
 
 if (0 == $count_staff)
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -93,4 +93,4 @@ $staff_surname  = $staff_array[0]['surname_name'];
 $num            = $get_num;
 $header_title   = $staff_name . ' ' . $staff_surname;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

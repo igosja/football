@@ -21,7 +21,7 @@ $count_position = $position_sql->num_rows;
 
 if (0 == $count_position)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -55,4 +55,4 @@ $smarty->assign('position_id', $position_id);
 $smarty->assign('position_array', $position_array);
 $smarty->assign('tpl', 'positioncreate_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

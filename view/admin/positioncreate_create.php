@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Позиция</td>
-                        <td class="left">
+                        <td>
                             <select name="position_id"/>
                                 {section name=i loop=$position_array}
                                     <option value="{$position_array[i].position_id}"

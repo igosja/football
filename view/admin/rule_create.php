@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Название</td>
-                        <td class="left">
+                        <td>
                             <input
                                 class="w100"
                                 name="rule_name" 
@@ -21,7 +21,7 @@
                     </tr>
                     <tr>
                         <td>Текст</td>
-                        <td class="left">
+                        <td>
                             <textarea name="rule_text" rows="10" cols="100">{if (isset($rule_text))}{$rule_text}{/if}</textarea>
                         </td>
                     </tr>

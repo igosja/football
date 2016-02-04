@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -32,4 +32,4 @@ $tournament_name = $tournament_array[0]['tournament_name'];
 $num            = $get_num;
 $header_title   = $tournament_name;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

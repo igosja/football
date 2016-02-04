@@ -23,7 +23,7 @@ $count_chapter = $chapter_sql->num_rows;
 
 if (0 == $count_chapter)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -70,4 +70,4 @@ $smarty->assign('chapter_id', $chapter_id);
 $smarty->assign('forumchapter_array', $forumchapter_array);
 $smarty->assign('tpl', 'forumthemegroup_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

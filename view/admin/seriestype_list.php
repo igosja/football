@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$seriestype_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="seriestype.php?num={$seriestype_array[i].seriestype_id}">
                                 {$seriestype_array[i].seriestype_name}
                             </a>

@@ -17,17 +17,17 @@
                 </tr>
                 {section name=i loop=$tournament_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <img alt="" src="../img/tournament/12/{$tournament_array[i].tournament_id}.png" class="img-12"/>
                             {$tournament_array[i].tournament_name}
                         </td>
-                        <td class="left">
+                        <td>
                             {$tournament_array[i].tournamenttype_name}
                         </td>
                         <td>
                             {$tournament_array[i].tournament_level}
                         </td>
-                        <td class="left">
+                        <td>
                             {$tournament_array[i].country_name}
                         </td>
                         <td>

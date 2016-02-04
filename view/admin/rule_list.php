@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$rule_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="rule.php?num={$rule_array[i].rule_id}">
                                 {$rule_array[i].rule_name}
                             </a>

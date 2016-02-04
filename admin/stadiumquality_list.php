@@ -11,4 +11,4 @@ $stadiumquality_array = $stadiumquality_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('stadiumquality_array', $stadiumquality_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

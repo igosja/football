@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$weather_array}
                     <tr>
-                        <td class="left">{$weather_array[i].weather_name}</td>
+                        <td>{$weather_array[i].weather_name}</td>
                         <td>
                             <a href="weather_edit.php?num={$weather_array[i].weather_id}" class="link-img link-pencil"></a>
                         </td>

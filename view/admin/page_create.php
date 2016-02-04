@@ -10,13 +10,13 @@
                 <table class="center striped">
                     <tr>
                         <td>Страница</td>
-                        <td class="left">
+                        <td>
                             <input name="page_name" type="text" value="{if (isset($page_name))}{$page_name}{/if}"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Раздел</td>
-                        <td class="left">
+                        <td>
                             <select name="chapter_id">
                                 {section name=i loop=$chapter_array}
                                     <option value="{$chapter_array[i].horizontalmenuchapter_id}"

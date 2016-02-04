@@ -6,14 +6,14 @@
                 <table class="center striped">
                     <tr>
                         <td class="right">Имя</td>
-                        <td class="left">
+                        <td>
                             <input name="data[firstname]" type="text" value="<?php print $user_array[0]['user_firstname']; ?>" />
                             <input name="data[lastname]" type="text" value="<?php print $user_array[0]['user_lastname']; ?>" />
                         </td>
                     </tr>
                     <tr>
                         <td class="right">Пол</td>
-                        <td class="left">
+                        <td>
                             <?php foreach ($gender_array as $item) { ?>
                                 <input
                                     name="data[gender]"
@@ -29,7 +29,7 @@
                     </tr>
                     <tr>
                         <td class="right">Дата рождения</td>
-                        <td class="left">
+                        <td>
                             <select name="data[birth][day]">
                                 <?php for ($i=1; $i<=31; $i++) { ?>
                                     <option value="<?php print $i; ?>"
@@ -51,11 +51,11 @@
                                     ><?php print $i; ?></option>
                                 <?php } ?>
                             </select>
-                        </td class="left">
+                        </td>
                     </tr>
                     <tr>
                         <td class="right">Страна</td>
-                        <td class="left">
+                        <td>
                             <select name="data[country]">
                                 <?php foreach ($country_array as $item) { ?>
                                     <option value="<?php print $item['country_id']; ?>"
@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                         <td class="right">Новый пароль</td>
-                        <td class="left">
+                        <td>
                             <input name="data[password]" type="text" />
                         </td>
                     </tr>

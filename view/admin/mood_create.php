@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <td>Эмблема (15x15, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="mood_logo" type="file"/>
                         </td>
                     </tr>

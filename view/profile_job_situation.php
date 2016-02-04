@@ -4,7 +4,7 @@
             <p class="header">Ситуация на рынке труда</p>
             <table class="w100">
                 <tr>
-                    <td class="left">
+                    <td>
                         <form method="GET">
                             <select name="country">
                                 <option value="0">Страна</option>

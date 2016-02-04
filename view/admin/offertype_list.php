@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$offertype_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="offertype.php?num={$offertype_array[i].offertype_id}">
                                 {$offertype_array[i].offertype_name}
                             </a>

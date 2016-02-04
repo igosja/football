@@ -14,64 +14,66 @@
                     <?php foreach ($player_array as $item) { ?>
                         <tr>
                             <td>
-                                <a href="player_home_profile.php?num={$player_array[i].player_id}">
-                                    {$player_array[i].name_name}
-                                    {$player_array[i].surname_name}
+                                <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
+                                    <?php print $item['name_name']; ?>
+                                    <?php print $item['surname_name']; ?>
                                 </a>
                             </td>
                             <td class="center">
-                                {$player_array[i].position_name}
+                                <?php print $item['position_name']; ?>
                             </td>
                             <td class="nopadding">
-                                <select class="w100" name="data[{$player_array[i].player_id}][position]">
+                                <select class="w100" name="data[<?php print $item['player_id']; ?>][position]">
                                     <option value="0">Не выбрано</option>
-                                    <?php foreach ($position_array as $position) { ?>
-                                        {if ($position_array[j].position_id != $player_array[i].position_id)}
-                                            <option
-                                                value="{$position_array[j].position_id}"
-                                                {if ($player_array[i].player_training_position_id == $position_array[j].position_id)}
-                                                    selected
-                                                <?php } ?>
-                                            >
-                                                {$position_array[j].position_description}
-                                            </option>
+                                    <?php if (1 != $item['position_id']) { ?>
+                                        <?php foreach ($position_array as $position) { ?>
+                                            <?php if ($position['position_id'] != $item['position_id']) { ?>
+                                                <option
+                                                    value="<?php print $position['position_id']; ?>"
+                                                    <?php if ($item['player_training_position_id'] == $position['position_id']) { ?>
+                                                        selected
+                                                    <?php } ?>
+                                                >
+                                                    <?php print $position['position_description']; ?>
+                                                </option>
+                                            <?php } ?>
                                         <?php } ?>
                                     <?php } ?>
                                 </select>
                             </td>
                             <td class="nopadding">
-                                <select class="w100" name="data[{$player_array[i].player_id}][attribute]">
+                                <select class="w100" name="data[<?php print $item['player_id']; ?>][attribute]">
                                     <option value="0">Не выбрано</option>
-                                    {if (1 == $player_array[i].position_id)}
+                                    <?php if (1 == $item['position_id']) { ?>
                                         <?php foreach ($gk_attribute_array as $attribute) { ?>
                                             <option
-                                                value="{$gk_attribute_array[j].attribute_id}"
-                                                {if ($player_array[i].player_training_attribute_id == $gk_attribute_array[j].attribute_id)}
+                                                value="<?php print $attribute['attribute_id']; ?>"
+                                                <?php if ($item['player_training_attribute_id'] == $attribute['attribute_id']) { ?>
                                                     selected
                                                 <?php } ?>
                                             >
-                                                {$gk_attribute_array[j].attribute_name}
+                                                <?php print $attribute['attribute_name']; ?>
                                             </option>
                                         <?php } ?>
-                                    {else}
+                                    <?php } else { ?>
                                         <?php foreach ($attribute_array as $attribute) { ?>
                                             <option
-                                                value="{$attribute_array[j].attribute_id}"
-                                                {if ($player_array[i].player_training_attribute_id == $attribute_array[j].attribute_id)}
+                                                value="<?php print $attribute['attribute_id']; ?>"
+                                                <?php if ($item['player_training_attribute_id'] == $attribute['attribute_id']) { ?>
                                                     selected
                                                 <?php } ?>
                                             >
-                                                {$attribute_array[j].attribute_name}
+                                                <?php print $attribute['attribute_name']; ?>
                                             </option>
                                         <?php } ?>
                                     <?php } ?>
                                 </select>
                             </td>
                             <td class="center nopadding">
-                                <select class="w100" name="data[{$player_array[i].player_id}][intensity]">
+                                <select class="w100" name="data[<?php print $item['player_id']; ?>][intensity]">
                                     <option
                                         value="1"
-                                        {if (1 == $player_array[i].player_training_intensity)}
+                                        <?php if (1 == $item['player_training_intensity']) { ?>
                                             selected
                                         <?php } ?>
                                     >
@@ -79,7 +81,7 @@
                                     </option>
                                     <option
                                         value="2"
-                                        {if (2 == $player_array[i].player_training_intensity)}
+                                        <?php if (2 == $item['player_training_intensity']) { ?>
                                             selected
                                         <?php } ?>
                                     >
@@ -87,7 +89,7 @@
                                     </option>
                                     <option
                                         value="3"
-                                        {if (3 == $player_array[i].player_training_intensity)}
+                                        <?php if (3 == $item['player_training_intensity']) { ?>
                                             selected
                                         <?php } ?>
                                     >

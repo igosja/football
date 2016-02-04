@@ -12,7 +12,7 @@
                 </tr>
                 {section name=i loop=$user_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="user.php?num={$user_array[i].user_id}">
                                 {$user_array[i].user_login}
                             </a>

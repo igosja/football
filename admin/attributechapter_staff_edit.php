@@ -21,7 +21,7 @@ $count_chapter = $chapter_sql->num_rows;
 
 if (0 == $count_chapter)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $chapter_name = $chapter_array[0]['attributechapterstaff_name'];
 $smarty->assign('chapter_name', $chapter_name);
 $smarty->assign('tpl', 'attributechapter_staff_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

@@ -22,8 +22,7 @@ $count_inboxtheme = $inboxtheme_sql->num_rows;
 
 if (0 == $count_inboxtheme)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
-
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -43,7 +42,6 @@ if (isset($_POST['inboxtheme_name']))
     $prepare->close();
 
     redirect('inboxtheme_list.php');
-
     exit;
 }
 
@@ -52,8 +50,6 @@ $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
 $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
 $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
 
-$smarty->assign('inboxtheme_name', $inboxtheme_name);
-$smarty->assign('inboxtheme_text', $inboxtheme_text);
-$smarty->assign('tpl', 'inboxtheme_create');
+$tpl = 'inboxtheme_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

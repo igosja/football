@@ -30,7 +30,7 @@ $count_player = $player_sql->num_rows;
 
 if (0 == $count_player)
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -108,4 +108,4 @@ $total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $player_name . ' ' . $player_surname;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

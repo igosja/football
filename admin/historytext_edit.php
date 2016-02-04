@@ -21,7 +21,7 @@ $count_historytext = $historytext_sql->num_rows;
 
 if (0 == $count_historytext)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $historytext_name = $historytext_array[0]['historytext_name'];
 $smarty->assign('historytext_name', $historytext_name);
 $smarty->assign('tpl', 'historytext_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

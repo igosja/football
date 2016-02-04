@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$stadiumquality_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="stadiumquality.php?num={$stadiumquality_array[i].stadiumquality_id}">
                                 {$stadiumquality_array[i].stadiumquality_name}
                             </a>

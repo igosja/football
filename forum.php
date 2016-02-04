@@ -1,6 +1,6 @@
 <?php
 
-include('include/include.php');
+include ('include/include.php');
 
 $sql = "SELECT `count_post`,
                `count_theme`,
@@ -58,4 +58,4 @@ $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
 $smarty->assign('header_title', 'Форум');
 $smarty->assign('forum_array', $forum_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.html');

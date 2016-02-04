@@ -13,7 +13,7 @@
                 </tr>
                 {section name=i loop=$formation_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="formation.php?num={$formation_array[i].formation_id}">
                                 {$formation_array[i].formation_name}
                             </a>

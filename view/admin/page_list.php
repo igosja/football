@@ -14,12 +14,12 @@
                 </tr>
                 {section name=i loop=$page_array}
                     <tr>
-                        <td class="left">
+                        <td>
                             <a href="page.php?num={$page_array[i].page_id}">
                                 {$page_array[i].page_name}
                             </a>
                         </td>
-                        <td class="left">
+                        <td>
                             {$page_array[i].horizontalmenuchapter_name}
                         </td>
                         <td>

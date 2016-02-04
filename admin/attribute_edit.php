@@ -21,7 +21,7 @@ $count_attribute = $attribute_sql->num_rows;
 
 if (0 == $count_attribute)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -56,11 +56,11 @@ $sql = "SELECT `attributechapter_id`, `attributechapter_name`
         ORDER BY `attributechapter_id` ASC";
 $chapter_sql = $mysqli->query($sql);
 
-$chapter_array = $chapter_sql->fetch_all(MYSQL_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
 
 $smarty->assign('chapter_array', $chapter_array);
 $smarty->assign('attribute_name', $attribute_name);
 $smarty->assign('chapter_id', $chapter_id);
 $smarty->assign('tpl', 'attribute_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

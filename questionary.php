@@ -78,4 +78,4 @@ $gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);
 
 $header_title = $authorization_login;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

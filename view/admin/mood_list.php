@@ -16,7 +16,7 @@
                         <td class="w1">
                             <img src="/img/mood/{$mood_array[i].mood_id}.png" class="img-12">
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="mood.php?num={$mood_array[i].mood_id}">
                                 {$mood_array[i].mood_name}
                             </a>

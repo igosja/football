@@ -1,6 +1,6 @@
 <?php
 
-include($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_POST['data']))
 {
@@ -54,7 +54,7 @@ if (isset($_POST['data']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'Неправильная комбинация логин/пароль.';
 
-        redirect('login');
+        redirect('login.php');
         exit;
     }
     elseif (0 == $user_activation)
@@ -82,4 +82,4 @@ if (isset($_POST['data']))
 
 $header_title = 'Вход';
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

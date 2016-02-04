@@ -20,7 +20,7 @@
                         <td>
                             <img alt="" src="/img/flag/12/{$country_array[i].country_id}.png" class="img-12"/>
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="country.php?num={$country_array[i].country_id}">
                                 {$country_array[i].country_name}
                             </a>
@@ -35,7 +35,7 @@
                                 {$country_array[i].count_team}
                             </a>
                         </td>
-                        <td class="left">
+                        <td>
                             <a href="continent.php?num={$country_array[i].continent_id}">
                                 {$country_array[i].continent_name}
                             </a>

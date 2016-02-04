@@ -14,7 +14,7 @@
                 </tr>
                 {section name=i loop=$injurytype_array}
                     <tr>
-                        <td class="left">{$injurytype_array[i].injurytype_name}</td>
+                        <td>{$injurytype_array[i].injurytype_name}</td>
                         <td class="center">{$injurytype_array[i].injurytype_day}</td>
                         <td>
                             <a href="injurytype_edit.php?num={$injurytype_array[i].injurytype_id}" class="link-img link-pencil"></a>

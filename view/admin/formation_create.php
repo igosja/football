@@ -25,7 +25,7 @@
                                 {section name=i loop=$position_array}
                                     {$number = ''}
                                     <tr>
-                                        <td class="left">
+                                        <td>
                                             <input 
                                                 name="position_id[]" 
                                                 type="checkbox" 
@@ -37,7 +37,7 @@
                                                 {/section}
                                             /> {$position_array[i].position_name}
                                         </td>
-                                        <td class="left">
+                                        <td>
                                             {section name=j loop=$formation_position}
                                                 {if $formation_position[j] == $position_array[i].position_id}
                                                     <!--{$number++}-->

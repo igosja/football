@@ -21,7 +21,7 @@ $count_eventtype = $eventtype_sql->num_rows;
 
 if (0 == $count_eventtype)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -56,4 +56,4 @@ $eventtype_name = $eventtype_array[0]['eventtype_name'];
 $smarty->assign('eventtype_name', $eventtype_name);
 $smarty->assign('tpl', 'eventtype_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

@@ -21,7 +21,7 @@ $count_country = $country_sql->num_rows;
 
 if (0 == $count_country)
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -48,7 +48,7 @@ $count_nearest_game = $nearest_game_sql->num_rows;
 
 if (0 == $count_nearest_game)
 {
-    include($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.html');
     exit;
 }
 
@@ -85,7 +85,7 @@ $game_sql = $mysqli->query($sql);
 
 $game = $game_sql->num_rows;
 
-$game_array = $game_sql->fetch_all(MYSQL_ASSOC);
+$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
 $win    = 0;
 $draw   = 0;
@@ -141,4 +141,4 @@ for ($i=0; $i<$game; $i++)
 $num            = $get_num;
 $header_title   = $country_name;
 
-include($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

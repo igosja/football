@@ -11,7 +11,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input name="data[password]"  placeholder="Пароль" type="password" />
+                            <input name="data[password]" placeholder="Пароль" type="password" />
                         </td>
                     </tr>
                     <tr>

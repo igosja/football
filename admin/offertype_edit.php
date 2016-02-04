@@ -21,7 +21,7 @@ $count_offertype = $offertype_sql->num_rows;
 
 if (0 == $count_offertype)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $offertype_name = $offertype_array[0]['offertype_name'];
 $smarty->assign('offertype_name', $offertype_name);
 $smarty->assign('tpl', 'offertype_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

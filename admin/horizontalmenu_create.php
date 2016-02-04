@@ -29,4 +29,4 @@ $horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(MYSQLI_ASSO
 
 $smarty->assign('horizontalmenuchapter_array', $horizontalmenuchapter_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

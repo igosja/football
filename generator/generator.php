@@ -47,6 +47,7 @@ f_igosja_generator_staff_salary();
 f_igosja_generator_team_reputation();
 f_igosja_generator_tournament_reputation();
 f_igosja_generator_user_reputation();
+f_igosja_generator_user_time_in_club();
 f_igosja_generator_finance();
 f_igosja_generator_make_played();
 f_igosja_generator_scout();

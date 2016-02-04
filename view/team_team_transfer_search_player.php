@@ -4,7 +4,7 @@
             <p class="header">Поиск игрока</p>
             <table class="w100">
                 <tr>
-                    <td class="left">
+                    <td>
                         <form method="GET">
                             <input name="surname" placeholder="Фамилия" value="<?php if (isset($_GET['surname'])) { print $_GET['surname']; } ?>">
                             <select name="position">

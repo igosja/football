@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Раздел</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="horizontalmenuchapter_name" 
                                 type="text" 

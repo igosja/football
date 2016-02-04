@@ -21,7 +21,7 @@ $count_recordtournamenttype = $recordtournamenttype_sql->num_rows;
 
 if (0 == $count_recordtournamenttype)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
 
     exit;
 }
@@ -51,4 +51,4 @@ $recordtournamenttype_name = $recordtournamenttype_array[0]['recordtournamenttyp
 $smarty->assign('recordtournamenttype_name', $recordtournamenttype_name);
 $smarty->assign('tpl', 'recordtournamenttype_create');
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

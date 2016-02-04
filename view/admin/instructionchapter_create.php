@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Группа</td>
-                        <td class="left">
+                        <td>
                             <input name="chapter_name" type="text" value="{if (isset($chapter_name))}{$chapter_name}{/if}"/>
                         </td>
                     </tr>

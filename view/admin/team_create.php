@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Город</td>
-                        <td class="left">
+                        <td>
                             <select name="city_id">
                                 {section name=i loop=$city_array}
                                     <option value="{$city_array[i].city_id}"
@@ -26,37 +26,37 @@
                     </tr>
                     <tr>
                         <td>Команда</td>
-                        <td class="left">
+                        <td>
                             <input name="team_name" type="text" value="{if (isset($team_name))}{$team_name}{/if}"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Стадион</td>
-                        <td class="left">
+                        <td>
                             <input name="stadium_name" type="text" value="{if (isset($stadium_name))}{$stadium_name}{/if}"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Эмблема (120x120, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="team_logo_120" type="file"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Эмблема (90x90, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="team_logo_90" type="file"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Эмблема (50x50, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="team_logo_50" type="file"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Эмблема (12x12, png)</td>
-                        <td class="left">
+                        <td>
                             <input name="team_logo_12" type="file"/>
                         </td>
                     </tr>

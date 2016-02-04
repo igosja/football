@@ -66,4 +66,4 @@ $count_country = $count_country[0]['count_country'];
 $smarty->assign('count_country', $count_country);
 $smarty->assign('country_array', $country_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

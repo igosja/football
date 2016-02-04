@@ -23,8 +23,7 @@ $count_horizontalmenupage = $horizontalmenupage_sql->num_rows;
 
 if (0 == $count_horizontalmenupage)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/wrong_page.html');
-
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
     exit;
 }
 
@@ -44,14 +43,13 @@ if (isset($_POST['horizontalmenupage_name']))
     $prepare->close();
 
     redirect('horizontalmenupage_list.php');
-
     exit;
 }
 
 $horizontalmenupage_array = $horizontalmenupage_sql->fetch_all(MYSQLI_ASSOC);
 
-$horizontalmenupage_name  = $horizontalmenupage_array[0]['horizontalmenupage_name'];
-$chapter_id = $horizontalmenupage_array[0]['horizontalmenuchapter_id'];
+$horizontalmenupage_name    = $horizontalmenupage_array[0]['horizontalmenupage_name'];
+$chapter_id                 = $horizontalmenupage_array[0]['horizontalmenuchapter_id'];
 
 $sql = "SELECT `horizontalmenuchapter_id`, `horizontalmenuchapter_name`
         FROM `horizontalmenuchapter`
@@ -60,9 +58,6 @@ $chapter_sql = $mysqli->query($sql);
 
 $chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('horizontalmenupage_name', $horizontalmenupage_name);
-$smarty->assign('chapter_id', $chapter_id);
-$smarty->assign('chapter_array', $chapter_array);
-$smarty->assign('tpl', 'horizontalmenupage_create');
+$tpl = 'horizontalmenupage_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/view/admin_main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

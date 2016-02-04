@@ -10,7 +10,7 @@
                 <table class="center striped">
                     <tr>
                         <td>Стадия</td>
-                        <td class="left">
+                        <td>
                             <input 
                                 name="stage_name" 
                                 type="text" 
