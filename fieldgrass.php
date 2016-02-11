@@ -55,13 +55,6 @@ if (isset($_GET['change']) &&
                 `building_team_id`='$get_num'";
     $mysqli->query($sql);
 
-    $sql = "INSERT INTO `historyfinanceteam`
-            SET `historyfinanceteam_date`=SYSDATE(),
-                `historyfinanceteam_historytext_id`='6',
-                `historyfinanceteam_team_id`='$get_num',
-                `historyfinanceteam_value`='$price'";
-    $mysqli->query($sql);
-
     $sql = "UPDATE `team`
             SET `team_finance`=`team_finance`-'$price'
             WHERE `team_id`='$get_num'
@@ -89,12 +82,20 @@ if (isset($_GET['change']) &&
     else
     {
         $sql = "UPDATE `finance`
-                SET `finance_expense_build`='$price'
+                SET `finance_expense_build`=`finance_expense_build`+'$price'
                 WHERE `finance_team_id`='$get_num'
                 AND `finance_season_id`='$igosja_season_id'
                 LIMIT 1";
         $mysqli->query($sql);
     }
+
+    $sql = "INSERT INTO `historyfinanceteam`
+            SET `historyfinanceteam_date`=SYSDATE(),
+                `historyfinanceteam_historytext_id`='" .HISTORY_TEXT_EXPENCE_BUILD_GRASS . "',
+                `historyfinanceteam_season_id`='$igosja_season_id',
+                `historyfinanceteam_team_id`='$get_num',
+                `historyfinanceteam_value`='$price'";
+    $mysqli->query($sql);
 
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Работы по замене газона начались успешно.';

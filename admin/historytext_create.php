@@ -14,7 +14,6 @@ if (isset($_POST['historytext_name']))
     $prepare->close();
 
     redirect('historytext_list.php');
-
     exit;
 }
 

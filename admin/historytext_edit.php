@@ -22,7 +22,6 @@ $count_historytext = $historytext_sql->num_rows;
 if (0 == $count_historytext)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
     exit;
 }
 
@@ -40,7 +39,6 @@ if (isset($_POST['historytext_name']))
     $prepare->close();
 
     redirect('historytext_list.php');
-
     exit;
 }
 
@@ -48,7 +46,6 @@ $historytext_array = $historytext_sql->fetch_all(MYSQLI_ASSOC);
 
 $historytext_name = $historytext_array[0]['historytext_name'];
 
-$smarty->assign('historytext_name', $historytext_name);
-$smarty->assign('tpl', 'historytext_create');
+$tpl = 'historytext_create';
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

@@ -151,7 +151,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
+                            <table class="table table-bordered table-hover table-condensed table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>

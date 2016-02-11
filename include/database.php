@@ -1,14 +1,14 @@
 <?php
 
-$host       = 'lion.beget.ru';
-// $host       = 'localhost';
-$user       = 'igosja_fm';
-// $user       = 'root';
-$password   = '66xM6RQ51D';
-// $password   = '';
-$database   = 'igosja_fm';
+$db_host        = 'lion.beget.ru';
+// $db_host        = 'localhost';
+$db_user        = 'igosja_fm';
+// $db_user        = 'root';
+$db_password    = '66xM6RQ51D';
+// $db_password    = '';
+$db_database    = 'igosja_fm';
 
-$mysqli = new mysqli($host, $user, $password, $database);
+$mysqli = new mysqli($db_host, $db_user, $db_password, $db_database);
 
 $sql = "SET NAMES 'utf8'";
 $mysqli->query($sql);

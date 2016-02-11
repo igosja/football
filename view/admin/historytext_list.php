@@ -1,25 +1,36 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Варианты действий</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="historytext_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th>Вариант</th>
-                    <th>Действия</th>
-                </tr>
-                {section name=i loop=$historytext_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Варианты действий</h1>
+        <button type="button" class="btn btn-default">
+            <a href="historytext_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td>{$historytext_array[i].historytext_name}</td>
-                        <td>
-                            <a href="historytext_edit.php?num={$historytext_array[i].historytext_id}" class="link-img link-pencil"></a>
-                        </td>
+                        <th>Вариант</th>
+                        <th class="col-lg-1"></th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($historytext_array as $item) { ?>
+                        <tr>
+                            <td><?php print $item['historytext_name']; ?></td>
+                            <td>
+                                <a href="historytext_edit.php?num=<?php print $item['historytext_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>
