@@ -38,8 +38,12 @@ $sql = "SELECT `history_date`,
         ON `user_id`=`history_user_id`
         LEFT JOIN `team`
         ON `team_id`=`history_team_id`
+        LEFT JOIN `standing`
+        ON `standing_team_id`=`team_id`
         WHERE `history_historytext_id`='1'
-        AND `history_season_id`='$igosja_season_id'";
+        AND `history_season_id`='$igosja_season_id'
+        AND `standing_season_id`='$igosja_season_id'
+        AND `standing_tournament_id`='$get_num'";
 $manager_new_sql = $mysqli->query($sql);
 
 $manager_new_array = $manager_new_sql->fetch_all(MYSQLI_ASSOC);

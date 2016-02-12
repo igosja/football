@@ -88,6 +88,7 @@ $sql = "SELECT `horizontalmenu_authorization`,
         LEFT JOIN `horizontalmenupage`
         ON `horizontalmenuchapter_id`=`horizontalmenupage_horizontalmenuchapter_id`
         WHERE `horizontalmenupage_name`='$file_name'
+        AND `horizontalsubmenu_status`='1'
         ORDER BY `horizontalmenu_id` ASC, `horizontalsubmenu_id` ASC";
 $horizontalmenu_sql = $mysqli->query($sql);
 

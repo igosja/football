@@ -90,7 +90,7 @@ $count_game = $count_array[0]['count'];
 
 if (0 == $count_game)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/lineup_first.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/lineup_first.php');
     exit;
 }
 

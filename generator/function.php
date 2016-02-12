@@ -9247,7 +9247,7 @@ function f_igosja_generator_finance()
             ) AS `t3`
             ON `staff_team_id`=`team_id`
             WHERE `team_id`!='0'
-            AND `team_id` ASC";
+            ORDER BY `team_id` ASC";
     $team_sql = $mysqli->query($sql);
 
     $count_team = $team_sql->num_rows;

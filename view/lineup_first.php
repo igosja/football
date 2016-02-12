@@ -1,3 +1,3 @@
-<?php include ($_SERVER['DOCUMENT_ROOT'] . '/view/include/header.html'); ?>
+<?php include ($_SERVER['DOCUMENT_ROOT'] . '/view/include/header.php'); ?>
 <p class="center warning">Сначала нужно отправить состав на игру.</p>
-<?php include ($_SERVER['DOCUMENT_ROOT'] . '/view/include/footer.html'); ?>
+<?php include ($_SERVER['DOCUMENT_ROOT'] . '/view/include/footer.php'); ?>

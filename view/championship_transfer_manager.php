@@ -22,7 +22,7 @@
                                 <?php print $item['team_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['history_date|date_format:"%d.%m.%Y"']; ?></td>
+                        <td class="center"><?php print f_igosja_ufu_date($item['history_date']); ?></td>
                         <td class="w40"><?php print $item['user_login']; ?></td>
                     </tr>
                 <?php } ?>
