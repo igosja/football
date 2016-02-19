@@ -26,6 +26,11 @@ function f_igosja_generator_asktoplay_delete()
         $sql = "DELETE FROM `inbox`
                 WHERE `inbox_asktoplay_id`='$asktoplay_id'";
         $mysqli->query($sql);
+
+        usleep(1);
+
+        print '.';
+        flush();
     }
 }
 
@@ -3079,7 +3084,7 @@ function f_igosja_generator_user_formation_gamemood_gamestyle()
 }
 
 function f_igosja_generator_player_condition_practice()
-//Обновляем усталость и игровую правктику футболистам
+//Обновляем усталость и игровую практику футболистам
 {
     global $mysqli;
 
@@ -3090,7 +3095,7 @@ function f_igosja_generator_player_condition_practice()
             ON `game_id`=`lineup_game_id`
             LEFT JOIN `shedule`
             ON `shedule_id`=`game_shedule_id`
-            SET `lineup_condition`=`player_condition`-'15'-`player_age`/'3',
+            SET `lineup_condition`=`player_condition`-'15'-`player_age`/'5',
                 `lineup_practice`=`player_practice`+'10'+`player_age`/'5'
             WHERE `shedule_date`=CURDATE()
             AND `lineup_position_id`<='25'
@@ -3112,7 +3117,7 @@ function f_igosja_generator_player_condition_practice()
     $mysqli->query($sql);
 
     $sql = "UPDATE `player`
-            SET `player_condition`=`player_condition`+'1'+('40'-`player_age`)/'4',
+            SET `player_condition`=`player_condition`+'3'+('45'-`player_age`)/'2',
                 `player_practice`=`player_practice`-'1'-'2'*RAND()";
     $mysqli->query($sql);
 
