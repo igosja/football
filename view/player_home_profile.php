@@ -153,12 +153,14 @@
                             <?php } ?>
                                 <tr>
                                     <td><?php print $attribute_array[$i]['attribute_name']; ?></td>
-                                    <td class="w25">
-                                        <div class="progress">
-                                            <div class="progress-bar" style="width: <?php print $attribute_array[$i]['playerattribute_value']; ?>%">
-                                                <?php print SPACE; ?>
+                                    <td class="center w25">
+                                        <?php if (1 == $count_scout) { ?>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: <?php print $attribute_array[$i]['playerattribute_value']; ?>%"></div>
                                             </div>
-                                        </div>
+                                        <?php } else { ?>
+                                            ?
+                                        <?php } ?>
                                     </td>
                                 </tr>
                         <?php
@@ -213,12 +215,12 @@
             <table class="w100">
                 <tr>
                     <td>Кондиции</td>
-                    <td class="right"><?php print $player_array[0]['player_condition']; ?>%</td>
+                    <td class="right"><?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { print $player_array[0]['player_condition'] . '%'; } else { print '?'; } ?></td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <div class="progress">
-                            <div class="<?php print f_igosja_progress_class($player_array[0]['player_condition']); ?>" style="width: <?php print $player_array[0]['player_condition']; ?>%"></div>
+                            <div class="<?php print f_igosja_progress_class($player_array[0]['player_condition']); ?>" style="width: <?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { print $player_array[0]['player_condition']; } else { print '0'; } ?>%"></div>
                         </div>
                     </td>
                 </tr>
@@ -227,12 +229,12 @@
                 </tr>
                 <tr>
                     <td>Игровая практика</td>
-                    <td class="right"><?php print $player_array[0]['player_practice']; ?>%</td>
+                    <td class="right"><?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { print $player_array[0]['player_practice'] . '%'; } else { print '?'; } ?></td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <div class="progress">
-                            <div class="<?php print f_igosja_progress_class($player_array[0]['player_practice']); ?>" style="width: <?php print $player_array[0]['player_practice']; ?>%"></div>
+                            <div class="<?php print f_igosja_progress_class($player_array[0]['player_practice']); ?>" style="width: <?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { print $player_array[0]['player_practice'];  } else { print '0'; } ?>%"></div>
                         </div>
                     </td>
                 </tr>

@@ -136,6 +136,22 @@ $disqualification_sql = $mysqli->query($sql);
 
 $disqualification_array = $disqualification_sql->fetch_all(MYSQLI_ASSOC);
 
+if (isset($authorization_team_id))
+{
+    $sql = "SELECT COUNT(`scout_id`) AS `count`
+            FROM `scout`
+            WHERE `scout_player_id`='$get_num'
+            AND `scout_team_id`='$authorization_team_id'";
+    $scout_sql = $mysqli->query($sql);
+
+    $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+    $count_scout = $scout_array[0]['count'];
+}
+else
+{
+    $count_scout = 0;
+}
+
 $num            = $get_num;
 $header_title   = $player_name . ' ' . $player_surname;;
 

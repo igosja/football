@@ -43,8 +43,8 @@
                             />
                             <?php print $item['mood_name']; ?>
                         </td>
-                        <td class="center"><?php print $item['player_condition']; ?> %</td>
-                        <td class="center"><?php print $item['player_practice']; ?> %</td>
+                        <td class="center"><?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { print $item['player_condition'] . '%'; } else { print '?'; } ?></td>
+                        <td class="center"><?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { print $item['player_practice'] . '%'; } else { print '?'; } ?></td>
                         <td class="right"><?php print f_igosja_money($item['player_salary']); ?></td>
                     </tr>
                 <?php } ?>

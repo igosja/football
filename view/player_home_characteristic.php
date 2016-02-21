@@ -87,29 +87,39 @@
                         <?php } ?>
                             <tr>
                                 <td><?php print $attribute_array[$i]['attribute_name']; ?></td>
-                                <td class="w33">
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: <?php print $attribute_array[$i]['playerattribute_value']; ?>%">
-                                            <?php print SPACE; ?>
+                                <td class="center w33">
+                                    <?php if (1 == $count_scout) { ?>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: <?php print $attribute_array[$i]['playerattribute_value']; ?>%"></div>
                                         </div>
-                                    </div>
+                                    <?php } else { ?>
+                                        ?
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php if (!isset($attribute_array[$i+1]['attributechapter_name'])) { ?>
                             <tr>
                                 <td>Кондиции</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: <?php print $player_array[0]['player_condition']; ?>%"></div>
-                                    </div>
+                                <td class="center">
+                                    <?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { ?>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: <?php print $player_array[0]['player_condition']; ?>%"></div>
+                                        </div>
+                                    <?php } else { ?>
+                                        ?
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Игровая практика</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: <?php print $player_array[0]['player_practice']; ?>%"></div>
-                                    </div>
+                                <td class="center">
+                                    <?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { ?>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: <?php print $player_array[0]['player_practice']; ?>%"></div>
+                                        </div>
+                                    <?php } else { ?>
+                                        ?
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <tr>
