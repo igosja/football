@@ -7,7 +7,6 @@
     <meta name="keywords" content="футбол, игра, менеджер, онлайн" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="/css/autocomplete.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -31,6 +30,7 @@
                         +  ";" +Math.random();
     </script>
     <!--/LiveInternet-->
+    <!--GoogleAnalytics-->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -92,9 +92,7 @@
                                             </li>
                                         <?php } ?>
                                     <?php } ?>
-                                    <?php if (1 == 0) { ?>
-                                        <li><a href="forum.php" class="main-menu-link">Форум</a></li>
-                                    <?php } ?>
+                                    <li><a href="forum.php" class="main-menu-link">Форум</a></li>
                                     <?php if (isset($authorization_id)) { ?>
                                         <li><a href="shop.php" class="main-menu-link">Магазин</a></li>
                                     <?php } ?>

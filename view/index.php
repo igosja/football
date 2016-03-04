@@ -6,26 +6,15 @@
             <p class="center"><button><a href="registration.php">Зарегистрироваться</a></button></p>
             <p class="center">или войти через</p>
             <p class="center">
-                <img
-                    alt="Facebook"
-                    class="img-30"
-                    src="img/social/facebook.png"
-                />
-                <img
-                    alt="Google"
-                    class="img-30"
-                    src="img/social/google.png"
-                />
-                <img
-                    alt="Одноклассники"
-                    class="img-30"
-                    src="img/social/odnoklassniki.png"
-                />
-                <img
-                    alt="Вконтакте"
-                    class="img-30"
-                    src="img/social/vkontakte.png"
-                />
+                <?php foreach ($social_array as $item) { ?>
+                    <a href="<?php print $item['url']; ?>">
+                        <img
+                            alt="<?php print $item['alt']; ?>"
+                            class="img-30"
+                            src="img/social/<?php print $item['img']; ?>.png"
+                        />
+                    </a>
+                <?php } ?>
             </p>
             <p class="justify">Внутри нашего мира - всё как в настоящем футболе: национальные чемпионаты и кубки, Лига чемпионов и чемпионат мира, товарищеские игры.</p>
             <p class="justify">Вы можете сделать карьеру успешного тренера-менеджера, меняя места своей работы или достигнув футбольных вершин со своим первым клубом. Каждый сезон вы можете претендовать на место у руля национальных сборных.</p>

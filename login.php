@@ -2,6 +2,11 @@
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
+if (isset($authorization_id))
+{
+    redirect('index.php');
+}
+
 if (isset($_POST['data']))
 {
     $authorization_login    = $_POST['data']['login'];
@@ -81,5 +86,6 @@ if (isset($_POST['data']))
 }
 
 $header_title = 'Вход';
+$social_array = f_igosja_social_array();
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

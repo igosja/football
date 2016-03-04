@@ -79,10 +79,7 @@ $count_forum = $count_forum->fetch_all(MYSQLI_ASSOC);
 $count_forum = $count_forum[0]['count_forum'];
 $count_forum = ceil($count_forum / $limit);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', 'Форум');
-$smarty->assign('page', $page);
-$smarty->assign('count_forum', $count_forum);
-$smarty->assign('forum_array', $forum_array);
+$num            = $get_num;
+$header_title   = 'Форум';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

@@ -24,26 +24,15 @@
                     </tr>
                     <tr>
                         <td class="center">
-                            <img
-                                alt="Facebook"
-                                class="img-30"
-                                src="img/social/facebook.png"
-                            />
-                            <img
-                                alt="Google"
-                                class="img-30"
-                                src="img/social/google.png"
-                            />
-                            <img
-                                alt="Одноклассники"
-                                class="img-30"
-                                src="img/social/odnoklassniki.png"
-                            />
-                            <img
-                                alt="Вконтакте"
-                                class="img-30"
-                                src="img/social/vkontakte.png"
-                            />
+                            <?php foreach ($social_array as $item) { ?>
+                                <a href="<?php print $item['url']; ?>">
+                                    <img
+                                        alt="<?php print $item['alt']; ?>"
+                                        class="img-30"
+                                        src="img/social/<?php print $item['img']; ?>.png"
+                                    />
+                                </a>
+                            <?php } ?>
                         </td>
                     </tr>
                 </table>

@@ -5,15 +5,27 @@
                 <p class="center header">Персональные данные</p>
                 <table class="center striped">
                     <tr>
+                        <td class="right">Логин</td>
+                        <td class="left">
+                            <input name="data[login]" type="text" value="<?php print $user_array[0]['user_login']; ?>" <?php if (!empty($user_array[0]['user_login'])) { ?>disabled<?php } ?>/>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="right">Имя</td>
-                        <td>
+                        <td class="left">
                             <input name="data[firstname]" type="text" value="<?php print $user_array[0]['user_firstname']; ?>" />
                             <input name="data[lastname]" type="text" value="<?php print $user_array[0]['user_lastname']; ?>" />
                         </td>
                     </tr>
                     <tr>
+                        <td class="right">Email</td>
+                        <td class="left">
+                            <input name="data[email]" type="text" value="<?php print $user_array[0]['user_email']; ?>" />
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="right">Пол</td>
-                        <td>
+                        <td class="left">
                             <?php foreach ($gender_array as $item) { ?>
                                 <input
                                     name="data[gender]"
@@ -29,7 +41,7 @@
                     </tr>
                     <tr>
                         <td class="right">Дата рождения</td>
-                        <td>
+                        <td class="left">
                             <select name="data[birth][day]">
                                 <?php for ($i=1; $i<=31; $i++) { ?>
                                     <option value="<?php print $i; ?>"
@@ -55,7 +67,7 @@
                     </tr>
                     <tr>
                         <td class="right">Страна</td>
-                        <td>
+                        <td class="left">
                             <select name="data[country]">
                                 <?php foreach ($country_array as $item) { ?>
                                     <option value="<?php print $item['country_id']; ?>"
@@ -71,7 +83,7 @@
                     </tr>
                     <tr>
                         <td class="right">Новый пароль</td>
-                        <td>
+                        <td class="left">
                             <input name="data[password]" type="text" />
                         </td>
                     </tr>
@@ -80,6 +92,29 @@
                             <input type="submit" value="Сохранить" />
                         </td>
                     </tr>
+                </table>
+            </form>
+        </td>
+        <td class="block-page">
+            <form method="POST">
+                <p class="center header">Соцсети</p>
+                <table class="center striped">
+                    <?php foreach ($social_array as $item) { ?>
+                        <tr>
+                            <td class="right">
+                                <img
+                                    alt="<?php print $item['alt']; ?>"
+                                    class="img-30"
+                                    src="img/social/<?php print $item['img']; ?>.png"
+                                />
+                            </td>
+                            <td class="left">
+                                <a href="<?php print $item['url']; ?>">
+                                    <?php print $item['text']; ?>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </table>
             </form>
         </td>

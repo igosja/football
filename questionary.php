@@ -41,6 +41,80 @@ if (isset($_POST['data']))
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Данные успешно сохранены';
 
+    if (isset($_POST['data']['email']))
+    {
+        $email = $_POST['data']['email'];
+
+        $sql = "SELECT `user_id`
+                FROM `user`
+                WHERE `user_id`!='$authorization_id'
+                AND `user_email`=?
+                LIMIT 1";
+        $prepare = $mysqli->prepare($sql);
+        $prepare->bind_param('s', $email);
+        $prepare->execute();
+
+        $check_sql      = $prepare->get_result();
+        $count_check    = $check_sql->num_rows;
+
+        $prepare->close();
+
+        if (0 == $count_check)
+        {
+            $sql = "UPDATE `user`
+                    SET `user_email`=?
+                    WHERE `user_id`='$authorization_id'
+                    LIMIT 1";
+            $prepare = $mysqli->prepare($sql);
+            $prepare->bind_param('s', $email);
+            $prepare->execute();
+            $prepare->close();
+        }
+        else
+        {
+            $_SESSION['message_class']  = 'error';
+            $_SESSION['message_text']   = 'Пользователь с таким e-mail уже зарегистрирован';
+        }
+    }
+
+    if (isset($_POST['data']['login']))
+    {
+        $login = $_POST['data']['login'];
+
+        $sql = "SELECT `user_id`
+                FROM `user`
+                WHERE `user_id`!='$authorization_id'
+                AND `user_login`=?
+                LIMIT 1";
+        $prepare = $mysqli->prepare($sql);
+        $prepare->bind_param('s', $login);
+        $prepare->execute();
+
+        $check_sql      = $prepare->get_result();
+        $count_check    = $check_sql->num_rows;
+
+        $prepare->close();
+
+        if (0 == $count_check)
+        {
+            $sql = "UPDATE `user`
+                    SET `user_login`=?
+                    WHERE `user_id`='$authorization_id'
+                    LIMIT 1";
+            $prepare = $mysqli->prepare($sql);
+            $prepare->bind_param('s', $login);
+            $prepare->execute();
+            $prepare->close();
+
+            $_SESSION['authorization_login'] = $login;
+        }
+        else
+        {
+            $_SESSION['message_class']  = 'error';
+            $_SESSION['message_text']   = 'Пользователь с таким логином уже зарегистрирован';
+        }
+    }
+
     redirect('questionary.php');
     exit;
 }
@@ -49,15 +123,22 @@ $sql = "SELECT `user_birth_day`,
                `user_birth_month`,
                `user_birth_year`,
                `user_country_id`,
+               `user_email`,
                `user_firstname`,
                `user_gender`,
-               `user_lastname`
+               `user_lastname`,
+               `user_login`,
+               `user_social_fb`,
+               `user_social_gl`,
+               `user_social_vk`
         FROM `user`
         WHERE `user_id`='$authorization_id'
         LIMIT 1";
 $user_sql = $mysqli->query($sql);
 
 $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+
+$social_array = f_igosja_social_array($user_array);
 
 $sql = "SELECT `country_id`,
                `country_name`

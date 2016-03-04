@@ -23,17 +23,17 @@ if (isset($_SESSION['authorization_id']))
             ON `team_user_id`=`user_id`
             LEFT JOIN `country`
             ON `country_user_id`=`user_id`
-            WHERE `user_login`=?
+            WHERE `user_id`='$authorization_id'
             LIMIT 1";
-    $prepare = $mysqli->prepare($sql);
-    $prepare->bind_param('s', $authorization_login);
-    $prepare->execute();
-
-    $user_sql = $prepare->get_result();
-
-    $prepare->close();
+    $user_sql = $mysqli->query($sql);
 
     $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+
+    if (!isset($user_array[0]['user_id']))
+    {
+        redirect('logout.php');
+        exit;
+    }
 
     $authorization_user_id      = $user_array[0]['user_id'];
     $authorization_team_id      = $user_array[0]['team_id'];

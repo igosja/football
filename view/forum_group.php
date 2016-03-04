@@ -4,30 +4,32 @@
             <table class="w100">
                 <tr>
                     <td>
-                        <button>
-                            <a href="forum_posting.php?group={$head_array.0.forumthemegroup_id}">
-                                Создать тему
-                            </a>
-                        </button>
+                        <?php if (isset($authorization_id)) { ?>
+                            <button>
+                                <a href="forum_posting.php?group=<?php print $head_array[0]['forumthemegroup_id']; ?>">
+                                    Создать тему
+                                </a>
+                            </button>
+                        <?php } ?>
                     </td>
                     <td class="right">
                         Страницы:
-                        {section name=i loop=$count_forum}
-                            {if ($smarty.section.i.iteration == 1 ||
-                                 $smarty.section.i.iteration == $count_forum ||
-                                ($smarty.section.i.iteration >= $page - 2 &&
-                                 $smarty.section.i.iteration <= $page + 2))}
-                            <button
-                                {if ($smarty.section.i.iteration == $page)}
-                                    class="button-active"
-                                {/if}
-                            >
-                                <a href="forum_group.php?num={$num}&page={$smarty.section.i.iteration}">
-                                    {$smarty.section.i.iteration}
-                                </a>
-                            </button>
-                            {/if}
-                        {/section}
+                        <?php for ($i=1; $i<=$count_forum; $i++) { ?>
+                            <?php if ($i == 1 ||
+                                      $i == $count_forum ||
+                                     ($i >= $page - 2 &&
+                                      $i <= $page + 2)) { ?>
+                                <button
+                                    <?php if ($i == $page) { ?>
+                                        class="button-active"
+                                    <?php } ?>
+                                >
+                                    <a href="forum_group.php?num=<?php print $num; ?>&page=<?php print $i; ?>">
+                                        <?php print $i; ?>
+                                    </a>
+                                </button>
+                            <?php } ?>
+                        <?php } ?>
                     </td>
                 </tr>
             </table>
@@ -37,65 +39,57 @@
                     <th class="w8">Ответы</th>
                     <th class="w20">Последнее</th>
                 </tr>
-                {section name=i loop=$forum_array}
+                <?php foreach ($forum_array as $item) { ?>
                     <tr>
-                        <td class="w1" rowspan="2">
+                        <td class="w1">
                             Picture
                         </td>
                         <td>
-                            <a href="forum_theme.php?num={$forum_array[i].forumtheme_id}">
-                                {$forum_array[i].forumtheme_name}
+                            <a href="forum_theme.php?num=<?php print $item['forumtheme_id']; ?>">
+                                <?php print $item['forumtheme_name']; ?>
                             </a>
+                            <br />
+                            <?php print $item['user_login']; ?>,
+                            <?php print f_igosja_ufu_date_time($item['forumtheme_date']); ?>
                         </td>
-                        <td></td>
+                        <td class="center vcenter"><?php print $item['count_post']; ?></td>
                         <td>
-                            {$forum_array[i].post_login}
+                            <?php print $item['post_login']; ?>
+                            <br />
+                            <?php print f_igosja_ufu_date_time($item['forumpost_date']); ?>
                         </td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td class="center vcenter">{$forum_array[i].count_post}</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            {$forum_array[i].user_login},
-                            {$forum_array[i].forumtheme_date|date_format:"%H:%M %d.%m.%Y"}
-                        </td>
-                        <td></td>
-                        <td>
-                            {$forum_array[i].forumpost_date|date_format:"%H:%M %d.%m.%Y"}
-                        </td>
-                    </tr>
-                {/section}
+                <?php } ?>
             </table>
             <table class="w100">
                 <tr>
                     <td>
-                        <button>
-                            <a href="forum_posting.php?group={$head_array.0.forumthemegroup_id}">
-                                Создать тему
-                            </a>
-                        </button>
+                        <?php if (isset($authorization_id)) { ?>
+                            <button>
+                                <a href="forum_posting.php?group=<?php print $head_array[0]['forumthemegroup_id']; ?>">
+                                    Создать тему
+                                </a>
+                            </button>
+                        <?php } ?>
                     </td>
                     <td class="right">
                         Страницы:
-                        {section name=i loop=$count_forum}
-                            {if ($smarty.section.i.iteration == 1 ||
-                                 $smarty.section.i.iteration == $count_forum ||
-                                ($smarty.section.i.iteration >= $page - 2 &&
-                                 $smarty.section.i.iteration <= $page + 2))}
+                        <?php for ($i=1; $i<=$count_forum; $i++) { ?>
+                            <?php if ($i == 1 ||
+                                      $i == $count_forum ||
+                                     ($i >= $page - 2 &&
+                                      $i <= $page + 2)) { ?>
                             <button
-                                {if ($smarty.section.i.iteration == $page)}
+                                <?php if ($i == $page) { ?>
                                     class="button-active"
-                                {/if}
+                                <?php } ?>
                             >
-                                <a href="forum_group.php?num={$num}&page={$smarty.section.i.iteration}">
-                                    {$smarty.section.i.iteration}
+                                <a href="forum_group.php?num=<?php print $num; ?>&page=<?php print $i; ?>">
+                                    <?php print $i; ?>
                                 </a>
                             </button>
-                            {/if}
-                        {/section}
+                            <?php } ?>
+                        <?php } ?>
                     </td>
                 </tr>
             </table>

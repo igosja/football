@@ -137,6 +137,15 @@ function f_igosja_ufu_date($date)
     return $date;
 }
 
+function f_igosja_ufu_date_time($date)
+//Форматирование даты
+{
+    $date = strtotime($date);
+    $date = date('H:i d.m.Y', $date);
+
+    return $date;
+}
+
 function f_igosja_ufu_last_visit($date)
 //Время последнего посещения
 {
@@ -464,6 +473,79 @@ function f_igosja_position_icon($value)
     {
         $icon = 3;
     }
-    
+
     return $icon;
+}
+
+function f_igosja_social_array($user_array = '')
+//Ссылки на авторизацию через соцсети
+{
+    $fb_params  = array('client_id' => FB_CLIENT_ID, 'redirect_uri' => FB_REDIRECT_URI, 'response_type' => 'code');
+    $fb_url     = 'https://www.facebook.com/dialog/oauth?' . urldecode(http_build_query($fb_params));
+
+    if (isset($user_array[0]['user_social_fb']))
+    {
+        if (empty($user_array[0]['user_social_fb']))
+        {
+            $fb_text = 'Связать';
+        }
+        else
+        {
+            $fb_url  = '';
+            $fb_text = 'Отвязать';
+        }
+    }
+    else
+    {
+        $fb_text = '';
+    }
+
+    $gl_params  = array('redirect_uri' => GL_REDIRECT_URI, 'response_type' => 'code', 'client_id' => GL_CLIENT_ID, 'scope' => 'https://www.googleapis.com/auth/userinfo.profile');
+    $gl_url     = 'https://accounts.google.com/o/oauth2/auth?' . urldecode(http_build_query($gl_params));
+
+    if (isset($user_array[0]['user_social_gl']))
+    {
+        if (empty($user_array[0]['user_social_gl']))
+        {
+            $gl_text = 'Связать';
+        }
+        else
+        {
+            $gl_url  = '';
+            $gl_text = 'Отвязать';
+        }
+    }
+    else
+    {
+        $gl_text = '';
+    }
+
+    $vk_params  = array('client_id' => VK_CLIENT_ID, 'redirect_uri' => VK_REDIRECT_URI, 'response_type' => 'code');
+    $vk_url     = 'http://oauth.vk.com/authorize?' . urldecode(http_build_query($vk_params));
+
+    if (isset($user_array[0]['user_social_vk']))
+    {
+        if (empty($user_array[0]['user_social_vk']))
+        {
+            $vk_text = 'Связать';
+        }
+        else
+        {
+            $vk_url  = '';
+            $vk_text = 'Отвязать';
+        }
+    }
+    else
+    {
+        $vk_text = '';
+    }
+
+    $social_array = array
+    (
+        array('alt' => 'Facebook',  'img' => 'facebook',    'url' => $fb_url, 'text' => $fb_text),
+        array('alt' => 'Google',    'img' => 'google',      'url' => $gl_url, 'text' => $gl_text),
+        array('alt' => 'Вконтакте', 'img' => 'vkontakte',   'url' => $vk_url, 'text' => $vk_text),
+    );
+
+    return $social_array;
 }

@@ -22,6 +22,9 @@ if (isset($_GET['group']))
         $prepare->execute();
         $prepare->close();
 
+        $_SESSION['message_class']  = 'success';
+        $_SESSION['message_text']   = 'Сообщение успешно добавлено.';
+
         redirect('forum_group.php?num=' . $get_group);
     }
 
@@ -60,6 +63,9 @@ else
         $prepare->execute();
         $prepare->close();
 
+        $_SESSION['message_class']  = 'success';
+        $_SESSION['message_text']   = 'Сообщение успешно добавлено.';
+
         redirect('forum_theme.php?num=' . $get_theme);
     }
 
@@ -71,7 +77,6 @@ else
     $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
 }
 
-$smarty->assign('header_title', 'Форум');
-$smarty->assign('forum_array', $forum_array);
+$header_title = 'Форум';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
