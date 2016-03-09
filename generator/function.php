@@ -9360,7 +9360,7 @@ function f_igosja_generator_finance()
 
         $sql = "INSERT INTO `historyfinanceteam` (`historyfinanceteam_date`, `historyfinanceteam_historytext_id`, `historyfinanceteam_season_id`, `historyfinanceteam_team_id`, `historyfinanceteam_value`)
                 VALUES (CURDATE(), '" . HISTORY_TEXT_INCOME_TICKET . "', '$igosja_season_id', '$home_team_id', '$finance_ticket_home'),
-                       (CURDATE(), '" . HISTORY_TEXT_INCOME_SUBSRIPTION . "', '$igosja_season_id', '$home_team_id', '$finance_subscription'),
+                       (CURDATE(), '" . HISTORY_TEXT_INCOME_SUBSCRIPTION . "', '$igosja_season_id', '$home_team_id', '$finance_subscription'),
                        (CURDATE(), '" . HISTORY_TEXT_EXPENCE_STADIUM . "', '$igosja_season_id', '$home_team_id', '$finance_stadium');";
         $mysqli->query($sql);
 

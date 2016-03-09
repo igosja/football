@@ -186,7 +186,7 @@
                             <img
                                 alt="<?php print $item['position_description']; ?>"
                                 src="img/position/<?php print f_igosja_position_icon($item['playerposition_value']); ?>.png"
-                                style="position: absolute; bottom: <?php print $item['position_coordinate_x'] * 15 - 10; ?>px; left: <?php print 1 + $item['position_coordinate_y'] * 15; ?>px;"
+                                style="position: absolute; top: <?php print 150 -   $item['position_coordinate_x'] * 15 - 10; ?>px; left: <?php print 1 + $item['position_coordinate_y'] * 15; ?>px;"
                                 title="<?php print $item['position_description']; ?>"
                             />
                         <?php } ?>

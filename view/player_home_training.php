@@ -1,67 +1,61 @@
 <table class="block-table w100">
     <tr>
-        <td class="block-page w33">
-            <p class="header">Персональные данные</p>
-            <table class="center w100">
+        <td class="block-page" colspan="2">
+            <p class="header">Общая информация</p>
+            <p class="center">На этой странице вы можете провести платную тренировку своего игрока.</p>
+            <p class="center">Доступные баллы для улучшения характеристик игроков:
+            <strong><?php print $user_array[0]['user_money_training']; ?></strong></p>
+            <p class="center">Доступные тернировки позиций:
+            <strong><?php print $user_array[0]['user_money_position']; ?></strong></p>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page w25">
+            <p class="header">Позиции</p>
+            <table class="w100">
                 <tr>
+                    <td class="relative w1">
+                        <div>
+                        <img alt="Позиции" src="/img/field/field-108.png" />
+                        <?php foreach ($playerposition_array as $item) { ?>
+                            <img
+                                alt="<?php print $item['position_description']; ?>"
+                                src="img/position/<?php print f_igosja_position_icon($item['playerposition_value']); ?>.png"
+                                style="position: absolute; top: <?php print 150 - $item['position_coordinate_x'] * 15 - 10; ?>px; left: <?php print 1 + $item['position_coordinate_y'] * 15; ?>px;"
+                                title="<?php print $item['position_description']; ?>"
+                            />
+                        <?php } ?>
+                        </div>
+                    </td>
                     <td>
                         <table class="striped w100">
                             <tr>
-                                <td colspan="2">
-                                    <h5><?php print $player_array[0]['position_description']; ?></h5>
-                                </td>
+                                <th class="w50">Позиция</th>
+                                <th>Способность</th>
                             </tr>
-                            <tr>
-                                <td class="w50">
-                                    <a href="national_team_review_profile.php?num=<?php print $player_array[0]['country_id']; ?>">
-                                        <img
-                                            alt="<?php print $player_array[0]['country_name']; ?>"
-                                            class="img-12"
-                                            src="img/flag/12/<?php print $player_array[0]['country_id']; ?>.png"
-                                        />
-                                        <?php print $player_array[0]['country_name']; ?>
-                                    </a>
-                                    <br />
-                                    Не вызывался
-                                </td>
-                                <td>
-                                    <?php print $player_array[0]['player_age']; ?>
-                                    <br />
-                                    Возраст
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <?php print $player_array[0]['player_height']; ?> см
-                                    <br />
-                                    <?php print $player_array[0]['player_weight']; ?> кг
-                                </td>
-                                <td>
-                                    <?php print f_igosja_leg_name($player_array[0]['player_leg_left'], $player_array[0]['player_leg_right']); ?>
-                                    <br />
-                                    Рабочая нога
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <?php print f_igosja_money($player_array[0]['player_salary']); ?> в день
-                                    <br />
-                                    Зарплата
-                                </td>
-                                <td>
-                                    <?php print f_igosja_money($player_array[0]['player_price']); ?>
-                                    <br />
-                                    Стоимость
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    Имеет сонтракт с клубом 
-                                    <a href="team_team_review_profile.php?num=<?php print $player_array[0]['team_id']; ?>">
-                                        <?php print $player_array[0]['team_name']; ?>
-                                    </a>
-                                </td>
-                            </tr>
+                            <?php foreach ($playerposition_array as $item) { ?>
+                                <tr>
+                                    <td><?php print $item['position_name']; ?></td>
+                                    <td class="right">
+                                        <?php print $item['playerposition_value']; ?> %
+                                        <?php if (100 > $item['playerposition_value']) { ?>
+                                            <a href="player_home_training.php?num=<?php print $num; ?>&position=<?php print $item['position_id']; ?>">
+                                                +
+                                            </a>
+                                        <?php } ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                            <?php foreach ($position_array as $item) { ?>
+                                <tr>
+                                    <td><?php print $item['position_name']; ?></td>
+                                    <td class="right">
+                                        <a href="player_home_training.php?num=<?php print $num; ?>&position=<?php print $item['position_id']; ?>">
+                                            +
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </table>
                     </td>
                 </tr>
