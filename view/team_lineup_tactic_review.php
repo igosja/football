@@ -72,6 +72,10 @@
         </td>
     </tr>
     <tr>
+        <td class="block-page center">
+            <div id="field-icon" class="relative"></div>
+            <img src="img/field/tactic-player.png" />
+        </td>
         <td class="block-page w50" rowspan="2">
             <p class="header">Игроки</p>
             <table class="striped w100">
@@ -119,10 +123,6 @@
                     </tr>
                 <?php } ?>
             </table>
-        </td>
-        <td class="block-page center">
-            <div id="field-icon" class="relative"></div>
-            <img src="img/field/tactic-player.png" />
         </td>
     </tr>
     <tr>

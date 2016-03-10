@@ -257,7 +257,7 @@
                     <tr>
                         <td>
                             <div class="progress">
-                                <div class="progress-bar" style="width: <?php print $item['lineup_mark*10']; ?>%">
+                                <div class="progress-bar" style="width: <?php print $item['lineup_mark'] * 10; ?>%">
                                     <?php print SPACE; ?>
                                 </div>
                             </div>

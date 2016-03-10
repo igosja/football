@@ -903,45 +903,55 @@ function f_igosja_generator_game_result()
 
             if (0 != $team_id)
             {
-                $sql = "SELECT `lineup_auto`,
-                               `lineup_position_id`,
-                               `player_power`
-                        FROM `lineup`
-                        LEFT JOIN
-                        (
-                            SELECT `playerattribute_player_id`,
-                                   SUM(`playerattribute_value`) AS `player_power`
-                            FROM `playerattribute`
-                            GROUP BY `playerattribute_player_id`
-                            ORDER BY `playerattribute_player_id` ASC
-                        ) AS `t1`
-                        ON `playerattribute_player_id`=`lineup_player_id`
-                        WHERE `lineup_game_id`='$game_id'
-                        AND `lineup_team_id`='$team_id'
-                        AND `lineup_position_id`<='25'
-                        ORDER BY `lineup_position_id` ASC";
+                $team_country_lineup_sql        = "`lineup_team_id`='$team_id'";
+                $team_country_lineupmain_sql    = "`lineupmain_team_id`='$team_id'";
             }
             else
             {
-                $sql = "SELECT `lineup_auto`,
-                               `lineup_position_id`,
-                               `player_power`
-                        FROM `lineup`
-                        LEFT JOIN
-                        (
-                            SELECT `playerattribute_player_id`,
-                                   SUM(`playerattribute_value`) AS `player_power`
-                            FROM `playerattribute`
-                            GROUP BY `playerattribute_player_id`
-                            ORDER BY `playerattribute_player_id` ASC
-                        ) AS `t1`
-                        ON `playerattribute_player_id`=`lineup_player_id`
-                        WHERE `lineup_game_id`='$game_id'
-                        AND `lineup_country_id`='$country_id'
-                        AND `lineup_position_id`<='25'
-                        ORDER BY `lineup_position_id` ASC";
+                $team_country_lineup_sql        = "`lineup_country_id`='$country_id'";
+                $team_country_lineupmain_sql    = "`lineupmain_team_id`='$country_id'";
             }
 
+            $sql = "SELECT `lineupmain_gamemood_id`
+                    FROM `lineupmain`
+                    WHERE $team_country_lineupmain_sql
+                    AND `lineupmain_game_id`='$game_id'
+                    LIMIT 1";
+            $lineupmain_sql = $mysqli->query($sql);
+
+            $lineupmain_array = $lineupmain_sql->fetch_all(MYSQLI_ASSOC);
+
+            $gamemood_id    = $team . '_gamemood_id';
+            $team_koef_1    = $team . '_koef_1';
+            $team_koef_2    = $team . '_koef_2';
+            $team_koef_3    = $team . '_koef_3';
+            $team_koef_4    = $team . '_koef_4';
+            $team_koef_5    = $team . '_koef_5';
+            $$gamemood_id   = $lineupmain_array[0]['lineupmain_gamemood_id'];
+            $$team_koef_1   = $koef_1 * ( $$gamemood_id + 6 ) / 10;
+            $$team_koef_2   = $koef_2 * ( $$gamemood_id + 6 ) / 10;
+            $$team_koef_3   = $koef_3 * ( $$gamemood_id + 6 ) / 10;
+            $$team_koef_4   = $koef_4 * ( $$gamemood_id + 6 ) / 10;
+            $$team_koef_5   = $koef_5 * ( $$gamemood_id + 6 ) / 10;
+
+            $sql = "SELECT `lineup_auto`,
+                           `lineup_player_id`,
+                           `lineup_position_id`,
+                           `player_power`
+                    FROM `lineup`
+                    LEFT JOIN
+                    (
+                        SELECT `playerattribute_player_id`,
+                               SUM(`playerattribute_value`) AS `player_power`
+                        FROM `playerattribute`
+                        GROUP BY `playerattribute_player_id`
+                        ORDER BY `playerattribute_player_id` ASC
+                    ) AS `t1`
+                    ON `playerattribute_player_id`=`lineup_player_id`
+                    WHERE `lineup_game_id`='$game_id'
+                    AND $team_country_lineup_sql
+                    AND `lineup_position_id`<='25'
+                    ORDER BY `lineup_position_id` ASC";
             $lineup_sql = $mysqli->query($sql);
 
             $count_lineup = $lineup_sql->num_rows;
@@ -949,10 +959,33 @@ function f_igosja_generator_game_result()
 
             for ($k=0; $k<$count_lineup; $k++)
             {
-                $player_power = $lineup_array[$k]['player_power'];
-                $position_id  = $lineup_array[$k]['lineup_position_id'];
-                $auto         = $lineup_array[$k]['lineup_auto'];
+                $player_id      = $lineup_array[$k]['lineup_player_id'];
+                $player_power   = $lineup_array[$k]['player_power'];
+                $position_id    = $lineup_array[$k]['lineup_position_id'];
+                $auto           = $lineup_array[$k]['lineup_auto'];
 
+                $sql = "SELECT `playerposition_value`
+                        FROM `playerposition`
+                        WHERE `playerposition_player_id`='$player_id'
+                        AND `playerposition_position_id`='$position_id'
+                        LIMIT 1";
+                $playerposition_sql = $mysqli->query($sql);
+
+                $count_playerposition = $playerposition_sql->num_rows;
+
+                if (0 == $count_playerposition)
+                {
+                    $power_koeff = 50;
+                }
+                else
+                {
+                    $playerposition_array = $playerposition_sql->fetch_all(MYSQLI_ASSOC);
+
+                    $power_koeff = $playerposition_array[0]['playerposition_value'];
+                    $power_koeff = (100 - $power_koeff) / 2 + $power_koeff;
+                }
+
+                $player_power       = $player_power * $power_koeff / 100;
                 $team_power         = $team . '_team_power';
                 $gk                 = $team . '_gk';
                 $defence_left       = $team . '_defence_left';
@@ -3095,8 +3128,8 @@ function f_igosja_generator_player_condition_practice()
             ON `game_id`=`lineup_game_id`
             LEFT JOIN `shedule`
             ON `shedule_id`=`game_shedule_id`
-            SET `lineup_condition`=`player_condition`-'15'-`player_age`/'5',
-                `lineup_practice`=`player_practice`+'10'+`player_age`/'5'
+            SET `lineup_condition`=`lineup_condition`-'15'-`player_age`/'5',
+                `lineup_practice`=`lineup_practice`+'10'+`player_age`/'5'
             WHERE `shedule_date`=CURDATE()
             AND `lineup_position_id`<='25'
             AND `lineup_position_id`!='0'
@@ -3113,6 +3146,8 @@ function f_igosja_generator_player_condition_practice()
             SET `player_condition`=`lineup_condition`,
                 `player_practice`=`lineup_practice`
             WHERE `shedule_date`=CURDATE()
+            AND `lineup_position_id`<='25'
+            AND `lineup_position_id`!='0'
             AND `game_played`='0'";
     $mysqli->query($sql);
 
@@ -6862,7 +6897,7 @@ function f_igosja_generator_tournament_series_to_record()
             {
                 $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
 
-                $record_value = $record_array[0]['recordteam_value'];
+                $record_value = $record_array[0]['recordtournament_value_1'];
 
                 if ($record_value < $value)
                 {
