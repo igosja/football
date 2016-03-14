@@ -4,7 +4,7 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (!isset($authorization_id))
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
     exit;
 }
 

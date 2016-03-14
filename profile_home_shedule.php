@@ -8,7 +8,7 @@ if (isset($authorization_id))
 }
 else
 {
-    $smarty->display($_SERVER['DOCUMENT_ROOT'] . '/wrong_page.html');
+    $smarty->display($_SERVER['DOCUMENT_ROOT'] . '/wrong_page.php');
     exit;
 }
 

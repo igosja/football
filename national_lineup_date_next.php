@@ -21,7 +21,7 @@ $count_country = $country_sql->num_rows;
 
 if (0 == $count_country)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
     exit;
 }
 
@@ -48,7 +48,7 @@ $count_nearest_game = $nearest_game_sql->num_rows;
 
 if (0 == $count_nearest_game)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.php');
     exit;
 }
 

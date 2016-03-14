@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.php');
     exit;
 }
 

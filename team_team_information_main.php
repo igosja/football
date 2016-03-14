@@ -63,7 +63,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
     exit;
 }
 

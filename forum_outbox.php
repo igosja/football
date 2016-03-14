@@ -18,4 +18,4 @@ $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
 $smarty->assign('header_title', 'Форум');
 $smarty->assign('forum_array', $forum_array);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.html');
+include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

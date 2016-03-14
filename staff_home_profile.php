@@ -40,7 +40,7 @@ $count_staff = $staff_sql->num_rows;
 
 if (0 == $count_staff)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
     exit;
 }
 

@@ -912,7 +912,8 @@ function f_igosja_generator_game_result()
                 $team_country_lineupmain_sql    = "`lineupmain_team_id`='$country_id'";
             }
 
-            $sql = "SELECT `lineupmain_gamemood_id`
+            $sql = "SELECT `lineupmain_gamemood_id`,
+                           `lineupmain_gamestyle_id`
                     FROM `lineupmain`
                     WHERE $team_country_lineupmain_sql
                     AND `lineupmain_game_id`='$game_id'
@@ -921,18 +922,27 @@ function f_igosja_generator_game_result()
 
             $lineupmain_array = $lineupmain_sql->fetch_all(MYSQLI_ASSOC);
 
-            $gamemood_id    = $team . '_gamemood_id';
-            $team_koef_1    = $team . '_koef_1';
-            $team_koef_2    = $team . '_koef_2';
-            $team_koef_3    = $team . '_koef_3';
-            $team_koef_4    = $team . '_koef_4';
-            $team_koef_5    = $team . '_koef_5';
-            $$gamemood_id   = $lineupmain_array[0]['lineupmain_gamemood_id'];
-            $$team_koef_1   = $koef_1 * ( $$gamemood_id + 6 ) / 10;
-            $$team_koef_2   = $koef_2 * ( $$gamemood_id + 6 ) / 10;
-            $$team_koef_3   = $koef_3 * ( $$gamemood_id + 6 ) / 10;
-            $$team_koef_4   = $koef_4 * ( $$gamemood_id + 6 ) / 10;
-            $$team_koef_5   = $koef_5 * ( $$gamemood_id + 6 ) / 10;
+            $gamemood_id        = $team . '_gamemood_id';
+            $$gamemood_id       = $lineupmain_array[0]['lineupmain_gamemood_id'];
+            $team_koef_1        = $team . '_koef_1';
+            $team_koef_3        = $team . '_koef_3';
+            $$team_koef_1       = $koef_1 * ( 8 - $$gamemood_id + 6 ) / 10;
+            $$team_koef_3       = $koef_3 * ( $$gamemood_id + 6 ) / 10;
+            $gamestyle_id       = $team . '_gamestyle_id';
+            $$gamestyle_id      = $lineupmain_array[0]['lineupmain_gamestyle_id'];
+            $gamestyle          = $team . '_gamestyle';
+            $$gamestyle         = $$gamestyle_id * 0.05 + 0.75;
+            $team_power         = $team . '_team_power';
+            $gk                 = $team . '_gk';
+            $defence_left       = $team . '_defence_left';
+            $defence_center     = $team . '_defence_center';
+            $defence_right      = $team . '_defence_right';
+            $halfback_left      = $team . '_halfback_left';
+            $halfback_center    = $team . '_halfback_center';
+            $halfback_right     = $team . '_halfback_right';
+            $forward_left       = $team . '_forward_left';
+            $forward_center     = $team . '_forward_center';
+            $forward_right      = $team . '_forward_right';
 
             $sql = "SELECT `lineup_auto`,
                            `lineup_player_id`,
@@ -985,20 +995,14 @@ function f_igosja_generator_game_result()
                     $power_koeff = (100 - $power_koeff) / 2 + $power_koeff;
                 }
 
-                $player_power       = $player_power * $power_koeff / 100;
-                $team_power         = $team . '_team_power';
-                $gk                 = $team . '_gk';
-                $defence_left       = $team . '_defence_left';
-                $defence_center     = $team . '_defence_center';
-                $defence_right      = $team . '_defence_right';
-                $halfback_left      = $team . '_halfback_left';
-                $halfback_center    = $team . '_halfback_center';
-                $halfback_right     = $team . '_halfback_right';
-                $forward_left       = $team . '_forward_left';
-                $forward_center     = $team . '_forward_center';
-                $forward_right      = $team . '_forward_right';
-
-                $$team_power = $$team_power + $player_power;
+                $player_power           = $player_power * $power_koeff / 100;
+                $$team_power            = $$team_power + $player_power;
+                $player_power_main_3    = (2 - $$gamestyle) * $player_power / 3;
+                $player_power_extra_3   = ($player_power - $player_power_main_3) / 2;
+                $player_power_main_4    = (2 - $$gamestyle) * $player_power / 4;
+                $player_power_extra_4   = ($player_power - $player_power_main_4) / 3;
+                $player_power_main_5    = (2 - $$gamestyle) * $player_power / 5;
+                $player_power_extra_5   = ($player_power - $player_power_main_5) / 4;
 
                 if (1 == $position_id)
                 {
@@ -1006,95 +1010,95 @@ function f_igosja_generator_game_result()
                 }
                 elseif (2 == $position_id)
                 {
-                    $$defence_left    = $$defence_left    + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$defence_center  = $$defence_center  + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$defence_right   = $$defence_right   + $player_power / 3 - $player_power / 3 * $auto / 4;
+                    $$defence_left    = $$defence_left    + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
+                    $$defence_center  = $$defence_center  + $player_power_main_3    - $player_power_main_3 * $auto / 4;
+                    $$defence_right   = $$defence_right   + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
                 }
                 elseif (3 == $position_id)
                 {
-                    $$defence_center  = $$defence_center  + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$defence_right   = $$defence_right   + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$halfback_right  = $$halfback_right  + $player_power / 3 - $player_power / 3 * $auto / 4;
+                    $$defence_center  = $$defence_center  + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
+                    $$defence_right   = $$defence_right   + $player_power_main_3    - $player_power_main_3 * $auto / 4;
+                    $$halfback_right  = $$halfback_right  + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
                 }
                 elseif (in_array($position_id, array(4, 5, 6)))
                 {
-                    $$defence_left    = $$defence_left    + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$defence_center  = $$defence_center  + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$defence_right   = $$defence_right   + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$halfback_center = $$halfback_center + $player_power / 4 - $player_power / 4 * $auto / 4;
+                    $$defence_left    = $$defence_left    + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$defence_center  = $$defence_center  + $player_power_main_4    - $player_power_main_4 * $auto / 4;
+                    $$defence_right   = $$defence_right   + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$halfback_center = $$halfback_center + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
                 }
                 elseif (7 == $position_id)
                 {
-                    $$defence_left    = $$defence_left    + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$defence_center  = $$defence_center  + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$halfback_left   = $$halfback_left   + $player_power / 3 - $player_power / 3 * $auto / 4;
+                    $$defence_left    = $$defence_left    + $player_power_main_3    - $player_power_main_3 * $auto / 4;
+                    $$defence_center  = $$defence_center  + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
+                    $$halfback_left   = $$halfback_left   + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
                 }
                 elseif (8 == $position_id)
                 {
-                    $$defence_right   = $$defence_right   + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$defence_center  = $$defence_center  + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$halfback_right  = $$halfback_right  + $player_power / 3 - $player_power / 3 * $auto / 4;
+                    $$defence_right   = $$defence_right   + $player_power_main_3    - $player_power_main_3 * $auto / 4;
+                    $$defence_center  = $$defence_center  + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
+                    $$halfback_right  = $$halfback_right  + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
                 }
                 elseif (in_array($position_id, array(9, 10, 11)))
                 {
-                    $$defence_center  = $$defence_center  + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$halfback_left   = $$halfback_left   + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$halfback_center = $$halfback_center + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$halfback_right  = $$halfback_right  + $player_power / 4 - $player_power / 4 * $auto / 4;
+                    $$defence_center  = $$defence_center  + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$halfback_left   = $$halfback_left   + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$halfback_center = $$halfback_center + $player_power_main_4    - $player_power_main_4 * $auto / 4;
+                    $$halfback_right  = $$halfback_right  + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
                 }
                 elseif (12 == $position_id)
                 {
-                    $$defence_left    = $$defence_left    + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$defence_center  = $$defence_center  + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$halfback_left   = $$halfback_left   + $player_power / 3 - $player_power / 3 * $auto / 4;
+                    $$defence_left    = $$defence_left    + $player_power_main_3    - $player_power_main_3 * $auto / 4;
+                    $$defence_center  = $$defence_center  + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
+                    $$halfback_left   = $$halfback_left   + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
                 }
                 elseif (13 == $position_id)
                 {
-                    $$defence_right   = $$defence_right   + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$halfback_right  = $$halfback_right  + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$halfback_center = $$halfback_center + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$forward_right   = $$forward_right   + $player_power / 4 - $player_power / 4 * $auto / 4;
+                    $$defence_right   = $$defence_right   + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$halfback_right  = $$halfback_right  + $player_power_main_4    - $player_power_main_4 * $auto / 4;
+                    $$halfback_center = $$halfback_center + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$forward_right   = $$forward_right   + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
                 }
                 elseif (in_array($position_id, array(14, 15, 16)))
                 {
-                    $$defence_center  = $$defence_center  + $player_power / 5 - $player_power / 5 * $auto / 4;
-                    $$halfback_left   = $$halfback_left   + $player_power / 5 - $player_power / 5 * $auto / 4;
-                    $$halfback_center = $$halfback_center + $player_power / 5 - $player_power / 5 * $auto / 4;
-                    $$halfback_right  = $$halfback_right  + $player_power / 5 - $player_power / 5 * $auto / 4;
-                    $$forward_center  = $$forward_center  + $player_power / 5 - $player_power / 5 * $auto / 4;
+                    $$defence_center  = $$defence_center  + $player_power_extra_5   - $player_power_extra_5 * $auto / 4;
+                    $$halfback_left   = $$halfback_left   + $player_power_extra_5   - $player_power_extra_5 * $auto / 4;
+                    $$halfback_center = $$halfback_center + $player_power_main_5    - $player_power_main_5 * $auto / 4;
+                    $$halfback_right  = $$halfback_right  + $player_power_extra_5   - $player_power_extra_5 * $auto / 4;
+                    $$forward_center  = $$forward_center  + $player_power_extra_5   - $player_power_extra_5 * $auto / 4;
                 }
                 elseif (17 == $position_id)
                 {
-                    $$defence_left    = $$defence_left    + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$halfback_left   = $$halfback_left   + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$halfback_center = $$halfback_center + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$forward_left    = $$forward_left    + $player_power / 4 - $player_power / 4 * $auto / 4;
+                    $$defence_left    = $$defence_left    + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$halfback_left   = $$halfback_left   + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$halfback_center = $$halfback_center + $player_power_main_4    - $player_power_main_4 * $auto / 4;
+                    $$forward_left    = $$forward_left    + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
                 }
                 elseif (18 == $position_id)
                 {
-                    $$halfback_right  = $$halfback_right  + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$forward_right   = $$forward_right   + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$forward_center  = $$forward_center  + $player_power / 3 - $player_power / 3 * $auto / 4;
+                    $$halfback_right  = $$halfback_right  + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
+                    $$forward_right   = $$forward_right   + $player_power_main_3    - $player_power_main_3 * $auto / 4;
+                    $$forward_center  = $$forward_center  + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
                 }
                 elseif (in_array($position_id, array(19, 20, 21)))
                 {
-                    $$halfback_left   = $$halfback_left   + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$halfback_center = $$halfback_center + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$halfback_right  = $$halfback_right  + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$forward_center  = $$forward_center  + $player_power / 4 - $player_power / 4 * $auto / 4;
+                    $$halfback_left   = $$halfback_left   + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$halfback_center = $$halfback_center + $player_power_main_4    - $player_power_main_4 * $auto / 4;
+                    $$halfback_right  = $$halfback_right  + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$forward_center  = $$forward_center  + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
                 }
                 elseif (22 == $position_id)
                 {
-                    $$halfback_left   = $$halfback_left   + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$forward_left    = $$forward_left    + $player_power / 3 - $player_power / 3 * $auto / 4;
-                    $$forward_center  = $$forward_center  + $player_power / 3 - $player_power / 3 * $auto / 4;
+                    $$halfback_left   = $$halfback_left   + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
+                    $$forward_left    = $$forward_left    + $player_power_main_3    - $player_power_main_3 * $auto / 4;
+                    $$forward_center  = $$forward_center  + $player_power_extra_3   - $player_power_extra_3 * $auto / 4;
                 }
                 elseif (in_array($position_id, array(23, 24, 25)))
                 {
-                    $$halfback_center = $$halfback_center + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$forward_left    = $$forward_left    + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$forward_center  = $$forward_center  + $player_power / 4 - $player_power / 4 * $auto / 4;
-                    $$forward_right   = $$forward_right   + $player_power / 4 - $player_power / 4 * $auto / 4;
+                    $$halfback_center = $$halfback_center + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$forward_left    = $$forward_left    + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
+                    $$forward_center  = $$forward_center  + $player_power_main_4    - $player_power_main_4 * $auto / 4;
+                    $$forward_right   = $$forward_right   + $player_power_extra_4   - $player_power_extra_4 * $auto / 4;
                 }
             }
         }
@@ -1129,8 +1133,8 @@ function f_igosja_generator_game_result()
 
                 if (1 == $defence_direction)
                 {
-                    $defence_1 = $team_1 . '_defence_left';
-                    $forward_2 = $team_2 . '_forward_right';
+                    $defence_1      = $team_1 . '_defence_left';
+                    $forward_2      = $team_2 . '_forward_right';
                 }
                 elseif (2 == $defence_direction)
                 {
@@ -1143,10 +1147,15 @@ function f_igosja_generator_game_result()
                     $forward_2 = $team_2 . '_forward_left';
                 }
 
+                $koef_1_1 = $team_1 . '_koef_1';
+                $koef_3_1 = $team_1 . '_koef_3';
+                $koef_1_2 = $team_2 . '_koef_1';
+                $koef_3_2 = $team_2 . '_koef_3';
+
                 $defence_1 = $$defence_1;
                 $forward_2 = $$forward_2;
 
-                if (rand(0, $defence_1 + $koef_1) > rand(0, $forward_2 + $koef_1))
+                if (rand(0, $defence_1 + $$koef_1_1) > rand(0, $forward_2 + $$koef_3_2))
                 {
                     $halfback_direction = rand(1, 3);
 
@@ -1192,7 +1201,7 @@ function f_igosja_generator_game_result()
                         $forward_1 = $$forward_1;
                         $defence_2 = $$defence_2;
 
-                        if (rand(0, $forward_1 + $koef_3) > rand(0, $defence_2 + $koef_3))
+                        if (rand(0, $forward_1 + $koef_3_1) > rand(0, $defence_2 + $koef_1_2))
                         {
                             $shot = $team_1 . '_shot';
                             $$shot++;
