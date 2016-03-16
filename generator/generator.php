@@ -2,8 +2,8 @@
 
 set_time_limit(0);
 
-include ('/../include/include.php');
-include ('/../generator/function.php');
+include ('../include/include.php');
+include ('../generator/function.php');
 
 f_igosja_generator_asktoplay_delete();
 f_igosja_generator_lineup_main_create();

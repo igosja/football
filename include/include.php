@@ -2,10 +2,10 @@
 
 $start_time = microtime(true);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/constants.php');
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/database.php');
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/function.php');
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/session.php');
+include (__DIR__ . '/constants.php');
+include (__DIR__ . '/database.php');
+include (__DIR__ . '/function.php');
+include (__DIR__ . '/session.php');
 
 $file_name  = $_SERVER['PHP_SELF'];
 $file_name  = explode('/', $file_name);
