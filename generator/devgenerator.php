@@ -2,8 +2,8 @@
 
 set_time_limit(0);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
-include ($_SERVER['DOCUMENT_ROOT'] . '/generator/function.php');
+include ('/../include/include.php');
+include ('/../generator/function.php');
 
 $current_time = round(microtime(true) - $start_time, 5);
 print $current_time . ' - start<br/>';
