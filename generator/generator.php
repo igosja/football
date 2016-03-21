@@ -1,5 +1,6 @@
 <?php
 
+ini_set('memory_limit', '2048M');
 set_time_limit(0);
 
 include (__DIR__ . '/../include/include.php');
