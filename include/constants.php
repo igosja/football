@@ -107,6 +107,7 @@ define('SERIES_LOOSE', 4);
 define('SERIES_NO_PASS', 5);
 define('SERIES_NO_SCORE', 6);
 define('SITE_URL', $_SERVER['HTTP_HOST']);
+define('SITE_CLOSED', 0);
 define('SPACE', '&nbsp;');
 define('STAFFPOST_COACH', 1);
 define('STAFFPOST_GK', 2);

@@ -6,9 +6,11 @@
         <!--<a href="//www.liveinternet.ru/click" target="_blank"><img src="//counter.yadro.ru/logo?14.1" border="0" width="88" height="31" alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня"/></a>-->
         <p>Страница сгенерирована за <?php print round(microtime(true) - $start_time, 5); ?> сек.<p>
         <p>Потребление памяти: <?php print number_format(memory_get_usage(), 0, ",", " "); ?> Б</p>
+        <p>Версия сайта: <?= $site_array[0]['site_version_1'] ?>.<?= $site_array[0]['site_version_2'] ?>.<?= $site_array[0]['site_version_3'] ?>.<?= $site_array[0]['site_version_4'] ?> от <?= date('d.m.Y', $site_array[0]['site_version_date']); ?></p>
         <?php if (1 < $authorization_permission) { ?>
             <p><a href="admin">Административный раздел</a></p>
         <?php } ?>
+        <?= time(); ?>
     </div>
 
     <script src="/js/jquery.js"></script>
