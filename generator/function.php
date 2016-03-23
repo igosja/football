@@ -1251,9 +1251,19 @@ function f_igosja_generator_game_result()
             $home_on_target = $home_on_target + rand(1, 3);
         }
 
+        if ($home_shot == $home_on_target)
+        {
+            $home_shot = $home_shot + rand(1, 3);
+        }
+
         if ($guest_score == $guest_on_target)
         {
             $guest_on_target = $guest_on_target + rand(1, 3);
+        }
+
+        if ($guest_shot == $guest_on_target)
+        {
+            $guest_shot = $guest_shot + rand(1, 3);
         }
 
         $home_moment        = round(($home_on_target + $home_score) / 2) - rand(0, 1);

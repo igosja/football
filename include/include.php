@@ -151,7 +151,7 @@ $site_array = $site_sql->fetch_all(MYSQLI_ASSOC);
 
 $site_status = $site_array[0]['site_status'];
 
-if (SITE_CLOSED == $site_status)
+if (SITE_CLOSED == $site_status && 'admin' != $chapter)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/site_closed.php');
     exit;

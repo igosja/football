@@ -11,7 +11,7 @@
         <link href="/css/timeline.css" rel="stylesheet">
         <link href="/css/sb-admin-2.css" rel="stylesheet">
         <link href="/css/morris.css" rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div id="wrapper">
@@ -23,7 +23,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/admin/">Административный раздел</a>
+                    <a class="navbar-brand" href="/admin/">
+                        ВФЛ (<?=$site_array[0]['site_version_1']?>.<?=$site_array[0]['site_version_2']?>.<?=$site_array[0]['site_version_3']?>.<?=$site_array[0]['site_version_4']?> <?=date('d.m.Y', $site_array[0]['site_version_date'])?>)
+                    </a>
                 </div>
 
                 <ul class="nav navbar-top-links navbar-right">
@@ -216,13 +218,19 @@
                             <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
+                            <li><a href="site_version.php"><i class="fa fa-gear fa-fw"></i> Обновить версию сайта</a></li>
+                            <li>
+                                <a href="site_status.php"><i class="fa fa-on fa-fw"></i> 
+                                    <?php if (SITE_CLOSED == $site_array[0]['site_status']) { ?>
+                                        Открыть сайт
+                                    <?php } else { ?>
+                                        Закрыть сайт
+                                    <?php } ?>
+                                </a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="/logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                            </li>
+                            <li><a href="/logout.php"><i class="fa fa-sign-out fa-fw"></i> Выйти</a></li>
                         </ul>
                     </li>
                 </ul>
