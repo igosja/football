@@ -6,7 +6,7 @@ date_default_timezone_set('Europe/Moscow');
 
 include (__DIR__ . '/../include/constants.php');
 include (__DIR__ . '/../include/database.php');
-include (__DIR__ . '/generator/function.php');
+include (__DIR__ . '/function.php');
 
 $sql = "SELECT `season_id`
         FROM `season`
