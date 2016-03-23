@@ -10,7 +10,6 @@
         <?php if (1 < $authorization_permission) { ?>
             <p><a href="admin">Административный раздел</a></p>
         <?php } ?>
-        <?= time(); ?>
     </div>
 
     <script src="/js/jquery.js"></script>
