@@ -30,7 +30,7 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 $tournament_name = $tournament_array[0]['tournament_name'];
 
 $sql = "SELECT `shedule_date`,
-               `stage_id`,
+               `shedule_id`,
                `stage_name`
         FROM `game`
         LEFT JOIN `stage`
@@ -38,11 +38,11 @@ $sql = "SELECT `shedule_date`,
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
         WHERE `game_tournament_id`='$get_num'
-        GROUP BY `stage_id`
+        GROUP BY `shedule_id`
         ORDER BY `shedule_date` ASC";
-$stage_sql = $mysqli->query($sql);
+$shedule_sql = $mysqli->query($sql);
 
-$stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
+$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
 $num            = $get_num;
 $header_title   = $tournament_name;

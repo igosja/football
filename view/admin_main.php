@@ -6,13 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Административный раздел">
         <title>Административный раздел</title>
-        <link href="/admin-css-js/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/admin-css-js/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-        <link href="/admin-css-js/dist/css/timeline.css" rel="stylesheet">
-        <link href="/admin-css-js/dist/css/sb-admin-2.css" rel="stylesheet">
-        <link href="/admin-css-js/bower_components/morrisjs/morris.css" rel="stylesheet">
-        <link href="/admin-css-js/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-        <link href="/admin-css-js/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/metisMenu.min.css" rel="stylesheet">
+        <link href="/css/timeline.css" rel="stylesheet">
+        <link href="/css/sb-admin-2.css" rel="stylesheet">
+        <link href="/css/morris.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div id="wrapper">
@@ -467,26 +466,14 @@
 
             </div>
         </div>
-        <script src="/admin-css-js/bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="/admin-css-js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="/admin-css-js/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-        <script src="/admin-css-js/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-        <script src="/admin-css-js/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-<!--        <script src="/admin-css-js/bower_components/raphael/raphael-min.js"></script>-->
-<!--        <script src="/admin-css-js/bower_components/morrisjs/morris.min.js"></script>-->
-<!--        <script src="/admin-css-js/js/morris-data.js"></script>-->
-        <script src="/admin-css-js/dist/js/sb-admin-2.js"></script>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/metisMenu.min.js"></script>
+        <script src="/js/sb-admin-2.js"></script>
+        <script src="/js/raphael-min.js"></script>
+        <script src="/js/morris.min.js"></script>
+        <script src="/js/morris-data.js"></script>
         <script>
-            $(document).ready(function()
-            {
-                $('#bootstrap-table').DataTable
-                (
-                    {
-                        responsive: true
-                    }
-                );
-            });
-
             $('#select-ajax-give-1').change(function()
                 //Зависимые селекты
             {

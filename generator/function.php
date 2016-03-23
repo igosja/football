@@ -1,5 +1,22 @@
 <?php
 
+function f_igosja_generator_site_close()
+//Закрываем сайт для пользователей на время генерации
+{
+    global $mysqli;
+
+    $sql = "UPDATE `site`
+            SET `site_status`='0'
+            WHERE `site_id`='1'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
+}
+
 function f_igosja_generator_asktoplay_delete()
 //Удаляем заявки на товарищеские матчи на текущий день
 {
@@ -9538,6 +9555,23 @@ function f_igosja_generator_building()
 
     $sql = "DELETE FROM `building`
             WHERE `building_buildingtype_id` IN (4,5)";
+    $mysqli->query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
+}
+
+function f_igosja_generator_site_open()
+//Открываем сайт для пользователей после генерации
+{
+    global $mysqli;
+
+    $sql = "UPDATE `site`
+            SET `site_status`='1'
+            WHERE `site_id`='1'
+            LIMIT 1";
     $mysqli->query($sql);
 
     usleep(1);

@@ -29,15 +29,15 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-if (isset($_GET['stage']))
+if (isset($_GET['shedule']))
 {
-    $stage_id = (int) $_GET['stage'];
+    $shedule_id = (int) $_GET['shedule'];
 }
 else
 {
     $today = date('Y-m-d');
 
-    $sql = "SELECT `game_stage_id`
+    $sql = "SELECT `game_shedule_id`
             FROM `shedule`
             LEFT JOIN `game`
             ON `game_shedule_id`=`shedule_id`
@@ -46,13 +46,13 @@ else
             AND `shedule_season_id`='$igosja_season_id'
             ORDER BY `shedule_date` DESC
             LIMIT 1";
-    $stage_sql = $mysqli->query($sql);
+    $shedule_sql = $mysqli->query($sql);
 
-    $count_stage = $stage_sql->num_rows;
+    $count_shedule = $shedule_sql->num_rows;
 
-    if (0 == $count_stage)
+    if (0 == $count_shedule)
     {
-        $sql = "SELECT `game_stage_id`
+        $sql = "SELECT `game_shedule_id`
                 FROM `shedule`
                 LEFT JOIN `game`
                 ON `game_shedule_id`=`shedule_id`
@@ -61,12 +61,12 @@ else
                 AND `shedule_season_id`='$igosja_season_id'
                 ORDER BY `shedule_date` ASC
                 LIMIT 1";
-        $stage_sql = $mysqli->query($sql);
+        $shedule_sql = $mysqli->query($sql);
     }
 
-    $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
+    $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
-    $stage_id = $stage_array[0]['game_stage_id'];
+    $shedule_id = $shedule_array[0]['game_shedule_id'];
 }
 
 $sql = "SELECT `game_id`,
@@ -75,7 +75,7 @@ $sql = "SELECT `game_id`,
                `game_home_score`,
                `game_home_team_id`,
                `game_played`,
-               `game_stage_id`,
+               `game_shedule_id`,
                `guest_team`.`team_name` AS `guest_team_name`,
                `home_team`.`team_name` AS `home_team_name`
         FROM `game`
@@ -84,14 +84,14 @@ $sql = "SELECT `game_id`,
         LEFT JOIN `team` AS `guest_team`
         ON `guest_team`.`team_id`=`game_guest_team_id`
         WHERE `game_tournament_id`='$get_num'
-        AND `game_stage_id`='$stage_id'
+        AND `game_shedule_id`='$shedule_id'
         ORDER BY `game_id` ASC";
 $game_sql = $mysqli->query($sql);
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `shedule_date`,
-               `stage_id`,
+               `shedule_id`,
                `stage_name`
         FROM `game`
         LEFT JOIN `stage`
@@ -99,11 +99,11 @@ $sql = "SELECT `shedule_date`,
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
         WHERE `game_tournament_id`='$get_num'
-        GROUP BY `stage_id`
+        GROUP BY `shedule_id`
         ORDER BY `shedule_date` ASC";
-$stage_sql = $mysqli->query($sql);
+$shedule_sql = $mysqli->query($sql);
 
-$stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
+$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
 $num            = $get_num;
 $header_title   = $tournament_name;

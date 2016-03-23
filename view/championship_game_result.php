@@ -5,10 +5,10 @@
             <form id="tournament-stage-form" method="GET" class="center">
                 <input type="hidden" name="num" value="<?php print $num; ?>">
                 Стадия:
-                <select id="tournament-stage-select" name="stage">
-                    <?php foreach ($stage_array as $item) { ?>
-                        <option value="<?php print $item['stage_id']; ?>"
-                            <?php if ($item['stage_id'] == $game_array[0]['game_stage_id']) { ?>
+                <select id="tournament-stage-select" name="shedule">
+                    <?php foreach ($shedule_array as $item) { ?>
+                        <option value="<?php print $item['shedule_id']; ?>"
+                            <?php if ($item['shedule_id'] == $game_array[0]['game_shedule_id']) { ?>
                                 selected
                             <?php } ?>
                         >

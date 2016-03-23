@@ -6,6 +6,7 @@ set_time_limit(0);
 include (__DIR__ . '/../include/include.php');
 include (__DIR__ . '/generator/function.php');
 
+f_igosja_generator_site_close();
 f_igosja_generator_asktoplay_delete();
 f_igosja_generator_lineup_main_create();
 f_igosja_generator_lineup_check_and_fill();
@@ -53,6 +54,7 @@ f_igosja_generator_finance();
 f_igosja_generator_make_played();
 f_igosja_generator_scout();
 f_igosja_generator_building();
+f_igosja_generator_site_open();
 
 print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
        <br/>Потребление памяти: ' . number_format(memory_get_usage(), 0, ",", " ") . ' Б';
