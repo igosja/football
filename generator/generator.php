@@ -2,9 +2,21 @@
 
 ini_set('memory_limit', '2048M');
 set_time_limit(0);
+date_default_timezone_set('Europe/Moscow');
 
-include (__DIR__ . '/../include/include.php');
+include (__DIR__ . '/../include/constants.php');
+include (__DIR__ . '/../include/database.php');
 include (__DIR__ . '/generator/function.php');
+
+$sql = "SELECT `season_id`
+        FROM `season`
+        ORDER BY `season_id` DESC
+        LIMIT 1";
+$season_sql = $mysqli->query($sql);
+
+$season_array = $season_sql->fetch_all(MYSQLI_ASSOC);
+
+$igosja_season_id = $season_array[0]['season_id'];
 
 f_igosja_generator_site_close();
 f_igosja_generator_asktoplay_delete();

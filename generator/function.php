@@ -1246,6 +1246,16 @@ function f_igosja_generator_game_result()
             }
         }
 
+        if ($home_score == $home_on_target)
+        {
+            $home_on_target = $home_on_target + rand(1, 3);
+        }
+
+        if ($guest_score == $guest_on_target)
+        {
+            $guest_on_target = $guest_on_target + rand(1, 3);
+        }
+
         $home_moment        = round(($home_on_target + $home_score) / 2) - rand(0, 1);
         $guest_moment       = round(($guest_on_target + $guest_score) / 2) - rand(0, 1);
         $home_pass          = $home_pass + rand(60, 80);
