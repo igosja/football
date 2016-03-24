@@ -1740,6 +1740,26 @@ function f_igosja_generator_game_result_overtime()
                     $guest_shoot_out = 0;
                 }
 
+                if ($home_score == $home_on_target)
+                {
+                    $home_on_target = $home_on_target + rand(1, 3);
+                }
+
+                if ($home_shot == $home_on_target)
+                {
+                    $home_shot = $home_shot + rand(1, 3);
+                }
+
+                if ($guest_score == $guest_on_target)
+                {
+                    $guest_on_target = $guest_on_target + rand(1, 3);
+                }
+
+                if ($guest_shot == $guest_on_target)
+                {
+                    $guest_shot = $guest_shot + rand(1, 3);
+                }
+
                 $sql = "UPDATE `game`
                         SET `game_guest_corner`=`game_guest_corner`+'$guest_corner',
                             `game_guest_foul`=`game_guest_foul`+'$guest_foul',
