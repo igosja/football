@@ -42,8 +42,6 @@ if (isset($_POST['injurytype_name']))
     $prepare->close();
 
     redirect('injurytype_list.php');
-
-    exit;
 }
 
 $injurytype_array = $injurytype_sql->fetch_all(MYSQLI_ASSOC);

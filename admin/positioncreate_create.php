@@ -11,8 +11,6 @@ if (isset($_POST['position_id']))
     $mysqli->query($sql);
 
     redirect('positioncreate_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `position_description`, `position_id`

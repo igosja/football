@@ -40,8 +40,6 @@ if (isset($_POST['statustransfer_name']))
     $prepare->close();
 
     redirect('statustransfer_list.php');
-
-    exit;
 }
 
 $statustransfer_array = $statustransfer_sql->fetch_all(MYSQLI_ASSOC);

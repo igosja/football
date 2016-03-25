@@ -42,8 +42,6 @@ if (isset($_POST['gamemood_name']))
     $prepare->close();
 
     redirect('gamemood_list.php');
-
-    exit;
 }
 
 $gamemood_array = $gamemood_sql->fetch_all(MYSQLI_ASSOC);

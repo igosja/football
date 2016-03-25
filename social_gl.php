@@ -63,7 +63,6 @@ if ($result)
         $_SESSION['authorization_login'] = $user_login;
 
         redirect('profile_home_home.php');
-        exit;
     }
     else
     {
@@ -76,7 +75,6 @@ if ($result)
             $mysqli->query($sql);
 
             redirect('questionary.php');
-            exit;
         }
         else
         {
@@ -90,7 +88,6 @@ if ($result)
             $_SESSION['authorization_login'] = $gl_id;
 
             redirect('questionary.php');
-            exit;
         }
     }
 }

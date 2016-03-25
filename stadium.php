@@ -54,7 +54,6 @@ if (isset($_POST['data']) &&
         $_SESSION['message_text']   = 'Строительство прошло успешно.';
 
         redirect('team_team_information_condition.php?num=' . $get_num);
-        exit;
     }
 
     $dif_capacity   = $new_capacity - $old_capacity;
@@ -66,7 +65,6 @@ if (isset($_POST['data']) &&
         $_SESSION['message_text']   = 'У вашей команды недостаточно денег для расширения стадиона.';
 
         redirect('team_team_information_condition.php?num=' . $get_num);
-        exit;
     }
 
     $sql = "INSERT INTO `building`
@@ -122,7 +120,6 @@ if (isset($_POST['data']) &&
     $_SESSION['message_text']   = 'Строительство началось успешно.';
 
     redirect('team_team_information_condition.php?num=' . $get_num);
-    exit;
 }
 
 $header_title = $authorization_team_name;

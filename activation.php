@@ -11,7 +11,6 @@ if (!isset($_GET['id']) ||
     !isset($_GET['code']))
 {
     redirect('index.php');
-    exit;
 }
 
 $id     = (int) $_GET['id'];
@@ -29,7 +28,6 @@ if ($code != $check)
     $_SESSION['message_text']   = 'Активировать профиль не удалось.<br/>Зарегистрируйтесь повторно.';
 
     redirect('index.php');
-    exit;
 }
 
 $sql = "UPDATE `user`
@@ -42,4 +40,3 @@ $_SESSION['message_class']  = 'success';
 $_SESSION['message_text']   = 'Профиль активирован успешно.';
 
 redirect('index.php');
-exit;

@@ -37,8 +37,6 @@ if (isset($_POST['tournamenttype_id']))
     }
 
     redirect('tournament_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `country_id`,

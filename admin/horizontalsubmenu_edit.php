@@ -45,7 +45,6 @@ if (isset($_POST['menu_id']))
     $prepare->close();
 
     redirect('horizontalsubmenu_list.php');
-    exit;
 }
 
 $menu_array = $menu_sql->fetch_all(MYSQLI_ASSOC);

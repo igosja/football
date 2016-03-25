@@ -116,7 +116,6 @@ if (isset($_POST['data']))
     }
 
     redirect('questionary.php');
-    exit;
 }
 
 $sql = "SELECT `user_birth_day`,

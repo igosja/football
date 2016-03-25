@@ -16,8 +16,6 @@ if (isset($_POST['horizontalmenuchapter_id']))
     $prepare->close();
 
     redirect('horizontalmenu_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `horizontalmenuchapter_id`, `horizontalmenuchapter_name`

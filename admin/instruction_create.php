@@ -16,8 +16,6 @@ if (isset($_POST['chapter_id']))
     $prepare->close();
 
     redirect('instruction_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `instructionchapter_id`, `instructionchapter_name`

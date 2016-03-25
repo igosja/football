@@ -40,8 +40,6 @@ if (isset($_POST['recordtournamenttype_name']))
     $prepare->close();
 
     redirect('recordtournamenttype_list.php');
-
-    exit;
 }
 
 $recordtournamenttype_array = $recordtournamenttype_sql->fetch_all(MYSQLI_ASSOC);

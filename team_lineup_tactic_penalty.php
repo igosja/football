@@ -50,7 +50,6 @@ if (isset($_POST['data']))
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
     redirect('team_lineup_tactic_penalty.php?num=' . $get_num);
-    exit;
 }
 
 $sql = "SELECT `composure`,

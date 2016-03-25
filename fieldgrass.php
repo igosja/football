@@ -46,7 +46,6 @@ if (isset($_GET['change']) &&
         $_SESSION['message_text']   = 'У вашей команды недостаточно денег для замены газона.';
 
         redirect('fieldgrass.php');
-        exit;
     }
 
     $sql = "INSERT INTO `building`
@@ -101,7 +100,6 @@ if (isset($_GET['change']) &&
     $_SESSION['message_text']   = 'Работы по замене газона начались успешно.';
 
     redirect('team_team_information_condition.php?num=' . $get_num);
-    exit;
 }
 
 $num            = $get_num;

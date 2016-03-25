@@ -36,8 +36,6 @@ if (isset($_POST['position_id']))
     $mysqli->query($sql);
 
     redirect('positioncreate_list.php');
-
-    exit;
 }
 
 $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);

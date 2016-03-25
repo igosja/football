@@ -64,8 +64,6 @@ if (isset($_POST['position_name']))
     $mysqli->query($sql);
 
     redirect('position_list.php');
-
-    exit;
 }
 
 $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);

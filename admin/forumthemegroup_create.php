@@ -17,8 +17,6 @@ if (isset($_POST['chapter_name']))
     $prepare->close();
 
     redirect('forumthemegroup_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `forumchapter_id`,

@@ -14,8 +14,6 @@ if (isset($_POST['offertype_name']))
     $prepare->close();
 
     redirect('offertype_list.php');
-
-    exit;
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

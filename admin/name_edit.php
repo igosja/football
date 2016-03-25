@@ -60,8 +60,6 @@ if (isset($_POST['name_name']))
     }
 
     redirect('name_list.php');
-
-    exit;
 }
 
 $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);

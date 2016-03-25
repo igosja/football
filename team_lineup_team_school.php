@@ -58,7 +58,6 @@ if (isset($_GET['ok']))
         $_SESSION['message_text']   = 'Игрок выбран неправильно.';
 
         redirect('team_lineup_team_school.php?num=' . $get_num);
-        exit;
     }
 
     $school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
@@ -176,7 +175,6 @@ if (isset($_GET['ok']))
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
     redirect('team_lineup_team_player.php?num=' . $get_num);
-    exit;
 }
 
 $sql = "SELECT COUNT(`position_id`) AS `count`

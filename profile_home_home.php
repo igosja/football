@@ -51,7 +51,6 @@ if (!isset($authorization_team_id))
             $_SESSION['message_text']   = 'Вы успешно взяли команду ' . $team_name . ' под управление.';
 
             redirect('profile_home_home.php');
-            exit();
         }
     }
 

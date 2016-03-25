@@ -58,7 +58,6 @@ if (isset($_GET['ok']))
         $_SESSION['message_text']   = 'Вы уже играете матч в этот день.';
 
         redirect('team_lineup_date_asktoplay.php?num=' . $get_num);
-        exit;
     }
 
     $sql = "SELECT COUNT(`game_id`) AS `count`
@@ -87,7 +86,6 @@ if (isset($_GET['ok']))
         $_SESSION['message_text']   = 'Ваш соперник уже играет матч в этот день.';
 
         redirect('team_lineup_date_asktoplay.php?num=' . $get_num);
-        exit;
     }
 
     $sql = "SELECT `asktoplay_home`,
@@ -228,7 +226,6 @@ if (isset($_GET['ok']))
         $_SESSION['message_text']   = 'Матч успешно организован.';
 
         redirect('team_lineup_date_asktoplay.php?num=' . $get_num);
-        exit;
     }
 }
 

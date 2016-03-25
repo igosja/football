@@ -49,7 +49,6 @@ if (isset($_POST['data']) &&
         $_SESSION['message_text']   = 'Не правильно введены размеры поля.';
 
         redirect('fieldsize.php?num=' . $get_num);
-        exit;
     }
 
     $sql = "INSERT INTO `building`
@@ -64,7 +63,6 @@ if (isset($_POST['data']) &&
     $_SESSION['message_text']   = 'Работы по смене размеров поля начались успешно.';
 
     redirect('team_team_information_condition.php?num=' . $get_num);
-    exit;
 }
 
 $num            = $get_num;

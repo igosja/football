@@ -50,8 +50,6 @@ if (isset($_POST['weather_name']))
     }
 
     redirect('weather_list.php');
-
-    exit;
 }
 
 $weather_array = $weather_sql->fetch_all(MYSQLI_ASSOC);

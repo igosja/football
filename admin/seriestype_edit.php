@@ -40,8 +40,6 @@ if (isset($_POST['seriestype_name']))
     $prepare->close();
 
     redirect('seriestype_list.php');
-
-    exit;
 }
 
 $seriestype_array = $seriestype_sql->fetch_all(MYSQLI_ASSOC);

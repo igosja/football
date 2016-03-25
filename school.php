@@ -47,7 +47,6 @@ if (isset($_GET['level']) &&
             $_SESSION['message_text']   = 'У вашей команды недостаточно денег для увеличения уровеня молодежной инфраструктуры.';
 
             redirect('school.php');
-            exit;
         }
         elseif ($school_level >= 10)
         {
@@ -55,7 +54,6 @@ if (isset($_GET['level']) &&
             $_SESSION['message_text']   = 'Вы имеете максимальный уровень молодежной инфраструктуры.';
 
             redirect('school.php');
-            exit;
         }
 
         $sql = "INSERT INTO `building`
@@ -110,7 +108,6 @@ if (isset($_GET['level']) &&
         $_SESSION['message_text']   = 'Строительство началось успешно.';
 
         redirect('team_team_information_condition.php?num=' . $get_num);
-        exit;
     }
     elseif (0 == $level)
     {
@@ -120,7 +117,6 @@ if (isset($_GET['level']) &&
             $_SESSION['message_text']   = 'Вы имеете минимальный уровень тренировочной базы.';
 
             redirect('school.php');
-            exit;
         }
 
         $sql = "UPDATE `team`
@@ -132,7 +128,6 @@ if (isset($_GET['level']) &&
         $_SESSION['message_text']   = 'Строительство прошло успешно.';
 
         redirect('team_team_information_condition.php?num=' . $get_num);
-        exit;
     }
 }
 

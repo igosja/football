@@ -9,8 +9,6 @@ if (isset($_POST['day_id']))
     $mysqli->query($sql);
 
     redirect('day_list.php');
-
-    exit;
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

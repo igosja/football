@@ -21,8 +21,6 @@ if (isset($_POST['eventtype_name']))
     }
 
     redirect('eventtype_list.php');
-
-    exit;
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

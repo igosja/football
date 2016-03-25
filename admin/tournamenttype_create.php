@@ -16,8 +16,6 @@ if (isset($_POST['tournamenttype_name']))
     $prepare->close();
 
     redirect('tournamenttype_list.php');
-
-    exit;
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

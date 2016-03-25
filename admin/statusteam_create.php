@@ -14,8 +14,6 @@ if (isset($_POST['statusteam_name']))
     $prepare->close();
 
     redirect('statusteam_list.php');
-
-    exit;
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

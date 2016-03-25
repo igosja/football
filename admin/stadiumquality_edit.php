@@ -40,8 +40,6 @@ if (isset($_POST['stadiumquality_name']))
     $prepare->close();
 
     redirect('stadiumquality_list.php');
-
-    exit;
 }
 
 $stadiumquality_array = $stadiumquality_sql->fetch_all(MYSQLI_ASSOC);

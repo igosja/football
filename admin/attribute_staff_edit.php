@@ -41,8 +41,6 @@ if (isset($_POST['chapter_id']))
     $prepare->close();
 
     redirect('attribute_staff_list.php');
-
-    exit;
 }
 
 $attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);

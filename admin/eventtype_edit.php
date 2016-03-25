@@ -45,8 +45,6 @@ if (isset($_POST['eventtype_name']))
     }
 
     redirect('eventtype_list.php');
-
-    exit;
 }
 
 $eventtype_array = $eventtype_sql->fetch_all(MYSQLI_ASSOC);

@@ -24,22 +24,18 @@ $tournamenttype_id = $tournament_array[0]['tournament_tournamenttype_id'];
 if (TOURNAMENT_TYPE_CHAMPIONSHIP == $tournamenttype_id)
 {
     redirect('championship_review_profile.php?num=' . $get_num);
-    exit();
 }
 elseif (TOURNAMENT_TYPE_CUP == $tournamenttype_id)
 {
     redirect('cup_review_profile.php?num=' . $get_num);
-    exit();
 }
 elseif (TOURNAMENT_TYPE_CHAMPIONS_LEAGUE == $tournamenttype_id)
 {
     redirect('league_review_profile.php?num=' . $get_num);
-    exit();
 }
 elseif (TOURNAMENT_TYPE_WORLD_CUP == $tournamenttype_id)
 {
     redirect('worldcup_review_profile.php?num=' . $get_num);
-    exit();
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

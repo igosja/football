@@ -48,7 +48,6 @@ if (isset($_POST['data']))
         if (0 == $count_user)
         {
             redirect('profile_news_outbox.php?num=' . $get_num);
-            exit;
         }
 
         $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
@@ -73,7 +72,6 @@ if (isset($_POST['data']))
     }
 
     redirect('profile_news_outbox.php?num=' . $get_num);
-    exit;
 }
 
 $sql = "SELECT `inbox_id`,

@@ -17,8 +17,6 @@ if (isset($_POST['position_id']))
     }
 
     redirect('positionmain_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `position_id`, `position_description`, `positionmain_id`

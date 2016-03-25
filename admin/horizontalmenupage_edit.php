@@ -43,7 +43,6 @@ if (isset($_POST['horizontalmenupage_name']))
     $prepare->close();
 
     redirect('horizontalmenupage_list.php');
-    exit;
 }
 
 $horizontalmenupage_array = $horizontalmenupage_sql->fetch_all(MYSQLI_ASSOC);

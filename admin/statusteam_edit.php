@@ -40,8 +40,6 @@ if (isset($_POST['statusteam_name']))
     $prepare->close();
 
     redirect('statusteam_list.php');
-
-    exit;
 }
 
 $statusteam_array = $statusteam_sql->fetch_all(MYSQLI_ASSOC);

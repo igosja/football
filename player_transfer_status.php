@@ -81,7 +81,6 @@ if (isset($_POST['data']) &&
             $_SESSION['message_text']   = 'Нельзя выставить на трансфер более 5 игроков.';
 
             redirect('player_transfer_status.php?num=' . $get_num);
-            exit;
         }
 
         $position_id = $player_array[0]['player_position_id'];
@@ -106,7 +105,6 @@ if (isset($_POST['data']) &&
                 $_SESSION['message_text']   = 'В команде должно остаться не менее 2 вратарей.';
 
                 redirect('player_transfer_status.php?num=' . $get_num);
-                exit;
             }
         }
         else
@@ -129,7 +127,6 @@ if (isset($_POST['data']) &&
                 $_SESSION['message_text']   = 'В команде должно остаться не менее 16 полевых игроков.';
 
                 redirect('player_transfer_status.php?num=' . $get_num);
-                exit;
             }
         }
     }
@@ -147,7 +144,6 @@ if (isset($_POST['data']) &&
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
     redirect('player_transfer_status.php?num=' . $get_num);
-    exit;
 }
 
 $player_name    = $player_array[0]['name_name'];

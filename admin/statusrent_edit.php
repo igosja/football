@@ -40,8 +40,6 @@ if (isset($_POST['statusrent_name']))
     $prepare->close();
 
     redirect('statusrent_list.php');
-
-    exit;
 }
 
 $statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);

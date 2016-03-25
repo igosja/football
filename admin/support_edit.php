@@ -54,7 +54,6 @@ if (isset($_POST['inbox_text']))
     $mysqli->query($sql);
 
     redirect('support_list.php');
-    exit;
 }
 
 $inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);

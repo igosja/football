@@ -58,8 +58,6 @@ if (isset($_POST['role_id']))
     $_SESSION['message_text']  = 'Изменения успешно сохранены';
 
     redirect('country_lineup_tactic_player.php?num=' . $get_num);
-
-    exit;
 }
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);

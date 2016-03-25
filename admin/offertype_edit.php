@@ -40,8 +40,6 @@ if (isset($_POST['offertype_name']))
     $prepare->close();
 
     redirect('offertype_list.php');
-
-    exit;
 }
 
 $offertype_array = $offertype_sql->fetch_all(MYSQLI_ASSOC);

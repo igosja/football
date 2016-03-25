@@ -39,7 +39,6 @@ if (isset($_POST['historytext_name']))
     $prepare->close();
 
     redirect('historytext_list.php');
-    exit;
 }
 
 $historytext_array = $historytext_sql->fetch_all(MYSQLI_ASSOC);

@@ -46,7 +46,6 @@ if (isset($_POST['data']))
         $_SESSION['message_text']   = 'Неправильная комбинация логин/пароль.';
 
         redirect('login.php');
-        exit;
     }
 
     $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
@@ -60,7 +59,6 @@ if (isset($_POST['data']))
         $_SESSION['message_text']   = 'Неправильная комбинация логин/пароль.';
 
         redirect('login.php');
-        exit;
     }
     elseif (0 == $user_activation)
     {
@@ -68,7 +66,6 @@ if (isset($_POST['data']))
         $_SESSION['message_text']   = 'Профиль не активирован после регистрации.';
 
         redirect('login.php');
-        exit;
     }
 
     $user_id                    = $user_array[0]['user_id'];
@@ -82,7 +79,6 @@ if (isset($_POST['data']))
     $_SESSION['authorization_login']        = $authorization_login;
 
     redirect('profile_home_home.php');
-    exit;
 }
 
 $header_title = 'Вход';

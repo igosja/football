@@ -32,7 +32,6 @@ if (isset($_SESSION['authorization_id']))
     if (!isset($user_array[0]['user_id']))
     {
         redirect('logout.php');
-        exit;
     }
 
     $authorization_user_id      = $user_array[0]['user_id'];

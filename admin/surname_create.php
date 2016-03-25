@@ -60,8 +60,6 @@ if (isset($_POST['surname_name']))
     }
 
     redirect('surname_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `country_id`, `country_name`

@@ -54,7 +54,6 @@ if (isset($_POST['data']))
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
     redirect('team_lineup_training_review.php?num=' . $get_num);
-    exit;
 }
 
 $sql = "SELECT `name_name`,

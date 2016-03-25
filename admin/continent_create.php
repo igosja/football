@@ -21,8 +21,6 @@ if (isset($_POST['continent_name']))
     }
 
     redirect('continent_list.php');
-
-    exit;
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

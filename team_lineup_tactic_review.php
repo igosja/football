@@ -162,7 +162,6 @@ if (isset($_POST['data']))
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
     redirect('team_lineup_tactic_review.php?num=' . $get_num . '&game=' . $game_id);
-    exit;
 }
 
 $sql = "SELECT `game_home_team_id`,

@@ -40,7 +40,6 @@ if (isset($_POST['note_id']))
     $_SESSION['message_text']   = 'Данные успешно сохранены';
 
     redirect('profile_history_note.php');
-    exit;
 }
 elseif (isset($_GET['note']))
 {
@@ -55,7 +54,6 @@ elseif (isset($_GET['note']))
     $_SESSION['message_text']   = 'Данные успешно удалены';
 
     redirect('profile_history_note.php');
-    exit;
 }
 
 $sql = "SELECT `note_id`,

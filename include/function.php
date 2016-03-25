@@ -4,6 +4,7 @@ function redirect($location)
 //Перенаправление
 {
     header('Location: ' . $location);
+    exit;
 }
 
 function f_igosja_five_star($value, $class)
@@ -106,7 +107,6 @@ function f_igosja_admin_permission($permission)
     else
     {
         redirect('/admin_login.php');
-        exit;
     }
 }
 

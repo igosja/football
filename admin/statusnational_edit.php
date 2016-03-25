@@ -40,8 +40,6 @@ if (isset($_POST['statusnational_name']))
     $prepare->close();
 
     redirect('statusnational_list.php');
-
-    exit;
 }
 
 $statusnational_array = $statusnational_sql->fetch_all(MYSQLI_ASSOC);

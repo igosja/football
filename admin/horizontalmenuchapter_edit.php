@@ -40,8 +40,6 @@ if (isset($_POST['horizontalmenuchapter_name']))
     $prepare->close();
 
     redirect('horizontalmenuchapter_list.php');
-
-    exit;
 }
 
 $horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(MYSQLI_ASSOC);

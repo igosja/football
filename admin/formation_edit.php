@@ -93,8 +93,6 @@ if (isset($_POST['formation_name']))
     $prepare->close();
 
     redirect('formation_list.php');
-
-    exit;
 }
 
 $formation_array = $formation_sql->fetch_all(MYSQLI_ASSOC);

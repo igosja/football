@@ -59,8 +59,6 @@ if (isset($_POST['name_name']))
     }
 
     redirect('name_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `country_id`, `country_name`

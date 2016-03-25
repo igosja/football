@@ -43,8 +43,6 @@ if (isset($_POST['rule_name']))
     $prepare->close();
 
     redirect('rule_list.php');
-
-    exit;
 }
 
 $rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);

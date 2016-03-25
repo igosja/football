@@ -152,8 +152,6 @@ if (isset($_POST['formation_id']))
     $mysqli->query($sql);
 
     redirect('national_lineup_tactic_review.php?num=' . $get_num);
-
-    exit;
 }
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);

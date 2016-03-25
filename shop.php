@@ -18,7 +18,6 @@ if (isset($_GET['success']))
     $_SESSION['message_text']   = 'Счет успешно пополнен';
 
     redirect('shop.php');
-    exit;
 }
 elseif (isset($_GET['error']))
 {
@@ -26,7 +25,6 @@ elseif (isset($_GET['error']))
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
 
     redirect('shop.php');
-    exit;
 }
 elseif (isset($_GET['point']))
 {
@@ -46,7 +44,6 @@ elseif (isset($_GET['point']))
         $_SESSION['message_text']   = 'На вашем счету недостаточно денег для покупки этого товара';
 
         redirect('shop.php');
-        exit;
     }
 
     if (isset($_GET['ok']))
@@ -68,14 +65,12 @@ elseif (isset($_GET['point']))
         $_SESSION['message_text']   = 'Балл для тренировки приобретен успешно';
 
         redirect('shop.php');
-        exit;
     }
 
     $tpl            = 'submit_shop_point';
     $header_title   = 'Магазин';
 
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
-    exit;
 }
 elseif (isset($_GET['position']))
 {
@@ -95,7 +90,6 @@ elseif (isset($_GET['position']))
         $_SESSION['message_text']   = 'На вашем счету недостаточно денег для покупки этого товара';
 
         redirect('shop.php');
-        exit;
     }
 
     if (isset($_GET['ok']))
@@ -117,7 +111,6 @@ elseif (isset($_GET['position']))
         $_SESSION['message_text']   = 'Позиция для тренировки приобретена успешно';
 
         redirect('shop.php');
-        exit;
     }
 
     $tpl            = 'submit_shop_position';
@@ -134,7 +127,6 @@ elseif (isset($_GET['money']))
         $_SESSION['message_text']   = 'В вашем распоряжении не найдено ни одной команды.';
 
         redirect('shop.php');
-        exit;
     }
 
     $sql = "SELECT `user_money`
@@ -153,7 +145,6 @@ elseif (isset($_GET['money']))
         $_SESSION['message_text']   = 'На вашем счету недостаточно денег для покупки этого товара';
 
         redirect('shop.php');
-        exit;
     }
 
     if (isset($_GET['ok']))
@@ -213,7 +204,6 @@ elseif (isset($_GET['money']))
         $_SESSION['message_text']   = '1 миллион $ успешно переведен на счет вашей команды';
 
         redirect('shop.php');
-        exit;
     }
 
     $tpl            = 'submit_shop_money';
@@ -264,8 +254,7 @@ elseif (isset($_POST['data']))
     $url = 'https://auth.robokassa.ru/Merchant/Index.aspx?' . http_build_query($params);;
 
     redirect($url);
-    exit;
-}
+    exit;}
 
 $sql = "SELECT `user_money`
         FROM `user`

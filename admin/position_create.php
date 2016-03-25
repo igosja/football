@@ -32,8 +32,6 @@ if (isset($_POST['position_name']))
     $mysqli->query($sql);
 
     redirect('position_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `role_id`, `role_name`

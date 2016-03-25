@@ -42,8 +42,6 @@ if (isset($_POST['horizontalmenuchapter_id']))
     $prepare->close();
 
     redirect('horizontalmenu_list.php');
-
-    exit;
 }
 
 $menu_array = $menu_sql->fetch_all(MYSQLI_ASSOC);

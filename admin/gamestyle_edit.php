@@ -42,8 +42,6 @@ if (isset($_POST['gamestyle_name']))
     $prepare->close();
 
     redirect('gamestyle_list.php');
-
-    exit;
 }
 
 $gamestyle_array = $gamestyle_sql->fetch_all(MYSQLI_ASSOC);

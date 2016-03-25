@@ -49,7 +49,6 @@ $header_2_guest_name  = $game_array[0]['game_guest_team_name'];
 if (0 == $game_played)
 {
     redirect('game_before_before.php?num=' . $get_num);
-    exit;
 }
 
 $home_score     = $game_array[0]['game_home_score'];

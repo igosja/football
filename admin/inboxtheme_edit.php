@@ -42,7 +42,6 @@ if (isset($_POST['inboxtheme_name']))
     $prepare->close();
 
     redirect('inboxtheme_list.php');
-    exit;
 }
 
 $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);

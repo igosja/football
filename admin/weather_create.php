@@ -26,8 +26,6 @@ if (isset($_POST['weather_name']))
     }
 
     redirect('weather_list.php');
-
-    exit;
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

@@ -16,7 +16,6 @@ if (strtoupper($my_crc) != strtoupper($crc))
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
 
     redirect('shop.php');
-    exit;
 }
 
 $sql = "SELECT `robokassa_status`,
@@ -35,7 +34,6 @@ if (0 == $count_robokassa)
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
 
     redirect('shop.php');
-    exit;
 }
 
 $robokassa_array = $robokassa_sql->fetch_all(MYSQLI_ASSOC);
@@ -48,7 +46,6 @@ if (1 == $status)
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
 
     redirect('shop.php');
-    exit;
 }
 
 $user_id    = $robokassa_array[0]['robokassa_user_id'];

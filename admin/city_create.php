@@ -16,8 +16,6 @@ if (isset($_POST['country_id']))
     $prepare->close();
 
     redirect('city_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `country_id`, `country_name`

@@ -33,8 +33,6 @@ if (isset($_POST['continent_id']))
     }
 
     redirect('country_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `continent_id`, `continent_name`

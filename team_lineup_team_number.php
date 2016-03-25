@@ -50,7 +50,6 @@ if (isset($_POST['data']))
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
     redirect('team_lineup_team_number.php?num=' . $get_num);
-    exit;
 }
 
 $sql = "SELECT `country_id`,

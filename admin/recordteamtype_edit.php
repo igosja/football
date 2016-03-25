@@ -40,8 +40,6 @@ if (isset($_POST['recordteamtype_name']))
     $prepare->close();
 
     redirect('recordteamtype_list.php');
-
-    exit;
 }
 
 $recordteamtype_array = $recordteamtype_sql->fetch_all(MYSQLI_ASSOC);

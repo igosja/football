@@ -39,7 +39,6 @@ if (isset($_POST['gender_name']))
     $prepare->close();
 
     redirect('gender_list.php');
-    exit;
 }
 
 $gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);

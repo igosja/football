@@ -93,8 +93,6 @@ if (isset($_POST['city_id']))
     f_igosja_history(2, 0, 0, $team_id);
 
     redirect('team_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `city_id`, `city_name`

@@ -16,7 +16,6 @@ if (isset($_POST['gender_name']))
     $gender_id = $mysqli->insert_id;
 
     redirect('gender_list.php');
-    exit;
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

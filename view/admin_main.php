@@ -219,9 +219,21 @@
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
-                            <li><a href="site_version.php"><i class="fa fa-gear fa-fw"></i> Обновить версию сайта</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/logout.php"><i class="fa fa-sign-out fa-fw"></i> Выйти</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-gear fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="generator_debug.php"><i class="fa fa-bug fa-fw"></i> Дебагер запросов генератора</a></li>
+                            <li class="divider"></li>
+                            <li><a href="site_version.php"><i class="fa fa-level-up fa-fw"></i> Обновить версию сайта</a></li>
+                            <li class="divider"></li>
                             <li>
-                                <a href="site_status.php"><i class="fa fa-on fa-fw"></i> 
+                                <a href="site_status.php"><i class="fa fa-power-off fa-fw"></i>
                                     <?php if (SITE_CLOSED == $site_array[0]['site_status']) { ?>
                                         Открыть сайт
                                     <?php } else { ?>
@@ -229,8 +241,6 @@
                                     <?php } ?>
                                 </a>
                             </li>
-                            <li class="divider"></li>
-                            <li><a href="/logout.php"><i class="fa fa-sign-out fa-fw"></i> Выйти</a></li>
                         </ul>
                     </li>
                 </ul>

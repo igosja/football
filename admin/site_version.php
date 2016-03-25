@@ -48,7 +48,6 @@ if (isset($_GET['version']))
     $mysqli->query($sql);
 
     redirect('version.php');
-    exit;
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

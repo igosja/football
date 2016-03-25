@@ -44,8 +44,6 @@ if (isset($_POST['role_name']))
     $prepare->close();
 
     redirect('role_list.php');
-
-    exit;
 }
 
 $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);

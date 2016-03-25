@@ -93,7 +93,6 @@ if (isset($_GET['char']))
         $_SESSION['message_text']   = 'У вас нет доступных баллов для платной тренировки.';
 
         redirect('player_home_training.php?num=' . $get_num);
-        exit;
     }
 
     $char = (int) $_GET['char'];
@@ -116,7 +115,6 @@ if (isset($_GET['char']))
         $_SESSION['message_text']   = 'Характеристика выбрана неправильно.';
 
         redirect('player_home_training.php?num=' . $get_num);
-        exit;
     }
 
     $attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
@@ -128,7 +126,6 @@ if (isset($_GET['char']))
         $_SESSION['message_text']   = 'Эта характеристика имеет максимальный уровень, больше ее увеличить нельзя.';
 
         redirect('player_home_training.php?num=' . $get_num);
-        exit;
     }
 
     if (isset($_GET['ok']))
@@ -165,7 +162,6 @@ if (isset($_GET['char']))
         $_SESSION['message_text']   = 'Тренировка прошла успешно.';
 
         redirect('player_home_training.php?num=' . $get_num);
-        exit;
     }
 
     $tpl            = 'submit_training';
@@ -185,7 +181,6 @@ elseif (isset($_GET['position']))
         $_SESSION['message_text']   = 'У вас нет доступных баллов для платной тренировки.';
 
         redirect('player_home_training.php?num=' . $get_num);
-        exit;
     }
 
     $position = (int) $_GET['position'];
@@ -205,7 +200,6 @@ elseif (isset($_GET['position']))
         $_SESSION['message_text']   = 'Позиция выбрана неправильно.';
 
         redirect('player_home_training.php?num=' . $get_num);
-        exit;
     }
 
     $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
@@ -232,7 +226,6 @@ elseif (isset($_GET['position']))
             $_SESSION['message_text']   = 'Навык игры на этой позиции имеет максимальный уровень, больше его увеличить нельзя.';
 
             redirect('player_home_training.php?num=' . $get_num);
-            exit;
         }
     }
 
@@ -265,7 +258,6 @@ elseif (isset($_GET['position']))
         $_SESSION['message_text']   = 'Тренировка прошла успешно.';
 
         redirect('player_home_training.php?num=' . $get_num);
-        exit;
     }
 
     $tpl            = 'submit_position';

@@ -40,8 +40,6 @@ if (isset($_POST['chapter_name']))
     $prepare->close();
 
     redirect('attributechapter_list.php');
-
-    exit;
 }
 
 $chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);

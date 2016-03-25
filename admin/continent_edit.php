@@ -45,8 +45,6 @@ if (isset($_POST['continent_name']))
     }
 
     redirect('continent_list.php');
-
-    exit;
 }
 
 $continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);

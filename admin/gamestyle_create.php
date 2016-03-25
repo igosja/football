@@ -16,8 +16,6 @@ if (isset($_POST['gamestyle_name']))
     $prepare->close();
 
     redirect('gamestyle_list.php');
-
-    exit;
 }
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

@@ -40,8 +40,6 @@ if (isset($_POST['post_name']))
     $prepare->close();
 
     redirect('post_list.php');
-
-    exit;
 }
 
 $post_array = $post_sql->fetch_all(MYSQLI_ASSOC);

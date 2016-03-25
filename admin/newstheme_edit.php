@@ -43,8 +43,6 @@ if (isset($_POST['newstheme_name']))
     $prepare->close();
 
     redirect('newstheme_list.php');
-
-    exit;
 }
 
 $newstheme_array = $newstheme_sql->fetch_all(MYSQLI_ASSOC);

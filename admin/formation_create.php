@@ -55,8 +55,6 @@ if (isset($_POST['formation_name']))
     $prepare->close();
 
     redirect('formation_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `position_id`, `position_name`

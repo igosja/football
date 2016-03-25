@@ -79,7 +79,6 @@ if (isset($_POST['data']))
         $_SESSION['message_text']   = 'У вашего клуба недостаточно денег для проведения этой сделки.';
 
         redirect('player_transfer_offer.php?num=' . $get_num);
-        exit;
     }
 
     $team_id = $player_array[0]['team_id'];
@@ -90,7 +89,6 @@ if (isset($_POST['data']))
         $_SESSION['message_text']   = 'Нельзя купить своего игрока.';
 
         redirect('player_transfer_offer.php?num=' . $get_num);
-        exit;
     }
 
     $statustransfer_id = $player_array[0]['player_statustransfer_id'];
@@ -101,7 +99,6 @@ if (isset($_POST['data']))
         $_SESSION['message_text']   = 'Этот игрок не продается.';
 
         redirect('player_transfer_offer.php?num=' . $get_num);
-        exit;
     }
 
     $sql = "SELECT `playeroffer_id`
@@ -185,7 +182,6 @@ if (isset($_POST['data']))
     $_SESSION['message_text']   = 'Ваше предложение успешно сохранено.';
 
     redirect('player_transfer_offer.php?num=' . $get_num);
-    exit;
 }
 
 $player_name    = $player_array[0]['name_name'];

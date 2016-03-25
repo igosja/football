@@ -1,24 +1,6 @@
 <?php
 
-$start_time = microtime(true);
-
-ini_set('memory_limit', '2048M');
-set_time_limit(0);
-date_default_timezone_set('Europe/Moscow');
-
-include (__DIR__ . '/../include/constants.php');
-include (__DIR__ . '/../include/database.php');
-include (__DIR__ . '/function.php');
-
-$sql = "SELECT `season_id`
-        FROM `season`
-        ORDER BY `season_id` DESC
-        LIMIT 1";
-$season_sql = $mysqli->query($sql);
-
-$season_array = $season_sql->fetch_all(MYSQLI_ASSOC);
-
-$igosja_season_id = $season_array[0]['season_id'];
+include (__DIR__ . '/../include/generator.php');
 
 f_igosja_generator_site_close();
 f_igosja_generator_asktoplay_delete();
@@ -71,4 +53,5 @@ f_igosja_generator_building();
 f_igosja_generator_site_open();
 
 print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
+       <br/>Запросов к базе данных: ' . $count_sql . '
        <br/>Потребление памяти: ' . number_format(memory_get_usage(), 0, ",", " ") . ' Б';

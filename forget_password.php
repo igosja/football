@@ -26,7 +26,6 @@ if (isset($_POST['data']))
         $_SESSION['message_text']   = 'Пользователь с таким email-ом не найден.';
 
         redirect('forget_password.php');
-        exit;
     }
 
     $user_array = $check_sql->fetch_all(MYSQLI_ASSOC);
@@ -54,7 +53,6 @@ if (isset($_POST['data']))
     $_SESSION['message_text']   = 'Пароль успешно выслан на email ' . $forget_email  . '.';
 
     redirect('forget_password.php');
-    exit;
 }
 
 $header_title = 'Восстановление пароля';

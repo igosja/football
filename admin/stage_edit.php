@@ -40,8 +40,6 @@ if (isset($_POST['stage_name']))
     $prepare->close();
 
     redirect('stage_list.php');
-
-    exit;
 }
 
 $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);

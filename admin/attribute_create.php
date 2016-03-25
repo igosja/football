@@ -16,7 +16,6 @@ if (isset($_POST['chapter_id']))
     $prepare->close();
 
     redirect('attribute_list.php');
-    exit;
 }
 
 $sql = "SELECT `attributechapter_id`, `attributechapter_name`

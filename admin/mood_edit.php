@@ -45,8 +45,6 @@ if (isset($_POST['mood_name']))
     }
 
     redirect('mood_list.php');
-
-    exit;
 }
 
 $mood_array = $mood_sql->fetch_all(MYSQLI_ASSOC);

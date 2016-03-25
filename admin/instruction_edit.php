@@ -42,8 +42,6 @@ if (isset($_POST['chapter_id']))
     $prepare->close();
 
     redirect('instruction_list.php');
-
-    exit;
 }
 
 $instruction_array = $instruction_sql->fetch_all(MYSQLI_ASSOC);

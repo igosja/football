@@ -16,7 +16,6 @@ if (isset($_POST['data']))
         $_SESSION['message_text']   = 'Заполнены не все поля.';
 
         redirect('registration.php');
-        exit;
     }
 
     $sql = "SELECT `user_id`
@@ -39,7 +38,6 @@ if (isset($_POST['data']))
         $_SESSION['message_text']   = 'Пользователь с таким логином/email-ом уже зарегистрирован.';
 
         redirect('registration.php');
-        exit;
     }
 
     $password = f_igosja_chiper_password($registration_password);
@@ -66,7 +64,6 @@ if (isset($_POST['data']))
     $_SESSION['message_text']   = 'Профиль создан успешно.<br/>Для завершения регистрации перейдите по ссылке, которая выслана вам на электронную почту.';
 
     redirect('registration.php');
-    exit;
 }
 
 $header_title = 'Регистрация';

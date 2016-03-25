@@ -46,7 +46,6 @@ if (isset($_POST['data']))
     $_SESSION['message_text']   = 'Изменения успешно сохранены';
 
     redirect('team_team_player_international.php?num=' . $get_num);
-    exit;
 }
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);

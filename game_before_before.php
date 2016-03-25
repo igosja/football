@@ -75,7 +75,6 @@ $header_2_guest_name  = $game_array[0]['game_guest_team_name'];
 if (1 == $game_played)
 {
     redirect('game_review_main.php?num=' . $get_num);
-    exit;
 }
 
 $header_2_score = '-';

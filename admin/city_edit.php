@@ -41,8 +41,6 @@ if (isset($_POST['country_id']))
     $prepare->close();
 
     redirect('city_list.php');
-
-    exit;
 }
 
 $city_array = $city_sql->fetch_all(MYSQLI_ASSOC);

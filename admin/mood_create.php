@@ -21,8 +21,6 @@ if (isset($_POST['mood_name']))
     }
 
     redirect('mood_list.php');
-
-    exit;
 }
 
 $sql = "SELECT `mood_id`, `mood_name`

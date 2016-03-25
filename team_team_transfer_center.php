@@ -48,7 +48,6 @@ if (isset($_GET['from_del']))
     $_SESSION['message_text']   = 'Предложение успешно удалено.';
 
     redirect('team_team_transfer_center.php?num=' . $get_num);
-    exit;
 }
 elseif (isset($_GET['to_del']))
 {
@@ -74,7 +73,6 @@ elseif (isset($_GET['to_del']))
     $_SESSION['message_text']   = 'Предложение успешно удалено.';
 
     redirect('team_team_transfer_center.php');
-    exit;
 }
 elseif (isset($_GET['to_ok']))
 {
@@ -95,7 +93,6 @@ elseif (isset($_GET['to_ok']))
         $_SESSION['message_text']   = 'Такая заявка не найдена.';
 
         redirect('team_team_transfer_center.php?num=' . $get_num);
-        exit;
     }
 
     $sql = "SELECT COUNT(`transfer_id`) AS `count`
@@ -151,7 +148,6 @@ elseif (isset($_GET['to_ok']))
         $_SESSION['message_text']   = 'Трансфер этого игрока уже согласован.';
 
         redirect('team_team_transfer_center.php?num=' . $get_num);
-        exit;
     }
 
     $sql = "INSERT INTO `transfer`
@@ -195,7 +191,6 @@ elseif (isset($_GET['to_ok']))
     $_SESSION['message_text']   = 'Предложение успешно принято.';
 
     redirect('team_team_transfer_center.php?num=' . $get_num);
-    exit;
 }
 
 $sql = "SELECT `name_name`,

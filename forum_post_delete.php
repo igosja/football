@@ -21,7 +21,6 @@ $count_theme = $theme_sql->num_rows;
 if (0 == $count_theme)
 {
     redirect('forum.php');
-    exit;
 }
 
 $theme_array = $theme_sql->fetch_all(MYSQLI_ASSOC);

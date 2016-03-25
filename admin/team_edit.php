@@ -73,8 +73,6 @@ if (isset($_POST['city_id']))
     }
 
     redirect('team_list.php');
-
-    exit;
 }
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
