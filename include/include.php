@@ -4,6 +4,7 @@ $start_time = microtime(true);
 
 $phpstorm_licence = 'http://idea.qinxi1992.cn/';
 $wind_php_command = 'D:\xampp\php\php-cgi.exe D:\xampp\htdocs\fm.local.net\www\generator\generator.php';
+$denw_php_command = '\usr\local\php5\php-cgi.exe \home\fm.local.net\www\generator\generator.php';
 $result = 'Страница сгенерирована за 1575.66448 сек. в 15:00:53 Запросов к базе данных: 518499 Потребление памяти: 1 120 496 Б';
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/constants.php');

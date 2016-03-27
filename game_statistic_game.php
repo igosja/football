@@ -103,7 +103,7 @@ $guest_shootout = $game_array[0]['game_guest_shoot_out'];
 
 if (0 != $home_shootout && 0 != $guest_shootout)
 {
-    $header_2_shootout = '(пен. ' . $home_shootout . ':' . $guest_score . ')';
+    $header_2_shootout = '(пен. ' . $home_shootout . ':' . $guest_shootout . ')';
 }
 else
 {
