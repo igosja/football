@@ -1,6 +1,14 @@
 <div class="row">
     <div class="col-lg-12 text-center">
-        <h1 class="page-header">Запросы к БД (<?=$count_debug?>)</h1>
+        <h1 class="page-header">Запросы к БД</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <p>
+            <button type="button" class="btn btn-default">Запросов: <?=$count_debug?></button>
+            <button type="button" class="btn btn-default">Время: <?=round($time_array[0]['time']/1000)?> сек.</button>
+        </p>
     </div>
 </div>
 <div class="row">

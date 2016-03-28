@@ -16,7 +16,7 @@
                     <th class="w5">О</th>
                 </tr>
                 <?php foreach ($standing_array as $item) { ?>
-                    <tr>
+                    <tr <?php if (isset($authorization_team_id) && $authorization_team_id == $item['team_id']) { ?>class="current"<?php } ?>>
                         <td class="center"><?php print $item['standing_place']; ?></td>
                         <td class="w1">
                             <img

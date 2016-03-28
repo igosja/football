@@ -410,6 +410,10 @@ function f_igosja_generator_game_result()
         $guest_foul         = $guest_foul + rand(8, 17);
         $home_penalty       = $home_penalty  + floor(rand(0, 7) / 7);
         $guest_penalty      = $guest_penalty + floor(rand(0, 7) / 7);
+        $home_shot          = $home_shot + $home_penalty;
+        $guest_shot         = $guest_shot + $guest_penalty;
+        $home_on_target     = $home_on_target + $home_penalty;
+        $guest_on_target    = $guest_on_target + $guest_penalty;
         $home_yellow        = $home_yellow  + rand(0, 3);
         $guest_yellow       = $guest_yellow + rand(0, 3);
         $home_red           = $home_red  + floor(rand(0, 8) / 8);

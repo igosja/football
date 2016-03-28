@@ -123,10 +123,11 @@ function f_igosja_generator_training()
                 f_igosja_mysqli_query($sql);
             }
 
-            $percent_minus = $percent_minus + $percent * $intensity / 100;
+            $percent_minus = $percent_minus + $percent * $intensity;
         }
 
-        $percent = ceil(($percent - $percent_minus) / TRAINING_ATTRIBUTES_COUNT, 0);
+        $percent = ceil(($percent - $percent_minus) / TRAINING_ATTRIBUTES_COUNT);
+        $insert = $update = array();
 
         $sql = "SELECT `playerattribute_attribute_id`
                 FROM `playerattribute`
@@ -157,38 +158,22 @@ function f_igosja_generator_training()
             {
                 if (30 >= $age)
                 {
-                    $sql = "INSERT INTO `training`
-                            SET `training_player_id`='$player_id',
-                                `training_attribute_id`='$attribute_id',
-                                `training_percent`='$percent'";
-                    f_igosja_mysqli_query($sql);
+                    $insert[$percent][] = $attribute_id;
                 }
                 else
                 {
-                    $sql = "INSERT INTO `training`
-                            SET `training_player_id`='$player_id',
-                                `training_attribute_id`='$attribute_id',
-                                `training_percent`='-8'";
-                    f_igosja_mysqli_query($sql);
+                    $insert[-8][] = $attribute_id;
                 }
             }
             else
             {
                 if (30 >= $age)
                 {
-                    $sql = "UPDATE `training`
-                            SET `training_percent`=`training_percent`+'$percent'
-                            WHERE `training_player_id`='$player_id'
-                            AND `training_attribute_id`='$attribute_id'";
-                    f_igosja_mysqli_query($sql);
+                    $update[$percent][] = $attribute_id;
                 }
                 else
                 {
-                    $sql = "UPDATE `training`
-                            SET `training_percent`=`training_percent`-'8'
-                            WHERE `training_player_id`='$player_id'
-                            AND `training_attribute_id`='$attribute_id'";
-                    f_igosja_mysqli_query($sql);
+                    $update[-8][] = $attribute_id;
                 }
             }
         }
@@ -220,21 +205,39 @@ function f_igosja_generator_training()
 
             if (0 == $count_check)
             {
-                $sql = "INSERT INTO `training`
-                        SET `training_player_id`='$player_id',
-                            `training_attribute_id`='$attribute_id',
-                            `training_percent`='$percent'";
-                f_igosja_mysqli_query($sql);
+                $insert[$percent][] = $attribute_id;
             }
             else
             {
-                $sql = "UPDATE `training`
-                        SET `training_percent`=`training_percent`+'$percent'
-                        WHERE `training_player_id`='$player_id'
-                        AND `training_attribute_id`='$attribute_id'";
-                f_igosja_mysqli_query($sql);
+                $update[$percent][] = $attribute_id;
             }
         }
+
+        $sql = "UPDATE `training`
+                SET ";
+
+        foreach ($update as $percent => $attributes)
+        {
+            $sql = $sql . "`training_percent`=`training_percent`+'$percent'
+            WHERE `training_player_id`='$player_id'
+            AND `training_attribute_id` IN (" . implode(', ', $attributes) . ")";
+        }
+
+        f_igosja_mysqli_query($sql);
+
+        $sql = array();
+
+        foreach ($insert as $percent => $attributes)
+        {
+            foreach ($attributes as $item)
+            {
+                $sql[] = "('$player_id', '$item', '$percent')";
+            }
+        }
+
+        $sql = "INSERT INTO `training` (`training_player_id`, `training_attribute_id`, `training_percent`)
+                VALUES " . implode(', ', $sql) . ";";
+        f_igosja_mysqli_query($sql);
 
         usleep(1);
 
