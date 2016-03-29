@@ -8,6 +8,7 @@ $denw_php_command = '\usr\local\php5\php-cgi.exe \home\fm.local.net\www\generato
 $result = 'Страница сгенерирована за 508.92606 сек. в 12:39:43 Запросов к базе данных: 309206 Потребление памяти: 1 142 824 Б';
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/constants.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/server_constants.php');
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/database.php');
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/function.php');
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/session.php');

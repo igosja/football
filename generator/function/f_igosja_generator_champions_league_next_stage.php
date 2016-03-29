@@ -127,7 +127,7 @@ function f_igosja_generator_champions_league_next_stage()
                             `game_temperature`='15'+RAND()*'15',
                             `game_tournament_id`='" . TOURNAMENT_CHAMPIONS_LEAGUE . "',
                             `game_weather_id`='1'+RAND()*'3'";
-                f_igosja_mysqli_query($sql);
+                $mysqli->query($sql);
 
                 $game_id = $mysqli->insert_id;
 
@@ -142,7 +142,7 @@ function f_igosja_generator_champions_league_next_stage()
                             `game_temperature`='15'+RAND()*'15',
                             `game_tournament_id`='" . TOURNAMENT_CHAMPIONS_LEAGUE . "',
                             `game_weather_id`='1'+RAND()*'3'";
-                f_igosja_mysqli_query($sql);
+                $mysqli->query($sql);
             }
         }
         elseif (0 != $count_game && 42 == $stage_id)

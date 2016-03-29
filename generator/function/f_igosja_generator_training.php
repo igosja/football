@@ -129,6 +129,20 @@ function f_igosja_generator_training()
         $percent = ceil(($percent - $percent_minus) / TRAINING_ATTRIBUTES_COUNT);
         $insert = $update = array();
 
+        $sql = "SELECT `training_attribute_id`
+                FROM `training`
+                WHERE `training_player_id`='$player_id'";
+        $training_sql = f_igosja_mysqli_query($sql);
+
+        $count_training = $training_sql->num_rows;
+        $training_array = $training_sql->fetch_all(MYSQLI_ASSOC);
+        $training_check = array();
+
+        for ($j=0; $j<$count_training; $j++)
+        {
+            $training_check[] = $training_array[$j]['training_attribute_id'];
+        }
+
         $sql = "SELECT `playerattribute_attribute_id`
                 FROM `playerattribute`
                 LEFT JOIN `attribute`
@@ -144,17 +158,7 @@ function f_igosja_generator_training()
         {
             $attribute_id = $attribute_array[$j]['playerattribute_attribute_id'];
 
-            $sql = "SELECT COUNT(`training_id`) AS `count`
-                    FROM `training`
-                    WHERE `training_player_id`='$player_id'
-                    AND `training_attribute_id`='$attribute_id'";
-            $check_sql = f_igosja_mysqli_query($sql);
-
-            $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
-
-            $count_check = $check_array[0]['count'];
-
-            if (0 == $count_check)
+            if (!in_array($attribute_id, $training_check))
             {
                 if (30 >= $age)
                 {
@@ -193,17 +197,7 @@ function f_igosja_generator_training()
         {
             $attribute_id = $attribute_array[$j]['playerattribute_attribute_id'];
 
-            $sql = "SELECT COUNT(`training_id`) AS `count`
-                    FROM `training`
-                    WHERE `training_player_id`='$player_id'
-                    AND `training_attribute_id`='$attribute_id'";
-            $check_sql = f_igosja_mysqli_query($sql);
-
-            $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
-
-            $count_check = $check_array[0]['count'];
-
-            if (0 == $count_check)
+            if (!in_array($attribute_id, $training_check))
             {
                 $insert[$percent][] = $attribute_id;
             }
