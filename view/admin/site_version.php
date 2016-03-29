@@ -10,25 +10,25 @@
                 <tr>
                     <td class="col-lg-3 text-center">
                         <?=$site_array[0]['site_version_1']?>
-                        <a href="version.php?version=1">
+                        <a href="site_version.php?version=1">
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
                     <td class="col-lg-3 text-center">
                         <?=$site_array[0]['site_version_2']?>
-                        <a href="version.php?version=2">
+                        <a href="site_version.php?version=2">
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
                     <td class="col-lg-3 text-center">
                         <?=$site_array[0]['site_version_3']?>
-                        <a href="version.php?version=3">
+                        <a href="site_version.php?version=3">
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
                     <td class="col-lg-3 text-center">
                         <?=$site_array[0]['site_version_4']?>
-                        <a href="version.php?version=4">
+                        <a href="site_version.php?version=4">
                             <i class="fa fa-plus"></i>
                         </a>
                     </td>
