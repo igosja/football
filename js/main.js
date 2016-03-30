@@ -32,9 +32,13 @@ $(document).ready(function($)
                 reversed: true,
                 plotLines: [{
                     value: 0,
-                    width: 1,
+                    width: 0.5,
                     color: '#808080'
                 }]
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br />',
+                pointFormat: 'Тур: <b>{point.x}</b><br />Позиция: <b>{point.y}</b>'
             },
             legend: {
                 layout: 'vertical',
@@ -42,9 +46,22 @@ $(document).ready(function($)
                 verticalAlign: 'middle',
                 borderWidth: 0
             },
+            plotOptions: {
+                series: {
+                    marker: {
+                        enabled: false,
+                        states: {
+                            hover: {
+                                radius: 2,
+                                radiusPlus: 2
+                            }
+                        }
+                    }
+                }
+            },
             series: position_series,
             credits: {
-                enabled: false,
+                enabled: false
             }
         });
     }
