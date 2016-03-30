@@ -18,8 +18,8 @@ foreach ($file_list as $item)
 }
 $count_sql  = 0;
 
-$sql = "TRUNCATE `debug`";
-$mysqli->query($sql);
+//$sql = "TRUNCATE `debug`";
+//$mysqli->query($sql);
 
 $sql = "SELECT `season_id`
         FROM `season`

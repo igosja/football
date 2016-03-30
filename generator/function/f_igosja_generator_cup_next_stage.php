@@ -141,7 +141,7 @@ function f_igosja_generator_cup_next_stage()
                                     `game_temperature`='15'+RAND()*'15',
                                     `game_tournament_id`='$tournament_id',
                                     `game_weather_id`='1'+RAND()*'3'";
-                        $mysqli->query($sql);
+                        f_igosja_mysqli_query($sql);
 
                         if (isset($shedule_2))
                         {
@@ -158,7 +158,7 @@ function f_igosja_generator_cup_next_stage()
                                         `game_temperature`='15'+RAND()*'15',
                                         `game_tournament_id`='$tournament_id',
                                         `game_weather_id`='1'+RAND()*'3'";
-                            $mysqli->query($sql);
+                            f_igosja_mysqli_query($sql);
                         }
                     }
                 }
