@@ -2,11 +2,51 @@ $(document).ready(function($)
 {
     var select_on_page_array = $('select');
     var input_on_page_array  = $('input');
+    var div_on_page_array  = $('div');
 
     if ($(select_on_page_array).is('#autocomplete'))
     //Автозаполнение
     {
         $('#autocomplete').editableSelect();
+    }
+
+    if ($(div_on_page_array).is('#previous-position'))
+    //Прошлые позиции команд в чемпионате
+    {
+        $('#previous-position').highcharts({
+            title: {
+                text: ''
+            },
+            xAxis: {
+                title: {
+                    text: 'Тур'
+                },
+                categories: position_stage
+            },
+            yAxis: {
+                title: {
+                    text: 'Позиция'
+                },
+                min: 1,
+                max: 20,
+                reversed: true,
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: position_series,
+            credits: {
+                enabled: false,
+            }
+        });
     }
 
     $('#tournament-stage-select').on('change',function()
@@ -786,7 +826,7 @@ $(document).ready(function($)
             }
         );
     });
-    
+
     $('.player-national-include').on('click', function()
     //Добавление игрока в сборную
     {
@@ -801,7 +841,7 @@ $(document).ready(function($)
                 dataType: "json",
                 success: function(data)
                 {
-                    
+
                     $('#player-block').removeClass('loading');
                 }
             }

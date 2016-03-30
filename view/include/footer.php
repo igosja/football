@@ -16,6 +16,7 @@
     <script src="/js/function.js"></script>
     <script src="/js/autocomplete.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/highcharts.js"></script>
 
 </body>
 
