@@ -42,6 +42,14 @@ if (isset($_POST['data']) &&
     $new_capacity = (int) $_POST['data']['capacity'];
     $old_capacity = $stadium_array[0]['stadium_capacity'];
 
+    if (100 > $new_capacity)
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Вместимоть трибун не может быть меньше 100 мест.';
+
+        redirect('stadium.php');
+    }
+
     if ($new_capacity <= $old_capacity)
     {
         $sql = "UPDATE `stadium`
