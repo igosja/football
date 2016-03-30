@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 $sql = "INSERT INTO `test`
         SET `test_date`=UNIX_TIMESTAMP()";
