@@ -6,16 +6,13 @@
                           $forum_array[$i-1]['forumchapter_id'] != $forum_array[$i]['forumchapter_id']) { ?>
                     <table class="forum-group w100">
                         <tr>
-                            <th colspan="2"><?php print $forum_array[$i]['forumchapter_name']; ?></th>
+                            <th><?php print $forum_array[$i]['forumchapter_name']; ?></th>
                             <th class="w8">Темы</th>
                             <th class="w8">Сообщений</th>
                             <th class="w20">Последнее</th>
                         </tr>
                 <?php } ?>
                 <tr>
-                    <td class="w1">
-                        Picture
-                    </td>
                     <td>
                         <a href="forum_group.php?num=<?php print $forum_array[$i]['forumthemegroup_id']; ?>">
                             <?php print $forum_array[$i]['forumthemegroup_name']; ?>

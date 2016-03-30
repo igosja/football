@@ -82,6 +82,57 @@ $count_forum = $count_forum->fetch_all(MYSQLI_ASSOC);
 $count_forum = $count_forum[0]['count_forum'];
 $count_forum = ceil($count_forum / $limit);
 
+if (isset($authorization_user_id))
+{
+    $sql = "SELECT `forumpost_id`
+            FROM `forumpost`
+            WHERE `forumpost_forumtheme_id`='$get_num'
+            ORDER BY `forumpost_id` DESC
+            LIMIT 1";
+    $forumpost_sql = $mysqli->query($sql);
+
+    $count_forumpost = $forumpost_sql->num_rows;
+
+    if (0 == $count_forumpost)
+    {
+        $forumpost_id = 0;
+    }
+    else
+    {
+        $forumpost_array = $forumpost_sql->fetch_all(MYSQLI_ASSOC);
+
+        $forumpost_id = $forumpost_array[0]['forumpost_id'];
+    }
+
+    $sql = "SELECT COUNT(`forumread_id`) AS `count`
+            FROM `forumread`
+            WHERE `forumread_forumtheme_id`='$get_num'
+            AND `forumread_user_id`='$authorization_user_id'";
+    $count_sql = $mysqli->query($sql);
+
+    $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+    $count_check = $count_array[0]['count'];
+
+    if (0 == $count_check)
+    {
+        $sql = "INSERT INTO `forumread`
+                SET `forumread_forumtheme_id`='$get_num',
+                    `forumread_forumpost_id`='$forumpost_id',
+                    `forumread_user_id`='$authorization_user_id'";
+        $mysqli->query($sql);
+    }
+    else
+    {
+        $sql = "UPDATE `forumread`
+                SET `forumread_forumpost_id`='$forumpost_id'
+                WHERE `forumread_forumtheme_id`='$get_num'
+                AND `forumread_user_id`='$authorization_user_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+}
+
 $num            = $get_num;
 $header_title   = 'Форум';
 

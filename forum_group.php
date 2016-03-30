@@ -37,6 +37,7 @@ $header_title = $head_array[0]['forumthemegroup_name'];
 $sql = "SELECT SQL_CALC_FOUND_ROWS
                `count_post`,
                `forumpost_date`,
+               `forumpost_id`,
                `forumtheme_date`,
                `forumtheme_id`,
                `forumtheme_name`,
@@ -55,7 +56,8 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `t1`.`forumpost_forumtheme_id`=`forumtheme_id`
         LEFT JOIN
         (
-            SELECT `forumpost_date`,
+            SELECT MAX(`forumpost_date`) AS `forumpost_date`,
+                   MAX(`forumpost_id`) AS `forumpost_id`,
                    `forumpost_forumtheme_id`,
                    `user_login` AS `post_login`
             FROM `forumpost`
@@ -78,6 +80,18 @@ $count_forum = $mysqli->query($sql);
 $count_forum = $count_forum->fetch_all(MYSQLI_ASSOC);
 $count_forum = $count_forum[0]['count_forum'];
 $count_forum = ceil($count_forum / $limit);
+
+if (isset($authorization_user_id))
+{
+    $sql = "SELECT `forumread_forumpost_id`,
+                   `forumread_forumtheme_id`
+            FROM `forumread`
+            WHERE `forumread_user_id`='$authorization_user_id'
+            ORDER BY `forumread_id`";
+    $forumread_sql = $mysqli->query($sql);
+
+    $forumread_array = $forumread_sql->fetch_all(MYSQLI_ASSOC);
+}
 
 $num            = $get_num;
 $header_title   = 'Форум';

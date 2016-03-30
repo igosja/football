@@ -35,17 +35,32 @@
             </table>
             <table class="forum-group w100">
                 <tr>
-                    <th colspan="2">Темы</th>
+                    <th>Темы</th>
                     <th class="w8">Ответы</th>
                     <th class="w20">Последнее</th>
                 </tr>
                 <?php foreach ($forum_array as $item) { ?>
                     <tr>
-                        <td class="w1">
-                            Picture
-                        </td>
                         <td>
-                            <a href="forum_theme.php?num=<?php print $item['forumtheme_id']; ?>">
+                            <a
+                                href="forum_theme.php?num=<?php print $item['forumtheme_id']; ?>"
+                                <?php
+
+                                if (isset($forumread_array)) {
+                                    foreach ($forumread_array as $read) {
+                                        if ($read['forumread_forumtheme_id'] == $item['forumtheme_id'] &&
+                                            $read['forumread_forumpost_id'] < $item['forumpost_id']) {
+
+                                ?>
+                                            class="strong"
+                                <?php
+
+                                        }
+                                    }
+                                }
+
+                                ?>
+                            >
                                 <?php print $item['forumtheme_name']; ?>
                             </a>
                             <br />
