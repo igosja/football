@@ -108,13 +108,29 @@ if (isset($_GET['ok']))
         $asktoplay_home = $asktoplay_array[0]['asktoplay_home'];
         $user_id        = $asktoplay_array[0]['team_user_id'];
 
+        $sql = "SELECT `referee_id`
+                FROM `referee`
+                WHERE `referee_id` NOT IN
+                (
+                    SELECT `game_referee_id`
+                    FROM `game`
+                    WHERE `game_shedule_id`='$shedule_id'
+                )
+                ORDER BY RAND()
+                LIMIT 1";
+        $referee_sql = $mysqli->query($sql);
+
+        $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+
+        $referee_id = $referee_array[0]['referee_id'];
+
         if (1 == $asktoplay_home)
         {
             $sql = "INSERT INTO `game`
                     SET `game_guest_team_id`='$get_num',
                         `game_home_team_id`='$team_id',
                         `game_shedule_id`='$shedule_id',
-                        `game_referee_id`='1',
+                        `game_referee_id`='$referee_id',
                         `game_stadium_id`='$team_id',
                         `game_tournament_id`='1'";
         }
@@ -124,7 +140,7 @@ if (isset($_GET['ok']))
                     SET `game_guest_team_id`='$team_id',
                         `game_home_team_id`='$get_num',
                         `game_shedule_id`='$shedule_id',
-                        `game_referee_id`='1',
+                        `game_referee_id`='$referee_id',
                         `game_stadium_id`='$get_num',
                         `game_tournament_id`='1'";
         }
