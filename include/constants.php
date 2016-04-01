@@ -17,6 +17,8 @@ define('GK_ATTRIBUTE_CHAPTER', 2);
 define('GK_POSITION_ID', 1);
 define('GL_CLIENT_ID', '194524095452-0nli8kbcu250r2h0i2m0lha85bd5mltm.apps.googleusercontent.com');
 define('GL_CLIENT_SECRET', 'mBJaoIdoOtdQftGu5e4xSHN6');
+define('CHAMPIONSHIP_LAST_STAGE', 38);
+define('CHAMPIONSHIP_GOLD_GAME_STAGE', 50);
 define('HISTORY_TEXT_GET_TEAM', 1);
 define('HISTORY_TEXT_LOST_TEAM', 2);
 define('HISTORY_TEXT_EXPENCE_AGENT', 10);

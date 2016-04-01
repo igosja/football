@@ -101,8 +101,11 @@ function f_igosja_generator_cup_next_stage()
                 $shedule_2 = $shedule_array[1]['shedule_id'];
             }
 
-            $sql = "SELECT `cupparticipant_tournament_id`
+            $sql = "SELECT `cupparticipant_tournament_id`,
+                           `tournament_country_id`
                     FROM `cupparticipant`
+                    LEFT JOIN `tournament`
+                    ON `cupparticipant_tournament_id`=`tournament_id`
                     GROUP BY `cupparticipant_tournament_id`
                     ORDER BY `cupparticipant_tournament_id` ASC";
             $tournament_sql = f_igosja_mysqli_query($sql);
@@ -113,6 +116,16 @@ function f_igosja_generator_cup_next_stage()
             for ($i=0; $i<$count_tournament; $i++)
             {
                 $tournament_id  = $tournament_array[$i]['cupparticipant_tournament_id'];
+                $country_id     = $tournament_array[$i]['tournament_country_id'];
+
+                $sql = "SELECT `referee_id`
+                        FROM `referee`
+                        WHERE `referee_country_id`='$country_id'
+                        ORDER BY RAND()
+                        LIMIT 1";
+                $referee_sql = f_igosja_mysqli_query($sql);
+
+                $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
 
                 $sql = "SELECT `cupparticipant_team_id`
                         FROM `cupparticipant`
@@ -129,12 +142,15 @@ function f_igosja_generator_cup_next_stage()
                     $team_1 = $team_array[$j]['cupparticipant_team_id'];
                     $team_2 = $team_array[$j+1]['cupparticipant_team_id'];
 
+                    $referee_1 = $referee_array[$j]['referee_id'];
+                    $referee_2 = $referee_array[$j+1]['referee_id'];
+
                     if (isset($shedule_1))
                     {
                         $sql = "INSERT INTO `game`
                                 SET `game_guest_team_id`='$team_2',
                                     `game_home_team_id`='$team_1',
-                                    `game_referee_id`='1',
+                                    `game_referee_id`='$referee_1',
                                     `game_stadium_id`='$team_1',
                                     `game_stage_id`='$stage_id'+'1',
                                     `game_shedule_id`='$shedule_1',
@@ -151,7 +167,7 @@ function f_igosja_generator_cup_next_stage()
                                     SET `game_first_game_id`='$game_id',
                                         `game_guest_team_id`='$team_1',
                                         `game_home_team_id`='$team_2',
-                                        `game_referee_id`='1',
+                                        `game_referee_id`='$referee_2',
                                         `game_stadium_id`='$team_2',
                                         `game_stage_id`='$stage_id'+'1',
                                         `game_shedule_id`='$shedule_2',

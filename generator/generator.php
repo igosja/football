@@ -29,6 +29,7 @@ f_igosja_generator_world_cup_standing();
 f_igosja_generator_standing_history();
 f_igosja_generator_cup_next_stage();
 f_igosja_generator_champions_league_next_stage();
+f_igosja_generator_championship_gold();
 f_igosja_generator_game_series();
 f_igosja_generator_team_series_to_record();
 f_igosja_generator_country_series_to_record();

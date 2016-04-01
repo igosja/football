@@ -18,6 +18,14 @@ function f_igosja_generator_champions_league_next_stage()
 
     if (TOURNAMENT_TYPE_CHAMPIONS_LEAGUE == $tournamenttype_id)
     {
+        $sql = "SELECT `referee_id`
+                FROM `referee`
+                ORDER BY RAND()
+                LIMIT 1";
+        $referee_sql = f_igosja_mysqli_query($sql);
+
+        $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+
         $sql = "SELECT `game_first_game_id`,
                        `game_guest_score`,
                        `game_guest_shoot_out`,
@@ -117,10 +125,13 @@ function f_igosja_generator_champions_league_next_stage()
                 $team_1 = $team_array[$j]['leagueparticipant_team_id'];
                 $team_2 = $team_array[$j+1]['leagueparticipant_team_id'];
 
+                $referee_1 = $referee_array[$j]['referee_id'];
+                $referee_2 = $referee_array[$j+1]['referee_id'];
+
                 $sql = "INSERT INTO `game`
                         SET `game_guest_team_id`='$team_2',
                             `game_home_team_id`='$team_1',
-                            `game_referee_id`='1',
+                            `game_referee_id`='$referee_1',
                             `game_stadium_id`='$team_1',
                             `game_stage_id`='$stage_id'+'1',
                             `game_shedule_id`='$shedule_1',
@@ -135,7 +146,7 @@ function f_igosja_generator_champions_league_next_stage()
                         SET `game_first_game_id`='$game_id',
                             `game_guest_team_id`='$team_1',
                             `game_home_team_id`='$team_2',
-                            `game_referee_id`='1',
+                            `game_referee_id`='$referee_2',
                             `game_stadium_id`='$team_2',
                             `game_stage_id`='$stage_id'+'1',
                             `game_shedule_id`='$shedule_2',
@@ -230,6 +241,13 @@ function f_igosja_generator_champions_league_next_stage()
                     $$team      = $league_array[$k]['league_team_id'];
                 }
 
+                for ($k=0; $k<12; $k++)
+                {
+                    $referee_num    = $k * $j;
+                    $referee        = 'referee_' . $k + 1;
+                    $$referee       = $referee_array[$referee_num]['referee_id'];
+                }
+
                 $sql = "INSERT INTO `game`
                         (
                             `game_home_team_id`,
@@ -242,18 +260,18 @@ function f_igosja_generator_champions_league_next_stage()
                             `game_tournament_id`,
                             `game_weather_id`
                         )
-                        VALUES  ('$team_1','$team_2','1','$team_1','1','$shedule_1','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_4','$team_3','1','$team_4','1','$shedule_1','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_3','$team_1','1','$team_3','2','$shedule_2','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_2','$team_4','1','$team_2','2','$shedule_2','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_1','$team_4','1','$team_1','3','$shedule_3','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_2','$team_3','1','$team_2','3','$shedule_3','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_2','$team_1','1','$team_2','4','$shedule_4','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_3','$team_4','1','$team_3','4','$shedule_4','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_1','$team_3','1','$team_1','5','$shedule_5','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_4','$team_2','1','$team_4','5','$shedule_5','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_4','$team_1','1','$team_4','6','$shedule_6','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_3','$team_2','1','$team_3','6','$shedule_6','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3');";
+                        VALUES  ('$team_1','$team_2','$referee_1','$team_1','1','$shedule_1','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_4','$team_3','$referee_2','$team_4','1','$shedule_1','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_3','$team_1','$referee_3','$team_3','2','$shedule_2','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_2','$team_4','$referee_4','$team_2','2','$shedule_2','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_1','$team_4','$referee_5','$team_1','3','$shedule_3','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_2','$team_3','$referee_6','$team_2','3','$shedule_3','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_2','$team_1','$referee_7','$team_2','4','$shedule_4','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_3','$team_4','$referee_8','$team_3','4','$shedule_4','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_1','$team_3','$referee_9','$team_1','5','$shedule_5','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_4','$team_2','$referee_10','$team_4','5','$shedule_5','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_4','$team_1','$referee_11','$team_4','6','$shedule_6','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
+                                ('$team_3','$team_2','$referee_12','$team_3','6','$shedule_6','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3');";
                 f_igosja_mysqli_query($sql);
             }
         }
@@ -312,10 +330,13 @@ function f_igosja_generator_champions_league_next_stage()
                 $team_1 = $team_array[$j]['leagueparticipant_team_id'];
                 $team_2 = $team_array[$j+1]['leagueparticipant_team_id'];
 
+                $referee_1 = $referee_array[$j]['referee_id'];
+                $referee_2 = $referee_array[$j+1]['referee_id'];
+
                 $sql = "INSERT INTO `game`
                         SET `game_guest_team_id`='$team_2',
                             `game_home_team_id`='$team_1',
-                            `game_referee_id`='1',
+                            `game_referee_id`='$referee_1',
                             `game_stadium_id`='$team_1',
                             `game_stage_id`='46',
                             `game_shedule_id`='$shedule_1',
@@ -330,7 +351,7 @@ function f_igosja_generator_champions_league_next_stage()
                         SET `game_first_game_id`='$game_id',
                             `game_guest_team_id`='$team_1',
                             `game_home_team_id`='$team_2',
-                            `game_referee_id`='1',
+                            `game_referee_id`='$referee_2',
                             `game_stadium_id`='$team_2',
                             `game_stage_id`='46',
                             `game_shedule_id`='$shedule_2',
