@@ -157,7 +157,6 @@ elseif (isset($_GET['to_ok']))
                 `transfer_period`,
                 `transfer_player_id`,
                 `transfer_price`,
-                `transfer_season_id`,
                 `transfer_seller_id`
             )
             SELECT `playeroffer_team_id`,
@@ -165,7 +164,6 @@ elseif (isset($_GET['to_ok']))
                    `playeroffer_period`,
                    `playeroffer_player_id`,
                    `playeroffer_price`,
-                   '$igosja_season_id',
                    `player_team_id`
             FROM `playeroffer`
             LEFT JOIN `player`
@@ -223,7 +221,7 @@ $sql = "SELECT `name_name`,
         OR `transfer_seller_id`='$get_num')
         AND `standing_season_id`='$igosja_season_id'
         AND `tournament_tournamenttype_id`='2'
-        ORDER BY `transfer_date` DESC";
+        ORDER BY `transfer_id` ASC";
 $transfer_sql = $mysqli->query($sql);
 
 $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);

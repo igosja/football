@@ -62,6 +62,27 @@ if (isset($button[0]) &&
     }
 }
 
+$sql = "SELECT `site_status`,
+               `site_version_1`,
+               `site_version_2`,
+               `site_version_3`,
+               `site_version_4`,
+               `site_version_date`
+        FROM `site`
+        WHERE `site_id`='1'
+        LIMIT 1";
+$site_sql = $mysqli->query($sql);
+
+$site_array = $site_sql->fetch_all(MYSQLI_ASSOC);
+
+$site_status = $site_array[0]['site_status'];
+
+if (SITE_CLOSED == $site_status && 'admin' != $chapter)
+{
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/site_closed.php');
+    exit;
+}
+
 $sql = "SELECT `season_id`
         FROM `season`
         ORDER BY `season_id` DESC
@@ -139,26 +160,5 @@ if (1 == $page_authorization &&
     !isset($authorization_id))
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_logged.php');
-    exit;
-}
-
-$sql = "SELECT `site_status`,
-               `site_version_1`,
-               `site_version_2`,
-               `site_version_3`,
-               `site_version_4`,
-               `site_version_date`
-        FROM `site`
-        WHERE `site_id`='1'
-        LIMIT 1";
-$site_sql = $mysqli->query($sql);
-
-$site_array = $site_sql->fetch_all(MYSQLI_ASSOC);
-
-$site_status = $site_array[0]['site_status'];
-
-if (SITE_CLOSED == $site_status && 'admin' != $chapter)
-{
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/site_closed.php');
     exit;
 }

@@ -51,6 +51,7 @@ f_igosja_generator_finance();
 f_igosja_generator_make_played();
 f_igosja_generator_scout();
 f_igosja_generator_building();
+f_igosja_generator_transfer();
 f_igosja_generator_site_open();
 
 print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '

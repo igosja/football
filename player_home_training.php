@@ -58,6 +58,7 @@ $sql = "SELECT `country_id`,
         ) AS `t1`
         ON `lineup_player_id`=`player_id`
         WHERE `player_id`='$get_num'
+        AND `player_team_id`='$authorization_team_id'
         LIMIT 1";
 $player_sql = $mysqli->query($sql);
 
