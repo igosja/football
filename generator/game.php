@@ -214,8 +214,8 @@ $sql = "UPDATE `player`
             `player_national_id`=`player_country_id`";
 $mysqli->query($sql);
 
-$sql = "INSERT INTO `standing` (`standing_tournament_id`, `standing_country_id`, `standing_season_id`, `standing_team_id`)
-        SELECT `tournament_id`, `city_country_id`, '$igosja_season_id', `team_id`
+$sql = "INSERT INTO `standing` (`standing_tournament_id`, `standing_country_id`, `standing_season_id`, `standing_team_id`, `standing_user_id`)
+        SELECT `tournament_id`, `city_country_id`, '$igosja_season_id', `team_id`, `team_user_id`
         FROM `team`
         LEFT JOIN `city`
         ON `team_city_id`=`city_id`

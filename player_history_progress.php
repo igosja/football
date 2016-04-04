@@ -45,15 +45,20 @@ $sql = "SELECT `team_id`,
                `team_name`,
                `tournament_id`,
                `tournament_name`,
-               `trophyplayer_place`,
-               `trophyplayer_season_id`
-        FROM `trophyplayer`
+               `standing_place`,
+               `standing_season_id`
+        FROM `statisticplayer`
+        LEFT JOIN `standing`
+        ON (`statisticplayer_team_id`=`standing_team_id`
+        AND `standing_season_id`=`statisticplayer_season_id`
+        AND `statisticplayer_tournament_id`=`standing_tournament_id`)
         LEFT JOIN `team`
-        ON `team_id`=`trophyplayer_team_id`
+        ON `team_id`=`statisticplayer_team_id`
         LEFT JOIN `tournament`
-        ON `tournament_id`=`trophyplayer_tournament_id`
-        WHERE `trophyplayer_player_id`='$get_num'
-        ORDER BY `trophyplayer_season_id` DESC";
+        ON `tournament_id`=`standing_tournament_id`
+        WHERE `statisticplayer_player_id`='$get_num'
+        AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONSHIP . "'
+        ORDER BY `statisticplayer_season_id` DESC";
 $trophy_sql = $mysqli->query($sql);
 
 $trophy_array = $trophy_sql->fetch_all(MYSQLI_ASSOC);

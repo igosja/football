@@ -210,6 +210,7 @@ $sql = "SELECT `tournament_id`,
         ON `standing_tournament_id`=`tournament_id`
         WHERE `tournament_tournamenttype_id`='2'
         AND `standing_season_id`='$igosja_season_id'
+        AND `standing_team_id`='$get_num'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 

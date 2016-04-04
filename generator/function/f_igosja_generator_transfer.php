@@ -17,7 +17,9 @@ function f_igosja_generator_transfer()
 
     if (0 != $count_shedule)
     {
-        $sql = "SELECT `player_team_id`,
+        $sql = "SELECT `buyer`.`team_user_id` AS `buyer_user_id`,
+                       `player_team_id`,
+                       `seller`.`team_user_id` AS `seller_user_id`,
                        `transfer_id`,
                        `transfer_buyer_id`,
                        `transfer_offertype_id`,
@@ -27,6 +29,10 @@ function f_igosja_generator_transfer()
                 FROM `transfer`
                 LEFT JOIN `player`
                 ON `transfer_player_id`=`player_id`
+                LEFT JOIN `team` AS `buyer`
+                ON `buyer`.`team_id`=`transfer_buyer_id`
+                LEFT JOIN `team` AS `seller`
+                ON `seller`.`team_id`=`transfer_buyer_id`
                 ORDER BY `transfer_id` ASC";
         $transfer_sql = f_igosja_mysqli_query($sql);
 
@@ -40,7 +46,9 @@ function f_igosja_generator_transfer()
             $player_id      = $transfer_array[$i]['transfer_price'];
             $player_team_id = $transfer_array[$i]['player_team_id'];
             $buyer_id       = $transfer_array[$i]['transfer_buyer_id'];
+            $buyer_user_id  = $transfer_array[$i]['buyer_user_id'];
             $seller_id      = $transfer_array[$i]['transfer_seller_id'];
+            $seller_user_id = $transfer_array[$i]['seller_user_id'];
             $price          = $transfer_array[$i]['transfer_price'];
             $offertype_id   = $transfer_array[$i]['transfer_offertype_id'];
 
@@ -106,6 +114,104 @@ function f_igosja_generator_transfer()
                             `transferhistory_season_id`='$igosja_season_id',
                             `transferhistory_seller_id`='$seller_id'";
                 f_igosja_mysqli_query($sql);
+
+                $sql = "SELECT `recordteam_value`
+                        FROM `recordteam`
+                        WHERE `recordteam_recordteamtype_id`='" . RECORD_TEAM_BIGGEST_TRANSFER_FROM . "'
+                        AND `recordteam_team_id`='$seller_id'
+                        LIMIT 1";
+                $record_sql = f_igosja_mysqli_query($sql);
+
+                $count_record = $record_sql->num_rows;
+
+                if (0 == $count_record)
+                {
+                    $sql = "INSERT INTO `recordteam`
+                            SET `recordteam_date_start`=CURDATE(),
+                                `recordteam_player_id`='$player_id',
+                                `recordteam_recordteamtype_id`='" . RECORD_TEAM_BIGGEST_TRANSFER_FROM . "',
+                                `recordteam_team_id`=' . $seller_id . ',
+                                `recordteam_value`='$price'";
+                    f_igosja_mysqli_query($sql);
+                }
+                else
+                {
+                    $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                    $record_value = $record_array[0]['recordteam_value'];
+
+                    if ($price > $record_value)
+                    {
+                        $sql = "UPDATE `recordteam`
+                                SET `recordteam_date_start`=CURDATE(),
+                                    `recordteam_player_id`='$player_id',
+                                    `recordteam_recordteamtype_id`='" . RECORD_TEAM_BIGGEST_TRANSFER_FROM . "',
+                                    `recordteam_value`='$price'
+                                WHERE `recordteam_team_id`=' . $seller_id . '
+                                LIMIT 1";
+                        f_igosja_mysqli_query($sql);
+                    }
+                }
+
+                $sql = "SELECT `recordteam_value`
+                        FROM `recordteam`
+                        WHERE `recordteam_recordteamtype_id`='" . RECORD_TEAM_BIGGEST_TRANSFER_TO . "'
+                        AND `recordteam_team_id`='$buyer_id'
+                        LIMIT 1";
+                $record_sql = f_igosja_mysqli_query($sql);
+
+                $count_record = $record_sql->num_rows;
+
+                if (0 == $count_record)
+                {
+                    $sql = "INSERT INTO `recordteam`
+                            SET `recordteam_date_start`=CURDATE(),
+                                `recordteam_player_id`='$player_id',
+                                `recordteam_recordteamtype_id`='" . RECORD_TEAM_BIGGEST_TRANSFER_TO . "',
+                                `recordteam_team_id`=' . $buyer_id . ',
+                                `recordteam_value`='$price'";
+                    f_igosja_mysqli_query($sql);
+                }
+                else
+                {
+                    $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                    $record_value = $record_array[0]['recordteam_value'];
+
+                    if ($price > $record_value)
+                    {
+                        $sql = "UPDATE `recordteam`
+                                SET `recordteam_date_start`=CURDATE(),
+                                    `recordteam_player_id`='$player_id',
+                                    `recordteam_recordteamtype_id`='" . RECORD_TEAM_BIGGEST_TRANSFER_TO . "',
+                                    `recordteam_value`='$price'
+                                WHERE `recordteam_team_id`=' . $buyer_id . '
+                                LIMIT 1";
+                        f_igosja_mysqli_query($sql);
+                    }
+                }
+
+                if (0 != $seller_user_id)
+                {
+                    $sql = "UPDATE `user`
+                            SET `user_sell_player`=`user_sell_player`+'1',
+                                `user_sell_price`=`user_sell_price`+'$price',
+                                `user_sell_max`=IF(`user_sell_max`>'$price', `user_sell_max`, '$price')
+                            WHERE `user_id`='$seller_user_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
+
+                if (0 != $buyer_user_id)
+                {
+                    $sql = "UPDATE `user`
+                            SET `user_buy_player`=`user_buy_player`+'1',
+                                `user_buy_price`=`user_buy_price`+'$price',
+                                `user_buy_max`=IF(`user_buy_max`>'$price', `user_buy_max`, '$price')
+                            WHERE `user_id`='$buyer_user_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
 
                 $delete_sql = 1;
             }

@@ -43,6 +43,7 @@ f_igosja_generator_training();
 f_igosja_generator_after_training();
 f_igosja_generator_player_salary();
 f_igosja_generator_staff_salary();
+f_igosja_generator_team_price();
 f_igosja_generator_team_reputation();
 f_igosja_generator_tournament_reputation();
 f_igosja_generator_user_reputation();

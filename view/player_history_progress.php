@@ -11,7 +11,7 @@
                 </tr>
                 <?php foreach ($trophy_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print $item['trophyplayer_season_id']; ?></td>
+                        <td class="center"><?php print $item['standing_season_id']; ?></td>
                         <td class="w1">
                             <img
                                 alt="<?php print $item['team_name']; ?>"
@@ -36,7 +36,7 @@
                                 <?php print $item['tournament_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['trophyplayer_place']; ?></td>
+                        <td class="center"><?php print $item['standing_place']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

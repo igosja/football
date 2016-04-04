@@ -29,7 +29,11 @@
                     <th class="w50"></th>
                 </tr>
                 <?php for ($i=0; $i<$count_team; $i++) { ?>
-                    <tr>
+                    <tr
+                        <?php if (isset($authorization_team_id) && $authorization_team_id == $team_array[$i]['team_id']) { ?>
+                            class="current"
+                        <?php } ?>
+                    >
                         <td class="center">
                             <?php
 
