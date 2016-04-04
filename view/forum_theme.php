@@ -1,8 +1,17 @@
-<table class="w100">
+<table class="block-table w100">
     <tr>
-        <td>
-            <p class="header"><?php print $head_array[0]['forumtheme_name']; ?></p>
-            <table class="w100">
+        <td class="block-page block-page-forum">
+            <table class="forum-group w100">
+                <tr>
+                    <th>
+                        <?php foreach ($bread_array as $item) { ?>
+                            <a href="<?= $item['url'] ?>"><?= $item['text'] ?></a> / 
+                        <?php } ?>
+                        <?= $bread_last ?>
+                    </th>
+                </tr>
+            </table>
+            <table class="striped w100">
                 <tr>
                     <td>
                         <?php if (isset($authorization_id)) { ?>
@@ -34,7 +43,7 @@
                     </td>
                 </tr>
             </table>
-            <table class="forum-theme forum-theme w100">
+            <table class="forum-group w100">
                 <tr>
                     <td class="w25">
                         <strong><?php print $head_array[0]['user_login']; ?></strong>
@@ -90,7 +99,7 @@
                     </tr>
                 <?php } ?>
             </table>
-            <table class="w100">
+            <table class="striped w100">
                 <tr>
                     <td>
                         <?php if (isset($authorization_id)) { ?>

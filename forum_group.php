@@ -32,12 +32,14 @@ $head_sql = $mysqli->query($sql);
 
 $head_array = $head_sql->fetch_all(MYSQLI_ASSOC);
 
-$header_title = $head_array[0]['forumthemegroup_name'];
+$header_title   = $head_array[0]['forumthemegroup_name'];
+$bread_array    = array(array('url' => 'forum.php', 'text' => 'Форум'));
+$bread_last     = $header_title;
 
 $sql = "SELECT SQL_CALC_FOUND_ROWS
                `count_post`,
                `forumpost_date`,
-               `forumpost_id`,
+               `t2`.`forumpost_id` AS `forumpost_id`,
                `forumtheme_date`,
                `forumtheme_id`,
                `forumtheme_name`,
@@ -58,15 +60,21 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         (
             SELECT MAX(`forumpost_date`) AS `forumpost_date`,
                    MAX(`forumpost_id`) AS `forumpost_id`,
-                   `forumpost_forumtheme_id`,
-                   `user_login` AS `post_login`
+                   `forumpost_forumtheme_id`
             FROM `forumpost`
-            LEFT JOIN `user`
-            ON `user_id`=`forumpost_user_id`
             GROUP BY `forumpost_forumtheme_id`
             ORDER BY `forumpost_id` DESC
         ) AS `t2`
         ON `t2`.`forumpost_forumtheme_id`=`forumtheme_id`
+        LEFT JOIN
+        (
+            SELECT `user_login` AS `post_login`,
+                   `forumpost_id`
+            FROM `forumpost`
+            LEFT JOIN `user`
+            ON `forumpost_user_id`=`user_id`
+        ) AS `t3`
+        ON `t3`.`forumpost_id`=`t2`.`forumpost_id`
         WHERE `forumtheme_forumthemegroup_id`='$get_num'
         ORDER BY `forumtheme_id` ASC
         LIMIT $offset, $limit";
@@ -86,14 +94,16 @@ if (isset($authorization_user_id))
     $sql = "SELECT `forumread_forumpost_id`,
                    `forumread_forumtheme_id`
             FROM `forumread`
+            LEFT JOIN `forumtheme`
+            ON `forumtheme_id`=`forumread_forumtheme_id`
             WHERE `forumread_user_id`='$authorization_user_id'
+            AND `forumtheme_forumthemegroup_id`='$get_num'
             ORDER BY `forumread_id`";
     $forumread_sql = $mysqli->query($sql);
 
     $forumread_array = $forumread_sql->fetch_all(MYSQLI_ASSOC);
 }
 
-$num            = $get_num;
-$header_title   = 'Форум';
+$num = $get_num;
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

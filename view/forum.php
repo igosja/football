@@ -1,6 +1,6 @@
 <table class="block-table w100">
     <tr>
-        <td class="block-page-forum">
+        <td class="block-page block-page-forum">
             <?php for ($i=0; $i<$count_forum; $i++) { ?>
                 <?php if (!isset($forum_array[$i-1]['forumchapter_id']) ||
                           $forum_array[$i-1]['forumchapter_id'] != $forum_array[$i]['forumchapter_id']) { ?>

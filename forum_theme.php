@@ -25,6 +25,8 @@ $offset = ($page - 1) * $limit;
 
 $sql = "SELECT `city_name`,
                `country_name`,
+               `forumthemegroup_id`,
+               `forumthemegroup_name`,
                `forumtheme_date`,
                `forumtheme_id`,
                `forumtheme_name`,
@@ -34,6 +36,8 @@ $sql = "SELECT `city_name`,
                `user_id`,
                `user_login`
         FROM `forumtheme`
+        LEFT JOIN `forumthemegroup`
+        ON `forumtheme_forumthemegroup_id`=`forumthemegroup_id`
         LEFT JOIN `user`
         ON `forumtheme_user_id`=`user_id`
         LEFT JOIN `team`
@@ -47,6 +51,16 @@ $sql = "SELECT `city_name`,
 $head_sql = $mysqli->query($sql);
 
 $head_array = $head_sql->fetch_all(MYSQLI_ASSOC);
+
+$header_title   = $head_array[0]['forumtheme_name'];
+$group_id       = $head_array[0]['forumthemegroup_id'];
+$group_name     = $head_array[0]['forumthemegroup_name'];
+
+$bread_array    = array(
+                    array('url' => 'forum.php', 'text' => 'Форум'),
+                    array('url' => 'forum_group.php?num=' . $group_id, 'text' => $group_name)
+                  );
+$bread_last     = $header_title;
 
 $sql = "SELECT SQL_CALC_FOUND_ROWS
                `city_name`,
@@ -133,7 +147,6 @@ if (isset($authorization_user_id))
     }
 }
 
-$num            = $get_num;
-$header_title   = 'Форум';
+$num = $get_num;
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

@@ -1,7 +1,17 @@
 <table class="block-table w100">
     <tr>
-        <td class="block-page">
-            <table class="w100">
+        <td class="block-page block-page-forum">
+            <table class="forum-group w100">
+                <tr>
+                    <th>
+                        <?php foreach ($bread_array as $item) { ?>
+                            <a href="<?= $item['url'] ?>"><?= $item['text'] ?></a> / 
+                        <?php } ?>
+                        <?= $bread_last ?>
+                    </th>
+                </tr>
+            </table>
+            <table class="striped w100">
                 <tr>
                     <td>
                         <?php if (isset($authorization_id)) { ?>
@@ -76,7 +86,7 @@
                     </tr>
                 <?php } ?>
             </table>
-            <table class="w100">
+            <table class="striped w100">
                 <tr>
                     <td>
                         <?php if (isset($authorization_id)) { ?>

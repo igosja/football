@@ -487,9 +487,9 @@ textarea
     font-weight: normal;
 }
 
-.forum-group td
+.forum-group th a
 {
-    padding: 3px;
+    color: #8C97A0;
 }
 
 .forum-group td
@@ -497,40 +497,14 @@ textarea
     padding: 3px;
 }
 
-.forum-group strong, .forum-theme strong
+.forum-group td
+{
+    padding: 3px;
+}
+
+.forum-group strong
 {
     font-size: 12px;
-}
-
-.forum-theme
-{
-    margin-top: 2px;
-    margin-bottom: 2px;
-    border-spacing: 0 3px;
-}
-
-.forum-theme tr:nth-child(2n)
-{
-    background-color: #EFEFF1;
-}
-
-.forum-theme tr:nth-child(2n+1)
-{
-    background-color: #EBEBEB;
-}
-
-.forum-theme th
-{
-    background-color: #3570BC;
-    color: #E1E2E4;
-    text-align: left;
-}
-
-.forum-theme td
-{
-    border-left: 1px solid #E1E2E4;
-    border-top: 2px solid #E1E2E4;
-    padding: 3px;
 }
 
 /*Полосатая таблица*/
