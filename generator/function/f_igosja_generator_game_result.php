@@ -9,7 +9,8 @@ function f_igosja_generator_game_result()
     $koef_4 = 100000;
     $koef_5 = 100000;
 
-    $sql = "SELECT `game_id`,
+    $sql = "SELECT `game_field_bonus`,
+                   `game_id`,
                    `game_guest_country_id`,
                    `game_guest_team_id`,
                    `game_home_country_id`,
@@ -59,12 +60,14 @@ function f_igosja_generator_game_result()
                 $team           = 'home';
                 $team_sql       = 'game_home_team_id';
                 $country_sql    = 'game_home_country_id';
+                $field_bonus    = 0;
             }
             else
             {
                 $team           = 'guest';
                 $team_sql       = 'game_guest_team_id';
                 $country_sql    = 'game_guest_country_id';
+                $field_bonus    = $game_array[$i]['game_field_bonus'];
             }
 
             $team_id    = $game_array[$i][$team_sql];
@@ -164,6 +167,7 @@ function f_igosja_generator_game_result()
                     $power_koeff = (100 - $power_koeff) / 2 + $power_koeff;
                 }
 
+                $player_power           = $player_power - $player_power * $field_bonus * 5 / 100;
                 $player_power           = $player_power * $power_koeff / 100;
                 $$team_power            = $$team_power + $player_power;
                 $player_power_main_3    = (2 - $$gamestyle) * $player_power / 3;

@@ -53,6 +53,40 @@ f_igosja_generator_make_played();
 f_igosja_generator_scout();
 f_igosja_generator_building();
 f_igosja_generator_transfer();
+
+$sql = "SELECT COUNT(`shedule_id`) AS `count`
+        FROM `shedule`
+        WHERE `shedule_date`>CURRENT_DATE()
+        AND `shedule_season_id`='$igosja_season_id'";
+$shedule_sql = $mysqli->query($sql);
+
+$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+
+$count_shedule = $shedule_array[0]['count'];
+
+if (0 == $count_shedule)
+{
+    include (__DIR__ . '/../include/season.php');
+
+    f_igosja_season_player_age();
+    f_igosja_season_user_championship_trophy();
+    f_igosja_season_user_cup_trophy();
+    f_igosja_season_championship_point_record();
+    f_igosja_season_championship_most_titled_record();
+    f_igosja_season_cup_most_titled_record();
+    f_igosja_season_championship_prize();
+    f_igosja_season_cup_prize();
+    f_igosja_season_truncate();
+    f_igosja_season_new_season();
+    f_igosja_season_worldcup_standing();
+    f_igosja_season_championship_standing();
+    f_igosja_season_shedule();
+    f_igosja_season_worldcup_game();
+    f_igosja_season_champions_league_game();
+    f_igosja_season_championship_game();
+    f_igosja_season_cup_game();
+}
+
 f_igosja_generator_site_open();
 
 print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '

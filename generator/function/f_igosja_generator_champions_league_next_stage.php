@@ -20,8 +20,7 @@ function f_igosja_generator_champions_league_next_stage()
     {
         $sql = "SELECT `referee_id`
                 FROM `referee`
-                ORDER BY RAND()
-                LIMIT 1";
+                ORDER BY RAND()";
         $referee_sql = f_igosja_mysqli_query($sql);
 
         $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
@@ -81,6 +80,7 @@ function f_igosja_generator_champions_league_next_stage()
             $sql = "UPDATE `leagueparticipant`
                     SET `leagueparticipant_out`='$stage_id'
                     WHERE `leagueparticipant_team_id`='$looser'
+                    AND `leagueparticipant_season_id`='$igosja_season_id'
                     LIMIT 1";
             f_igosja_mysqli_query($sql);
         }
@@ -113,6 +113,7 @@ function f_igosja_generator_champions_league_next_stage()
                     FROM `leagueparticipant`
                     WHERE `leagueparticipant_out`='0'
                     AND `leagueparticipant_in`<='$stage_id'+'1'
+                    AND `leagueparticipant_season_id`='$igosja_season_id'
                     AND $and_sql
                     ORDER BY RAND()";
             $team_sql = f_igosja_mysqli_query($sql);
@@ -162,7 +163,8 @@ function f_igosja_generator_champions_league_next_stage()
                     SELECT '$igosja_season_id', `leagueparticipant_team_id`
                     FROM `leagueparticipant`
                     WHERE `leagueparticipant_out`='0'
-                    AND `leagueparticipant_in`<='$stage_id'
+                    AND `leagueparticipant_in`<='$stage_id'+'1'
+                    AND `leagueparticipant_season_id`='$igosja_season_id'
                     ORDER BY RAND()";
             f_igosja_mysqli_query($sql);
 
@@ -260,18 +262,18 @@ function f_igosja_generator_champions_league_next_stage()
                             `game_tournament_id`,
                             `game_weather_id`
                         )
-                        VALUES  ('$team_1','$team_2','$referee_1','$team_1','1','$shedule_1','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_4','$team_3','$referee_2','$team_4','1','$shedule_1','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_3','$team_1','$referee_3','$team_3','2','$shedule_2','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_2','$team_4','$referee_4','$team_2','2','$shedule_2','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_1','$team_4','$referee_5','$team_1','3','$shedule_3','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_2','$team_3','$referee_6','$team_2','3','$shedule_3','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_2','$team_1','$referee_7','$team_2','4','$shedule_4','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_3','$team_4','$referee_8','$team_3','4','$shedule_4','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_1','$team_3','$referee_9','$team_1','5','$shedule_5','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_4','$team_2','$referee_10','$team_4','5','$shedule_5','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_4','$team_1','$referee_11','$team_4','6','$shedule_6','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3'),
-                                ('$team_3','$team_2','$referee_12','$team_3','6','$shedule_6','15'+RAND()*'15','" . TOURNAMENT_CHAMPIONS_LEAGUE . "','1'+RAND()*'3');";
+                        VALUES  ('$team_1', '$team_2', '$referee_1',  '$team_1', '1', '$shedule_1', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_4', '$team_3', '$referee_2',  '$team_4', '1', '$shedule_1', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_3', '$team_1', '$referee_3',  '$team_3', '2', '$shedule_2', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_2', '$team_4', '$referee_4',  '$team_2', '2', '$shedule_2', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_1', '$team_4', '$referee_5',  '$team_1', '3', '$shedule_3', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_2', '$team_3', '$referee_6',  '$team_2', '3', '$shedule_3', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_2', '$team_1', '$referee_7',  '$team_2', '4', '$shedule_4', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_3', '$team_4', '$referee_8',  '$team_3', '4', '$shedule_4', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_1', '$team_3', '$referee_9',  '$team_1', '5', '$shedule_5', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_4', '$team_2', '$referee_10', '$team_4', '5', '$shedule_5', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_4', '$team_1', '$referee_11', '$team_4', '6', '$shedule_6', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3'),
+                                ('$team_3', '$team_2', '$referee_12', '$team_3', '6', '$shedule_6', '15'+RAND()*'15', '" . TOURNAMENT_CHAMPIONS_LEAGUE . "', '1'+RAND()*'3');";
                 f_igosja_mysqli_query($sql);
             }
         }
@@ -300,7 +302,8 @@ function f_igosja_generator_champions_league_next_stage()
                         FROM `league`
                         WHERE `league_season_id`='$igosja_season_id'
                         AND `league_place`>='3'
-                    )";
+                    )
+                    AND `leagueparticipant_season_id`='$igosja_season_id'";
             f_igosja_mysqli_query($sql);
 
             $sql = "SELECT `shedule_id`
@@ -319,6 +322,7 @@ function f_igosja_generator_champions_league_next_stage()
             $sql = "SELECT `leagueparticipant_team_id`
                     FROM `leagueparticipant`
                     WHERE `leagueparticipant_out`='0'
+                    AND `leagueparticipant_season_id`='$igosja_season_id'
                     ORDER BY RAND()";
             $team_sql = f_igosja_mysqli_query($sql);
 

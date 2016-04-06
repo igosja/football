@@ -127,7 +127,8 @@ if (isset($_GET['ok']))
         if (1 == $asktoplay_home)
         {
             $sql = "INSERT INTO `game`
-                    SET `game_guest_team_id`='$get_num',
+                    SET `game_field_bonus`='0',
+                        `game_guest_team_id`='$get_num',
                         `game_home_team_id`='$team_id',
                         `game_shedule_id`='$shedule_id',
                         `game_referee_id`='$referee_id',
@@ -137,7 +138,8 @@ if (isset($_GET['ok']))
         else
         {
             $sql = "INSERT INTO `game`
-                    SET `game_guest_team_id`='$team_id',
+                    SET `game_field_bonus`='0',
+                        `game_guest_team_id`='$team_id',
                         `game_home_team_id`='$get_num',
                         `game_shedule_id`='$shedule_id',
                         `game_referee_id`='$referee_id',

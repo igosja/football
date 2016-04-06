@@ -80,7 +80,8 @@ function f_igosja_generator_championship_gold()
                 $referee_id = $referee_array[0]['referee_id'];
 
                 $sql = "INSERT INTO `game`
-                        SET `game_guest_team_id`='$team_1',
+                        SET `game_field_bonus`='0',
+                            `game_guest_team_id`='$team_1',
                             `game_home_team_id`='$team_2',
                             `game_referee_id`='$referee_id',
                             `game_stadium_id`='$team_1',

@@ -95,6 +95,20 @@ function f_igosja_generator_transfer()
                                (SYSDATE(), '" . HISTORY_TEXT_INCOME_TRANSFER. "', '$igosja_season_id', '$seller_id', '$price');";
                 f_igosja_mysqli_query($sql);
 
+                $sql = "UPDATE `finance`
+                        SET `finance_expense_transfer`=`finance_expense_transfer`+'$price'
+                        WHERE `finance_season_id`='$igosja_season_id'
+                        AND `finance_team_id`='$buyer_id'
+                        LIMIT 1";
+                f_igosja_mysqli_query($sql);
+
+                $sql = "UPDATE `finance`
+                        SET `finance_income_transfer`=`finance_income_transfer`+'$price'
+                        WHERE `finance_season_id`='$igosja_season_id'
+                        AND `finance_team_id`='$seller_id'
+                        LIMIT 1";
+                f_igosja_mysqli_query($sql);
+
                 $sql = "INSERT INTO `transferhistory`
                         SET `transferhistory_buyer_id`='$buyer_id',
                             `transferhistory_date`=SYSDATE(),

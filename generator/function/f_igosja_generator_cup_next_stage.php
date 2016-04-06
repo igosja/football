@@ -4,6 +4,7 @@ function f_igosja_generator_cup_next_stage()
 //Кубковые турниры - следующая стадия
 {
     global $mysqli;
+    global $igosja_season_id;
 
     $sql = "SELECT `shedule_tournamenttype_id`
             FROM `shedule`
@@ -75,6 +76,7 @@ function f_igosja_generator_cup_next_stage()
                     SET `cupparticipant_out`='$stage_id'
                     WHERE `cupparticipant_tournament_id`='$tournament_id'
                     AND `cupparticipant_team_id`='$looser'
+                    AND `cupparticipant_season_id`='$igosja_season_id'
                     LIMIT 1";
             f_igosja_mysqli_query($sql);
         }
@@ -99,6 +101,11 @@ function f_igosja_generator_cup_next_stage()
             if (isset($shedule_array[1]['shedule_id']))
             {
                 $shedule_2 = $shedule_array[1]['shedule_id'];
+                $game_field_bonus = 1;
+            }
+            else
+            {
+                $game_field_bonus = 0;
             }
 
             $sql = "SELECT `cupparticipant_tournament_id`,
@@ -106,6 +113,7 @@ function f_igosja_generator_cup_next_stage()
                     FROM `cupparticipant`
                     LEFT JOIN `tournament`
                     ON `cupparticipant_tournament_id`=`tournament_id`
+                    WHERE `cupparticipant_season_id`='$igosja_season_id'
                     GROUP BY `cupparticipant_tournament_id`
                     ORDER BY `cupparticipant_tournament_id` ASC";
             $tournament_sql = f_igosja_mysqli_query($sql);
@@ -131,6 +139,7 @@ function f_igosja_generator_cup_next_stage()
                         FROM `cupparticipant`
                         WHERE `cupparticipant_tournament_id`='$tournament_id'
                         AND `cupparticipant_out`='0'
+                        AND `cupparticipant_season_id`='$igosja_season_id'
                         ORDER BY RAND()";
                 $team_sql = f_igosja_mysqli_query($sql);
 
@@ -148,7 +157,8 @@ function f_igosja_generator_cup_next_stage()
                     if (isset($shedule_1))
                     {
                         $sql = "INSERT INTO `game`
-                                SET `game_guest_team_id`='$team_2',
+                                SET `game_field_bonus`='$game_field_bonus',
+                                    `game_guest_team_id`='$team_2',
                                     `game_home_team_id`='$team_1',
                                     `game_referee_id`='$referee_1',
                                     `game_stadium_id`='$team_1',

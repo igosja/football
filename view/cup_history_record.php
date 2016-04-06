@@ -61,18 +61,6 @@
                         </td>
                     </tr>
                 <?php } ?>
-                <?php for ($i=11; $i<13; $i++) { ?>
-                    <tr>
-                        <td class="w25"><?php print $record_array[$i]['recordtournamenttype_name']; ?></td>
-                        <td>
-                            <?php print $record_array[$i]['recordtournament_value_1']; ?> -
-                            <a href="team_team_review_profile.php?num=<?php print $record_array[$i]['team_id']; ?>">
-                                <?php print $record_array[$i]['team_name']; ?>
-                            </a>,
-                            <?php print $record_array[$i]['recordtournament_season_id']; ?> сезон
-                        </td>
-                    </tr>
-                <?php } ?>
                 <?php for ($i=13; $i<14; $i++) { ?>
                     <tr>
                         <td class="w25"><?php print $record_array[$i]['recordtournamenttype_name']; ?></td>
