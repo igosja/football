@@ -9,7 +9,7 @@ if (isset($_GET['group']))
     if (isset($_POST['text']))
     {
         $name = $_POST['name'];
-        $text = $_POST['text'];
+        $text = strip_tags($_POST['text']);
 
         $sql = "INSERT INTO `forumtheme`
                 SET `forumtheme_forumthemegroup_id`='$get_group',
@@ -50,7 +50,7 @@ else
     if (isset($_POST['text']))
     {
         $name = $_POST['name'];
-        $text = $_POST['text'];
+        $text = strip_tags($_POST['text']);
 
         $sql = "INSERT INTO `forumpost`
                 SET `forumpost_forumtheme_id`='$get_theme',

@@ -162,3 +162,26 @@ if (1 == $page_authorization &&
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_logged.php');
     exit;
 }
+
+$sql = "SELECT COUNT(`shedule_id`) AS `count`
+        FROM `shedule`
+        WHERE `shedule_tournamenttype_id`='" . TOURNAMENT_TYPE_OFF_SEASON . "'
+        AND `shedule_date`<=CURDATE()
+        AND `shedule_season_id`='$igosja_season_id'";
+$shedule_sql = $mysqli->query($sql);
+
+$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+$count_shedule = $shedule_array[0]['count'];
+
+if (0 == $count_shedule)
+{
+    $coach_link = '';
+}
+elseif (5 >= $count_shedule)
+{
+    $coach_link = 'national_coach_application.php';
+}
+else
+{
+    $coach_link = 'national_coach_vote.php';
+}

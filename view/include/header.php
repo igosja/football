@@ -91,6 +91,13 @@
                                                 </a>
                                             </li>
                                         <?php } ?>
+                                        <?php if (!empty($coach_link)) { ?>
+                                            <li>
+                                                <a href="<?=$coach_link?>" class="main-menu-link main-menu-link-red">
+                                                    Выборы
+                                                </a>
+                                            </li>
+                                        <?php } ?>
                                     <?php } ?>
                                     <li><a href="forum.php" class="main-menu-link">Форум</a></li>
                                     <?php if (isset($authorization_id)) { ?>

@@ -837,5 +837,29 @@ elseif (isset($_GET['to_national_player_id']))
 
     $json_data['success'] = 1;
 }
+elseif (isset($_GET['application_country_id']))
+{
+    $country_id = (int) $_GET['application_country_id'];
+
+    $sql = "SELECT `coachapplication_text`
+            FROM `coachapplication`
+            WHERE `coachapplication_season_id`='$igosja_season_id'
+            AND `coachapplication_user_id`='$authorization_user_id'
+            AND `coachapplication_country_id`='$country_id'
+            LIMIT 1";
+    $application_sql = $mysqli->query($sql);
+
+    $count_application = $application_sql->num_rows;
+    $application_array = $application_sql->fetch_all(MYSQLI_ASSOC);
+
+    if (0 == $count_application)
+    {
+        $json_data['coachapplication_text'] = '';
+    }
+    else
+    {
+        $json_data['coachapplication_text'] = $application_array[0]['coachapplication_text'];
+    }
+}
 
 print json_encode($json_data);

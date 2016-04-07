@@ -858,8 +858,28 @@ $(document).ready(function($)
                 dataType: "json",
                 success: function(data)
                 {
-
                     $('#player-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
+    $('#application-country-id').on('change', function()
+    //Просмотр своей заявки на должность тренера
+    {
+        var country_id = $(this).val();
+
+        $('#application-block').addClass('loading');
+
+        $.ajax
+        (
+            {
+                url: 'json.php?application_country_id=' + country_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    $('#application-text').text(data.coachapplication_text);
+                    $('#application-block').removeClass('loading');
                 }
             }
         );
