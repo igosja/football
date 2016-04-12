@@ -11,41 +11,41 @@
                 </tr>
                 <?php for ($i=0; $i<$count_first; $i++) { ?>
                     <tr>
-                        <td class="center"><?php print $first_array[$i]['standing_season_id']; ?></td>
+                        <td class="center"><?= $first_array[$i]['standing_season_id']; ?></td>
                         <td class="w1">
                             <img
-                                alt="<?php print $first_array[$i]['team_name']; ?>"
+                                alt="<?= $first_array[$i]['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $first_array[$i]['team_id']; ?>.png"
+                                src="img/team/12/<?= $first_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
-                            <a href="team_team_review_profile.php?num=<?php print $first_array[$i]['team_id']; ?>">
-                                <?php print $first_array[$i]['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $first_array[$i]['team_id']; ?>">
+                                <?= $first_array[$i]['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $second_array[$i]['team_name']; ?>"
+                                alt="<?= $second_array[$i]['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $second_array[$i]['team_id']; ?>.png"
+                                src="img/team/12/<?= $second_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
-                            <a href="team_team_review_profile.php?num=<?php print $second_array[$i]['team_id']; ?>">
-                                <?php print $second_array[$i]['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $second_array[$i]['team_id']; ?>">
+                                <?= $second_array[$i]['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $third_array[$i]['team_name']; ?>"
+                                alt="<?= $third_array[$i]['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $third_array[$i]['team_id']; ?>.png"
+                                src="img/team/12/<?= $third_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
-                            <a href="team_team_review_profile.php?num=<?php print $third_array[$i]['team_id']; ?>">
-                                <?php print $third_array[$i]['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $third_array[$i]['team_id']; ?>">
+                                <?= $third_array[$i]['team_name']; ?>
                             </a>
                         </td>
                     </tr>

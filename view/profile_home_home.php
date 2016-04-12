@@ -8,49 +8,49 @@
                         <?php foreach ($next_array as $item) { ?>
                             <td class="w30">
                                 <img
-                                    alt="<?php print $item['home_name']; ?>"
+                                    alt="<?= $item['home_name']; ?>"
                                     class="img-120"
-                                    src="img/team/120/<?php print $item['home_id']; ?>.png"
+                                    src="img/team/120/<?= $item['home_id']; ?>.png"
                                 />
                             </td>
                             <td class="w30">
                                 <img
-                                    alt="<?php print $item['guest_name']; ?>"
+                                    alt="<?= $item['guest_name']; ?>"
                                     class="img-120"
-                                    src="img/team/120/<?php print $item['guest_id']; ?>.png"
+                                    src="img/team/120/<?= $item['guest_id']; ?>.png"
                                 />
                             </td>
                             <td>
                                 <table class="left vcenter w100">
                                     <tr>
                                         <td class="h20">
-                                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                                <?php print $item['tournament_name']; ?>
+                                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                                <?= $item['tournament_name']; ?>
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="h20">
-                                            <a href="team_team_review_profile.php?num=<?php print $item['home_id']; ?>">
-                                                <?php print $item['home_name']; ?>
+                                            <a href="team_team_review_profile.php?num=<?= $item['home_id']; ?>">
+                                                <?= $item['home_name']; ?>
                                             </a>
                                             против
-                                            <a href="team_team_review_profile.php?num=<?php print $item['guest_id']; ?>">
-                                                <?php print $item['guest_name']; ?>
+                                            <a href="team_team_review_profile.php?num=<?= $item['guest_id']; ?>">
+                                                <?= $item['guest_name']; ?>
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="h20"><?php print $item['stadium_name']; ?></td>
+                                        <td class="h20"><?= $item['stadium_name']; ?></td>
                                     </tr>
                                     <tr>
                                         <td class="h20">
                                             <img
-                                                alt="<?php print $item['weather_name']; ?>"
+                                                alt="<?= $item['weather_name']; ?>"
                                                 class="img-12"
-                                                src="/img/weather/12/<?php print $item['weather_id']; ?>.png" 
+                                                src="/img/weather/12/<?= $item['weather_id']; ?>.png" 
                                             />
-                                            <?php print $item['game_temperature']; ?> <?php print CELSIUS; ?>
+                                            <?= $item['game_temperature']; ?> <?= CELSIUS; ?>
                                         </td>
                                     </tr>
                                 </table>
@@ -61,7 +61,7 @@
                 <table class="striped w100">
                     <?php foreach ($latest_array as $item) { ?>
                         <tr>
-                            <td class="center w10"><?php print f_igosja_ufu_date($item['shedule_date']); ?></td>
+                            <td class="center w10"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
                             <td class="w1">
                                 <?php if ($item['game_home_team_id'] == $authorization_team_id) { ?>
                                     Д
@@ -71,26 +71,26 @@
                             </td>
                             <td class="w1">
                                 <img
-                                    alt="<?php print $item['team_name']; ?>"
+                                    alt="<?= $item['team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                    src="img/team/12/<?= $item['team_id']; ?>.png"
                                 />
                             </td>
                             <td>
-                                <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                    <?php print $item['team_name']; ?>
+                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                    <?= $item['team_name']; ?>
                                 </a>
                             </td>
                             <td class="right">
-                                <a href="game_review_main.php?num=<?php print $item['game_id']; ?>">
-                                    <?php print $item['home_score']; ?>:<?php print $item['guest_score']; ?>
+                                <a href="game_review_main.php?num=<?= $item['game_id']; ?>">
+                                    <?= $item['home_score']; ?>:<?= $item['guest_score']; ?>
                                 </a>
                             </td>
                         </tr>
                     <?php } ?>
                     <?php foreach ($nearest_array as $item) { ?>
                         <tr>
-                            <td class="center w10"><?php print f_igosja_ufu_date($item['shedule_date']); ?></td>
+                            <td class="center w10"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
                             <td class="w1">
                                 <?php if ($item['game_home_team_id'] == $authorization_team_id) { ?>
                                     Д
@@ -100,18 +100,18 @@
                             </td>
                             <td class="w1">
                                 <img
-                                    alt="<?php print $item['team_name']; ?>"
+                                    alt="<?= $item['team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                    src="img/team/12/<?= $item['team_id']; ?>.png"
                                 />
                             </td>
                             <td>
-                                <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                    <?php print $item['team_name']; ?>
+                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                    <?= $item['team_name']; ?>
                                 </a>
                             </td>
                             <td class="right">
-                                <a href="team_lineup_tactic_review.php?num=<?php print $authorization_team_id; ?>&game=<?php print $item['game_id']; ?>">
+                                <a href="team_lineup_tactic_review.php?num=<?= $authorization_team_id; ?>&game=<?= $item['game_id']; ?>">
                                     <?php if ($item['lineupmain_id']) { ?>
                                         Редактировать
                                     <?php } else { ?>
@@ -133,24 +133,24 @@
                     </tr>
                     <?php foreach ($standing_array as $item) { ?>
                         <tr>
-                            <td class="center"><?php print $item['standing_place']; ?></td>
+                            <td class="center"><?= $item['standing_place']; ?></td>
                             <td class="w1">
                                 <img
-                                    alt="<?php print $item['team_name']; ?>"
+                                    alt="<?= $item['team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                    src="img/team/12/<?= $item['team_id']; ?>.png"
                                 />
                             </td>
                             <td>
-                                <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>"
+                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>"
                                     <?php if ($authorization_team_id == $item['team_id']) { ?>
                                         class="blue"
                                     <?php } ?>
                                 >
-                                    <?php print $item['team_name']; ?>
+                                    <?= $item['team_name']; ?>
                                 </a>
                             </td>
-                            <td class="center"><?php print $item['standing_point']; ?></td>
+                            <td class="center"><?= $item['standing_point']; ?></td>
                         </tr>
                     <?php } ?>
                 </table>
@@ -161,27 +161,27 @@
                     <table class="striped w100">
                         <tr>
                             <td>Баланс</td>
-                            <td class="right"><?php print f_igosja_money($item['team_finance']); ?></td>
+                            <td class="right"><?= f_igosja_money($item['team_finance']); ?></td>
                         </tr>
                         <tr>
                             <td>Прибыль текущего сезона</td>
-                            <td class="right"><?php print f_igosja_money($item['profit']); ?></td>
+                            <td class="right"><?= f_igosja_money($item['profit']); ?></td>
                         </tr>
                         <tr>
                             <td>Зарплата игроков</td>
-                            <td class="right"><?php print f_igosja_money($item['total_player_salary']); ?></td>
+                            <td class="right"><?= f_igosja_money($item['total_player_salary']); ?></td>
                         </tr>
                         <tr>
                             <td>Средняя зарплата</td>
-                            <td class="right"><?php print f_igosja_money($item['average_player_salary']); ?></td>
+                            <td class="right"><?= f_igosja_money($item['average_player_salary']); ?></td>
                         </tr>
                         <tr>
                             <td>Зарплата персонала</td>
-                            <td class="right"><?php print f_igosja_money($item['total_staff_salary']); ?></td>
+                            <td class="right"><?= f_igosja_money($item['total_staff_salary']); ?></td>
                         </tr>
                         <tr>
                             <td>Средняя зарплата</td>
-                            <td class="right"><?php print f_igosja_money($item['average_staff_salary']); ?></td>
+                            <td class="right"><?= f_igosja_money($item['average_staff_salary']); ?></td>
                         </tr>
                     </table>
                 <?php } ?>
@@ -195,44 +195,44 @@
                         <tr>
                             <td class="center" colspan="2">
                                 <img
-                                    alt="<?php print $item['tournament_name']; ?>"
+                                    alt="<?= $item['tournament_name']; ?>"
                                     class="img-12"
-                                    src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                    src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                                 />
-                                <a href="tournament_review_profile?num=<?php print $item['tournament_id']; ?>">
-                                    <?php print $item['tournament_name']; ?>
+                                <a href="tournament_review_profile?num=<?= $item['tournament_id']; ?>">
+                                    <?= $item['tournament_name']; ?>
                                 </a>
                             </td>
                         </tr>
                         <tr>
                             <td>Сыграно матчей</td>
-                            <td class="right"><?php print $item['statisticteam_game']; ?></td>
+                            <td class="right"><?= $item['statisticteam_game']; ?></td>
                         </tr>
                         <tr>
                             <td>Забито голов</td>
-                            <td class="right"><?php print $item['statisticteam_goal']; ?></td>
+                            <td class="right"><?= $item['statisticteam_goal']; ?></td>
                         </tr>
                         <tr>
                             <td>Пропушено голов</td>
-                            <td class="right"><?php print $item['statisticteam_pass']; ?></td>
+                            <td class="right"><?= $item['statisticteam_pass']; ?></td>
                         </tr>
                         <tr>
                             <td>Желтые карточки</td>
-                            <td class="right"><?php print $item['statisticteam_yellow']; ?></td>
+                            <td class="right"><?= $item['statisticteam_yellow']; ?></td>
                         </tr>
                         <tr>
                             <td>Красные карточки</td>
-                            <td class="right"><?php print $item['statisticteam_red']; ?></td>
+                            <td class="right"><?= $item['statisticteam_red']; ?></td>
                         </tr>
                         <tr>
                             <td>Средняя посещаемость</td>
                             <td class="right">
-                                <?php print $item['statisticteam_visitor']; ?>
+                                <?= $item['statisticteam_visitor']; ?>
                             </td>
                         </tr>
                         <tr>
                             <td>Аншлаги</td>
-                            <td class="right"><?php print $item['statisticteam_full_house']; ?></td>
+                            <td class="right"><?= $item['statisticteam_full_house']; ?></td>
                         </tr>
                     </table>
                 <?php } ?>
@@ -244,67 +244,67 @@
                         <tr>
                             <td class="center" colspan="2">
                                 <img
-                                    alt="<?php print $item['tournament_name']; ?>"
+                                    alt="<?= $item['tournament_name']; ?>"
                                     class="img-12"
-                                    src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                    src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                                 />
-                                <a href="tournament_review_profile?num=<?php print $item['tournament_id']; ?>">
-                                    <?php print $item['tournament_name']; ?>
+                                <a href="tournament_review_profile?num=<?= $item['tournament_id']; ?>">
+                                    <?= $item['tournament_name']; ?>
                                 </a>
                             </td>
                         </tr>
                         <tr>
                             <td>Лучший бомбардир</td>
                             <td class="right">
-                                <a href="player_home_profile.php?num=<?php print $item['goal_player_id']; ?>">
-                                    <?php print $item['goal_name']; ?> <?php print $item['goal_surname']; ?>
+                                <a href="player_home_profile.php?num=<?= $item['goal_player_id']; ?>">
+                                    <?= $item['goal_name']; ?> <?= $item['goal_surname']; ?>
                                 </a>
-                                (<?php print $item['statisticplayer_goal']; ?>)
+                                (<?= $item['statisticplayer_goal']; ?>)
                             </td>
                         </tr>
                         <tr>
                             <td>Лучший ассистент</td>
                             <td class="right">
-                                <a href="player_home_profile.php?num=<?php print $item['pass_player_id']; ?>">
-                                    <?php print $item['pass_name']; ?> <?php print $item['pass_surname']; ?>
+                                <a href="player_home_profile.php?num=<?= $item['pass_player_id']; ?>">
+                                    <?= $item['pass_name']; ?> <?= $item['pass_surname']; ?>
                                 </a>
-                                (<?php print $item['statisticplayer_pass_scoring']; ?>)
+                                (<?= $item['statisticplayer_pass_scoring']; ?>)
                             </td>
                         </tr>
                         <tr>
                             <td>Игрок матча</td>
                             <td class="right">
-                                <a href="player_home_profile.php?num=<?php print $item['best_player_id']; ?>">
-                                    <?php print $item['best_name']; ?> <?php print $item['best_surname']; ?>
+                                <a href="player_home_profile.php?num=<?= $item['best_player_id']; ?>">
+                                    <?= $item['best_name']; ?> <?= $item['best_surname']; ?>
                                 </a>
-                                (<?php print $item['statisticplayer_best']; ?>)
+                                (<?= $item['statisticplayer_best']; ?>)
                             </td>
                         </tr>
                         <tr>
                             <td>Сыграно матчей</td>
                             <td class="right">
-                                <a href="player_home_profile.php?num=<?php print $item['game_player_id']; ?>">
-                                    <?php print $item['game_name']; ?> <?php print $item['game_surname']; ?>
+                                <a href="player_home_profile.php?num=<?= $item['game_player_id']; ?>">
+                                    <?= $item['game_name']; ?> <?= $item['game_surname']; ?>
                                 </a>
-                                (<?php print $item['statisticplayer_game']; ?>)
+                                (<?= $item['statisticplayer_game']; ?>)
                             </td>
                         </tr>
                         <tr>
                             <td>Желтых карточек</td>
                             <td class="right">
-                                <a href="player_home_profile.php?num=<?php print $item['yellow_player_id']; ?>">
-                                    <?php print $item['yellow_name']; ?> <?php print $item['yellow_surname']; ?>
+                                <a href="player_home_profile.php?num=<?= $item['yellow_player_id']; ?>">
+                                    <?= $item['yellow_name']; ?> <?= $item['yellow_surname']; ?>
                                 </a>
-                                (<?php print $item['statisticplayer_yellow']; ?>)
+                                (<?= $item['statisticplayer_yellow']; ?>)
                             </td>
                         </tr>
                         <tr>
                             <td>Красных карточек</td>
                             <td class="right">
-                                <a href="player_home_profile.php?num=<?php print $item['red_player_id']; ?>">
-                                    <?php print $item['red_name']; ?> <?php print $item['red_surname']; ?>
+                                <a href="player_home_profile.php?num=<?= $item['red_player_id']; ?>">
+                                    <?= $item['red_name']; ?> <?= $item['red_surname']; ?>
                                 </a>
-                                (<?php print $item['statisticplayer_red']; ?>)
+                                (<?= $item['statisticplayer_red']; ?>)
                             </td>
                         </tr>
                     </table>
@@ -316,12 +316,12 @@
                     <?php foreach ($injury_array as $item) { ?>
                         <tr>
                             <td>
-                                <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                    <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                    <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                 </a>
                             </td>
-                            <td><?php print $item['injurytype_name']; ?></td>
-                            <td class="right"><?php print $item['day']; ?> дн</td>
+                            <td><?= $item['injurytype_name']; ?></td>
+                            <td class="right"><?= $item['day']; ?> дн</td>
                         </tr>
                     <?php } ?>
                 </table>
@@ -333,17 +333,17 @@
                         <tr>
                             <td class="w1">
                                 <img
-                                    alt="<?php print $item['tournament_name']; ?>"
+                                    alt="<?= $item['tournament_name']; ?>"
                                     class="w12"
-                                    src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                    src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                                 />
                             </td>
                             <td>
-                                <a href="tournament_review_profile?num=<?php print $item['tournament_id']; ?>">
-                                    <?php print $item['tournament_name']; ?>
+                                <a href="tournament_review_profile?num=<?= $item['tournament_id']; ?>">
+                                    <?= $item['tournament_name']; ?>
                                 </a>
                             </td>
-                            <td class="right w25"><?php print $item['standing_place']; ?></td>
+                            <td class="right w25"><?= $item['standing_place']; ?></td>
                         </tr>
                     <?php } ?>
                 </table>
@@ -367,42 +367,42 @@
                         <?php foreach ($team_array as $item) { ?>
                             <tr>
                                 <td>
-                                    <input name="data[team]" value="<?php print $item['team_id']; ?>" type="radio" />
+                                    <input name="data[team]" value="<?= $item['team_id']; ?>" type="radio" />
                                 </td>
                                 <td class="w1">
                                     <img
-                                        alt="<?php print $item['team_name']; ?>"
+                                        alt="<?= $item['team_name']; ?>"
                                         class="img-12"
-                                        src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                        src="img/team/12/<?= $item['team_id']; ?>.png"
                                     />
                                 </td>
                                 <td>
-                                    <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                        <?php print $item['team_name']; ?>
+                                    <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                        <?= $item['team_name']; ?>
                                     </a>
                                 </td>
                                 <td class="center">
-                                    <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
+                                    <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
                                         <img
-                                            alt="<?php print $item['country_name']; ?>"
+                                            alt="<?= $item['country_name']; ?>"
                                             class="img-12"
-                                            src="img/flag/12/<?php print $item['country_id']; ?>.png"
+                                            src="img/flag/12/<?= $item['country_id']; ?>.png"
                                         />
                                     </a>
                                 </td>
                                 <td class="w1">
                                     <img
-                                        alt="<?php print $item['tournament_name']; ?>"
+                                        alt="<?= $item['tournament_name']; ?>"
                                         class="img-12"
-                                        src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                        src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                                     />
                                 </td>
                                 <td class="w25">
-                                    <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                        <?php print $item['tournament_name']; ?>
+                                    <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                        <?= $item['tournament_name']; ?>
                                     </a>
                                 </td>
-                                <td class="right"><?php print f_igosja_money($item['team_finance']); ?></td>
+                                <td class="right"><?= f_igosja_money($item['team_finance']); ?></td>
                             </tr>
                         <?php } ?>
                     </table>

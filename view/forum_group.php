@@ -16,7 +16,7 @@
                     <td>
                         <?php if (isset($authorization_id)) { ?>
                             <button>
-                                <a href="forum_posting.php?group=<?php print $head_array[0]['forumthemegroup_id']; ?>">
+                                <a href="forum_posting.php?group=<?= $head_array[0]['forumthemegroup_id']; ?>">
                                     Создать тему
                                 </a>
                             </button>
@@ -34,8 +34,8 @@
                                         class="button-active"
                                     <?php } ?>
                                 >
-                                    <a href="forum_group.php?num=<?php print $num; ?>&page=<?php print $i; ?>">
-                                        <?php print $i; ?>
+                                    <a href="forum_group.php?num=<?= $num; ?>&page=<?= $i; ?>">
+                                        <?= $i; ?>
                                     </a>
                                 </button>
                             <?php } ?>
@@ -53,7 +53,7 @@
                     <tr>
                         <td>
                             <a
-                                href="forum_theme.php?num=<?php print $item['forumtheme_id']; ?>"
+                                href="forum_theme.php?num=<?= $item['forumtheme_id']; ?>"
                                 <?php
 
                                 if (isset($forumread_array)) {
@@ -71,17 +71,17 @@
 
                                 ?>
                             >
-                                <?php print $item['forumtheme_name']; ?>
+                                <?= $item['forumtheme_name']; ?>
                             </a>
                             <br />
-                            <?php print $item['user_login']; ?>,
-                            <?php print f_igosja_ufu_date_time($item['forumtheme_date']); ?>
+                            <?= $item['user_login']; ?>,
+                            <?= f_igosja_ufu_date_time($item['forumtheme_date']); ?>
                         </td>
-                        <td class="center vcenter"><?php print $item['count_post']; ?></td>
+                        <td class="center vcenter"><?= $item['count_post']; ?></td>
                         <td>
-                            <?php print $item['post_login']; ?>
+                            <?= $item['post_login']; ?>
                             <br />
-                            <?php print f_igosja_ufu_date_time($item['forumpost_date']); ?>
+                            <?= f_igosja_ufu_date_time($item['forumpost_date']); ?>
                         </td>
                     </tr>
                 <?php } ?>
@@ -91,7 +91,7 @@
                     <td>
                         <?php if (isset($authorization_id)) { ?>
                             <button>
-                                <a href="forum_posting.php?group=<?php print $head_array[0]['forumthemegroup_id']; ?>">
+                                <a href="forum_posting.php?group=<?= $head_array[0]['forumthemegroup_id']; ?>">
                                     Создать тему
                                 </a>
                             </button>
@@ -109,8 +109,8 @@
                                     class="button-active"
                                 <?php } ?>
                             >
-                                <a href="forum_group.php?num=<?php print $num; ?>&page=<?php print $i; ?>">
-                                    <?php print $i; ?>
+                                <a href="forum_group.php?num=<?= $num; ?>&page=<?= $i; ?>">
+                                    <?= $i; ?>
                                 </a>
                             </button>
                             <?php } ?>

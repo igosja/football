@@ -13,39 +13,39 @@
                 <?php foreach ($transfer_array as $item) { ?>
                     <tr>
                         <td class="center">
-                            <?php print f_igosja_ufu_date($item['transferhistory_date']); ?>
+                            <?= f_igosja_ufu_date($item['transferhistory_date']); ?>
                         </td>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['seller_name']; ?>"
+                                alt="<?= $item['seller_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['seller_id']; ?>.png"
+                                src="img/team/12/<?= $item['seller_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="team_team_review_profile.php?num=<?php print $item['seller_id']; ?>">
-                                <?php print $item['seller_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['seller_id']; ?>">
+                                <?= $item['seller_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['buyer_name']; ?>"
+                                alt="<?= $item['buyer_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['buyer_id']; ?>.png"
+                                src="img/team/12/<?= $item['buyer_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="team_team_review_profile.php?num=<?php print $item['buyer_id']; ?>">
-                                <?php print $item['buyer_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['buyer_id']; ?>">
+                                <?= $item['buyer_name']; ?>
                             </a>
                         </td>
                         <td class="right">
-                            <?php print f_igosja_money($item['transferhistory_price']); ?>
+                            <?= f_igosja_money($item['transferhistory_price']); ?>
                         </td>
                     </tr>
                 <?php } ?>

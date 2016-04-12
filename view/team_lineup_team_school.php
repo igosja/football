@@ -18,35 +18,35 @@
                 <?php foreach ($school_array as $item) { ?>
                     <tr>
                         <td class="nopadding">
-                            <a class="link-img link-ok" href="team_lineup_team_school.php?num=<?php print $num; ?>&ok=<?php print $item['school_id']; ?>"></a>
+                            <a class="link-img link-ok" href="team_lineup_team_school.php?num=<?= $num; ?>&ok=<?= $item['school_id']; ?>"></a>
                         </td>
                         <td>
-                            <?php print $item['name_name']; ?>
-                            <?php print $item['surname_name']; ?>
+                            <?= $item['name_name']; ?>
+                            <?= $item['surname_name']; ?>
                         </td>
                         <td class="center">
-                            <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
                                 <img
-                                    alt="<?php print $item['country_name']; ?>"
+                                    alt="<?= $item['country_name']; ?>"
                                     class="img-12"
-                                    src="img/flag/12/<?php print $item['country_id']; ?>.png"
+                                    src="img/flag/12/<?= $item['country_id']; ?>.png"
                                 />
                             </a>
                         </td>
-                        <td class="center"><?php print $item['position_name']; ?></td>
+                        <td class="center"><?= $item['position_name']; ?></td>
                         <td class="center">17</td>
-                        <td class="center"><?php print $item['school_weight']; ?> кг</td>
-                        <td class="center"><?php print $item['school_height']; ?> см</td>
+                        <td class="center"><?= $item['school_weight']; ?> кг</td>
+                        <td class="center"><?= $item['school_height']; ?> см</td>
                         <td>
                             <img
-                                alt="<?php print $item['mood_name']; ?>"
+                                alt="<?= $item['mood_name']; ?>"
                                 class="img-12"
-                                src="/img/mood/<?php print $item['mood_id']; ?>.png"
+                                src="/img/mood/<?= $item['mood_id']; ?>.png"
                             />
-                            <?php print $item['mood_name']; ?>
+                            <?= $item['mood_name']; ?>
                         </td>
-                        <td class="center"><?php print $item['school_condition']; ?> %</td>
-                        <td class="center"><?php print $item['school_practice']; ?> %</td>
+                        <td class="center"><?= $item['school_condition']; ?> %</td>
+                        <td class="center"><?= $item['school_practice']; ?> %</td>
                     </tr>
                 <?php } ?>
             </table>

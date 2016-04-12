@@ -4,12 +4,12 @@
             <p class="header">Общая информация</p>
             <table class="center w100">
                 <tr>
-                    <td class="w50"><h5><?php print f_igosja_money($player_array[0]['player_price']); ?></h5></td>
+                    <td class="w50"><h5><?= f_igosja_money($player_array[0]['player_price']); ?></h5></td>
                     <td class="vcenter" rowspan="3">
                         <img
-                            alt="<?php print $player_array[0]['team_name']; ?>"
+                            alt="<?= $player_array[0]['team_name']; ?>"
                             class="img-50"
-                            src="img/team/50/<?php print $player_array[0]['team_id']; ?>.png"
+                            src="img/team/50/<?= $player_array[0]['team_id']; ?>.png"
                         />
                     </td>
                 </tr>
@@ -17,13 +17,13 @@
                     <td>Цена</td>
                 </tr>
                 <tr>
-                    <td><h5><?php print f_igosja_money($player_array[0]['player_salary']); ?></h5></td>
+                    <td><h5><?= f_igosja_money($player_array[0]['player_salary']); ?></h5></td>
                 </tr>
                 <tr>
                     <td>Зарплата</td>
                     <td>
-                        <a href="team_team_review_profile.php?num=<?php print $player_array[0]['team_id']; ?>">
-                            <?php print $player_array[0]['team_name']; ?>
+                        <a href="team_team_review_profile.php?num=<?= $player_array[0]['team_id']; ?>">
+                            <?= $player_array[0]['team_name']; ?>
                         </a>
                     </td>
                 </tr>
@@ -41,18 +41,18 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print f_igosja_ufu_date($item['playeroffer_date']); ?></td>
-                        <td class="right"><?php print f_igosja_money($item['playeroffer_price']); ?></td>
+                        <td class="center"><?= f_igosja_ufu_date($item['playeroffer_date']); ?></td>
+                        <td class="right"><?= f_igosja_money($item['playeroffer_price']); ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -69,17 +69,17 @@
                                       $authorization_team_id == $player_array[0]['team_id']) { ?>
                                 <select class="w100" name="data[statustransfer]">
                                     <?php foreach ($statustransfer_array as $item) { ?>
-                                        <option value="<?php print $item['statustransfer_id']; ?>"
+                                        <option value="<?= $item['statustransfer_id']; ?>"
                                             <?php if ($item['statustransfer_id'] == $player_array[0]['player_statustransfer_id']) { ?>
                                                 selected
                                             <?php } ?>
                                         >
-                                            <?php print $item['statustransfer_name']; ?>
+                                            <?= $item['statustransfer_name']; ?>
                                         </option>
                                     <?php } ?>
                                 </select>
                             <?php } else { ?>
-                                <h5><?php print $player_array[0]['statustransfer_name']; ?></h5>
+                                <h5><?= $player_array[0]['statustransfer_name']; ?></h5>
                             <?php } ?>
                         </td>
                         <td>
@@ -87,17 +87,17 @@
                                       $authorization_team_id == $player_array[0]['team_id']) { ?>
                                 <select class="w100" name="data[statusrent]">
                                     <?php foreach ($statusrent_array as $item) { ?>
-                                        <option value="<?php print $item['statusrent_id']; ?>"
+                                        <option value="<?= $item['statusrent_id']; ?>"
                                             <?php if ($item['statusrent_id'] == $player_array[0]['player_statusrent_id']) { ?>
                                                 selected
                                             <?php } ?>
                                         >
-                                            <?php print $item['statusrent_name']; ?>
+                                            <?= $item['statusrent_name']; ?>
                                         </option>
                                     <?php } ?>
                                 </select>
                             <?php } else { ?>
-                                <h5><?php print $player_array[0]['statusrent_name']; ?></h5>
+                                <h5><?= $player_array[0]['statusrent_name']; ?></h5>
                             <?php } ?>
                         </td>
                     </tr>
@@ -106,7 +106,7 @@
                         <td>Арендный статус</td>
                     </tr>
                     <tr>
-                        <td colspan="2"><?php print SPACE; ?></td>
+                        <td colspan="2"><?= SPACE; ?></td>
                     </tr>
                     <tr>
                         <td>
@@ -114,25 +114,25 @@
                                       $authorization_team_id == $player_array[0]['team_id']) { ?>
                                 <select class="w100" name="data[statusteam]">
                                     <?php foreach ($statusteam_array as $item) { ?>
-                                        <option value="<?php print $item['statusteam_id']; ?>"
+                                        <option value="<?= $item['statusteam_id']; ?>"
                                             <?php if ($item['statusteam_id'] == $player_array[0]['player_statusteam_id']) { ?>
                                                 selected
                                             <?php } ?>
                                         >
-                                            <?php print $item['statusteam_name']; ?>
+                                            <?= $item['statusteam_name']; ?>
                                         </option>
                                     <?php } ?>
                                 </select>
                             <?php } else { ?>
-                                <h5><?php print $player_array[0]['statusteam_name']; ?></h5>
+                                <h5><?= $player_array[0]['statusteam_name']; ?></h5>
                             <?php } ?>
                         </td>
                         <td class="vcenter">
                             <?php if (isset($authorization_team_id) &&
                                       $authorization_team_id == $player_array[0]['team_id']) { ?>
-                                <input name="data[transfer_price]" type="text" value="<?php print $player_array[0]['player_transfer_price']; ?>" /> $
+                                <input name="data[transfer_price]" type="text" value="<?= $player_array[0]['player_transfer_price']; ?>" /> $
                             <?php } else { ?>
-                                <h5><?php print $player_array[0]['player_transfer_price']; ?> $</h5>
+                                <h5><?= $player_array[0]['player_transfer_price']; ?> $</h5>
                             <?php } ?>
                         </td>
                     </tr>
@@ -143,7 +143,7 @@
                     <?php if (isset($authorization_team_id) &&
                               $authorization_team_id == $player_array[0]['team_id']) { ?>
                         <tr>
-                            <td colspan="2"><?php print SPACE; ?></td>
+                            <td colspan="2"><?= SPACE; ?></td>
                         </tr>
                         <tr>
                             <td class="center" colspan="2">

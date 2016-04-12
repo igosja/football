@@ -11,17 +11,17 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['country_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?php print $item['country_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
-                                <?php print $item['country_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['count_scout_player']; ?> (<?php print $item['count_scout']; ?>%)</td>
+                        <td class="center"><?= $item['count_scout_player']; ?> (<?= $item['count_scout']; ?>%)</td>
                     </tr>
                 <?php } ?>
             </table>
@@ -36,11 +36,11 @@
                 <?php foreach ($scout_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="staff_home_profile.php?num=<?php print $item['staff_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="staff_home_profile.php?num=<?= $item['staff_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td class="right"><?php print f_igosja_money($item['staff_salary']); ?></td>
+                        <td class="right"><?= f_igosja_money($item['staff_salary']); ?></td>
                     </tr>
                 <?php } ?>
             </table>

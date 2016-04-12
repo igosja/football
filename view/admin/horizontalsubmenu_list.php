@@ -29,12 +29,12 @@
                 <tbody>
                     <?php foreach ($menu_array as $item) { ?>
                         <tr>
-                            <td><?php print $item['horizontalsubmenu_name']; ?></td>
-                            <td><?php print $item['horizontalsubmenu_href']; ?></td>
-                            <td><?php print $item['horizontalmenu_name']; ?></td>
-                            <td><?php print $item['horizontalmenuchapter_name']; ?></td>
+                            <td><?= $item['horizontalsubmenu_name']; ?></td>
+                            <td><?= $item['horizontalsubmenu_href']; ?></td>
+                            <td><?= $item['horizontalmenu_name']; ?></td>
+                            <td><?= $item['horizontalmenuchapter_name']; ?></td>
                             <td>
-                                <a href="horizontalsubmenu_edit.php?num=<?php print $item['horizontalsubmenu_id']; ?>"><i class="fa fa-pencil"></i></a>
+                                <a href="horizontalsubmenu_edit.php?num=<?= $item['horizontalsubmenu_id']; ?>"><i class="fa fa-pencil"></i></a>
                             </td>
                         </tr>
                     <?php } ?>

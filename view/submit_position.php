@@ -4,16 +4,16 @@
             <p class="header">Тренировка позиции</p>
             <p class="center">
                 Вы собираетесь натренировать позицию
-                "<?php print $position_array[0]['position_description']; ?>"
+                "<?= $position_array[0]['position_description']; ?>"
                 игроку
-                <?php print $header_title; ?>.
+                <?= $header_title; ?>.
             </p>
             <p class="center">
                 <button>
-                    <a href="player_home_training.php?num=<?php print $num; ?>&position=<?php print $position; ?>&ok=1">Подвердить</a>
+                    <a href="player_home_training.php?num=<?= $num; ?>&position=<?= $position; ?>&ok=1">Подвердить</a>
                 </button>
                 <button>
-                    <a href="player_home_training.php?num=<?php print $num; ?>">Отказаться</a>
+                    <a href="player_home_training.php?num=<?= $num; ?>">Отказаться</a>
                 </button>
             </p>
         </td>

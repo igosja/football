@@ -23,13 +23,13 @@
                     <?php foreach ($horizontalmenupage_array as $item) { ?>
                         <tr>
                             <td>
-                                <a href="horizontalmenupage.php?num=<?php print $item['horizontalmenupage_id']; ?>">
-                                    <?php print $item['horizontalmenupage_name']; ?>
+                                <a href="horizontalmenupage.php?num=<?= $item['horizontalmenupage_id']; ?>">
+                                    <?= $item['horizontalmenupage_name']; ?>
                                 </a>
                             </td>
-                            <td><?php print $item['horizontalmenuchapter_name']; ?></td>
+                            <td><?= $item['horizontalmenuchapter_name']; ?></td>
                             <td>
-                                <a href="horizontalmenupage_edit.php?num=<?php print $item['horizontalmenupage_id']; ?>">
+                                <a href="horizontalmenupage_edit.php?num=<?= $item['horizontalmenupage_id']; ?>">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                             </td>

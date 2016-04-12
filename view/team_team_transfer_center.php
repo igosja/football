@@ -23,38 +23,38 @@
                             />
                         </td>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['tournament_name']; ?>"
+                                alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                <?php print $item['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
                             </a>
                         </td>
                         <td class="center">
-                            <?php print $item['offertype_name']; ?>
+                            <?= $item['offertype_name']; ?>
                         </td>
-                        <td class="right"><?php print f_igosja_money($item['transfer_price']); ?></td>
+                        <td class="right"><?= f_igosja_money($item['transfer_price']); ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -73,40 +73,40 @@
                 <?php foreach ($offer_from_me_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['tournament_name']; ?>"
+                                alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                <?php print $item['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
                             </a>
                         </td>
                         <td class="center">
-                            <?php print $item['offertype_name']; ?>
+                            <?= $item['offertype_name']; ?>
                         </td>
-                        <td class="right"><?php print f_igosja_money($item['playeroffer_price']); ?></td>
+                        <td class="right"><?= f_igosja_money($item['playeroffer_price']); ?></td>
                         <td class="center">
-                            <a href="team_team_transfer_center.php?num=<?php print $num; ?>&from_del=<?php print $item['playeroffer_id']; ?>" class="link-img link-delete"></a>
+                            <a href="team_team_transfer_center.php?num=<?= $num; ?>&from_del=<?= $item['playeroffer_id']; ?>" class="link-img link-delete"></a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -126,41 +126,41 @@
                 <?php foreach ($offer_to_me_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['tournament_name']; ?>"
+                                alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                <?php print $item['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
                             </a>
                         </td>
                         <td class="center">
-                            <?php print $item['offertype_name']; ?>
+                            <?= $item['offertype_name']; ?>
                         </td>
-                        <td class="right"><?php print f_igosja_money($item['playeroffer_price']); ?></td>
+                        <td class="right"><?= f_igosja_money($item['playeroffer_price']); ?></td>
                         <td class="center">
-                            <a href="team_team_transfer_center.php?num=<?php print $num; ?>&to_ok=<?php print $item['playeroffer_id']; ?>" class="link-img link-ok"></a>
-                            <a href="team_team_transfer_center.php?num=<?php print $num; ?>&to_del=<?php print $item['playeroffer_id']; ?>" class="link-img link-delete"></a>
+                            <a href="team_team_transfer_center.php?num=<?= $num; ?>&to_ok=<?= $item['playeroffer_id']; ?>" class="link-img link-ok"></a>
+                            <a href="team_team_transfer_center.php?num=<?= $num; ?>&to_del=<?= $item['playeroffer_id']; ?>" class="link-img link-delete"></a>
                         </td>
                     </tr>
                 <?php } ?>

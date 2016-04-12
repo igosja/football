@@ -21,42 +21,42 @@
                         <tr>
                             <td class="center nopadding">
                                 <input
-                                    name="data[<?php print $item['player_id']; ?>]"
+                                    name="data[<?= $item['player_id']; ?>]"
                                     size="1"
                                     type="text"
-                                    value="<?php print $item['player_number']; ?>"
+                                    value="<?= $item['player_number']; ?>"
                                 />
                             </td>
                             <td>
-                                <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                    <?php print $item['name_name']; ?>
-                                    <?php print $item['surname_name']; ?>
+                                <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                    <?= $item['name_name']; ?>
+                                    <?= $item['surname_name']; ?>
                                 </a>
                             </td>
                             <td class="center">
-                                <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
+                                <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
                                     <img
-                                        alt="<?php print $item['country_name']; ?>"
+                                        alt="<?= $item['country_name']; ?>"
                                         class="img-12"
-                                        src="img/flag/12/<?php print $item['country_id']; ?>.png"
+                                        src="img/flag/12/<?= $item['country_id']; ?>.png"
                                     />
                                 </a>
                             </td>
-                            <td class="center"><?php print $item['position_name']; ?></td>
-                            <td class="center"><?php print $item['player_age']; ?></td>
-                            <td class="center"><?php print $item['player_weight']; ?> кг</td>
-                            <td class="center"><?php print $item['player_height']; ?> см</td>
+                            <td class="center"><?= $item['position_name']; ?></td>
+                            <td class="center"><?= $item['player_age']; ?></td>
+                            <td class="center"><?= $item['player_weight']; ?> кг</td>
+                            <td class="center"><?= $item['player_height']; ?> см</td>
                             <td>
                                 <img
-                                    alt="<?php print $item['mood_name']; ?>"
+                                    alt="<?= $item['mood_name']; ?>"
                                     class="img-12"
-                                    src="/img/mood/<?php print $item['mood_id']; ?>.png"
+                                    src="/img/mood/<?= $item['mood_id']; ?>.png"
                                 />
-                                <?php print $item['mood_name']; ?>
+                                <?= $item['mood_name']; ?>
                             </td>
-                            <td class="center"><?php print $item['player_condition']; ?> %</td>
-                            <td class="center"><?php print $item['player_practice']; ?> %</td>
-                            <td class="right"><?php print f_igosja_money($item['player_salary']); ?></td>
+                            <td class="center"><?= $item['player_condition']; ?> %</td>
+                            <td class="center"><?= $item['player_practice']; ?> %</td>
+                            <td class="right"><?= f_igosja_money($item['player_salary']); ?></td>
                         </tr>
                     <?php } ?>
                     <tr>

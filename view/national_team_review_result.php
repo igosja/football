@@ -4,18 +4,18 @@
             <p class="header">Итоги сезона</p>
             <table class="striped w100">
                 <tr>
-                    <th colspan="2"><?php print $championship_array[0]['tournament_name']; ?></th>
+                    <th colspan="2"><?= $championship_array[0]['tournament_name']; ?></th>
                 </tr>
                 <tr>
                     <td class="w50">Победитель</td>
                     <td>
                         <img
-                            alt="<?php print $championship_array[0]['team_name']; ?>"
+                            alt="<?= $championship_array[0]['team_name']; ?>"
                             class="img-12"
-                            src="img/team/12/<?php print $championship_array[0]['team_id']; ?>.png"
+                            src="img/team/12/<?= $championship_array[0]['team_id']; ?>.png"
                         />
-                        <a href="team_team_review_profile.php?num=<?php print $championship_array[0]['team_id']; ?>">
-                            <?php print $championship_array[0]['team_name']; ?>
+                        <a href="team_team_review_profile.php?num=<?= $championship_array[0]['team_id']; ?>">
+                            <?= $championship_array[0]['team_name']; ?>
                         </a>
                     </td>
                 </tr>
@@ -23,19 +23,19 @@
                     <td>Лучший бомбардир</td>
                     <td>
                         <?php foreach ($championship_goal_array as $item) { ?>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                             из команды
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
-                            (<?php print $item['statisticplayer_goal']; ?>)
+                            (<?= $item['statisticplayer_goal']; ?>)
                         <?php } ?>
                     </td>
                 </tr>
@@ -43,19 +43,19 @@
                     <td>Лучший асистент</td>
                     <td>
                         <?php foreach ($championship_pass_array as $item) { ?>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                             из команды
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
-                            (<?php print $item['statisticplayer_pass_scoring']; ?>)
+                            (<?= $item['statisticplayer_pass_scoring']; ?>)
                         <?php } ?>
                     </td>
                 </tr>
@@ -63,38 +63,38 @@
                     <td>Лучшая средняя оценка</td>
                     <td>
                         <?php foreach ($championship_mark_array as $item) { ?>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                             из команды
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
-                            (<?php print $item['mark']; ?>)
+                            (<?= $item['mark']; ?>)
                         <?php } ?>
                     </td>
                 </tr>
             </table>
             <table class="striped w100">
                 <tr>
-                    <th colspan="2"><?php print $cup_array[0]['tournament_name']; ?></th>
+                    <th colspan="2"><?= $cup_array[0]['tournament_name']; ?></th>
                 </tr>
                 <tr>
                     <td class="w50">Победитель</td>
                     <td>
                         <?php foreach ($cup_array as $item) { ?>
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         <?php } ?>
                     </td>
@@ -103,19 +103,19 @@
                     <td>Лучший бомбардир</td>
                     <td>
                         <?php foreach ($cup_goal_array as $item) { ?>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                             из команды
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
-                            (<?php print $item['statisticplayer_goal']; ?>)
+                            (<?= $item['statisticplayer_goal']; ?>)
                         <?php } ?>
                     </td>
                 </tr>
@@ -123,19 +123,19 @@
                     <td>Лучший асистент</td>
                     <td>
                         <?php foreach ($cup_pass_array as $item) { ?>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                             из команды
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
-                            (<?php print $item['statisticplayer_pass_scoring']; ?>)
+                            (<?= $item['statisticplayer_pass_scoring']; ?>)
                         <?php } ?>
                     </td>
                 </tr>
@@ -143,19 +143,19 @@
                     <td>Лучшая средняя оценка</td>
                     <td>
                         <?php foreach ($cup_mark_array as $item) { ?>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                             из команды
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
-                            (<?php print $item['mark']; ?>)
+                            (<?= $item['mark']; ?>)
                         <?php } ?>
                     </td>
                 </tr>
@@ -168,15 +168,15 @@
                     <tr>
                         <td class="w50">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td><?php print $item['stage_name']; ?></td>
+                        <td><?= $item['stage_name']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -188,15 +188,15 @@
                     <tr>
                         <td class="w50">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td><?php print $item['stage_name']; ?></td>
+                        <td><?= $item['stage_name']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

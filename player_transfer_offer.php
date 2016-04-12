@@ -133,7 +133,7 @@ if (isset($_POST['data']))
                 ON `surname_id`=`player_surname_id`
                 LEFT JOIN `team`
                 ON `team_id`=`player_team_id`
-                WHERE `player_id`='$player_id'
+                WHERE `player_id`='$get_num'
                 LIMIT 1";
         $player_sql = $mysqli->query($sql);
 

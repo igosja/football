@@ -10,20 +10,20 @@
                 </tr>
                 <?php foreach ($tournament_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print $item['standing_season_id']; ?></td>
+                        <td class="center"><?= $item['standing_season_id']; ?></td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['tournament_name']; ?>"
+                                alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                <?php print $item['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['standing_place']; ?></td>
+                        <td class="center"><?= $item['standing_place']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -38,9 +38,9 @@
                 </tr>
                 <?php foreach ($manager_array as $item) { ?>
                     <tr>
-                        <td class="center w25"><?php print f_igosja_ufu_date($item['history_date']); ?></td>
+                        <td class="center w25"><?= f_igosja_ufu_date($item['history_date']); ?></td>
                         <td class="center w25"></td>
-                        <td><?php print $item['user_login']; ?></td>
+                        <td><?= $item['user_login']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

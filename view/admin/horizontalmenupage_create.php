@@ -29,12 +29,12 @@
                     <td>
                         <select class="form-control" name="chapter_id">
                             <?php foreach ($chapter_array as $item) { ?>
-                                <option value="<?php print $item['horizontalmenuchapter_id']; ?>"
+                                <option value="<?= $item['horizontalmenuchapter_id']; ?>"
                                     <?php if (isset($chapter_id) && $chapter_id == $item['horizontalmenuchapter_id']) { ?>
                                         selected
                                     <?php } ?>
                                 >
-                                    <?php print $item['horizontalmenuchapter_name']; ?>
+                                    <?= $item['horizontalmenuchapter_name']; ?>
                                 </option>
                             <?php } ?>
                         </select>

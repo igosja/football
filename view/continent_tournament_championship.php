@@ -10,31 +10,31 @@
                                 <tr>
                                     <td class="center">
                                         <img
-                                            alt="<?php print $tournament_array[$i]['tournament_name']; ?>"
+                                            alt="<?= $tournament_array[$i]['tournament_name']; ?>"
                                             class="img-90"
-                                            src="img/tournament/90/<?php print $tournament_array[$i]['tournament_id']; ?>.png"
+                                            src="img/tournament/90/<?= $tournament_array[$i]['tournament_id']; ?>.png"
                                         />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="center">
                                         <img
-                                            alt="<?php print $tournament_array[$i]['country_name']; ?>"
+                                            alt="<?= $tournament_array[$i]['country_name']; ?>"
                                             class="img-12"
-                                            src="img/flag/12/<?php print $tournament_array[$i]['country_id']; ?>.png"
+                                            src="img/flag/12/<?= $tournament_array[$i]['country_id']; ?>.png"
                                         />
-                                        <?php print $tournament_array[$i]['country_name']; ?>
+                                        <?= $tournament_array[$i]['country_name']; ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="center">
                                         <img
-                                            alt="<?php print $tournament_array[$i]['tournament_name']; ?>"
+                                            alt="<?= $tournament_array[$i]['tournament_name']; ?>"
                                             class="img-12"
-                                            src="img/tournament/12/<?php print $tournament_array[$i]['tournament_id']; ?>.png"
+                                            src="img/tournament/12/<?= $tournament_array[$i]['tournament_id']; ?>.png"
                                         />
-                                        <a href="tournament_review_profile.php?num=<?php print $tournament_array[$i]['tournament_id']; ?>">
-                                            <?php print $tournament_array[$i]['tournament_name']; ?>
+                                        <a href="tournament_review_profile.php?num=<?= $tournament_array[$i]['tournament_id']; ?>">
+                                            <?= $tournament_array[$i]['tournament_name']; ?>
                                         </a>
                                     </td>
                                 </tr>
@@ -45,7 +45,7 @@
                                 </tr>
                                 <tr>
                                     <td class="center">
-                                        Рейтинг: <?php print f_igosja_five_star($tournament_array[$i]['tournament_reputation'], 12); ?>
+                                        Рейтинг: <?= f_igosja_five_star($tournament_array[$i]['tournament_reputation'], 12); ?>
                                     </td>
                                 </tr>
                             </table>
@@ -63,29 +63,29 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['tournament_name']; ?>"
+                                alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td class="left w70">
-                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                <?php print $item['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['country_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?php print $item['country_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
-                                <?php print $item['country_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print f_igosja_five_star($item['tournament_reputation'], 12); ?></td>
+                        <td class="center"><?= f_igosja_five_star($item['tournament_reputation'], 12); ?></td>
                     </tr>
                 <?php } ?>
             </table>

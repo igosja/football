@@ -13,23 +13,23 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td><?php print $item['injurytype_name']; ?></td>
-                        <td class="center"><?php print $item['day']; ?></td>
+                        <td><?= $item['injurytype_name']; ?></td>
+                        <td class="center"><?= $item['day']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

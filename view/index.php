@@ -7,11 +7,11 @@
             <p class="center">или войти через</p>
             <p class="center">
                 <?php foreach ($social_array as $item) { ?>
-                    <a href="<?php print $item['url']; ?>">
+                    <a href="<?= $item['url']; ?>">
                         <img
-                            alt="<?php print $item['alt']; ?>"
+                            alt="<?= $item['alt']; ?>"
                             class="img-30"
-                            src="img/social/<?php print $item['img']; ?>.png"
+                            src="img/social/<?= $item['img']; ?>.png"
                         />
                     </a>
                 <?php } ?>

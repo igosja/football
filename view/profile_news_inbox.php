@@ -6,9 +6,9 @@
                 <table class="striped w100">
                     <?php foreach ($inbox_array as $item) { ?>
                         <tr>
-                            <td class="inbox-title <?php if (0 == $item['inbox_read']) { ?>strong<?php } ?>" data-id="<?php print $item['inbox_id']; ?>">
-                                <?php print $item['inbox_title']; ?>
-                                <p class="grey"><?php print f_igosja_ufu_date($item['inbox_date']); ?> (<?php print $item['user_login']; ?>)</p>
+                            <td class="inbox-title <?php if (0 == $item['inbox_read']) { ?>strong<?php } ?>" data-id="<?= $item['inbox_id']; ?>">
+                                <?= $item['inbox_title']; ?>
+                                <p class="grey"><?= f_igosja_ufu_date($item['inbox_date']); ?> (<?= $item['user_login']; ?>)</p>
                             </td>
                         </tr>
                     <?php } ?>
@@ -22,7 +22,7 @@
                     <td class="inbox-text"></td>
                 </tr>
                 <tr>
-                    <td><?php print SPACE; ?></td>
+                    <td><?= SPACE; ?></td>
                 </tr>
                 <tr>
                     <td class="inbox-button center"></td>

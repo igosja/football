@@ -20,7 +20,7 @@
                     <div class="panel-body">
                         <?php if (isset($alert_message)) { ?>
                             <div class="alert alert-danger text-center">
-                                <?php print $alert_message['text']; ?>
+                                <?= $alert_message['text']; ?>
                             </div>
                         <?php } ?>
                         <form method="POST">

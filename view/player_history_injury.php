@@ -10,9 +10,9 @@
                 </tr>
                 <?php foreach ($injury_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print f_igosja_ufu_date($item['injury_start_date']); ?></td>
-                        <td><?php print $item['injurytype_name']; ?></td>
-                        <td class="center"><?php print $item['injurytype_day']; ?> дн.</td>
+                        <td class="center"><?= f_igosja_ufu_date($item['injury_start_date']); ?></td>
+                        <td><?= $item['injurytype_name']; ?></td>
+                        <td class="center"><?= $item['injurytype_day']; ?> дн.</td>
                     </tr>
                 <?php } ?>
             </table>

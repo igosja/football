@@ -12,18 +12,18 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w50">
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print f_igosja_ufu_date($item['history_date']); ?></td>
-                        <td class="w40"><?php print $item['user_login']; ?></td>
+                        <td class="center"><?= f_igosja_ufu_date($item['history_date']); ?></td>
+                        <td class="w40"><?= $item['user_login']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -40,18 +40,18 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w50">
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['history_date|date_format:"%d.%m.%Y"']; ?></td>
-                        <td class="w40"><?php print $item['user_login']; ?></td>
+                        <td class="center"><?= $item['history_date|date_format:"%d.%m.%Y"']; ?></td>
+                        <td class="w40"><?= $item['user_login']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

@@ -6,56 +6,56 @@
                 <tr>
                     <td class="w1" rowspan="4">
                         <img
-                            alt="<?php print $game_array[0]['tournament_name']; ?>"
+                            alt="<?= $game_array[0]['tournament_name']; ?>"
                             class="img-50"
-                            src="img/tournament/50/<?php print $game_array[0]['tournament_id']; ?>.png"
+                            src="img/tournament/50/<?= $game_array[0]['tournament_id']; ?>.png"
                         />
                     </td>
                     <td>
                         <h6>
-                            <a href="tournament_review_profile.php?num=<?php print $game_array[0]['tournament_id']; ?>">
-                                <?php print $game_array[0]['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $game_array[0]['tournament_id']; ?>">
+                                <?= $game_array[0]['tournament_name']; ?>
                             </a>
                         </h6>
                     </td>
-                    <td class="right"><?php print f_igosja_ufu_date($game_array[0]['shedule_date']); ?></td>
+                    <td class="right"><?= f_igosja_ufu_date($game_array[0]['shedule_date']); ?></td>
                 </tr>
                 <tr>
                     <td>Судья: 
-                        <a href="referee_home_profile.php?num=<?php print $game_array[0]['referee_id']; ?>">
-                            <?php print $game_array[0]['name_name']; ?> <?php print $game_array[0]['surname_name']; ?>
+                        <a href="referee_home_profile.php?num=<?= $game_array[0]['referee_id']; ?>">
+                            <?= $game_array[0]['name_name']; ?> <?= $game_array[0]['surname_name']; ?>
                         </a>
-                        (оценка - <?php print $game_array[0]['game_referee_mark']; ?>)
+                        (оценка - <?= $game_array[0]['game_referee_mark']; ?>)
                     </td>
                     <td class="right">
                         <img
-                            alt="<?php print $game_array[0]['weather_name']; ?>"
+                            alt="<?= $game_array[0]['weather_name']; ?>"
                             class="img-12"
-                            src="img/weather/12/<?php print $game_array[0]['weather_id']; ?>.png"
+                            src="img/weather/12/<?= $game_array[0]['weather_id']; ?>.png"
                         />
-                        <?php print $game_array[0]['game_temperature'] . CELSIUS; ?>
+                        <?= $game_array[0]['game_temperature'] . CELSIUS; ?>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">Зрителей: <?php print number_format($game_array[0]['game_visitor'], 0, ',', ' '); ?></td>
+                    <td colspan="2">Зрителей: <?= number_format($game_array[0]['game_visitor'], 0, ',', ' '); ?></td>
                 </tr>
                 <tr>
-                    <td class="center" colspan="2"><?php print $game_array[0]['stadium_name']; ?>, <?php print $game_array[0]['city_name']; ?></td>
+                    <td class="center" colspan="2"><?= $game_array[0]['stadium_name']; ?>, <?= $game_array[0]['city_name']; ?></td>
                 </tr>
             </table>
             <table class="w100">
                 <tr>
                     <td class="center w50">
                         <h5>
-                            <a href="team_team_review_profile.php?num=<?php print $game_array[0]['game_home_team_id']; ?>">
-                                <?php print $game_array[0]['game_home_team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $game_array[0]['game_home_team_id']; ?>">
+                                <?= $game_array[0]['game_home_team_name']; ?>
                             </a>
                         </h5>
                     </td>
                     <td class="center">
                         <h5>
-                            <a href="team_team_review_profile.php?num=<?php print $game_array[0]['game_guest_team_id']; ?>">
-                                <?php print $game_array[0]['game_guest_team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $game_array[0]['game_guest_team_id']; ?>">
+                                <?= $game_array[0]['game_guest_team_name']; ?>
                             </a>
                         </h5>
                     </td>
@@ -67,14 +67,14 @@
                                 <tr>
                                     <td>
                                         <img
-                                            alt="<?php print $item['eventtype_name']; ?>"
+                                            alt="<?= $item['eventtype_name']; ?>"
                                             class="img-12"
-                                            src="img/eventtype/<?php print $item['eventtype_id']; ?>.png"
+                                            src="img/eventtype/<?= $item['eventtype_id']; ?>.png"
                                         />
-                                        <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                            <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                            <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                         </a>
-                                        (<?php print $item['event_minute']; ?>)
+                                        (<?= $item['event_minute']; ?>)
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -86,14 +86,14 @@
                                 <tr>
                                     <td>
                                         <img
-                                            alt="<?php print $item['eventtype_name']; ?>"
+                                            alt="<?= $item['eventtype_name']; ?>"
                                             class="img-12"
-                                            src="img/eventtype/<?php print $item['eventtype_id']; ?>.png"
+                                            src="img/eventtype/<?= $item['eventtype_id']; ?>.png"
                                         />
-                                        <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                            <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                            <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                         </a>
-                                        (<?php print $item['event_minute']; ?>)
+                                        (<?= $item['event_minute']; ?>)
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -106,41 +106,41 @@
             <p class="header">Статистика матча</p>
             <table class="striped w100">
                 <tr>
-                    <th class="center w33"><?php print $game_array[0]['game_home_team_name']; ?></th>
+                    <th class="center w33"><?= $game_array[0]['game_home_team_name']; ?></th>
                     <th class="center w33"></th>
-                    <th class="center"><?php print $game_array[0]['game_guest_team_name']; ?></th>
+                    <th class="center"><?= $game_array[0]['game_guest_team_name']; ?></th>
                 </tr>
                 <tr>
-                    <td class="center"><?php print $game_array[0]['game_home_shot']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_shot']; ?></td>
                     <td class="center">Удары</td>
-                    <td class="center"><?php print $game_array[0]['game_guest_shot']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_shot']; ?></td>
                 </tr>
                 <tr>
-                    <td class="center"><?php print $game_array[0]['game_home_ontarget']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_ontarget']; ?></td>
                     <td class="center">В створ</td>
-                    <td class="center"><?php print $game_array[0]['game_guest_ontarget']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_ontarget']; ?></td>
                 </tr>
                 <tr>
-                    <td class="center"><?php print $game_array[0]['game_home_foul']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_foul']; ?></td>
                     <td class="center">Фолы</td>
-                    <td class="center"><?php print $game_array[0]['game_guest_foul']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_foul']; ?></td>
                 </tr>
                 <tr>
-                    <td class="center"><?php print $game_array[0]['game_home_yellow']; ?> (<?php print $game_array[0]['game_home_red']; ?>)</td>
+                    <td class="center"><?= $game_array[0]['game_home_yellow']; ?> (<?= $game_array[0]['game_home_red']; ?>)</td>
                     <td class="center">Желтые (красные) карточки</td>
-                    <td class="center"><?php print $game_array[0]['game_guest_yellow']; ?> (<?php print $game_array[0]['game_guest_red']; ?>)</td>
+                    <td class="center"><?= $game_array[0]['game_guest_yellow']; ?> (<?= $game_array[0]['game_guest_red']; ?>)</td>
                 </tr>
                 <tr>
-                    <td class="center"><?php print $game_array[0]['game_home_possession']; ?>%</td>
+                    <td class="center"><?= $game_array[0]['game_home_possession']; ?>%</td>
                     <td class="center">Владение</td>
-                    <td class="center"><?php print $game_array[0]['game_guest_possession']; ?>%</td>
+                    <td class="center"><?= $game_array[0]['game_guest_possession']; ?>%</td>
                 </tr>
             </table>
         </td>
     </tr>
     <tr>
         <td class="block-page">
-            <p class="header">Статистика (<?php print $game_array[0]['game_home_team_name']; ?>)</p>
+            <p class="header">Статистика (<?= $game_array[0]['game_home_team_name']; ?>)</p>
             <table class="striped w100">
                 <tr>
                     <th class="w5">№</th>
@@ -151,21 +151,21 @@
                 </tr>
                 <?php foreach ($home_player_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print $item['player_number']; ?></td>
+                        <td class="center"><?= $item['player_number']; ?></td>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['position_name']; ?></td>
-                        <td class="center"><?php print $item['lineup_condition']; ?>%</td>
-                        <td class="center"><?php print $item['lineup_mark']; ?></td>
+                        <td class="center"><?= $item['position_name']; ?></td>
+                        <td class="center"><?= $item['lineup_condition']; ?>%</td>
+                        <td class="center"><?= $item['lineup_mark']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
         </td>
         <td class="block-page">
-            <p class="header">Статистика (<?php print $game_array[0]['game_guest_team_name']; ?>)</p>
+            <p class="header">Статистика (<?= $game_array[0]['game_guest_team_name']; ?>)</p>
             <table class="striped w100">
                 <tr>
                     <th class="w5">№</th>
@@ -176,15 +176,15 @@
                 </tr>
                 <?php foreach ($guest_player_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print $item['player_number']; ?></td>
+                        <td class="center"><?= $item['player_number']; ?></td>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['position_name']; ?></td>
-                        <td class="center"><?php print $item['lineup_condition']; ?>%</td>
-                        <td class="center"><?php print $item['lineup_mark']; ?></td>
+                        <td class="center"><?= $item['position_name']; ?></td>
+                        <td class="center"><?= $item['lineup_condition']; ?>%</td>
+                        <td class="center"><?= $item['lineup_mark']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

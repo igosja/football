@@ -15,42 +15,42 @@
                 <tr>
                     <td class="w1">
                         <img
-                            alt="<?php print $team_name; ?>"
+                            alt="<?= $team_name; ?>"
                             class="img-12"
-                            src="img/team/12/<?php print $num; ?>.png"
+                            src="img/team/12/<?= $num; ?>.png"
                         />
                     </td>
                     <td>
-                        <a href="team_team_review_profile.php?num=<?php print $num; ?>">
-                            <?php print $team_name; ?>
+                        <a href="team_team_review_profile.php?num=<?= $num; ?>">
+                            <?= $team_name; ?>
                         </a>
                     </td>
-                    <td class="center"><?php print $game; ?></td>
-                    <td class="center"><?php print $win; ?></td>
-                    <td class="center"><?php print $draw; ?></td>
-                    <td class="center"><?php print $loose; ?></td>
-                    <td class="center"><?php print $score; ?></td>
-                    <td class="center"><?php print $pass; ?></td>
+                    <td class="center"><?= $game; ?></td>
+                    <td class="center"><?= $win; ?></td>
+                    <td class="center"><?= $draw; ?></td>
+                    <td class="center"><?= $loose; ?></td>
+                    <td class="center"><?= $score; ?></td>
+                    <td class="center"><?= $pass; ?></td>
                 </tr>
                 <tr>
                     <td class="w1">
                         <img
-                            alt="<?php print $nearest_game_array[0]['team_name']; ?>"
+                            alt="<?= $nearest_game_array[0]['team_name']; ?>"
                             class="img-12"
-                            src="img/team/12/<?php print $nearest_game_array[0]['team_id']; ?>.png"
+                            src="img/team/12/<?= $nearest_game_array[0]['team_id']; ?>.png"
                         />
                     </td>
                     <td>
-                        <a href="team_team_review_profile.php?num=<?php print $nearest_game_array[0]['team_id']; ?>">
-                            <?php print $nearest_game_array[0]['team_name']; ?>
+                        <a href="team_team_review_profile.php?num=<?= $nearest_game_array[0]['team_id']; ?>">
+                            <?= $nearest_game_array[0]['team_name']; ?>
                         </a>
                     </td>
-                    <td class="center"><?php print $game; ?></td>
-                    <td class="center"><?php print $loose; ?></td>
-                    <td class="center"><?php print $draw; ?></td>
-                    <td class="center"><?php print $win; ?></td>
-                    <td class="center"><?php print $pass; ?></td>
-                    <td class="center"><?php print $score; ?></td>
+                    <td class="center"><?= $game; ?></td>
+                    <td class="center"><?= $loose; ?></td>
+                    <td class="center"><?= $draw; ?></td>
+                    <td class="center"><?= $win; ?></td>
+                    <td class="center"><?= $pass; ?></td>
+                    <td class="center"><?= $score; ?></td>
                 </tr>
             </table>
         </td>
@@ -68,46 +68,46 @@
                 </tr>
                 <?php foreach ($game_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print f_igosja_ufu_date($item['shedule_date']); ?></td>
+                        <td class="center"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['tournament_name']; ?>"
+                                alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                <?php print $item['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['game_home_team_name']; ?>"
+                                alt="<?= $item['game_home_team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['game_home_team_id']; ?>.png"
+                                src="img/team/12/<?= $item['game_home_team_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="team_team_review_profile.php?num=<?php print $item['game_home_team_id']; ?>">
-                                <?php print $item['game_home_team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['game_home_team_id']; ?>">
+                                <?= $item['game_home_team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['game_guest_team_name']; ?>"
+                                alt="<?= $item['game_guest_team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['game_guest_team_id']; ?>.png"
+                                src="img/team/12/<?= $item['game_guest_team_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="team_team_review_profile.php?num=<?php print $item['game_guest_team_id']; ?>">
-                                <?php print $item['game_guest_team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['game_guest_team_id']; ?>">
+                                <?= $item['game_guest_team_name']; ?>
                             </a>
                         </td>
                         <td class="center w5">
-                            <a href="game_review_main.php?num=<?php print $item['game_id']; ?>">
-                                <?php print $item['game_home_score']; ?>:<?php print $item['game_guest_score']; ?>
+                            <a href="game_review_main.php?num=<?= $item['game_id']; ?>">
+                                <?= $item['game_home_score']; ?>:<?= $item['game_guest_score']; ?>
                             </a>
                         </td>
                     </tr>

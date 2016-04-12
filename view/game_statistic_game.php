@@ -6,13 +6,13 @@
                 <tr>
                     <th>Статистика</th>
                     <th class="w1"></th>
-                    <th class="w35"><?php print $game_array[0]['game_home_team_name']; ?></th>
-                    <th class="w35"><?php print $game_array[0]['game_guest_team_name']; ?></th>
+                    <th class="w35"><?= $game_array[0]['game_home_team_name']; ?></th>
+                    <th class="w35"><?= $game_array[0]['game_guest_team_name']; ?></th>
                     <th class="w1"></th>
                 </tr>
                 <tr>
                     <td>Удары</td>
-                    <td class="center"><?php print $game_array[0]['game_home_shot']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_shot']; ?></td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -30,14 +30,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_shot']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_shot']; ?></td>
                 </tr>
                 <tr>
                     <td>В створ</td>
-                    <td class="center"><?php print $game_array[0]['game_home_ontarget']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_ontarget']; ?></td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -55,14 +55,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_ontarget']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_ontarget']; ?></td>
                 </tr>
                 <tr>
                     <td>Голевые моменты</td>
-                    <td class="center"><?php print $game_array[0]['game_home_moment']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_moment']; ?></td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -80,14 +80,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_moment']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_moment']; ?></td>
                 </tr>
                 <tr>
                     <td>Владение</td>
-                    <td class="center"><?php print $game_array[0]['game_home_possession']; ?>%</td>
+                    <td class="center"><?= $game_array[0]['game_home_possession']; ?>%</td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -105,14 +105,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_possession']; ?>%</td>
+                    <td class="center"><?= $game_array[0]['game_guest_possession']; ?>%</td>
                 </tr>
                 <tr>
                     <td>Угловые</td>
-                    <td class="center"><?php print $game_array[0]['game_home_corner']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_corner']; ?></td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -130,14 +130,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_corner']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_corner']; ?></td>
                 </tr>
                 <tr>
                     <td>Фолы</td>
-                    <td class="center"><?php print $game_array[0]['game_home_foul']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_foul']; ?></td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -155,14 +155,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_foul']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_foul']; ?></td>
                 </tr>
                 <tr>
                     <td>Пенальти</td>
-                    <td class="center"><?php print $game_array[0]['game_home_penalty']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_penalty']; ?></td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -180,14 +180,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_penalty']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_penalty']; ?></td>
                 </tr>
                 <tr>
                     <td>Офсайды</td>
-                    <td class="center"><?php print $game_array[0]['game_home_offside']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_offside']; ?></td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -205,14 +205,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_offside']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_offside']; ?></td>
                 </tr>
                 <tr>
                     <td>Точные передачи</td>
-                    <td class="center"><?php print $game_array[0]['game_home_pass']; ?>%</td>
+                    <td class="center"><?= $game_array[0]['game_home_pass']; ?>%</td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -230,14 +230,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_pass']; ?>%</td>
+                    <td class="center"><?= $game_array[0]['game_guest_pass']; ?>%</td>
                 </tr>
                 <tr>
                     <td>Желтые карточки</td>
-                    <td class="center"><?php print $game_array[0]['game_home_yellow']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_yellow']; ?></td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -255,14 +255,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_yellow']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_yellow']; ?></td>
                 </tr>
                 <tr>
                     <td>Красные карточки</td>
-                    <td class="center"><?php print $game_array[0]['game_home_red']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_home_red']; ?></td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -280,14 +280,14 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['game_guest_red']; ?></td>
+                    <td class="center"><?= $game_array[0]['game_guest_red']; ?></td>
                 </tr>
                 <tr>
                     <td>Средняя оценка</td>
-                    <td class="center"><?php print $game_array[0]['home_average']; ?></td>
+                    <td class="center"><?= $game_array[0]['home_average']; ?></td>
                     <td colspan="2">
                         <div class="progress">
                             <div class="progress-bar-red" style="width: 
@@ -305,10 +305,10 @@
                             print $percent;
 
                             ?>%"></div>
-                            <div class="progress-bar-green" style="width: <?php print 100 - $percent; ?>%"></div>
+                            <div class="progress-bar-green" style="width: <?= 100 - $percent; ?>%"></div>
                         </div>
                     </td>
-                    <td class="center"><?php print $game_array[0]['guest_average']; ?></td>
+                    <td class="center"><?= $game_array[0]['guest_average']; ?></td>
                 </tr>
             </table>
         </td>

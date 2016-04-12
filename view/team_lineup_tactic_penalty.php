@@ -12,13 +12,13 @@
                 <?php foreach ($player_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['position_name']; ?></td>
-                        <td class="center"><?php print $item['composure']; ?></td>
-                        <td class="center"><?php print $item['penalty']; ?></td>
+                        <td class="center"><?= $item['position_name']; ?></td>
+                        <td class="center"><?= $item['composure']; ?></td>
+                        <td class="center"><?= $item['penalty']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -33,12 +33,12 @@
                             <select id="select-penalty-1" class="select-penalty w100" name="data[1]">
                                 <option value="0">-</option>
                                 <?php foreach ($penaltyplayer_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($penalty_array[0]['team_penalty_player_id_1'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -50,12 +50,12 @@
                             <select id="select-penalty-2" class="select-penalty w100" name="data[2]">
                                 <option value="0">-</option>
                                 <?php foreach ($penaltyplayer_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($penalty_array[0]['team_penalty_player_id_2'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -67,12 +67,12 @@
                             <select id="select-penalty-3" class="select-penalty w100" name="data[3]">
                                 <option value="0">-</option>
                                 <?php foreach ($penaltyplayer_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($penalty_array[0]['team_penalty_player_id_3'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -84,12 +84,12 @@
                             <select id="select-penalty-4" class="select-penalty w100" name="data[4]">
                                 <option value="0">-</option>
                                 <?php foreach ($penaltyplayer_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($penalty_array[0]['team_penalty_player_id_4'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -101,12 +101,12 @@
                             <select id="select-penalty-5" class="select-penalty w100" name="data[5]">
                                 <option value="0">-</option>
                                 <?php foreach ($penaltyplayer_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($penalty_array[0]['team_penalty_player_id_5'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -118,12 +118,12 @@
                             <select id="select-penalty-6" class="select-penalty w100" name="data[6]">
                                 <option value="0">-</option>
                                 <?php foreach ($penaltyplayer_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($penalty_array[0]['team_penalty_player_id_6'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -135,12 +135,12 @@
                             <select id="select-penalty-7" class="select-penalty w100" name="data[7]">
                                 <option value="0">-</option>
                                 <?php foreach ($penaltyplayer_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($penalty_array[0]['team_penalty_player_id_7'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>

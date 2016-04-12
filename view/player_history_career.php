@@ -15,36 +15,36 @@
                 </tr>
                 <?php foreach ($season_statistic_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print $item['statisticplayer_season_id']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_season_id']; ?></td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['tournament_name']; ?>"
+                                alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td class="w35">
-                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                <?php print $item['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['statisticplayer_game']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_goal']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_pass_scoring']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_best']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_mark']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_game']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_goal']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_pass_scoring']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_best']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_mark']; ?></td>
                     </tr>
                 <?php } ?>
                 <tr>
@@ -53,11 +53,11 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_game']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_goal']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_pass_scoring']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_best']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_mark']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_game']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_goal']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_pass_scoring']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_best']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_mark']; ?></td>
                 </tr>
             </table>
         </td>
@@ -83,35 +83,35 @@
                 </tr>
                 <?php foreach ($statistic_array as $item) { ?>
                     <tr>
-                        <td><?php print $item['tournamenttype_name']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_game']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_goal']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_penalty']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_pass_scoring']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_best']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_yellow']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_red']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_pass_accurate']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_shot']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_ontarget']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_foul']; ?></td>
-                        <td class="center"><?php print $item['statisticplayer_mark']; ?></td>
+                        <td><?= $item['tournamenttype_name']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_game']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_goal']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_penalty']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_pass_scoring']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_best']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_yellow']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_red']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_pass_accurate']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_shot']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_ontarget']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_foul']; ?></td>
+                        <td class="center"><?= $item['statisticplayer_mark']; ?></td>
                     </tr>
                 <?php } ?>
                 <tr>
                     <td>Всего</td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_game']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_goal']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_penalty']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_pass_scoring']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_best']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_yellow']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_red']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_pass_accurate']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_shot']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_ontarget']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_foul']; ?></td>
-                    <td class="center"><?php print $total_statistic_array[0]['count_mark']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_game']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_goal']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_penalty']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_pass_scoring']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_best']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_yellow']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_red']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_pass_accurate']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_shot']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_ontarget']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_foul']; ?></td>
+                    <td class="center"><?= $total_statistic_array[0]['count_mark']; ?></td>
                 </tr>
             </table>
         </td>

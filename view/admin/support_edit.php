@@ -15,12 +15,12 @@
                 <table class="table table-striped table-bordered">
                     <tr>
                         <td>
-                            <?php print $inbox_array[0]['inbox_title']; ?>
+                            <?= $inbox_array[0]['inbox_title']; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <?php print nl2br($inbox_array[0]['inbox_text']); ?>
+                            <?= nl2br($inbox_array[0]['inbox_text']); ?>
                         </td>
                     </tr>
                     <tr>
@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <td class="text-center">
-                            <input name="user_id" type="hidden" value="<?php print $inbox_array[0]['inbox_sender_id']; ?>" />
+                            <input name="user_id" type="hidden" value="<?= $inbox_array[0]['inbox_sender_id']; ?>" />
                             <input class="btn btn-default" type="submit" value="Сохранить" />
                         </td>
                     </tr>

@@ -6,7 +6,7 @@
                           $forum_array[$i-1]['forumchapter_id'] != $forum_array[$i]['forumchapter_id']) { ?>
                     <table class="forum-group w100">
                         <tr>
-                            <th><?php print $forum_array[$i]['forumchapter_name']; ?></th>
+                            <th><?= $forum_array[$i]['forumchapter_name']; ?></th>
                             <th class="w8">Темы</th>
                             <th class="w8">Сообщений</th>
                             <th class="w20">Последнее</th>
@@ -14,20 +14,20 @@
                 <?php } ?>
                 <tr>
                     <td>
-                        <a href="forum_group.php?num=<?php print $forum_array[$i]['forumthemegroup_id']; ?>">
-                            <?php print $forum_array[$i]['forumthemegroup_name']; ?>
+                        <a href="forum_group.php?num=<?= $forum_array[$i]['forumthemegroup_id']; ?>">
+                            <?= $forum_array[$i]['forumthemegroup_name']; ?>
                         </a>
                         <br />
-                        <?php print $forum_array[$i]['forumthemegroup_description']; ?>
+                        <?= $forum_array[$i]['forumthemegroup_description']; ?>
                     </td>
-                    <td class="center vcenter"><?php print $forum_array[$i]['count_theme']; ?></td>
-                    <td class="center vcenter"><?php print $forum_array[$i]['count_post']; ?></td>
+                    <td class="center vcenter"><?= $forum_array[$i]['count_theme']; ?></td>
+                    <td class="center vcenter"><?= $forum_array[$i]['count_post']; ?></td>
                     <td>
-                        <a href="forum_theme.php?num=<?php print $forum_array[$i]['forumtheme_id']; ?>">
-                            <?php print $forum_array[$i]['forumtheme_name']; ?>
+                        <a href="forum_theme.php?num=<?= $forum_array[$i]['forumtheme_id']; ?>">
+                            <?= $forum_array[$i]['forumtheme_name']; ?>
                         </a>
                         <br />
-                        <?php print $forum_array[$i]['user_login']; ?> (<?php print f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?>)
+                        <?= $forum_array[$i]['user_login']; ?> (<?= f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?>)
                     </td>
                 </tr>
                 <?php if (!isset($forum_array[$i+1]['forumchapter_id']) ||

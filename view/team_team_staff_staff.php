@@ -13,23 +13,23 @@
                 <?php foreach ($staff_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="staff_home_profile.php?num=<?php print $item['staff_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="staff_home_profile.php?num=<?= $item['staff_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
-                            <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
                                 <img
-                                    alt="<?php print $item['country_name']; ?>"
+                                    alt="<?= $item['country_name']; ?>"
                                     class="img-12"
-                                    src="img/flag/12/<?php print $item['country_id']; ?>.png"
-                                    title="<?php print $item['country_name']; ?>"
+                                    src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                    title="<?= $item['country_name']; ?>"
                                 />
                             </a>
                         </td>
-                        <td><?php print $item['staffpost_name']; ?></td>
-                        <td class="center"><?php print f_igosja_five_star($item['staff_reputation'], 12); ?></td>
-                        <td class="right"><?php print f_igosja_money($item['staff_salary']); ?></td>
+                        <td><?= $item['staffpost_name']; ?></td>
+                        <td class="center"><?= f_igosja_five_star($item['staff_reputation'], 12); ?></td>
+                        <td class="right"><?= f_igosja_money($item['staff_salary']); ?></td>
                     </tr>
                 <?php } ?>
             </table>

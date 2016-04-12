@@ -25,11 +25,11 @@
                     <tr>
                         <td class="center">
                             <?php foreach ($social_array as $item) { ?>
-                                <a href="<?php print $item['url']; ?>">
+                                <a href="<?= $item['url']; ?>">
                                     <img
-                                        alt="<?php print $item['alt']; ?>"
+                                        alt="<?= $item['alt']; ?>"
                                         class="img-30"
-                                        src="img/social/<?php print $item['img']; ?>.png"
+                                        src="img/social/<?= $item['img']; ?>.png"
                                     />
                                 </a>
                             <?php } ?>
@@ -37,7 +37,7 @@
                     </tr>
                 </table>
             </form>
-            <p><?php print SPACE; ?></p>
+            <p><?= SPACE; ?></p>
             <table class="center striped grey">
                 <tr>
                     <td>

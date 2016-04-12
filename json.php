@@ -466,7 +466,7 @@ elseif (isset($_GET['inbox_id']))
     }
     elseif (INBOXTHEME_TRANSFER == $inboxtheme_id)
     {
-        $inbox_array[0]['inbox_button'] = '<button><a href="team_team_transfer_center.php">Подробнее</a></button>';
+        $inbox_array[0]['inbox_button'] = '<button><a href="team_team_transfer_center.php?num=' . $authorization_team_id . '">Подробнее</a></button>';
     }
     elseif (INBOXTHEME_PERSONAL == $inboxtheme_id)
     {

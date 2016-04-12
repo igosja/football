@@ -1,7 +1,7 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page w100">
-            <p class="header">Статистика (<?php print $game_array[0]['game_home_team_name']; ?>)</p>
+            <p class="header">Статистика (<?= $game_array[0]['game_home_team_name']; ?>)</p>
             <table class="striped w100">
                 <tr>
                     <th class="w4">№</th>
@@ -23,26 +23,26 @@
                 </tr>
                 <?php foreach ($game_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print $item['player_number']; ?></td>
+                        <td class="center"><?= $item['player_number']; ?></td>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['lineup_condition']; ?>%</td>
-                        <td class="center"><?php print $item['lineup_distance']; ?> м</td>
-                        <td class="center"><?php print $item['lineup_shot']; ?></td>
-                        <td class="center"><?php print $item['lineup_ontarget']; ?></td>
-                        <td class="center"><?php print $item['lineup_pass']; ?></td>
-                        <td class="center"><?php print $item['lineup_pass_accurate']; ?></td>
-                        <td class="center"><?php print $item['lineup_offside']; ?></td>
-                        <td class="center"><?php print $item['lineup_foul_made']; ?></td>
-                        <td class="center"><?php print $item['lineup_foul_recieve']; ?></td>
-                        <td class="center"><?php print $item['lineup_yellow']; ?></td>
-                        <td class="center"><?php print $item['lineup_red']; ?></td>
-                        <td class="center"><?php print $item['lineup_goal']; ?></td>
-                        <td class="center"><?php print $item['lineup_pass_scoring']; ?></td>
-                        <td class="center"><?php print $item['lineup_mark']; ?></td>
+                        <td class="center"><?= $item['lineup_condition']; ?>%</td>
+                        <td class="center"><?= $item['lineup_distance']; ?> м</td>
+                        <td class="center"><?= $item['lineup_shot']; ?></td>
+                        <td class="center"><?= $item['lineup_ontarget']; ?></td>
+                        <td class="center"><?= $item['lineup_pass']; ?></td>
+                        <td class="center"><?= $item['lineup_pass_accurate']; ?></td>
+                        <td class="center"><?= $item['lineup_offside']; ?></td>
+                        <td class="center"><?= $item['lineup_foul_made']; ?></td>
+                        <td class="center"><?= $item['lineup_foul_recieve']; ?></td>
+                        <td class="center"><?= $item['lineup_yellow']; ?></td>
+                        <td class="center"><?= $item['lineup_red']; ?></td>
+                        <td class="center"><?= $item['lineup_goal']; ?></td>
+                        <td class="center"><?= $item['lineup_pass_scoring']; ?></td>
+                        <td class="center"><?= $item['lineup_mark']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

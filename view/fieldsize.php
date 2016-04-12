@@ -5,7 +5,7 @@
             <?php if (isset($stadium_array[0]['building_end_date'])) { ?>
                 <p class="center warning">
                     Сейчас проходит изменение размеров поля до
-                    <?php print $stadium_array[0]['building_length']; ?>x<?php print $stadium_array[0]['building_width']; ?>м<br/>
+                    <?= $stadium_array[0]['building_length']; ?>x<?= $stadium_array[0]['building_width']; ?>м<br/>
                     Изменения вступят в силу после игр ближайшего дня
                 </p>
             <?php } else { ?>
@@ -13,11 +13,11 @@
                     <table class="striped w100">
                         <tr>
                             <td class="right w50">Стадион</td>
-                            <td><?php print $stadium_array[0]['stadium_name']; ?></td>
+                            <td><?= $stadium_array[0]['stadium_name']; ?></td>
                         </tr>
                         <tr>
                             <td class="right">Текущие размеры</td>
-                            <td>Длина: <?php print $stadium_array[0]['stadium_length']; ?> м, ширина: <?php print $stadium_array[0]['stadium_width']; ?> м</td>
+                            <td>Длина: <?= $stadium_array[0]['stadium_length']; ?> м, ширина: <?= $stadium_array[0]['stadium_width']; ?> м</td>
                         </tr>
                         <tr>
                             <td class="right">Новые размеры</td>

@@ -16,7 +16,7 @@
                                             <td>
                                                 <h6>
                                                     <?php if (0 < $player_array[0]['player_number']) { ?>
-                                                        <?php print $player_array[0]['player_number']; ?>
+                                                        <?= $player_array[0]['player_number']; ?>
                                                     <?php } else { ?>
                                                         -
                                                     <?php } ?>
@@ -27,7 +27,7 @@
                                 </td>
                                 <td class="center vcenter">
                                     <h5>
-                                        <?php print $position_array[0]['position_description']; ?>
+                                        <?= $position_array[0]['position_description']; ?>
                                     </h5>
                                 </td>
                                 <td class="w20">
@@ -38,7 +38,7 @@
                                         <tr>
                                             <td>
                                                 <h6>
-                                                    <?php print $player_array[0]['player_age']; ?>
+                                                    <?= $player_array[0]['player_age']; ?>
                                                 </h6>
                                             </td>
                                         </tr>
@@ -49,18 +49,18 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><?php print SPACE; ?></td>
+                    <td><?= SPACE; ?></td>
                 </tr>
                 <tr>
                     <td class="center">
                         Имеет контракт с клубом 
-                        <a href="team_team_review_profile.php?num=<?php print $player_array[0]['team_id']; ?>">
-                            <?php print $player_array[0]['team_name']; ?>
+                        <a href="team_team_review_profile.php?num=<?= $player_array[0]['team_id']; ?>">
+                            <?= $player_array[0]['team_name']; ?>
                         </a>
                     </td>
                 </tr>
                 <tr>
-                    <td><?php print SPACE; ?></td>
+                    <td><?= SPACE; ?></td>
                 </tr>
                 <tr>
                     <td>
@@ -69,22 +69,22 @@
                                 <td class="vcenter w50">
                                     <table class="w100">
                                         <tr>
-                                            <td>Игры: <?php print $player_array[0]['count_game']; ?></td>
+                                            <td>Игры: <?= $player_array[0]['count_game']; ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Голы: <?php print $player_array[0]['count_goal']; ?></td>
+                                            <td>Голы: <?= $player_array[0]['count_goal']; ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Передачи: <?php print $player_array[0]['count_pass']; ?></td>
+                                            <td>Передачи: <?= $player_array[0]['count_pass']; ?></td>
                                         </tr>
                                     </table>
                                 </td>
                                 <td class="center">
-                                    <a href="national_team_review_profile.php?num=<?php print $player_array[0]['country_id']; ?>">
+                                    <a href="national_team_review_profile.php?num=<?= $player_array[0]['country_id']; ?>">
                                         <img
-                                            alt="<?php print $player_array[0]['country_name']; ?>"
+                                            alt="<?= $player_array[0]['country_name']; ?>"
                                             class="img-50"
-                                            src="img/flag/50/<?php print $player_array[0]['country_id']; ?>.png"
+                                            src="img/flag/50/<?= $player_array[0]['country_id']; ?>.png"
                                         />
                                     </a>
                                 </td>
@@ -93,14 +93,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><?php print SPACE; ?></td>
+                    <td><?= SPACE; ?></td>
                 </tr>
                 <tr>
                     <td>
                         <table class="center w100">
                             <tr>
-                                <td class="w50"><h6><?php print f_igosja_money($player_array[0]['player_salary']); ?></h6></td>
-                                <td><h6><?php print f_igosja_money($player_array[0]['player_price']); ?></h6></td>
+                                <td class="w50"><h6><?= f_igosja_money($player_array[0]['player_salary']); ?></h6></td>
+                                <td><h6><?= f_igosja_money($player_array[0]['player_price']); ?></h6></td>
                             </tr>
                             <tr>
                                 <td>Зарплата в день</td>
@@ -110,17 +110,17 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><?php print SPACE; ?></td>
+                    <td><?= SPACE; ?></td>
                 </tr>
                 <tr>
                     <td>
                         <table class="center w100">
                             <tr>
-                                <td class="w33"><h6><?php print $player_array[0]['player_height']; ?> см</h6></td>
-                                <td><h6><?php print $player_array[0]['player_weight']; ?> кг</h6></td>
+                                <td class="w33"><h6><?= $player_array[0]['player_height']; ?> см</h6></td>
+                                <td><h6><?= $player_array[0]['player_weight']; ?> кг</h6></td>
                                 <td class="w33">
                                     <h6>
-                                        <?php print f_igosja_leg_name($player_array[0]['player_leg_left'], $player_array[0]['player_leg_right']); ?>
+                                        <?= f_igosja_leg_name($player_array[0]['player_leg_left'], $player_array[0]['player_leg_right']); ?>
                                     </h6>
                                 </td>
                             </tr>
@@ -148,15 +148,15 @@
                             <td>
                                 <table class="striped w100">
                                     <tr>
-                                        <th colspan="2"><?php print $attribute_array[$i]['attributechapter_name']; ?></th>
+                                        <th colspan="2"><?= $attribute_array[$i]['attributechapter_name']; ?></th>
                                     </tr>
                             <?php } ?>
                                 <tr>
-                                    <td><?php print $attribute_array[$i]['attribute_name']; ?></td>
+                                    <td><?= $attribute_array[$i]['attribute_name']; ?></td>
                                     <td class="center w25">
                                         <?php if (1 == $count_scout) { ?>
                                             <div class="progress">
-                                                <div class="progress-bar" style="width: <?php print $attribute_array[$i]['playerattribute_value']; ?>%"></div>
+                                                <div class="progress-bar" style="width: <?= $attribute_array[$i]['playerattribute_value']; ?>%"></div>
                                             </div>
                                         <?php } else { ?>
                                             ?
@@ -184,10 +184,10 @@
                         <img alt="Позиции" src="/img/field/field-108.png" />
                         <?php foreach ($position_array as $item) { ?>
                             <img
-                                alt="<?php print $item['position_description']; ?>"
-                                src="img/position/<?php print f_igosja_position_icon($item['playerposition_value']); ?>.png"
-                                style="position: absolute; top: <?php print 150 -   $item['position_coordinate_x'] * 15 - 10; ?>px; left: <?php print 1 + $item['position_coordinate_y'] * 15; ?>px;"
-                                title="<?php print $item['position_description']; ?>"
+                                alt="<?= $item['position_description']; ?>"
+                                src="img/position/<?= f_igosja_position_icon($item['playerposition_value']); ?>.png"
+                                style="position: absolute; top: <?= 150 -   $item['position_coordinate_x'] * 15 - 10; ?>px; left: <?= 1 + $item['position_coordinate_y'] * 15; ?>px;"
+                                title="<?= $item['position_description']; ?>"
                             />
                         <?php } ?>
                     </td>
@@ -199,8 +199,8 @@
                             </tr>
                             <?php foreach ($position_array as $item) { ?>
                                 <tr>
-                                    <td><?php print $item['position_name']; ?></td>
-                                    <td class="right"><?php print $item['playerposition_value']; ?> %</td>
+                                    <td><?= $item['position_name']; ?></td>
+                                    <td class="right"><?= $item['playerposition_value']; ?> %</td>
                                 </tr>
                             <?php } ?>
                         </table>
@@ -220,12 +220,12 @@
                 <tr>
                     <td colspan="2">
                         <div class="progress">
-                            <div class="<?php print f_igosja_progress_class($player_array[0]['player_condition']); ?>" style="width: <?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { print $player_array[0]['player_condition']; } else { print '0'; } ?>%"></div>
+                            <div class="<?= f_igosja_progress_class($player_array[0]['player_condition']); ?>" style="width: <?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { print $player_array[0]['player_condition']; } else { print '0'; } ?>%"></div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><?php print SPACE; ?></td>
+                    <td colspan="2"><?= SPACE; ?></td>
                 </tr>
                 <tr>
                     <td>Игровая практика</td>
@@ -234,7 +234,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="progress">
-                            <div class="<?php print f_igosja_progress_class($player_array[0]['player_practice']); ?>" style="width: <?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { print $player_array[0]['player_practice'];  } else { print '0'; } ?>%"></div>
+                            <div class="<?= f_igosja_progress_class($player_array[0]['player_practice']); ?>" style="width: <?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { print $player_array[0]['player_practice'];  } else { print '0'; } ?>%"></div>
                         </div>
                     </td>
                 </tr>
@@ -246,7 +246,7 @@
             <p class="header">Информация о статусе игрока</p>
             <table class="w100">
                 <tr>
-                    <td>Настроение: <img alt="" class="img-12" src="/img/mood/<?php print $player_array[0]['mood_id']; ?>.png" /> <?php print $player_array[0]['mood_name']; ?></td>
+                    <td>Настроение: <img alt="" class="img-12" src="/img/mood/<?= $player_array[0]['mood_id']; ?>.png" /> <?= $player_array[0]['mood_name']; ?></td>
                 </tr>
             </table>
         </td>
@@ -257,12 +257,12 @@
                     <tr>
                         <td>
                             <div class="progress">
-                                <div class="progress-bar" style="width: <?php print $item['lineup_mark'] * 10; ?>%">
-                                    <?php print SPACE; ?>
+                                <div class="progress-bar" style="width: <?= $item['lineup_mark'] * 10; ?>%">
+                                    <?= SPACE; ?>
                                 </div>
                             </div>
                         </td>
-                        <td class="center w10"><?php print $item['lineup_mark']; ?></td>
+                        <td class="center w10"><?= $item['lineup_mark']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -276,17 +276,17 @@
                             <img alt="Желтая карточка" class="img-30" src="/img/card/yellow.png" />
                         </td>
                         <td class="w1">
-                            <?php print SPACE; ?>
+                            <?= SPACE; ?>
                         </td>
-                        <td><?php print 2-$item['disqualification_yellow']; ?> ЖК до дисквалификации на 1 игру</td>
+                        <td><?= 2-$item['disqualification_yellow']; ?> ЖК до дисквалификации на 1 игру</td>
                     </tr>
                     <tr>
                         <td class="w1">
-                            <?php print SPACE; ?>
+                            <?= SPACE; ?>
                         </td>
                         <td>
-                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                <?php print $item['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
                             </a>
                         </td>
                     </tr>

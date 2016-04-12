@@ -52,14 +52,14 @@
                                     <li><a href="javascript:;" class="main-menu-link">Меню</a>
                                         <ul>
                                             <li><a href="continent_review_profile.php?num=1">Лига</a></li>
-                                            <li><a href="worldcup_review_profile.php?num=<?php print TOURNAMENT_WORLD_CUP; ?>">Чемпионат мира</a></li>
-                                            <li><a href="league_review_profile.php?num=<?php print TOURNAMENT_CHAMPIONS_LEAGUE; ?>">Лига чемпионов</a></li>
+                                            <li><a href="worldcup_review_profile.php?num=<?= TOURNAMENT_WORLD_CUP; ?>">Чемпионат мира</a></li>
+                                            <li><a href="league_review_profile.php?num=<?= TOURNAMENT_CHAMPIONS_LEAGUE; ?>">Лига чемпионов</a></li>
                                         </ul>
                                     </li>
                                     <?php if (!isset($authorization_id)) { ?>
                                         <li><a href="login.php" class="main-menu-link">Войти</a></li>
                                     <?php } else { ?>
-                                        <li><a href="profile_home_home.php" class="main-menu-link"><?php print $authorization_login; ?></a>
+                                        <li><a href="profile_home_home.php" class="main-menu-link"><?= $authorization_login; ?></a>
                                             <ul>
                                                 <li><a href="questionary.php">Личные данные</a></li>
                                                 <li><a href="logout.php">Выйти</a></li>
@@ -73,21 +73,21 @@
                                                     src="img/envelope.png"
                                                 />
                                                 <?php if (isset($count_message) && 0 < $count_message) { ?>
-                                                    <sup class="inbox-sup"><?php print $count_message; ?></sup>
+                                                    <sup class="inbox-sup"><?= $count_message; ?></sup>
                                                 <?php } ?>
                                             </a>
                                         </li>
                                         <?php if (isset($authorization_team_id)) { ?>
                                             <li>
-                                                <a href="team_lineup_team_player.php?num=<?php print $authorization_team_id ?>" class="main-menu-link">
-                                                    <?php print $authorization_team_name; ?>
+                                                <a href="team_lineup_team_player.php?num=<?= $authorization_team_id ?>" class="main-menu-link">
+                                                    <?= $authorization_team_name; ?>
                                                 </a>
                                             </li>
                                         <?php } ?>
                                         <?php if (isset($authorization_country_id)) { ?>
                                             <li>
-                                                <a href="national_lineup_team_player.php?num=<?php print $authorization_country_id ?>" class="main-menu-link">
-                                                    <?php print $authorization_country_name; ?>
+                                                <a href="national_lineup_team_player.php?num=<?= $authorization_country_id ?>" class="main-menu-link">
+                                                    <?= $authorization_country_name; ?>
                                                 </a>
                                             </li>
                                         <?php } ?>
@@ -127,7 +127,7 @@
                 <td colspan="2">
                     <table class="w100">
                         <tr>
-                            <td><span class="header-text"><?php print $header_title; ?></span></td>
+                            <td><span class="header-text"><?= $header_title; ?></span></td>
                             <td class="right fright">
                                 <table class="horizontal-menu-table">
                                     <tr class="horizontal-menu" id="horizontal-menu-tr">
@@ -154,7 +154,7 @@
 
                                                         ?>
                                                             <td class="horizontal-menu-td">
-                                                                <a href="javascript:;" id="horizontal-menu-<?php print $i + 1; ?>"
+                                                                <a href="javascript:;" id="horizontal-menu-<?= $i + 1; ?>"
                                                                     <?php foreach ($horizontalmenu_array as $item) { ?>
                                                                         <?php
 
@@ -166,9 +166,9 @@
 
                                                                         ?>
                                                                     <?php } ?>
-                                                                    class="<?php print $css_class; ?>"
+                                                                    class="<?= $css_class; ?>"
                                                                 >
-                                                                    <?php print $horizontalmenu_array[$i]['horizontalmenu_name']; ?>
+                                                                    <?= $horizontalmenu_array[$i]['horizontalmenu_name']; ?>
                                                                 </a>
                                                             </td>
                                                         <?php } ?>
@@ -198,8 +198,8 @@
 
                                                     ?>
                                                 <?php } ?>
-                                                class="<?php print $css_class; ?>"
-                                                id="horizontal-menu-<?php print $i + 1; ?>-tr"
+                                                class="<?= $css_class; ?>"
+                                                id="horizontal-menu-<?= $i + 1; ?>-tr"
                                             >
                                                 <td class="horizontal-menu-td">
                                                     <table>
@@ -222,12 +222,12 @@
 
                                         ?>
                                             <td>
-                                                <a href="<?php print $horizontalmenu_array[$i]['horizontalsubmenu_href']; ?><?php if (isset($_GET['num'])) { ?>?num=<?php print (int) $_GET['num']; ?><?php } ?>"
+                                                <a href="<?= $horizontalmenu_array[$i]['horizontalsubmenu_href']; ?><?php if (isset($_GET['num'])) { ?>?num=<?= (int) $_GET['num']; ?><?php } ?>"
                                                     <?php if ($horizontalmenu_array[$i]['horizontalsubmenu_href'] == $chapter) { ?>
                                                         class="active"
                                                     <?php } ?>
                                                 >
-                                                    <?php print $horizontalmenu_array[$i]['horizontalsubmenu_name']; ?>
+                                                    <?= $horizontalmenu_array[$i]['horizontalsubmenu_name']; ?>
                                                 </a>
                                             </td>
                                         <?php } ?>
@@ -255,11 +255,11 @@
     <div class="header-button">
         <?php if (isset($button_array)) { ?>
             <?php foreach ($button_array as $item) { ?>
-                <a href="<?php print $item['href']; ?>" class="<?php print $item['class']; ?>"><?php print $item['text']; ?></a>
+                <a href="<?= $item['href']; ?>" class="<?= $item['class']; ?>"><?= $item['text']; ?></a>
             <?php } ?>
         <?php } ?>
     </div>
     <div class="page-content">
         <?php if (isset($alert_message)) { ?>
-            <p class="alert center <?php print $alert_message['class']; ?>"><?php print $alert_message['text']; ?></p>
+            <p class="alert center <?= $alert_message['class']; ?>"><?= $alert_message['text']; ?></p>
         <?php } ?>

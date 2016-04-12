@@ -21,9 +21,9 @@
                 <tbody>
                     <?php foreach ($inboxtheme_array as $item) { ?>
                         <tr>
-                            <td><?php print $item['inboxtheme_name']; ?></td>
+                            <td><?= $item['inboxtheme_name']; ?></td>
                             <td>
-                                <a href="inboxtheme_edit.php?num=<?php print $item['inboxtheme_id']; ?>"><i class="fa fa-pencil"></i></a>
+                                <a href="inboxtheme_edit.php?num=<?= $item['inboxtheme_id']; ?>"><i class="fa fa-pencil"></i></a>
                             </td>
                         </tr>
                     <?php } ?>

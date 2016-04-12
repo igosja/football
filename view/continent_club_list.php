@@ -9,11 +9,11 @@
                             Старница:
                             <select name="page" id="page-select">
                                 <?php for ($i=0; $i<$count_page; $i++) { ?>
-                                    <option value="<?php print $i + 1; ?>"
+                                    <option value="<?= $i + 1; ?>"
                                         <?php if (isset($_GET['page']) && $_GET['page'] == $i + 1) { ?>
                                             selected
                                         <?php } ?>
-                                    ><?php print $i + 1; ?></option>
+                                    ><?= $i + 1; ?></option>
                                 <?php } ?>
                             </select>
                         </form>
@@ -45,32 +45,32 @@
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $team_array[$i]['team_name']; ?>"
+                                alt="<?= $team_array[$i]['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $team_array[$i]['team_id']; ?>.png"
+                                src="img/team/12/<?= $team_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?php print $team_array[$i]['team_id']; ?>">
-                                <?php print $team_array[$i]['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $team_array[$i]['team_id']; ?>">
+                                <?= $team_array[$i]['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $team_array[$i]['country_name']; ?>"
+                                alt="<?= $team_array[$i]['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?php print $team_array[$i]['country_id']; ?>.png"
+                                src="img/flag/12/<?= $team_array[$i]['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w15">
-                            <a href="national_team_review_profile.php?num=<?php print $team_array[$i]['country_id']; ?>">
-                                <?php print $team_array[$i]['country_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $team_array[$i]['country_id']; ?>">
+                                <?= $team_array[$i]['country_name']; ?>
                             </a>
                         </td>
                         <td>
                             <div class="progress">
-                                <div class="progress-bar" style="width: <?php print $team_array[$i]['team_reputation'] / $best_team_array[0]['team_reputation'] * 100; ?>%">
-                                    <?php print SPACE; ?>
+                                <div class="progress-bar" style="width: <?= $team_array[$i]['team_reputation'] / $best_team_array[0]['team_reputation'] * 100; ?>%">
+                                    <?= SPACE; ?>
                                 </div>
                             </div>
                         </td>

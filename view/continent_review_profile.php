@@ -5,21 +5,21 @@
             <p class="center">
                 <img
                     alt="Лига"
-                    src="img/continent/<?php print $num; ?>.png"
+                    src="img/continent/<?= $num; ?>.png"
                 />
             </p>
             <table class="striped w100">
                 <tr>
                     <td class="w50">Континент</td>
-                    <td><?php print $continent_name; ?></td>
+                    <td><?= $continent_name; ?></td>
                 </tr>
                 <tr>
                     <td>Страны</td>
-                    <td><?php print $count_country; ?></td>
+                    <td><?= $count_country; ?></td>
                 </tr>
                 <tr>
                     <td>Команды</td>
-                    <td><?php print $count_team; ?></td>
+                    <td><?= $count_team; ?></td>
                 </tr>
             </table>
         </td>
@@ -34,17 +34,17 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['country_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?php print $item['country_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
-                                <?php print $item['country_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['ratingcountry_position']; ?></td>
+                        <td class="center"><?= $item['ratingcountry_position']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -62,26 +62,26 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['country_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?php print $item['country_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w35">
-                            <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
-                                <?php print $item['country_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
                     </tr>
@@ -98,20 +98,20 @@
                 <?php foreach ($player_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
                     </tr>
@@ -129,32 +129,32 @@
                 <?php foreach ($transfer_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['seller_name']; ?>"
+                                alt="<?= $item['seller_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['seller_id']; ?>.png"
+                                src="img/team/12/<?= $item['seller_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
-                            <a href="team_team_review_profile.php?num=<?php print $item['seller_id']; ?>">
-                                <?php print $item['seller_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['seller_id']; ?>">
+                                <?= $item['seller_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['buyer_name']; ?>"
+                                alt="<?= $item['buyer_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['buyer_id']; ?>.png"
+                                src="img/team/12/<?= $item['buyer_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
-                            <a href="team_team_review_profile.php?num=<?php print $item['buyer_id']; ?>">
-                                <?php print $item['buyer_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['buyer_id']; ?>">
+                                <?= $item['buyer_name']; ?>
                             </a>
                         </td>
                     </tr>

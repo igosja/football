@@ -17,27 +17,27 @@
                 </tr>
                 <?php foreach ($standing_array as $item) { ?>
                     <tr <?php if (isset($authorization_team_id) && $authorization_team_id == $item['team_id']) { ?>class="current"<?php } ?>>
-                        <td class="center"><?php print $item['standing_place']; ?></td>
+                        <td class="center"><?= $item['standing_place']; ?></td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['standing_game']; ?></td>
-                        <td class="center"><?php print $item['standing_win']; ?></td>
-                        <td class="center"><?php print $item['standing_draw']; ?></td>
-                        <td class="center"><?php print $item['standing_loose']; ?></td>
-                        <td class="center"><?php print $item['standing_score']; ?></td>
-                        <td class="center"><?php print $item['standing_pass']; ?></td>
-                        <td class="center"><?php print $item['standing_difference']; ?></td>
-                        <td class="center"><strong><?php print $item['standing_point']; ?></strong></td>
+                        <td class="center"><?= $item['standing_game']; ?></td>
+                        <td class="center"><?= $item['standing_win']; ?></td>
+                        <td class="center"><?= $item['standing_draw']; ?></td>
+                        <td class="center"><?= $item['standing_loose']; ?></td>
+                        <td class="center"><?= $item['standing_score']; ?></td>
+                        <td class="center"><?= $item['standing_pass']; ?></td>
+                        <td class="center"><?= $item['standing_difference']; ?></td>
+                        <td class="center"><strong><?= $item['standing_point']; ?></strong></td>
                     </tr>
                 <?php } ?>
             </table>

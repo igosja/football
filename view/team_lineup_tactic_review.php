@@ -17,7 +17,7 @@
                             class="current"
                         <?php } ?>
                     >
-                        <td class="center"><?php print f_igosja_ufu_date($item['shedule_date']); ?></td>
+                        <td class="center"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
                         <td class="center">
                             <?php if ($item['game_home_team_id'] == $authorization_team_id) { ?>
                                 Д
@@ -27,38 +27,38 @@
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['tournament_name']; ?>"
+                                alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                <?php print $item['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
                             </a>
                         </td>
                         <td class="center">
-                            <?php print $item['game_temperature']; ?>
+                            <?= $item['game_temperature']; ?>
                             <img
                                 alt=""
                                 class="img-12"
-                                src="img/weather/<?php print $item['game_weather_id']; ?>.png"
+                                src="img/weather/<?= $item['game_weather_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_lineup_tactic_review.php?num=<?php print $num; ?>&game=<?php print $item['game_id']; ?>">
+                            <a href="team_lineup_tactic_review.php?num=<?= $num; ?>&game=<?= $item['game_id']; ?>">
                                 <?php if ($item['lineupmain_id']) { ?>
                                     Редактировать
                                 <?php } else { ?>
@@ -92,10 +92,10 @@
                         <td class="nopadding">
                             <select
                                 class="position-select w100"
-                                data-id="<?php print $item['player_id']; ?>"
+                                data-id="<?= $item['player_id']; ?>"
                                 <?php foreach ($lineup_array as $lineup) { ?>
                                     <?php if ($lineup['lineup_player_id'] == $item['player_id']) { ?>
-                                        data-position="<?php print $lineup['lineup_position_id']; ?>"
+                                        data-position="<?= $lineup['lineup_position_id']; ?>"
                                     <?php } ?>
                                 <?php } ?>
                             >
@@ -106,20 +106,20 @@
                                 class="role-select w100"
                                 <?php foreach ($lineup_array as $lineup) { ?>
                                     <?php if ($lineup['lineup_player_id'] == $item['player_id']) { ?>
-                                        data-role="<?php print $lineup['lineup_role_id']; ?>"
+                                        data-role="<?= $lineup['lineup_role_id']; ?>"
                                     <?php } ?>
                                 <?php } ?>
                             >
                             </select>
                         </td>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['position_name']; ?></td>
-                        <td class="center"><?php print $item['player_condition']; ?> %</td>
-                        <td class="center"><?php print $item['player_practice']; ?> %</td>
+                        <td class="center"><?= $item['position_name']; ?></td>
+                        <td class="center"><?= $item['player_condition']; ?> %</td>
+                        <td class="center"><?= $item['player_practice']; ?> %</td>
                     </tr>
                 <?php } ?>
             </table>
@@ -134,13 +134,13 @@
                             <p class="header">Тактика</p>
                             <select id="tactic-select" name="data[formation_id]" class="w100">
                                 <?php foreach ($formation_array as $item) { ?>
-                                    <option value="<?php print $item['formation_id']; ?>"
+                                    <option value="<?= $item['formation_id']; ?>"
                                         <?php if (isset($lineupmain_array[0]['lineupmain_formation_id']) &&
                                                   $lineupmain_array[0]['lineupmain_formation_id'] == $item['formation_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['formation_name']; ?>
+                                        <?= $item['formation_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -151,13 +151,13 @@
                             <p class="header">Настрой</p>
                             <select name="data[gamemood_id]" class="w100">
                                 <?php foreach ($gamemood_array as $item) { ?>
-                                    <option value="<?php print $item['gamemood_id']; ?>"
+                                    <option value="<?= $item['gamemood_id']; ?>"
                                         <?php if (isset($lineupmain_array[0]['lineupmain_formation_id']) &&
                                                   $lineupmain_array[0]['lineupmain_gamemood_id'] == $item['gamemood_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['gamemood_name']; ?>
+                                        <?= $item['gamemood_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -168,48 +168,48 @@
                             <p class="header">Стиль игры</p>
                             <select name="data[gamestyle_id]" class="w100">
                                 <?php foreach ($gamestyle_array as $item) { ?>
-                                    <option value="<?php print $item['gamestyle_id']; ?>"
+                                    <option value="<?= $item['gamestyle_id']; ?>"
                                         <?php if (isset($lineupmain_array[0]['lineupmain_formation_id']) &&
                                                   $lineupmain_array[0]['lineupmain_gamestyle_id'] == $item['gamestyle_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['gamestyle_name']; ?>
+                                        <?= $item['gamestyle_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td><?php print SPACE; ?></td>
+                        <td><?= SPACE; ?></td>
                     </tr>
                     <tr>
                         <td class="center">
                             <?php for ($i=1; $i<=18; $i++) { ?>
                                 <input
-                                    id="input-position-<?php print $i; ?>"
-                                    name="data[position_<?php print $i; ?>]"
+                                    id="input-position-<?= $i; ?>"
+                                    name="data[position_<?= $i; ?>]"
                                     type="hidden"
                                     value=""
                                 />
                                 <input
-                                    id="input-player-<?php print $i; ?>"
-                                    name="data[player_<?php print $i; ?>]"
+                                    id="input-player-<?= $i; ?>"
+                                    name="data[player_<?= $i; ?>]"
                                     type="hidden"
                                     value=""
                                 />
                                 <input
-                                    id="input-role-<?php print $i; ?>"
-                                    name="data[role_<?php print $i; ?>]"
+                                    id="input-role-<?= $i; ?>"
+                                    name="data[role_<?= $i; ?>]"
                                     type="hidden"
                                     value=""
                                 />
                                 <input
-                                    name="data[lineup_<?php print $i; ?>]"
+                                    name="data[lineup_<?= $i; ?>]"
                                     type="hidden"
                                     <?php for ($j=0; $j<$count_lineup; $j++) { ?>
                                         <?php if ($j + 1 == $i) { ?>
-                                            value="<?php print $lineup_array[$j]['lineup_id']; ?>"
+                                            value="<?= $lineup_array[$j]['lineup_id']; ?>"
                                         <?php } ?>
                                     <?php } ?>
                                 />

@@ -50,6 +50,7 @@ function f_igosja_generator_transfer()
             $seller_id      = $transfer_array[$i]['transfer_seller_id'];
             $seller_user_id = $transfer_array[$i]['seller_user_id'];
             $price          = $transfer_array[$i]['transfer_price'];
+            $tax            = round($price / 10);
             $offertype_id   = $transfer_array[$i]['transfer_offertype_id'];
 
             $sql = "SELECT `team_finance`
@@ -72,7 +73,7 @@ function f_igosja_generator_transfer()
                 f_igosja_mysqli_query($sql);
 
                 $sql = "UPDATE `team`
-                        SET `team_finance`=`team_finance`+'$price'
+                        SET `team_finance`=`team_finance`+'$price'-'$tax'
                         WHERE `team_id`='$seller_id'
                         LIMIT 1";
                 f_igosja_mysqli_query($sql);
@@ -92,6 +93,7 @@ function f_igosja_generator_transfer()
                             `historyfinanceteam_value`
                         )
                         VALUES (SYSDATE(), '" . HISTORY_TEXT_EXPENCE_TRANSFER. "', '$igosja_season_id', '$buyer_id', '$price'),
+                               (SYSDATE(), '" . HISTORY_TEXT_EXPENCE_TAX. "', '$igosja_season_id', '$seller_id', '$tax'),
                                (SYSDATE(), '" . HISTORY_TEXT_INCOME_TRANSFER. "', '$igosja_season_id', '$seller_id', '$price');";
                 f_igosja_mysqli_query($sql);
 
@@ -103,20 +105,11 @@ function f_igosja_generator_transfer()
                 f_igosja_mysqli_query($sql);
 
                 $sql = "UPDATE `finance`
-                        SET `finance_income_transfer`=`finance_income_transfer`+'$price'
+                        SET `finance_income_transfer`=`finance_income_transfer`+'$price',
+                            `finance_expense_tax`=`finance_expense_tax`+'$tax'
                         WHERE `finance_season_id`='$igosja_season_id'
                         AND `finance_team_id`='$seller_id'
                         LIMIT 1";
-                f_igosja_mysqli_query($sql);
-
-                $sql = "INSERT INTO `transferhistory`
-                        SET `transferhistory_buyer_id`='$buyer_id',
-                            `transferhistory_date`=SYSDATE(),
-                            `transferhistory_offertype_id`='$offertype_id',
-                            `transferhistory_player_id`='$player_id',
-                            `transferhistory_price`='$price',
-                            `transferhistory_season_id`='$igosja_season_id',
-                            `transferhistory_seller_id`='$seller_id'";
                 f_igosja_mysqli_query($sql);
 
                 $sql = "INSERT INTO `transferhistory`

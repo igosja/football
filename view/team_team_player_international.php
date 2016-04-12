@@ -16,33 +16,33 @@
                     <?php foreach ($player_array as $item) { ?>
                         <tr>
                             <td>
-                                <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                    <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                    <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
+                                <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
                                     <img
-                                        alt="<?php print $item['country_name']; ?>"
+                                        alt="<?= $item['country_name']; ?>"
                                         class="img-12"
-                                        src="img/flag/12/<?php print $item['country_id']; ?>.png"
-                                        title="<?php print $item['country_name']; ?>"
+                                        src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                        title="<?= $item['country_name']; ?>"
                                     />
                                 </a>
                             </td>
-                            <td class="center"><?php print $item['position_name']; ?></td>
-                            <td class="center"><?php print $item['player_age']; ?></td>
-                            <td class="center"><?php print $item['player_height']; ?> см</td>
-                            <td class="center"><?php print $item['player_weight']; ?> кг</td>
+                            <td class="center"><?= $item['position_name']; ?></td>
+                            <td class="center"><?= $item['player_age']; ?></td>
+                            <td class="center"><?= $item['player_height']; ?> см</td>
+                            <td class="center"><?= $item['player_weight']; ?> кг</td>
                             <td class="nopadding">
-                                <select name="data[<?php print $item['player_id']; ?>]">
+                                <select name="data[<?= $item['player_id']; ?>]">
                                     <?php foreach ($statusnational_array as $status) { ?>
-                                        <option value="<?php print $status['statusnational_id']; ?>"
+                                        <option value="<?= $status['statusnational_id']; ?>"
                                             <?php if ($status['statusnational_id'] == $item['player_statusnational_id']) { ?>
                                                 selected
                                             <?php } ?>
                                         >
-                                            <?php print $status['statusnational_name']; ?>
+                                            <?= $status['statusnational_name']; ?>
                                         </option>
                                     <?php } ?>
                                 </select>

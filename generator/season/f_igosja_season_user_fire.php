@@ -1,6 +1,6 @@
 <?php
 
-function f_igosja_season_national_coach()
+function f_igosja_season_user_fire()
 {
     $sql = "SELECT `team_id`,
                    `user_id`

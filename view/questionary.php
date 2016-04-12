@@ -7,20 +7,20 @@
                     <tr>
                         <td class="right">Логин</td>
                         <td class="left">
-                            <input name="data[login]" type="text" value="<?php print $user_array[0]['user_login']; ?>" <?php if (!empty($user_array[0]['user_login'])) { ?>disabled<?php } ?>/>
+                            <input name="data[login]" type="text" value="<?= $user_array[0]['user_login']; ?>" <?php if (!empty($user_array[0]['user_login'])) { ?>disabled<?php } ?>/>
                         </td>
                     </tr>
                     <tr>
                         <td class="right">Имя</td>
                         <td class="left">
-                            <input name="data[firstname]" type="text" value="<?php print $user_array[0]['user_firstname']; ?>" />
-                            <input name="data[lastname]" type="text" value="<?php print $user_array[0]['user_lastname']; ?>" />
+                            <input name="data[firstname]" type="text" value="<?= $user_array[0]['user_firstname']; ?>" />
+                            <input name="data[lastname]" type="text" value="<?= $user_array[0]['user_lastname']; ?>" />
                         </td>
                     </tr>
                     <tr>
                         <td class="right">Email</td>
                         <td class="left">
-                            <input name="data[email]" type="text" value="<?php print $user_array[0]['user_email']; ?>" />
+                            <input name="data[email]" type="text" value="<?= $user_array[0]['user_email']; ?>" />
                         </td>
                     </tr>
                     <tr>
@@ -30,12 +30,12 @@
                                 <input
                                     name="data[gender]"
                                     type="radio"
-                                    value="<?php print $item['gender_id']; ?>"
+                                    value="<?= $item['gender_id']; ?>"
                                     <?php if ($item['gender_id'] == $user_array[0]['user_gender']) { ?>
                                         checked
                                     <?php } ?>
                                 />
-                                <?php print $item['gender_name']; ?>
+                                <?= $item['gender_name']; ?>
                             <?php } ?>
                         </td>
                     </tr>
@@ -44,23 +44,23 @@
                         <td class="left">
                             <select name="data[birth][day]">
                                 <?php for ($i=1; $i<=31; $i++) { ?>
-                                    <option value="<?php print $i; ?>"
+                                    <option value="<?= $i; ?>"
                                         <?php if ($i == $user_array[0]['user_birth_day']) { ?>selected<?php } ?>
-                                    ><?php print $i; ?></option>
+                                    ><?= $i; ?></option>
                                 <?php } ?>
                             </select>
                             <select name="data[birth][month]">
                                 <?php for ($i=1; $i<=12; $i++) { ?>
-                                    <option value="<?php print $i; ?>"
+                                    <option value="<?= $i; ?>"
                                         <?php if ($i == $user_array[0]['user_birth_month']) { ?>selected<?php } ?>
-                                    ><?php print $i; ?></option>
+                                    ><?= $i; ?></option>
                                 <?php } ?>
                             </select>
                             <select name="data[birth][year]">
                                 <?php for ($i=date('Y'); $i>=date('Y')-100; $i--) { ?>
-                                    <option value="<?php print $i; ?>"
+                                    <option value="<?= $i; ?>"
                                         <?php if ($i == $user_array[0]['user_birth_year']) { ?>selected<?php } ?>
-                                    ><?php print $i; ?></option>
+                                    ><?= $i; ?></option>
                                 <?php } ?>
                             </select>
                         </td>
@@ -70,12 +70,12 @@
                         <td class="left">
                             <select name="data[country]">
                                 <?php foreach ($country_array as $item) { ?>
-                                    <option value="<?php print $item['country_id']; ?>"
+                                    <option value="<?= $item['country_id']; ?>"
                                         <?php if ($item['country_id'] == $user_array[0]['user_country_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['country_name']; ?>
+                                        <?= $item['country_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -103,14 +103,14 @@
                         <tr>
                             <td class="right">
                                 <img
-                                    alt="<?php print $item['alt']; ?>"
+                                    alt="<?= $item['alt']; ?>"
                                     class="img-30"
-                                    src="img/social/<?php print $item['img']; ?>.png"
+                                    src="img/social/<?= $item['img']; ?>.png"
                                 />
                             </td>
                             <td class="left">
-                                <a href="<?php print $item['url']; ?>">
-                                    <?php print $item['text']; ?>
+                                <a href="<?= $item['url']; ?>">
+                                    <?= $item['text']; ?>
                                 </a>
                             </td>
                         </tr>

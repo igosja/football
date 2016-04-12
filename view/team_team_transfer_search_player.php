@@ -10,24 +10,24 @@
                             <select name="position">
                                 <option value="0">Позиция</option>
                                 <?php foreach ($position_array as $item) { ?>
-                                    <option value="<?php print $item['position_id']; ?>"
+                                    <option value="<?= $item['position_id']; ?>"
                                         <?php if (isset($_GET['position']) && $_GET['position'] == $item['position_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['position_name']; ?>
+                                        <?= $item['position_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
                             <select name="country">
                                 <option value="0">Национальность</option>
                                 <?php foreach ($country_array as $item) { ?>
-                                    <option value="<?php print $item['country_id']; ?>"
+                                    <option value="<?= $item['country_id']; ?>"
                                         <?php if (isset($_GET['country']) && $_GET['country'] == $item['country_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['country_name']; ?>
+                                        <?= $item['country_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -55,11 +55,11 @@
                             Старница:
                             <select name="page" id="page-select">
                                 <?php for ($i=0; $i<$count_page; $i++) { ?>
-                                    <option value="<?php print $i + 1; ?>"
+                                    <option value="<?= $i + 1; ?>"
                                         <?php if (isset($_GET['page']) && $_GET['page'] == $i + 1) { ?>
                                             selected
                                         <?php } ?>
-                                    ><?php print $i + 1; ?></option>
+                                    ><?= $i + 1; ?></option>
                                 <?php } ?>
                             </select>
                             <input type="hidden" name="num" value="<?php if (isset($_GET['num'])) { print $_GET['num']; } ?>" />
@@ -93,36 +93,36 @@
                 <?php foreach ($player_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="player_transfer_offer.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_transfer_offer.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
                         <td>
-                            <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
                                 <img
-                                    alt="<?php print $item['country_name']; ?>"
+                                    alt="<?= $item['country_name']; ?>"
                                     class="img-12"
-                                    src="img/flag/12/<?php print $item['country_id']; ?>.png"
-                                    title="<?php print $item['country_name']; ?>"
+                                    src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                    title="<?= $item['country_name']; ?>"
                                 />
                             </a>
                         </td>
-                        <td class="center"><?php print $item['position_name']; ?></td>
-                        <td class="center"><?php print $item['player_age']; ?></td>
-                        <td class="center"><?php print $item['player_height']; ?> см</td>
-                        <td class="center"><?php print $item['player_weight']; ?> кг</td>
-                        <td class="right"><?php print f_igosja_money($item['player_price']); ?></td>
-                        <td class="right"><?php print f_igosja_money($item['player_transfer_price']); ?></td>
+                        <td class="center"><?= $item['position_name']; ?></td>
+                        <td class="center"><?= $item['player_age']; ?></td>
+                        <td class="center"><?= $item['player_height']; ?> см</td>
+                        <td class="center"><?= $item['player_weight']; ?> кг</td>
+                        <td class="right"><?= f_igosja_money($item['player_price']); ?></td>
+                        <td class="right"><?= f_igosja_money($item['player_transfer_price']); ?></td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w15">
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
                     </tr>

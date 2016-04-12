@@ -11,7 +11,7 @@
                 </tr>
                 <tr>
                     <td class="w50">Баланс личного счета</td>
-                    <td class="right"><?php print $user_array[0]['user_money']; ?> ед.</td>
+                    <td class="right"><?= $user_array[0]['user_money']; ?> ед.</td>
                 </tr>
                 <tr>
                     <td class="center" colspan="2">

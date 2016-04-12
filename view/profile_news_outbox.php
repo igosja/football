@@ -7,9 +7,9 @@
                 <table class="striped w100">
                     <?php foreach ($inbox_array as $item) { ?>
                         <tr>
-                            <td class="outbox-title <?php if (0 == $item['inbox_read']) { ?>strong<?php } ?>" data-id="<?php print $item['inbox_id']; ?>">
-                                <?php print $item['inbox_title']; ?>
-                                <p class="grey"><?php print f_igosja_ufu_date($item['inbox_date']); ?> (<?php print $item['user_login']; ?>)</p>
+                            <td class="outbox-title <?php if (0 == $item['inbox_read']) { ?>strong<?php } ?>" data-id="<?= $item['inbox_id']; ?>">
+                                <?= $item['inbox_title']; ?>
+                                <p class="grey"><?= f_igosja_ufu_date($item['inbox_date']); ?> (<?= $item['user_login']; ?>)</p>
                             </td>
                         </tr>
                     <?php } ?>
@@ -23,7 +23,7 @@
                     <td class="inbox-text"></td>
                 </tr>
                 <tr>
-                    <td><?php print SPACE; ?></td>
+                    <td><?= SPACE; ?></td>
                 </tr>
                 <tr>
                     <td class="inbox-button center"></td>
@@ -36,11 +36,11 @@
                             <select id="autocomplete" name="data[inbox_user_id]">
                                 <option value="-1">Тех. поддержка</option>
                                 <?php foreach ($user_array as $item) { ?>
-                                    <option value="<?php print $item['user_id']; ?>"
+                                    <option value="<?= $item['user_id']; ?>"
                                         <?php if ($answer == $item['user_id']) { ?>
                                             selected
                                         <?php } ?>
-                                    ><?php print $item['user_login']; ?></option>
+                                    ><?= $item['user_login']; ?></option>
                                 <?php } ?>
                             </select>
                         </td>

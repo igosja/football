@@ -21,9 +21,9 @@
                 <tbody>
                     <?php foreach ($historytext_array as $item) { ?>
                         <tr>
-                            <td><?php print $item['historytext_name']; ?></td>
+                            <td><?= $item['historytext_name']; ?></td>
                             <td>
-                                <a href="historytext_edit.php?num=<?php print $item['historytext_id']; ?>">
+                                <a href="historytext_edit.php?num=<?= $item['historytext_id']; ?>">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                             </td>

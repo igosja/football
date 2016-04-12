@@ -52,7 +52,8 @@ $sql = "SELECT `country_id`,
         ON `player_team_id`=`team_id`
         LEFT JOIN `country`
         ON `country_id`=`player_country_id`
-        WHERE `team_id`='$get_num'";
+        WHERE `team_id`='$get_num'
+        ORDER BY `player_position_id` ASC";
 $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);

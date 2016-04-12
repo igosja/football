@@ -12,26 +12,26 @@
                 </tr>
                 <?php foreach ($transferhistory_buy_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print f_igosja_ufu_date($item['transferhistory_date']); ?></td>
+                        <td class="center"><?= f_igosja_ufu_date($item['transferhistory_date']); ?></td>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['offertype_name']; ?></td>
-                        <td class="right"><?php print f_igosja_money($item['transferhistory_price']); ?></td>
+                        <td class="center"><?= $item['offertype_name']; ?></td>
+                        <td class="right"><?= f_igosja_money($item['transferhistory_price']); ?></td>
                     </tr>
                 <?php } ?>
                 <tr>
@@ -40,7 +40,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td class="right"><?php print f_igosja_money($transferhistory_buy_summ[0]['transferhistory_total_price']); ?></td>
+                    <td class="right"><?= f_igosja_money($transferhistory_buy_summ[0]['transferhistory_total_price']); ?></td>
                 </tr>
             </table>
         </td>
@@ -58,26 +58,26 @@
                 </tr>
                 <?php foreach ($transferhistory_sell_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print f_igosja_ufu_date($item['transferhistory_date']); ?></td>
+                        <td class="center"><?= f_igosja_ufu_date($item['transferhistory_date']); ?></td>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['offertype_name']; ?></td>
-                        <td class="right"><?php print f_igosja_money($item['transferhistory_price']); ?></td>
+                        <td class="center"><?= $item['offertype_name']; ?></td>
+                        <td class="right"><?= f_igosja_money($item['transferhistory_price']); ?></td>
                     </tr>
                 <?php } ?>
                 <tr>
@@ -86,7 +86,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td class="right"><?php print f_igosja_money($transferhistory_sell_summ[0]['transferhistory_total_price']); ?></td>
+                    <td class="right"><?= f_igosja_money($transferhistory_sell_summ[0]['transferhistory_total_price']); ?></td>
                 </tr>
             </table>
         </td>

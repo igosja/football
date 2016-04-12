@@ -11,18 +11,18 @@
                 <table class="striped w100">
                     <tr>
                         <td class="right w50">Стадион</td>
-                        <td><?php print $stadium_array[0]['stadium_name']; ?></td>
+                        <td><?= $stadium_array[0]['stadium_name']; ?></td>
                     </tr>
                     <tr>
                         <td class="right">Состояние газона</td>
-                        <td><?php print $stadium_array[0]['stadiumquality_name']; ?></td>
+                        <td><?= $stadium_array[0]['stadiumquality_name']; ?></td>
                     </tr>
                         <td class="right">Стоимоть замены газона</td>
-                        <td><?php print f_igosja_money($price); ?></td>
+                        <td><?= f_igosja_money($price); ?></td>
                     </tr>
                     <tr>
                         <td class="right">Баланс клуба</td>
-                        <td><?php print f_igosja_money($team_finance); ?></td>
+                        <td><?= f_igosja_money($team_finance); ?></td>
                     </tr>
                     <tr>
                         <td class="center" colspan="2">

@@ -79,6 +79,7 @@ if (0 == $count_shedule)
     f_igosja_season_national_coach();
     f_igosja_season_truncate();
     f_igosja_season_user_fire();
+    f_igosja_season_tax();
     f_igosja_season_new_season();
     f_igosja_season_worldcup_standing();
     f_igosja_season_championship_standing();

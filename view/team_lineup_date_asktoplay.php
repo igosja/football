@@ -11,36 +11,36 @@
                 </tr>
                 <?php foreach ($shedule_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print f_igosja_ufu_date($item['shedule_date']); ?></td>
+                        <td class="center"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
                         <td class="w1">
                             <?php if ($item['team_id']) { ?>
                                 <img
-                                    alt="<?php print $item['team_name']; ?>"
+                                    alt="<?= $item['team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                    src="img/team/12/<?= $item['team_id']; ?>.png"
                                 />
                             <?php } ?>
                         </td>
                         <td>
                             <?php if ($item['team_id']) { ?>
-                                <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                    <?php print $item['team_name']; ?>
+                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                    <?= $item['team_name']; ?>
                                 </a>
                             <?php } ?>
                         </td>
                         <td class="w1">
                             <?php if ($item['team_id']) { ?>
                                 <img
-                                    alt="<?php print $item['tournament_name']; ?>"
+                                    alt="<?= $item['tournament_name']; ?>"
                                     class="img-12"
-                                    src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                    src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                                 />
                             <?php } ?>
                         </td>
                         <td class="w25">
                             <?php if ($item['team_id']) { ?>
-                                <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                    <?php print $item['tournament_name']; ?>
+                                <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                    <?= $item['tournament_name']; ?>
                                 </a>
                             <?php } ?>
                         </td>
@@ -50,7 +50,7 @@
                                      TOURNAMENT_TYPE_CUP == $item['shedule_tournamenttype_id'])) { ?>
                                 Недоступен
                             <?php } else { ?>
-                                <a href="javascript:;" class="asktoplay-link" data-shedule="<?php print $item['shedule_id']; ?>">
+                                <a href="javascript:;" class="asktoplay-link" data-shedule="<?= $item['shedule_id']; ?>">
                                     <?php if ($item['asktoplay_shedule_id']) { ?>
                                         Есть предложения
                                     <?php } else { ?>

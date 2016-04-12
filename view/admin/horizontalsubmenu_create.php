@@ -24,12 +24,12 @@
                                 data-need="horizontalmenu"
                             >
                                 <?php foreach ($horizontalmenuchapter_array as $item) { ?>
-                                    <option value="<?php print $item['horizontalmenuchapter_id']; ?>"
+                                    <option value="<?= $item['horizontalmenuchapter_id']; ?>"
                                         <?php if (isset($page_id) && $page_id == $item['horizontalmenuchapter_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['horizontalmenuchapter_name']; ?>
+                                        <?= $item['horizontalmenuchapter_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -44,12 +44,12 @@
                                 name="menu_id"
                             >
                                 <?php foreach ($horizontalmenu_array as $item) { ?>
-                                    <option value="<?php print $item['horizontalmenu_id']; ?>"
+                                    <option value="<?= $item['horizontalmenu_id']; ?>"
                                         <?php if (isset($parent_id) && $parent_id == $item['horizontalmenu_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['horizontalmenu_name']; ?>
+                                        <?= $item['horizontalmenu_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>

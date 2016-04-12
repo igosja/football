@@ -4,9 +4,9 @@
             <p class="header">Общая информация</p>
             <p class="center">На этой странице вы можете провести платную тренировку своего игрока.</p>
             <p class="center">Доступные баллы для улучшения характеристик игроков:
-            <strong><?php print $user_array[0]['user_money_training']; ?></strong></p>
+            <strong><?= $user_array[0]['user_money_training']; ?></strong></p>
             <p class="center">Доступные тернировки позиций:
-            <strong><?php print $user_array[0]['user_money_position']; ?></strong></p>
+            <strong><?= $user_array[0]['user_money_position']; ?></strong></p>
         </td>
     </tr>
     <tr>
@@ -19,10 +19,10 @@
                         <img alt="Позиции" src="/img/field/field-108.png" />
                         <?php foreach ($playerposition_array as $item) { ?>
                             <img
-                                alt="<?php print $item['position_description']; ?>"
-                                src="img/position/<?php print f_igosja_position_icon($item['playerposition_value']); ?>.png"
-                                style="position: absolute; top: <?php print 150 - $item['position_coordinate_x'] * 15 - 10; ?>px; left: <?php print 1 + $item['position_coordinate_y'] * 15; ?>px;"
-                                title="<?php print $item['position_description']; ?>"
+                                alt="<?= $item['position_description']; ?>"
+                                src="img/position/<?= f_igosja_position_icon($item['playerposition_value']); ?>.png"
+                                style="position: absolute; top: <?= 150 - $item['position_coordinate_x'] * 15 - 10; ?>px; left: <?= 1 + $item['position_coordinate_y'] * 15; ?>px;"
+                                title="<?= $item['position_description']; ?>"
                             />
                         <?php } ?>
                         </div>
@@ -35,11 +35,11 @@
                             </tr>
                             <?php foreach ($playerposition_array as $item) { ?>
                                 <tr>
-                                    <td><?php print $item['position_name']; ?></td>
+                                    <td><?= $item['position_name']; ?></td>
                                     <td class="right">
-                                        <?php print $item['playerposition_value']; ?> %
+                                        <?= $item['playerposition_value']; ?> %
                                         <?php if (100 > $item['playerposition_value']) { ?>
-                                            <a href="player_home_training.php?num=<?php print $num; ?>&position=<?php print $item['position_id']; ?>">
+                                            <a href="player_home_training.php?num=<?= $num; ?>&position=<?= $item['position_id']; ?>">
                                                 +
                                             </a>
                                         <?php } ?>
@@ -48,9 +48,9 @@
                             <?php } ?>
                             <?php foreach ($position_array as $item) { ?>
                                 <tr>
-                                    <td><?php print $item['position_name']; ?></td>
+                                    <td><?= $item['position_name']; ?></td>
                                     <td class="right">
-                                        <a href="player_home_training.php?num=<?php print $num; ?>&position=<?php print $item['position_id']; ?>">
+                                        <a href="player_home_training.php?num=<?= $num; ?>&position=<?= $item['position_id']; ?>">
                                             +
                                         </a>
                                     </td>
@@ -76,15 +76,15 @@
                             <td>
                                 <table class="striped w100">
                                     <tr>
-                                        <th colspan="2"><?php print $attribute_array[$i]['attributechapter_name']; ?></th>
+                                        <th colspan="2"><?= $attribute_array[$i]['attributechapter_name']; ?></th>
                                     </tr>
                         <?php } ?>
                             <tr>
-                                <td><?php print $attribute_array[$i]['attribute_name']; ?></td>
+                                <td><?= $attribute_array[$i]['attribute_name']; ?></td>
                                 <td class="center w33">
                                     <?php if (isset($authorization_team_id) && $authorization_team_id == $player_array[0]['team_id']) { ?>
-                                        <?php print $attribute_array[$i]['playerattribute_value']; ?>
-                                        <a href="player_home_training.php?num=<?php print $num; ?>&char=<?php print $attribute_array[$i]['attribute_id']; ?>">+</a>
+                                        <?= $attribute_array[$i]['playerattribute_value']; ?>
+                                        <a href="player_home_training.php?num=<?= $num; ?>&char=<?= $attribute_array[$i]['attribute_id']; ?>">+</a>
                                     <?php } else { ?>
                                         ?
                                     <?php } ?>

@@ -14,15 +14,15 @@
                 <?php foreach ($referee_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="referee_home_profile.php?num=<?php print $item['referee_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="referee_home_profile.php?num=<?= $item['referee_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['statisticreferee_game']; ?></td>
-                        <td class="center"><?php print $item['statisticreferee_yellow']; ?></td>
-                        <td class="center"><?php print $item['statisticreferee_red']; ?></td>
-                        <td class="center"><?php print $item['statisticreferee_penalty']; ?></td>
-                        <td class="center"><?php print $item['statisticreferee_mark']; ?></td>
+                        <td class="center"><?= $item['statisticreferee_game']; ?></td>
+                        <td class="center"><?= $item['statisticreferee_yellow']; ?></td>
+                        <td class="center"><?= $item['statisticreferee_red']; ?></td>
+                        <td class="center"><?= $item['statisticreferee_penalty']; ?></td>
+                        <td class="center"><?= $item['statisticreferee_mark']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

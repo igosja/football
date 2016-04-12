@@ -10,29 +10,29 @@
                 </tr>
                 <?php foreach ($winner_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print $item['shedule_season_id']; ?></td>
+                        <td class="center"><?= $item['shedule_season_id']; ?></td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['winner_name']; ?>"
+                                alt="<?= $item['winner_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['winner_id']; ?>.png"
+                                src="img/team/12/<?= $item['winner_id']; ?>.png"
                             />
                         </td>
                         <td class="w40">
-                            <a href="team_team_review_profile.php?num=<?php print $item['winner_id']; ?>">
-                                <?php print $item['winner_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['winner_id']; ?>">
+                                <?= $item['winner_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['looser_name']; ?>"
+                                alt="<?= $item['looser_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['looser_id']; ?>.png"
+                                src="img/team/12/<?= $item['looser_id']; ?>.png"
                             />
                         </td>
                         <td class="w40">
-                            <a href="team_team_review_profile.php?num=<?php print $item['looser_id']; ?>">
-                                <?php print $item['looser_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['looser_id']; ?>">
+                                <?= $item['looser_name']; ?>
                             </a>
                         </td>
                     </tr>

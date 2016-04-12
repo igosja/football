@@ -53,7 +53,7 @@
                     </tr>
                 </table>
             </form>
-            <p><?php print SPACE; ?></p>
+            <p><?= SPACE; ?></p>
             <table class="center striped grey">
                 <tr>
                     <td>

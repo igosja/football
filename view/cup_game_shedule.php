@@ -9,10 +9,10 @@
                 </tr>
                 <?php foreach ($shedule_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print date('d.m.Y', strtotime($item['shedule_date'])); ?></td>
+                        <td class="center"><?= date('d.m.Y', strtotime($item['shedule_date'])); ?></td>
                         <td>
-                            <a href="cup_game_result.php?num=<?php print $num; ?>&shedule=<?php print $item['shedule_id']; ?>">
-                                <?php print $item['stage_name']; ?>
+                            <a href="cup_game_result.php?num=<?= $num; ?>&shedule=<?= $item['shedule_id']; ?>">
+                                <?= $item['stage_name']; ?>
                             </a>
                         </td>
                     </tr>

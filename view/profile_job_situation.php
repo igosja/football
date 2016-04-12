@@ -9,12 +9,12 @@
                             <select name="country">
                                 <option value="0">Страна</option>
                                 <?php foreach ($country_array as $item) { ?>
-                                    <option value="<?php print $item['country_id']; ?>"
+                                    <option value="<?= $item['country_id']; ?>"
                                         <?php if (isset($_GET['country']) && $_GET['country'] == $item['country_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['country_name']; ?>
+                                        <?= $item['country_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -26,11 +26,11 @@
                             Старница:
                             <select name="page" id="page-select">
                                 <?php for ($i=1; $i<=$count_page; $i++) { ?>
-                                    <option value="<?php print $i; ?>"
+                                    <option value="<?= $i; ?>"
                                         <?php if (isset($_GET['page']) && $_GET['page'] == $i) { ?>
                                             selected
                                         <?php } ?>
-                                    ><?php print $i; ?></option>
+                                    ><?= $i; ?></option>
                                 <?php } ?>
                             </select>
                         </form>
@@ -47,44 +47,44 @@
                 </tr>
                 <?php foreach ($team_array as $item) { ?>
                     <tr>
-                        <td><?php print $item['user_login']; ?></td>
+                        <td><?= $item['user_login']; ?></td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['team_name']; ?>"
+                                alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                <?php print $item['team_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['country_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?php print $item['country_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
-                            <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
-                                <?php print $item['country_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['tournament_name']; ?>"
+                                alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td class="w25">
-                            <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                <?php print $item['tournament_name']; ?>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
                             </a>
                         </td>
-                        <td class="right"><?php print f_igosja_money($item['team_finance']); ?></td>
+                        <td class="right"><?= f_igosja_money($item['team_finance']); ?></td>
                     </tr>
                 <?php } ?>
             </table>

@@ -8,11 +8,11 @@
                 </tr>
                 <?php foreach ($note_array as $item) { ?>
                     <tr>
-                        <td><?php print $item['note_title']; ?></td>
+                        <td><?= $item['note_title']; ?></td>
                         <td class="right w10">
-                            <a href="javascript:;" class="note-view link-img link-eye" data-id="<?php print $item['note_id']; ?>"></a>
-                            <a href="javascript:;" class="note-edit link-img link-pencil" data-id="<?php print $item['note_id']; ?>"></a>
-                            <a href="profile_history_note.php?note=<?php print $item['note_id']; ?>" class="link-img link-delete"></a>
+                            <a href="javascript:;" class="note-view link-img link-eye" data-id="<?= $item['note_id']; ?>"></a>
+                            <a href="javascript:;" class="note-edit link-img link-pencil" data-id="<?= $item['note_id']; ?>"></a>
+                            <a href="profile_history_note.php?note=<?= $item['note_id']; ?>" class="link-img link-delete"></a>
                         </td>
                     </tr>
                 <?php } ?>

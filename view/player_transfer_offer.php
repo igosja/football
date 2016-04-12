@@ -9,8 +9,8 @@
                             <td class="center">
                                 <h6>
                                     Игрок уже согласовал свой трансфер в команду
-                                    <a href="team_team_review_profile.php?num=<?php print $transfer[0]['team_id']; ?>">
-                                        <?php print $transfer[0]['team_name']; ?>
+                                    <a href="team_team_review_profile.php?num=<?= $transfer[0]['team_id']; ?>">
+                                        <?= $transfer[0]['team_name']; ?>
                                     </a>
                                 </h6>
                             </td>
@@ -46,8 +46,8 @@
                             <td class="w50">
                                 <select name="data[offer_type]">
                                     <?php foreach ($offertype_array as $item) { ?>
-                                        <option value="<?php print $item['offertype_id']; ?>">
-                                            <?php print $item['offertype_name']; ?>
+                                        <option value="<?= $item['offertype_id']; ?>">
+                                            <?= $item['offertype_name']; ?>
                                         </option>
                                     <?php } ?>
                                 </select>
@@ -56,7 +56,7 @@
                         <tr>
                             <td class="right">Выплата</td>
                             <td class="vcenter">
-                                <input name="data[offer_price]" type="text" value="<?php print $player_array[0]['player_transfer_price']; ?>"> $
+                                <input name="data[offer_price]" type="text" value="<?= $player_array[0]['player_transfer_price']; ?>"> $
                             </td>
                         </tr>
                         <tr>
@@ -75,30 +75,30 @@
                     <td class="w50">Команда</td>
                     <td>
                         <img
-                            alt="<?php print $player_array[0]['team_name']; ?>"
+                            alt="<?= $player_array[0]['team_name']; ?>"
                             class="img-12"
-                            src="img/team/12/<?php print $player_array[0]['team_id']; ?>.png"
+                            src="img/team/12/<?= $player_array[0]['team_id']; ?>.png"
                         />
-                        <a href="team_team_review_profile.php?num=<?php print $player_array[0]['team_id']; ?>">
-                            <?php print $player_array[0]['team_name']; ?>
+                        <a href="team_team_review_profile.php?num=<?= $player_array[0]['team_id']; ?>">
+                            <?= $player_array[0]['team_name']; ?>
                         </a>
                     </td>
                 </tr>
                 <tr>
                     <td>Трансферный статус</td>
-                    <td><?php print $player_array[0]['statustransfer_name']; ?></td>
+                    <td><?= $player_array[0]['statustransfer_name']; ?></td>
                 </tr>
                 <tr>
                     <td>Арендный статус</td>
-                    <td><?php print $player_array[0]['statusrent_name']; ?></td>
+                    <td><?= $player_array[0]['statusrent_name']; ?></td>
                 </tr>
                 <tr>
                     <td>Командный статус</td>
-                    <td><?php print $player_array[0]['statusteam_name']; ?></td>
+                    <td><?= $player_array[0]['statusteam_name']; ?></td>
                 </tr>
                 <tr>
                     <td>Запрашиваемая цена</td>
-                    <td><?php print f_igosja_money($player_array[0]['player_transfer_price']); ?></td>
+                    <td><?= f_igosja_money($player_array[0]['player_transfer_price']); ?></td>
                 </tr>
             </table>
         </td>

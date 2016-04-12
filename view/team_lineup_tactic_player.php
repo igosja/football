@@ -18,7 +18,7 @@
                                 class="current"
                             <?php } ?>
                         >
-                            <td class="center"><?php print f_igosja_ufu_date($item['shedule_date']); ?></td>
+                            <td class="center"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
                             <td class="center">
                                 <?php if ($item['game_home_team_id'] == $authorization_team_id) { ?>
                                     Д
@@ -28,38 +28,38 @@
                             </td>
                             <td class="w1">
                                 <img
-                                    alt="<?php print $item['team_name']; ?>"
+                                    alt="<?= $item['team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?php print $item['team_id']; ?>.png"
+                                    src="img/team/12/<?= $item['team_id']; ?>.png"
                                 />
                             </td>
                             <td>
-                                <a href="team_team_review_profile.php?num=<?php print $item['team_id']; ?>">
-                                    <?php print $item['team_name']; ?>
+                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                    <?= $item['team_name']; ?>
                                 </a>
                             </td>
                             <td class="w1">
                                 <img
-                                    alt="<?php print $item['tournament_name']; ?>"
+                                    alt="<?= $item['tournament_name']; ?>"
                                     class="img-12"
-                                    src="img/tournament/12/<?php print $item['tournament_id']; ?>.png"
+                                    src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                                 />
                             </td>
                             <td>
-                                <a href="tournament_review_profile.php?num=<?php print $item['tournament_id']; ?>">
-                                    <?php print $item['tournament_name']; ?>
+                                <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                    <?= $item['tournament_name']; ?>
                                 </a>
                             </td>
                             <td class="center">
-                                <?php print $item['game_temperature']; ?>
+                                <?= $item['game_temperature']; ?>
                                 <img
                                     alt=""
                                     class="img-12"
-                                    src="img/weather/<?php print $item['game_weather_id']; ?>.png"
+                                    src="img/weather/<?= $item['game_weather_id']; ?>.png"
                                 />
                             </td>
                             <td>
-                                <a href="team_lineup_tactic_player.php?num=<?php print $num; ?>&game=<?php print $item['game_id']; ?>">
+                                <a href="team_lineup_tactic_player.php?num=<?= $num; ?>&game=<?= $item['game_id']; ?>">
                                     <?php if ($item['lineupmain_id']) { ?>
                                         Редактировать
                                     <?php } else { ?>
@@ -76,8 +76,8 @@
             <p class="header">Схема</p>
             <div id="field-icon" class="relative"></div>
             <img src="img/field/tactic-player.png" />
-            <input type="hidden" value="<?php print $lineup_array[0]['lineupmain_formation_id']; ?>" id="tactic-player-formation">
-            <input type="hidden" value="<?php print $game_id; ?>" id="tactic-player-game">
+            <input type="hidden" value="<?= $lineup_array[0]['lineupmain_formation_id']; ?>" id="tactic-player-formation">
+            <input type="hidden" value="<?= $game_id; ?>" id="tactic-player-game">
         </td>
         <td class="block-page w45" rowspan="2">
             <p class="header">

@@ -6,11 +6,11 @@
                 <?php foreach ($rule_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="javascript:;" class="bordered rule" data-id="<?php print $item['rule_id']; ?>"><?php print $item['rule_name']; ?></a>
+                            <a href="javascript:;" class="bordered rule" data-id="<?= $item['rule_id']; ?>"><?= $item['rule_name']; ?></a>
                         </td>
                     </tr>
-                    <tr style="display: none;" id="rule-<?php print $item['rule_id']; ?>" class="rule-text">
-                        <td><?php print $item['rule_text']; ?></td>
+                    <tr style="display: none;" id="rule-<?= $item['rule_id']; ?>" class="rule-text">
+                        <td><?= $item['rule_text']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

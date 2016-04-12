@@ -13,7 +13,7 @@
                             <i class="fa fa-comments fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php print $count_support ?></div>
+                            <div class="huge"><?= $count_support ?></div>
                             <div>Новые вопросы в ТП!</div>
                         </div>
                     </div>

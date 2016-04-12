@@ -12,13 +12,13 @@
                 <?php foreach ($player_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['position_name']; ?></td>
-                        <td class="center"><?php print $item['player_age']; ?></td>
-                        <td class="center"><?php print $item['leader']; ?></td>
+                        <td class="center"><?= $item['position_name']; ?></td>
+                        <td class="center"><?= $item['player_age']; ?></td>
+                        <td class="center"><?= $item['leader']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -33,12 +33,12 @@
                             <select id="select-captain-1" class="select-captain w100" name="data[1]">
                                 <option value="0">-</option>
                                 <?php foreach ($leader_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($captain_array[0]['team_captain_player_id_1'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -50,12 +50,12 @@
                             <select id="select-captain-2" class="select-captain w100" name="data[2]">
                                 <option value="0">-</option>
                                 <?php foreach ($leader_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($captain_array[0]['team_captain_player_id_2'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -67,12 +67,12 @@
                             <select id="select-captain-3" class="select-captain w100" name="data[3]">
                                 <option value="0">-</option>
                                 <?php foreach ($leader_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($captain_array[0]['team_captain_player_id_3'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -84,12 +84,12 @@
                             <select id="select-captain-4" class="select-captain w100" name="data[4]">
                                 <option value="0">-</option>
                                 <?php foreach ($leader_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($captain_array[0]['team_captain_player_id_4'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -101,12 +101,12 @@
                             <select id="select-captain-5" class="select-captain w100" name="data[5]">
                                 <option value="0">-</option>
                                 <?php foreach ($leader_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($captain_array[0]['team_captain_player_id_5'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>

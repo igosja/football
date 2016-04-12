@@ -13,13 +13,13 @@
                     <?php foreach ($player_array as $item) { ?>
                         <tr>
                             <td>
-                                <a href="player_home_profile.php?num=<?php print $item['player_id']; ?>">
-                                    <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                    <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                 </a>
                             </td>
-                            <td class="center"><?php print $item['free_kick']; ?></td>
-                            <td class="center"><?php print $item['corner']; ?></td>
-                            <td class="center"><?php print $item['out']; ?></td>
+                            <td class="center"><?= $item['free_kick']; ?></td>
+                            <td class="center"><?= $item['corner']; ?></td>
+                            <td class="center"><?= $item['out']; ?></td>
                         </tr>
                     <?php } ?>
                 </table>
@@ -36,12 +36,12 @@
                             <select name="data[corner_left][1]" id="select-corner-left-1" class="select-corner-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_corner_left_player_id_1'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -50,12 +50,12 @@
                             <select name="data[corner_right][1]" id="select-corner-right-1" class="select-corner-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_corner_right_player_id_1'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -66,12 +66,12 @@
                             <select name="data[corner_left][2]" id="select-corner-left-2" class="select-corner-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_corner_left_player_id_2'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -80,12 +80,12 @@
                             <select name="data[corner_right][2]" id="select-corner-right-2" class="select-corner-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_corner_right_player_id_2'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -96,12 +96,12 @@
                             <select name="data[corner_left][3]" id="select-corner-left-3" class="select-corner-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_corner_left_player_id_3'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -110,12 +110,12 @@
                             <select name="data[corner_right][3]" id="select-corner-right-3" class="select-corner-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_corner_right_player_id_3'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -126,12 +126,12 @@
                             <select name="data[corner_left][4]" id="select-corner-left-4" class="select-corner-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_corner_left_player_id_4'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -140,12 +140,12 @@
                             <select name="data[corner_right][4]" id="select-corner-right-4" class="select-corner-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_corner_right_player_id_4'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -156,12 +156,12 @@
                             <select name="data[corner_left][5]" id="select-corner-left-5" class="select-corner-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_corner_left_player_id_5'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -170,12 +170,12 @@
                             <select name="data[corner_right][5]" id="select-corner-right-5" class="select-corner-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_corner_right_player_id_5'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -193,12 +193,12 @@
                             <select name="data[freekick_left][1]" id="select-freekick-left-1" class="select-freekick-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_freekick_left_player_id_1'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -207,12 +207,12 @@
                             <select name="data[freekick_right][1]" id="select-freekick-right-1" class="select-freekick-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_freekick_right_player_id_1'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -223,12 +223,12 @@
                             <select name="data[freekick_left][2]" id="select-freekick-left-2" class="select-freekick-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_freekick_left_player_id_2'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -237,12 +237,12 @@
                             <select name="data[freekick_right][2]" id="select-freekick-right-2" class="select-freekick-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_freekick_right_player_id_2'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -253,12 +253,12 @@
                             <select name="data[freekick_left][3]" id="select-freekick-left-3" class="select-freekick-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_freekick_left_player_id_3'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -267,12 +267,12 @@
                             <select name="data[freekick_right][3]" id="select-freekick-right-3" class="select-freekick-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_freekick_right_player_id_3'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -283,12 +283,12 @@
                             <select name="data[freekick_left][4]" id="select-freekick-left-4" class="select-freekick-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_freekick_left_player_id_4'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -297,12 +297,12 @@
                             <select name="data[freekick_right][4]" id="select-freekick-right-4" class="select-freekick-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_freekick_right_player_id_4'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -313,12 +313,12 @@
                             <select name="data[freekick_left][5]" id="select-freekick-left-5" class="select-freekick-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_freekick_left_player_id_5'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -327,12 +327,12 @@
                             <select name="data[freekick_right][5]" id="select-freekick-right-5" class="select-freekick-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_freekick_right_player_id_5'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -350,12 +350,12 @@
                             <select name="data[out_left][1]" id="select-out-left-1" class="select-out-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_out_left_player_id_1'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -364,12 +364,12 @@
                             <select name="data[out_right][1]" id="select-out-right-1" class="select-out-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_out_right_player_id_1'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -380,12 +380,12 @@
                             <select name="data[out_left][2]" id="select-out-left-2" class="select-out-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_out_left_player_id_2'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -394,12 +394,12 @@
                             <select name="data[out_right][2]" id="select-out-right-2" class="select-out-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_out_right_player_id_2'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -410,12 +410,12 @@
                             <select name="data[out_left][3]" id="select-out-left-3" class="select-out-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_out_left_player_id_3'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -424,12 +424,12 @@
                             <select name="data[out_right][3]" id="select-out-right-3" class="select-out-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_out_right_player_id_3'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -440,12 +440,12 @@
                             <select name="data[out_left][4]" id="select-out-left-4" class="select-out-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_out_left_player_id_4'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -454,12 +454,12 @@
                             <select name="data[out_right][4]" id="select-out-right-4" class="select-out-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_out_right_player_id_4'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -470,12 +470,12 @@
                             <select name="data[out_left][5]" id="select-out-left-5" class="select-out-left w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_out_left_player_id_5'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -484,12 +484,12 @@
                             <select name="data[out_right][5]" id="select-out-right-5" class="select-out-right w100">
                                 <option value="0">-</option>
                                 <?php foreach ($player_array as $item) { ?>
-                                    <option value="<?php print $item['player_id']; ?>"
+                                    <option value="<?= $item['player_id']; ?>"
                                         <?php if ($standard_array[0]['team_out_right_player_id_5'] == $item['player_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
-                                        <?php print $item['name_name']; ?> <?php print $item['surname_name']; ?>
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>

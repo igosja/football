@@ -10,20 +10,20 @@
                 </tr>
                 <?php foreach ($country_array as $item) { ?>
                     <tr>
-                        <td class="center"><?php print $item['ratingcountry_position']; ?></td>
+                        <td class="center"><?= $item['ratingcountry_position']; ?></td>
                         <td class="w1">
                             <img
-                                alt="<?php print $item['country_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?php print $item['country_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="national_team_review_profile.php?num=<?php print $item['country_id']; ?>">
-                                <?php print $item['country_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?php print $item['ratingcountry_value']; ?></td>
+                        <td class="center"><?= $item['ratingcountry_value']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

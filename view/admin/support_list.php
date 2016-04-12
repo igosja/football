@@ -18,14 +18,14 @@
                 <tbody>
                     <?php foreach ($support_array as $item) { ?>
                         <tr>
-                            <td></i><?php print $item['inbox_date']; ?></td>
+                            <td></i><?= $item['inbox_date']; ?></td>
                             <td>
                                 <?php if (0 == $item['inbox_read']) { ?><i class="fa fa-comment-o"><?php } ?>
-                                <?php print $item['inbox_title']; ?>
+                                <?= $item['inbox_title']; ?>
                             </td>
-                            <td><?php print $item['user_login']; ?></td>
+                            <td><?= $item['user_login']; ?></td>
                             <td>
-                                <a href="support_edit.php?num=<?php print $item['inbox_id']; ?>"><i class="fa fa-eye"></i></a>
+                                <a href="support_edit.php?num=<?= $item['inbox_id']; ?>"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                     <?php } ?>
