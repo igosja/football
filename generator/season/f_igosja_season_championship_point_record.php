@@ -45,7 +45,7 @@ function f_igosja_season_championship_point_record()
         else
         {
             $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
-            $record_point = $record_array[$i]['recordtournament_value_1'];
+            $record_point = $record_array[0]['recordtournament_value_1'];
 
             if ($point > $record_point)
             {
@@ -82,7 +82,7 @@ function f_igosja_season_championship_point_record()
         else
         {
             $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
-            $record_score = $record_array[$i]['recordtournament_value_1'];
+            $record_score = $record_array[0]['recordtournament_value_1'];
 
             if ($score > $record_score)
             {

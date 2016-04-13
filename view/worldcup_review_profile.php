@@ -1,59 +1,121 @@
 <table class="block-table w100">
     <tr>
-        <td rowspan="2" class="block-page w30">
+        <td rowspan="2" class="block-page">
             <p class="header">Турнирная таблица</p>
             <table class="striped w100">
                 <tr>
-                    <th>№</th>
+                    <th class="w8">№</th>
                     <th colspan="2">Команда</th>
-                    <th>И</th>
-                    <th>В</th>
-                    <th>Н</th>
-                    <th>П</th>
-                    <th>+/-</th>
-                    <th>О</th>
+                    <th class="w8">И</th>
+                    <th class="w8">В</th>
+                    <th class="w8">Н</th>
+                    <th class="w8">П</th>
+                    <th class="w8">О</th>
                 </tr>
-                {section name=i loop=$standing_array}
-                    <tr>
-                        <td class="center">{$standing_array[i].standing_place}</td>
-                        <td class="w1"><img src="img/team/12/{$standing_array[i].team_id}.png" class="img-12" alt="" /></td>
+                <?php foreach ($standing_array as $item) { ?>
+                    <tr <?php if (isset($authorization_country_id) && $authorization_country_id == $item['country_id']) { ?>class="current"<?php } ?>>
+                        <td class="center"><?= $item['worldcup_place']; ?></td>
+                        <td class="w1">
+                            <img
+                                alt="<?= $item['country_name']; ?>"
+                                class="img-12"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
+                            />
+                        </td>
                         <td>
-                            <a href="team_team_review_profile.php?num={$standing_array[i].team_id}">
-                                {$standing_array[i].team_name}
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
-                        <td class="center">0</td>
-                        <td class="center">0</td>
-                        <td class="center">0</td>
-                        <td class="center">0</td>
-                        <td class="center">0</td>
-                        <td class="center">0</td>
+                        <td class="center"><?= $item['worldcup_game']; ?></td>
+                        <td class="center"><?= $item['worldcup_win']; ?></td>
+                        <td class="center"><?= $item['worldcup_draw']; ?></td>
+                        <td class="center"><?= $item['worldcup_loose']; ?></td>
+                        <td class="center"><?= $item['worldcup_point']; ?></td>
                     </tr>
-                {/section}
+                <?php } ?>
             </table>
         </td>
-        <td class="block-page w35">
+        <td class="block-page w35" id="game-block">
             <p class="header">Матчи</p>
-            <table class="striped w100">
+            <table class="center striped vcenter">
                 <tr>
-                    <td class="right">
-                        <a href="team_team_review_profile.php?num=1">Arsenal</a>
-                    </td>
-                    <td class="center">-</td>
                     <td>
-                        <a href="team_team_review_profile.php?num=1">Arsenal</a>
+                        <img
+                            alt="Предыдущие"
+                            class="img-12"
+                            data-tournament="<?= $num; ?>"
+                            data-shedule="<?= $game_array[0]['shedule_id']; ?>"
+                            id="worldcup-game-prev"
+                            src="img/arrow/left.png"
+                        />
+                    </td>
+                    <td id="shedule-date">
+                        <?= $game_array[0]['shedule_day']; ?>,
+                        <?= date('d.m.Y', strtotime($game_array[0]['shedule_date'])); ?>
+                    </td>
+                    <td>
+                        <img
+                            alt="Следующие"
+                            class="img-12"
+                            data-tournament="<?= $num; ?>"
+                            data-shedule="<?= $game_array[0]['shedule_id']; ?>"
+                            id="worldcup-game-next"
+                            src="img/arrow/right.png"
+                        />
                     </td>
                 </tr>
             </table>
+            <table class="striped w100" id="tournament-game">
+                <?php foreach ($game_array as $item) { ?>
+                    <tr>
+                        <td class="right w45">
+                            <a href="national_team_review_profile.php?num=<?= $item['game_home_country_id']; ?>">
+                                <?= $item['home_country_name']; ?>
+                            </a>
+                        </td>
+                        <td class="center">
+                            <a href="game_review_main.php?num=<?= $item['game_id']; ?>">
+                                <?php if (1 == $item['game_played']) { ?>
+                                    <?= $item['game_home_score']; ?>:<?= $item['game_guest_score']; ?>
+                                <?php } ?>
+                            </a>
+                        </td>
+                        <td class="w45">
+                            <a href="national_team_review_profile.php?num=<?= $item['game_guest_country_id']; ?>">
+                                <?= $item['guest_country_name']; ?>
+                            </a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
         </td>
-        <td class="block-page w35">
+        <td class="block-page w30">
             <p class="header">Предыдущие победители</p>
             <table class="striped w100">
-                <tr>
-                    <td class="w1"><img alt="" class="img-50" src="img/team/50/1.png" /></td>
-                    <td><h1><a href="team_team_review_profile.php?num=1">Arsenal</a></h1></td>
-                    <td><h1>1</h1></td>
-                </tr>
+                <?php foreach ($winner_array as $item) { ?>
+                    <tr>
+                        <td class="w1">
+                            <img
+                                alt="<?= $item['team_name']; ?>"
+                                class="img-50"
+                                src="img/team/50/<?= $item['team_id']; ?>.png"
+                            />
+                        </td>
+                        <td>
+                            <h6>
+                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                    <?= $item['team_name']; ?>
+                                </a>
+                            </h6>
+                        </td>
+                        <td>
+                            <h6>
+                                <?= $item['standing_season_id']; ?>
+                            </h6>
+                        </td>
+                    </tr>
+                <?php } ?>
             </table>
         </td>
     </tr>
@@ -67,16 +129,16 @@
                             <tr>
                                 <th colspan="2">Лучшие бомбардиры</th>
                             </tr>
-                            {section name=i loop=$player_goal_array}
+                            <?php foreach ($player_goal_array as $item) { ?>
                                 <tr>
                                     <td>
-                                        <a href="player_home_profile.php?num={$player_goal_array[i].player_id}">
-                                            {$player_goal_array[i].name_name} {$player_goal_array[i].surname_name}
+                                        <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                            <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                         </a>
                                     </td>
-                                    <td class="center">{$player_goal_array[i].statisticplayer_goal}</td>
+                                    <td class="center"><?= $item['statisticplayer_goal']; ?></td>
                                 </tr>
-                            {/section}
+                            <?php } ?>
                         </table>
                     </td>
                     <td class="w33">
@@ -84,16 +146,16 @@
                             <tr>
                                 <th colspan="2">Лучшие асистенты</th>
                             </tr>
-                            {section name=i loop=$player_pass_array}
+                            <?php foreach ($player_pass_array as $item) { ?>
                                 <tr>
                                     <td>
-                                        <a href="player_home_profile.php?num={$player_pass_array[i].player_id}">
-                                            {$player_pass_array[i].name_name} {$player_pass_array[i].surname_name}
+                                        <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                            <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                         </a>
                                     </td>
-                                    <td class="center">{$player_pass_array[i].statisticplayer_pass_scoring}</td>
+                                    <td class="center"><?= $item['statisticplayer_pass_scoring']; ?></td>
                                 </tr>
-                            {/section}
+                            <?php } ?>
                         </table>
                     </td>
                     <td class="w33">
@@ -101,16 +163,16 @@
                             <tr>
                                 <th colspan="2">Средняя оценка</th>
                             </tr>
-                            {section name=i loop=$player_mark_array}
+                            <?php foreach ($player_mark_array as $item) { ?>
                                 <tr>
                                     <td>
-                                        <a href="player_home_profile.php?num={$player_mark_array[i].player_id}">
-                                            {$player_mark_array[i].name_name} {$player_mark_array[i].surname_name}
+                                        <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                            <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                         </a>
                                     </td>
-                                    <td class="center">{$player_mark_array[i].statisticplayer_mark}</td>
+                                    <td class="center"><?= $item['statisticplayer_mark']; ?></td>
                                 </tr>
-                            {/section}
+                            <?php } ?>
                         </table>
                     </td>
                 </tr>

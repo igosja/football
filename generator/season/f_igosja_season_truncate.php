@@ -22,4 +22,9 @@ function f_igosja_season_truncate()
 
     $sql = "TRUNCATE `transfer`";
     f_igosja_mysqli_query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }

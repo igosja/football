@@ -28,4 +28,9 @@ function f_igosja_generator_after_training()
             WHERE `training_percent`>='100'
             OR `training_percent`<='-100'";
     f_igosja_mysqli_query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }

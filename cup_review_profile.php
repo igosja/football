@@ -121,6 +121,20 @@ $sql = "SELECT `standing_season_id`,
         LIMIT 4";
 $winner_sql = $mysqli->query($sql);
 
+$sql = "SELECT `shedule_season_id`,
+               `team_id`,
+               `team_name`
+        FROM `game`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `team`
+        ON `team_id`=IF(`game_home_score`+`game_home_shoot_out`>`game_guest_score`+`game_guest_shoot_out`, `game_home_team_id`, `game_guest_team_id`)
+        WHERE `game_tournament_id`='$get_num'
+        AND `shedule_season_id`<='$igosja_season_id'
+        AND `game_stage_id`='" . CUP_FINAL_STAGE . "'
+        ORDER BY `shedule_season_id` DESC";
+$winner_sql = $mysqli->query($sql);
+
 $winner_array = $winner_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `name_name`,

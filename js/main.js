@@ -334,8 +334,124 @@ $(document).ready(function($)
         );
     });
 
+    $('#worldcup-game-prev').on('click', function()
+    //Список игр предыдущего тура
+    {
+        var tournament_id = $(this).data('tournament');
+        var shedule_id    = $(this).data('shedule');
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#game-block').addClass('loading');},
+                url: 'json.php?shedule_worldcup_prev=' + shedule_id + '&tournament=' + tournament_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    var table_data = '';
+
+                    for (var i=0; i<data.game_array.length; i++)
+                    {
+                        if (1 == data.game_array[i].game_played)
+                        {
+                            var score = data.game_array[i].game_home_score
+                                        + ':'
+                                        + data.game_array[i].game_guest_score
+                        }
+                        else
+                        {
+                            var score = '';
+                        }
+
+                        table_data = table_data
+                                   + '<tr><td class="right w45"><a href="national_team_review_profile.php?num='
+                                   + data.game_array[i].game_home_country_id
+                                   + '">'
+                                   + data.game_array[i].home_country_name
+                                   + '</a></td><td class="center"><a href="game_review_main.php?num='
+                                   + data.game_array[i].game_id
+                                   + '">'
+                                   + score
+                                   + '</a></td><td class="w45"><a href="national_team_review_profile.php?num='
+                                   + data.game_array[i].game_guest_country_id
+                                   + '">'
+                                   + data.game_array[i].guest_country_name
+                                   + '</a></td></tr>';
+                    }
+
+                    var shedule_date = data.game_array[0].shedule_day + ', ' + data.game_array[0].shedule_date;
+
+                    $('#tournament-game').html(table_data);
+                    $('#shedule-date').html(shedule_date);
+
+                    $('#tournament-game-prev').data('shedule', data.game_array[0].shedule_id);
+                    $('#tournament-game-next').data('shedule', data.game_array[0].shedule_id);
+                    $('#game-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
+    $('#worldcup-game-next').on('click', function()
+    //Список игр следующего тура
+    {
+        var tournament_id = $(this).data('tournament');
+        var shedule_id    = $(this).data('shedule');
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#game-block').addClass('loading');},
+                url: 'json.php?shedule_worldcup_next=' + shedule_id + '&tournament=' + tournament_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    var table_data = '';
+
+                    for (var i=0; i<data.game_array.length; i++)
+                    {
+                        if (1 == data.game_array[i].game_played)
+                        {
+                            var score = data.game_array[i].game_home_score
+                                        + ':'
+                                        + data.game_array[i].game_guest_score
+                        }
+                        else
+                        {
+                            var score = '';
+                        }
+
+                        table_data = table_data
+                                   + '<tr><td class="right w45"><a href="national_team_review_profile.php?num='
+                                   + data.game_array[i].game_home_country_id
+                                   + '">'
+                                   + data.game_array[i].home_country_name
+                                   + '</a></td><td class="center"><a href="game_review_main.php?num='
+                                   + data.game_array[i].game_id
+                                   + '">'
+                                   + score
+                                   + '</a></td><td class="w45"><a href="national_team_review_profile.php?num='
+                                   + data.game_array[i].game_guest_country_id
+                                   + '">'
+                                   + data.game_array[i].guest_country_name
+                                   + '</a></td></tr>';
+                    }
+
+                    var shedule_date = data.game_array[0].shedule_day + ', ' + data.game_array[0].shedule_date;
+
+                    $('#tournament-game').html(table_data);
+                    $('#shedule-date').html(shedule_date);
+
+                    $('#tournament-game-prev').data('shedule', data.game_array[0].shedule_id);
+                    $('#tournament-game-next').data('shedule', data.game_array[0].shedule_id);
+                    $('#game-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
     $('#outbox-create').on('click', function()
-        //Написать личное сообщение
+    //Написать личное сообщение
     {
         $('.inbox-header').empty();
         $('.inbox-text').empty();

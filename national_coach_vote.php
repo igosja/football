@@ -85,7 +85,7 @@ $application_array = $application_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT COUNT(`coachvote_id`) AS `count`
         FROM `coachvote`
-        WHERE `coachvote_season_id`='$authorization_user_id'
+        WHERE `coachvote_user_id`='$authorization_user_id'
         AND `coachvote_season_id`='$igosja_season_id'";
 $coachvote_sql = $mysqli->query($sql);
 

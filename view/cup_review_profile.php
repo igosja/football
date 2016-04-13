@@ -101,7 +101,7 @@
                         </td>
                         <td>
                             <h6>
-                                <?= $item['standing_season_id']; ?>
+                                <?= $item['shedule_season_id']; ?>
                             </h6>
                         </td>
                     </tr>

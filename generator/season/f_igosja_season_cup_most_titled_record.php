@@ -25,7 +25,7 @@ function f_igosja_season_cup_most_titled_record()
                        COUNT(`game_id`) AS `count`
                 FROM `game`
                 WHERE `game_stage_id`='" . CUP_FINAL_STAGE . "'
-                AND `game_tournament_id`='$igosja_season_id'
+                AND `game_tournament_id`='$tournament_id'
                 ORDER BY `count` DESC
                 LIMIT 1";
         $winner_sql = f_igosja_mysqli_query($sql);

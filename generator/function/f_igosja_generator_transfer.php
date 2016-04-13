@@ -43,7 +43,7 @@ function f_igosja_generator_transfer()
         {
             $delete_sql     = 0;
             $transfer_id    = $transfer_array[$i]['transfer_id'];
-            $player_id      = $transfer_array[$i]['transfer_price'];
+            $player_id      = $transfer_array[$i]['transfer_player_id'];
             $player_team_id = $transfer_array[$i]['player_team_id'];
             $buyer_id       = $transfer_array[$i]['transfer_buyer_id'];
             $buyer_user_id  = $transfer_array[$i]['buyer_user_id'];

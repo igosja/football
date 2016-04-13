@@ -26,5 +26,10 @@ function f_igosja_season_user_fire()
         f_igosja_mysqli_query($sql);
 
         f_igosja_history(2, $user_id, 0, $team_id);
+
+        usleep(1);
+
+        print '.';
+        flush();
     }
 }

@@ -8,6 +8,7 @@ date_default_timezone_set('Europe/Moscow');
 
 include (__DIR__ . '/constants.php');
 include (__DIR__ . '/database.php');
+include (__DIR__ . '/function.php');
 
 $file_list = scandir(__DIR__ . '/../generator/function');
 $file_list = array_slice($file_list, 2);

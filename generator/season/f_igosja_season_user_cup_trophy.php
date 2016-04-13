@@ -22,4 +22,9 @@ function f_igosja_season_user_cup_trophy()
             WHERE `winner_id`>'0'
             AND `user_id`!='0'";
     f_igosja_mysqli_query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }

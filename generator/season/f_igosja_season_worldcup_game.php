@@ -174,4 +174,9 @@ function f_igosja_season_worldcup_game()
                     ('0', '$country_6',  '$country_9',  '$referee_90', '$stadium_6',  '13', '$shedule_13', '15'+RAND()*'15', '$tournament_id', '1'+RAND()*'3'),
                     ('0', '$country_7',  '$country_8',  '$referee_91', '$stadium_7',  '13', '$shedule_13', '15'+RAND()*'15', '$tournament_id', '1'+RAND()*'3');";
     f_igosja_mysqli_query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }

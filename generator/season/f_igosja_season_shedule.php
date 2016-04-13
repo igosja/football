@@ -13,8 +13,9 @@ function f_igosja_season_shedule()
 
     for ($i=0; $i<98; $i++)
     {
-        $date = $date = strtotime(date('Y-m-d') . ' +1days');
-        $date = strtotime($date . ' +' . $i . 'days');
+        $day  = $i + 1;
+        $date = strtotime(date('Y-m-d') . ' +1days');
+        $date = strtotime(strtotime($date) . ' +' . $day . 'days');
         $date = date('Y-m-d', $date);
 
         if (90 < $i)
@@ -50,4 +51,9 @@ function f_igosja_season_shedule()
     $sql = "INSERT INTO `shedule` (`shedule_date`, `shedule_season_id`, `shedule_tournamenttype_id`)
             VALUES $shedule_insert_sql;";
     f_igosja_mysqli_query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }

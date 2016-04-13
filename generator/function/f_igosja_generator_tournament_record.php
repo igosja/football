@@ -597,7 +597,7 @@ function f_igosja_generator_tournament_record()
                 $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
-                if ($visitor > $record_value)
+                if ($score > $record_value)
                 {
                     $sql = "UPDATE `recordtournament`
                             SET `recordtournament_team_id`='$team_id',

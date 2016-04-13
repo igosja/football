@@ -5,7 +5,7 @@ function f_igosja_season_worldcup_standing()
     global $igosja_season_id;
 
     $sql = "INSERT INTO `worldcup` (`worldcup_country_id`, `worldcup_season_id`, `worldcup_tournament_id`, `worldcup_user_id`)
-            SELECT `country_id`, '$igosja_season_id', '" . TOURNAMENT_TYPE_WORLD_CUP . "', `country_user_id`
+            SELECT `country_id`, '$igosja_season_id', '" . TOURNAMENT_WORLD_CUP . "', `country_user_id`
             FROM `country`
             WHERE `country_id` IN
             (
@@ -15,4 +15,9 @@ function f_igosja_season_worldcup_standing()
             )
             ORDER BY RAND()";
     f_igosja_mysqli_query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }

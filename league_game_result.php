@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -22,7 +22,6 @@ $count_tournament = $tournament_sql->num_rows;
 if (0 == $count_tournament)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
     exit;
 }
 
@@ -30,67 +29,83 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$sql = "SELECT `team_id`, `team_name`, `standing_place`
-        FROM `standing`
-        LEFT JOIN `team`
-        ON `standing_team_id`=`team_id`
-        WHERE `standing_tournament_id`='$get_num'
-        AND `standing_season_id`='$igosja_season_id'
-        ORDER BY `standing_place` ASC";
-$standing_sql = $mysqli->query($sql);
+if (isset($_GET['shedule']))
+{
+    $shedule_id = (int) $_GET['shedule'];
+}
+else
+{
+    $today = date('Y-m-d');
 
-$standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+    $sql = "SELECT `game_shedule_id`
+            FROM `shedule`
+            LEFT JOIN `game`
+            ON `game_shedule_id`=`shedule_id`
+            WHERE `shedule_date`<='$today'
+            AND `game_tournament_id`='$get_num'
+            AND `shedule_season_id`='$igosja_season_id'
+            ORDER BY `shedule_date` DESC
+            LIMIT 1";
+    $shedule_sql = $mysqli->query($sql);
 
-$sql = "SELECT `name_name`, `player_id`, `statisticplayer_goal`, `surname_name`
-        FROM `statisticplayer`
-        LEFT JOIN `player`
-        ON `statisticplayer_player_id`=`player_id`
-        LEFT JOIN `name`
-        ON `player_name_id`=`name_id`
-        LEFT JOIN `surname`
-        ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
-        ORDER BY `statisticplayer_goal` DESC
-        LIMIT 5";
-$player_goal_sql = $mysqli->query($sql);
+    $count_shedule = $shedule_sql->num_rows;
 
-$player_goal_array = $player_goal_sql->fetch_all(MYSQLI_ASSOC);
+    if (0 == $count_shedule)
+    {
+        $sql = "SELECT `game_shedule_id`
+                FROM `shedule`
+                LEFT JOIN `game`
+                ON `game_shedule_id`=`shedule_id`
+                WHERE `shedule_date`>'$today'
+                AND `game_tournament_id`='$get_num'
+                AND `shedule_season_id`='$igosja_season_id'
+                ORDER BY `shedule_date` ASC
+                LIMIT 1";
+        $shedule_sql = $mysqli->query($sql);
+    }
 
-$sql = "SELECT `name_name`, `player_id`, `statisticplayer_pass_scoring`, `surname_name`
-        FROM `statisticplayer`
-        LEFT JOIN `player`
-        ON `statisticplayer_player_id`=`player_id`
-        LEFT JOIN `name`
-        ON `player_name_id`=`name_id`
-        LEFT JOIN `surname`
-        ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
-        ORDER BY `statisticplayer_pass_scoring` DESC
-        LIMIT 5";
-$player_pass_sql = $mysqli->query($sql);
+    $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
-$player_pass_array = $player_pass_sql->fetch_all(MYSQLI_ASSOC);
+    $shedule_id = $shedule_array[0]['game_shedule_id'];
+}
 
-$sql = "SELECT `name_name`, `player_id`, `statisticplayer_mark`, `surname_name`
-        FROM `statisticplayer`
-        LEFT JOIN `player`
-        ON `statisticplayer_player_id`=`player_id`
-        LEFT JOIN `name`
-        ON `player_name_id`=`name_id`
-        LEFT JOIN `surname`
-        ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
-        ORDER BY `statisticplayer_mark` DESC
-        LIMIT 5";
-$player_mark_sql = $mysqli->query($sql);
+$sql = "SELECT `game_id`,
+               `game_guest_score`,
+               `game_guest_team_id`,
+               `game_home_score`,
+               `game_home_team_id`,
+               `game_played`,
+               `game_shedule_id`,
+               `guest_team`.`team_name` AS `guest_team_name`,
+               `home_team`.`team_name` AS `home_team_name`
+        FROM `game`
+        LEFT JOIN `team` AS `home_team`
+        ON `home_team`.`team_id`=`game_home_team_id`
+        LEFT JOIN `team` AS `guest_team`
+        ON `guest_team`.`team_id`=`game_guest_team_id`
+        WHERE `game_tournament_id`='$get_num'
+        AND `game_shedule_id`='$shedule_id'
+        ORDER BY `game_id` ASC";
+$game_sql = $mysqli->query($sql);
 
-$player_mark_array = $player_mark_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $tournament_name);
-$smarty->assign('standing_array', $standing_array);
-$smarty->assign('player_goal_array', $player_goal_array);
-$smarty->assign('player_pass_array', $player_pass_array);
-$smarty->assign('player_mark_array', $player_mark_array);
+$sql = "SELECT `shedule_date`,
+               `shedule_id`,
+               `stage_name`
+        FROM `game`
+        LEFT JOIN `stage`
+        ON `game_stage_id`=`stage_id`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        WHERE `game_tournament_id`='$get_num'
+        GROUP BY `shedule_id`
+        ORDER BY `shedule_date` ASC";
+$shedule_sql = $mysqli->query($sql);
+
+$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+
+$num            = $get_num;
+$header_title   = $tournament_name;
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

@@ -185,15 +185,15 @@ elseif (isset($_GET['player_tactic_position_id_national']))
 
     $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
 
-    $json_data['position_name'] = $position_array[0]['position_name'];
-    $json_data['position_description'] = $lineup_array[0]['position_description'];
-    $json_data['player_name'] = $lineup_array[0]['name_name'] . ' ' . $lineup_array[0]['surname_name'];
-    $json_data['role_id'] = $lineup_array[0]['role_id'];
-    $json_data['role_description'] = $lineup_array[0]['role_description'];
-    $json_data['game'] = $lineup_array[0]['count_game'];
-    $json_data['mark'] = $lineup_array[0]['mark'];
-    $json_data['position'] = $lineup_array[0]['lineup_position'];
-    $json_data['role_array'] = $role_array;
+    $json_data['position_name']         = $position_array[0]['position_name'];
+    $json_data['position_description']  = $lineup_array[0]['position_description'];
+    $json_data['player_name']           = $lineup_array[0]['name_name'] . ' ' . $lineup_array[0]['surname_name'];
+    $json_data['role_id']               = $lineup_array[0]['role_id'];
+    $json_data['role_description']      = $lineup_array[0]['role_description'];
+    $json_data['game']                  = $lineup_array[0]['count_game'];
+    $json_data['mark']                  = $lineup_array[0]['mark'];
+    $json_data['position']              = $lineup_array[0]['lineup_position'];
+    $json_data['role_array']            = $role_array;
 }
 elseif (isset($_GET['select_value']))
 {
@@ -214,7 +214,7 @@ elseif (isset($_GET['select_value']))
 
     $select_array = array();
 
-    for ($i = 0; $i < $count_result; $i++)
+    for ($i=0; $i<$count_result; $i++)
     {
         $select_array[$i]['value']  = $result_array[$i][$need . '_id'];
         $select_array[$i]['text']   = $result_array[$i][$need . '_name'];
@@ -369,26 +369,88 @@ elseif (isset($_GET['shedule_next']))
 
     if (0 == $count_result)
     {
-        
+        $sql = "SELECT `game_id`,
+                       `game_guest_score`,
+                       `game_guest_team_id`,
+                       `game_home_score`,
+                       `game_home_team_id`,
+                       `game_played`,
+                       `guest_team`.`team_name` AS `guest_team_name`,
+                       `home_team`.`team_name` AS `home_team_name`,
+                       `shedule_date`,
+                       DATE_FORMAT(`shedule_date`,'%W') AS `shedule_day`,
+                       `shedule_id`
+                FROM `game`
+                LEFT JOIN `shedule`
+                ON `game_shedule_id`=`shedule_id`
+                LEFT JOIN `team` AS `home_team`
+                ON `home_team`.`team_id`=`game_home_team_id`
+                LEFT JOIN `team` AS `guest_team`
+                ON `guest_team`.`team_id`=`game_guest_team_id`
+                WHERE `game_tournament_id`='$tournament_id'
+                AND `shedule_season_id`='$igosja_season_id'
+                AND `shedule_date`=
+                (
+                    SELECT `shedule_date`
+                    FROM `shedule`
+                    LEFT JOIN `game`
+                    ON `game_shedule_id`=`shedule_id`
+                    WHERE `shedule_id`>='$shedule_id'
+                    AND `game_tournament_id`='$tournament_id'
+                    AND `shedule_season_id`='$igosja_season_id'
+                    ORDER BY `shedule_date` ASC
+                    LIMIT 1
+                )
+                ORDER BY `game_id` ASC";
+        $result_sql = $mysqli->query($sql);
+
+        $count_result = $result_sql->num_rows;
+    }
+
+    $result_array = $result_sql->fetch_all(MYSQLI_ASSOC);
+
+    $game_array = array();
+
+    for ($i=0; $i<$count_result; $i++)
+    {
+        $game_array[$i]['game_id']              = $result_array[$i]['game_id'];
+        $game_array[$i]['game_guest_score']     = $result_array[$i]['game_guest_score'];
+        $game_array[$i]['game_guest_team_id']   = $result_array[$i]['game_guest_team_id'];
+        $game_array[$i]['game_home_score']      = $result_array[$i]['game_home_score'];
+        $game_array[$i]['game_home_team_id']    = $result_array[$i]['game_home_team_id'];
+        $game_array[$i]['game_played']          = $result_array[$i]['game_played'];
+        $game_array[$i]['guest_team_name']      = $result_array[$i]['guest_team_name'];
+        $game_array[$i]['home_team_name']       = $result_array[$i]['home_team_name'];
+        $game_array[$i]['shedule_day']          = $result_array[$i]['shedule_day'];
+        $game_array[$i]['shedule_date']         = date('d.m.Y', strtotime($result_array[$i]['shedule_date']));
+        $game_array[$i]['shedule_id']           = $result_array[$i]['shedule_id'];
+    }
+
+    $json_data['game_array'] = $game_array;
+}
+elseif (isset($_GET['shedule_worldcup_prev']))
+{
+    $shedule_id     = (int) $_GET['shedule_worldcup_prev'];
+    $tournament_id  = (int) $_GET['tournament'];
 
     $sql = "SELECT `game_id`,
                    `game_guest_score`,
-                   `game_guest_team_id`,
+                   `game_guest_country_id`,
                    `game_home_score`,
-                   `game_home_team_id`,
+                   `game_home_country_id`,
                    `game_played`,
-                   `guest_team`.`team_name` AS `guest_team_name`,
-                   `home_team`.`team_name` AS `home_team_name`,
+                   `guest_country`.`country_name` AS `guest_country_name`,
+                   `home_country`.`country_name` AS `home_country_name`,
                    `shedule_date`,
                    DATE_FORMAT(`shedule_date`,'%W') AS `shedule_day`,
                    `shedule_id`
             FROM `game`
             LEFT JOIN `shedule`
             ON `game_shedule_id`=`shedule_id`
-            LEFT JOIN `team` AS `home_team`
-            ON `home_team`.`team_id`=`game_home_team_id`
-            LEFT JOIN `team` AS `guest_team`
-            ON `guest_team`.`team_id`=`game_guest_team_id`
+            LEFT JOIN `country` AS `home_country`
+            ON `home_country`.`country_id`=`game_home_country_id`
+            LEFT JOIN `country` AS `guest_country`
+            ON `guest_country`.`country_id`=`game_guest_country_id`
             WHERE `game_tournament_id`='$tournament_id'
             AND `shedule_season_id`='$igosja_season_id'
             AND `shedule_date`=
@@ -397,7 +459,110 @@ elseif (isset($_GET['shedule_next']))
                 FROM `shedule`
                 LEFT JOIN `game`
                 ON `game_shedule_id`=`shedule_id`
-                WHERE `shedule_id`>='$shedule_id'
+                WHERE `shedule_id`<'$shedule_id'
+                AND `game_tournament_id`='$tournament_id'
+                AND `shedule_season_id`='$igosja_season_id'
+                ORDER BY `shedule_date` DESC
+                LIMIT 1
+            )
+            ORDER BY `game_id` ASC";
+    $result_sql = $mysqli->query($sql);
+
+    $count_result = $result_sql->num_rows;
+
+    if (0 == $count_result)
+    {
+        $sql = "SELECT `game_id`,
+                       `game_guest_score`,
+                       `game_guest_country_id`,
+                       `game_home_score`,
+                       `game_home_country_id`,
+                       `game_played`,
+                       `guest_country`.`country_name` AS `guest_country_name`,
+                       `home_country`.`country_name` AS `home_country_name`,
+                       `shedule_date`,
+                       DATE_FORMAT(`shedule_date`,'%W') AS `shedule_day`,
+                       `shedule_id`
+                FROM `game`
+                LEFT JOIN `shedule`
+                ON `game_shedule_id`=`shedule_id`
+                LEFT JOIN `country` AS `home_country`
+                ON `home_country`.`country_id`=`game_home_country_id`
+                LEFT JOIN `country` AS `guest_country`
+                ON `guest_country`.`country_id`=`game_guest_country_id`
+                WHERE `game_tournament_id`='$tournament_id'
+                AND `shedule_season_id`='$igosja_season_id'
+                AND `shedule_date`=
+                (
+                    SELECT `shedule_date`
+                    FROM `shedule`
+                    LEFT JOIN `game`
+                    ON `game_shedule_id`=`shedule_id`
+                    WHERE `shedule_id`<='$shedule_id'
+                    AND `game_tournament_id`='$tournament_id'
+                    AND `shedule_season_id`='$igosja_season_id'
+                    ORDER BY `shedule_date` DESC
+                    LIMIT 1
+                )
+                ORDER BY `game_id` ASC";
+        $result_sql = $mysqli->query($sql);
+
+        $count_result = $result_sql->num_rows;
+    }
+
+    $result_array = $result_sql->fetch_all(MYSQLI_ASSOC);
+
+    $game_array = array();
+
+    for ($i=0; $i<$count_result; $i++)
+    {
+        $game_array[$i]['game_id']                  = $result_array[$i]['game_id'];
+        $game_array[$i]['game_guest_score']         = $result_array[$i]['game_guest_score'];
+        $game_array[$i]['game_guest_country_id']    = $result_array[$i]['game_guest_country_id'];
+        $game_array[$i]['game_home_score']          = $result_array[$i]['game_home_score'];
+        $game_array[$i]['game_home_country_id']     = $result_array[$i]['game_home_country_id'];
+        $game_array[$i]['game_played']              = $result_array[$i]['game_played'];
+        $game_array[$i]['guest_country_name']       = $result_array[$i]['guest_country_name'];
+        $game_array[$i]['home_country_name']        = $result_array[$i]['home_country_name'];
+        $game_array[$i]['shedule_day']              = $result_array[$i]['shedule_day'];
+        $game_array[$i]['shedule_date']             = date('d.m.Y', strtotime($result_array[$i]['shedule_date']));
+        $game_array[$i]['shedule_id']               = $result_array[$i]['shedule_id'];
+    }
+
+    $json_data['game_array'] = $game_array;
+}
+elseif (isset($_GET['shedule_worldcup_next']))
+{
+    $shedule_id     = (int) $_GET['shedule_worldcup_next'];
+    $tournament_id  = (int) $_GET['tournament'];
+
+    $sql = "SELECT `game_id`,
+                   `game_guest_score`,
+                   `game_guest_country_id`,
+                   `game_home_score`,
+                   `game_home_country_id`,
+                   `game_played`,
+                   `guest_country`.`country_name` AS `guest_country_name`,
+                   `home_country`.`country_name` AS `home_country_name`,
+                   `shedule_date`,
+                   DATE_FORMAT(`shedule_date`,'%W') AS `shedule_day`,
+                   `shedule_id`
+            FROM `game`
+            LEFT JOIN `shedule`
+            ON `game_shedule_id`=`shedule_id`
+            LEFT JOIN `country` AS `home_country`
+            ON `home_country`.`country_id`=`game_home_country_id`
+            LEFT JOIN `country` AS `guest_country`
+            ON `guest_country`.`country_id`=`game_guest_country_id`
+            WHERE `game_tournament_id`='$tournament_id'
+            AND `shedule_season_id`='$igosja_season_id'
+            AND `shedule_date`=
+            (
+                SELECT `shedule_date`
+                FROM `shedule`
+                LEFT JOIN `game`
+                ON `game_shedule_id`=`shedule_id`
+                WHERE `shedule_id`>'$shedule_id'
                 AND `game_tournament_id`='$tournament_id'
                 AND `shedule_season_id`='$igosja_season_id'
                 ORDER BY `shedule_date` ASC
@@ -407,30 +572,72 @@ elseif (isset($_GET['shedule_next']))
     $result_sql = $mysqli->query($sql);
 
     $count_result = $result_sql->num_rows;
+
+    if (0 == $count_result)
+    {
+        $sql = "SELECT `game_id`,
+                       `game_guest_score`,
+                       `game_guest_country_id`,
+                       `game_home_score`,
+                       `game_home_country_id`,
+                       `game_played`,
+                       `guest_country`.`country_name` AS `guest_country_name`,
+                       `home_country`.`country_name` AS `home_country_name`,
+                       `shedule_date`,
+                       DATE_FORMAT(`shedule_date`,'%W') AS `shedule_day`,
+                       `shedule_id`
+                FROM `game`
+                LEFT JOIN `shedule`
+                ON `game_shedule_id`=`shedule_id`
+                LEFT JOIN `country` AS `home_country`
+                ON `home_country`.`country_id`=`game_home_country_id`
+                LEFT JOIN `country` AS `guest_country`
+                ON `guest_country`.`country_id`=`game_guest_country_id`
+                WHERE `game_tournament_id`='$tournament_id'
+                AND `shedule_season_id`='$igosja_season_id'
+                AND `shedule_date`=
+                (
+                    SELECT `shedule_date`
+                    FROM `shedule`
+                    LEFT JOIN `game`
+                    ON `game_shedule_id`=`shedule_id`
+                    WHERE `shedule_id`>='$shedule_id'
+                    AND `game_tournament_id`='$tournament_id'
+                    AND `shedule_season_id`='$igosja_season_id'
+                    ORDER BY `shedule_date` ASC
+                    LIMIT 1
+                )
+                ORDER BY `game_id` ASC";
+        $result_sql = $mysqli->query($sql);
+
+        $count_result = $result_sql->num_rows;
     }
 
     $result_array = $result_sql->fetch_all(MYSQLI_ASSOC);
 
     $game_array = array();
 
-    for ($i = 0; $i < $count_result; $i++) {
-        $game_array[$i]['game_id'] = $result_array[$i]['game_id'];
-        $game_array[$i]['game_guest_score'] = $result_array[$i]['game_guest_score'];
-        $game_array[$i]['game_guest_team_id'] = $result_array[$i]['game_guest_team_id'];
-        $game_array[$i]['game_home_score'] = $result_array[$i]['game_home_score'];
-        $game_array[$i]['game_home_team_id'] = $result_array[$i]['game_home_team_id'];
-        $game_array[$i]['game_played'] = $result_array[$i]['game_played'];
-        $game_array[$i]['guest_team_name'] = $result_array[$i]['guest_team_name'];
-        $game_array[$i]['home_team_name'] = $result_array[$i]['home_team_name'];
-        $game_array[$i]['shedule_day'] = $result_array[$i]['shedule_day'];
-        $game_array[$i]['shedule_date'] = date('d.m.Y', strtotime($result_array[$i]['shedule_date']));
-        $game_array[$i]['shedule_id'] = $result_array[$i]['shedule_id'];
+    for ($i=0; $i<$count_result; $i++)
+    {
+        $game_array[$i]['game_id']                  = $result_array[$i]['game_id'];
+        $game_array[$i]['game_guest_score']         = $result_array[$i]['game_guest_score'];
+        $game_array[$i]['game_guest_country_id']    = $result_array[$i]['game_guest_country_id'];
+        $game_array[$i]['game_home_score']          = $result_array[$i]['game_home_score'];
+        $game_array[$i]['game_home_country_id']     = $result_array[$i]['game_home_country_id'];
+        $game_array[$i]['game_played']              = $result_array[$i]['game_played'];
+        $game_array[$i]['guest_country_name']       = $result_array[$i]['guest_country_name'];
+        $game_array[$i]['home_country_name']        = $result_array[$i]['home_country_name'];
+        $game_array[$i]['shedule_day']              = $result_array[$i]['shedule_day'];
+        $game_array[$i]['shedule_date']             = date('d.m.Y', strtotime($result_array[$i]['shedule_date']));
+        $game_array[$i]['shedule_id']               = $result_array[$i]['shedule_id'];
     }
 
     $json_data['game_array'] = $game_array;
-} elseif (isset($_GET['number_national'])) {
-    $number = (int) $_GET['number_national'];
-    $player_id = (int) $_GET['player_id'];
+}
+elseif (isset($_GET['number_national']))
+{
+    $number     = (int) $_GET['number_national'];
+    $player_id  = (int) $_GET['player_id'];
 
     $sql = "UPDATE `player`
             SET `player_number_national`='$number'
@@ -477,7 +684,7 @@ elseif (isset($_GET['inbox_id']))
         $inbox_array[0]['inbox_button'] = '';
     }
 
-    $inbox_array[0]['inbox_text']   = nl2br($inbox_array[0]['inbox_text']);
+    $inbox_array[0]['inbox_text'] = nl2br($inbox_array[0]['inbox_text']);
 
     $sql = "UPDATE `inbox`
             SET `inbox_read`='1'
@@ -788,8 +995,8 @@ elseif (isset($_GET['change_role_id']))
 }
 elseif (isset($_GET['change_role_id_national']))
 {
-    $role_id = (int) $_GET['change_role_id_national'];
-    $position_id = (int) $_GET['position_id'];
+    $role_id        = (int) $_GET['change_role_id_national'];
+    $position_id    = (int) $_GET['position_id'];
 
     $sql = "UPDATE `lineupcurrent`
             SET `lineupcurrent_role_id_" . $position_id . "`='$role_id'
@@ -821,13 +1028,16 @@ elseif (isset($_GET['to_national_player_id']))
 
     $national_id = $player_array[0]['player_national_id'];
 
-    if (0 == $national_id) {
+    if (0 == $national_id)
+    {
         $sql = "UPDATE `player`
                 SET `player_national_id`='$authorization_country_id'
                 WHERE `player_id`='$player_id'
                 LIMIT 1";
         $mysqli->query($sql);
-    } else {
+    }
+    else
+    {
         $sql = "UPDATE `player`
                 SET `player_national_id`='0'
                 WHERE `player_id`='$player_id'

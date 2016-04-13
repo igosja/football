@@ -84,6 +84,7 @@ $sql = "SELECT `historyfinanceteam_date`,
         LEFT JOIN `historytext`
         ON `historyfinanceteam_historytext_id`=`historytext_id`
         WHERE `historyfinanceteam_team_id`='$get_num'
+        AND `historyfinanceteam_season_id`='$igosja_season_id'
         ORDER BY `historyfinanceteam_date` DESC";
 $history_sql = $mysqli->query($sql);
 

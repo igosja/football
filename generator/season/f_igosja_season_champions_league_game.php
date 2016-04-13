@@ -43,7 +43,7 @@ function f_igosja_season_champions_league_game()
         $standing_sql = f_igosja_mysqli_query($sql);
 
         $count_standing = $standing_sql->num_rows;
-        $standing_array = $standing_sql->fetch_all($sql);
+        $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
 
         for ($j=0; $j<$count_standing; $j++)
         {
@@ -103,7 +103,7 @@ function f_igosja_season_champions_league_game()
                     $sql = "INSERT INTO `leagueparticipant` 
                             SET `leagueparticipant_in`='$leagueparticipant_in',
                                 `leagueparticipant_season_id`='$igosja_season_id',
-                                `leagueparticipant_team_id`='$igosja_season_id'";
+                                `leagueparticipant_team_id`='$team_id'";
                     f_igosja_mysqli_query($sql);
                 }
             }
@@ -121,8 +121,8 @@ function f_igosja_season_champions_league_game()
 
     for ($i=0; $i<$count_referee; $i++)
     {
-        $referee  = 'referee_' . ($j + 1);
-        $$referee = $referee_array[$j]['referee_id'];
+        $referee  = 'referee_' . ($i + 1);
+        $$referee = $referee_array[$i]['referee_id'];
     }
 
     $sql = "SELECT `shedule_id`
@@ -150,8 +150,8 @@ function f_igosja_season_champions_league_game()
 
     for ($i=0; $i<$count_team; $i=$i+2)
     {
-        $team_1         = $team_array[$i]['cupparticipant_team_id'];
-        $team_2         = $team_array[$i+1]['cupparticipant_team_id'];
+        $team_1         = $team_array[$i]['leagueparticipant_team_id'];
+        $team_2         = $team_array[$i+1]['leagueparticipant_team_id'];
         $referee_first  = 'referee_' . ($i + 1);
         $referee_second = 'referee_' . ($i + 2);
         $referee_id_1   = $$referee_first;
