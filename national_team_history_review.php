@@ -37,6 +37,7 @@ $sql = "SELECT `worldcup_place`,
         LEFT JOIN `tournament`
         ON `worldcup_tournament_id`=`tournament_id`
         WHERE `worldcup_country_id`='$get_num'
+        AND `worldcup_season_id`<'$igosja_season_id'
         ORDER BY `worldcup_season_id` DESC";
 $tournament_sql = $mysqli->query($sql);
 
@@ -48,7 +49,7 @@ $sql = "SELECT `history_date`,
         LEFT JOIN `user`
         ON `history_user_id`=`user_id`
         WHERE `history_country_id`='$get_num'
-        AND `history_historytext_id`='1'
+        AND `history_historytext_id`='22'
         ORDER BY `history_date` DESC";
 $manager_sql = $mysqli->query($sql);
 

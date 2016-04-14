@@ -1,10 +1,10 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page">
-            <p class="header">Итоги сезона</p>
+            <p class="header">Итоги</p>
             <table class="striped w100">
                 <tr>
-                    <th colspan="2"><?= $championship_array[0]['tournament_name']; ?></th>
+                    <th colspan="2"><?= $championship_array[0]['tournament_name']; ?> (прошлый сезон)</th>
                 </tr>
                 <tr>
                     <td class="w50">Победитель</td>
@@ -82,7 +82,7 @@
             </table>
             <table class="striped w100">
                 <tr>
-                    <th colspan="2"><?= $cup_array[0]['tournament_name']; ?></th>
+                    <th colspan="2"><?= $cup_array[0]['tournament_name']; ?> (прошлый сезон)</th>
                 </tr>
                 <tr>
                     <td class="w50">Победитель</td>
@@ -162,8 +162,23 @@
             </table>
             <table class="striped w100">
                 <tr>
-                    <th colspan="2">Лига чемпионов - квалификация</th>
+                    <th colspan="2">Лига чемпионов - квалификация (этот сезон)</th>
                 </tr>
+                <?php foreach ($champions_qualify_group_array as $item) { ?>
+                    <tr>
+                        <td class="w50">
+                            <img
+                                alt="<?= $item['team_name']; ?>"
+                                class="img-12"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                            />
+                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                <?= $item['team_name']; ?>
+                            </a>
+                        </td>
+                        <td>Групповой этап</td>
+                    </tr>
+                <?php } ?>
                 <?php foreach ($champions_qualify_array as $item) { ?>
                     <tr>
                         <td class="w50">
@@ -182,7 +197,7 @@
             </table>
             <table class="striped w100">
                 <tr>
-                    <th colspan="2">Лига чемпионов - достижения</th>
+                    <th colspan="2">Лига чемпионов - достижения (этот сезон)</th>
                 </tr>
                 <?php foreach ($champions_out_array as $item) { ?>
                     <tr>

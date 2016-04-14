@@ -20,7 +20,7 @@
                             />
                         </td>
                         <td>
-                            <a href="country_country_review_profile.php?num=<?= $item['country_id']; ?>">
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
                                 <?= $item['country_name']; ?>
                             </a>
                         </td>

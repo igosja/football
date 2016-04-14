@@ -23,13 +23,34 @@ $count_country = $country_sql->num_rows;
 if (0 == $count_country)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-    
     exit;
 }
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 $country_name = $country_array[0]['country_name'];
+
+if (isset($_POST['data']))
+{
+    $data = $_POST['data'];
+
+    foreach ($data as $key => $value)
+    {
+        $player_id  = (int) $key;
+        $number     = (int) $value;
+
+        $sql = "UPDATE `player`
+                SET `player_number_national`='$number'
+                WHERE `player_id`='$player_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('national_lineup_team_number.php?num=' . $get_num);
+}
 
 $sql = "SELECT `mood_id`,
                `mood_name`,
@@ -59,13 +80,13 @@ $sql = "SELECT `mood_id`,
         ON `player_mood_id`=`mood_id`
         LEFT JOIN `team`
         ON `team_id`=`player_team_id`
-        WHERE `country_id`='$get_num'";
+        WHERE `country_id`='$get_num'
+        ORDER BY `player_position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $country_name);
-$smarty->assign('player_array', $player_array);
+$num            = $get_num;
+$header_title   = $country_name;
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

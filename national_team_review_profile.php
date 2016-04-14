@@ -15,26 +15,25 @@ $sql = "SELECT `t1`.`country_name` AS `country_name`,
                `t1`.`country_season_id` AS `country_season_id`,
                `stadium_name`,
                `stadium_capacity`,
+               `team_id`,
                `user_birth_year`,
                `user_firstname`,
                `user_id`,
                `user_country_id`,
                `t2`.`country_name` AS `user_country_name`,
                `user_lastname`,
+               `user_login`,
                `user_registration_date`
         FROM `country` AS `t1`
-        LEFT JOIN `city`
-        ON `t1`.`country_id`=`city_country_id`
-        LEFT JOIN `team`
-        ON `city_id`=`team_city_id`
         LEFT JOIN `stadium`
+        ON `t1`.`country_stadium_id`=`stadium_id`
+        LEFT JOIN `team`
         ON `team_id`=`stadium_team_id`
         LEFT JOIN `user`
         ON `country_user_id`=`user_id`
         LEFT JOIN `country` AS `t2`
         ON `user_country_id`=`t2`.`country_id`
         WHERE `t1`.`country_id`='$get_num'
-        ORDER BY `stadium_capacity` DESC, `stadium_id` ASC
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
 
@@ -50,16 +49,12 @@ $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 $country_name = $country_array[0]['country_name'];
 
-$sql = "SELECT `country_id`,
-               `country_name`,
-               `team_id`,
+$sql = "SELECT `team_id`,
                `team_name`
         FROM `team`
         LEFT JOIN `city`
         ON `team_city_id`=`city_id`
-        LEFT JOIN `country`
-        ON `city_country_id`=`country_id`
-        WHERE `country_id`='$get_num'
+        WHERE `city_country_id`='$get_num'
         AND `team_id`!='0'
         ORDER BY `team_reputation` DESC, `team_id` ASC
         LIMIT 7";
@@ -142,7 +137,7 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         ON `seller`.`team_id`=`transferhistory_seller_id`
         LEFT JOIN `city` AS `seller_city`
         ON `seller`.`team_city_id`=`seller_city`.`city_id`
-        WHERE `transferhistory_season_id`='$igosja_season_id'
+        WHERE `transferhistory_season_id`='$igosja_season_id'-'1'
         AND (`seller_city`.`city_country_id`='$get_num'
         OR `buyer_city`.`city_country_id`='$get_num')
         ORDER BY `transferhistory_price` DESC, `transferhistory_id` ASC

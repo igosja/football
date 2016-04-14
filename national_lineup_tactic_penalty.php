@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_country_id))
 {
@@ -23,13 +23,34 @@ $count_country = $country_sql->num_rows;
 if (0 == $count_country)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
     exit;
 }
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 $country_name = $country_array[0]['country_name'];
+
+if (isset($_POST['data']))
+{
+    $data = $_POST['data'];
+
+    foreach ($data as $key => $value)
+    {
+        $penalty_id = (int) $key;
+        $player_id  = (int) $value;
+
+        $sql = "UPDATE `country`
+                SET `country_penalty_player_id_" . $penalty_id . "`='$player_id'
+                WHERE `country_id`='$get_num'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('national_lineup_tactic_penalty.php?num=' . $get_num);
+}
 
 $sql = "SELECT `composure`,
                `name_name`,
@@ -58,9 +79,12 @@ $sql = "SELECT `composure`,
             WHERE `playerattribute_attribute_id`='26'
         ) AS `t2`
         ON `t2`.`playerattribute_player_id`=`player_id`
+        LEFT JOIN `playerposition`
+        ON `playerposition_player_id`=`player_id`
         LEFT JOIN `position`
-        ON `player_position_id`=`position_id`
+        ON `playerposition_position_id`=`position_id`
         WHERE `player_national_id`='$get_num'
+        AND `playerposition_value`='100'
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
@@ -91,7 +115,7 @@ $sql = "SELECT `name_name`,
         ) AS `t2`
         ON `t2`.`playerattribute_player_id`=`player_id`
         WHERE `player_national_id`='$get_num'
-        ORDER BY `penalty` DESC, `composure` DESC";
+        ORDER BY `penalty` DESC, `composure` DESC, `player_id` ASC";
 $penaltyplayer_sql = $mysqli->query($sql);
 
 $penaltyplayer_array = $penaltyplayer_sql->fetch_all(MYSQLI_ASSOC);
@@ -110,10 +134,7 @@ $penalty_sql = $mysqli->query($sql);
 
 $penalty_array = $penalty_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $country_name);
-$smarty->assign('player_array', $player_array);
-$smarty->assign('penalty_array', $penalty_array);
-$smarty->assign('penaltyplayer_array', $penaltyplayer_array);
+$num            = $get_num;
+$header_title   = $country_name;
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

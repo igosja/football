@@ -79,6 +79,81 @@ if (isset($_GET['player_tactic_position_id']))
     $json_data['mark']                  = $lineup_array[0]['mark'];
     $json_data['role_array']            = $role_array;
 }
+elseif (isset($_GET['national_player_tactic_position_id']))
+{
+    $position_id = (int) $_GET['national_player_tactic_position_id'];
+    $game_id     = (int) $_GET['game_id'];
+
+    $sql = "SELECT `count_game`,
+                   `lineup_id`,
+                   `mark`,
+                   `name_name`,
+                   `player_id`,
+                   `position_description`,
+                   `position_name`,
+                   `role_description`,
+                   `role_id`,
+                   `surname_name`
+            FROM `player`
+            LEFT JOIN `name`
+            ON `player_name_id`=`name_id`
+            LEFT JOIN `surname`
+            ON `player_surname_id`=`surname_id`
+            LEFT JOIN `playerposition`
+            ON `playerposition_player_id`=`player_id`
+            LEFT JOIN `position`
+            ON `position_id`=`playerposition_position_id`
+            INNER JOIN
+            (
+                SELECT `lineup_id`,
+                       `lineup_player_id`,
+                       `lineup_role_id`
+                FROM `lineup`
+                WHERE `lineup_country_id`='$authorization_country_id'
+                AND `lineup_game_id`='$game_id'
+                AND `lineup_position_id`='$position_id'
+                LIMIT 1
+            ) AS `t1`
+            ON `lineup_player_id`=`player_id`
+            LEFT JOIN `role`
+            ON `lineup_role_id`=`role_id`
+            LEFT JOIN
+            (
+                SELECT SUM(`statisticplayer_game`) AS `count_game`,
+                       ROUND(SUM(`statisticplayer_mark`)/SUM(`statisticplayer_game`),2) AS `mark`,
+                       `statisticplayer_player_id`
+                FROM `statisticplayer`
+                WHERE `statisticplayer_season_id`='$igosja_season_id'
+                GROUP BY `statisticplayer_player_id`
+            ) AS `t2`
+            ON `player_id`=`statisticplayer_player_id`
+            WHERE `playerposition_value`='100'
+            LIMIT 1";
+    $lineup_sql = $mysqli->query($sql);
+
+    $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+
+    $sql = "SELECT `role_id`,
+                   `role_name`
+            FROM `positionrole`
+            LEFT JOIN `role`
+            ON `role_id`=`positionrole_role_id`
+            WHERE `positionrole_position_id`='$position_id'
+            ORDER BY `positionrole_id` ASC";
+    $role_sql = $mysqli->query($sql);
+
+    $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
+
+    $json_data['lineup_id']             = $lineup_array[0]['lineup_id'];
+    $json_data['position_name']         = $lineup_array[0]['position_name'];
+    $json_data['position_description']  = $lineup_array[0]['position_description'];
+    $json_data['player_name']           = $lineup_array[0]['name_name'] . ' ' . $lineup_array[0]['surname_name'];
+    $json_data['role_id']               = $lineup_array[0]['role_id'];
+    $json_data['role_description']      = $lineup_array[0]['role_description'];
+    $json_data['game']                  = $lineup_array[0]['count_game'];
+    $json_data['mark']                  = $lineup_array[0]['mark'];
+    $json_data['role_array']            = $role_array;
+}
 elseif (isset($_GET['player_tactic_position_id_national']))
 {
     $position_id = (int) $_GET['player_tactic_position_id_national'];
@@ -982,27 +1057,6 @@ elseif (isset($_GET['asktoplay']))
 elseif (isset($_GET['change_role_id']))
 {
     $role_id = (int) $_GET['change_role_id'];
-
-    $sql = "SELECT `role_description`
-            FROM `role`
-            WHERE `role_id`='$role_id'
-            LIMIT 1";
-    $role_sql = $mysqli->query($sql);
-
-    $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
-
-    $json_data['role_array'] = $role_array;
-}
-elseif (isset($_GET['change_role_id_national']))
-{
-    $role_id        = (int) $_GET['change_role_id_national'];
-    $position_id    = (int) $_GET['position_id'];
-
-    $sql = "UPDATE `lineupcurrent`
-            SET `lineupcurrent_role_id_" . $position_id . "`='$role_id'
-            WHERE `lineupcurrent_country_id`='$authorization_country_id'
-            LIMIT 1";
-    $mysqli->query($sql);
 
     $sql = "SELECT `role_description`
             FROM `role`

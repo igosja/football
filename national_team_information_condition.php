@@ -19,13 +19,13 @@ $sql = "SELECT `country_name`,
                `stadium_width`,
                `stadiumquality_name`,
                `team_id`
-        FROM `team`
+        FROM `country`
         LEFT JOIN `stadium`
+        ON `stadium_id`=`country_stadium_id`
+        LEFT JOIN `team`
         ON `stadium_team_id`=`team_id`
         LEFT JOIN `city`
         ON `team_city_id`=`city_id`
-        LEFT JOIN `country`
-        ON `city_country_id`=`country_id`
         LEFT JOIN `stadiumquality`
         ON `stadiumquality_id`=`stadium_stadiumquality_id`
         WHERE `city_country_id`='$get_num'

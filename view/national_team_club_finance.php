@@ -40,7 +40,7 @@
                         <td class="right"><?= f_igosja_money($team_array[$i]['team_price']); ?></td>
                         <td>
                             <div class="progress">
-                                <div class="progress-bar" style="width: <?= $team_array[$i]['team_price'] / $team_array[0]['team_price'] * 100; ?>%"></div>
+                                <div class="progress-bar" style="width: <?= round($team_array[$i]['team_price'] / $team_array[0]['team_price'] * 100); ?>%"></div>
                             </div>
                         </td>
                     </tr>

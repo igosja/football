@@ -5,19 +5,19 @@
             <table class="striped w100">
                 <tr>
                     <th class="w1"></th>
-                    <th>Имя</th>
+                    <th class="w25">Имя</th>
                     <th colspan="2">Команда</th>
                     <th class="w5">Позиция</th>
                     <th class="w5">Воз</th>
                     <th class="w5">Вес</th>
                     <th class="w5">Рост</th>
-                    <th class="w5">Настроение</th>
+                    <th class="w15">Настроение</th>
                     <th class="w5">Конд</th>
                     <th class="w5">Фит</th>
                 </tr>
                 <?php foreach ($player_array as $item) { ?>
                     <tr>
-                        <td class="center">
+                        <td class="center nopadding">
                             <input
                                 class="player-national-include"
                                 data-player="<?= $item['player_id']; ?>"
@@ -49,7 +49,7 @@
                         <td class="center"><?= $item['player_age']; ?></td>
                         <td class="center"><?= $item['player_weight']; ?> кг</td>
                         <td class="center"><?= $item['player_height']; ?> см</td>
-                        <td class="center">
+                        <td>
                             <img
                                 alt="<?= $item['mood_name']; ?>"
                                 class="img-12"

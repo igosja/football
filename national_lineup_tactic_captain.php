@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_country_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_country_id))
 }
 else
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.php');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_country.php');
     exit;
 }
 
@@ -23,13 +23,34 @@ $count_country = $country_sql->num_rows;
 if (0 == $count_country)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
     exit;
 }
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 $country_name = $country_array[0]['country_name'];
+
+if (isset($_POST['data']))
+{
+    $data = $_POST['data'];
+
+    foreach ($data as $key => $value)
+    {
+        $captain_id = (int) $key;
+        $player_id  = (int) $value;
+
+        $sql = "UPDATE `country`
+                SET `country_captain_player_id_" . $captain_id . "`='$player_id'
+                WHERE `country_id`='$get_num'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('national_lineup_tactic_captain.php?num=' . $get_num);
+}
 
 $sql = "SELECT `leader`,
                `name_name`,
@@ -76,7 +97,7 @@ $sql = "SELECT `leader`,
         ) AS `t1`
         ON `playerattribute_player_id`=`player_id`
         WHERE `player_national_id`='$get_num'
-        ORDER BY `leader` DESC";
+        ORDER BY `leader` DESC, `player_id` ASC";
 $leader_sql = $mysqli->query($sql);
 
 $leader_array = $leader_sql->fetch_all(MYSQLI_ASSOC);
@@ -93,10 +114,7 @@ $captain_sql = $mysqli->query($sql);
 
 $captain_array = $captain_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $country_name);
-$smarty->assign('player_array', $player_array);
-$smarty->assign('captain_array', $captain_array);
-$smarty->assign('leader_array', $leader_array);
+$num            = $get_num;
+$header_title   = $country_name;
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

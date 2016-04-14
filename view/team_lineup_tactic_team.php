@@ -53,9 +53,10 @@
                             <td class="center">
                                 <?= $item['game_temperature']; ?>
                                 <img
-                                    alt=""
+                                    alt="<?= $item['weather_name']; ?>"
                                     class="img-12"
-                                    src="img/weather/<?= $item['game_weather_id']; ?>.png"
+                                    title="<?= $item['weather_name']; ?>"
+                                    src="img/weather/<?= $item['weather_id']; ?>.png"
                                 />
                             </td>
                             <td>
@@ -156,13 +157,14 @@
                                 <?php if (!isset($instruction_array[$i-1]['instructionchapter_id']) ||
                                           $instruction_array[$i-1]['instructionchapter_id'] != $instruction_array[$i]['instructionchapter_id']) { ?>
                                     <?php if (2 == $instruction_array[$i]['instructionchapter_id'] ||
-                                         4 == $instruction_array[$i]['instructionchapter_id']) { ?>
-                                    </td><td class="w33">
+                                              4 == $instruction_array[$i]['instructionchapter_id']) { ?>
+                        </td>
+                        <td class="w33">
                                     <?php } ?>
-                                    <table class="striped w100">
-                                        <tr>
-                                            <th colspan="2"><?= $instruction_array[$i]['instructionchapter_name']; ?></th>
-                                        </tr>
+                            <table class="striped w100">
+                                <tr>
+                                    <th colspan="2"><?= $instruction_array[$i]['instructionchapter_name']; ?></th>
+                                </tr>
                                 <?php } ?>
                                 <tr>
                                     <td class="nopadding w1">
@@ -183,7 +185,7 @@
                                 </tr>
                                 <?php if (!isset($instruction_array[$i+1]['instructionchapter_id']) ||
                                           $instruction_array[$i+1]['instructionchapter_id'] != $instruction_array[$i]['instructionchapter_id']) { ?>
-                                    </table>
+                            </table>
                                 <?php } ?>
                             <?php } ?>
                         </td>

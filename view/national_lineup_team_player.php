@@ -4,13 +4,13 @@
             <p class="header">Игроки</p>
             <table class="striped w100">
                 <tr>
-                    <th>Имя</th>
+                    <th class="w25">Имя</th>
                     <th colspan="2">Команда</th>
                     <th class="w5">Позиция</th>
                     <th class="w5">Воз</th>
                     <th class="w5">Вес</th>
                     <th class="w5">Рост</th>
-                    <th class="w5">Настроение</th>
+                    <th class="w55">Настроение</th>
                     <th class="w5">Конд</th>
                     <th class="w5">Фит</th>
                 </tr>
@@ -38,7 +38,7 @@
                         <td class="center"><?= $item['player_age']; ?></td>
                         <td class="center"><?= $item['player_weight']; ?> кг</td>
                         <td class="center"><?= $item['player_height']; ?> см</td>
-                        <td class="center">
+                        <td>
                             <img
                                 alt="<?= $item['mood_name']; ?>"
                                 class="img-12"

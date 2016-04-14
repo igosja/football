@@ -11,7 +11,11 @@
                         <table class="left striped w100">
                             <tr>
                                 <td class="w50">Стадион</td>
-                                <td><?= $country_array[0]['stadium_name']; ?></td>
+                                <td>
+                                    <a href="team_team_information_condition.php?num=<?= $country_array[0]['team_id']; ?>">
+                                        <?= $country_array[0]['stadium_name']; ?>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Вместимость стадиона</td>
@@ -30,9 +34,11 @@
             <p class="header">Профиль менеджера</p>
             <table class="left striped w100">
                 <tr>
-                    <td>Имя</td>
+                    <td class="w50">Имя</td>
                     <td>
                         <?= $country_array[0]['user_firstname']; ?> <?= $country_array[0]['user_lastname']; ?>
+                        <br />
+                        (<?= $country_array[0]['user_login']; ?>)
                     </td>
                 </tr>
                 <tr>
@@ -106,14 +112,11 @@
             <table class="striped w100">
                 <tr>
                     <th colspan="2">Название</th>
-                    <th colspan="2">Страна</th>
                 </tr>
                 <?php foreach ($team_array as $item) { ?>
                     <tr>
                         <td class="w1"><img alt="" class="img-12" src="img/team/12/<?= $item['team_id']; ?>.png" /></td>
                         <td><a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>"><?= $item['team_name']; ?></a></td>
-                        <td class="w1"><img alt="" class="img-12" src="img/flag/12/<?= $item['country_id']; ?>.png" /></td>
-                        <td><a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>"><?= $item['country_name']; ?></a></td>
                     </tr>
                 <?php } ?>
             </table>

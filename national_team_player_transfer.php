@@ -53,7 +53,7 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         ON `seller`.`team_id`=`transferhistory_seller_id`
         LEFT JOIN `city` AS `seller_city`
         ON `seller`.`team_city_id`=`seller_city`.`city_id`
-        WHERE `transferhistory_season_id`='$igosja_season_id'
+        WHERE `transferhistory_season_id`='$igosja_season_id'-'1'
         AND (`seller_city`.`city_country_id`='$get_num'
         OR `buyer_city`.`city_country_id`='$get_num')
         ORDER BY `transferhistory_price` DESC";

@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($authorization_country_id))
 {
@@ -23,104 +23,139 @@ $count_country = $country_sql->num_rows;
 if (0 == $count_country)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
     exit;
 }
 
-$sql = "SELECT COUNT(`lineupcurrent_id`) AS `count`
-        FROM `lineupcurrent`
-        WHERE `lineupcurrent_country_id`='$get_num'";
-$lineupcurrent_sql = $mysqli->query($sql);
-
-$lineupcurrent_array = $lineupcurrent_sql->fetch_all(MYSQLI_ASSOC);
-
-$count_lineupcurrent = $lineupcurrent_array[0]['count'];
-
-if (0 == $count_lineupcurrent)
+if (isset($_GET['game']))
 {
-    $sql = "INSERT INTO `lineupcurrent`
-            SET `lineupcurrent_country_id`='$get_num'";
-    $mysqli->query($sql);
+    $game_id = (int) $_GET['game'];
+}
+else
+{
+    $sql = "SELECT `game_id`
+            FROM `game`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            WHERE (`game_home_country_id`='$get_num'
+            OR `game_guest_country_id`='$get_num')
+            AND `game_played`='0'
+            ORDER BY `shedule_date` ASC
+            LIMIT 1";
+    $game_sql = $mysqli->query($sql);
+
+    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+
+    if (isset($game_array[0]['game_id']))
+    {
+        $game_id = $game_array[0]['game_id'];
+    }
+    else
+    {
+        include ($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.php');
+        exit;
+    }
 }
 
-if (isset($_POST['role_id']))
+$sql = "SELECT COUNT(`game_id`) AS `count`
+        FROM `game`
+        WHERE `game_id`='$game_id'
+        AND (`game_home_country_id`='$get_num'
+        OR `game_guest_country_id`='$get_num')";
+$count_sql = $mysqli->query($sql);
+
+$count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+$count_game = $count_array[0]['count'];
+
+if (0 == $count_game)
 {
-    $role_id  = (int) $_POST['role_id'];
-    $position = (int) $_POST['position'];
-
-    $sql = "UPDATE `lineupcurrent`
-            SET `lineupcurrent_role_id_" . $position . "`='$role_id'
-            WHERE `lineupcurrent_country_id`='$get_num'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $_SESSION['message_class'] = 'success';
-    $_SESSION['message_text']  = 'Изменения успешно сохранены';
-
-    redirect('country_lineup_tactic_player.php?num=' . $get_num);
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_game.php');
+    exit;
 }
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 $country_name = $country_array[0]['country_name'];
 
-$sql = "SELECT `lineupcurrent_formation_id`,
-               `lineupcurrent_player_id_1`,
-               `lineupcurrent_player_id_2`,
-               `lineupcurrent_player_id_3`,
-               `lineupcurrent_player_id_4`,
-               `lineupcurrent_player_id_5`,
-               `lineupcurrent_player_id_6`,
-               `lineupcurrent_player_id_7`,
-               `lineupcurrent_player_id_8`,
-               `lineupcurrent_player_id_9`,
-               `lineupcurrent_player_id_10`,
-               `lineupcurrent_player_id_11`,
-               `lineupcurrent_player_id_12`,
-               `lineupcurrent_player_id_13`,
-               `lineupcurrent_player_id_14`,
-               `lineupcurrent_player_id_15`,
-               `lineupcurrent_player_id_16`,
-               `lineupcurrent_player_id_17`,
-               `lineupcurrent_player_id_18`,
-               `lineupcurrent_position_id_1`,
-               `lineupcurrent_position_id_2`,
-               `lineupcurrent_position_id_3`,
-               `lineupcurrent_position_id_4`,
-               `lineupcurrent_position_id_5`,
-               `lineupcurrent_position_id_6`,
-               `lineupcurrent_position_id_7`,
-               `lineupcurrent_position_id_8`,
-               `lineupcurrent_position_id_9`,
-               `lineupcurrent_position_id_10`,
-               `lineupcurrent_position_id_11`,
-               `lineupcurrent_position_id_12`,
-               `lineupcurrent_position_id_13`,
-               `lineupcurrent_position_id_14`,
-               `lineupcurrent_position_id_15`,
-               `lineupcurrent_position_id_16`,
-               `lineupcurrent_position_id_17`,
-               `lineupcurrent_position_id_18`,
-               `lineupcurrent_role_id_1`,
-               `lineupcurrent_role_id_2`,
-               `lineupcurrent_role_id_3`,
-               `lineupcurrent_role_id_4`,
-               `lineupcurrent_role_id_5`,
-               `lineupcurrent_role_id_6`,
-               `lineupcurrent_role_id_7`,
-               `lineupcurrent_role_id_8`,
-               `lineupcurrent_role_id_9`,
-               `lineupcurrent_role_id_10`,
-               `lineupcurrent_role_id_11`
-        FROM `lineupcurrent`
-        WHERE `lineupcurrent_country_id`='$get_num'
+$sql = "SELECT COUNT(`lineupmain_id`) AS `count`
+        FROM `lineupmain`
+        WHERE `lineupmain_game_id`='$game_id'
+        AND `lineupmain_country_id`='$get_num'
+        AND `lineupmain_formation_id`!='0'";
+$count_sql = $mysqli->query($sql);
+
+$count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+$count_game = $count_array[0]['count'];
+
+if (0 == $count_game)
+{
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/lineup_first.php');
+    exit;
+}
+
+if (isset($_POST['data']))
+{
+    $data = $_POST['data'];
+
+    $role_id    = (int) $data['role'];
+    $lineup_id  = (int) $data['lineup_id'];
+
+    $sql = "UPDATE `lineup`
+            SET `lineup_role_id`='$role_id'
+            WHERE `lineup_id`='$lineup_id'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $_SESSION['message_class']  = 'success';
+    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+    redirect('national_lineup_tactic_player.php?num=' . $get_num . '&game=' . $game_id);
+}
+
+$sql = "SELECT `game_home_country_id`,
+               `game_id`,
+               `game_temperature`,
+               `lineupmain_id`,
+               `shedule_date`,
+               `country_id`,
+               `country_name`,
+               `tournament_id`,
+               `tournament_name`,
+               `weather_id`,
+               `weather_name`
+        FROM `game`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `country`
+        ON IF (`game_home_country_id`='$get_num', `game_guest_country_id`=`country_id`, `game_home_country_id`=`country_id`)
+        LEFT JOIN `tournament`
+        ON `game_tournament_id`=`tournament_id`
+        LEFT JOIN `weather`
+        ON `weather_id`=`game_weather_id`
+        LEFT JOIN `lineupmain`
+        ON (`lineupmain_game_id`=`game_id`
+        AND `lineupmain_country_id`='$get_num')
+        WHERE (`game_home_country_id`='$get_num'
+        OR `game_guest_country_id`='$get_num')
+        AND `game_played`='0'
+        AND `lineupmain_id`>'0'
+        ORDER BY `shedule_date` ASC
+        LIMIT 5";
+$nearest_sql = $mysqli->query($sql);
+
+$nearest_array = $nearest_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `lineupmain_formation_id`
+        FROM `lineupmain`
+        WHERE `lineupmain_country_id`='$get_num'
+        AND `lineupmain_game_id`='$game_id'
         LIMIT 1";
 $lineup_sql = $mysqli->query($sql);
 
 $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('num', $get_num);
-$smarty->assign('header_title', $country_name);
-$smarty->assign('lineup_array', $lineup_array);
+$num            = $get_num;
+$header_title   = $country_name;
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

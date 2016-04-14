@@ -104,11 +104,11 @@ if (isset($_POST['data']))
     }
     else
     {
-        $sql = "UPDATE `lineupcurrent`
-                SET `lineupcurrent_gamemood_id`='$gamemood_id',
-                    `lineupcurrent_gamestyle_id`='$gamestyle_id'
-                WHERE `lineupcurrent_team_id`='$get_num'
-                AND `lineupcurrent_game_id`='$game_id'
+        $sql = "UPDATE `lineupmain`
+                SET `lineupmain_gamemood_id`='$gamemood_id',
+                    `lineupmain_gamestyle_id`='$gamestyle_id'
+                WHERE `lineupmain_team_id`='$get_num'
+                AND `lineupmain_game_id`='$game_id'
                 LIMIT 1";
     }
 
@@ -165,13 +165,14 @@ if (isset($_POST['data']))
 $sql = "SELECT `game_home_team_id`,
                `game_id`,
                `game_temperature`,
-               `game_weather_id`,
                `lineupmain_id`,
                `shedule_date`,
                `team_id`,
                `team_name`,
                `tournament_id`,
-               `tournament_name`
+               `tournament_name`,
+               `weather_id`,
+               `weather_name`
         FROM `game`
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
@@ -179,6 +180,8 @@ $sql = "SELECT `game_home_team_id`,
         ON IF (`game_home_team_id`='$get_num', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
         LEFT JOIN `tournament`
         ON `game_tournament_id`=`tournament_id`
+        LEFT JOIN `weather`
+        ON `weather_id`=`game_weather_id`
         LEFT JOIN `lineupmain`
         ON (`lineupmain_game_id`=`game_id`
         AND `lineupmain_team_id`='$get_num')

@@ -114,7 +114,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-90"
-                                src="img/team/90/<?= $item[0]['team_id']; ?>.png"
+                                src="img/team/90/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>

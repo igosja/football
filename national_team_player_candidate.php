@@ -51,13 +51,12 @@ $sql = "SELECT `mood_id`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `country`
-        ON `player_country_id`=`country_id`
         LEFT JOIN `mood`
         ON `player_mood_id`=`mood_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `country_id`='$get_num'
+        WHERE `player_country_id`='$get_num'
+        AND `player_statusnational_id`='1'
         ORDER BY `player_position_id` ASC, `player_reputation` DESC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 

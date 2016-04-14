@@ -22,8 +22,11 @@ function f_igosja_season_worldcup_game()
         $$shedule = $shedule_array[$i]['shedule_id'];
     }
 
-    $sql = "SELECT `worldcup_country_id`
+    $sql = "SELECT `country_id`,
+                   `country_stadium_id`
             FROM `worldcup`
+            LEFT JOIN `country`
+            ON `country_id`=`worldcup_country_id`
             WHERE `worldcup_season_id`='$igosja_season_id'
             ORDER BY RAND()";
     $standing_sql = f_igosja_mysqli_query($sql);
@@ -35,23 +38,9 @@ function f_igosja_season_worldcup_game()
     {
         $team_num   = $j + 1;
         $country    = 'country_' . $team_num;
-        $$country   = $standing_array[$j]['worldcup_country_id'];
+        $$country   = $standing_array[$j]['country_id'];
         $stadium    = 'stadium_' . $team_num;
-
-        $sql = "SELECT `stadium_id`
-                FROM `stadium`
-                LEFT JOIN `team`
-                ON `stadium_team_id`=`team_id`
-                LEFT JOIN `city`
-                ON `team_city_id`=`city_id`
-                WHERE `city_country_id`='$$country'
-                ORDER BY `stadium_capacity` DESC
-                LIMIT 1";
-        $stadium_sql = f_igosja_mysqli_query($sql);
-
-        $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
-
-        $$stadium = $stadium_array[0]['stadium_id'];
+        $$stadium   = $standing_array[$j]['country_stadium_id'];
     }
 
     $sql = "SELECT `referee_id`

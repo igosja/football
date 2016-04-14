@@ -37,7 +37,7 @@ $sql = "SELECT `team_id`,
         ON `standing_tournament_id`=`tournament_id`
         LEFT JOIN `team`
         ON `team_id`=`standing_team_id`
-        WHERE `standing_season_id`='$igosja_season_id'
+        WHERE `standing_season_id`='$igosja_season_id'-'1'
         AND `tournament_country_id`='$get_num'
         ORDER BY `standing_place` ASC
         LIMIT 1";
@@ -63,7 +63,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `team`
         ON `statisticplayer_team_id`=`team_id`
         WHERE `statisticplayer_tournament_id`='$tournament_id'
-        AND `statisticplayer_season_id`='$igosja_season_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'-'1'
         ORDER BY `statisticplayer_goal` DESC
         LIMIT 1";
 $championship_goal_sql = $mysqli->query($sql);
@@ -86,7 +86,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `team`
         ON `statisticplayer_team_id`=`team_id`
         WHERE `statisticplayer_tournament_id`='$tournament_id'
-        AND `statisticplayer_season_id`='$igosja_season_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'-'1'
         ORDER BY `statisticplayer_pass_scoring` DESC
         LIMIT 1";
 $championship_pass_sql = $mysqli->query($sql);
@@ -109,7 +109,7 @@ $sql = "SELECT ROUND(`statisticplayer_mark`/`statisticplayer_game`, '1') AS `mar
         LEFT JOIN `team`
         ON `statisticplayer_team_id`=`team_id`
         WHERE `statisticplayer_tournament_id`='$tournament_id'
-        AND `statisticplayer_season_id`='$igosja_season_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'-'1'
         ORDER BY `mark` DESC
         LIMIT 1";
 $championship_mark_sql = $mysqli->query($sql);
@@ -125,8 +125,8 @@ $sql = "SELECT `team_id`,
         ON `cupparticipant_tournament_id`=`tournament_id`
         LEFT JOIN `team`
         ON `team_id`=`cupparticipant_team_id`
-        WHERE `cupparticipant_season_id`='$igosja_season_id'
-        AND `cupparticipant_out`='0'
+        WHERE `cupparticipant_season_id`='$igosja_season_id'-'1'
+        AND `cupparticipant_out`='-1'
         AND `tournament_country_id`='$get_num'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CUP . "'
         LIMIT 1";
@@ -152,7 +152,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `team`
         ON `statisticplayer_team_id`=`team_id`
         WHERE `statisticplayer_tournament_id`='$tournament_id'
-        AND `statisticplayer_season_id`='$igosja_season_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'-'1'
         ORDER BY `statisticplayer_goal` DESC
         LIMIT 1";
 $cup_goal_sql = $mysqli->query($sql);
@@ -175,7 +175,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `team`
         ON `statisticplayer_team_id`=`team_id`
         WHERE `statisticplayer_tournament_id`='$tournament_id'
-        AND `statisticplayer_season_id`='$igosja_season_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'-'1'
         ORDER BY `statisticplayer_pass_scoring` DESC
         LIMIT 1";
 $cup_pass_sql = $mysqli->query($sql);
@@ -198,12 +198,27 @@ $sql = "SELECT ROUND(`statisticplayer_mark`/`statisticplayer_game`, '1') AS `mar
         LEFT JOIN `team`
         ON `statisticplayer_team_id`=`team_id`
         WHERE `statisticplayer_tournament_id`='$tournament_id'
-        AND `statisticplayer_season_id`='$igosja_season_id'
+        AND `statisticplayer_season_id`='$igosja_season_id'-'1'
         ORDER BY `mark` DESC
         LIMIT 1";
 $cup_mark_sql = $mysqli->query($sql);
 
 $cup_mark_array = $cup_mark_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `team_id`,
+               `team_name`
+        FROM `leagueparticipant`
+        LEFT JOIN `team`
+        ON `leagueparticipant_team_id`=`team_id`
+        LEFT JOIN `city`
+        ON `city_id`=`team_city_id`
+        WHERE `city_country_id`='$get_num'
+        AND `leagueparticipant_in`='1'
+        AND `leagueparticipant_season_id`='$igosja_season_id'
+        ORDER BY `leagueparticipant_in` DESC";
+$champions_qualify_group_sql = $mysqli->query($sql);
+
+$champions_qualify_group_array = $champions_qualify_group_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `stage_name`,
                `team_id`,
@@ -216,6 +231,7 @@ $sql = "SELECT `stage_name`,
         LEFT JOIN `stage`
         ON `leagueparticipant_in`=`stage_id`
         WHERE `city_country_id`='$get_num'
+        AND `leagueparticipant_in`!='1'
         AND `leagueparticipant_season_id`='$igosja_season_id'
         ORDER BY `leagueparticipant_in` DESC";
 $champions_qualify_sql = $mysqli->query($sql);

@@ -153,6 +153,43 @@ function tactic_player_field()
     }
 }
 
+function tactic_player_field_national()
+//Построение на поле на странице индивидуальных заданий игрокам в сборной
+{
+    var formation = $('#tactic-player-formation-national').val();
+    formation = parseInt(formation);
+    formation--;
+    formation = formation_array[formation];
+
+    var field_icon = $('#field-icon');
+
+    $(field_icon).empty();
+
+    for (var i=0; i<formation.length; i++)
+    {
+        var position = formation[i];
+        position = parseInt(position);
+        position--;
+        var coordinate = coordinate_array[position];
+        var icon_width = coordinate[0];
+        var icon_length = coordinate[1];
+        icon_width = parseInt(icon_width) * 25;
+        icon_length = parseInt(icon_length) * 11 + 3;
+        position = position_array[position];
+        var icon_img = '<table class="w1" style="position: absolute; top: ' + icon_width + 'px; left: ' + icon_length + 'px;">' +
+            '<tr>' +
+            '<td class="center">' +
+            '<a href="javascript:;" class="player-tactic-shirt-national" data-position="' + position[0] + '">' +
+            '<img alt="" class="img-20" src="img/shirt.png" />' +
+            '</a>' +
+            '</td>' +
+            '</tr>' +
+            '</table>';
+
+        $(field_icon).append(icon_img);
+    }
+}
+
 function tactic_name(player_select)
 //Выбор игроков в стартовый состав
 {

@@ -61,7 +61,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `buyer`.`team_id`=`transferhistory_buyer_id`
         LEFT JOIN `team` AS `seller`
         ON `seller`.`team_id`=`transferhistory_seller_id`
-        WHERE `transferhistory_season_id`='$igosja_season_id'
+        WHERE `transferhistory_season_id`='$igosja_season_id'-'1'
         ORDER BY `transferhistory_price` DESC, `transferhistory_id` ASC
         LIMIT $offset, 30";
 $transfer_sql = $mysqli->query($sql);

@@ -56,7 +56,8 @@ $sql = "SELECT `mood_id`,
         ON `player_mood_id`=`mood_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `country_id`='$get_num'";
+        WHERE `country_id`='$get_num'
+        ORDER BY `player_position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);

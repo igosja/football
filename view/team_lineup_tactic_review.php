@@ -52,9 +52,10 @@
                         <td class="center">
                             <?= $item['game_temperature']; ?>
                             <img
-                                alt=""
+                                alt="<?= $item['weather_name']; ?>"
                                 class="img-12"
-                                src="img/weather/<?= $item['game_weather_id']; ?>.png"
+                                title="<?= $item['weather_name']; ?>"
+                                src="img/weather/<?= $item['weather_id']; ?>.png"
                             />
                         </td>
                         <td>

@@ -110,6 +110,12 @@ function f_igosja_season_champions_league_game()
         }
     }
 
+    $sql = "INSERT INTO `ratingteamseason` (`ratingteamseason_team_id`, `ratingteamseason_season_id`)
+            SELECT `leagueparticipant_team_id`, '$igosja_season_id'
+            FROM `leagueparticipant`
+            WHERE `leagueparticipant_season_id`='$igosja_season_id'";
+    f_igosja_mysqli_query($sql);
+
     $sql = "SELECT `referee_id`
             FROM `referee`
             ORDER BY RAND()

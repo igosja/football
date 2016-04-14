@@ -1,210 +1,220 @@
 <table class="block-table w100">
     <tr>
-        <td class="block-page w50">
+        <td class="block-page" colspan="2">
+            <p class="header">Ближайшие матчи</p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w10">Дата</th>
+                    <th class="w1"></th>
+                    <th colspan="2">Соперник</th>
+                    <th colspan="2">Турнир</th>
+                    <th class="w5">Погода</th>
+                    <th class="w1"></th>
+                </tr>
+                <?php foreach ($nearest_array as $item) { ?>
+                    <tr
+                        <?php if ($game_id == $item['game_id']) { ?>
+                            class="current"
+                        <?php } ?>
+                    >
+                        <td class="center"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
+                        <td class="center">
+                            <?php if ($item['game_home_country_id'] == $authorization_country_id) { ?>
+                                Д
+                            <?php } else { ?>
+                                Г
+                            <?php } ?>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="<?= $item['country_name']; ?>"
+                                class="img-12"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="<?= $item['tournament_name']; ?>"
+                                class="img-12"
+                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                <?= $item['tournament_name']; ?>
+                            </a>
+                        </td>
+                        <td class="center">
+                            <?= $item['game_temperature']; ?>
+                            <img
+                                alt="<?= $item['weather_name']; ?>"
+                                class="img-12"
+                                title="<?= $item['weather_name']; ?>"
+                                src="img/weather/<?= $item['weather_id']; ?>.png"
+                            />
+                        </td>
+                        <td>
+                            <a href="national_lineup_tactic_review.php?num=<?= $num; ?>&game=<?= $item['game_id']; ?>">
+                                <?php if ($item['lineupmain_id']) { ?>
+                                    Редактировать
+                                <?php } else { ?>
+                                    Отправить
+                                <?php } ?>
+                            </a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page center">
+            <div id="field-icon" class="relative"></div>
+            <img src="img/field/tactic-player.png" />
+        </td>
+        <td class="block-page w50" rowspan="2">
             <p class="header">Игроки</p>
             <table class="striped w100">
                 <tr>
-                    <th class="w1"></th>
-                    <th class="w1"></th>
+                    <th class="w13"></th>
+                    <th class="w13"></th>
                     <th>Имя</th>
                     <th class="w15">Позиция</th>
                     <th class="w15">Кондиции</th>
                     <th class="w15">Фитнес</th>
                 </tr>
-                {section name=i loop=$player_array}
+                <?php foreach ($player_array as $item) { ?>
                     <tr>
                         <td class="nopadding">
                             <select
-                                class="position-select"
-                                data-name="{$player_array[i].surname_name}"
-                                data-id="{$player_array[i].player_id}"
-                                data-position="{if
-                                ($lineup_array.0.lineupcurrent_player_id_1 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_1}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_2 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_2}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_3 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_3}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_4 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_4}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_5 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_5}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_6 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_6}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_7 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_7}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_8 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_8}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_9 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_9}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_10 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_10}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_11 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_11}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_12 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_12}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_13 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_13}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_14 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_14}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_15 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_15}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_16 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_16}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_17 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_17}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_18 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_position_id_18}{/if}">
+                                class="position-select w100"
+                                data-id="<?= $item['player_id']; ?>"
+                                <?php foreach ($lineup_array as $lineup) { ?>
+                                    <?php if ($lineup['lineup_player_id'] == $item['player_id']) { ?>
+                                        data-position="<?= $lineup['lineup_position_id']; ?>"
+                                    <?php } ?>
+                                <?php } ?>
+                            >
                             </select>
                         </td>
                         <td class="nopadding">
                             <select
-                                class="role-select"
-                                data-role="{if
-                                ($lineup_array.0.lineupcurrent_player_id_1 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_1}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_2 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_2}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_3 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_3}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_4 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_4}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_5 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_5}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_6 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_6}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_7 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_7}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_8 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_8}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_9 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_9}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_10 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_10}{elseif
-                                ($lineup_array.0.lineupcurrent_player_id_11 == $player_array[i].player_id)
-                                }{$lineup_array.0.lineupcurrent_role_id_11}{/if}">
+                                class="role-select w100"
+                                <?php foreach ($lineup_array as $lineup) { ?>
+                                    <?php if ($lineup['lineup_player_id'] == $item['player_id']) { ?>
+                                        data-role="<?= $lineup['lineup_role_id']; ?>"
+                                    <?php } ?>
+                                <?php } ?>
+                            >
                             </select>
                         </td>
                         <td>
-                            <a href="player_home_profile.php?num={$player_array[i].player_id}">
-                                {$player_array[i].name_name} {$player_array[i].surname_name}
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td class="center">{$player_array[i].position_name}</td>
-                        <td class="center">{$player_array[i].player_condition} %</td>
-                        <td class="center">{$player_array[i].player_practice} %</td>
+                        <td class="center"><?= $item['position_name']; ?></td>
+                        <td class="center"><?= $item['player_condition']; ?> %</td>
+                        <td class="center"><?= $item['player_practice']; ?> %</td>
                     </tr>
-                {/section}
+                <?php } ?>
             </table>
         </td>
-        <td class="block-page w1">
-            <div id="field-icon" class="relative"></div>
-            <img alt="" src="img/field/tactic.png" />
-        </td>
+    </tr>
+    <tr>
         <td class="block-page">
-            <form action="" method="POST">
-
+            <form method="POST">
                 <table class="w100">
                     <tr>
                         <td>
                             <p class="header">Тактика</p>
-                            <select id="tactic-select" name="formation_id" class="w100">
-                                {section name=i loop=$formation_array}
-                                    <option value="{$formation_array[i].formation_id}"
-                                        {if ($lineup_array.0.lineupcurrent_formation_id == $formation_array[i].formation_id)}
+                            <select id="tactic-select" name="data[formation_id]" class="w100">
+                                <?php foreach ($formation_array as $item) { ?>
+                                    <option value="<?= $item['formation_id']; ?>"
+                                        <?php if (isset($lineupmain_array[0]['lineupmain_formation_id']) &&
+                                                  $lineupmain_array[0]['lineupmain_formation_id'] == $item['formation_id']) { ?>
                                             selected
-                                        {/if}
+                                        <?php } ?>
                                     >
-                                        {$formation_array[i].formation_name}
+                                        <?= $item['formation_name']; ?>
                                     </option>
-                                {/section}
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <p class="header">Настрой</p>
-                            <select name="gamemood_id" class="w100">
-                                {section name=i loop=$gamemood_array}
-                                    <option value="{$gamemood_array[i].gamemood_id}"
-                                        {if ($lineup_array.0.lineupcurrent_gamemood_id == $gamemood_array[i].gamemood_id)}
+                            <select name="data[gamemood_id]" class="w100">
+                                <?php foreach ($gamemood_array as $item) { ?>
+                                    <option value="<?= $item['gamemood_id']; ?>"
+                                        <?php if (isset($lineupmain_array[0]['lineupmain_formation_id']) &&
+                                                  $lineupmain_array[0]['lineupmain_gamemood_id'] == $item['gamemood_id']) { ?>
                                             selected
-                                        {/if}
+                                        <?php } ?>
                                     >
-                                        {$gamemood_array[i].gamemood_name}
+                                        <?= $item['gamemood_name']; ?>
                                     </option>
-                                {/section}
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <p class="header">Стиль игры</p>
-                            <select name="gamestyle_id" class="w100">
-                                {section name=i loop=$gamestyle_array}
-                                    <option value="{$gamestyle_array[i].gamestyle_id}"
-                                        {if ($lineup_array.0.lineupcurrent_gamestyle_id == $gamestyle_array[i].gamestyle_id)}
+                            <select name="data[gamestyle_id]" class="w100">
+                                <?php foreach ($gamestyle_array as $item) { ?>
+                                    <option value="<?= $item['gamestyle_id']; ?>"
+                                        <?php if (isset($lineupmain_array[0]['lineupmain_formation_id']) &&
+                                                  $lineupmain_array[0]['lineupmain_gamestyle_id'] == $item['gamestyle_id']) { ?>
                                             selected
-                                        {/if}
+                                        <?php } ?>
                                     >
-                                        {$gamestyle_array[i].gamestyle_name}
+                                        <?= $item['gamestyle_name']; ?>
                                     </option>
-                                {/section}
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>{$smarty.const.SPACE}</td>
+                        <td><?= SPACE; ?></td>
                     </tr>
                     <tr>
                         <td class="center">
-                            <input type="hidden" class="hidden" value="" id="input-position-1" name="position_1" />
-                            <input type="hidden" class="hidden" value="" id="input-position-2" name="position_2" />
-                            <input type="hidden" class="hidden" value="" id="input-position-3" name="position_3" />
-                            <input type="hidden" class="hidden" value="" id="input-position-4" name="position_4" />
-                            <input type="hidden" class="hidden" value="" id="input-position-5" name="position_5" />
-                            <input type="hidden" class="hidden" value="" id="input-position-6" name="position_6" />
-                            <input type="hidden" class="hidden" value="" id="input-position-7" name="position_7" />
-                            <input type="hidden" class="hidden" value="" id="input-position-8" name="position_8" />
-                            <input type="hidden" class="hidden" value="" id="input-position-9" name="position_9" />
-                            <input type="hidden" class="hidden" value="" id="input-position-10" name="position_10" />
-                            <input type="hidden" class="hidden" value="" id="input-position-11" name="position_11" />
-                            <input type="hidden" class="hidden" value="" id="input-position-12" name="position_12" />
-                            <input type="hidden" class="hidden" value="" id="input-position-13" name="position_13" />
-                            <input type="hidden" class="hidden" value="" id="input-position-14" name="position_14" />
-                            <input type="hidden" class="hidden" value="" id="input-position-15" name="position_15" />
-                            <input type="hidden" class="hidden" value="" id="input-position-16" name="position_16" />
-                            <input type="hidden" class="hidden" value="" id="input-position-17" name="position_17" />
-                            <input type="hidden" class="hidden" value="" id="input-position-18" name="position_18" />
-                            <input type="hidden" class="hidden" value="" id="input-player-1" name="player_1" />
-                            <input type="hidden" class="hidden" value="" id="input-player-2" name="player_2" />
-                            <input type="hidden" class="hidden" value="" id="input-player-3" name="player_3" />
-                            <input type="hidden" class="hidden" value="" id="input-player-4" name="player_4" />
-                            <input type="hidden" class="hidden" value="" id="input-player-5" name="player_5" />
-                            <input type="hidden" class="hidden" value="" id="input-player-6" name="player_6" />
-                            <input type="hidden" class="hidden" value="" id="input-player-7" name="player_7" />
-                            <input type="hidden" class="hidden" value="" id="input-player-8" name="player_8" />
-                            <input type="hidden" class="hidden" value="" id="input-player-9" name="player_9" />
-                            <input type="hidden" class="hidden" value="" id="input-player-10" name="player_10" />
-                            <input type="hidden" class="hidden" value="" id="input-player-11" name="player_11" />
-                            <input type="hidden" class="hidden" value="" id="input-player-12" name="player_12" />
-                            <input type="hidden" class="hidden" value="" id="input-player-13" name="player_13" />
-                            <input type="hidden" class="hidden" value="" id="input-player-14" name="player_14" />
-                            <input type="hidden" class="hidden" value="" id="input-player-15" name="player_15" />
-                            <input type="hidden" class="hidden" value="" id="input-player-16" name="player_16" />
-                            <input type="hidden" class="hidden" value="" id="input-player-17" name="player_17" />
-                            <input type="hidden" class="hidden" value="" id="input-player-18" name="player_18" />
-                            <input type="hidden" class="hidden" value="" id="input-role-1" name="role_1" />
-                            <input type="hidden" class="hidden" value="" id="input-role-2" name="role_2" />
-                            <input type="hidden" class="hidden" value="" id="input-role-3" name="role_3" />
-                            <input type="hidden" class="hidden" value="" id="input-role-4" name="role_4" />
-                            <input type="hidden" class="hidden" value="" id="input-role-5" name="role_5" />
-                            <input type="hidden" class="hidden" value="" id="input-role-6" name="role_6" />
-                            <input type="hidden" class="hidden" value="" id="input-role-7" name="role_7" />
-                            <input type="hidden" class="hidden" value="" id="input-role-8" name="role_8" />
-                            <input type="hidden" class="hidden" value="" id="input-role-9" name="role_9" />
-                            <input type="hidden" class="hidden" value="" id="input-role-10" name="role_10" />
-                            <input type="hidden" class="hidden" value="" id="input-role-11" name="role_11" />
+                            <?php for ($i=1; $i<=18; $i++) { ?>
+                                <input
+                                    id="input-position-<?= $i; ?>"
+                                    name="data[position_<?= $i; ?>]"
+                                    type="hidden"
+                                    value=""
+                                />
+                                <input
+                                    id="input-player-<?= $i; ?>"
+                                    name="data[player_<?= $i; ?>]"
+                                    type="hidden"
+                                    value=""
+                                />
+                                <input
+                                    id="input-role-<?= $i; ?>"
+                                    name="data[role_<?= $i; ?>]"
+                                    type="hidden"
+                                    value=""
+                                />
+                                <input
+                                    name="data[lineup_<?= $i; ?>]"
+                                    type="hidden"
+                                    <?php for ($j=0; $j<$count_lineup; $j++) { ?>
+                                        <?php if ($j + 1 == $i) { ?>
+                                            value="<?= $lineup_array[$j]['lineup_id']; ?>"
+                                        <?php } ?>
+                                    <?php } ?>
+                                />
+                            <?php } ?>
                             <input type="submit" value="Сохранить" />
                         </td>
                     </tr>

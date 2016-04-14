@@ -21,6 +21,7 @@
                         <tr>
                             <td class="center nopadding">
                                 <input
+                                    class="center"
                                     name="data[<?= $item['player_id']; ?>]"
                                     size="1"
                                     type="text"

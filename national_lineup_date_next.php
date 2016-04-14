@@ -95,7 +95,7 @@ $pass   = 0;
 
 for ($i=0; $i<$game; $i++)
 {
-    $country_id     = $game_array[$i]['game_home_country_id'];
+    $country_id  = $game_array[$i]['game_home_country_id'];
     $home_score  = $game_array[$i]['game_home_score'];
     $guest_score = $game_array[$i]['game_guest_score'];
 

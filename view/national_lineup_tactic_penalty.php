@@ -9,143 +9,150 @@
                     <th class="w15">Самообладание</th>
                     <th class="w15">Пенальти</th>
                 </tr>
-                {section name=i loop=$player_array}
+                <?php foreach ($player_array as $item) { ?>
                     <tr>
                         <td>
-                            <a href="player_home_profile.php?num={$player_array[i].player_id}">
-                                {$player_array[i].name_name} {$player_array[i].surname_name}
+                            <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
                         </td>
-                        <td class="center">{$player_array[i].position_name}</td>
-                        <td class="center">{$player_array[i].composure}</td>
-                        <td class="center">{$player_array[i].penalty}</td>
+                        <td class="center"><?= $item['position_name']; ?></td>
+                        <td class="center"><?= $item['composure']; ?></td>
+                        <td class="center"><?= $item['penalty']; ?></td>
                     </tr>
-                {/section}
+                <?php } ?>
             </table>
         </td>
-        <td class="block-page w35" id="player-block">
-        <p class="header">Пенальти</p>
-            <table class="w100">
-                <tr>
-                    <td class="vcenter w50">Первый игрок</td>
-                    <td>
-                        <select data-id="1" id="select-penalty-1-national" class="select-penalty-national">
-                            <option value="0">-</option>
-                            {section name=i loop=$penaltyplayer_array}
-                                <option value="{$penaltyplayer_array[i].player_id}"
-                                    {if $penalty_array.0.country_penalty_player_id_1 == $penaltyplayer_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$penaltyplayer_array[i].name_name} {$penaltyplayer_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="vcenter">Второй игрок</td>
-                    <td>
-                        <select data-id="2" id="select-penalty-2-national" class="select-penalty-national">
-                            <option value="0">-</option>
-                            {section name=i loop=$penaltyplayer_array}
-                                <option value="{$penaltyplayer_array[i].player_id}"
-                                    {if $penalty_array.0.country_penalty_player_id_2 == $penaltyplayer_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$penaltyplayer_array[i].name_name} {$penaltyplayer_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="vcenter">Третий игрок</td>
-                    <td>
-                        <select data-id="3" id="select-penalty-3-national" class="select-penalty-national">
-                            <option value="0">-</option>
-                            {section name=i loop=$penaltyplayer_array}
-                                <option value="{$penaltyplayer_array[i].player_id}"
-                                    {if $penalty_array.0.country_penalty_player_id_3 == $penaltyplayer_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$penaltyplayer_array[i].name_name} {$penaltyplayer_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="vcenter">Четвертый игрок</td>
-                    <td>
-                        <select data-id="4" id="select-penalty-4-national" class="select-penalty-national">
-                            <option value="0">-</option>
-                            {section name=i loop=$penaltyplayer_array}
-                                <option value="{$penaltyplayer_array[i].player_id}"
-                                    {if $penalty_array.0.country_penalty_player_id_4 == $penaltyplayer_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$penaltyplayer_array[i].name_name} {$penaltyplayer_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="vcenter">Пятый игрок</td>
-                    <td>
-                        <select data-id="5" id="select-penalty-5-national" class="select-penalty-national">
-                            <option value="0">-</option>
-                            {section name=i loop=$penaltyplayer_array}
-                                <option value="{$penaltyplayer_array[i].player_id}"
-                                    {if $penalty_array.0.country_penalty_player_id_5 == $penaltyplayer_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$penaltyplayer_array[i].name_name} {$penaltyplayer_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="vcenter">Шестой игрок</td>
-                    <td>
-                        <select data-id="6" id="select-penalty-6-national" class="select-penalty-national">
-                            <option value="0">-</option>
-                            {section name=i loop=$penaltyplayer_array}
-                                <option value="{$penaltyplayer_array[i].player_id}"
-                                    {if $penalty_array.0.country_penalty_player_id_6 == $penaltyplayer_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$penaltyplayer_array[i].name_name} {$penaltyplayer_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="vcenter">Седьмой игрок</td>
-                    <td>
-                        <select data-id="7" id="select-penalty-7-national" class="select-penalty-national">
-                            <option value="0">-</option>
-                            {section name=i loop=$penaltyplayer_array}
-                                <option value="{$penaltyplayer_array[i].player_id}"
-                                    {if $penalty_array.0.country_penalty_player_id_7 == $penaltyplayer_array[i].player_id}
-                                        selected
-                                    {/if}
-                                >
-                                    {$penaltyplayer_array[i].name_name} {$penaltyplayer_array[i].surname_name}
-                                </option>
-                            {/section}
-                        </select>
-                    </td>
-                </tr>
-            </table>
+        <td class="block-page w50">
+            <p class="header">Пенальти</p>
+            <form method="POST">
+                <table class="striped w100">
+                    <tr>
+                        <td class="vcenter w35">Первый игрок</td>
+                        <td class="nopadding">
+                            <select id="select-penalty-1" class="select-penalty w100" name="data[1]">
+                                <option value="0">-</option>
+                                <?php foreach ($penaltyplayer_array as $item) { ?>
+                                    <option value="<?= $item['player_id']; ?>"
+                                        <?php if ($penalty_array[0]['country_penalty_player_id_1'] == $item['player_id']) { ?>
+                                            selected
+                                        <?php } ?>
+                                    >
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="vcenter">Второй игрок</td>
+                        <td class="nopadding">
+                            <select id="select-penalty-2" class="select-penalty w100" name="data[2]">
+                                <option value="0">-</option>
+                                <?php foreach ($penaltyplayer_array as $item) { ?>
+                                    <option value="<?= $item['player_id']; ?>"
+                                        <?php if ($penalty_array[0]['country_penalty_player_id_2'] == $item['player_id']) { ?>
+                                            selected
+                                        <?php } ?>
+                                    >
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="vcenter">Третий игрок</td>
+                        <td class="nopadding">
+                            <select id="select-penalty-3" class="select-penalty w100" name="data[3]">
+                                <option value="0">-</option>
+                                <?php foreach ($penaltyplayer_array as $item) { ?>
+                                    <option value="<?= $item['player_id']; ?>"
+                                        <?php if ($penalty_array[0]['country_penalty_player_id_3'] == $item['player_id']) { ?>
+                                            selected
+                                        <?php } ?>
+                                    >
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="vcenter">Четвертый игрок</td>
+                        <td class="nopadding">
+                            <select id="select-penalty-4" class="select-penalty w100" name="data[4]">
+                                <option value="0">-</option>
+                                <?php foreach ($penaltyplayer_array as $item) { ?>
+                                    <option value="<?= $item['player_id']; ?>"
+                                        <?php if ($penalty_array[0]['country_penalty_player_id_4'] == $item['player_id']) { ?>
+                                            selected
+                                        <?php } ?>
+                                    >
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="vcenter">Пятый игрок</td>
+                        <td class="nopadding">
+                            <select id="select-penalty-5" class="select-penalty w100" name="data[5]">
+                                <option value="0">-</option>
+                                <?php foreach ($penaltyplayer_array as $item) { ?>
+                                    <option value="<?= $item['player_id']; ?>"
+                                        <?php if ($penalty_array[0]['country_penalty_player_id_5'] == $item['player_id']) { ?>
+                                            selected
+                                        <?php } ?>
+                                    >
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="vcenter">Шестой игрок</td>
+                        <td class="nopadding">
+                            <select id="select-penalty-6" class="select-penalty w100" name="data[6]">
+                                <option value="0">-</option>
+                                <?php foreach ($penaltyplayer_array as $item) { ?>
+                                    <option value="<?= $item['player_id']; ?>"
+                                        <?php if ($penalty_array[0]['country_penalty_player_id_6'] == $item['player_id']) { ?>
+                                            selected
+                                        <?php } ?>
+                                    >
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="vcenter">Седьмой игрок</td>
+                        <td class="nopadding">
+                            <select id="select-penalty-7" class="select-penalty w100" name="data[7]">
+                                <option value="0">-</option>
+                                <?php foreach ($penaltyplayer_array as $item) { ?>
+                                    <option value="<?= $item['player_id']; ?>"
+                                        <?php if ($penalty_array[0]['country_penalty_player_id_7'] == $item['player_id']) { ?>
+                                            selected
+                                        <?php } ?>
+                                    >
+                                        <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="center" colspan="2">
+                            <input type="submit" value="Сохранить" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </td>
     </tr>
 </table>

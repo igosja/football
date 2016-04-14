@@ -22,7 +22,6 @@ $count_weather = $weather_sql->num_rows;
 if (0 == $count_weather)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
     exit;
 }
 
@@ -54,9 +53,7 @@ if (isset($_POST['weather_name']))
 
 $weather_array = $weather_sql->fetch_all(MYSQLI_ASSOC);
 
-$weather_name = $weather_array[0]['weather_name'];
-
-$smarty->assign('weather_name', $weather_name);
-$smarty->assign('tpl', 'weather_create');
+$weather_name   = $weather_array[0]['weather_name'];
+$tpl            = 'weather_create';
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

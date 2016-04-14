@@ -21,7 +21,7 @@
                         />
                     </td>
                     <td>
-                        <a href="country_country_review_profile.php?num=<?= $num; ?>">
+                        <a href="national_team_review_profile.php?num=<?= $num; ?>">
                             <?= $country_name; ?>
                         </a>
                     </td>
@@ -41,7 +41,7 @@
                         />
                     </td>
                     <td>
-                        <a href="country_country_review_profile.php?num=<?= $nearest_game_array[0]['country_id']; ?>">
+                        <a href="national_team_review_profile.php?num=<?= $nearest_game_array[0]['country_id']; ?>">
                             <?= $nearest_game_array[0]['country_name']; ?>
                         </a>
                     </td>

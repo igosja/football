@@ -155,6 +155,12 @@ $(document).ready(function($)
         tactic_player_field();
     }
 
+    if ($(input_on_page_array).is('#tactic-player-formation-national'))
+    //Загрузка стриницы тактики
+    {
+        tactic_player_field_national();
+    }
+
     $('.player-tactic-shirt').on('click', function()
     //Роль игрока при редактировании индивидуальной тактики
     {
@@ -165,6 +171,69 @@ $(document).ready(function($)
         (
             {
                 url: 'json.php?player_tactic_position_id=' + position_id + '&game_id=' + game_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    var role_select = '<select id="role-id" name="data[role]">';
+
+                    for (var i=0; i<data.role_array.length; i++)
+                    {
+                        role_select = role_select + '<option value="' + data.role_array[i].role_id + '"';
+
+                        if (data.role_array[i].role_id == data.role_id)
+                        {
+                            role_select = role_select + ' selected';
+                        }
+
+                        role_select = role_select + '>' + data.role_array[i].role_name + '</option>';
+                    }
+
+                    role_select = role_select + '</select>';
+
+                    $('#position-name').text(data.position_name);
+                    $('#table-player-position-name').text(data.position_description);
+                    $('#table-player-position-game').text(data.game);
+                    $('#table-player-mark').text(data.mark);
+                    $('#player-name').text(data.player_name + ' на позиции ' + data.position_name);
+                    $('#table-player-name').text(data.player_name);
+                    $('#role-name').html(role_select);
+                    $('#role-description').html(data.role_description);
+                    $('#player-table').removeClass('none');
+                    $('#lineup-id').val(data.lineup_id);
+                    $('#submit-role').show();
+
+                    $('#role-id').on('change', function()
+                    //Смена роли игрока
+                    {
+                        var role_id = $(this).val();
+
+                        $.ajax
+                        (
+                            {
+                                url: 'json.php?change_role_id=' + role_id + '&position_id=' + position_id,
+                                dataType: "json",
+                                success: function(data)
+                                {
+                                    $('#role-description').html(data.role_array[0].role_description);
+                                }
+                            }
+                        );
+                    });
+                }
+            }
+        );
+    });
+
+    $('.player-tactic-shirt-national').on('click', function()
+    //Роль игрока при редактировании индивидуальной тактики
+    {
+        var position_id = $(this).data('position');
+        var game_id     = $('#tactic-player-game').val();
+
+        $.ajax
+        (
+            {
+                url: 'json.php?national_player_tactic_position_id=' + position_id + '&game_id=' + game_id,
                 dataType: "json",
                 success: function(data)
                 {

@@ -38,7 +38,7 @@
                         </td>
                         <td class="center">
                             <div class="progress">
-                                <div class="progress-bar" style="width: <?= $team_array[$i]['team_reputation'] / $team_array[0]['team_reputation'] * 100; ?>%"></div>
+                                <div class="progress-bar" style="width: <?= round($team_array[$i]['team_reputation'] / $team_array[0]['team_reputation'] * 100); ?>%"></div>
                             </div>
                         </td>
                     </tr>
