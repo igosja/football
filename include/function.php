@@ -286,6 +286,7 @@ function f_igosja_player_create($team_id, $i)
 
     $sql = "INSERT INTO `player`
             SET `player_country_id`='$country_id',
+                `player_national_id`='$country_id',
                 `player_name_id`='$name_id',
                 `player_age`='$age',
                 `player_surname_id`='$surname_id',
@@ -548,4 +549,13 @@ function f_igosja_social_array($user_array = '')
     );
 
     return $social_array;
+}
+
+function f_igosja_nearest_game_sort($a, $b)
+{
+    $a_date         = $a['shedule_date'];
+    $b_date         = $b['shedule_date'];
+    $sort_result    = strcmp($a_date, $b_date);
+
+    return $sort_result;
 }

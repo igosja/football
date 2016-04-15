@@ -168,6 +168,36 @@ $nearest_sql = $mysqli->query($sql);
 
 $nearest_array = $nearest_sql->fetch_all(MYSQLI_ASSOC);
 
+$sql = "SELECT `game_home_country_id`,
+               `game_id`,
+               `lineupmain_id`,
+               `shedule_date`,
+               `country_id`,
+               `country_name`,
+               `tournament_name`
+        FROM `game`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `country`
+        ON IF (`game_home_country_id`='$authorization_country_id', `game_guest_country_id`=`country_id`, `game_home_country_id`=`country_id`)
+        LEFT JOIN `tournament`
+        ON `game_tournament_id`=`tournament_id`
+        LEFT JOIN `lineupmain`
+        ON (`lineupmain_game_id`=`game_id`
+        AND `lineupmain_country_id`='$authorization_country_id')
+        WHERE (`game_home_country_id`='$authorization_country_id'
+        OR `game_guest_country_id`='$authorization_country_id')
+        AND `game_played`='0'
+        ORDER BY `shedule_date` ASC
+        LIMIT 2";
+$nearest_sql = $mysqli->query($sql);
+
+$nearest_country_array = $nearest_sql->fetch_all(MYSQLI_ASSOC);
+
+$nearest_array = array_merge($nearest_array, $nearest_country_array);
+
+usort($nearest_array, 'f_igosja_nearest_game_sort');
+
 $sql = "SELECT `team_id`,
                `team_name`,
                `standing_place`,
@@ -442,11 +472,43 @@ $sql = "SELECT `standing_place`,
         ON `standing_tournament_id`=`tournament_id`
         WHERE `standing_season_id`='$igosja_season_id'
         AND `standing_team_id`='$authorization_team_id'
-        AND `tournament_tournamenttype_id`='2'
+        AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONSHIP . "'
         LIMIT 1";
-$tournament_sql = $mysqli->query($sql);
+$tournament_championship_sql = $mysqli->query($sql);
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_championship_array = $tournament_championship_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `stage_name`,
+               `tournament_id`,
+               `tournament_name`
+        FROM `cupparticipant`
+        LEFT JOIN `tournament`
+        ON `cupparticipant_tournament_id`=`tournament_id`
+        LEFT JOIN `stage`
+        ON `stage_id`=`cupparticipant_out`
+        WHERE `cupparticipant_season_id`='$igosja_season_id'
+        AND `cupparticipant_team_id`='$authorization_team_id'
+        AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CUP . "'
+        LIMIT 1";
+$tournament_cup_sql = $mysqli->query($sql);
+
+$tournament_cup_array = $tournament_cup_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `stage_name`,
+               `tournament_id`,
+               `tournament_name`
+        FROM `leagueparticipant`
+        LEFT JOIN `tournament`
+        ON `leagueparticipant_tournament_id`=`tournament_id`
+        LEFT JOIN `stage`
+        ON `stage_id`=`leagueparticipant_out`
+        WHERE `leagueparticipant_season_id`='$igosja_season_id'
+        AND `leagueparticipant_team_id`='$authorization_team_id'
+        AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONS_LEAGUE . "'
+        LIMIT 1";
+$tournament_league_sql = $mysqli->query($sql);
+
+$tournament_league_array = $tournament_league_sql->fetch_all(MYSQLI_ASSOC);
 
 $num            = $authorization_id;
 $header_title   = $authorization_login;

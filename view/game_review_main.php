@@ -31,6 +31,7 @@
                         <img
                             alt="<?= $game_array[0]['weather_name']; ?>"
                             class="img-12"
+                            title="<?= $game_array[0]['weather_name']; ?>"
                             src="img/weather/12/<?= $game_array[0]['weather_id']; ?>.png"
                         />
                         <?= $game_array[0]['game_temperature'] . CELSIUS; ?>

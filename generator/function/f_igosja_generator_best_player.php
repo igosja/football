@@ -47,7 +47,7 @@ function f_igosja_generator_best_player()
             AND `statisticplayer_country_id`=`lineup_country_id`
             SET `statisticplayer_best`=`statisticplayer_best`+'1'
             WHERE `statisticplayer_season_id`='$igosja_season_id'
-            AND `lineup_team_id`!='0'
+            AND `lineup_team_id`='0'
             AND `lineup_id` IS NOT NULL";
     f_igosja_mysqli_query($sql);
 

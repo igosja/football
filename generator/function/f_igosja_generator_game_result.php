@@ -81,7 +81,7 @@ function f_igosja_generator_game_result()
             else
             {
                 $team_country_lineup_sql        = "`lineup_country_id`='$country_id'";
-                $team_country_lineupmain_sql    = "`lineupmain_team_id`='$country_id'";
+                $team_country_lineupmain_sql    = "`lineupmain_country_id`='$country_id'";
             }
 
             $sql = "SELECT `lineupmain_gamemood_id`,

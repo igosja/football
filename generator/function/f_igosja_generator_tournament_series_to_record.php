@@ -28,7 +28,8 @@ function f_igosja_generator_tournament_series_to_record()
         {
             $tournament_id = $tournament_array[$i]['series_tournament_id'];
 
-            $sql = "SELECT `series_date_end`,
+            $sql = "SELECT `series_country_id`,
+                           `series_date_end`,
                            `series_date_start`,
                            `series_team_id`,
                            `series_value`
@@ -45,6 +46,11 @@ function f_igosja_generator_tournament_series_to_record()
             $date_start = $series_array[0]['series_date_start'];
             $date_end   = $series_array[0]['series_date_end'];
             $value      = $series_array[0]['series_value'];
+
+            if (0 == $team_id)
+            {
+                $team_id = $series_array[0]['series_country_id'];
+            }
 
             $sql = "SELECT `recordtournament_value_1`
                     FROM `recordtournament`

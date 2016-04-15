@@ -234,7 +234,7 @@ for ($i=0; $i<70; $i++)
     $date = strtotime($date . ' +' . $i . 'days');
     $date = date('Y-m-d', $date);
 
-    if (14 > $i || 61 == $i)
+    if (14 > $i || 61 == $i || 62 == $i)
     {
         $tournament_type = TOURNAMENT_TYPE_FRIENDLY;
     }

@@ -27,7 +27,7 @@ function f_igosja_generator_country_series_to_record()
 
         for ($i=0; $i<$count_series; $i++)
         {
-            $country_id    = $series_array[$i]['series_country_id'];
+            $country_id = $series_array[$i]['series_country_id'];
             $date_start = $series_array[$i]['series_date_start'];
             $date_end   = $series_array[$i]['series_date_end'];
             $value      = $series_array[$i]['series_value'];

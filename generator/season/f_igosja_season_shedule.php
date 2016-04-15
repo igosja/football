@@ -6,7 +6,7 @@ function f_igosja_season_shedule()
 
     $shedule_insert_sql = array();
 
-    $shedule_friendly_array = array(19, 29, 31, 40, 57, 59, 61, 82);
+    $shedule_friendly_array = array(19, 29, 31, 40, 57, 59, 61, 82, 88);
     $shedule_cup_array      = array(5, 12, 26, 33, 47, 54, 68, 75, 89);
     $shedule_league_array   = array(1, 3, 8, 10, 15, 17, 22, 24, 36, 38, 43, 45, 50, 52, 64, 66, 71, 73, 78, 80, 85, 87);
     $shedule_worldcup_array = array(6, 13, 20, 27, 34, 41, 48, 55, 62, 69, 76, 83, 90);

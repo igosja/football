@@ -6,7 +6,7 @@
                 <table class="center">
                     <tr>
                         <td>
-                            <input name="data[login]" placeholder="Логин" type="text" />
+                            <input name="data[login]" placeholder="Логин" type="text" autofocus />
                         </td>
                     </tr>
                     <tr>

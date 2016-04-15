@@ -1,8 +1,6 @@
 <?php
 
 define('CELSIUS', '&deg;С');
-define('CHAMPIONSHIP_LAST_STAGE', 38);
-define('CHAMPIONSHIP_GOLD_GAME_STAGE', 50);
 define('CUP_FINAL_STAGE', 49);
 define('EVENT_GOAL', 1);
 define('EVENT_AUTOGOAL', 2);

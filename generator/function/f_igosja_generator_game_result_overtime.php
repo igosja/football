@@ -7,7 +7,7 @@ function f_igosja_generator_game_result_overtime()
     $koef_2 = 100000;
     $koef_3 = 100000;
     $koef_4 = 100000;
-    $koef_5 = 10000;
+    $koef_5 = 100000;
 
     $sql = "SELECT `game_id`,
                    `game_first_game_id`,

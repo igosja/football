@@ -48,6 +48,7 @@
                                             <img
                                                 alt="<?= $item['weather_name']; ?>"
                                                 class="img-12"
+                                                title="<?= $item['weather_name']; ?>"
                                                 src="/img/weather/12/<?= $item['weather_id']; ?>.png" 
                                             />
                                             <?= $item['game_temperature']; ?> <?= CELSIUS; ?>
@@ -92,26 +93,52 @@
                         <tr>
                             <td class="center w10"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
                             <td class="w1">
-                                <?php if ($item['game_home_team_id'] == $authorization_team_id) { ?>
-                                    Д
+                                <?php if (isset($item['game_home_team_id'])) { ?>
+                                    <?php if ($item['game_home_team_id'] == $authorization_team_id) { ?>
+                                        Д
+                                    <?php } else { ?>
+                                        Г
+                                    <?php } ?>
                                 <?php } else { ?>
-                                    Г
+                                    <?php if ($item['game_home_country_id'] == $authorization_team_id) { ?>
+                                        Д
+                                    <?php } else { ?>
+                                        Г
+                                    <?php } ?>
                                 <?php } ?>
                             </td>
                             <td class="w1">
-                                <img
-                                    alt="<?= $item['team_name']; ?>"
-                                    class="img-12"
-                                    src="img/team/12/<?= $item['team_id']; ?>.png"
-                                />
+                                <?php if (isset($item['game_home_team_id'])) { ?>
+                                    <img
+                                        alt="<?= $item['team_name']; ?>"
+                                        class="img-12"
+                                        src="img/team/12/<?= $item['team_id']; ?>.png"
+                                    />
+                                <?php } else { ?>
+                                    <img
+                                        alt="<?= $item['country_name']; ?>"
+                                        class="img-12"
+                                        src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                    />
+                                <?php } ?>
                             </td>
                             <td>
-                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                    <?= $item['team_name']; ?>
-                                </a>
+                                <?php if (isset($item['game_home_team_id'])) { ?>
+                                    <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                        <?= $item['team_name']; ?>
+                                    </a>
+                                <?php } else { ?>
+                                    <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                        <?= $item['country_name']; ?>
+                                    </a>
+                                <?php } ?>
                             </td>
                             <td class="right">
-                                <a href="team_lineup_tactic_review.php?num=<?= $authorization_team_id; ?>&game=<?= $item['game_id']; ?>">
+                                <?php if (isset($item['game_home_team_id'])) { ?>
+                                    <a href="team_lineup_tactic_review.php?num=<?= $authorization_team_id; ?>&game=<?= $item['game_id']; ?>">
+                                <?php } else { ?>
+                                    <a href="national_lineup_tactic_review.php?num=<?= $authorization_country_id; ?>&game=<?= $item['game_id']; ?>">
+                                <?php } ?>
                                     <?php if ($item['lineupmain_id']) { ?>
                                         Редактировать
                                     <?php } else { ?>
@@ -329,7 +356,7 @@
             <td class="block-page">
                 <p class="header">Турниры команды</p>
                 <table class="striped w100">
-                    <?php foreach ($tournament_array as $item) { ?>
+                    <?php foreach ($tournament_championship_array as $item) { ?>
                         <tr>
                             <td class="w1">
                                 <img
@@ -344,6 +371,40 @@
                                 </a>
                             </td>
                             <td class="right w25"><?= $item['standing_place']; ?></td>
+                        </tr>
+                    <?php } ?>
+                    <?php foreach ($tournament_cup_array as $item) { ?>
+                        <tr>
+                            <td class="w1">
+                                <img
+                                    alt="<?= $item['tournament_name']; ?>"
+                                    class="w12"
+                                    src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
+                                />
+                            </td>
+                            <td>
+                                <a href="tournament_review_profile?num=<?= $item['tournament_id']; ?>">
+                                    <?= $item['tournament_name']; ?>
+                                </a>
+                            </td>
+                            <td class="right w25"><?= $item['stage_name']; ?></td>
+                        </tr>
+                    <?php } ?>
+                    <?php foreach ($tournament_league_array as $item) { ?>
+                        <tr>
+                            <td class="w1">
+                                <img
+                                    alt="<?= $item['tournament_name']; ?>"
+                                    class="w12"
+                                    src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
+                                />
+                            </td>
+                            <td>
+                                <a href="tournament_review_profile?num=<?= $item['tournament_id']; ?>">
+                                    <?= $item['tournament_name']; ?>
+                                </a>
+                            </td>
+                            <td class="right w25"><?= $item['stage_name']; ?></td>
                         </tr>
                     <?php } ?>
                 </table>
