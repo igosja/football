@@ -3,6 +3,8 @@
 function f_igosja_generator_lineup_main_create()
 //Создинае составов в командах, где их нет
 {
+    $sql_insert = array();
+
     $sql = "SELECT `game_guest_team_id`,
                    `game_home_team_id`,
                    `game_id`,
@@ -25,8 +27,6 @@ function f_igosja_generator_lineup_main_create()
 
     $count_game = $game_sql->num_rows;
     $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
-
-    $sql_insert = array();
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -75,8 +75,6 @@ function f_igosja_generator_lineup_main_create()
     $count_game = $game_sql->num_rows;
     $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-    $sql_insert = array();
-
     for ($i=0; $i<$count_game; $i++)
     {
         $home_lineup_id  = $game_array[$i]['homelineup_id'];
@@ -108,14 +106,14 @@ function f_igosja_generator_lineup_main_create()
         $sql_insert = implode(',', $sql_insert);
 
         $sql = "INSERT INTO `lineupmain`
-                            (
-                                `lineupmain_game_id`,
-                                `lineupmain_formation_id`,
-                                `lineupmain_gamemood_id`,
-                                `lineupmain_gamestyle_id`,
-                                `lineupmain_country_id`,
-                                `lineupmain_team_id`
-                            )
+                (
+                    `lineupmain_game_id`,
+                    `lineupmain_formation_id`,
+                    `lineupmain_gamemood_id`,
+                    `lineupmain_gamestyle_id`,
+                    `lineupmain_country_id`,
+                    `lineupmain_team_id`
+                )
                 VALUES " . $sql_insert . ";";
         f_igosja_mysqli_query($sql);
     }

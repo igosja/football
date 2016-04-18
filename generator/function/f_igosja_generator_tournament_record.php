@@ -35,44 +35,49 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $game_sql = f_igosja_mysqli_query($sql);
 
-        $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+        $count_game = $game_sql->num_rows;
 
-        $game_id = $game_array[0]['game_id'];
-        $visitor = $game_array[0]['game_visitor'];
-
-        $sql = "SELECT `recordtournament_value_1`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_HIGHEST_ATTENDANCE . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_game)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_game_id`='$game_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_HIGHEST_ATTENDANCE . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$visitor'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value = $record_array[0]['recordtournament_value_1'];
+            $game_id = $game_array[0]['game_id'];
+            $visitor = $game_array[0]['game_visitor'];
 
-            if ($visitor > $record_value)
+            $sql = "SELECT `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_HIGHEST_ATTENDANCE . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_game_id`='$game_id',
-                            `recordtournament_value_1`='$visitor'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_HIGHEST_ATTENDANCE . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_HIGHEST_ATTENDANCE . "',
+                            `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_value_1`='$visitor'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value = $record_array[0]['recordtournament_value_1'];
+
+                if ($visitor > $record_value)
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_game_id`='$game_id',
+                                `recordtournament_value_1`='$visitor'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_HIGHEST_ATTENDANCE . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -86,50 +91,55 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $visitor_sql = f_igosja_mysqli_query($sql);
 
-        $visitor_array = $visitor_sql->fetch_all(MYSQLI_ASSOC);
+        $count_visitor = $visitor_sql->num_rows;
 
-        $team_id                = $visitor_array[0]['statisticteam_team_id'];
-        $statistic_season_id    = $visitor_array[0]['statisticteam_season_id'];
-        $visitor                = $visitor_array[0]['visitor'];
-
-        $sql = "SELECT `recordtournament_season_id`,
-                       `recordtournament_value_1`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_visitor)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "',
-                        `recordtournament_season_id`='$statistic_season_id',
-                        `recordtournament_team_id`='$team_id',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$visitor'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array  = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $visitor_array = $visitor_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value  = $record_array[0]['recordtournament_value_1'];
-            $record_season = $record_array[0]['recordtournament_season_id'];
+            $team_id                = $visitor_array[0]['statisticteam_team_id'];
+            $statistic_season_id    = $visitor_array[0]['statisticteam_season_id'];
+            $visitor                = $visitor_array[0]['visitor'];
 
-            if ($visitor > $record_value ||
-                $statistic_season_id == $record_season)
+            $sql = "SELECT `recordtournament_season_id`,
+                           `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
-                        SET `recordtournament_game_id`='$game_id',
+                $sql = "INSERT INTO `recordtournament`
+                        SET `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "',
+                            `recordtournament_season_id`='$statistic_season_id',
                             `recordtournament_team_id`='$team_id',
-                            `recordtournament_value_1`='$visitor'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_value_1`='$visitor'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array  = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value  = $record_array[0]['recordtournament_value_1'];
+                $record_season = $record_array[0]['recordtournament_season_id'];
+
+                if ($visitor > $record_value ||
+                    $statistic_season_id == $record_season)
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_game_id`='$game_id',
+                                `recordtournament_team_id`='$team_id',
+                                `recordtournament_value_1`='$visitor'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -143,50 +153,55 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $visitor_sql = f_igosja_mysqli_query($sql);
 
-        $visitor_array = $visitor_sql->fetch_all(MYSQLI_ASSOC);
+        $count_visitor = $visitor_sql->num_rows;
 
-        $country_id                = $visitor_array[0]['statisticcountry_country_id'];
-        $statistic_season_id    = $visitor_array[0]['statisticcountry_season_id'];
-        $visitor                = $visitor_array[0]['visitor'];
-
-        $sql = "SELECT `recordtournament_season_id`,
-                       `recordtournament_value_1`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_visitor)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "',
-                        `recordtournament_season_id`='$statistic_season_id',
-                        `recordtournament_team_id`='$country_id',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$visitor'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array  = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $visitor_array = $visitor_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value  = $record_array[0]['recordtournament_value_1'];
-            $record_season = $record_array[0]['recordtournament_season_id'];
+            $country_id                = $visitor_array[0]['statisticcountry_country_id'];
+            $statistic_season_id    = $visitor_array[0]['statisticcountry_season_id'];
+            $visitor                = $visitor_array[0]['visitor'];
 
-            if ($visitor > $record_value ||
-                $statistic_season_id == $record_season)
+            $sql = "SELECT `recordtournament_season_id`,
+                           `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
-                        SET `recordtournament_game_id`='$game_id',
+                $sql = "INSERT INTO `recordtournament`
+                        SET `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "',
+                            `recordtournament_season_id`='$statistic_season_id',
                             `recordtournament_team_id`='$country_id',
-                            `recordtournament_value_1`='$visitor'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_value_1`='$visitor'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array  = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value  = $record_array[0]['recordtournament_value_1'];
+                $record_season = $record_array[0]['recordtournament_season_id'];
+
+                if ($visitor > $record_value ||
+                    $statistic_season_id == $record_season)
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_game_id`='$game_id',
+                                `recordtournament_team_id`='$country_id',
+                                `recordtournament_value_1`='$visitor'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -202,44 +217,49 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $game_sql = f_igosja_mysqli_query($sql);
 
-        $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+        $count_game = $game_sql->num_rows;
 
-        $game_id = $game_array[0]['game_id'];
-        $score   = $game_array[0]['game_score'];
-
-        $sql = "SELECT `recordtournament_value_1`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_SCORE . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_game)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_game_id`='$game_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_SCORE . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$score'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value = $record_array[0]['recordtournament_value_1'];
+            $game_id = $game_array[0]['game_id'];
+            $score   = $game_array[0]['game_score'];
 
-            if ($score > $record_value)
+            $sql = "SELECT `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_SCORE . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_game_id`='$game_id',
-                            `recordtournament_value_1`='$score'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_SCORE . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_SCORE . "',
+                            `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_value_1`='$score'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value = $record_array[0]['recordtournament_value_1'];
+
+                if ($score > $record_value)
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_game_id`='$game_id',
+                                `recordtournament_value_1`='$score'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_SCORE . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -255,44 +275,49 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $game_sql = f_igosja_mysqli_query($sql);
 
-        $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+        $count_game = $game_sql->num_rows;
 
-        $game_id = $game_array[0]['game_id'];
-        $score   = $game_array[0]['game_score'];
-
-        $sql = "SELECT `recordtournament_value_1`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_WIN . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_game)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_game_id`='$game_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_WIN . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$score'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value = $record_array[0]['recordtournament_value_1'];
+            $game_id = $game_array[0]['game_id'];
+            $score   = $game_array[0]['game_score'];
 
-            if ($score > $record_value)
+            $sql = "SELECT `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_WIN . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_game_id`='$game_id',
-                            `recordtournament_value_1`='$score'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_WIN . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_WIN . "',
+                            `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_value_1`='$score'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value = $record_array[0]['recordtournament_value_1'];
+
+                if ($score > $record_value)
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_game_id`='$game_id',
+                                `recordtournament_value_1`='$score'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_BIGGEST_WIN . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -310,44 +335,49 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $count_player = $player_sql->num_rows;
 
-        $player_id  = $player_array[0]['lineup_player_id'];
-        $goal       = $player_array[0]['lineup_goal'];
-
-        $sql = "SELECT `recordtournament_value_1`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_ONE_GAME_SCORE . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_player)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_player_id`='$player_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_ONE_GAME_SCORE . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$goal'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value = $record_array[0]['recordtournament_value_1'];
+            $player_id  = $player_array[0]['lineup_player_id'];
+            $goal       = $player_array[0]['lineup_goal'];
 
-            if ($goal > $record_value)
+            $sql = "SELECT `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_ONE_GAME_SCORE . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_player_id`='$player_id',
-                            `recordtournament_value_1`='$goal'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_ONE_GAME_SCORE . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_ONE_GAME_SCORE . "',
+                            `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_value_1`='$goal'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value = $record_array[0]['recordtournament_value_1'];
+
+                if ($goal > $record_value)
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_player_id`='$player_id',
+                                `recordtournament_value_1`='$goal'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_ONE_GAME_SCORE . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -365,44 +395,49 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $count_player = $player_sql->num_rows;
 
-        $player_id  = $player_array[0]['lineup_player_id'];
-        $mark       = $player_array[0]['lineup_mark'] * 10; //Нужно целое число
-
-        $sql = "SELECT `recordtournament_value_1`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_MARK . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_player)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_player_id`='$player_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_MARK . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$mark'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value = $record_array[0]['recordtournament_value_1'];
+            $player_id  = $player_array[0]['lineup_player_id'];
+            $mark       = $player_array[0]['lineup_mark'] * 10; //Нужно целое число
 
-            if ($mark > $record_value)
+            $sql = "SELECT `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_MARK . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_player_id`='$player_id',
-                            `recordtournament_value_1`='$mark'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_MARK . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_MARK . "',
+                            `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_value_1`='$mark'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value = $record_array[0]['recordtournament_value_1'];
+
+                if ($mark > $record_value)
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_player_id`='$player_id',
+                                `recordtournament_value_1`='$mark'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_MARK . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -415,43 +450,48 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $count_player = $player_sql->num_rows;
 
-        $player_id  = $player_array[0]['statisticplayer_player_id'];
-        $goal       = $player_array[0]['goal'];
-
-        $sql = "SELECT `recordtournament_value_1`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_SCORER . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_player)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_player_id`='$player_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_SCORER . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$goal'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
-            $record_value = $record_array[0]['recordtournament_value_1'];
+            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-            if ($goal > $record_value)
+            $player_id  = $player_array[0]['statisticplayer_player_id'];
+            $goal       = $player_array[0]['goal'];
+
+            $sql = "SELECT `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_SCORER . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_player_id`='$player_id',
-                            `recordtournament_value_1`='$goal'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_SCORER . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_SCORER . "',
+                            `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_value_1`='$goal'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_value = $record_array[0]['recordtournament_value_1'];
+
+                if ($goal > $record_value)
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_player_id`='$player_id',
+                                `recordtournament_value_1`='$goal'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_SCORER . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -464,44 +504,49 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $count_player = $player_sql->num_rows;
 
-        $player_id  = $player_array[0]['statisticplayer_player_id'];
-        $pass       = $player_array[0]['pass'];
-
-        $sql = "SELECT `recordtournament_value_1`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_ASSISTANT . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_player)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_player_id`='$player_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_ASSISTANT . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$pass'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value = $record_array[0]['recordtournament_value_1'];
+            $player_id  = $player_array[0]['statisticplayer_player_id'];
+            $pass       = $player_array[0]['pass'];
 
-            if ($pass > $record_value)
+            $sql = "SELECT `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_ASSISTANT . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_player_id`='$player_id',
-                            `recordtournament_value_1`='$pass'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_ASSISTANT . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_ASSISTANT . "',
+                            `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_value_1`='$pass'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value = $record_array[0]['recordtournament_value_1'];
+
+                if ($pass > $record_value)
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_player_id`='$player_id',
+                                `recordtournament_value_1`='$pass'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_ASSISTANT . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -514,44 +559,49 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $count_player = $player_sql->num_rows;
 
-        $player_id  = $player_array[0]['statisticplayer_player_id'];
-        $best       = $player_array[0]['best'];
-
-        $sql = "SELECT `recordtournament_value_1`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_BEST . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_player)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_player_id`='$player_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_BEST . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$best'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-            $record_value = $record_array[0]['recordtournament_value_1'];
+            $player_id  = $player_array[0]['statisticplayer_player_id'];
+            $best       = $player_array[0]['best'];
 
-            if ($best > $record_value)
+            $sql = "SELECT `recordtournament_value_1`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_BEST . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_player_id`='$player_id',
-                            `recordtournament_value_1`='$best'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_BEST . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_BEST . "',
+                            `recordtournament_tournament_id`='$tournament_id',
+                            `recordtournament_value_1`='$best'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+
+                $record_value = $record_array[0]['recordtournament_value_1'];
+
+                if ($best > $record_value)
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_player_id`='$player_id',
+                                `recordtournament_value_1`='$best'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_MOST_BEST . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -789,52 +839,57 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $discipline_sql = f_igosja_mysqli_query($sql);
 
-        $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
+        $count_discipline = $discipline_sql->num_rows;
 
-        $team_id = $discipline_array[0]['statisticteam_team_id'];
-        $red     = $discipline_array[0]['statisticteam_red'];
-        $yellow  = $discipline_array[0]['statisticteam_yellow'];
-
-        $sql = "SELECT `recordtournament_value_1`,
-                       `recordtournament_value_2`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_discipline)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_team_id`='$team_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$red',
-                        `recordtournament_value_2`='$yellow',
-                        `recordtournament_season_id`='$igosja_season_id'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
-            $record_value_1 = $record_array[0]['recordtournament_value_1'];
-            $record_value_2 = $record_array[0]['recordtournament_value_2'];
+            $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
 
-            if ($red > $record_value_1 ||
-                ($red == $record_value_1 &&
-                 $yellow > $record_value_2))
+            $team_id = $discipline_array[0]['statisticteam_team_id'];
+            $red     = $discipline_array[0]['statisticteam_red'];
+            $yellow  = $discipline_array[0]['statisticteam_yellow'];
+
+            $sql = "SELECT `recordtournament_value_1`,
+                           `recordtournament_value_2`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_team_id`='$team_id',
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "',
+                            `recordtournament_tournament_id`='$tournament_id',
                             `recordtournament_value_1`='$red',
                             `recordtournament_value_2`='$yellow',
-                            `recordtournament_season_id`='$igosja_season_id'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_season_id`='$igosja_season_id'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_value_1 = $record_array[0]['recordtournament_value_1'];
+                $record_value_2 = $record_array[0]['recordtournament_value_2'];
+
+                if ($red > $record_value_1 ||
+                    ($red == $record_value_1 &&
+                     $yellow > $record_value_2))
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_team_id`='$team_id',
+                                `recordtournament_value_1`='$red',
+                                `recordtournament_value_2`='$yellow',
+                                `recordtournament_season_id`='$igosja_season_id'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -848,52 +903,57 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $discipline_sql = f_igosja_mysqli_query($sql);
 
-        $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
+        $count_discipline = $discipline_sql->num_rows;
 
-        $country_id = $discipline_array[0]['statisticcountry_country_id'];
-        $red        = $discipline_array[0]['statisticcountry_red'];
-        $yellow     = $discipline_array[0]['statisticcountry_yellow'];
-
-        $sql = "SELECT `recordtournament_value_1`,
-                       `recordtournament_value_2`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_discipline)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_team_id`='$country_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$red',
-                        `recordtournament_value_2`='$yellow',
-                        `recordtournament_season_id`='$igosja_season_id'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
-            $record_value_1 = $record_array[0]['recordtournament_value_1'];
-            $record_value_2 = $record_array[0]['recordtournament_value_2'];
+            $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
 
-            if ($red > $record_value_1 ||
-                ($red == $record_value_1 &&
-                 $yellow > $record_value_2))
+            $country_id = $discipline_array[0]['statisticcountry_country_id'];
+            $red        = $discipline_array[0]['statisticcountry_red'];
+            $yellow     = $discipline_array[0]['statisticcountry_yellow'];
+
+            $sql = "SELECT `recordtournament_value_1`,
+                           `recordtournament_value_2`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_team_id`='$country_id',
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "',
+                            `recordtournament_tournament_id`='$tournament_id',
                             `recordtournament_value_1`='$red',
                             `recordtournament_value_2`='$yellow',
-                            `recordtournament_season_id`='$igosja_season_id'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_season_id`='$igosja_season_id'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_value_1 = $record_array[0]['recordtournament_value_1'];
+                $record_value_2 = $record_array[0]['recordtournament_value_2'];
+
+                if ($red > $record_value_1 ||
+                    ($red == $record_value_1 &&
+                     $yellow > $record_value_2))
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_team_id`='$country_id',
+                                `recordtournament_value_1`='$red',
+                                `recordtournament_value_2`='$yellow',
+                                `recordtournament_season_id`='$igosja_season_id'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_TEAM . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 
@@ -907,50 +967,55 @@ function f_igosja_generator_tournament_record()
                 LIMIT 1";
         $discipline_sql = f_igosja_mysqli_query($sql);
 
-        $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
+        $count_discipline = $discipline_sql->num_rows;
 
-        $player_id  = $discipline_array[0]['statisticplayer_player_id'];
-        $red        = $discipline_array[0]['red'];
-        $yellow     = $discipline_array[0]['yellow'];
-
-        $sql = "SELECT `recordtournament_value_1`,
-                       `recordtournament_value_2`
-                FROM `recordtournament`
-                WHERE `recordtournament_tournament_id`='$tournament_id'
-                AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_PLAYER . "'
-                LIMIT 1";
-        $record_sql = f_igosja_mysqli_query($sql);
-
-        $count_record = $record_sql->num_rows;
-
-        if (0 == $count_record)
+        if (0 != $count_discipline)
         {
-            $sql = "INSERT INTO `recordtournament`
-                    SET `recordtournament_player_id`='$player_id',
-                        `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_PLAYER . "',
-                        `recordtournament_tournament_id`='$tournament_id',
-                        `recordtournament_value_1`='$red',
-                        `recordtournament_value_2`='$yellow'";
-            f_igosja_mysqli_query($sql);
-        }
-        else
-        {
-            $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
-            $record_value_1 = $record_array[0]['recordtournament_value_1'];
-            $record_value_2 = $record_array[0]['recordtournament_value_2'];
+            $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
 
-            if ($red > $record_value_1 ||
-                ($red == $record_value_1 &&
-                 $yellow > $record_value_2))
+            $player_id  = $discipline_array[0]['statisticplayer_player_id'];
+            $red        = $discipline_array[0]['red'];
+            $yellow     = $discipline_array[0]['yellow'];
+
+            $sql = "SELECT `recordtournament_value_1`,
+                           `recordtournament_value_2`
+                    FROM `recordtournament`
+                    WHERE `recordtournament_tournament_id`='$tournament_id'
+                    AND `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_PLAYER . "'
+                    LIMIT 1";
+            $record_sql = f_igosja_mysqli_query($sql);
+
+            $count_record = $record_sql->num_rows;
+
+            if (0 == $count_record)
             {
-                $sql = "UPDATE `recordtournament`
+                $sql = "INSERT INTO `recordtournament`
                         SET `recordtournament_player_id`='$player_id',
+                            `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_PLAYER . "',
+                            `recordtournament_tournament_id`='$tournament_id',
                             `recordtournament_value_1`='$red',
-                            `recordtournament_value_2`='$yellow'
-                        WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_PLAYER . "'
-                        AND `recordtournament_tournament_id`='$tournament_id'
-                        LIMIT 1";
+                            `recordtournament_value_2`='$yellow'";
                 f_igosja_mysqli_query($sql);
+            }
+            else
+            {
+                $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_value_1 = $record_array[0]['recordtournament_value_1'];
+                $record_value_2 = $record_array[0]['recordtournament_value_2'];
+
+                if ($red > $record_value_1 ||
+                    ($red == $record_value_1 &&
+                     $yellow > $record_value_2))
+                {
+                    $sql = "UPDATE `recordtournament`
+                            SET `recordtournament_player_id`='$player_id',
+                                `recordtournament_value_1`='$red',
+                                `recordtournament_value_2`='$yellow'
+                            WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_DISCIPLINE_PLAYER . "'
+                            AND `recordtournament_tournament_id`='$tournament_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+                }
             }
         }
 

@@ -137,6 +137,7 @@ function f_igosja_generator_lineup_check_and_fill()
                                 FROM `lineup`
                                 WHERE `lineup_game_id`='$game_id'
                                 AND `lineup_team_id`='$team_id'
+                                AND `lineup_player_id`='$player_id'
                                 AND `lineup_id`!='$lineup_id'";
                         $lineup_sql = f_igosja_mysqli_query($sql);
 
@@ -310,6 +311,7 @@ function f_igosja_generator_lineup_check_and_fill()
                                 FROM `lineup`
                                 WHERE `lineup_game_id`='$game_id'
                                 AND `lineup_country_id`='$country_id'
+                                AND `lineup_player_id`='$player_id'
                                 AND `lineup_id`!='$lineup_id'";
                         $lineup_sql = f_igosja_mysqli_query($sql);
 

@@ -90,6 +90,7 @@ $sql = "SELECT `game_temperature`,
                `guest`.`team_name` AS `guest_name`,
                `home`.`team_id` AS `home_id`,
                `home`.`team_name` AS `home_name`,
+               `shedule_date`,
                `stadium_name`,
                `tournament_id`,
                `tournament_name`,
@@ -117,6 +118,45 @@ $next_sql = $mysqli->query($sql);
 
 $next_array = $next_sql->fetch_all(MYSQLI_ASSOC);
 
+$sql = "SELECT `game_temperature`,
+               `guest`.`country_id` AS `guest_id`,
+               `guest`.`country_name` AS `guest_country_name`,
+               `home`.`country_id` AS `home_id`,
+               `home`.`country_name` AS `home_country_name`,
+               `shedule_date`,
+               `stadium_name`,
+               `tournament_id`,
+               `tournament_name`,
+               `weather_id`,
+               `weather_name`
+        FROM `game`
+        LEFT JOIN `shedule`
+        ON `game_shedule_id`=`shedule_id`
+        LEFT JOIN `country` AS `home`
+        ON `home`.`country_id`=`game_home_country_id`
+        LEFT JOIN `country` AS `guest`
+        ON `guest`.`country_id`=`game_guest_country_id`
+        LEFT JOIN `stadium`
+        ON `game_stadium_id`=`stadium_id`
+        LEFT JOIN `tournament`
+        ON `tournament_id`=`game_tournament_id`
+        LEFT JOIN `weather`
+        ON `weather_id`=`game_weather_id`
+        WHERE `game_played`='0'
+        AND (`game_home_country_id`='$authorization_country_id'
+        OR `game_guest_country_id`='$authorization_country_id')
+        ORDER BY `shedule_date` ASC
+        LIMIT 1";
+$next_sql = $mysqli->query($sql);
+
+$next_country_array = $next_sql->fetch_all(MYSQLI_ASSOC);
+
+$next_array = array_merge($next_array, $next_country_array);
+
+usort($next_array, 'f_igosja_nearest_game_sort');
+
+$next_array = array_slice($next_array, 0, 1);
+
 $sql = "SELECT `game_home_team_id`,
                IF (`game_home_team_id`='$authorization_team_id', `game_home_score`, `game_guest_score`) AS `home_score`,
                `game_id`,
@@ -140,7 +180,34 @@ $sql = "SELECT `game_home_team_id`,
 $latest_sql = $mysqli->query($sql);
 
 $latest_array = $latest_sql->fetch_all(MYSQLI_ASSOC);
-$latest_array = array_reverse($latest_array);
+
+$sql = "SELECT `game_home_country_id`,
+               IF (`game_home_country_id`='$authorization_country_id', `game_home_score`, `game_guest_score`) AS `home_score`,
+               `game_id`,
+               IF (`game_home_country_id`='$authorization_country_id', `game_guest_score`, `game_home_score`) AS `guest_score`,
+               `shedule_date`,
+               `country_id`,
+               `country_name`,
+               `tournament_name`
+        FROM `game`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `country`
+        ON IF (`game_home_country_id`='$authorization_country_id', `game_guest_country_id`=`country_id`, `game_home_country_id`=`country_id`)
+        LEFT JOIN `tournament`
+        ON `game_tournament_id`=`tournament_id`
+        WHERE (`game_home_country_id`='$authorization_country_id'
+        OR `game_guest_country_id`='$authorization_country_id')
+        AND `game_played`='1'
+        ORDER BY `shedule_date` DESC
+        LIMIT 1";
+$latest_sql = $mysqli->query($sql);
+
+$latest_country_array = $latest_sql->fetch_all(MYSQLI_ASSOC);
+
+$latest_array = array_merge($latest_array, $latest_country_array);
+
+usort($latest_array, 'f_igosja_nearest_game_sort');
 
 $sql = "SELECT `game_home_team_id`,
                `game_id`,

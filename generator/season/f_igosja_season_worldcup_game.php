@@ -101,7 +101,7 @@ function f_igosja_season_worldcup_game()
                     ('0', '$country_3',  '$country_14', '$referee_28', '$stadium_3',  '4',  '$shedule_4',  '15'+RAND()*'15', '$tournament_id', '1'+RAND()*'3'),
                     ('0', '$country_1',  '$country_6',  '$referee_29', '$stadium_1',  '5',  '$shedule_5',  '15'+RAND()*'15', '$tournament_id', '1'+RAND()*'3'),
                     ('0', '$country_2',  '$country_5',  '$referee_30', '$stadium_2',  '5',  '$shedule_5',  '15'+RAND()*'15', '$tournament_id', '1'+RAND()*'3'),
-                    ('0', '$country_3',  '$country_5',  '$referee_31', '$stadium_3',  '5',  '$shedule_5',  '15'+RAND()*'15', '$tournament_id', '1'+RAND()*'3'),
+                    ('0', '$country_3',  '$country_4',  '$referee_31', '$stadium_3',  '5',  '$shedule_5',  '15'+RAND()*'15', '$tournament_id', '1'+RAND()*'3'),
                     ('0', '$country_11', '$country_9',  '$referee_32', '$stadium_11', '5',  '$shedule_5',  '15'+RAND()*'15', '$tournament_id', '1'+RAND()*'3'),
                     ('0', '$country_12', '$country_8',  '$referee_33', '$stadium_12', '5',  '$shedule_5',  '15'+RAND()*'15', '$tournament_id', '1'+RAND()*'3'),
                     ('0', '$country_13', '$country_7',  '$referee_34', '$stadium_13', '5',  '$shedule_5',  '15'+RAND()*'15', '$tournament_id', '1'+RAND()*'3'),

@@ -7,20 +7,36 @@
                     <tr>
                         <?php foreach ($next_array as $item) { ?>
                             <td class="w30">
-                                <img
-                                    alt="<?= $item['home_name']; ?>"
-                                    class="img-120"
-                                    src="img/team/120/<?= $item['home_id']; ?>.png"
-                                />
+                                <?php if (isset($item['home_name'])) { ?>
+                                    <img
+                                        alt="<?= $item['home_name']; ?>"
+                                        class="img-120"
+                                        src="img/team/120/<?= $item['home_id']; ?>.png"
+                                    />
+                                <?php } else { ?>
+                                    <img
+                                        alt="<?= $item['home_country_name']; ?>"
+                                        class="img-90"
+                                        src="img/flag/90/<?= $item['home_id']; ?>.png"
+                                    />
+                                <?php } ?>
                             </td>
                             <td class="w30">
-                                <img
-                                    alt="<?= $item['guest_name']; ?>"
-                                    class="img-120"
-                                    src="img/team/120/<?= $item['guest_id']; ?>.png"
-                                />
+                                <?php if (isset($item['guest_name'])) { ?>
+                                    <img
+                                        alt="<?= $item['guest_name']; ?>"
+                                        class="img-120"
+                                        src="img/team/120/<?= $item['guest_id']; ?>.png"
+                                    />
+                                <?php } else { ?>
+                                    <img
+                                        alt="<?= $item['guest_country_name']; ?>"
+                                        class="img-90"
+                                        src="img/flag/90/<?= $item['guest_id']; ?>.png"
+                                    />
+                                <?php } ?>
                             </td>
-                            <td>
+                            <td class="vcenter">
                                 <table class="left vcenter w100">
                                     <tr>
                                         <td class="h20">
@@ -31,13 +47,23 @@
                                     </tr>
                                     <tr>
                                         <td class="h20">
-                                            <a href="team_team_review_profile.php?num=<?= $item['home_id']; ?>">
-                                                <?= $item['home_name']; ?>
-                                            </a>
-                                            против
-                                            <a href="team_team_review_profile.php?num=<?= $item['guest_id']; ?>">
-                                                <?= $item['guest_name']; ?>
-                                            </a>
+                                            <?php if (isset($item['guest_name'])) { ?>
+                                                <a href="team_team_review_profile.php?num=<?= $item['home_id']; ?>">
+                                                    <?= $item['home_name']; ?>
+                                                </a>
+                                                против
+                                                <a href="national_team_review_profile.php?num=<?= $item['guest_id']; ?>">
+                                                    <?= $item['guest_name']; ?>
+                                                </a>
+                                            <?php } else { ?>
+                                                <a href="team_team_review_profile.php?num=<?= $item['home_id']; ?>">
+                                                    <?= $item['home_country_name']; ?>
+                                                </a>
+                                                против
+                                                <a href="national_team_review_profile.php?num=<?= $item['guest_id']; ?>">
+                                                    <?= $item['guest_country_name']; ?>
+                                                </a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -64,23 +90,45 @@
                         <tr>
                             <td class="center w10"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
                             <td class="w1">
-                                <?php if ($item['game_home_team_id'] == $authorization_team_id) { ?>
-                                    Д
+                                <?php if (isset($item['game_home_team_id'])) { ?>
+                                    <?php if ($item['game_home_team_id'] == $authorization_team_id) { ?>
+                                        Д
+                                    <?php } else { ?>
+                                        Г
+                                    <?php } ?>
                                 <?php } else { ?>
-                                    Г
+                                    <?php if ($item['game_home_country_id'] == $authorization_team_id) { ?>
+                                        Д
+                                    <?php } else { ?>
+                                        Г
+                                    <?php } ?>
                                 <?php } ?>
                             </td>
                             <td class="w1">
-                                <img
-                                    alt="<?= $item['team_name']; ?>"
-                                    class="img-12"
-                                    src="img/team/12/<?= $item['team_id']; ?>.png"
-                                />
+                                <?php if (isset($item['game_home_team_id'])) { ?>
+                                    <img
+                                        alt="<?= $item['team_name']; ?>"
+                                        class="img-12"
+                                        src="img/team/12/<?= $item['team_id']; ?>.png"
+                                    />
+                                <?php } else { ?>
+                                    <img
+                                        alt="<?= $item['country_name']; ?>"
+                                        class="img-12"
+                                        src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                    />
+                                <?php } ?>
                             </td>
                             <td>
-                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                    <?= $item['team_name']; ?>
-                                </a>
+                                <?php if (isset($item['game_home_team_id'])) { ?>
+                                    <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                        <?= $item['team_name']; ?>
+                                    </a>
+                                <?php } else { ?>
+                                    <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                        <?= $item['country_name']; ?>
+                                    </a>
+                                <?php } ?>
                             </td>
                             <td class="right">
                                 <a href="game_review_main.php?num=<?= $item['game_id']; ?>">

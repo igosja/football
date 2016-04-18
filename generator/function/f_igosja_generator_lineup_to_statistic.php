@@ -28,6 +28,7 @@ function f_igosja_generator_lineup_to_statistic()
             AND `statisticplayer_team_id`=`lineup_team_id`)
             WHERE `game_played`='0'
             AND `lineup_team_id`!='0'
+            AND `lineup_player_id`!='0'
             AND `shedule_date`=CURDATE()
             ORDER BY `game_id` ASC";
     $lineup_sql = f_igosja_mysqli_query($sql);
@@ -86,6 +87,7 @@ function f_igosja_generator_lineup_to_statistic()
             AND `statisticplayer_country_id`=`lineup_country_id`)
             WHERE `game_played`='0'
             AND `lineup_country_id`!='0'
+            AND `lineup_player_id`!='0'
             AND `shedule_date`=CURDATE()
             ORDER BY `game_id` ASC";
     $lineup_sql = f_igosja_mysqli_query($sql);
@@ -104,10 +106,10 @@ function f_igosja_generator_lineup_to_statistic()
             $tournament_id  = $lineup_array[$i]['game_tournament_id'];
 
             $sql = "INSERT INTO `statisticplayer`
-                            SET `statisticplayer_player_id`='$player_id',
-                                `statisticplayer_tournament_id`='$tournament_id',
-                                `statisticplayer_season_id`='$igosja_season_id',
-                                `statisticplayer_country_id`='$country_id'";
+                    SET `statisticplayer_player_id`='$player_id',
+                        `statisticplayer_tournament_id`='$tournament_id',
+                        `statisticplayer_season_id`='$igosja_season_id',
+                        `statisticplayer_country_id`='$country_id'";
             f_igosja_mysqli_query($sql);
         }
 

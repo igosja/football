@@ -246,7 +246,7 @@ function f_igosja_generator_champions_league_next_stage()
                 for ($k=0; $k<12; $k++)
                 {
                     $referee_num    = $k * $j;
-                    $referee        = 'referee_' . $k + 1;
+                    $referee        = 'referee_' . ($k + 1);
                     $$referee       = $referee_array[$referee_num]['referee_id'];
                 }
 

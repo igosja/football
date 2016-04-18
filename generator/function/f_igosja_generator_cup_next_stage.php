@@ -100,8 +100,8 @@ function f_igosja_generator_cup_next_stage()
 
             if (isset($shedule_array[1]['shedule_id']))
             {
-                $shedule_2 = $shedule_array[1]['shedule_id'];
-                $game_field_bonus = 1;
+                $shedule_2          = $shedule_array[1]['shedule_id'];
+                $game_field_bonus   = 1;
             }
             else
             {
@@ -129,8 +129,7 @@ function f_igosja_generator_cup_next_stage()
                 $sql = "SELECT `referee_id`
                         FROM `referee`
                         WHERE `referee_country_id`='$country_id'
-                        ORDER BY RAND()
-                        LIMIT 1";
+                        ORDER BY RAND()";
                 $referee_sql = f_igosja_mysqli_query($sql);
 
                 $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);

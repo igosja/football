@@ -10,6 +10,12 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `building`";
 $mysqli->query($sql);
 
+$sql = "TRUNCATE `coachapplication`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `coachvote`";
+$mysqli->query($sql);
+
 $sql = "TRUNCATE `cupparticipant`";
 $mysqli->query($sql);
 
@@ -64,6 +70,21 @@ $mysqli->query($sql);
 $sql = "TRUNCATE `playerposition`";
 $mysqli->query($sql);
 
+$sql = "TRUNCATE `ratingcountry`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `ratingcountryseason`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `ratingleague`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `ratingteam`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `ratingteamseason`";
+$mysqli->query($sql);
+
 $sql = "TRUNCATE `recordcountry`";
 $mysqli->query($sql);
 
@@ -101,6 +122,9 @@ $sql = "TRUNCATE `standing`";
 $mysqli->query($sql);
 
 $sql = "TRUNCATE `standinghistory`";
+$mysqli->query($sql);
+
+$sql = "TRUNCATE `statisticcountry`";
 $mysqli->query($sql);
 
 $sql = "TRUNCATE `statisticplayer`";

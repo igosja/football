@@ -72,7 +72,7 @@ function f_igosja_generator_rating_country()
                         `ratingcountryseason_win`=`ratingcountryseason_win`+'$guest_win',
                         `ratingcountryseason_draw`=`ratingcountryseason_draw`+'$guest_draw',
                         `ratingcountryseason_loose`=`ratingcountryseason_loose`+'$guest_loose',
-                        `ratingcountryseason_win`=`ratingcountryseason_win`*'2'+`ratingcountryseason_draw`
+                        `ratingcountryseason_point`=`ratingcountryseason_win`*'2'+`ratingcountryseason_draw`
                     WHERE `ratingcountryseason_country_id`='$guest_country_id'
                     AND `ratingcountryseason_season_id`='$igosja_season_id'
                     LIMIT 1";
