@@ -323,7 +323,7 @@
                                     class="img-12"
                                     src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
                                 />
-                                <a href="tournament_review_profile?num=<?= $item['tournament_id']; ?>">
+                                <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
                                     <?= $item['tournament_name']; ?>
                                 </a>
                             </td>
@@ -414,7 +414,7 @@
                                 />
                             </td>
                             <td>
-                                <a href="tournament_review_profile?num=<?= $item['tournament_id']; ?>">
+                                <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
                                     <?= $item['tournament_name']; ?>
                                 </a>
                             </td>
@@ -431,7 +431,7 @@
                                 />
                             </td>
                             <td>
-                                <a href="tournament_review_profile?num=<?= $item['tournament_id']; ?>">
+                                <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
                                     <?= $item['tournament_name']; ?>
                                 </a>
                             </td>
@@ -448,12 +448,31 @@
                                 />
                             </td>
                             <td>
-                                <a href="tournament_review_profile?num=<?= $item['tournament_id']; ?>">
+                                <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
                                     <?= $item['tournament_name']; ?>
                                 </a>
                             </td>
                             <td class="right w25"><?= $item['stage_name']; ?></td>
                         </tr>
+                    <?php } ?>
+                    <?php if (isset($tournament_worldcup_array)) { ?>
+                        <?php foreach ($tournament_worldcup_array as $item) { ?>
+                            <tr>
+                                <td class="w1">
+                                    <img
+                                        alt="<?= $item['tournament_name']; ?>"
+                                        class="w12"
+                                        src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
+                                    />
+                                </td>
+                                <td>
+                                    <a href="tournament_review_profile.php?num=<?= $item['tournament_id']; ?>">
+                                        <?= $item['tournament_name']; ?>
+                                    </a>
+                                </td>
+                                <td class="right w25"><?= $item['worldcup_place']; ?></td>
+                            </tr>
+                        <?php } ?>
                     <?php } ?>
                 </table>
             </td>

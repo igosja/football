@@ -203,7 +203,7 @@ $(document).ready(function($)
                     $('#submit-role').show();
 
                     $('#role-id').on('change', function()
-                    //Смена роли игрока
+                        //Смена роли игрока
                     {
                         var role_id = $(this).val();
 
@@ -266,7 +266,7 @@ $(document).ready(function($)
                     $('#submit-role').show();
 
                     $('#role-id').on('change', function()
-                    //Смена роли игрока
+                        //Смена роли игрока
                     {
                         var role_id = $(this).val();
 
@@ -308,8 +308,8 @@ $(document).ready(function($)
                         if (1 == data.game_array[i].game_played)
                         {
                             var score = data.game_array[i].game_home_score
-                                        + ':'
-                                        + data.game_array[i].game_guest_score
+                                + ':'
+                                + data.game_array[i].game_guest_score
                         }
                         else
                         {
@@ -317,19 +317,19 @@ $(document).ready(function($)
                         }
 
                         table_data = table_data
-                                   + '<tr><td class="right w45"><a href="team_team_review_profile.php?num='
-                                   + data.game_array[i].game_home_team_id
-                                   + '">'
-                                   + data.game_array[i].home_team_name
-                                   + '</a></td><td class="center"><a href="game_review_main.php?num='
-                                   + data.game_array[i].game_id
-                                   + '">'
-                                   + score
-                                   + '</a></td><td class="w45"><a href="team_team_review_profile.php?num='
-                                   + data.game_array[i].game_guest_team_id
-                                   + '">'
-                                   + data.game_array[i].guest_team_name
-                                   + '</a></td></tr>';
+                            + '<tr><td class="right w45"><a href="team_team_review_profile.php?num='
+                            + data.game_array[i].game_home_team_id
+                            + '">'
+                            + data.game_array[i].home_team_name
+                            + '</a></td><td class="center"><a href="game_review_main.php?num='
+                            + data.game_array[i].game_id
+                            + '">'
+                            + score
+                            + '</a></td><td class="w45"><a href="team_team_review_profile.php?num='
+                            + data.game_array[i].game_guest_team_id
+                            + '">'
+                            + data.game_array[i].guest_team_name
+                            + '</a></td></tr>';
                     }
 
                     var shedule_date = data.game_array[0].shedule_day + ', ' + data.game_array[0].shedule_date;
@@ -366,8 +366,8 @@ $(document).ready(function($)
                         if (1 == data.game_array[i].game_played)
                         {
                             var score = data.game_array[i].game_home_score
-                                        + ':'
-                                        + data.game_array[i].game_guest_score
+                                + ':'
+                                + data.game_array[i].game_guest_score
                         }
                         else
                         {
@@ -375,19 +375,19 @@ $(document).ready(function($)
                         }
 
                         table_data = table_data
-                                   + '<tr><td class="right w45"><a href="team_team_review_profile.php?num='
-                                   + data.game_array[i].game_home_team_id
-                                   + '">'
-                                   + data.game_array[i].home_team_name
-                                   + '</a></td><td class="center"><a href="game_review_main.php?num='
-                                   + data.game_array[i].game_id
-                                   + '">'
-                                   + score
-                                   + '</a></td><td class="w45"><a href="team_team_review_profile.php?num='
-                                   + data.game_array[i].game_guest_team_id
-                                   + '">'
-                                   + data.game_array[i].guest_team_name
-                                   + '</a></td></tr>';
+                            + '<tr><td class="right w45"><a href="team_team_review_profile.php?num='
+                            + data.game_array[i].game_home_team_id
+                            + '">'
+                            + data.game_array[i].home_team_name
+                            + '</a></td><td class="center"><a href="game_review_main.php?num='
+                            + data.game_array[i].game_id
+                            + '">'
+                            + score
+                            + '</a></td><td class="w45"><a href="team_team_review_profile.php?num='
+                            + data.game_array[i].game_guest_team_id
+                            + '">'
+                            + data.game_array[i].guest_team_name
+                            + '</a></td></tr>';
                     }
 
                     var shedule_date = data.game_array[0].shedule_day + ', ' + data.game_array[0].shedule_date;
@@ -398,6 +398,171 @@ $(document).ready(function($)
                     $('#tournament-game-prev').data('shedule', data.game_array[0].shedule_id);
                     $('#tournament-game-next').data('shedule', data.game_array[0].shedule_id);
                     $('#game-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
+    $('#tournament-stage-prev').on('click', function()
+    //Предыдущая стадия
+    {
+        var tournament_id   = $(this).data('tournament');
+        var stage_id        = $(this).data('stage');
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#stage-block').addClass('loading');},
+                url: 'json.php?stage_prev=' + stage_id + '&tournament=' + tournament_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    var table_data  = '';
+
+                    for (var i=0; i<data.stage_array.length; i++)
+                    {
+                        if (1 == data.stage_array[i].game_played_1)
+                        {
+                            var score_1 = data.stage_array[i].home_score_1
+                                + ':'
+                                + data.stage_array[i].guest_score_1
+                        }
+                        else
+                        {
+                            var score_1 = '';
+                        }
+
+                        if (1 == data.stage_array[i].game_played_2)
+                        {
+                            var score_2 = data.stage_array[i].home_score_2
+                                + ':'
+                                + data.stage_array[i].guest_score_2
+                        }
+                        else
+                        {
+                            var score_2 = '';
+                        }
+
+                        table_data = table_data
+                            + '<tr><td class="right w40"><a href="team_team_review_profile.php?num='
+                            + data.stage_array[i].game_home_team_id
+                            + '">'
+                            + data.stage_array[i].home_team_name
+                            + '</a></td><td class="center"><a href="game_review_main.php?num='
+                            + data.stage_array[i].game_id_2
+                            + '">'
+                            + score_2
+                            + '</a> (<a href="game_review_main.php?num='
+                            + data.stage_array[i].game_id_1
+                            + '">'
+                            + score_1
+                            + '</a>)</td><td class="w40"><a href="team_team_review_profile.php?num='
+                            + data.stage_array[i].game_guest_team_id
+                            + '">'
+                            + data.stage_array[i].guest_team_name
+                            + '</a></td></tr>';
+                    }
+
+                    var stage_name = data.stage_array[0].stage_name;
+
+                    $('#tournament-stage').html(table_data);
+                    $('#stage-name').html(stage_name);
+
+                    $('#tournament-stage-prev').data('stage', data.stage_array[0].stage_id);
+                    $('#tournament-stage-next').data('stage', data.stage_array[0].stage_id);
+                    $('#stage-block').removeClass('loading');
+                }
+            }
+        );
+    });
+
+    $('#tournament-stage-next').on('click', function()
+    //Следующая стадия
+    {
+        var tournament_id   = $(this).data('tournament');
+        var stage_id        = $(this).data('stage');
+
+        $.ajax
+        (
+            {
+                beforeSend: function(){$('#stage-block').addClass('loading');},
+                url: 'json.php?stage_next=' + stage_id + '&tournament=' + tournament_id,
+                dataType: "json",
+                success: function(data)
+                {
+                    var table_data  = '';
+                    var stage_id    = data.stage_array[0].stage_id;
+
+                    for (var i=0; i<data.stage_array.length; i++)
+                    {
+                        if (1 == data.stage_array[i].game_played_1)
+                        {
+                            var score_1 = data.stage_array[i].home_score_1
+                                + ':'
+                                + data.stage_array[i].guest_score_1
+                        }
+                        else
+                        {
+                            var score_1 = '';
+                        }
+
+                        if (1 == data.stage_array[i].game_played_2)
+                        {
+                            var score_2 = data.stage_array[i].home_score_2
+                                + ':'
+                                + data.stage_array[i].guest_score_2
+                        }
+                        else
+                        {
+                            var score_2 = '';
+                        }
+
+                        table_data = table_data
+                            + '<tr><td class="right w40"><a href="team_team_review_profile.php?num='
+                            + data.stage_array[i].game_home_team_id
+                            + '">'
+                            + data.stage_array[i].home_team_name
+                            + '</a></td><td class="center">';
+
+                        if (49 != stage_id)
+                        {
+                            table_data = table_data
+                                + '<a href="game_review_main.php?num='
+                                + data.stage_array[i].game_id_2
+                                + '">'
+                                + score_2
+                                + '</a> (';
+                        }
+
+                        table_data = table_data
+                            + '<a href="game_review_main.php?num='
+                            + data.stage_array[i].game_id_1
+                            + '">'
+                            + score_1
+                            + '</a>';
+
+                        if (49 != stage_id)
+                        {
+                            table_data = table_data
+                                + ')';
+                        }
+
+                        table_data = table_data
+                            + '</td><td class="w40"><a href="team_team_review_profile.php?num='
+                            + data.stage_array[i].game_guest_team_id
+                            + '">'
+                            + data.stage_array[i].guest_team_name
+                            + '</a></td></tr>';
+                    }
+
+                    var stage_name = data.stage_array[0].stage_name;
+
+                    $('#tournament-stage').html(table_data);
+                    $('#stage-name').html(stage_name);
+
+                    $('#tournament-stage-prev').data('stage', stage_id);
+                    $('#tournament-stage-next').data('stage', stage_id);
+                    $('#stage-block').removeClass('loading');
                 }
             }
         );
@@ -424,8 +589,8 @@ $(document).ready(function($)
                         if (1 == data.game_array[i].game_played)
                         {
                             var score = data.game_array[i].game_home_score
-                                        + ':'
-                                        + data.game_array[i].game_guest_score
+                                + ':'
+                                + data.game_array[i].game_guest_score
                         }
                         else
                         {
@@ -433,19 +598,19 @@ $(document).ready(function($)
                         }
 
                         table_data = table_data
-                                   + '<tr><td class="right w45"><a href="national_team_review_profile.php?num='
-                                   + data.game_array[i].game_home_country_id
-                                   + '">'
-                                   + data.game_array[i].home_country_name
-                                   + '</a></td><td class="center"><a href="game_review_main.php?num='
-                                   + data.game_array[i].game_id
-                                   + '">'
-                                   + score
-                                   + '</a></td><td class="w45"><a href="national_team_review_profile.php?num='
-                                   + data.game_array[i].game_guest_country_id
-                                   + '">'
-                                   + data.game_array[i].guest_country_name
-                                   + '</a></td></tr>';
+                            + '<tr><td class="right w45"><a href="national_team_review_profile.php?num='
+                            + data.game_array[i].game_home_country_id
+                            + '">'
+                            + data.game_array[i].home_country_name
+                            + '</a></td><td class="center"><a href="game_review_main.php?num='
+                            + data.game_array[i].game_id
+                            + '">'
+                            + score
+                            + '</a></td><td class="w45"><a href="national_team_review_profile.php?num='
+                            + data.game_array[i].game_guest_country_id
+                            + '">'
+                            + data.game_array[i].guest_country_name
+                            + '</a></td></tr>';
                     }
 
                     var shedule_date = data.game_array[0].shedule_day + ', ' + data.game_array[0].shedule_date;
@@ -482,8 +647,8 @@ $(document).ready(function($)
                         if (1 == data.game_array[i].game_played)
                         {
                             var score = data.game_array[i].game_home_score
-                                        + ':'
-                                        + data.game_array[i].game_guest_score
+                                + ':'
+                                + data.game_array[i].game_guest_score
                         }
                         else
                         {
@@ -491,19 +656,19 @@ $(document).ready(function($)
                         }
 
                         table_data = table_data
-                                   + '<tr><td class="right w45"><a href="national_team_review_profile.php?num='
-                                   + data.game_array[i].game_home_country_id
-                                   + '">'
-                                   + data.game_array[i].home_country_name
-                                   + '</a></td><td class="center"><a href="game_review_main.php?num='
-                                   + data.game_array[i].game_id
-                                   + '">'
-                                   + score
-                                   + '</a></td><td class="w45"><a href="national_team_review_profile.php?num='
-                                   + data.game_array[i].game_guest_country_id
-                                   + '">'
-                                   + data.game_array[i].guest_country_name
-                                   + '</a></td></tr>';
+                            + '<tr><td class="right w45"><a href="national_team_review_profile.php?num='
+                            + data.game_array[i].game_home_country_id
+                            + '">'
+                            + data.game_array[i].home_country_name
+                            + '</a></td><td class="center"><a href="game_review_main.php?num='
+                            + data.game_array[i].game_id
+                            + '">'
+                            + score
+                            + '</a></td><td class="w45"><a href="national_team_review_profile.php?num='
+                            + data.game_array[i].game_guest_country_id
+                            + '">'
+                            + data.game_array[i].guest_country_name
+                            + '</a></td></tr>';
                     }
 
                     var shedule_date = data.game_array[0].shedule_day + ', ' + data.game_array[0].shedule_date;

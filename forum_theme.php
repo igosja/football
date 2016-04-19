@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include (__DIR__ . 'include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -149,4 +149,4 @@ if (isset($authorization_user_id))
 
 $num = $get_num;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

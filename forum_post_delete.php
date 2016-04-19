@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (!isset($_GET['num']) || !isset($authorization_user_id))
 {

@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -46,6 +46,7 @@ $sql = "SELECT `name_name`,
         ON `referee_surname_id`=`surname_id`
         WHERE `statisticreferee_tournament_id`='$get_num'
         AND `statisticreferee_season_id`='$igosja_season_id'
+        AND `statisticreferee_game`>'0'
         ORDER BY `statisticreferee_game` DESC, `statisticreferee_mark` DESC";
 $referee_sql = $mysqli->query($sql);
 
@@ -54,4 +55,4 @@ $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $tournament_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

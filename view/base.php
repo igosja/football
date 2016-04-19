@@ -7,6 +7,21 @@
                     Сейчас проходит улучшение тернировчной базы<br/>
                     Строительство продлится до <?= date('d.m.Y', strtotime($base_array[0]['building_end_date'])); ?>
                 </p>
+            <?php } elseif (isset($level) && 1 == $level) { ?>
+                <p class="center info">
+                    Вы собираетесь увеличить уровень вашей тренирочной базы<br/>
+                    Стоимость строительльтва составит <?= f_igosja_money($price); ?>.
+                    Строительство продлится до <?= date('d.m.Y', time()+30*24*60*60); ?><br/>
+                    <a href="base.php?level=1&ok=1">Начать строительство</a> |
+                    <a href="base.php">Отказаться от строительства</a>
+                </p>
+            <?php } elseif (isset($level) && 0 == $level) { ?>
+                <p class="center info">
+                    Вы собираетесь уменьшить уровень вашей тренирочной базы<br/>
+                    Строительство бесплатно и пройдет мгновенно.<br/>
+                    <a href="base.php?level=0&ok=1">Провести строительство</a> |
+                    <a href="base.php">Отказаться от строительства</a>
+                </p>
             <?php } else { ?>
                 <table class="striped w100">
                     <tr>
@@ -26,8 +41,8 @@
                         <td><?= f_igosja_money($team_finance); ?></td>
                     </tr>
                     <tr>
-                        <td class="right"><button><a href="base.php?level=1">Увеличить уровень</a></button></td>
-                        <td><button><a href="base.php?level=0">Уменьшить уровень</a></button></td>
+                        <td class="right"><button><a href="base.php?level=1&ok=0">Увеличить уровень</a></button></td>
+                        <td><button><a href="base.php?level=0&ok=0">Уменьшить уровень</a></button></td>
                     </tr>
                 </table>
             <?php } ?>

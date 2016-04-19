@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -99,6 +99,7 @@ $sql = "SELECT `shedule_date`,
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
         WHERE `game_tournament_id`='$get_num'
+        AND `shedule_season_id`='$igosja_season_id'
         GROUP BY `shedule_id`
         ORDER BY `shedule_date` ASC";
 $shedule_sql = $mysqli->query($sql);
@@ -108,4 +109,4 @@ $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $tournament_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

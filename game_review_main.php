@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,64 +11,8 @@ else
     $get_num = 1;
 }
 
-$sql = "SELECT `city_name`,
-               `game_guest_foul`,
-               `game_guest_ontarget`,
-               `game_guest_possession`,
-               `game_guest_red`,
-               `game_guest_score`,
-               `game_guest_shot`,
-               `game_guest_shoot_out`,
-               `game_guest_team_id`,
-               `t2`.`team_name` AS `game_guest_team_name`,
-               `game_guest_yellow`,
-               `game_home_foul`,
-               `game_home_ontarget`,
-               `game_home_possession`,
-               `game_home_red`,
-               `game_home_score`,
-               `game_home_shot`,
-               `game_home_shoot_out`,
-               `game_home_team_id`,
-               `t1`.`team_name` AS `game_home_team_name`,
-               `game_home_yellow`,
-               `game_id`,
-               `game_played`,
-               `game_temperature`,
-               `game_referee_mark`,
-               `game_visitor`,
-               `name_name`,
-               `referee_id`,
-               `shedule_date`,
-               `stadium_name`,
-               `surname_name`,
-               `tournament_id`,
-               `tournament_name`,
-               `weather_id`,
-               `weather_name`
+$sql = "SELECT `game_home_team_id`
         FROM `game`
-        LEFT JOIN `team` AS `t1`
-        ON `game_home_team_id`=`t1`.`team_id`
-        LEFT JOIN `team` AS `t2`
-        ON `game_guest_team_id`=`t2`.`team_id`
-        LEFT JOIN `tournament`
-        ON `game_tournament_id`=`tournament_id`
-        LEFT JOIN `shedule`
-        ON `shedule_id`=`game_shedule_id`
-        LEFT JOIN `referee`
-        ON `game_referee_id`=`referee_id`
-        LEFT JOIN `name`
-        ON `name_id`=`referee_name_id`
-        LEFT JOIN `surname`
-        ON `surname_id`=`referee_surname_id`
-        LEFT JOIN `stadium`
-        ON `game_stadium_id`=`stadium_id`
-        LEFT JOIN `team` AS `t3`
-        ON `t3`.`team_id`=`stadium_team_id`
-        LEFT JOIN `city`
-        ON `city_id`=`t3`.`team_city_id`
-        LEFT JOIN `weather`
-        ON `weather_id`=`game_weather_id`
         WHERE `game_id`='$get_num'
         LIMIT 1";
 $game_sql = $mysqli->query($sql);
@@ -77,17 +21,180 @@ $count_game = $game_sql->num_rows;
 
 if (0 == $count_game)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
+    exit;
+}
+
+$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+
+$home_team_id = $game_array[0]['game_home_team_id'];
+
+if (0 != $home_team_id)
+{
+    $team_country   = 'team';
+    $number         = '_';
+}
+else
+{
+    $team_country   = 'country';
+    $number         = '_national';
+}
+
+if (0 != $home_team_id)
+{
+    $sql = "SELECT `city_name`,
+                   `game_guest_foul`,
+                   `game_guest_ontarget`,
+                   `game_guest_possession`,
+                   `game_guest_red`,
+                   `game_guest_score`,
+                   `game_guest_shot`,
+                   `game_guest_shoot_out`,
+                   `game_guest_team_id`,
+                   `t2`.`team_name` AS `game_guest_team_name`,
+                   `game_guest_yellow`,
+                   `game_home_foul`,
+                   `game_home_ontarget`,
+                   `game_home_possession`,
+                   `game_home_red`,
+                   `game_home_score`,
+                   `game_home_shot`,
+                   `game_home_shoot_out`,
+                   `game_home_team_id`,
+                   `t1`.`team_name` AS `game_home_team_name`,
+                   `game_home_yellow`,
+                   `game_id`,
+                   `game_played`,
+                   `game_temperature`,
+                   `game_referee_mark`,
+                   `game_visitor`,
+                   `name_name`,
+                   `referee_id`,
+                   `shedule_date`,
+                   `stadium_name`,
+                   `surname_name`,
+                   `tournament_id`,
+                   `tournament_name`,
+                   `weather_id`,
+                   `weather_name`
+            FROM `game`
+            LEFT JOIN `team` AS `t1`
+            ON `game_home_team_id`=`t1`.`team_id`
+            LEFT JOIN `team` AS `t2`
+            ON `game_guest_team_id`=`t2`.`team_id`
+            LEFT JOIN `tournament`
+            ON `game_tournament_id`=`tournament_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            LEFT JOIN `referee`
+            ON `game_referee_id`=`referee_id`
+            LEFT JOIN `name`
+            ON `name_id`=`referee_name_id`
+            LEFT JOIN `surname`
+            ON `surname_id`=`referee_surname_id`
+            LEFT JOIN `stadium`
+            ON `game_stadium_id`=`stadium_id`
+            LEFT JOIN `team` AS `t3`
+            ON `t3`.`team_id`=`stadium_team_id`
+            LEFT JOIN `city`
+            ON `city_id`=`t3`.`team_city_id`
+            LEFT JOIN `weather`
+            ON `weather_id`=`game_weather_id`
+            WHERE `game_id`='$get_num'
+            LIMIT 1";
+}
+else
+{
+    $sql = "SELECT `city_name`,
+                   `game_guest_foul`,
+                   `game_guest_ontarget`,
+                   `game_guest_possession`,
+                   `game_guest_red`,
+                   `game_guest_score`,
+                   `game_guest_shot`,
+                   `game_guest_shoot_out`,
+                   `game_guest_country_id`,
+                   `t2`.`country_name` AS `game_guest_country_name`,
+                   `game_guest_yellow`,
+                   `game_home_foul`,
+                   `game_home_ontarget`,
+                   `game_home_possession`,
+                   `game_home_red`,
+                   `game_home_score`,
+                   `game_home_shot`,
+                   `game_home_shoot_out`,
+                   `game_home_country_id`,
+                   `t1`.`country_name` AS `game_home_country_name`,
+                   `game_home_yellow`,
+                   `game_id`,
+                   `game_played`,
+                   `game_temperature`,
+                   `game_referee_mark`,
+                   `game_visitor`,
+                   `name_name`,
+                   `referee_id`,
+                   `shedule_date`,
+                   `stadium_name`,
+                   `surname_name`,
+                   `tournament_id`,
+                   `tournament_name`,
+                   `weather_id`,
+                   `weather_name`
+            FROM `game`
+            LEFT JOIN `country` AS `t1`
+            ON `game_home_country_id`=`t1`.`country_id`
+            LEFT JOIN `country` AS `t2`
+            ON `game_guest_country_id`=`t2`.`country_id`
+            LEFT JOIN `tournament`
+            ON `game_tournament_id`=`tournament_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            LEFT JOIN `referee`
+            ON `game_referee_id`=`referee_id`
+            LEFT JOIN `name`
+            ON `name_id`=`referee_name_id`
+            LEFT JOIN `surname`
+            ON `surname_id`=`referee_surname_id`
+            LEFT JOIN `stadium`
+            ON `game_stadium_id`=`stadium_id`
+            LEFT JOIN `team` AS `t3`
+            ON `t3`.`team_id`=`stadium_team_id`
+            LEFT JOIN `city`
+            ON `city_id`=`t3`.`team_city_id`
+            LEFT JOIN `weather`
+            ON `weather_id`=`game_weather_id`
+            WHERE `game_id`='$get_num'
+            LIMIT 1";
+}
+
+$game_sql = $mysqli->query($sql);
+
+$count_game = $game_sql->num_rows;
+
+if (0 == $count_game)
+{
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
 $game_played          = $game_array[0]['game_played'];
-$header_2_home_id     = $game_array[0]['game_home_team_id'];
-$header_2_home_name   = $game_array[0]['game_home_team_name'];
-$header_2_guest_id    = $game_array[0]['game_guest_team_id'];
-$header_2_guest_name  = $game_array[0]['game_guest_team_name'];
+
+if (isset($game_array[0]['game_home_team_id']))
+{
+    $header_2_home_id       = $game_array[0]['game_home_team_id'];
+    $header_2_home_name     = $game_array[0]['game_home_team_name'];
+    $header_2_guest_id      = $game_array[0]['game_guest_team_id'];
+    $header_2_guest_name    = $game_array[0]['game_guest_team_name'];
+}
+else
+{
+    $header_2_home_id       = $game_array[0]['game_home_country_id'];
+    $header_2_home_name     = $game_array[0]['game_home_country_name'];
+    $header_2_guest_id      = $game_array[0]['game_guest_country_id'];
+    $header_2_guest_name    = $game_array[0]['game_guest_country_name'];
+}
 
 if (0 == $game_played)
 {
@@ -125,7 +232,7 @@ $sql = "SELECT `event_minute`,
         LEFT JOIN `eventtype`
         ON `event_eventtype_id`=`eventtype_id`
         WHERE `event_game_id`='$get_num'
-        AND `event_team_id`='$header_2_home_id'
+        AND `event_" . $team_country . "_id`='$header_2_home_id'
         ORDER BY `event_minute` ASC";
 $home_event_sql = $mysqli->query($sql);
 
@@ -147,8 +254,9 @@ $sql = "SELECT `event_minute`,
         LEFT JOIN `eventtype`
         ON `event_eventtype_id`=`eventtype_id`
         WHERE `event_game_id`='$get_num'
-        AND `event_team_id`='$header_2_guest_id'
+        AND `event_" . $team_country . "_id`='$header_2_guest_id'
         ORDER BY `event_minute` ASC";
+
 $guest_event_sql = $mysqli->query($sql);
 
 $guest_event_array = $guest_event_sql->fetch_all(MYSQLI_ASSOC);
@@ -157,7 +265,7 @@ $sql = "SELECT `lineup_condition`,
                `lineup_mark`,
                `name_name`,
                `player_id`,
-               `player_number`,
+               `player_number" . $number . "`,
                `position_name`,
                `surname_name`
         FROM `lineup`
@@ -170,7 +278,7 @@ $sql = "SELECT `lineup_condition`,
         LEFT JOIN `position`
         ON `lineup_position_id`=`position_id`
         WHERE `lineup_game_id`='$get_num'
-        AND `lineup_team_id`='$header_2_home_id'
+        AND `lineup_" . $team_country . "_id`='$header_2_home_id'
         ORDER BY `lineup_id` ASC";
 $home_player_sql = $mysqli->query($sql);
 
@@ -180,7 +288,7 @@ $sql = "SELECT `lineup_condition`,
                `lineup_mark`,
                `name_name`,
                `player_id`,
-               `player_number`,
+               `player_number" . $number . "`,
                `position_name`,
                `surname_name`
         FROM `lineup`
@@ -193,7 +301,7 @@ $sql = "SELECT `lineup_condition`,
         LEFT JOIN `position`
         ON `lineup_position_id`=`position_id`
         WHERE `lineup_game_id`='$get_num'
-        AND `lineup_team_id`='$header_2_guest_id'
+        AND `lineup_" . $team_country . "_id`='$header_2_guest_id'
         ORDER BY `lineup_id` ASC";
 $guest_player_sql = $mysqli->query($sql);
 
@@ -202,4 +310,4 @@ $guest_player_array = $guest_player_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

@@ -1,7 +1,7 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page w100">
-            <p class="header">Статистика (<?= $game_array[0]['game_home_team_name']; ?>)</p>
+            <p class="header">Статистика (<?= $game_array[0]['game_home_' . $team_country . '_name']; ?>)</p>
             <table class="striped w100">
                 <tr>
                     <th class="w4">№</th>
@@ -23,7 +23,7 @@
                 </tr>
                 <?php foreach ($game_array as $item) { ?>
                     <tr>
-                        <td class="center"><?= $item['player_number']; ?></td>
+                        <td class="center"><?= $item['player_number' . $number]; ?></td>
                         <td>
                             <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
                                 <?= $item['name_name']; ?> <?= $item['surname_name']; ?>

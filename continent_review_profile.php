@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_continent = $continent_sql->num_rows;
 
 if (0 == $count_continent)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -122,4 +122,4 @@ $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $continent_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

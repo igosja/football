@@ -48,16 +48,28 @@
                 <tr>
                     <td class="center w50">
                         <h5>
-                            <a href="team_team_review_profile.php?num=<?= $game_array[0]['game_home_team_id']; ?>">
-                                <?= $game_array[0]['game_home_team_name']; ?>
-                            </a>
+                            <?php if (isset($game_array[0]['game_home_team_id'])) { ?>
+                                <a href="team_team_review_profile.php?num=<?= $game_array[0]['game_home_team_id']; ?>">
+                                    <?= $game_array[0]['game_home_team_name']; ?>
+                                </a>
+                            <?php } else { ?>
+                                <a href="national_team_review_profile.php?num=<?= $game_array[0]['game_home_country_id']; ?>">
+                                    <?= $game_array[0]['game_home_country_name']; ?>
+                                </a>
+                            <?php } ?>
                         </h5>
                     </td>
                     <td class="center">
                         <h5>
-                            <a href="team_team_review_profile.php?num=<?= $game_array[0]['game_guest_team_id']; ?>">
-                                <?= $game_array[0]['game_guest_team_name']; ?>
-                            </a>
+                            <?php if (isset($game_array[0]['game_guest_team_id'])) { ?>
+                                <a href="team_team_review_profile.php?num=<?= $game_array[0]['game_guest_team_id']; ?>">
+                                    <?= $game_array[0]['game_guest_team_name']; ?>
+                                </a>
+                            <?php } else { ?>
+                                <a href="national_team_review_profile.php?num=<?= $game_array[0]['game_guest_country_id']; ?>">
+                                    <?= $game_array[0]['game_guest_country_name']; ?>
+                                </a>
+                            <?php } ?>
                         </h5>
                     </td>
                 </tr>
@@ -107,9 +119,21 @@
             <p class="header">Статистика матча</p>
             <table class="striped w100">
                 <tr>
-                    <th class="center w33"><?= $game_array[0]['game_home_team_name']; ?></th>
+                    <th class="center w33">
+                        <?php if (isset($game_array[0]['game_home_team_name'])) { ?>
+                            <?= $game_array[0]['game_home_team_name']; ?>
+                        <?php } else { ?>
+                            <?= $game_array[0]['game_home_country_name']; ?>
+                        <?php } ?>
+                    </th>
                     <th class="center w33"></th>
-                    <th class="center"><?= $game_array[0]['game_guest_team_name']; ?></th>
+                    <th class="center">
+                        <?php if (isset($game_array[0]['game_guest_team_name'])) { ?>
+                            <?= $game_array[0]['game_guest_team_name']; ?>
+                        <?php } else { ?>
+                            <?= $game_array[0]['game_guest_country_name']; ?>
+                        <?php } ?>
+                    </th>
                 </tr>
                 <tr>
                     <td class="center"><?= $game_array[0]['game_home_shot']; ?></td>
@@ -141,7 +165,14 @@
     </tr>
     <tr>
         <td class="block-page">
-            <p class="header">Статистика (<?= $game_array[0]['game_home_team_name']; ?>)</p>
+            <p class="header">
+                Статистика
+                <?php if (isset($game_array[0]['game_home_team_name'])) { ?>
+                    (<?= $game_array[0]['game_home_team_name']; ?>)
+                <?php } else { ?>
+                    (<?= $game_array[0]['game_home_country_name']; ?>)
+                <?php } ?>
+            </p>
             <table class="striped w100">
                 <tr>
                     <th class="w5">№</th>
@@ -152,7 +183,13 @@
                 </tr>
                 <?php foreach ($home_player_array as $item) { ?>
                     <tr>
-                        <td class="center"><?= $item['player_number']; ?></td>
+                        <td class="center">
+                            <?php if (isset($item['player_number'])) { ?>
+                                <?= $item['player_number']; ?>
+                            <?php } else { ?>
+                                <?= $item['player_number_national']; ?>
+                            <?php } ?>
+                        </td>
                         <td>
                             <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
                                 <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
@@ -166,7 +203,14 @@
             </table>
         </td>
         <td class="block-page">
-            <p class="header">Статистика (<?= $game_array[0]['game_guest_team_name']; ?>)</p>
+            <p class="header">
+                Статистика
+                <?php if (isset($game_array[0]['game_guest_team_name'])) { ?>
+                    (<?= $game_array[0]['game_guest_team_name']; ?>)
+                <?php } else { ?>
+                    (<?= $game_array[0]['game_guest_country_name']; ?>)
+                <?php } ?>
+            </p>
             <table class="striped w100">
                 <tr>
                     <th class="w5">№</th>
@@ -177,7 +221,13 @@
                 </tr>
                 <?php foreach ($guest_player_array as $item) { ?>
                     <tr>
-                        <td class="center"><?= $item['player_number']; ?></td>
+                        <td class="center">
+                            <?php if (isset($item['player_number'])) { ?>
+                                <?= $item['player_number']; ?>
+                            <?php } else { ?>
+                                <?= $item['player_number_national']; ?>
+                            <?php } ?>
+                        </td>
                         <td>
                             <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
                                 <?= $item['name_name']; ?> <?= $item['surname_name']; ?>

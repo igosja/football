@@ -35,9 +35,11 @@ $price          = pow($school_level + 1, 1.3) * 1000000;
 $team_finance   = $school_array[0]['team_finance'];
 
 if (isset($_GET['level']) &&
+    isset($_GET['ok']) &&
     !$school_array[0]['building_end_date'])
 {
-    $level = (int) $_GET['level'];
+    $level  = (int) $_GET['level'];
+    $ok     = (int) $_GET['ok'];
 
     if (1 == $level)
     {
@@ -56,58 +58,61 @@ if (isset($_GET['level']) &&
             redirect('school.php');
         }
 
-        $sql = "INSERT INTO `building`
-                SET `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 30 DAY),
-                    `building_buildingtype_id`='2',
-                    `building_team_id`='$get_num'";
-        $mysqli->query($sql);
-
-        $sql = "UPDATE `team`
-                SET `team_finance`=`team_finance`-'$price'
-                WHERE `team_id`='$get_num'
-                LIMIT 1";
-        $mysqli->query($sql);
-
-        $sql = "SELECT COUNT(`finance_id`) AS `count`
-                FROM `finance`
-                WHERE `finance_season_id`='$igosja_season_id'
-                AND `finance_team_id`='$get_num'
-                LIMIT 1";
-        $finance_sql = $mysqli->query($sql);
-
-        $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
-        $count_finance = $finance_array[0]['count'];
-
-        if (0 == $count_finance)
+        if (1 == $ok)
         {
-            $sql = "INSERT INTO `finance`
-                    SET `finance_expense_build`='$price',
-                        `finance_team_id`='$get_num',
-                        `finance_season_id`='$igosja_season_id'";
+            $sql = "INSERT INTO `building`
+                    SET `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 30 DAY),
+                        `building_buildingtype_id`='2',
+                        `building_team_id`='$get_num'";
             $mysqli->query($sql);
-        }
-        else
-        {
-            $sql = "UPDATE `finance`
-                    SET `finance_expense_build`=`finance_expense_build`+'$price'
-                    WHERE `finance_team_id`='$get_num'
-                    AND `finance_season_id`='$igosja_season_id'
+
+            $sql = "UPDATE `team`
+                    SET `team_finance`=`team_finance`-'$price'
+                    WHERE `team_id`='$get_num'
                     LIMIT 1";
             $mysqli->query($sql);
+
+            $sql = "SELECT COUNT(`finance_id`) AS `count`
+                    FROM `finance`
+                    WHERE `finance_season_id`='$igosja_season_id'
+                    AND `finance_team_id`='$get_num'
+                    LIMIT 1";
+            $finance_sql = $mysqli->query($sql);
+
+            $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
+            $count_finance = $finance_array[0]['count'];
+
+            if (0 == $count_finance)
+            {
+                $sql = "INSERT INTO `finance`
+                        SET `finance_expense_build`='$price',
+                            `finance_team_id`='$get_num',
+                            `finance_season_id`='$igosja_season_id'";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $sql = "UPDATE `finance`
+                        SET `finance_expense_build`=`finance_expense_build`+'$price'
+                        WHERE `finance_team_id`='$get_num'
+                        AND `finance_season_id`='$igosja_season_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
+
+            $sql = "INSERT INTO `historyfinanceteam`
+                    SET `historyfinanceteam_date`=SYSDATE(),
+                        `historyfinanceteam_historytext_id`='" .HISTORY_TEXT_EXPENCE_BUILD_SCHOOL . "',
+                        `historyfinanceteam_season_id`='$igosja_season_id',
+                        `historyfinanceteam_team_id`='$get_num',
+                        `historyfinanceteam_value`='$price'";
+            $mysqli->query($sql);
+
+            $_SESSION['message_class']  = 'success';
+            $_SESSION['message_text']   = 'Строительство началось успешно.';
+
+            redirect('team_team_information_condition.php?num=' . $get_num);
         }
-
-        $sql = "INSERT INTO `historyfinanceteam`
-                SET `historyfinanceteam_date`=SYSDATE(),
-                    `historyfinanceteam_historytext_id`='" .HISTORY_TEXT_EXPENCE_BUILD_SCHOOL . "',
-                    `historyfinanceteam_season_id`='$igosja_season_id',
-                    `historyfinanceteam_team_id`='$get_num',
-                    `historyfinanceteam_value`='$price'";
-        $mysqli->query($sql);
-
-        $_SESSION['message_class']  = 'success';
-        $_SESSION['message_text']   = 'Строительство началось успешно.';
-
-        redirect('team_team_information_condition.php?num=' . $get_num);
     }
     elseif (0 == $level)
     {
@@ -119,15 +124,18 @@ if (isset($_GET['level']) &&
             redirect('school.php');
         }
 
-        $sql = "UPDATE `team`
-                SET `team_school_level`=`team_school_level`-'1'
-                WHERE `team`='$get_num'";
-        $mysqli->query($sql);
+        if (1 == $ok)
+        {
+            $sql = "UPDATE `team`
+                    SET `team_school_level`=`team_school_level`-'1'
+                    WHERE `team_id`='$get_num'";
+            $mysqli->query($sql);
 
-        $_SESSION['message_class']  = 'success';
-        $_SESSION['message_text']   = 'Строительство прошло успешно.';
+            $_SESSION['message_class']  = 'success';
+            $_SESSION['message_text']   = 'Строительство прошло успешно.';
 
-        redirect('team_team_information_condition.php?num=' . $get_num);
+            redirect('team_team_information_condition.php?num=' . $get_num);
+        }
     }
 }
 

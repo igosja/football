@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.php');
+    include (__DIR__ . '/view/only_my_team.php');
     exit;
 }
 
@@ -38,6 +38,7 @@ $price          = 1000;
 $team_finance   = $stadium_array[0]['team_finance'];
 
 if (isset($_GET['change']) &&
+    isset($_GET['ok']) &&
     !$stadium_array[0]['building_end_date'])
 {
     if ($team_finance < $price)
@@ -48,61 +49,67 @@ if (isset($_GET['change']) &&
         redirect('fieldgrass.php');
     }
 
-    $sql = "INSERT INTO `building`
-            SET `building_buildingtype_id`='4',
-                `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 1 DAY),
-                `building_team_id`='$get_num'";
-    $mysqli->query($sql);
+    $change = (int) $_GET['change'];
+    $ok     = (int) $_GET['ok'];
 
-    $sql = "UPDATE `team`
-            SET `team_finance`=`team_finance`-'$price'
-            WHERE `team_id`='$get_num'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $sql = "SELECT COUNT(`finance_id`) AS `count`
-            FROM `finance`
-            WHERE `finance_season_id`='$igosja_season_id'
-            AND `finance_team_id`='$get_num'
-            LIMIT 1";
-    $finance_sql = $mysqli->query($sql);
-
-    $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
-    $count_finance = $finance_array[0]['count'];
-
-    if (0 == $count_finance)
+    if (1 == $ok)
     {
-        $sql = "INSERT INTO `finance`
-                SET `finance_expense_build`='$price',
-                    `finance_team_id`='$get_num',
-                    `finance_season_id`='$igosja_season_id'";
+        $sql = "INSERT INTO `building`
+                SET `building_buildingtype_id`='4',
+                    `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 1 DAY),
+                    `building_team_id`='$get_num'";
         $mysqli->query($sql);
-    }
-    else
-    {
-        $sql = "UPDATE `finance`
-                SET `finance_expense_build`=`finance_expense_build`+'$price'
-                WHERE `finance_team_id`='$get_num'
-                AND `finance_season_id`='$igosja_season_id'
+
+        $sql = "UPDATE `team`
+                SET `team_finance`=`team_finance`-'$price'
+                WHERE `team_id`='$get_num'
                 LIMIT 1";
         $mysqli->query($sql);
+
+        $sql = "SELECT COUNT(`finance_id`) AS `count`
+                FROM `finance`
+                WHERE `finance_season_id`='$igosja_season_id'
+                AND `finance_team_id`='$get_num'
+                LIMIT 1";
+        $finance_sql = $mysqli->query($sql);
+
+        $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
+        $count_finance = $finance_array[0]['count'];
+
+        if (0 == $count_finance)
+        {
+            $sql = "INSERT INTO `finance`
+                    SET `finance_expense_build`='$price',
+                        `finance_team_id`='$get_num',
+                        `finance_season_id`='$igosja_season_id'";
+            $mysqli->query($sql);
+        }
+        else
+        {
+            $sql = "UPDATE `finance`
+                    SET `finance_expense_build`=`finance_expense_build`+'$price'
+                    WHERE `finance_team_id`='$get_num'
+                    AND `finance_season_id`='$igosja_season_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+        }
+
+        $sql = "INSERT INTO `historyfinanceteam`
+                SET `historyfinanceteam_date`=SYSDATE(),
+                    `historyfinanceteam_historytext_id`='" .HISTORY_TEXT_EXPENCE_BUILD_GRASS . "',
+                    `historyfinanceteam_season_id`='$igosja_season_id',
+                    `historyfinanceteam_team_id`='$get_num',
+                    `historyfinanceteam_value`='$price'";
+        $mysqli->query($sql);
+
+        $_SESSION['message_class']  = 'success';
+        $_SESSION['message_text']   = 'Работы по замене газона начались успешно.';
+
+        redirect('team_team_information_condition.php?num=' . $get_num);
     }
-
-    $sql = "INSERT INTO `historyfinanceteam`
-            SET `historyfinanceteam_date`=SYSDATE(),
-                `historyfinanceteam_historytext_id`='" .HISTORY_TEXT_EXPENCE_BUILD_GRASS . "',
-                `historyfinanceteam_season_id`='$igosja_season_id',
-                `historyfinanceteam_team_id`='$get_num',
-                `historyfinanceteam_value`='$price'";
-    $mysqli->query($sql);
-
-    $_SESSION['message_class']  = 'success';
-    $_SESSION['message_text']   = 'Работы по замене газона начались успешно.';
-
-    redirect('team_team_information_condition.php?num=' . $get_num);
 }
 
 $num            = $get_num;
 $header_title   = $authorization_team_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

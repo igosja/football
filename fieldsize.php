@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.php');
+    include (__DIR__ . '/view/only_my_team.php');
     exit;
 }
 
@@ -34,38 +34,44 @@ $stadium_sql = $mysqli->query($sql);
 
 $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
 
-if (isset($_POST['data']) &&
+if (isset($_GET['data']) &&
     !$stadium_array[0]['building_end_date'])
 {
-    $length = (int) $_POST['data']['length'];
-    $width  = (int) $_POST['data']['width'];
+    $data   = $_GET['data'];
+    $ok     = (int) $_GET['ok'];
 
-    if (100 > $length ||
-        110 < $length ||
-        64 > $width ||
-        75 < $width)
+    if (1 == $ok)
     {
-        $_SESSION['message_class']  = 'error';
-        $_SESSION['message_text']   = 'Не правильно введены размеры поля.';
+        $length = (int) $data['length'];
+        $width  = (int) $data['width'];
 
-        redirect('fieldsize.php?num=' . $get_num);
+        if (100 > $length ||
+            110 < $length ||
+            64 > $width ||
+            75 < $width)
+        {
+            $_SESSION['message_class']  = 'error';
+            $_SESSION['message_text']   = 'Не правильно введены размеры поля.';
+
+            redirect('fieldsize.php?num=' . $get_num);
+        }
+
+        $sql = "INSERT INTO `building`
+                SET `building_buildingtype_id`='5',
+                    `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 1 DAY),
+                    `building_length`='$length',
+                    `building_team_id`='$get_num',
+                    `building_width`='$width'";
+        $mysqli->query($sql);
+
+        $_SESSION['message_class']  = 'success';
+        $_SESSION['message_text']   = 'Работы по смене размеров поля начались успешно.';
+
+        redirect('team_team_information_condition.php?num=' . $get_num);
     }
-
-    $sql = "INSERT INTO `building`
-            SET `building_buildingtype_id`='5',
-                `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 1 DAY),
-                `building_length`='$length',
-                `building_team_id`='$get_num',
-                `building_width`='$width'";
-    $mysqli->query($sql);
-
-    $_SESSION['message_class']  = 'success';
-    $_SESSION['message_text']   = 'Работы по смене размеров поля начались успешно.';
-
-    redirect('team_team_information_condition.php?num=' . $get_num);
 }
 
 $num            = $get_num;
 $header_title   = $authorization_team_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

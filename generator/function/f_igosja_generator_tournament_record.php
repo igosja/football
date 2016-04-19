@@ -132,8 +132,7 @@ function f_igosja_generator_tournament_record()
                     $statistic_season_id == $record_season)
                 {
                     $sql = "UPDATE `recordtournament`
-                            SET `recordtournament_game_id`='$game_id',
-                                `recordtournament_team_id`='$team_id',
+                            SET `recordtournament_team_id`='$team_id',
                                 `recordtournament_value_1`='$visitor'
                             WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
                             AND `recordtournament_tournament_id`='$tournament_id'
@@ -194,8 +193,7 @@ function f_igosja_generator_tournament_record()
                     $statistic_season_id == $record_season)
                 {
                     $sql = "UPDATE `recordtournament`
-                            SET `recordtournament_game_id`='$game_id',
-                                `recordtournament_team_id`='$country_id',
+                            SET `recordtournament_team_id`='$country_id',
                                 `recordtournament_value_1`='$visitor'
                             WHERE `recordtournament_recordtournamenttype_id`='" . RECORD_TOURNAMENT_AVERAGE_ATTENDANCE . "'
                             AND `recordtournament_tournament_id`='$tournament_id'
@@ -647,7 +645,7 @@ function f_igosja_generator_tournament_record()
                 $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
-                if ($visitor > $record_value)
+                if ($point > $record_value)
                 {
                     $sql = "UPDATE `recordtournament`
                             SET `recordtournament_team_id`='$team_id',
@@ -703,7 +701,7 @@ function f_igosja_generator_tournament_record()
                 $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
-                if ($visitor > $record_value)
+                if ($point > $record_value)
                 {
                     $sql = "UPDATE `recordtournament`
                             SET `recordtournament_team_id`='$country_id',

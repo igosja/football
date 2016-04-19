@@ -6,8 +6,8 @@
                 <tr>
                     <th>Статистика</th>
                     <th class="w1"></th>
-                    <th class="w35"><?= $game_array[0]['game_home_team_name']; ?></th>
-                    <th class="w35"><?= $game_array[0]['game_guest_team_name']; ?></th>
+                    <th class="w35"><?= $game_array[0]['game_home_' . $team_country . '_name']; ?></th>
+                    <th class="w35"><?= $game_array[0]['game_guest_' . $team_country . '_name']; ?></th>
                     <th class="w1"></th>
                 </tr>
                 <tr>

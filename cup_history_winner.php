@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -42,7 +42,7 @@ $sql = "SELECT `looser`.`team_id` AS `looser_id`,
         LEFT JOIN `team` AS `looser`
         ON `looser`.`team_id`=IF(`game_home_score`+`game_home_shoot_out`>`game_guest_score`+`game_guest_shoot_out`, `game_guest_team_id`, `game_home_team_id`)
         WHERE `game_tournament_id`='$get_num'
-        AND `shedule_season_id`<='$igosja_season_id'
+        AND `shedule_season_id`<'$igosja_season_id'
         AND `game_stage_id`='" . CUP_FINAL_STAGE . "'
         ORDER BY `shedule_season_id` DESC";
 $winner_sql = $mysqli->query($sql);
@@ -52,4 +52,4 @@ $winner_array = $winner_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $tournament_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include (__DIR__ . 'include/include.php');
 
 if (isset($_GET['group']))
 {
@@ -79,4 +79,4 @@ else
 
 $header_title = 'Форум';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

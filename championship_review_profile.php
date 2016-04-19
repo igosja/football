@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -153,6 +153,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_goal` DESC
         LIMIT 5";
 $player_goal_sql = $mysqli->query($sql);
@@ -171,6 +172,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_pass_scoring` DESC
         LIMIT 5";
 $player_pass_sql = $mysqli->query($sql);
@@ -189,6 +191,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_mark` DESC
         LIMIT 5";
 $player_mark_sql = $mysqli->query($sql);
@@ -198,4 +201,4 @@ $player_mark_array = $player_mark_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $tournament_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

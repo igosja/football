@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -53,7 +53,7 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         ON `seller`.`team_id`=`transferhistory_seller_id`
         LEFT JOIN `standing` AS `seller_standing`
         ON `seller`.`team_id`=`seller_standing`.`standing_team_id`
-        WHERE `transferhistory_season_id`='$igosja_season_id'
+        WHERE `transferhistory_season_id`='$igosja_season_id'-'1'
         AND `buyer_standing`.`standing_season_id`='$igosja_season_id'
         AND `seller_standing`.`standing_season_id`='$igosja_season_id'
         AND `buyer_standing`.`standing_tournament_id`='$get_num'
@@ -66,4 +66,4 @@ $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $tournament_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

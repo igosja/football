@@ -73,7 +73,6 @@ if (0 == $count_shedule)
     f_igosja_season_player_age();
     f_igosja_season_user_championship_trophy();
     f_igosja_season_user_cup_trophy();
-    f_igosja_season_championship_point_record();
     f_igosja_season_championship_most_titled_record();
     f_igosja_season_cup_most_titled_record();
     f_igosja_season_championship_prize();

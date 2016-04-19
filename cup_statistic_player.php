@@ -216,7 +216,7 @@ $yellow_array = $yellow_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `name_name`,
                `player_id`,
-               `statisticplayer_distance`,
+               ROUND(`statisticplayer_distance`/'1000', '1') AS `statisticplayer_distance`,
                `surname_name`,
                `team_id`,
                `team_name`

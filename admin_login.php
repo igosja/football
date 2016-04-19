@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_POST['data']))
 {
@@ -78,4 +78,4 @@ if (isset($_POST['data']))
 
 $header_title = 'Вход';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_login.php');
+include (__DIR__ . '/view/admin_login.php');

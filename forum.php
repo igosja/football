@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include (__DIR__ . '/include/include.php');
 
 $sql = "SELECT `count_post`,
                `count_theme`,
@@ -58,4 +58,4 @@ $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
 
 $header_title = 'Форум';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

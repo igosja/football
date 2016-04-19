@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -9,6 +9,33 @@ if (isset($_GET['num']))
 else
 {
     $get_num = 1;
+}
+
+$sql = "SELECT `game_home_team_id`
+        FROM `game`
+        WHERE `game_id`='$get_num'
+        LIMIT 1";
+$game_sql = $mysqli->query($sql);
+
+$count_game = $game_sql->num_rows;
+
+if (0 == $count_game)
+{
+    include (__DIR__ . '/view/wrong_page.php');
+    exit;
+}
+
+$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+
+$home_team_id = $game_array[0]['game_home_team_id'];
+
+if (0 != $home_team_id)
+{
+    $team_country = 'team';
+}
+else
+{
+    $team_country = 'country';
 }
 
 $sql = "SELECT `game_guest_corner`,
@@ -20,8 +47,8 @@ $sql = "SELECT `game_guest_corner`,
                `game_guest_penalty`,
                `game_guest_possession`,
                `game_guest_red`,
-               `game_guest_team_id`,
-               `t2`.`team_name` AS `game_guest_team_name`,
+               `game_guest_" . $team_country . "_id`,
+               `t2`.`" . $team_country . "_name` AS `game_guest_" . $team_country . "_name`,
                `game_guest_score`,
                `game_guest_shoot_out`,
                `game_guest_shot`,
@@ -35,8 +62,8 @@ $sql = "SELECT `game_guest_corner`,
                `game_home_penalty`,
                `game_home_possession`,
                `game_home_red`,
-               `game_home_team_id`,
-               `t1`.`team_name` AS `game_home_team_name`,
+               `game_home_" . $team_country . "_id`,
+               `t1`.`" . $team_country . "_name` AS `game_home_" . $team_country . "_name`,
                `game_home_score`,
                `game_home_shoot_out`,
                `game_home_shot`,
@@ -46,49 +73,41 @@ $sql = "SELECT `game_guest_corner`,
                `guest_average`,
                `home_average`
         FROM `game`
-        LEFT JOIN `team` AS `t1`
-        ON `game_home_team_id`=`t1`.`team_id`
-        LEFT JOIN `team` AS `t2`
-        ON `game_guest_team_id`=`t2`.`team_id`
+        LEFT JOIN `" . $team_country . "` AS `t1`
+        ON `game_home_" . $team_country . "_id`=`t1`.`" . $team_country . "_id`
+        LEFT JOIN `" . $team_country . "` AS `t2`
+        ON `game_guest_" . $team_country . "_id`=`t2`.`" . $team_country . "_id`
         LEFT JOIN
         (
             SELECT ROUND(AVG(`lineup_mark`),2) AS `home_average`,
-                   `lineup_team_id`
+                   `lineup_" . $team_country . "_id`
             FROM `lineup`
             WHERE `lineup_game_id`='$get_num'
             AND `lineup_position_id`<='25'
-            GROUP BY `lineup_team_id`
+            GROUP BY `lineup_" . $team_country . "_id`
         ) AS `t3`
-        ON `t3`.`lineup_team_id`=`game_home_team_id`
+        ON `t3`.`lineup_" . $team_country . "_id`=`game_home_" . $team_country . "_id`
         LEFT JOIN
         (
             SELECT ROUND(AVG(`lineup_mark`),2) AS `guest_average`,
-                   `lineup_team_id`
+                   `lineup_" . $team_country . "_id`
             FROM `lineup`
             WHERE `lineup_game_id`='$get_num'
             AND `lineup_position_id`<='25'
-            GROUP BY `lineup_team_id`
+            GROUP BY `lineup_" . $team_country . "_id`
         ) AS `t4`
-        ON `t4`.`lineup_team_id`=`game_guest_team_id`
+        ON `t4`.`lineup_" . $team_country . "_id`=`game_guest_" . $team_country . "_id`
         WHERE `game_id`='$get_num'
         LIMIT 1";
 $game_sql = $mysqli->query($sql);
 
-$count_game = $game_sql->num_rows;
-
-if (0 == $count_game)
-{
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-    exit;
-}
-
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
 $game_played          = $game_array[0]['game_played'];
-$header_2_home_id     = $game_array[0]['game_home_team_id'];
-$header_2_home_name   = $game_array[0]['game_home_team_name'];
-$header_2_guest_id    = $game_array[0]['game_guest_team_id'];
-$header_2_guest_name  = $game_array[0]['game_guest_team_name'];
+$header_2_home_id     = $game_array[0]['game_home_' . $team_country . '_id'];
+$header_2_home_name   = $game_array[0]['game_home_' . $team_country . '_name'];
+$header_2_guest_id    = $game_array[0]['game_guest_' . $team_country . '_id'];
+$header_2_guest_name  = $game_array[0]['game_guest_' . $team_country . '_name'];
 
 if (0 == $game_played)
 {
@@ -113,4 +132,4 @@ else
 $num            = $get_num;
 $header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');
