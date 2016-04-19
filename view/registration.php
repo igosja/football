@@ -29,31 +29,21 @@
                     </tr>
                     <tr>
                         <td class="center">
-                            <img
-                                alt="Facebook"
-                                class="img-30"
-                                src="img/social/facebook.png"
-                            />
-                            <img
-                                alt="Google"
-                                class="img-30"
-                                src="img/social/google.png"
-                            />
-                            <img
-                                alt="Одноклассники"
-                                class="img-30"
-                                src="img/social/odnoklassniki.png"
-                            />
-                            <img
-                                alt="Вконтакте"
-                                class="img-30"
-                                src="img/social/vkontakte.png"
-                            />
+                            <p class="social-block">
+                                <?php foreach ($social_array as $item) { ?>
+                                    <a href="<?= $item['url']; ?>">
+                                        <img
+                                            alt="<?= $item['alt']; ?>"
+                                            class="img-30"
+                                            src="img/social/<?= $item['img']; ?>.png"
+                                        />
+                                    </a>
+                                <?php } ?>
+                            </p>
                         </td>
                     </tr>
                 </table>
             </form>
-            <p><?= SPACE; ?></p>
             <table class="center striped grey">
                 <tr>
                     <td>

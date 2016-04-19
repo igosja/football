@@ -109,7 +109,7 @@
                         </tr>
                     </table>
                 </td>
-                <td rowspan="2">
+                <td class="center" rowspan="2">
                     <a href="/">
                         <img
                             alt="Футбольная Лига"
@@ -120,7 +120,7 @@
             </tr>
             <tr>
                 <td class="right">
-                    <span class="logo-text">Футбольная Лига</span>
+                    <span class="logo-text"><?= SPACE; ?></span>
                 </td>
             </tr>
             <tr>

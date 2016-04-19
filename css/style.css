@@ -877,6 +877,12 @@ td.nopadding
     opacity: 0.5;
 }
 
+/*Иконки регистрации через соцсети*/
+.social-block
+{
+    padding: 10px;
+}
+
 /*Автокомпит*/
 input.es-input
 {

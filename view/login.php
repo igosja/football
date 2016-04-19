@@ -24,20 +24,21 @@
                     </tr>
                     <tr>
                         <td class="center">
-                            <?php foreach ($social_array as $item) { ?>
-                                <a href="<?= $item['url']; ?>">
-                                    <img
-                                        alt="<?= $item['alt']; ?>"
-                                        class="img-30"
-                                        src="img/social/<?= $item['img']; ?>.png"
-                                    />
-                                </a>
-                            <?php } ?>
+                            <p class="social-block">
+                                <?php foreach ($social_array as $item) { ?>
+                                    <a href="<?= $item['url']; ?>">
+                                        <img
+                                            alt="<?= $item['alt']; ?>"
+                                            class="img-30"
+                                            src="img/social/<?= $item['img']; ?>.png"
+                                        />
+                                    </a>
+                                <?php } ?>
+                            </p>
                         </td>
                     </tr>
                 </table>
             </form>
-            <p><?= SPACE; ?></p>
             <table class="center striped grey">
                 <tr>
                     <td>

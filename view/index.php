@@ -5,7 +5,7 @@
             <p class="justify"><strong>Виртуальная Футбольная Лига</strong> - это игра, в которой вы выступаете в роли тренера виртуальной футбольной команды, футбольный менеджер онлайн. Здесь вы можете выбрать себе команду и привести её к победам и славе.</p>
             <p class="center"><button><a href="registration.php">Зарегистрироваться</a></button></p>
             <p class="center">или войти через</p>
-            <p class="center">
+            <p class="center social-block">
                 <?php foreach ($social_array as $item) { ?>
                     <a href="<?= $item['url']; ?>">
                         <img

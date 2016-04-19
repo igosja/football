@@ -67,5 +67,6 @@ if (isset($_POST['data']))
 }
 
 $header_title = 'Регистрация';
+$social_array = f_igosja_social_array();
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
