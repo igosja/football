@@ -830,6 +830,12 @@ td.nopadding
     height: 200px;
 }
 
+.img-logo
+{
+    position: relative;
+    top: 7px;
+}
+
 /*Цвета*/
 .grey,
 .grey a

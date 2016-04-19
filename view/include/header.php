@@ -113,6 +113,7 @@
                     <a href="/">
                         <img
                             alt="Футбольная Лига"
+                            class="img-logo"
                             src="/img/logo.png"
                         />
                     </a>
