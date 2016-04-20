@@ -116,6 +116,13 @@ function f_igosja_season_champions_league_game()
             WHERE `leagueparticipant_season_id`='$igosja_season_id'";
     f_igosja_mysqli_query($sql);
 
+    $sql = "UPDATE `leagueparticipant`
+            LEFT JOIN `team`
+            ON `leagueparticipant_team_id`=`team_id`
+            SET `leagueparticipant_user_id`=`team_user_id`
+            WHERE `leagueparticipant_season_id`='$igosja_season_id'";
+    f_igosja_mysqli_query($sql);
+
     $sql = "SELECT `referee_id`
             FROM `referee`
             ORDER BY RAND()

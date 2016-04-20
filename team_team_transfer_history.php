@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -50,7 +50,6 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `team`
         ON `transferhistory_buyer_id`=`team_id`
         WHERE `transferhistory_seller_id`='$get_num'
-        AND `transferhistory_season_id`='$igosja_season_id'
         ORDER BY `transferhistory_date` DESC";
 $transferhistory_sell_sql = $mysqli->query($sql);
 
@@ -58,8 +57,7 @@ $transferhistory_sell_array = $transferhistory_sell_sql->fetch_all(MYSQLI_ASSOC)
 
 $sql = "SELECT SUM(`transferhistory_price`) AS `transferhistory_total_price`
         FROM `transferhistory`
-        WHERE `transferhistory_seller_id`='$get_num'
-        AND `transferhistory_season_id`='$igosja_season_id'";
+        WHERE `transferhistory_seller_id`='$get_num'";
 $transferhistory_sell_sql = $mysqli->query($sql);
 
 $transferhistory_sell_summ = $transferhistory_sell_sql->fetch_all(MYSQLI_ASSOC);
@@ -85,7 +83,6 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `team`
         ON `transferhistory_seller_id`=`team_id`
         WHERE `transferhistory_buyer_id`='$get_num'
-        AND `transferhistory_season_id`='$igosja_season_id'
         ORDER BY `transferhistory_date` DESC";
 $transferhistory_buy_sql = $mysqli->query($sql);
 
@@ -93,8 +90,7 @@ $transferhistory_buy_array = $transferhistory_buy_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT SUM(`transferhistory_price`) AS `transferhistory_total_price`
         FROM `transferhistory`
-        WHERE `transferhistory_buyer_id`='$get_num'
-        AND `transferhistory_season_id`='$igosja_season_id'";
+        WHERE `transferhistory_buyer_id`='$get_num'";
 $transferhistory_buy_sql = $mysqli->query($sql);
 
 $transferhistory_buy_summ = $transferhistory_buy_sql->fetch_all(MYSQLI_ASSOC);
@@ -102,4 +98,4 @@ $transferhistory_buy_summ = $transferhistory_buy_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $team_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

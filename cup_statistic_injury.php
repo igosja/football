@@ -51,6 +51,7 @@ $sql = "SELECT DATEDIFF(`injury_end_date`, SYSDATE()) AS `day`,
         ON `cupparticipant_team_id`=`team_id`
         WHERE `injury_end_date`>SYSDATE()
         AND `cupparticipant_tournament_id`='$get_num'
+        AND `cupparticipant_out`='0'
         AND `cupparticipant_season_id`='$igosja_season_id'
         ORDER BY `team_id` ASC, `injury_id` ASC";
 $injury_sql = $mysqli->query($sql);

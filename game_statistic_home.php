@@ -32,7 +32,7 @@ $home_team_id = $game_array[0]['game_home_team_id'];
 if (0 != $home_team_id)
 {
     $team_country   = 'team';
-    $number         = '_national';
+    $number         = '';
 }
 else
 {

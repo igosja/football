@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if ('national_coach_vote.php' != $coach_link)
 {
@@ -9,7 +9,7 @@ if ('national_coach_vote.php' != $coach_link)
 
 if (!isset($authorization_user_id))
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_logged.php');
+    include (__DIR__ . '/view/only_logged.php');
     exit;
 }
 
@@ -93,4 +93,4 @@ $coachvote_array = $coachvote_sql->fetch_all(MYSQLI_ASSOC);
 
 $header_title = 'Выборы';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

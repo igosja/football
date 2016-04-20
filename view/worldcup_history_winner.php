@@ -11,41 +11,41 @@
                 </tr>
                 <?php for ($i=0; $i<$count_first; $i++) { ?>
                     <tr>
-                        <td class="center"><?= $first_array[$i]['standing_season_id']; ?></td>
+                        <td class="center"><?= $first_array[$i]['worldcup_season_id']; ?></td>
                         <td class="w1">
                             <img
-                                alt="<?= $first_array[$i]['team_name']; ?>"
+                                alt="<?= $first_array[$i]['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $first_array[$i]['team_id']; ?>.png"
+                                src="img/flag/12/<?= $first_array[$i]['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
-                            <a href="team_team_review_profile.php?num=<?= $first_array[$i]['team_id']; ?>">
-                                <?= $first_array[$i]['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $first_array[$i]['country_id']; ?>">
+                                <?= $first_array[$i]['country_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?= $second_array[$i]['team_name']; ?>"
+                                alt="<?= $second_array[$i]['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $second_array[$i]['team_id']; ?>.png"
+                                src="img/flag/12/<?= $second_array[$i]['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
-                            <a href="team_team_review_profile.php?num=<?= $second_array[$i]['team_id']; ?>">
-                                <?= $second_array[$i]['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $second_array[$i]['country_id']; ?>">
+                                <?= $second_array[$i]['country_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?= $third_array[$i]['team_name']; ?>"
+                                alt="<?= $third_array[$i]['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $third_array[$i]['team_id']; ?>.png"
+                                src="img/flag/12/<?= $third_array[$i]['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
-                            <a href="team_team_review_profile.php?num=<?= $third_array[$i]['team_id']; ?>">
-                                <?= $third_array[$i]['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $third_array[$i]['country_id']; ?>">
+                                <?= $third_array[$i]['country_name']; ?>
                             </a>
                         </td>
                     </tr>

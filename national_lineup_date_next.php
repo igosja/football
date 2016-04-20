@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_country = $country_sql->num_rows;
 
 if (0 == $count_country)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -48,7 +48,7 @@ $count_nearest_game = $nearest_game_sql->num_rows;
 
 if (0 == $count_nearest_game)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/no_game.php');
+    include (__DIR__ . '/view/no_game.php');
     exit;
 }
 
@@ -141,4 +141,4 @@ for ($i=0; $i<$game; $i++)
 $num            = $get_num;
 $header_title   = $country_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

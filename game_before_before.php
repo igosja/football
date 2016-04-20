@@ -39,97 +39,56 @@ $shedule_id         = $game_array[0]['game_shedule_id'];
 
 if (0 != $home_team_id)
 {
-    $sql = "SELECT `city_name`,
-                   `game_guest_team_id`,
-                   `t2`.`team_name` AS `game_guest_team_name`,
-                   `game_guest_score`,
-                   `game_home_team_id`,
-                   `t1`.`team_name` AS `game_home_team_name`,
-                   `game_home_score`,
-                   `game_id`,
-                   `game_played`,
-                   `name_name`,
-                   `referee_id`,
-                   `shedule_date`,
-                   `stadium_capacity`,
-                   `stadium_name`,
-                   `stadiumquality_name`,
-                   `surname_name`,
-                   `tournament_id`,
-                   `tournament_name`
-            FROM `game`
-            LEFT JOIN `team` AS `t1`
-            ON `game_home_team_id`=`t1`.`team_id`
-            LEFT JOIN `team` AS `t2`
-            ON `game_guest_team_id`=`t2`.`team_id`
-            LEFT JOIN `tournament`
-            ON `game_tournament_id`=`tournament_id`
-            LEFT JOIN `shedule`
-            ON `shedule_id`=`game_shedule_id`
-            LEFT JOIN `referee`
-            ON `game_referee_id`=`referee_id`
-            LEFT JOIN `name`
-            ON `name_id`=`referee_name_id`
-            LEFT JOIN `surname`
-            ON `surname_id`=`referee_surname_id`
-            LEFT JOIN `stadium`
-            ON `game_stadium_id`=`stadium_id`
-            LEFT JOIN `stadiumquality`
-            ON `stadium_stadiumquality_id`=`stadiumquality_id`
-            LEFT JOIN `team` AS `t3`
-            ON `t3`.`team_id`=`stadium_team_id`
-            LEFT JOIN `city`
-            ON `city_id`=`t3`.`team_city_id`
-            WHERE `game_id`='$get_num'
-            LIMIT 1";
+    $team_country = 'team';
 }
 else
 {
-
-    $sql = "SELECT `city_name`,
-                   `game_guest_country_id`,
-                   `t2`.`country_name` AS `game_guest_country_name`,
-                   `game_guest_score`,
-                   `game_home_country_id`,
-                   `t1`.`country_name` AS `game_home_country_name`,
-                   `game_home_score`,
-                   `game_id`,
-                   `game_played`,
-                   `name_name`,
-                   `referee_id`,
-                   `shedule_date`,
-                   `stadium_capacity`,
-                   `stadium_name`,
-                   `stadiumquality_name`,
-                   `surname_name`,
-                   `tournament_id`,
-                   `tournament_name`
-            FROM `game`
-            LEFT JOIN `country` AS `t1`
-            ON `game_home_country_id`=`t1`.`country_id`
-            LEFT JOIN `country` AS `t2`
-            ON `game_guest_country_id`=`t2`.`country_id`
-            LEFT JOIN `tournament`
-            ON `game_tournament_id`=`tournament_id`
-            LEFT JOIN `shedule`
-            ON `shedule_id`=`game_shedule_id`
-            LEFT JOIN `referee`
-            ON `game_referee_id`=`referee_id`
-            LEFT JOIN `name`
-            ON `name_id`=`referee_name_id`
-            LEFT JOIN `surname`
-            ON `surname_id`=`referee_surname_id`
-            LEFT JOIN `stadium`
-            ON `game_stadium_id`=`stadium_id`
-            LEFT JOIN `stadiumquality`
-            ON `stadium_stadiumquality_id`=`stadiumquality_id`
-            LEFT JOIN `team` AS `t3`
-            ON `t3`.`team_id`=`stadium_team_id`
-            LEFT JOIN `city`
-            ON `city_id`=`t3`.`team_city_id`
-            WHERE `game_id`='$get_num'
-            LIMIT 1";
+    $team_country = 'country';
 }
+
+$sql = "SELECT `city_name`,
+               `game_guest_" . $team_country . "_id`,
+               `t2`.`" . $team_country . "_name` AS `game_guest_" . $team_country . "_name`,
+               `game_guest_score`,
+               `game_home_" . $team_country . "_id`,
+               `t1`.`" . $team_country . "_name` AS `game_home_" . $team_country . "_name`,
+               `game_home_score`,
+               `game_id`,
+               `game_played`,
+               `name_name`,
+               `referee_id`,
+               `shedule_date`,
+               `stadium_capacity`,
+               `stadium_name`,
+               `stadiumquality_name`,
+               `surname_name`,
+               `tournament_id`,
+               `tournament_name`
+        FROM `game`
+        LEFT JOIN `" . $team_country . "` AS `t1`
+        ON `game_home_" . $team_country . "_id`=`t1`.`" . $team_country . "_id`
+        LEFT JOIN `" . $team_country . "` AS `t2`
+        ON `game_guest_" . $team_country . "_id`=`t2`.`" . $team_country . "_id`
+        LEFT JOIN `tournament`
+        ON `game_tournament_id`=`tournament_id`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `referee`
+        ON `game_referee_id`=`referee_id`
+        LEFT JOIN `name`
+        ON `name_id`=`referee_name_id`
+        LEFT JOIN `surname`
+        ON `surname_id`=`referee_surname_id`
+        LEFT JOIN `stadium`
+        ON `game_stadium_id`=`stadium_id`
+        LEFT JOIN `stadiumquality`
+        ON `stadium_stadiumquality_id`=`stadiumquality_id`
+        LEFT JOIN `team` AS `t3`
+        ON `t3`.`team_id`=`stadium_team_id`
+        LEFT JOIN `city`
+        ON `city_id`=`t3`.`team_city_id`
+        WHERE `game_id`='$get_num'
+        LIMIT 1";
 
 $game_sql = $mysqli->query($sql);
 
@@ -143,22 +102,11 @@ if (0 == $count_game)
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-$game_played          = $game_array[0]['game_played'];
-
-if (isset($game_array[0]['game_home_team_id']))
-{
-    $header_2_home_id       = $game_array[0]['game_home_team_id'];
-    $header_2_home_name     = $game_array[0]['game_home_team_name'];
-    $header_2_guest_id      = $game_array[0]['game_guest_team_id'];
-    $header_2_guest_name    = $game_array[0]['game_guest_team_name'];
-}
-else
-{
-    $header_2_home_id       = $game_array[0]['game_home_country_id'];
-    $header_2_home_name     = $game_array[0]['game_home_country_name'];
-    $header_2_guest_id      = $game_array[0]['game_guest_country_id'];
-    $header_2_guest_name    = $game_array[0]['game_guest_country_name'];
-}
+$game_played            = $game_array[0]['game_played'];
+$header_2_home_id       = $game_array[0]['game_home_' . $team_country . '_id'];
+$header_2_home_name     = $game_array[0]['game_home_' . $team_country . '_name'];
+$header_2_guest_id      = $game_array[0]['game_guest_' . $team_country . '_id'];
+$header_2_guest_name    = $game_array[0]['game_guest_' . $team_country . '_name'];
 
 if (1 == $game_played)
 {
@@ -180,155 +128,79 @@ $referee_sql = $mysqli->query($sql);
 
 $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
 
-
-if (0 != $home_team_id)
-{
-    $sql = "SELECT `game_guest_score`,
-                   `game_guest_team_id`,
-                   `game_home_score`,
-                   `game_home_team_id`,
-                   `game_id`,
-                   `guest`.`team_name` AS `guest_name`,
-                   `home`.`team_name` AS `home_name`,
-                   `shedule_date`,
-                   `tournament_id`,
-                   `tournament_name`
-            FROM `game`
-            LEFT JOIN `shedule`
-            ON `shedule_id`=`game_shedule_id`
-            LEFT JOIN `tournament`
-            ON `tournament_id`=`game_tournament_id`
-            LEFT JOIN `team` AS `home`
-            ON `home`.`team_id`=`game_home_team_id`
-            LEFT JOIN `team` AS `guest`
-            ON `guest`.`team_id`=`game_guest_team_id`
-            WHERE ((`game_home_team_id`='$header_2_home_id'
-            AND `game_guest_team_id`='$header_2_guest_id')
-            OR (`game_home_team_id`='$header_2_guest_id'
-            AND `game_guest_team_id`='$header_2_home_id'))
-            AND `game_played`='1'
-            ORDER BY `shedule_date` DESC";
-}
-else
-{
-    $sql = "SELECT `game_guest_score`,
-                   `game_guest_country_id`,
-                   `game_home_score`,
-                   `game_home_country_id`,
-                   `game_id`,
-                   `guest`.`country_name` AS `guest_name`,
-                   `home`.`country_name` AS `home_name`,
-                   `shedule_date`,
-                   `tournament_id`,
-                   `tournament_name`
-            FROM `game`
-            LEFT JOIN `shedule`
-            ON `shedule_id`=`game_shedule_id`
-            LEFT JOIN `tournament`
-            ON `tournament_id`=`game_tournament_id`
-            LEFT JOIN `country` AS `home`
-            ON `home`.`country_id`=`game_home_country_id`
-            LEFT JOIN `country` AS `guest`
-            ON `guest`.`country_id`=`game_guest_country_id`
-            WHERE ((`game_home_country_id`='$header_2_home_id'
-            AND `game_guest_country_id`='$header_2_guest_id')
-            OR (`game_home_country_id`='$header_2_guest_id'
-            AND `game_guest_country_id`='$header_2_home_id'))
-            AND `game_played`='1'
-            ORDER BY `shedule_date` DESC";
-}
+$sql = "SELECT `game_guest_score`,
+               `game_guest_" . $team_country . "_id`,
+               `game_home_score`,
+               `game_home_" . $team_country . "_id`,
+               `game_id`,
+               `guest`.`" . $team_country . "_name` AS `guest_name`,
+               `home`.`" . $team_country . "_name` AS `home_name`,
+               `shedule_date`,
+               `tournament_id`,
+               `tournament_name`
+        FROM `game`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `tournament`
+        ON `tournament_id`=`game_tournament_id`
+        LEFT JOIN `" . $team_country . "` AS `home`
+        ON `home`.`" . $team_country . "_id`=`game_home_" . $team_country . "_id`
+        LEFT JOIN `" . $team_country . "` AS `guest`
+        ON `guest`.`" . $team_country . "_id`=`game_guest_" . $team_country . "_id`
+        WHERE ((`game_home_" . $team_country . "_id`='$header_2_home_id'
+        AND `game_guest_" . $team_country . "_id`='$header_2_guest_id')
+        OR (`game_home_" . $team_country . "_id`='$header_2_guest_id'
+        AND `game_guest_" . $team_country . "_id`='$header_2_home_id'))
+        AND `game_played`='1'
+        ORDER BY `shedule_date` DESC";
 
 $last_sql = $mysqli->query($sql);
 
 $last_array = $last_sql->fetch_all(MYSQLI_ASSOC);
 
-if (0 != $home_team_id)
-{
-    $sql = "SELECT `game_id`,
-                   IF (`game_home_team_id`='$header_2_home_id', `game_guest_score`, `game_home_score`) AS `guest_score`,
-                   IF (`game_home_team_id`='$header_2_home_id', `game_home_score`, `game_guest_score`) AS `home_score`,
-                   `shedule_date`,
-                   IF (`game_home_team_id`='$header_2_home_id', `game_guest_team_id`, `game_home_team_id`) AS `team_id`,
-                   `team_name`
-            FROM `game`
-            LEFT JOIN `shedule`
-            ON `shedule_id`=`game_shedule_id`
-            LEFT JOIN `team`
-            ON IF (`game_home_team_id`='$header_2_home_id', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
-            WHERE (`game_home_team_id`='$header_2_home_id'
-            OR `game_guest_team_id`='$header_2_home_id')
-            AND `game_played`='1'
-            ORDER BY `shedule_date` DESC
-            LIMIT 5";
-}
-else
-{
-    $sql = "SELECT `game_id`,
-                   IF (`game_home_country_id`='$header_2_home_id', `game_guest_score`, `game_home_score`) AS `guest_score`,
-                   IF (`game_home_country_id`='$header_2_home_id', `game_home_score`, `game_guest_score`) AS `home_score`,
-                   `shedule_date`,
-                   IF (`game_home_country_id`='$header_2_home_id', `game_guest_country_id`, `game_home_country_id`) AS `country_id`,
-                   `country_name`
-            FROM `game`
-            LEFT JOIN `shedule`
-            ON `shedule_id`=`game_shedule_id`
-            LEFT JOIN `country`
-            ON IF (`game_home_country_id`='$header_2_home_id', `game_guest_country_id`=`country_id`, `game_home_country_id`=`country_id`)
-            WHERE (`game_home_country_id`='$header_2_home_id'
-            OR `game_guest_country_id`='$header_2_home_id')
-            AND `game_played`='1'
-            ORDER BY `shedule_date` DESC
-            LIMIT 5";
-}
+$sql = "SELECT `game_id`,
+               IF (`game_home_" . $team_country . "_id`='$header_2_home_id', `game_guest_score`, `game_home_score`) AS `guest_score`,
+               IF (`game_home_" . $team_country . "_id`='$header_2_home_id', `game_home_score`, `game_guest_score`) AS `home_score`,
+               `shedule_date`,
+               IF (`game_home_" . $team_country . "_id`='$header_2_home_id', `game_guest_" . $team_country . "_id`, `game_home_" . $team_country . "_id`) AS `" . $team_country . "_id`,
+               `" . $team_country . "_name`
+        FROM `game`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `" . $team_country . "`
+        ON IF (`game_home_" . $team_country . "_id`='$header_2_home_id', `game_guest_" . $team_country . "_id`=`" . $team_country . "_id`, `game_home_" . $team_country . "_id`=`" . $team_country . "_id`)
+        WHERE (`game_home_" . $team_country . "_id`='$header_2_home_id'
+        OR `game_guest_" . $team_country . "_id`='$header_2_home_id')
+        AND `game_played`='1'
+        ORDER BY `shedule_date` DESC
+        LIMIT 5";
 
 $home_latest_game_sql = $mysqli->query($sql);
 
 $home_latest_game_array = $home_latest_game_sql->fetch_all(MYSQLI_ASSOC);
 
-if (0 != $home_team_id)
-{
-    $sql = "SELECT IF (`game_home_team_id`='$header_2_guest_id', `game_home_score`, `game_guest_score`) AS `home_score`,
-                   `game_id`,
-                   IF (`game_home_team_id`='$header_2_guest_id', `game_guest_score`, `game_home_score`) AS `guest_score`,
-                   `shedule_date`,
-                   IF (`game_home_team_id`='$header_2_guest_id', `game_guest_team_id`, `game_home_team_id`) AS `team_id`,
-                   `team_name`
-            FROM `game`
-            LEFT JOIN `shedule`
-            ON `shedule_id`=`game_shedule_id`
-            LEFT JOIN `team`
-            ON IF (`game_home_team_id`='$header_2_guest_id', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
-            WHERE (`game_home_team_id`='$header_2_guest_id'
-            OR `game_guest_team_id`='$header_2_guest_id')
-            AND `game_played`='1'
-            ORDER BY `shedule_date` DESC
-            LIMIT 5";
-}
-else
-{
-    $sql = "SELECT IF (`game_home_country_id`='$header_2_guest_id', `game_home_score`, `game_guest_score`) AS `home_score`,
-                   `game_id`,
-                   IF (`game_home_country_id`='$header_2_guest_id', `game_guest_score`, `game_home_score`) AS `guest_score`,
-                   `shedule_date`,
-                   IF (`game_home_country_id`='$header_2_guest_id', `game_guest_country_id`, `game_home_country_id`) AS `country_id`,
-                   `country_name`
-            FROM `game`
-            LEFT JOIN `shedule`
-            ON `shedule_id`=`game_shedule_id`
-            LEFT JOIN `country`
-            ON IF (`game_home_country_id`='$header_2_guest_id', `game_guest_country_id`=`country_id`, `game_home_country_id`=`country_id`)
-            WHERE (`game_home_country_id`='$header_2_guest_id'
-            OR `game_guest_country_id`='$header_2_guest_id')
-            AND `game_played`='1'
-            ORDER BY `shedule_date` DESC
-            LIMIT 5";
-}
+$sql = "SELECT IF (`game_home_" . $team_country . "_id`='$header_2_guest_id', `game_home_score`, `game_guest_score`) AS `home_score`,
+               `game_id`,
+               IF (`game_home_" . $team_country . "_id`='$header_2_guest_id', `game_guest_score`, `game_home_score`) AS `guest_score`,
+               `shedule_date`,
+               IF (`game_home_" . $team_country . "_id`='$header_2_guest_id', `game_guest_" . $team_country . "_id`, `game_home_" . $team_country . "_id`) AS `" . $team_country . "_id`,
+               `" . $team_country . "_name`
+        FROM `game`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `" . $team_country . "`
+        ON IF (`game_home_" . $team_country . "_id`='$header_2_guest_id', `game_guest_" . $team_country . "_id`=`" . $team_country . "_id`, `game_home_" . $team_country . "_id`=`" . $team_country . "_id`)
+        WHERE (`game_home_" . $team_country . "_id`='$header_2_guest_id'
+        OR `game_guest_" . $team_country . "_id`='$header_2_guest_id')
+        AND `game_played`='1'
+        ORDER BY `shedule_date` DESC
+        LIMIT 5";
 
 $guest_latest_game_sql = $mysqli->query($sql);
 
 $guest_latest_game_array = $guest_latest_game_sql->fetch_all(MYSQLI_ASSOC);
 
-if (0 == $home_team_id)
+if (TOURNAMENT_TYPE_WORLD_CUP == $tournamenttype_id)
 {
     $sql = "SELECT `country_id`,
                    `country_name`,

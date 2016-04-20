@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -40,7 +40,7 @@ $count_staff = $staff_sql->num_rows;
 
 if (0 == $count_staff)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -93,4 +93,4 @@ $staff_surname  = $staff_array[0]['surname_name'];
 $num            = $get_num;
 $header_title   = $staff_name . ' ' . $staff_surname;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

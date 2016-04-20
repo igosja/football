@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_id))
 }
 else
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_logged.php');
+    include (__DIR__ . '/view/only_logged.php');
     exit;
 }
 
@@ -70,7 +70,7 @@ elseif (isset($_GET['point']))
     $tpl            = 'submit_shop_point';
     $header_title   = 'Магазин';
 
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+    include (__DIR__ . '/view/main.php');
 }
 elseif (isset($_GET['position']))
 {
@@ -116,7 +116,7 @@ elseif (isset($_GET['position']))
     $tpl            = 'submit_shop_position';
     $header_title   = 'Магазин';
 
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+    include (__DIR__ . '/view/main.php');
     exit;
 }
 elseif (isset($_GET['money']))
@@ -209,7 +209,7 @@ elseif (isset($_GET['money']))
     $tpl            = 'submit_shop_money';
     $header_title   = 'Магазин';
 
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+    include (__DIR__ . '/view/main.php');
     exit;
 }
 elseif (isset($_POST['data']))
@@ -267,4 +267,4 @@ $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $authorization_id;
 $header_title   = 'Магазин';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

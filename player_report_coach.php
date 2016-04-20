@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -39,7 +39,7 @@ $count_player = $player_sql->num_rows;
 
 if (0 == $count_player)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -51,4 +51,4 @@ $player_surname = $player_array[0]['surname_name'];
 $num            = $get_num;
 $header_title   = $player_name . ' ' . $player_surname;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

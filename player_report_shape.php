@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -30,7 +30,7 @@ $count_player = $player_sql->num_rows;
 
 if (0 == $count_player)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -48,7 +48,8 @@ $sql = "SELECT MAX(`lineup_mark`) AS `max_mark`,
         ON `shedule_id`=`game_shedule_id`
         WHERE `lineup_player_id`='$get_num'
         AND `shedule_season_id`='$igosja_season_id'
-        AND `game_played`='1'";
+        AND `game_played`='1'
+        AND `lineup_mark`>'0'";
 $mark_sql = $mysqli->query($sql);
 
 $mark_array = $mark_sql->fetch_all(MYSQLI_ASSOC);
@@ -78,6 +79,7 @@ $sql = "SELECT IF (`game_home_team_id`=`lineup_team_id`, `game_home_score`, `gam
         WHERE `lineup_player_id`='$get_num'
         AND `shedule_season_id`='$igosja_season_id'
         AND `game_played`='1'
+        AND `lineup_mark`>'0'
         ORDER BY `shedule_date` DESC";
 $game_sql = $mysqli->query($sql);
 
@@ -87,7 +89,7 @@ $sql = "SELECT `statisticplayer_best`,
                `statisticplayer_foul`,
                `statisticplayer_game`,
                `statisticplayer_goal`,
-               ROUND(`statisticplayer_mark`/`statisticplayer_game`,'2') AS `statisticplayer_mark`,
+               ROUND(`statisticplayer_mark`/`statisticplayer_game`, '2') AS `statisticplayer_mark`,
                `statisticplayer_ontarget`,
                ROUND(`statisticplayer_pass_accurate`/`statisticplayer_pass`*'100') AS `statisticplayer_pass_accurate`,
                `statisticplayer_pass_scoring`,
@@ -112,7 +114,7 @@ $sql = "SELECT SUM(`statisticplayer_best`) AS `count_best`,
                SUM(`statisticplayer_foul`) AS `count_foul`,
                SUM(`statisticplayer_game`) AS `count_game`,
                SUM(`statisticplayer_goal`) AS `count_goal`,
-               ROUND(SUM(`statisticplayer_mark`)/SUM(`statisticplayer_game`),2) AS `count_mark`,
+               ROUND(SUM(`statisticplayer_mark`)/SUM(`statisticplayer_game`), 2) AS `count_mark`,
                SUM(`statisticplayer_ontarget`) AS `count_ontarget`,
                ROUND(SUM(`statisticplayer_pass_accurate`)/SUM(`statisticplayer_pass`)*'100') AS `count_pass_accurate`,
                SUM(`statisticplayer_pass_scoring`) AS `count_pass_scoring`,
@@ -132,4 +134,4 @@ $total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $player_name . ' ' . $player_surname;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

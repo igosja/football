@@ -1,6 +1,6 @@
 <?php
 
-include ('include/include.php');
+include (__DIR__ . '/include/include.php');
 
 $mrh_pass2  = "RNVK948h0sUWiOcvkSq8";
 $shp_item   = 1;

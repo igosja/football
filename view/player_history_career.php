@@ -67,6 +67,7 @@
             <p class="header">Статистика</p>
             <table class="striped w100">
                 <tr>
+                    <th class="w5">Сезон</th>
                     <th>Статистика</th>
                     <th class="w5">Игры</th>
                     <th class="w5">Гол</th>
@@ -83,6 +84,7 @@
                 </tr>
                 <?php foreach ($statistic_array as $item) { ?>
                     <tr>
+                        <td class="center"><?= $item['statisticplayer_season_id']; ?></td>
                         <td><?= $item['tournamenttype_name']; ?></td>
                         <td class="center"><?= $item['statisticplayer_game']; ?></td>
                         <td class="center"><?= $item['statisticplayer_goal']; ?></td>
@@ -99,6 +101,7 @@
                     </tr>
                 <?php } ?>
                 <tr>
+                    <td></td>
                     <td>Всего</td>
                     <td class="center"><?= $total_statistic_array[0]['count_game']; ?></td>
                     <td class="center"><?= $total_statistic_array[0]['count_goal']; ?></td>

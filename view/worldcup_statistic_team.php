@@ -7,17 +7,17 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?= $item['team_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                <?= $item['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
-                        <td class="w15"><?= $item['statisticteam_goal']; ?></td>
+                        <td class="w15"><?= $item['statisticcountry_goal']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -29,17 +29,17 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?= $item['team_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                <?= $item['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
-                        <td class="w15"><?= $item['statisticteam_pass']; ?></td>
+                        <td class="w15"><?= $item['statisticcountry_pass']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -51,17 +51,17 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?= $item['team_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                <?= $item['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
-                        <td class="w15"><?= $item['statisticteam_red']; ?></td>
+                        <td class="w15"><?= $item['statisticcountry_red']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -73,17 +73,17 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?= $item['team_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                <?= $item['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
-                        <td class="w15"><?= $item['statisticteam_yellow']; ?></td>
+                        <td class="w15"><?= $item['statisticcountry_yellow']; ?></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -97,14 +97,14 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?= $item['team_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                <?= $item['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
                         <td class="w15"><?= $item['series_value']; ?></td>
@@ -119,14 +119,14 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?= $item['team_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                <?= $item['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
                         <td class="w15"><?= $item['series_value']; ?></td>
@@ -141,14 +141,14 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?= $item['team_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                <?= $item['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
                         <td class="w15"><?= $item['series_value']; ?></td>
@@ -163,14 +163,14 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?= $item['team_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
-                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                <?= $item['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                <?= $item['country_name']; ?>
                             </a>
                         </td>
                         <td class="w15"><?= $item['series_value']; ?></td>

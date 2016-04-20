@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_id))
 {
@@ -84,4 +84,4 @@ if (isset($_POST['data']))
 $header_title = 'Вход';
 $social_array = f_igosja_social_array();
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

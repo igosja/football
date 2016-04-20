@@ -5,13 +5,13 @@
             <?php if (isset($school_array[0]['building_end_date'])) { ?>
                 <p class="center warning">
                     Сейчас проходит улучшение молодежной инфраструктуры<br/>
-                    Строительство продлится до <?= igosja_ufu_date($school_array[0]['building_end_date']); ?>
+                    Строительство продлится до <?= f_igosja_ufu_date($school_array[0]['building_end_date']); ?>
                 </p>
             <?php } elseif (isset($level) && 1 == $level) { ?>
                 <p class="center info">
                     Вы собираетесь увеличить уровень вашей молодежной инфраструктуры<br/>
                     Стоимость строительльтва составит <?= f_igosja_money($price); ?>.
-                    Строительство продлится до <?= date('d.m.Y', time()+30*24*60*60); ?><br/>
+                    Строительство продлится до <?= f_igosja_ufu_date(date('d.m.Y', time()+30*24*60*60)); ?><br/>
                     <a href="school.php?level=1&ok=1">Начать строительство</a> |
                     <a href="school.php">Отказаться от строительства</a>
                 </p>

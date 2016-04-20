@@ -69,14 +69,25 @@
                     <tr>
                         <td><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
                         <td class="right">
-                            <a href="team_team_review_profile.php?num=<?= $item['game_home_team_id']; ?>">
-                                <?= $item['home_team_name']; ?>
-                            </a>
-                            <img
-                                alt="<?= $item['home_team_name']; ?>"
-                                class="img-12"
-                                src="img/team/12/<?= $item['game_home_team_id']; ?>.png"
-                            />
+                            <?php if (0 != $item['game_home_team_id']) { ?>
+                                <a href="team_team_review_profile.php?num=<?= $item['game_home_team_id']; ?>">
+                                    <?= $item['home_team_name']; ?>
+                                </a>
+                                <img
+                                    alt="<?= $item['home_team_name']; ?>"
+                                    class="img-12"
+                                    src="img/team/12/<?= $item['game_home_team_id']; ?>.png"
+                                />
+                            <?php } else { ?>
+                                <a href="national_team_review_profile.php?num=<?= $item['game_home_country_id']; ?>">
+                                    <?= $item['home_country_name']; ?>
+                                </a>
+                                <img
+                                    alt="<?= $item['home_country_name']; ?>"
+                                    class="img-12"
+                                    src="img/flag/12/<?= $item['game_home_country_id']; ?>.png"
+                                />
+                            <?php } ?>
                         </td>
                         <td class="center">
                             <a href="game_review_main.php?num=<?= $item['game_id']; ?>">
@@ -84,14 +95,25 @@
                             </a>
                         </td>
                         <td>
-                            <img
-                                alt="<?= $item['guest_team_name']; ?>"
-                                class="img-12"
-                                src="img/team/12/<?= $item['game_guest_team_id']; ?>.png"
-                            />
-                            <a href="team_team_review_profile.php?num=<?= $item['game_guest_team_id']; ?>">
-                                <?= $item['guest_team_name']; ?>
-                            </a>
+                            <?php if (0 != $item['game_home_team_id']) { ?>
+                                <img
+                                    alt="<?= $item['guest_team_name']; ?>"
+                                    class="img-12"
+                                    src="img/team/12/<?= $item['game_guest_team_id']; ?>.png"
+                                />
+                                <a href="team_team_review_profile.php?num=<?= $item['game_guest_team_id']; ?>">
+                                    <?= $item['guest_team_name']; ?>
+                                </a>
+                            <?php } else { ?>
+                                <img
+                                    alt="<?= $item['guest_country_name']; ?>"
+                                    class="img-12"
+                                    src="img/flag/12/<?= $item['game_guest_country_id']; ?>.png"
+                                />
+                                <a href="national_team_review_profile.php?num=<?= $item['game_guest_country_id']; ?>">
+                                    <?= $item['guest_country_name']; ?>
+                                </a>
+                            <?php } ?>
                         </td>
                         <td class="w1">
                             <img

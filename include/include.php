@@ -6,11 +6,11 @@ $phpstorm_licence = 'http://idea.qinxi1992.cn/';
 $wind_php_command = 'D:\xampp\php\php-cgi.exe D:\xampp\htdocs\fm.local.net\www\generator\generator.php';
 $denw_php_command = '\usr\local\php5\php-cgi.exe \home\fm.local.net\www\generator\generator.php';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/constants.php');
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/server_constants.php');
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/database.php');
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/function.php');
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/session.php');
+include (__DIR__ . '/constants.php');
+include (__DIR__ . '/server_constants.php');
+include (__DIR__ . '/database.php');
+include (__DIR__ . '/function.php');
+include (__DIR__ . '/session.php');
 
 $header_title           = 'Лига';
 $horizontalmenu_array   = array();

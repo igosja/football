@@ -21,6 +21,8 @@
                         <td class="w40">
                             <a href="team_team_review_profile.php?num=<?= $item['winner_id']; ?>">
                                 <?= $item['winner_name']; ?>
+                                (<?= $item['winner_city']; ?>,
+                                <?= $item['winner_country']; ?>)
                             </a>
                         </td>
                         <td class="w1">
@@ -33,6 +35,8 @@
                         <td class="w40">
                             <a href="team_team_review_profile.php?num=<?= $item['looser_id']; ?>">
                                 <?= $item['looser_name']; ?>
+                                (<?= $item['looser_city']; ?>,
+                                <?= $item['looser_country']; ?>)
                             </a>
                         </td>
                     </tr>

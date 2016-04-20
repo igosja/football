@@ -32,7 +32,7 @@
             <table class="striped w100">
                 <tr>
                     <th class="w5">Дата</th>
-                    <th>Соперник</th>
+                    <th colspan="2">Соперник</th>
                     <th class="w5">Счет</th>
                     <th class="w5">Гол</th>
                     <th class="w5">Гпас</th>
@@ -47,6 +47,13 @@
                 <?php foreach ($game_array as $item) { ?>
                     <tr>
                         <td><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
+                        <td class="w1">
+                            <img
+                                alt="<?= $item['team_name']; ?>"
+                                class="img-12"
+                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                            />
+                        </td>
                         <td>
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>

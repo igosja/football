@@ -97,21 +97,21 @@
                     <tr>
                         <td class="w1">
                             <img
-                                alt="<?= $item['team_name']; ?>"
+                                alt="<?= $item['country_name']; ?>"
                                 class="img-50"
-                                src="img/team/50/<?= $item['team_id']; ?>.png"
+                                src="img/flag/50/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
                             <h6>
-                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                    <?= $item['team_name']; ?>
+                                <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                    <?= $item['country_name']; ?>
                                 </a>
                             </h6>
                         </td>
                         <td>
                             <h6>
-                                <?= $item['standing_season_id']; ?>
+                                <?= $item['worldcup_season_id']; ?>
                             </h6>
                         </td>
                     </tr>

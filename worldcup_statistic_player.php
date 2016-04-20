@@ -33,8 +33,8 @@ $sql = "SELECT `name_name`,
                `player_id`,
                `statisticplayer_game`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `player_id`=`statisticplayer_player_id`
@@ -42,8 +42,8 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
+        LEFT JOIN `country`
+        ON `player_country_id`=`country_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_game` DESC, `player_id` ASC
@@ -56,8 +56,8 @@ $sql = "SELECT `name_name`,
                `player_id`,
                `statisticplayer_win`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `player_id`=`statisticplayer_player_id`
@@ -65,8 +65,8 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
+        LEFT JOIN `country`
+        ON `player_country_id`=`country_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_win` DESC, `player_id` ASC
@@ -79,8 +79,8 @@ $sql = "SELECT `name_name`,
                `player_id`,
                `statisticplayer_best`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `player_id`=`statisticplayer_player_id`
@@ -88,8 +88,8 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
+        LEFT JOIN `country`
+        ON `player_country_id`=`country_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_best` DESC, `player_id` ASC
@@ -102,8 +102,8 @@ $sql = "SELECT `name_name`,
                `player_id`,
                `statisticplayer_goal`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `player_id`=`statisticplayer_player_id`
@@ -111,8 +111,8 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
+        LEFT JOIN `country`
+        ON `player_country_id`=`country_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_goal` DESC, `player_id` ASC
@@ -125,8 +125,8 @@ $sql = "SELECT `name_name`,
                `player_id`,
                `statisticplayer_pass_scoring`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `player_id`=`statisticplayer_player_id`
@@ -134,8 +134,8 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
+        LEFT JOIN `country`
+        ON `player_country_id`=`country_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_pass_scoring` DESC, `player_id` ASC
@@ -148,8 +148,8 @@ $sql = "SELECT `name_name`,
                `player_id`,
                ROUND(`statisticplayer_ontarget`/`statisticplayer_shot`*'100','0') AS `statisticplayer_shot`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `player_id`=`statisticplayer_player_id`
@@ -157,8 +157,8 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
+        LEFT JOIN `country`
+        ON `player_country_id`=`country_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
         AND `statisticplayer_season_id`='$igosja_season_id'
         AND `statisticplayer_shot`>'0'
@@ -172,8 +172,8 @@ $sql = "SELECT `name_name`,
                `player_id`,
                `statisticplayer_red`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `player_id`=`statisticplayer_player_id`
@@ -181,8 +181,8 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
+        LEFT JOIN `country`
+        ON `player_country_id`=`country_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_red` DESC, `player_id` ASC
@@ -195,8 +195,8 @@ $sql = "SELECT `name_name`,
                `player_id`,
                `statisticplayer_yellow`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `player_id`=`statisticplayer_player_id`
@@ -204,8 +204,8 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
+        LEFT JOIN `country`
+        ON `player_country_id`=`country_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_yellow` DESC, `player_id` ASC
@@ -216,10 +216,10 @@ $yellow_array = $yellow_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `name_name`,
                `player_id`,
-               `statisticplayer_distance`,
+               ROUND(`statisticplayer_distance`/'1000', '1') AS `statisticplayer_distance`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `statisticplayer`
         LEFT JOIN `player`
         ON `player_id`=`statisticplayer_player_id`
@@ -227,8 +227,8 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
+        LEFT JOIN `country`
+        ON `player_country_id`=`country_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_distance` DESC, `player_id` ASC

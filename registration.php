@@ -1,11 +1,11 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_POST['data']))
 {
-    $registration_login     = $_POST['data']['registration_login'];
-    $registration_email     = $_POST['data']['registration_email'];
+    $registration_login     = strip_tags($_POST['data']['registration_login']);
+    $registration_email     = strip_tags($_POST['data']['registration_email']);
     $registration_password  = $_POST['data']['registration_password'];
 
     if (empty($registration_login) ||
@@ -69,4 +69,4 @@ if (isset($_POST['data']))
 $header_title = 'Регистрация';
 $social_array = f_igosja_social_array();
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

@@ -32,7 +32,7 @@ $home_team_id = $game_array[0]['game_home_team_id'];
 if (0 != $home_team_id)
 {
     $team_country   = 'team';
-    $number         = '_national';
+    $number         = '';
 }
 else
 {
@@ -61,11 +61,11 @@ $game_sql = $mysqli->query($sql);
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-$game_played          = $game_array[0]['game_played'];
-$header_2_home_id     = $game_array[0]['game_home_' . $team_country . '_id'];
-$header_2_home_name   = $game_array[0]['game_home_' . $team_country . '_name'];
-$header_2_guest_id    = $game_array[0]['game_guest_' . $team_country . '_id'];
-$header_2_guest_name  = $game_array[0]['game_guest_' . $team_country . '_name'];
+$game_played            = $game_array[0]['game_played'];
+$header_2_home_id       = $game_array[0]['game_home_' . $team_country . '_id'];
+$header_2_home_name     = $game_array[0]['game_home_' . $team_country . '_name'];
+$header_2_guest_id      = $game_array[0]['game_guest_' . $team_country . '_id'];
+$header_2_guest_name    = $game_array[0]['game_guest_' . $team_country . '_name'];
 
 if (0 == $game_played)
 {

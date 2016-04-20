@@ -221,7 +221,7 @@
             </table>
         </td>
         <td class="block-page">
-            <p class="header">Перодоленное расстояние</p>
+            <p class="header">Перодоленное расстояние (км)</p>
             <table class="striped w100">
                 <?php foreach ($distance_array as $item) { ?>
                     <tr>
@@ -242,7 +242,7 @@
                                 <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td class="center w10"><?= $item['statisticplayer_distance']; ?> м</td>
+                        <td class="center w10"><?= $item['statisticplayer_distance']; ?></td>
                     </tr>
                 <?php } ?>
             </table>

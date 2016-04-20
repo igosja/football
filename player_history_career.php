@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -30,7 +30,7 @@ $count_player = $player_sql->num_rows;
 
 if (0 == $count_player)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -44,7 +44,7 @@ $player_surname = $player_array[0]['surname_name'];
 $sql = "SELECT `statisticplayer_best`,
                `statisticplayer_game`,
                `statisticplayer_goal`,
-               ROUND(`statisticplayer_mark`/`statisticplayer_game`,2) AS `statisticplayer_mark`,
+               ROUND(`statisticplayer_mark`/`statisticplayer_game`, 2) AS `statisticplayer_mark`,
                `statisticplayer_pass_scoring`,
                `statisticplayer_season_id`,
                `team_id`,
@@ -54,8 +54,18 @@ $sql = "SELECT `statisticplayer_best`,
         FROM `statisticplayer`
         LEFT JOIN `team`
         ON `team_id`=`statisticplayer_team_id`
-        LEFT JOIN `tournament`
-        ON `tournament_id`=`statisticplayer_tournament_id`
+        LEFT JOIN
+        (
+            SELECT `statisticplayer_season_id` AS `season_id`,
+                   `tournament_id`,
+                   `tournament_name`
+            FROM `statisticplayer`
+            LEFT JOIN `tournament`
+            ON `statisticplayer_tournament_id`=`tournament_id`
+            WHERE `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONSHIP . "'
+            AND `statisticplayer_player_id`='$get_num'
+        ) AS `t1`
+        ON `season_id`=`statisticplayer_season_id`
         WHERE `statisticplayer_player_id`='$get_num'
         GROUP BY `statisticplayer_season_id`
         ORDER BY `statisticplayer_season_id` ASC";
@@ -73,6 +83,7 @@ $sql = "SELECT `statisticplayer_best`,
                `statisticplayer_pass_scoring`,
                `statisticplayer_penalty`,
                `statisticplayer_red`,
+               `statisticplayer_season_id`,
                `statisticplayer_shot`,
                `statisticplayer_yellow`,
                `tournamenttype_name`
@@ -82,7 +93,7 @@ $sql = "SELECT `statisticplayer_best`,
         LEFT JOIN `tournamenttype`
         ON `tournamenttype_id`=`tournament_tournamenttype_id`
         WHERE `statisticplayer_player_id`='$get_num'
-        ORDER BY `tournament_id`";
+        ORDER BY `statisticplayer_season_id` DESC, `tournament_id` ASC";
 $statistic_sql = $mysqli->query($sql);
 
 $statistic_array = $statistic_sql->fetch_all(MYSQLI_ASSOC);
@@ -108,4 +119,4 @@ $total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $player_name . ' ' . $player_surname;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

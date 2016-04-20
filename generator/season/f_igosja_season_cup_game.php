@@ -42,8 +42,8 @@ function f_igosja_season_cup_game()
 
         $tournament_id  = $country_array[$i]['tournament_id'];
 
-        $sql = "INSERT INTO `cupparticipant` (`cupparticipant_team_id`, `cupparticipant_tournament_id`, `cupparticipant_season_id`)
-                SELECT `team_id`, '$tournament_id', '$igosja_season_id'
+        $sql = "INSERT INTO `cupparticipant` (`cupparticipant_team_id`, `cupparticipant_tournament_id`, `cupparticipant_season_id`, `cupparticipant_user_id`)
+                SELECT `team_id`, '$tournament_id', '$igosja_season_id', `team_user_id`
                 FROM `team`
                 LEFT JOIN `city`
                 ON `team_city_id`=`city_id`

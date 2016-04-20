@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_id))
 }
 else
 {
-    $smarty->display($_SERVER['DOCUMENT_ROOT'] . '/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -30,6 +30,7 @@ $sql = "SELECT `game_home_team_id`,
         ON `game_tournament_id`=`tournament_id`
         WHERE (`game_home_team_id`='$authorization_team_id'
         OR `game_guest_team_id`='$authorization_team_id')
+        AND `shedule_season_id`='$igosja_season_id'
         ORDER BY `shedule_date` ASC";
 $shedule_sql = $mysqli->query($sql);
 
@@ -38,4 +39,4 @@ $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $authorization_id;
 $header_title   = $authorization_login;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

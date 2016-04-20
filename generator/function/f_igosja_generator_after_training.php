@@ -29,6 +29,16 @@ function f_igosja_generator_after_training()
             OR `training_percent`<='-100'";
     f_igosja_mysqli_query($sql);
 
+    $sql = "UPDATE `playerattribute`
+            SET `playerattribute_value`='1'
+            WHERE `playerattribute_value`<'1'";
+    f_igosja_mysqli_query($sql);
+
+    $sql = "UPDATE `playerattribute`
+            SET `playerattribute_value`='100'
+            WHERE `playerattribute_value`>'100'";
+    f_igosja_mysqli_query($sql);
+
     usleep(1);
 
     print '.';

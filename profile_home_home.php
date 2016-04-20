@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_id))
 }
 else
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -81,7 +81,7 @@ if (!isset($authorization_team_id))
     $num            = $authorization_id;
     $header_title   = $authorization_login;
 
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+    include (__DIR__ . '/view/main.php');
     exit;
 }
 
@@ -606,4 +606,4 @@ if (isset($authorization_country_id))
 $num            = $authorization_id;
 $header_title   = $authorization_login;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

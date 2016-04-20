@@ -1,11 +1,11 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_POST['data']))
 {
-    $firstname  = $_POST['data']['firstname'];
-    $lastname   = $_POST['data']['lastname'];
+    $firstname  = strip_tags($_POST['data']['firstname']);
+    $lastname   = strip_tags($_POST['data']['lastname']);
     $gender     = (int) $_POST['data']['gender'];
     $day        = (int) $_POST['data']['birth']['day'];
     $month      = (int) $_POST['data']['birth']['month'];
@@ -158,4 +158,4 @@ $gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);
 
 $header_title = $authorization_login;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

@@ -35,6 +35,7 @@ $stadium_sql = $mysqli->query($sql);
 $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
 
 if (isset($_GET['data']) &&
+    $_GET['ok'] &&
     !$stadium_array[0]['building_end_date'])
 {
     $data   = $_GET['data'];

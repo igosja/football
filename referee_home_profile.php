@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -48,7 +48,7 @@ $count_referee = $referee_sql->num_rows;
 
 if (0 == $count_referee)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -57,8 +57,10 @@ $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
 $referee_name    = $referee_array[0]['name_name'];
 $referee_surname = $referee_array[0]['surname_name'];
 
-$sql = "SELECT `game_guest_team_id`,
+$sql = "SELECT `game_guest_country_id`,
+               `game_guest_team_id`,
                `game_guest_score`,
+               `game_home_country_id`,
                `game_home_team_id`,
                `game_home_score`,
                `game_id`,
@@ -68,6 +70,8 @@ $sql = "SELECT `game_guest_team_id`,
                `game_guest_yellow`+`game_home_yellow` AS `game_yellow`,
                `t2`.`team_name` AS `guest_team_name`,
                `t1`.`team_name` AS `home_team_name`,
+               `t4`.`country_name` AS `guest_country_name`,
+               `t3`.`country_name` AS `home_country_name`,
                `shedule_date`,
                `tournament_id`,
                `tournament_name`
@@ -80,6 +84,10 @@ $sql = "SELECT `game_guest_team_id`,
         ON `t1`.`team_id`=`game_home_team_id`
         LEFT JOIN `team` AS `t2`
         ON `t2`.`team_id`=`game_guest_team_id`
+        LEFT JOIN `country` AS `t3`
+        ON `t3`.`country_id`=`game_home_country_id`
+        LEFT JOIN `country` AS `t4`
+        ON `t4`.`country_id`=`game_guest_country_id`
         WHERE `game_referee_id`='$get_num'
         AND `game_played`='1'
         ORDER BY `shedule_date` DESC, `game_id` DESC
@@ -91,4 +99,4 @@ $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $referee_name . ' ' . $referee_surname;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

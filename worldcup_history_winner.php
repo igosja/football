@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -29,43 +29,43 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$sql = "SELECT `standing_season_id`,
-               `team_id`,
-               `team_name`
-        FROM `standing`
-        LEFT JOIN `team`
-        ON `team_id`=`standing_team_id`
-        WHERE `standing_tournament_id`='$get_num'
-        AND `standing_season_id`<'$igosja_season_id'
-        AND `standing_place`='1'
-        ORDER BY `standing_season_id` DESC";
+$sql = "SELECT `worldcup_season_id`,
+               `country_id`,
+               `country_name`
+        FROM `worldcup`
+        LEFT JOIN `country`
+        ON `country_id`=`worldcup_country_id`
+        WHERE `worldcup_tournament_id`='$get_num'
+        AND `worldcup_season_id`<'$igosja_season_id'
+        AND `worldcup_place`='1'
+        ORDER BY `worldcup_season_id` DESC";
 $first_sql = $mysqli->query($sql);
 
 $count_first = $first_sql->num_rows;
 $first_array = $first_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `team_id`,
-               `team_name`
-        FROM `standing`
-        LEFT JOIN `team`
-        ON `team_id`=`standing_team_id`
-        WHERE `standing_tournament_id`='$get_num'
-        AND `standing_season_id`<'$igosja_season_id'
-        AND `standing_place`='2'
-        ORDER BY `standing_season_id` DESC";
+$sql = "SELECT `country_id`,
+               `country_name`
+        FROM `worldcup`
+        LEFT JOIN `country`
+        ON `country_id`=`worldcup_country_id`
+        WHERE `worldcup_tournament_id`='$get_num'
+        AND `worldcup_season_id`<'$igosja_season_id'
+        AND `worldcup_place`='2'
+        ORDER BY `worldcup_season_id` DESC";
 $second_sql = $mysqli->query($sql);
 
 $second_array = $second_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `team_id`,
-               `team_name`
-        FROM `standing`
-        LEFT JOIN `team`
-        ON `team_id`=`standing_team_id`
-        WHERE `standing_tournament_id`='$get_num'
-        AND `standing_season_id`<'$igosja_season_id'
-        AND `standing_place`='3'
-        ORDER BY `standing_season_id` DESC";
+$sql = "SELECT `country_id`,
+               `country_name`
+        FROM `worldcup`
+        LEFT JOIN `country`
+        ON `country_id`=`worldcup_country_id`
+        WHERE `worldcup_tournament_id`='$get_num'
+        AND `worldcup_season_id`<'$igosja_season_id'
+        AND `worldcup_place`='3'
+        ORDER BY `worldcup_season_id` DESC";
 $third_sql = $mysqli->query($sql);
 
 $third_array = $third_sql->fetch_all(MYSQLI_ASSOC);
@@ -73,4 +73,4 @@ $third_array = $third_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $tournament_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

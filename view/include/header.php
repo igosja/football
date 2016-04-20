@@ -16,6 +16,7 @@
             В вашем браузере отключен javasript. Для корректной работы сайт рекомендуем включить javasript.
         </p>
     </noscript>
+    <?php if (1 == 0) { ?>
     <!--LiveInternet counter-->
     <script type="text/javascript">
         new Image().src = "//counter.yadro.ru/hit?r"
@@ -41,6 +42,7 @@
         ga('send', 'pageview');
     </script>
     <!--/GoogleAnalytics-->
+    <?php } ?>
     <div class="page-header">
         <table class="header-inner">
             <tr>

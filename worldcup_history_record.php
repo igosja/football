@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -83,13 +83,13 @@ $sql = "SELECT `game_guest_score`,
                `recordtournamenttype_name`,
                `shedule_date`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `recordtournament`
         LEFT JOIN `recordtournamenttype`
         ON `recordtournamenttype_id`=`recordtournament_recordtournamenttype_id`
-        LEFT JOIN `team`
-        ON `team_id`=`recordtournament_team_id`
+        LEFT JOIN `country`
+        ON `country_id`=`recordtournament_team_id`
         LEFT JOIN `game`
         ON `recordtournament_game_id`=`game_id`
         LEFT JOIN `shedule`
@@ -110,4 +110,4 @@ $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $tournament_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

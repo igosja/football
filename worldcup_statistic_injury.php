@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -34,8 +34,8 @@ $sql = "SELECT DATEDIFF(`injury_end_date`, SYSDATE()) AS `day`,
                `name_name`,
                `player_id`,
                `surname_name`,
-               `team_id`,
-               `team_name`
+               `country_id`,
+               `country_name`
         FROM `injury`
         LEFT JOIN `injurytype`
         ON `injurytype_id`=`injury_injurytype_id`
@@ -45,14 +45,14 @@ $sql = "SELECT DATEDIFF(`injury_end_date`, SYSDATE()) AS `day`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        LEFT JOIN `team`
-        ON `player_team_id`=`team_id`
-        LEFT JOIN `standing`
-        ON `standing_team_id`=`team_id`
+        LEFT JOIN `country`
+        ON `player_national_id`=`country_id`
+        LEFT JOIN `worldcup`
+        ON `worldcup_country_id`=`country_id`
         WHERE `injury_end_date`>SYSDATE()
-        AND `standing_tournament_id`='$get_num'
-        AND `standing_season_id`='$igosja_season_id'
-        ORDER BY `team_id` ASC, `injury_id` ASC";
+        AND `worldcup_tournament_id`='$get_num'
+        AND `worldcup_season_id`='$igosja_season_id'
+        ORDER BY `worldcup_id` ASC, `injury_id` ASC";
 $injury_sql = $mysqli->query($sql);
 
 $injury_array = $injury_sql->fetch_all(MYSQLI_ASSOC);
@@ -60,4 +60,4 @@ $injury_array = $injury_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $tournament_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

@@ -8,8 +8,8 @@
                         <td class="w25"><?= $record_array[$i]['recordtournamenttype_name']; ?></td>
                         <td>
                             <?= $record_array[$i]['recordtournament_value_1']; ?> -
-                            <a href="team_team_review_profile.php?num=<?= $record_array[$i]['team_id']; ?>">
-                                <?= $record_array[$i]['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $record_array[$i]['country_id']; ?>">
+                                <?= $record_array[$i]['country_name']; ?>
                             </a>
                         </td>
                     </tr>
@@ -31,8 +31,8 @@
                         <td class="w50"><?= $record_array[$i]['recordtournamenttype_name']; ?></td>
                         <td>
                             <?= $record_array[$i]['recordtournament_value_1']; ?> -
-                            <a href="team_team_review_profile.php?num=<?= $record_array[$i]['team_id']; ?>">
-                                <?= $record_array[$i]['team_name']; ?></a>,
+                            <a href="national_team_review_profile.php?num=<?= $record_array[$i]['country_id']; ?>">
+                                <?= $record_array[$i]['country_name']; ?></a>,
                             <?= $record_array[$i]['recordtournament_season_id']; ?> сезон
                         </td>
                     </tr>
@@ -53,8 +53,8 @@
                         <td class="w50"><?= $record_array[$i]['recordtournamenttype_name']; ?></td>
                         <td>
                             <?= $record_array[$i]['recordtournament_value_1']; ?> -
-                            <a href="team_team_review_profile.php?num=<?= $record_array[$i]['team_id']; ?>">
-                                <?= $record_array[$i]['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $record_array[$i]['country_id']; ?>">
+                                <?= $record_array[$i]['country_name']; ?>
                             </a>
                             (<?= date('d.m.Y', strtotime($record_array[$i]['recordtournament_date_start'])); ?> -
                             <?= date('d.m.Y', strtotime($record_array[$i]['recordtournament_date_end'])); ?>)
@@ -66,8 +66,8 @@
                         <td class="w25"><?= $record_array[$i]['recordtournamenttype_name']; ?></td>
                         <td>
                             <?= $record_array[$i]['recordtournament_value_1']; ?> -
-                            <a href="team_team_review_profile.php?num=<?= $record_array[$i]['team_id']; ?>">
-                                <?= $record_array[$i]['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $record_array[$i]['country_id']; ?>">
+                                <?= $record_array[$i]['country_name']; ?>
                             </a>,
                             <?= $record_array[$i]['recordtournament_season_id']; ?> сезон
                         </td>
@@ -79,8 +79,8 @@
                         <td>
                             <?= $record_array[$i]['recordtournament_value_1']; ?> КК,
                             <?= $record_array[$i]['recordtournament_value_2']; ?> ЖК,
-                            <a href="team_team_review_profile.php?num=<?= $record_array[$i]['team_id']; ?>">
-                                <?= $record_array[$i]['team_name']; ?>
+                            <a href="national_team_review_profile.php?num=<?= $record_array[$i]['country_id']; ?>">
+                                <?= $record_array[$i]['country_name']; ?>
                             </a>,
                             <?= $record_array[$i]['recordtournament_season_id']; ?> сезон
                         </td>

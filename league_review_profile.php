@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -31,23 +31,97 @@ $tournament_name = $tournament_array[0]['tournament_name'];
 
 $today = date('Y-m-d');
 
-$sql = "SELECT `team_id`,
-               `team_name`,
-               `standing_draw`,
-               `standing_game`,
-               `standing_loose`,
-               `standing_place`,
-               `standing_point`,
-               `standing_win`
-        FROM `standing`
-        LEFT JOIN `team`
-        ON `standing_team_id`=`team_id`
-        WHERE `standing_tournament_id`='$get_num'
-        AND `standing_season_id`='$igosja_season_id'
-        ORDER BY `standing_place` ASC";
-$standing_sql = $mysqli->query($sql);
+$standing_array = array();
 
-$standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+$sql = "SELECT `game_first_game_id`,
+               `game_guest_score`,
+               `game_guest_shoot_out`,
+               `game_guest_team_id`,
+               `game_home_score`,
+               `game_home_shoot_out`,
+               `game_home_team_id`,
+               `guest_team`.`team_name` AS `guest_team_name`,
+               `home_team`.`team_name` AS `home_team_name`,
+               `shedule_season_id`
+        FROM `game`
+        LEFT JOIN `team` AS `guest_team`
+        ON `guest_team`.`team_id`=`game_guest_team_id`
+        LEFT JOIN `team` AS `home_team`
+        ON `home_team`.`team_id`=`game_home_team_id`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        WHERE `game_tournament_id`='$get_num'
+        AND `shedule_season_id`<'$igosja_season_id'
+        AND `game_stage_id`='" . CUP_FINAL_STAGE . "'
+        ORDER BY `shedule_season_id` DESC, `game_first_game_id` ASC
+        LIMIT 8";
+$game_sql = $mysqli->query($sql);
+
+$count_game = $game_sql->num_rows;
+$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+
+$final_game_array   = array();
+$winner_array       = array();
+
+for ($i=0; $i<$count_game; $i++)
+{
+    $first_game_id  = $game_array[$i]['game_first_game_id'];
+    $season_id      = $game_array[$i]['shedule_season_id'];
+
+    if (0 == $first_game_id)
+    {
+        $home_team_id       = $game_array[$i]['game_home_team_id'];
+        $home_team_name     = $game_array[$i]['home_team_name'];
+        $home_score_1       = $game_array[$i]['game_home_score'] + $game_array[$i]['game_home_shoot_out'];
+        $guest_team_id      = $game_array[$i]['game_guest_team_id'];
+        $guest_team_name    = $game_array[$i]['guest_team_name'];
+        $guest_score_1      = $game_array[$i]['game_guest_score'] + $game_array[$i]['game_guest_shoot_out'];
+
+        $final_game_array[$season_id] = array
+        (
+            'home_team_id'          => $home_team_id,
+            'home_team_name'        => $home_team_name,
+            'home_score_1'          => $home_score_1,
+            'guest_team_id'         => $guest_team_id,
+            'guest_team_name'       => $guest_team_name,
+            'guest_score_1'         => $guest_score_1,
+            'season_id'             => $season_id,
+        );
+    }
+    else
+    {
+        $home_score_2   = $game_array[$i]['game_guest_score'] + $game_array[$i]['game_guest_shoot_out'];;
+        $guest_score_2  = $game_array[$i]['game_home_score'] + $game_array[$i]['game_home_shoot_out'];;
+
+        $final_game_array[$season_id]['home_score_2']   = $home_score_2;
+        $final_game_array[$season_id]['guest_score_2']  = $guest_score_2;
+    }
+}
+
+foreach ($final_game_array as $item)
+{
+    $home_score     = $item['home_score_1'] + $item['home_score_2'];
+    $guest_score    = $item['guest_score_1'] + $item['guest_score_2'];
+    $season_id      = $item['season_id'];
+
+    if ($home_score > $guest_score)
+    {
+        $winner_id          = $item['home_team_id'];
+        $winner_name        = $item['home_team_name'];
+    }
+    else
+    {
+        $winner_id          = $item['guest_team_id'];
+        $winner_name        = $item['guest_team_name'];
+    }
+
+    $winner_array[] = array
+    (
+        'standing_season_id'    => $season_id,
+        'team_id'               => $winner_id,
+        'team_name'             => $winner_name,
+    );
+}
 
 $sql = "SELECT `game_id`,
                `game_guest_score`,
@@ -126,21 +200,6 @@ if (0 == $count_game)
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `standing_season_id`,
-               `team_id`,
-               `team_name`
-        FROM `standing`
-        LEFT JOIN `team`
-        ON `team_id`=`standing_team_id`
-        WHERE `standing_tournament_id`='$get_num'
-        AND `standing_season_id`<'$igosja_season_id'
-        AND `standing_place`='1'
-        ORDER BY `standing_season_id` DESC
-        LIMIT 4";
-$winner_sql = $mysqli->query($sql);
-
-$winner_array = $winner_sql->fetch_all(MYSQLI_ASSOC);
-
 $sql = "SELECT `name_name`,
                `player_id`,
                `statisticplayer_goal`,
@@ -153,6 +212,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_goal` DESC
         LIMIT 5";
 $player_goal_sql = $mysqli->query($sql);
@@ -171,6 +231,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_pass_scoring` DESC
         LIMIT 5";
 $player_pass_sql = $mysqli->query($sql);
@@ -189,6 +250,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
         WHERE `statisticplayer_tournament_id`='$get_num'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_mark` DESC
         LIMIT 5";
 $player_mark_sql = $mysqli->query($sql);
@@ -198,4 +260,4 @@ $player_mark_array = $player_mark_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $tournament_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

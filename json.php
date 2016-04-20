@@ -384,16 +384,16 @@ elseif (isset($_GET['stage_prev']))
 
             $stage_array[$game_id] = array
             (
-                'home_team_id' => $home_team_id,
-                'home_team_name' => $home_team_name,
-                'home_score_1' => $home_score_1,
-                'guest_team_id' => $guest_team_id,
-                'guest_team_name' => $guest_team_name,
-                'guest_score_1' => $guest_score_1,
-                'game_played_1' => $game_played,
-                'game_id_1' => $game_id,
-                'stage_id' => $stage_id,
-                'stage_name' => $stage_name,
+                'home_team_id'      => $home_team_id,
+                'home_team_name'    => $home_team_name,
+                'home_score_1'      => $home_score_1,
+                'guest_team_id'     => $guest_team_id,
+                'guest_team_name'   => $guest_team_name,
+                'guest_score_1'     => $guest_score_1,
+                'game_played_1'     => $game_played,
+                'game_id_1'         => $game_id,
+                'stage_id'          => $stage_id,
+                'stage_name'        => $stage_name,
             );
         }
         else
@@ -499,16 +499,16 @@ elseif (isset($_GET['stage_next']))
 
             $stage_array[$game_id] = array
             (
-                'home_team_id' => $home_team_id,
-                'home_team_name' => $home_team_name,
-                'home_score_1' => $home_score_1,
-                'guest_team_id' => $guest_team_id,
-                'guest_team_name' => $guest_team_name,
-                'guest_score_1' => $guest_score_1,
-                'game_played_1' => $game_played,
-                'game_id_1' => $game_id,
-                'stage_id' => $stage_id,
-                'stage_name' => $stage_name,
+                'home_team_id'      => $home_team_id,
+                'home_team_name'    => $home_team_name,
+                'home_score_1'      => $home_score_1,
+                'guest_team_id'     => $guest_team_id,
+                'guest_team_name'   => $guest_team_name,
+                'guest_score_1'     => $guest_score_1,
+                'game_played_1'     => $game_played,
+                'game_id_1'         => $game_id,
+                'stage_id'          => $stage_id,
+                'stage_name'        => $stage_name,
             );
         }
         else

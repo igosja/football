@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -37,5 +37,9 @@ elseif (TOURNAMENT_TYPE_WORLD_CUP == $tournamenttype_id)
 {
     redirect('worldcup_review_profile.php?num=' . $get_num);
 }
+elseif (TOURNAMENT_TYPE_FRIENDLY == $tournamenttype_id)
+{
+    redirect('index.php');
+}
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

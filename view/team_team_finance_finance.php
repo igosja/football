@@ -147,7 +147,7 @@
             <?php } ?>
             <table class="striped w100" id="finance-4" style="display: none;">
                 <tr>
-                    <th class="w20">Дата</th>
+                    <th class="w10">Дата</th>
                     <th>Операция</th>
                     <th class="w20">Сумма</th>
                 </tr>

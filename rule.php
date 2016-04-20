@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 $sql = "SELECT `rule_id`,
                `rule_name`,
@@ -13,4 +13,4 @@ $rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);
 
 $header_title = 'Правила';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

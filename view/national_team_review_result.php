@@ -211,7 +211,13 @@
                                 <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td><?= $item['stage_name']; ?></td>
+                        <td>
+                            <?php if ('6 тур' == $item['stage_name']) { ?>
+                                Групповой этап
+                            <?php } else { ?>
+                                <?= $item['stage_name']; ?>
+                            <?php } ?>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>

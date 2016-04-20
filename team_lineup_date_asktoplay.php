@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
@@ -8,7 +8,7 @@ if (isset($authorization_team_id))
 }
 else
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_my_team.php');
+    include (__DIR__ . '/view/only_my_team.php');
     exit;
 }
 
@@ -22,7 +22,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -282,7 +282,7 @@ $sql = "SELECT `asktoplay_shedule_id`,
         ON `shedule_id`=`asktoplay_shedule_id`
         WHERE `shedule_season_id`='$igosja_season_id'
         AND `shedule_tournamenttype_id`!='" . TOURNAMENT_TYPE_OFF_SEASON . "'
-        AND `shedule_date`>=CURDATE()
+        AND `shedule_date`>CURDATE()
         ORDER BY `shedule_date` ASC";
 $shedule_sql = $mysqli->query($sql);
 
@@ -300,4 +300,4 @@ $cupparticipant_array = $cupparticipant_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $get_num;
 $header_title   = $team_name;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

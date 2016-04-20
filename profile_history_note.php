@@ -1,18 +1,18 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (!isset($authorization_id))
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
 if (isset($_POST['note_id']))
 {
     $note_id    = (int) $_POST['note_id'];
-    $note_title = $_POST['note_title'];
-    $note_text  = $_POST['note_text'];
+    $note_title = strip_tags($_POST['note_title']);
+    $note_text  = strip_tags($_POST['note_text']);
 
     if (0 < $note_id)
     {
@@ -68,4 +68,4 @@ $note_array = $note_sql->fetch_all(MYSQLI_ASSOC);
 $num            = $authorization_id;
 $header_title   = $authorization_login;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');
