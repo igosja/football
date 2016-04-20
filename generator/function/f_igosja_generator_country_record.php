@@ -104,8 +104,8 @@ function f_igosja_generator_country_record()
 
                 $record_value = $record_array[0]['recordcountry_value'];
 
-                if ($visitor < $record_value &&
-                    0 != $record_value)
+                if ($visitor < $record_value ||
+                    0 == $record_value)
                 {
                     $sql = "UPDATE `recordcountry`
                             SET `recordcountry_value`='$visitor',

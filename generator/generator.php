@@ -53,8 +53,10 @@ f_igosja_generator_user_time_in_club();
 f_igosja_generator_finance();
 f_igosja_generator_make_played();
 f_igosja_generator_scout();
+f_igosja_generator_field_worse();
 f_igosja_generator_building();
 f_igosja_generator_transfer();
+f_igosja_generator_ticket_price();
 
 $sql = "SELECT COUNT(`shedule_id`) AS `count`
         FROM `shedule`

@@ -30,7 +30,7 @@ $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 $team_name = $team_array[0]['team_name'];
 
 $sql = "SELECT `standing_place`,
-               `standing_season_id`,
+               `standing_season_id` AS `season_id`,
                `tournament_id`,
                `tournament_name`
         FROM `standing`
@@ -38,9 +38,43 @@ $sql = "SELECT `standing_place`,
         ON `standing_tournament_id`=`tournament_id`
         WHERE `standing_team_id`='$get_num'
         ORDER BY `standing_season_id` DESC";
-$tournament_sql = $mysqli->query($sql);
+$championship_sql = $mysqli->query($sql);
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$championship_array = $championship_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `stage_name` AS `standing_place`,
+               `cupparticipant_season_id` AS `season_id`,
+               `tournament_id`,
+               `tournament_name`
+        FROM `cupparticipant`
+        LEFT JOIN `tournament`
+        ON `cupparticipant_tournament_id`=`tournament_id`
+        LEFT JOIN `stage`
+        ON `stage_id`=`cupparticipant_out`
+        WHERE `cupparticipant_team_id`='$get_num'
+        ORDER BY `cupparticipant_season_id` DESC";
+$cup_sql = $mysqli->query($sql);
+
+$cup_array = $cup_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `stage_name` AS `standing_place`,
+               `leagueparticipant_season_id` AS `season_id`,
+               `tournament_id`,
+               `tournament_name`
+        FROM `leagueparticipant`
+        LEFT JOIN `tournament`
+        ON `leagueparticipant_tournament_id`=`tournament_id`
+        LEFT JOIN `stage`
+        ON `stage_id`=`leagueparticipant_out`
+        WHERE `leagueparticipant_team_id`='$get_num'
+        ORDER BY `leagueparticipant_season_id` DESC";
+$league_sql = $mysqli->query($sql);
+
+$league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
+
+$tournament_array = array_merge($championship_array, $cup_array, $league_array);
+
+usort($tournament_array, 'f_igosja_trophy_sort');
 
 $sql = "SELECT `history_date`,
                `user_login`

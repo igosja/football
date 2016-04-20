@@ -17,7 +17,7 @@
                                         <img
                                             alt="<?= $player_array[0]['country_name']; ?>"
                                             class="img-12"
-                                            src="img/flag/12/<?= $player_array[0]['country_id']; ?>.png"
+                                            src="/img/flag/12/<?= $player_array[0]['country_id']; ?>.png"
                                         />
                                         <?= $player_array[0]['country_name']; ?>
                                     </a>
@@ -132,7 +132,7 @@
                                     <img
                                         alt="<?= $player_array[0]['mood_name']; ?>"
                                         class="img-12"
-                                        src="img/mood/<?= $player_array[0]['mood_id']; ?>.png"
+                                        src="/img/mood/<?= $player_array[0]['mood_id']; ?>.png"
                                     />
                                     <?= $player_array[0]['mood_name']; ?>
                                 </td>

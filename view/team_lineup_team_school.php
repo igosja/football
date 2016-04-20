@@ -2,6 +2,13 @@
     <tr>
         <td class="block-page">
             <p class="header">Игроки</p>
+            <?php if (isset($school_id)) { ?>
+                <p class="center info">
+                    Вы собираетесь перевести игрока из моложедной команды в основную<br/>
+                    <a href="team_lineup_team_school.php?num=<?= $num; ?>&school_id=<?= $school_id; ?>&ok=1">Подтверить</a> |
+                    <a href="team_lineup_team_school.php?num=<?= $num; ?>">Отказаться</a>
+                </p>
+            <?php } ?>
             <table class="striped w100">
                 <tr>
                     <th class="w1"></th>
@@ -18,7 +25,7 @@
                 <?php foreach ($school_array as $item) { ?>
                     <tr>
                         <td class="nopadding">
-                            <a class="link-img link-ok" href="team_lineup_team_school.php?num=<?= $num; ?>&ok=<?= $item['school_id']; ?>"></a>
+                            <a class="link-img link-ok" href="team_lineup_team_school.php?num=<?= $num; ?>&school_id=<?= $item['school_id']; ?>&ok=0"></a>
                         </td>
                         <td>
                             <?= $item['name_name']; ?>
@@ -29,7 +36,7 @@
                                 <img
                                     alt="<?= $item['country_name']; ?>"
                                     class="img-12"
-                                    src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                    src="/img/flag/12/<?= $item['country_id']; ?>.png"
                                 />
                             </a>
                         </td>

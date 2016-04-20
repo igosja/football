@@ -8,7 +8,7 @@
                         <img
                             alt="<?= $game_array[0]['tournament_name']; ?>"
                             class="img-50"
-                            src="img/tournament/50/<?= $game_array[0]['tournament_id']; ?>.png"
+                            src="/img/tournament/50/<?= $game_array[0]['tournament_id']; ?>.png"
                         />
                     </td>
                     <td>
@@ -32,7 +32,7 @@
                             alt="<?= $game_array[0]['weather_name']; ?>"
                             class="img-12"
                             title="<?= $game_array[0]['weather_name']; ?>"
-                            src="img/weather/12/<?= $game_array[0]['weather_id']; ?>.png"
+                            src="/img/weather/12/<?= $game_array[0]['weather_id']; ?>.png"
                         />
                         <?= $game_array[0]['game_temperature'] . CELSIUS; ?>
                     </td>
@@ -82,7 +82,7 @@
                                         <img
                                             alt="<?= $item['eventtype_name']; ?>"
                                             class="img-12"
-                                            src="img/eventtype/<?= $item['eventtype_id']; ?>.png"
+                                            src="/img/eventtype/<?= $item['eventtype_id']; ?>.png"
                                         />
                                         <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
                                             <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
@@ -101,7 +101,7 @@
                                         <img
                                             alt="<?= $item['eventtype_name']; ?>"
                                             class="img-12"
-                                            src="img/eventtype/<?= $item['eventtype_id']; ?>.png"
+                                            src="/img/eventtype/<?= $item['eventtype_id']; ?>.png"
                                         />
                                         <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
                                             <?= $item['name_name']; ?> <?= $item['surname_name']; ?>

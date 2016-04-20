@@ -8,7 +8,7 @@
                         <img
                             alt="<?= $team_array[0]['team_name']; ?>"
                             class="img-120"
-                            src="img/team/120/<?= $num; ?>.png"
+                            src="/img/team/120/<?= $num; ?>.png"
                         />
                     </td>
                 </tr>
@@ -20,7 +20,7 @@
                         <img
                             alt="<?= $team_array[0]['tournament_name']; ?>"
                             class="img-50"
-                            src="img/tournament/50/<?= $team_array[0]['tournament_id']; ?>.png"
+                            src="/img/tournament/50/<?= $team_array[0]['tournament_id']; ?>.png"
                         />
                     </td>
                 </tr>
@@ -36,7 +36,7 @@
                         <img
                             alt="<?= $team_array[0]['country_name']; ?>"
                             class="img-12"
-                            src="img/flag/12/<?= $team_array[0]['country_id']; ?>.png"
+                            src="/img/flag/12/<?= $team_array[0]['country_id']; ?>.png"
                         />
                         <a href="national_team_review_profile.php?num=<?= $team_array[0]['country_id']; ?>">
                             <?= $team_array[0]['country_name']; ?>
@@ -114,7 +114,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-90"
-                                src="img/team/90/<?= $item['team_id']; ?>.png"
+                                src="/img/team/90/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
@@ -157,7 +157,7 @@
                         <img
                             alt="<?= $team_array[0]['user_country_name']; ?>"
                             class="img-12"
-                            src="img/flag/12/<?= $team_array[0]['user_country_id']; ?>.png"
+                            src="/img/flag/12/<?= $team_array[0]['user_country_id']; ?>.png"
                         />
                     </td>
                     <td>
@@ -177,7 +177,7 @@
                         <img
                             alt="<?= $team_array[0]['captain_country_name']; ?>"
                             class="img-12"
-                            src="img/flag/12/<?= $team_array[0]['captain_country_id']; ?>.png"
+                            src="/img/flag/12/<?= $team_array[0]['captain_country_id']; ?>.png"
                         />
                     </td>
                     <td>
@@ -197,7 +197,7 @@
                         <img
                             alt="<?= $team_array[0]['vicecaptain_country_name']; ?>"
                             class="img-12"
-                            src="img/flag/12/<?= $team_array[0]['vicecaptain_country_id']; ?>.png"
+                            src="/img/flag/12/<?= $team_array[0]['vicecaptain_country_id']; ?>.png"
                         />
                     </td>
                     <td>
@@ -242,7 +242,7 @@
                                         <img
                                             alt="<?= $item['team_name']; ?>"
                                             class="img-50"
-                                            src="img/team/50/<?= $item['team_id']; ?>.png"
+                                            src="/img/team/50/<?= $item['team_id']; ?>.png"
                                         />
                                     </td>
                                 </tr>

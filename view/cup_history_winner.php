@@ -15,7 +15,7 @@
                             <img
                                 alt="<?= $item['winner_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['winner_id']; ?>.png"
+                                src="/img/team/12/<?= $item['winner_id']; ?>.png"
                             />
                         </td>
                         <td class="w40">
@@ -27,7 +27,7 @@
                             <img
                                 alt="<?= $item['looser_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['looser_id']; ?>.png"
+                                src="/img/team/12/<?= $item['looser_id']; ?>.png"
                             />
                         </td>
                         <td class="w40">

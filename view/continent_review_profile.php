@@ -5,7 +5,7 @@
             <p class="center">
                 <img
                     alt="Лига"
-                    src="img/continent/<?= $num; ?>.png"
+                    src="/img/continent/<?= $num; ?>.png"
                 />
             </p>
             <table class="striped w100">
@@ -36,7 +36,7 @@
                             <img
                                 alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                src="/img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
@@ -64,7 +64,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
@@ -76,7 +76,7 @@
                             <img
                                 alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                src="/img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w35">
@@ -106,7 +106,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
@@ -137,7 +137,7 @@
                             <img
                                 alt="<?= $item['seller_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['seller_id']; ?>.png"
+                                src="/img/team/12/<?= $item['seller_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
@@ -149,7 +149,7 @@
                             <img
                                 alt="<?= $item['buyer_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['buyer_id']; ?>.png"
+                                src="/img/team/12/<?= $item['buyer_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">

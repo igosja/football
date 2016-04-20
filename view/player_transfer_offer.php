@@ -77,7 +77,7 @@
                         <img
                             alt="<?= $player_array[0]['team_name']; ?>"
                             class="img-12"
-                            src="img/team/12/<?= $player_array[0]['team_id']; ?>.png"
+                            src="/img/team/12/<?= $player_array[0]['team_id']; ?>.png"
                         />
                         <a href="team_team_review_profile.php?num=<?= $player_array[0]['team_id']; ?>">
                             <?= $player_array[0]['team_name']; ?>

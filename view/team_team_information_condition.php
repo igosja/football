@@ -22,7 +22,7 @@
                         <img
                             alt="<?= $team_array[0]['team_name']; ?>"
                             class="img-12"
-                            src="img/team/12/<?= $team_array[0]['team_id']; ?>.png"
+                            src="/img/team/12/<?= $team_array[0]['team_id']; ?>.png"
                         />
                         <a href="team_team_review_profile.php?num=<?= $team_array[0]['team_id']; ?>">
                             <?= $team_array[0]['team_name']; ?>

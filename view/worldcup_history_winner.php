@@ -16,7 +16,7 @@
                             <img
                                 alt="<?= $first_array[$i]['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $first_array[$i]['country_id']; ?>.png"
+                                src="/img/flag/12/<?= $first_array[$i]['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
@@ -28,7 +28,7 @@
                             <img
                                 alt="<?= $second_array[$i]['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $second_array[$i]['country_id']; ?>.png"
+                                src="/img/flag/12/<?= $second_array[$i]['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
@@ -40,7 +40,7 @@
                             <img
                                 alt="<?= $third_array[$i]['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $third_array[$i]['country_id']; ?>.png"
+                                src="/img/flag/12/<?= $third_array[$i]['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">

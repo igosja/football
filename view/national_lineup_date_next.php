@@ -17,7 +17,7 @@
                         <img
                             alt="<?= $country_name; ?>"
                             class="img-12"
-                            src="img/flag/12/<?= $num; ?>.png"
+                            src="/img/flag/12/<?= $num; ?>.png"
                         />
                     </td>
                     <td>
@@ -37,7 +37,7 @@
                         <img
                             alt="<?= $nearest_game_array[0]['country_name']; ?>"
                             class="img-12"
-                            src="img/flag/12/<?= $nearest_game_array[0]['country_id']; ?>.png"
+                            src="/img/flag/12/<?= $nearest_game_array[0]['country_id']; ?>.png"
                         />
                     </td>
                     <td>
@@ -73,7 +73,7 @@
                             <img
                                 alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/<?= $item['tournament_id']; ?>.png"
+                                src="/img/tournament/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td>
@@ -85,7 +85,7 @@
                             <img
                                 alt="<?= $item['game_home_country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $item['game_home_country_id']; ?>.png"
+                                src="/img/flag/12/<?= $item['game_home_country_id']; ?>.png"
                             />
                         </td>
                         <td class="w25">
@@ -97,7 +97,7 @@
                             <img
                                 alt="<?= $item['game_guest_country_name']; ?>"
                                 class="img-12"
-                                src="img/country/12/<?= $item['game_guest_country_id']; ?>.png"
+                                src="/img/country/12/<?= $item['game_guest_country_id']; ?>.png"
                             />
                         </td>
                         <td class="w25">

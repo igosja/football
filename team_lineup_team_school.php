@@ -30,9 +30,10 @@ $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
 
-if (isset($_GET['ok']))
+if (isset($_GET['school_id']) && isset($_GET['ok']))
 {
-    $ok = (int) $_GET['ok'];
+    $school_id  = (int) $_GET['school_id'];
+    $ok         = (int) $_GET['ok'];
 
     $sql = "SELECT `city_country_id`,
                    `school_height`,
@@ -47,7 +48,7 @@ if (isset($_GET['ok']))
             LEFT JOIN `city`
             ON `team_city_id`=`city_id`
             WHERE `school_team_id`='$get_num'
-            AND `school_id`='$ok'";
+            AND `school_id`='$school_id'";
     $school_sql = $mysqli->query($sql);
 
     $count_school = $school_sql->num_rows;
@@ -72,109 +73,112 @@ if (isset($_GET['ok']))
     $ability        = $school_level * 10 - rand(0, 10);
     $age            = 17;
 
-    $leg_array = f_igosja_player_leg($position_id);
-    $leg_left  = $leg_array['leg_left'];
-    $leg_right = $leg_array['leg_right'];
-
-    $sql = "INSERT INTO `player`
-            SET `player_country_id`='$country_id',
-                `player_name_id`='$name_id',
-                `player_age`='$age',
-                `player_surname_id`='$surname_id',
-                `player_team_id`='$get_num',
-                `player_leg_left`='$leg_left',
-                `player_leg_right`='$leg_right',
-                `player_ability`='$ability',
-                `player_height`='$height',
-                `player_weight`='$weight',
-                `player_position_id`='$position_id'";
-    $mysqli->query($sql);
-
-    $player_id = $mysqli->insert_id;
-
-    if (GK_POSITION_ID == $position_id)
+    if (1 == $ok)
     {
-        $sql = "INSERT INTO `playerattribute` (`playerattribute_player_id`, `playerattribute_attribute_id`, `playerattribute_value`)
-                SELECT '$player_id', `attribute_id`, '$school_level' * '10' - '10' * RAND()
-                FROM `attribute`
-                WHERE `attribute_attributechapter_id`!=" . FIELD_ATTRIBUTE_CHAPTER . "
-                ORDER BY `attribute_id` ASC";
+        $leg_array = f_igosja_player_leg($position_id);
+        $leg_left  = $leg_array['leg_left'];
+        $leg_right = $leg_array['leg_right'];
+
+        $sql = "INSERT INTO `player`
+                SET `player_country_id`='$country_id',
+                    `player_name_id`='$name_id',
+                    `player_age`='$age',
+                    `player_surname_id`='$surname_id',
+                    `player_team_id`='$get_num',
+                    `player_leg_left`='$leg_left',
+                    `player_leg_right`='$leg_right',
+                    `player_ability`='$ability',
+                    `player_height`='$height',
+                    `player_weight`='$weight',
+                    `player_position_id`='$position_id'";
         $mysqli->query($sql);
-    }
-    else
-    {
-        $sql = "INSERT INTO `playerattribute` (`playerattribute_player_id`, `playerattribute_attribute_id`, `playerattribute_value`)
-                SELECT '$player_id', `attribute_id`, '$school_level' * '10' - '10' * RAND()
-                FROM `attribute`
-                WHERE `attribute_attributechapter_id`!=" . GK_ATTRIBUTE_CHAPTER . "
-                ORDER BY `attribute_id` ASC";
+
+        $player_id = $mysqli->insert_id;
+
+        if (GK_POSITION_ID == $position_id)
+        {
+            $sql = "INSERT INTO `playerattribute` (`playerattribute_player_id`, `playerattribute_attribute_id`, `playerattribute_value`)
+                    SELECT '$player_id', `attribute_id`, '$school_level' * '10' - '10' * RAND()
+                    FROM `attribute`
+                    WHERE `attribute_attributechapter_id`!=" . FIELD_ATTRIBUTE_CHAPTER . "
+                    ORDER BY `attribute_id` ASC";
+            $mysqli->query($sql);
+        }
+        else
+        {
+            $sql = "INSERT INTO `playerattribute` (`playerattribute_player_id`, `playerattribute_attribute_id`, `playerattribute_value`)
+                    SELECT '$player_id', `attribute_id`, '$school_level' * '10' - '10' * RAND()
+                    FROM `attribute`
+                    WHERE `attribute_attributechapter_id`!=" . GK_ATTRIBUTE_CHAPTER . "
+                    ORDER BY `attribute_id` ASC";
+            $mysqli->query($sql);
+        }
+
+        $sql = "INSERT INTO `playerposition`
+                SET `playerposition_player_id`='$player_id', 
+                    `playerposition_position_id`='$position_id', 
+                    `playerposition_value`='100'";
         $mysqli->query($sql);
+
+        $sql = "UPDATE `player`
+                LEFT JOIN
+                (
+                    SELECT `playerattribute_player_id`,
+                           SUM(`playerattribute_value`) AS `power`
+                    FROM `playerattribute`
+                    GROUP BY `playerattribute_player_id`
+                ) AS `t1`
+                ON `player_id`=`playerattribute_player_id`
+                SET `player_salary`=ROUND(POW(`power`, 1.3)),
+                    `player_price`=`player_salary`*'987',
+                    `player_reputation`=`power`/'" . MAX_PLAYER_POWER . "'*'100'
+                WHERE `player_id`='$player_id'";
+        $mysqli->query($sql);
+
+        $sql = "SELECT `countryname_name_id`
+                FROM `countryname`
+                LEFT JOIN `city`
+                ON `city_country_id`=`countryname_country_id`
+                LEFT JOIN `team`
+                ON `team_city_id`=`city_id`
+                WHERE `team_id`='$get_num'
+                ORDER BY RAND()
+                LIMIT 1";
+        $name_sql = $mysqli->query($sql);
+
+        $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+
+        $name_id = $name_array[0]['countryname_name_id'];
+
+        $sql = "SELECT `countrysurname_surname_id`
+                FROM `countrysurname`
+                LEFT JOIN `city`
+                ON `city_country_id`=`countrysurname_country_id`
+                LEFT JOIN `team`
+                ON `team_city_id`=`city_id`
+                WHERE `team_id`='$get_num'
+                ORDER BY RAND()
+                LIMIT 1";
+        $surname_sql = $mysqli->query($sql);
+
+        $surname_array = $surname_sql->fetch_all(MYSQLI_ASSOC);
+
+        $surname_id = $surname_array[0]['countrysurname_surname_id'];
+
+        $sql = "UPDATE `school`
+                SET `school_height`='150'+'50'*RAND(),
+                    `school_name_id`='$name_id',
+                    `school_surname_id`='$surname_id',
+                    `school_weight`=`school_height`-'95'-'5'*RAND()
+                WHERE `school_id`='$ok'
+                LIMIT 1";
+        $mysqli->query($sql);
+
+        $_SESSION['message_class']  = 'success';
+        $_SESSION['message_text']   = 'Изменения успешно сохранены.';
+
+        redirect('team_lineup_team_player.php?num=' . $get_num);
     }
-
-    $sql = "INSERT INTO `playerposition`
-            SET `playerposition_player_id`='$player_id', 
-                `playerposition_position_id`='$position_id', 
-                `playerposition_value`='100'";
-    $mysqli->query($sql);
-
-    $sql = "UPDATE `player`
-            LEFT JOIN
-            (
-                SELECT `playerattribute_player_id`,
-                       SUM(`playerattribute_value`) AS `power`
-                FROM `playerattribute`
-                GROUP BY `playerattribute_player_id`
-            ) AS `t1`
-            ON `player_id`=`playerattribute_player_id`
-            SET `player_salary`=ROUND(POW(`power`, 1.3)),
-                `player_price`=`player_salary`*'987',
-                `player_reputation`=`power`/'" . MAX_PLAYER_POWER . "'*'100'
-            WHERE `player_id`='$player_id'";
-    $mysqli->query($sql);
-    
-    $sql = "SELECT `countryname_name_id`
-            FROM `countryname`
-            LEFT JOIN `city`
-            ON `city_country_id`=`countryname_country_id`
-            LEFT JOIN `team`
-            ON `team_city_id`=`city_id`
-            WHERE `team_id`='$get_num'
-            ORDER BY RAND()
-            LIMIT 1";
-    $name_sql = $mysqli->query($sql);
-
-    $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
-
-    $name_id = $name_array[0]['countryname_name_id'];
-
-    $sql = "SELECT `countrysurname_surname_id`
-            FROM `countrysurname`
-            LEFT JOIN `city`
-            ON `city_country_id`=`countrysurname_country_id`
-            LEFT JOIN `team`
-            ON `team_city_id`=`city_id`
-            WHERE `team_id`='$get_num'
-            ORDER BY RAND()
-            LIMIT 1";
-    $surname_sql = $mysqli->query($sql);
-
-    $surname_array = $surname_sql->fetch_all(MYSQLI_ASSOC);
-
-    $surname_id = $surname_array[0]['countrysurname_surname_id'];
-
-    $sql = "UPDATE `school`
-            SET `school_height`='150'+'50'*RAND(),
-                `school_name_id`='$name_id',
-                `school_surname_id`='$surname_id',
-                `school_weight`=`school_height`-'95'-'5'*RAND()
-            WHERE `school_id`='$ok'
-            LIMIT 1";
-    $mysqli->query($sql);
-
-    $_SESSION['message_class']  = 'success';
-    $_SESSION['message_text']   = 'Изменения успешно сохранены.';
-
-    redirect('team_lineup_team_player.php?num=' . $get_num);
 }
 
 $sql = "SELECT COUNT(`position_id`) AS `count`

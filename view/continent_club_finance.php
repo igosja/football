@@ -52,7 +52,7 @@
                             <img
                                 alt="<?= $team_array[$i]['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $team_array[$i]['team_id']; ?>.png"
+                                src="/img/team/12/<?= $team_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td>
@@ -64,7 +64,7 @@
                             <img
                                 alt="<?= $team_array[$i]['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $team_array[$i]['country_id']; ?>.png"
+                                src="/img/flag/12/<?= $team_array[$i]['country_id']; ?>.png"
                             />
                         </td>
                         <td class="w15">

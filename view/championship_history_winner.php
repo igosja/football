@@ -16,7 +16,7 @@
                             <img
                                 alt="<?= $first_array[$i]['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $first_array[$i]['team_id']; ?>.png"
+                                src="/img/team/12/<?= $first_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
@@ -28,7 +28,7 @@
                             <img
                                 alt="<?= $second_array[$i]['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $second_array[$i]['team_id']; ?>.png"
+                                src="/img/team/12/<?= $second_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
@@ -40,7 +40,7 @@
                             <img
                                 alt="<?= $third_array[$i]['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $third_array[$i]['team_id']; ?>.png"
+                                src="/img/team/12/<?= $third_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">

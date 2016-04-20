@@ -10,12 +10,12 @@
                 </tr>
                 <?php foreach ($tournament_array as $item) { ?>
                     <tr>
-                        <td class="center"><?= $item['standing_season_id']; ?></td>
+                        <td class="center"><?= $item['season_id']; ?></td>
                         <td class="w1">
                             <img
                                 alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
+                                src="/img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td>

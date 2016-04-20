@@ -26,7 +26,7 @@
                             <img
                                 alt="<?= $item['seller_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['seller_id']; ?>.png"
+                                src="/img/team/12/<?= $item['seller_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
@@ -38,7 +38,7 @@
                             <img
                                 alt="<?= $item['buyer_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['buyer_id']; ?>.png"
+                                src="/img/team/12/<?= $item['buyer_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">

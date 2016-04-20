@@ -25,7 +25,7 @@
                 <tr>
                     <td class="center" colspan="2">
                         <a href="https://passport.webmoney.ru/asp/certview.asp?wmid=274662367507" target="_blank">
-                            <img src="img/webmoney.png">
+                            <img src="/img/webmoney.png">
                         </a>
                     </td>
                 </tr>

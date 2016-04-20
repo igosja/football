@@ -4,7 +4,7 @@
             <p class="header">Профиль страны</p>
             <table class="center w100">
                 <tr>
-                    <td><img alt="" class="img-90" src="img/flag/90/<?= $get_num; ?>.png" /></td>
+                    <td><img alt="" class="img-90" src="/img/flag/90/<?= $get_num; ?>.png" /></td>
                 </tr>
                 <tr>
                     <td>
@@ -51,7 +51,7 @@
                         <img
                             alt="<?= $country_array[0]['user_country_name']; ?>"
                             class="img-12"
-                            src="img/flag/12/<?= $country_array[0]['user_country_id']; ?>.png"
+                            src="/img/flag/12/<?= $country_array[0]['user_country_id']; ?>.png"
                         />
                         <?= $country_array[0]['user_country_name']; ?>
                     </td>
@@ -81,7 +81,7 @@
                             <img
                                 alt="<?= $item['country_name']; ?>"
                                 class="img-50"
-                                src="img/flag/50/<?= $item['country_id']; ?>.png"
+                                src="/img/flag/50/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                     </tr>
@@ -115,7 +115,7 @@
                 </tr>
                 <?php foreach ($team_array as $item) { ?>
                     <tr>
-                        <td class="w1"><img alt="" class="img-12" src="img/team/12/<?= $item['team_id']; ?>.png" /></td>
+                        <td class="w1"><img alt="" class="img-12" src="/img/team/12/<?= $item['team_id']; ?>.png" /></td>
                         <td><a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>"><?= $item['team_name']; ?></a></td>
                     </tr>
                 <?php } ?>
@@ -131,7 +131,7 @@
                 <?php foreach ($player_array as $item) { ?>
                     <tr>
                         <td><a href="player_home_profile.php?num=<?= $item['player_id']; ?>"><?= $item['name_name']; ?> <?= $item['surname_name']; ?></a></td>
-                        <td class="w1"><img alt="" class="img-12" src="img/team/12/<?= $item['team_id']; ?>.png" /></td>
+                        <td class="w1"><img alt="" class="img-12" src="/img/team/12/<?= $item['team_id']; ?>.png" /></td>
                         <td><a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>"><?= $item['team_name']; ?></a></td>
                     </tr>
                 <?php } ?>
@@ -156,7 +156,7 @@
                             <img
                                 alt="<?= $item['seller_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['seller_id']; ?>.png"
+                                src="/img/team/12/<?= $item['seller_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">
@@ -168,7 +168,7 @@
                             <img
                                 alt="<?= $item['buyer_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['buyer_id']; ?>.png"
+                                src="/img/team/12/<?= $item['buyer_id']; ?>.png"
                             />
                         </td>
                         <td class="w30">

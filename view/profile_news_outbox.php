@@ -34,7 +34,6 @@
                     <tr>
                         <td>
                             <select id="autocomplete" name="data[inbox_user_id]">
-                                <option value="-1">Тех. поддержка</option>
                                 <?php foreach ($user_array as $item) { ?>
                                     <option value="<?= $item['user_id']; ?>"
                                         <?php if ($answer == $item['user_id']) { ?>

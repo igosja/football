@@ -143,7 +143,7 @@ function tactic_player_field()
             '<tr>' +
             '<td class="center">' +
             '<a href="javascript:;" class="player-tactic-shirt" data-position="' + position[0] + '">' +
-            '<img alt="" class="img-20" src="img/shirt.png" />' +
+            '<img alt="" class="img-20" src="/img/shirt.png" />' +
             '</a>' +
             '</td>' +
             '</tr>' +
@@ -180,7 +180,7 @@ function tactic_player_field_national()
             '<tr>' +
             '<td class="center">' +
             '<a href="javascript:;" class="player-tactic-shirt-national" data-position="' + position[0] + '">' +
-            '<img alt="" class="img-20" src="img/shirt.png" />' +
+            '<img alt="" class="img-20" src="/img/shirt.png" />' +
             '</a>' +
             '</td>' +
             '</tr>' +
@@ -298,7 +298,7 @@ function tactic_field()
                         + 'px; left: '
                         + icon_length
                         + 'px;">'
-                        + '<tr><td class="center"><img alt="" class="img-20" src="img/shirt.png" /></td></tr></table>';
+                        + '<tr><td class="center"><img alt="" class="img-20" src="/img/shirt.png" /></td></tr></table>';
 
         $(field_icon).append(icon_img);
         $(position_select_array).append('<option value="' + position[0] + '" class="position-option">' + position[1] + '</option>');

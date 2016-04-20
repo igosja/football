@@ -12,7 +12,7 @@
                                         <img
                                             alt="<?= $tournament_array[$i]['tournament_name']; ?>"
                                             class="img-90"
-                                            src="img/tournament/90/<?= $tournament_array[$i]['tournament_id']; ?>.png"
+                                            src="/img/tournament/90/<?= $tournament_array[$i]['tournament_id']; ?>.png"
                                         />
                                     </td>
                                 </tr>
@@ -21,7 +21,7 @@
                                         <img
                                             alt="<?= $tournament_array[$i]['country_name']; ?>"
                                             class="img-12"
-                                            src="img/flag/12/<?= $tournament_array[$i]['country_id']; ?>.png"
+                                            src="/img/flag/12/<?= $tournament_array[$i]['country_id']; ?>.png"
                                         />
                                         <?= $tournament_array[$i]['country_name']; ?>
                                     </td>
@@ -31,7 +31,7 @@
                                         <img
                                             alt="<?= $tournament_array[$i]['tournament_name']; ?>"
                                             class="img-12"
-                                            src="img/tournament/12/<?= $tournament_array[$i]['tournament_id']; ?>.png"
+                                            src="/img/tournament/12/<?= $tournament_array[$i]['tournament_id']; ?>.png"
                                         />
                                         <a href="tournament_review_profile.php?num=<?= $tournament_array[$i]['tournament_id']; ?>">
                                             <?= $tournament_array[$i]['tournament_name']; ?>
@@ -66,7 +66,7 @@
                             <img
                                 alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
+                                src="/img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td>
@@ -78,7 +78,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td class="left w20">
@@ -90,7 +90,7 @@
                             <img
                                 alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                src="/img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td class="left w20">

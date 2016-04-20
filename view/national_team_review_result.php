@@ -12,7 +12,7 @@
                         <img
                             alt="<?= $championship_array[0]['team_name']; ?>"
                             class="img-12"
-                            src="img/team/12/<?= $championship_array[0]['team_id']; ?>.png"
+                            src="/img/team/12/<?= $championship_array[0]['team_id']; ?>.png"
                         />
                         <a href="team_team_review_profile.php?num=<?= $championship_array[0]['team_id']; ?>">
                             <?= $championship_array[0]['team_name']; ?>
@@ -30,7 +30,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>
@@ -50,7 +50,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>
@@ -70,7 +70,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>
@@ -91,7 +91,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>
@@ -110,7 +110,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>
@@ -130,7 +130,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>
@@ -150,7 +150,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>
@@ -170,7 +170,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>
@@ -185,7 +185,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>
@@ -205,7 +205,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>

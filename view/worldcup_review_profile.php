@@ -19,7 +19,7 @@
                             <img
                                 alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                src="/img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>
@@ -47,7 +47,7 @@
                             data-tournament="<?= $num; ?>"
                             data-shedule="<?= $game_array[0]['shedule_id']; ?>"
                             id="worldcup-game-prev"
-                            src="img/arrow/left.png"
+                            src="/img/arrow/left.png"
                         />
                     </td>
                     <td id="shedule-date">
@@ -61,7 +61,7 @@
                             data-tournament="<?= $num; ?>"
                             data-shedule="<?= $game_array[0]['shedule_id']; ?>"
                             id="worldcup-game-next"
-                            src="img/arrow/right.png"
+                            src="/img/arrow/right.png"
                         />
                     </td>
                 </tr>
@@ -99,7 +99,7 @@
                             <img
                                 alt="<?= $item['country_name']; ?>"
                                 class="img-50"
-                                src="img/flag/50/<?= $item['country_id']; ?>.png"
+                                src="/img/flag/50/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>

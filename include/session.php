@@ -50,10 +50,22 @@ if (isset($_SESSION['authorization_id']))
     $sql = "SELECT COUNT(`inbox_id`) AS `count_inbox`
             FROM `inbox`
             WHERE `inbox_user_id`='$authorization_id'
+            AND `inbox_support`='0'
             AND `inbox_read`='0'";
     $message_sql = $mysqli->query($sql);
 
     $message_array = $message_sql->fetch_all(MYSQLI_ASSOC);
 
     $count_message = $message_array[0]['count_inbox'];
+
+    $sql = "SELECT COUNT(`inbox_id`) AS `count_inbox`
+            FROM `inbox`
+            WHERE `inbox_user_id`='$authorization_id'
+            AND `inbox_support`='1'
+            AND `inbox_read`='0'";
+    $support_sql = $mysqli->query($sql);
+
+    $support_array = $support_sql->fetch_all(MYSQLI_ASSOC);
+
+    $count_support = $support_array[0]['count_inbox'];
 }

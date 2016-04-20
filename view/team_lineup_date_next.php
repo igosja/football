@@ -17,7 +17,7 @@
                         <img
                             alt="<?= $team_name; ?>"
                             class="img-12"
-                            src="img/team/12/<?= $num; ?>.png"
+                            src="/img/team/12/<?= $num; ?>.png"
                         />
                     </td>
                     <td>
@@ -37,7 +37,7 @@
                         <img
                             alt="<?= $nearest_game_array[0]['team_name']; ?>"
                             class="img-12"
-                            src="img/team/12/<?= $nearest_game_array[0]['team_id']; ?>.png"
+                            src="/img/team/12/<?= $nearest_game_array[0]['team_id']; ?>.png"
                         />
                     </td>
                     <td>
@@ -73,7 +73,7 @@
                             <img
                                 alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
+                                src="/img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td>
@@ -85,7 +85,7 @@
                             <img
                                 alt="<?= $item['game_home_team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['game_home_team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['game_home_team_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">
@@ -97,7 +97,7 @@
                             <img
                                 alt="<?= $item['game_guest_team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['game_guest_team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['game_guest_team_id']; ?>.png"
                             />
                         </td>
                         <td class="w20">

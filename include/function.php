@@ -29,7 +29,7 @@ function f_igosja_five_star($value, $class)
         }
 
         $value  = $value - 2;
-        $return = $return . '<img class="img-' . $class . '" src="img/star/' . $star . '.png" /> ';
+        $return = $return . '<img class="img-' . $class . '" src="/img/star/' . $star . '.png" /> ';
     }
 
     return $return;
@@ -556,6 +556,15 @@ function f_igosja_nearest_game_sort($a, $b)
     $a_date         = $a['shedule_date'];
     $b_date         = $b['shedule_date'];
     $sort_result    = strcmp($a_date, $b_date);
+
+    return $sort_result;
+}
+
+function f_igosja_trophy_sort($a, $b)
+{
+    $a_date         = $a['season_id'];
+    $b_date         = $b['season_id'];
+    $sort_result    = strcmp($b_date, $a_date);
 
     return $sort_result;
 }

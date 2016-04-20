@@ -137,7 +137,7 @@ function f_igosja_generator_transfer()
                             SET `recordteam_date_start`=CURDATE(),
                                 `recordteam_player_id`='$player_id',
                                 `recordteam_recordteamtype_id`='" . RECORD_TEAM_BIGGEST_TRANSFER_FROM . "',
-                                `recordteam_team_id`=' . $seller_id . ',
+                                `recordteam_team_id`='$seller_id',
                                 `recordteam_value`='$price'";
                     f_igosja_mysqli_query($sql);
                 }
@@ -154,7 +154,7 @@ function f_igosja_generator_transfer()
                                     `recordteam_player_id`='$player_id',
                                     `recordteam_recordteamtype_id`='" . RECORD_TEAM_BIGGEST_TRANSFER_FROM . "',
                                     `recordteam_value`='$price'
-                                WHERE `recordteam_team_id`=' . $seller_id . '
+                                WHERE `recordteam_team_id`='$seller_id'
                                 LIMIT 1";
                         f_igosja_mysqli_query($sql);
                     }
@@ -175,7 +175,7 @@ function f_igosja_generator_transfer()
                             SET `recordteam_date_start`=CURDATE(),
                                 `recordteam_player_id`='$player_id',
                                 `recordteam_recordteamtype_id`='" . RECORD_TEAM_BIGGEST_TRANSFER_TO . "',
-                                `recordteam_team_id`=' . $buyer_id . ',
+                                `recordteam_team_id`='$buyer_id',
                                 `recordteam_value`='$price'";
                     f_igosja_mysqli_query($sql);
                 }
@@ -192,7 +192,7 @@ function f_igosja_generator_transfer()
                                     `recordteam_player_id`='$player_id',
                                     `recordteam_recordteamtype_id`='" . RECORD_TEAM_BIGGEST_TRANSFER_TO . "',
                                     `recordteam_value`='$price'
-                                WHERE `recordteam_team_id`=' . $buyer_id . '
+                                WHERE `recordteam_team_id`='$buyer_id'
                                 LIMIT 1";
                         f_igosja_mysqli_query($sql);
                     }

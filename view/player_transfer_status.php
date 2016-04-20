@@ -9,7 +9,7 @@
                         <img
                             alt="<?= $player_array[0]['team_name']; ?>"
                             class="img-50"
-                            src="img/team/50/<?= $player_array[0]['team_id']; ?>.png"
+                            src="/img/team/50/<?= $player_array[0]['team_id']; ?>.png"
                         />
                     </td>
                 </tr>
@@ -43,7 +43,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>

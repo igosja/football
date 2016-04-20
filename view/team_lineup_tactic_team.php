@@ -30,7 +30,7 @@
                                 <img
                                     alt="<?= $item['team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?= $item['team_id']; ?>.png"
+                                    src="/img/team/12/<?= $item['team_id']; ?>.png"
                                 />
                             </td>
                             <td>
@@ -42,7 +42,7 @@
                                 <img
                                     alt="<?= $item['tournament_name']; ?>"
                                     class="img-12"
-                                    src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
+                                    src="/img/tournament/12/<?= $item['tournament_id']; ?>.png"
                                 />
                             </td>
                             <td>
@@ -56,7 +56,7 @@
                                     alt="<?= $item['weather_name']; ?>"
                                     class="img-12"
                                     title="<?= $item['weather_name']; ?>"
-                                    src="img/weather/<?= $item['weather_id']; ?>.png"
+                                    src="/img/weather/<?= $item['weather_id']; ?>.png"
                                 />
                             </td>
                             <td>

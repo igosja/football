@@ -12,7 +12,7 @@
                                     <img
                                         alt="<?= $team_array[0]['country_name']; ?>"
                                         class="img-12"
-                                        src="img/flag/12/<?= $team_array[0]['country_id']; ?>.png"
+                                        src="/img/flag/12/<?= $team_array[0]['country_id']; ?>.png"
                                     />
                                     <a href="national_team_review_profile.php?num=<?= $team_array[0]['country_id']; ?>">
                                         <?= $team_array[0]['country_name']; ?>

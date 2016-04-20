@@ -29,7 +29,7 @@
                             <img
                                 alt="<?= $item['home_country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $item['game_home_country_id']; ?>.png"
+                                src="/img/flag/12/<?= $item['game_home_country_id']; ?>.png"
                             />
                         </td>
                         <td class="center">
@@ -43,7 +43,7 @@
                             <img
                                 alt="<?= $item['guest_country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $item['game_guest_country_id']; ?>.png"
+                                src="/img/flag/12/<?= $item['game_guest_country_id']; ?>.png"
                             />
                         </td>
                         <td class="w45">

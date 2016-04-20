@@ -9,7 +9,7 @@
                         <img
                             alt="<?= $staff_array[0]['team_name']; ?>"
                             class="img-12"
-                            src="img/team/12/<?= $staff_array[0]['team_id']; ?>.png"
+                            src="/img/team/12/<?= $staff_array[0]['team_id']; ?>.png"
                         />
                         <a href="team_team_review_profile.php?num=<?= $staff_array[0]['team_id']; ?>">
                             <?= $staff_array[0]['team_name']; ?>
@@ -22,7 +22,7 @@
                         <img
                             alt="<?= $staff_array[0]['country_name']; ?>"
                             class="img-12"
-                            src="img/flag/12/<?= $staff_array[0]['country_id']; ?>.png"
+                            src="/img/flag/12/<?= $staff_array[0]['country_id']; ?>.png"
                         />
                         <a href="national_team_review_profile.php?num=<?= $staff_array[0]['country_id']; ?>">
                             <?= $staff_array[0]['country_name']; ?>
@@ -53,7 +53,7 @@
                                 <img
                                     alt="<?= $item['country_name']; ?>"
                                     class="img-12"
-                                    src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                    src="/img/flag/12/<?= $item['country_id']; ?>.png"
                                 />
                                 <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
                                     <?= $item['country_name']; ?>

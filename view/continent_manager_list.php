@@ -54,7 +54,7 @@
                                 <img
                                     alt="<?= $user_array[$i]['team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?= $user_array[$i]['team_id']; ?>.png"
+                                    src="/img/team/12/<?= $user_array[$i]['team_id']; ?>.png"
                                 />
                             <?php } ?>
                         </td>
@@ -64,7 +64,7 @@
                             </a>
                         </td>
                         <td class="w1">
-                            <img src="img/flag/12/<?= $user_array[$i]['country_id']; ?>.png" class="img-12" />
+                            <img src="/img/flag/12/<?= $user_array[$i]['country_id']; ?>.png" class="img-12" />
                         </td>
                         <td class="w20">
                             <a href="national_team_review_profile.php?num=<?= $user_array[$i]['country_id']; ?>">

@@ -104,8 +104,8 @@ function f_igosja_generator_team_record()
 
                 $record_value = $record_array[0]['recordteam_value'];
 
-                if ($visitor < $record_value &&
-                    0 != $record_value)
+                if ($visitor < $record_value ||
+                    0 == $record_value)
                 {
                     $sql = "UPDATE `recordteam`
                             SET `recordteam_value`='$visitor',

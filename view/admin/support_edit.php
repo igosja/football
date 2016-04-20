@@ -15,11 +15,6 @@
                 <table class="table table-striped table-bordered">
                     <tr>
                         <td>
-                            <?= $inbox_array[0]['inbox_title']; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             <?= nl2br($inbox_array[0]['inbox_text']); ?>
                         </td>
                     </tr>

@@ -12,7 +12,7 @@
                         <img
                             alt="<?= $user_array[0]['country_name']; ?>"
                             class="img-12"
-                            src="img/flag/12/<?= $user_array[0]['country_id']; ?>.png"
+                            src="/img/flag/12/<?= $user_array[0]['country_id']; ?>.png"
                         />
                     </td>
                 </tr>
@@ -80,7 +80,7 @@
                             <img
                                 alt="<?= $career_array[$i]['team_name']; ?>"
                                 class="img-50"
-                                src="img/team/50/<?= $career_array[$i]['team_id']; ?>.png"
+                                src="/img/team/50/<?= $career_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td><?= $career_array[$i]['team_name']; ?></td>
@@ -90,7 +90,7 @@
                             <img
                                 alt="<?= $career_array[$i]['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $career_array[$i]['country_id']; ?>.png"
+                                src="/img/flag/12/<?= $career_array[$i]['country_id']; ?>.png"
                             />
                             <?= $career_array[$i]['country_name']; ?>
                         </td>

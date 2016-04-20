@@ -4,7 +4,8 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT COUNT(`inbox_id`) AS `count`
         FROM `inbox`
-        WHERE `inbox_user_id`='-1'
+        WHERE `inbox_support`='1'
+        AND `inbox_user_id`='0'
         AND `inbox_read`='0'";
 $support_sql = $mysqli->query($sql);
 

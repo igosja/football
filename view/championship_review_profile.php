@@ -19,7 +19,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>
@@ -47,7 +47,7 @@
                             data-tournament="<?= $num; ?>"
                             data-shedule="<?= $game_array[0]['shedule_id']; ?>"
                             id="tournament-game-prev"
-                            src="img/arrow/left.png"
+                            src="/img/arrow/left.png"
                         />
                     </td>
                     <td id="shedule-date">
@@ -61,7 +61,7 @@
                             data-tournament="<?= $num; ?>"
                             data-shedule="<?= $game_array[0]['shedule_id']; ?>"
                             id="tournament-game-next"
-                            src="img/arrow/right.png"
+                            src="/img/arrow/right.png"
                         />
                     </td>
                 </tr>
@@ -99,7 +99,7 @@
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-50"
-                                src="img/team/50/<?= $item['team_id']; ?>.png"
+                                src="/img/team/50/<?= $item['team_id']; ?>.png"
                             />
                         </td>
                         <td>

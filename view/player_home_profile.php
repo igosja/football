@@ -84,7 +84,7 @@
                                         <img
                                             alt="<?= $player_array[0]['country_name']; ?>"
                                             class="img-50"
-                                            src="img/flag/50/<?= $player_array[0]['country_id']; ?>.png"
+                                            src="/img/flag/50/<?= $player_array[0]['country_id']; ?>.png"
                                         />
                                     </a>
                                 </td>
@@ -185,7 +185,7 @@
                         <?php foreach ($position_array as $item) { ?>
                             <img
                                 alt="<?= $item['position_description']; ?>"
-                                src="img/position/<?= f_igosja_position_icon($item['playerposition_value']); ?>.png"
+                                src="/img/position/<?= f_igosja_position_icon($item['playerposition_value']); ?>.png"
                                 style="position: absolute; top: <?= 150 -   $item['position_coordinate_x'] * 15 - 10; ?>px; left: <?= 1 + $item['position_coordinate_y'] * 15; ?>px;"
                                 title="<?= $item['position_description']; ?>"
                             />

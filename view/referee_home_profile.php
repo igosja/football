@@ -6,7 +6,7 @@
                 <tr>
                     <td>Национальность</td>
                     <td>
-                        <img alt="" class="img-12" src="img/flag/12/<?= $referee_array[0]['country_id']; ?>.png" />
+                        <img alt="" class="img-12" src="/img/flag/12/<?= $referee_array[0]['country_id']; ?>.png" />
                         <a href="national_team_review_profile.php?num=<?= $referee_array[0]['country_id']; ?>">
                             <?= $referee_array[0]['country_name']; ?>
                         </a>
@@ -76,7 +76,7 @@
                                 <img
                                     alt="<?= $item['home_team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?= $item['game_home_team_id']; ?>.png"
+                                    src="/img/team/12/<?= $item['game_home_team_id']; ?>.png"
                                 />
                             <?php } else { ?>
                                 <a href="national_team_review_profile.php?num=<?= $item['game_home_country_id']; ?>">
@@ -85,7 +85,7 @@
                                 <img
                                     alt="<?= $item['home_country_name']; ?>"
                                     class="img-12"
-                                    src="img/flag/12/<?= $item['game_home_country_id']; ?>.png"
+                                    src="/img/flag/12/<?= $item['game_home_country_id']; ?>.png"
                                 />
                             <?php } ?>
                         </td>
@@ -99,7 +99,7 @@
                                 <img
                                     alt="<?= $item['guest_team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?= $item['game_guest_team_id']; ?>.png"
+                                    src="/img/team/12/<?= $item['game_guest_team_id']; ?>.png"
                                 />
                                 <a href="team_team_review_profile.php?num=<?= $item['game_guest_team_id']; ?>">
                                     <?= $item['guest_team_name']; ?>
@@ -108,7 +108,7 @@
                                 <img
                                     alt="<?= $item['guest_country_name']; ?>"
                                     class="img-12"
-                                    src="img/flag/12/<?= $item['game_guest_country_id']; ?>.png"
+                                    src="/img/flag/12/<?= $item['game_guest_country_id']; ?>.png"
                                 />
                                 <a href="national_team_review_profile.php?num=<?= $item['game_guest_country_id']; ?>">
                                     <?= $item['guest_country_name']; ?>
@@ -119,7 +119,7 @@
                             <img
                                 alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
+                                src="/img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td class="w15">

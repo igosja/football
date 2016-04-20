@@ -21,6 +21,7 @@ $sql = "SELECT `inbox_id`,
         LEF JOIN `user`
         ON `user_id`=`inbox_sender_id`
         WHERE `inbox_user_id`='$get_num'
+        AND `inbox_support`='0'
         ORDER BY `inbox_date` DESC";
 $inbox_sql = $mysqli->query($sql);
 

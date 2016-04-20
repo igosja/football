@@ -11,7 +11,7 @@
                         <img
                             alt="<?= $item['alt']; ?>"
                             class="img-30"
-                            src="img/social/<?= $item['img']; ?>.png"
+                            src="/img/social/<?= $item['img']; ?>.png"
                         />
                     </a>
                 <?php } ?>

@@ -10,7 +10,6 @@
                 <thead>
                     <tr>
                         <th>Дата</th>
-                        <th>Тема</th>
                         <th>Пользователь</th>
                         <th class="col-lg-1"></th>
                     </tr>
@@ -21,9 +20,8 @@
                             <td></i><?= $item['inbox_date']; ?></td>
                             <td>
                                 <?php if (0 == $item['inbox_read']) { ?><i class="fa fa-comment-o"><?php } ?>
-                                <?= $item['inbox_title']; ?>
+                                <?= $item['user_login']; ?>
                             </td>
-                            <td><?= $item['user_login']; ?></td>
                             <td>
                                 <a href="support_edit.php?num=<?= $item['inbox_id']; ?>"><i class="fa fa-eye"></i></a>
                             </td>

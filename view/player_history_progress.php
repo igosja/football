@@ -11,24 +11,39 @@
                 </tr>
                 <?php foreach ($trophy_array as $item) { ?>
                     <tr>
-                        <td class="center"><?= $item['standing_season_id']; ?></td>
-                        <td class="w1">
-                            <img
-                                alt="<?= $item['team_name']; ?>"
-                                class="img-12"
-                                src="img/team/12/<?= $item['team_id']; ?>.png"
-                            />
-                        </td>
-                        <td>
-                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                <?= $item['team_name']; ?>
-                            </a>
-                        </td>
+                        <td class="center"><?= $item['season_id']; ?></td>
+                        <?php if (isset($item['team_id'])) { ?>
+                            <td class="w1">
+                                <img
+                                    alt="<?= $item['team_name']; ?>"
+                                    class="img-12"
+                                    src="/img/team/12/<?= $item['team_id']; ?>.png"
+                                />
+                            </td>
+                            <td>
+                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                    <?= $item['team_name']; ?>
+                                </a>
+                            </td>
+                        <?php } else { ?>
+                            <td class="w1">
+                                <img
+                                    alt="<?= $item['country_name']; ?>"
+                                    class="img-12"
+                                    src="/img/flag/12/<?= $item['country_id']; ?>.png"
+                                />
+                            </td>
+                            <td>
+                                <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                    <?= $item['country_name']; ?>
+                                </a>
+                            </td>
+                        <?php } ?>
                         <td class="w1">
                             <img
                                 alt="<?= $item['tournament_name']; ?>"
                                 class="img-12"
-                                src="img/tournament/12/<?= $item['tournament_id']; ?>.png"
+                                src="/img/tournament/12/<?= $item['tournament_id']; ?>.png"
                             />
                         </td>
                         <td class="w35">

@@ -5,7 +5,7 @@
             <table class="striped w100">
                 <tr>
                     <td class="center" rowspan="3">
-                        <img alt="" class="img-20" src="img/weather/1.png" />
+                        <img alt="" class="img-20" src="/img/weather/1.png" />
                         <br />
                         14<?= CELSIUS; ?>
                     </td>
@@ -41,13 +41,13 @@
                                 <img
                                     alt=""
                                     class="img-12"
-                                    src="img/team/12/<?= $item['game_home_team_id']; ?>.png"
+                                    src="/img/team/12/<?= $item['game_home_team_id']; ?>.png"
                                 />
                             <?php } else { ?>
                                 <img
                                     alt=""
                                     class="img-12"
-                                    src="img/flag/12/<?= $item['game_home_country_id']; ?>.png"
+                                    src="/img/flag/12/<?= $item['game_home_country_id']; ?>.png"
                                 />
                             <?php } ?>
                         </td>
@@ -61,13 +61,13 @@
                                 <img
                                     alt=""
                                     class="img-12"
-                                    src="img/team/12/<?= $item['game_guest_team_id']; ?>.png"
+                                    src="/img/team/12/<?= $item['game_guest_team_id']; ?>.png"
                                 />
                             <?php } else { ?>
                                 <img
                                     alt=""
                                     class="img-12"
-                                    src="img/flag/12/<?= $item['game_guest_country_id']; ?>.png"
+                                    src="/img/flag/12/<?= $item['game_guest_country_id']; ?>.png"
                                 />
                             <?php } ?>
                         </td>
@@ -96,7 +96,7 @@
                                 <img
                                     alt="<?= $item['home_team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?= $item['game_home_team_id']; ?>.png"
+                                    src="/img/team/12/<?= $item['game_home_team_id']; ?>.png"
                                 />
                             </td>
                             <td class="center">-</td>
@@ -104,7 +104,7 @@
                                 <img
                                     alt="<?= $item['guest_team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?= $item['game_guest_team_id']; ?>.png"
+                                    src="/img/team/12/<?= $item['game_guest_team_id']; ?>.png"
                                 />
                             </td>
                             <td class="w40">
@@ -130,7 +130,7 @@
                                     <img
                                         alt="<?= $item['team_name']; ?>"
                                         class="img-12"
-                                        src="img/team/12/<?= $item['team_id']; ?>.png"
+                                        src="/img/team/12/<?= $item['team_id']; ?>.png"
                                     />
                                 </td>
                                 <td>
@@ -147,7 +147,7 @@
                                     <img
                                         alt="<?= $item['country_name']; ?>"
                                         class="img-12"
-                                        src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                        src="/img/flag/12/<?= $item['country_id']; ?>.png"
                                     />
                                 </td>
                                 <td>
@@ -234,7 +234,7 @@
                                 <img
                                     alt="<?= $item['team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?= $item['team_id']; ?>.png"
+                                    src="/img/team/12/<?= $item['team_id']; ?>.png"
                                 />
                                 <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                     <?= $item['team_name']; ?>
@@ -243,7 +243,7 @@
                                 <img
                                     alt="<?= $item['country_name']; ?>"
                                     class="img-12"
-                                    src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                    src="/img/flag/12/<?= $item['country_id']; ?>.png"
                                 />
                                 <a href="team_team_review_profile.php?num=<?= $item['country_id']; ?>">
                                     <?= $item['country_name']; ?>
@@ -282,7 +282,7 @@
                                 <img
                                     alt="<?= $item['team_name']; ?>"
                                     class="img-12"
-                                    src="img/team/12/<?= $item['team_id']; ?>.png"
+                                    src="/img/team/12/<?= $item['team_id']; ?>.png"
                                 />
                                 <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                     <?= $item['team_name']; ?>
@@ -291,7 +291,7 @@
                                 <img
                                     alt="<?= $item['country_name']; ?>"
                                     class="img-12"
-                                    src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                    src="/img/flag/12/<?= $item['country_id']; ?>.png"
                                 />
                                 <a href="team_team_review_profile.php?num=<?= $item['country_id']; ?>">
                                     <?= $item['country_name']; ?>

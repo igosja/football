@@ -15,7 +15,7 @@
                             <img
                                 alt="<?= $item['country_name']; ?>"
                                 class="img-12"
-                                src="img/flag/12/<?= $item['country_id']; ?>.png"
+                                src="/img/flag/12/<?= $item['country_id']; ?>.png"
                             />
                         </td>
                         <td>

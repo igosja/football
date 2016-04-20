@@ -29,7 +29,7 @@
                             <img
                                 alt="<?= $item['home_team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['game_home_team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['game_home_team_id']; ?>.png"
                             />
                         </td>
                         <td class="center">
@@ -43,7 +43,7 @@
                             <img
                                 alt="<?= $item['guest_team_name']; ?>"
                                 class="img-12"
-                                src="img/team/12/<?= $item['game_guest_team_id']; ?>.png"
+                                src="/img/team/12/<?= $item['game_guest_team_id']; ?>.png"
                             />
                         </td>
                         <td class="w45">
