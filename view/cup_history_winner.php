@@ -8,31 +8,31 @@
                     <th colspan="2">Победитель</th>
                     <th colspan="2">Второй призер</th>
                 </tr>
-                <?php foreach ($winner_array as $item) { ?>
+                <?php for ($i=0; $i<$count_winner; $i++) { ?>
                     <tr>
-                        <td class="center"><?= $item['shedule_season_id']; ?></td>
+                        <td class="center"><?= $winner_array[$i]['cupparticipant_season_id']; ?></td>
                         <td class="w1">
                             <img
-                                alt="<?= $item['winner_name']; ?>"
+                                alt="<?= $winner_array[$i]['team_name']; ?>"
                                 class="img-12"
-                                src="/img/team/12/<?= $item['winner_id']; ?>.png"
+                                src="/img/team/12/<?= $winner_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w40">
-                            <a href="team_team_review_profile.php?num=<?= $item['winner_id']; ?>">
-                                <?= $item['winner_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $winner_array[$i]['team_id']; ?>">
+                                <?= $winner_array[$i]['team_name']; ?>
                             </a>
                         </td>
                         <td class="w1">
                             <img
-                                alt="<?= $item['looser_name']; ?>"
+                                alt="<?= $looser_array[$i]['team_name']; ?>"
                                 class="img-12"
-                                src="/img/team/12/<?= $item['looser_id']; ?>.png"
+                                src="/img/team/12/<?= $looser_array[$i]['team_id']; ?>.png"
                             />
                         </td>
                         <td class="w40">
-                            <a href="team_team_review_profile.php?num=<?= $item['looser_id']; ?>">
-                                <?= $item['looser_name']; ?>
+                            <a href="team_team_review_profile.php?num=<?= $looser_array[$i]['team_id']; ?>">
+                                <?= $looser_array[$i]['team_name']; ?>
                             </a>
                         </td>
                     </tr>

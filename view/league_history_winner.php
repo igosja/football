@@ -8,6 +8,39 @@
                     <th colspan="2">Победитель</th>
                     <th colspan="2">Второй призер</th>
                 </tr>
+                <?php for ($i=0; $i<$count_winner; $i++) { ?>
+                    <tr>
+                        <td class="center"><?= $winner_array[$i]['leagueparticipant_season_id']; ?></td>
+                        <td class="w1">
+                            <img
+                                alt="<?= $winner_array[$i]['team_name']; ?>"
+                                class="img-12"
+                                src="/img/team/12/<?= $winner_array[$i]['team_id']; ?>.png"
+                            />
+                        </td>
+                        <td class="w40">
+                            <a href="team_team_review_profile.php?num=<?= $winner_array[$i]['team_id']; ?>">
+                                <?= $winner_array[$i]['team_name']; ?>
+                                (<?= $winner_array[$i]['city_name']; ?>,
+                                <?= $winner_array[$i]['country_name']; ?>)
+                            </a>
+                        </td>
+                        <td class="w1">
+                            <img
+                                alt="<?= $looser_array[$i]['team_name']; ?>"
+                                class="img-12"
+                                src="/img/team/12/<?= $looser_array[$i]['team_id']; ?>.png"
+                            />
+                        </td>
+                        <td class="w40">
+                            <a href="team_team_review_profile.php?num=<?= $looser_array[$i]['team_id']; ?>">
+                                <?= $looser_array[$i]['team_name']; ?>
+                                (<?= $looser_array[$i]['city_name']; ?>,
+                                <?= $looser_array[$i]['country_name']; ?>)
+                            </a>
+                        </td>
+                    </tr>
+                <?php } ?>
                 <?php foreach ($winner_array as $item) { ?>
                     <tr>
                         <td class="center"><?= $item['shedule_season_id']; ?></td>

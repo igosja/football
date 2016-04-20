@@ -2,6 +2,7 @@
 
 define('CELSIUS', '&deg;С');
 define('CUP_FINAL_STAGE', 49);
+define('CUP_WINNER_STAGE', -1);
 define('EVENT_GOAL', 1);
 define('EVENT_AUTOGOAL', 2);
 define('EVENT_PENALTY_GOAL', 3);
