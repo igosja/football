@@ -10,6 +10,7 @@
         <?php if (1 < $authorization_permission) { ?>
             <p><a href="admin">Административный раздел</a></p>
         <?php } ?>
+        <p><?= $sape->return_links(1); ?></p>
     </div>
 
     <script src="/js/jquery.js"></script>
