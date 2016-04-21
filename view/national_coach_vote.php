@@ -21,9 +21,9 @@
                             </td>
                             <td>
                                 <strong><?=nl2br($item['user_login'])?></strong>
-                                <br/>
+                                <br />
                                 Дата регистрации - <?=f_igosja_ufu_date($item['user_registration_date'])?>
-                                <br/>
+                                <br />
                                 Клубных постов в карьере - <?=$item['user_team']?>
                                 Сборных постов в карьере - <?=$item['user_national']?>
                             </td>

@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -58,13 +58,13 @@ $sql = "SELECT `country_id`,
         ON `player_mood_id`=`mood_id`
         LEFT JOIN `country`
         ON `player_country_id`=`country_id`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

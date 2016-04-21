@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `injurytype_day`, `injurytype_name`
         FROM `injurytype`
-        WHERE `injurytype_id`='$get_num'
+        WHERE `injurytype_id`='$num_get'
         LIMIT 1";
 $injurytype_sql = $mysqli->query($sql);
 
@@ -34,7 +34,7 @@ if (isset($_POST['injurytype_name']))
     $sql = "UPDATE `injurytype` 
             SET `injurytype_name`=?,
                 `injurytype_day`=?
-            WHERE `injurytype_id`='$get_num'
+            WHERE `injurytype_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('si', $injurytype_name, $injurytype_day);

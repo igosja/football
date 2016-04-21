@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournament_name`
         FROM `tournament`
-        WHERE `tournament_id`='$get_num'
+        WHERE `tournament_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -35,7 +35,7 @@ $sql = "SELECT `standing_season_id`,
         FROM `standing`
         LEFT JOIN `team`
         ON `team_id`=`standing_team_id`
-        WHERE `standing_tournament_id`='$get_num'
+        WHERE `standing_tournament_id`='$num_get'
         AND `standing_season_id`<'$igosja_season_id'
         AND `standing_place`='1'
         ORDER BY `standing_season_id` DESC";
@@ -49,7 +49,7 @@ $sql = "SELECT `team_id`,
         FROM `standing`
         LEFT JOIN `team`
         ON `team_id`=`standing_team_id`
-        WHERE `standing_tournament_id`='$get_num'
+        WHERE `standing_tournament_id`='$num_get'
         AND `standing_season_id`<'$igosja_season_id'
         AND `standing_place`='2'
         ORDER BY `standing_season_id` DESC";
@@ -62,7 +62,7 @@ $sql = "SELECT `team_id`,
         FROM `standing`
         LEFT JOIN `team`
         ON `team_id`=`standing_team_id`
-        WHERE `standing_tournament_id`='$get_num'
+        WHERE `standing_tournament_id`='$num_get'
         AND `standing_season_id`<'$igosja_season_id'
         AND `standing_place`='3'
         ORDER BY `standing_season_id` DESC";
@@ -70,7 +70,7 @@ $third_sql = $mysqli->query($sql);
 
 $third_array = $third_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $tournament_name;
 
 include (__DIR__ . '/view/main.php');

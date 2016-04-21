@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `continent_name`
         FROM `continent`
-        WHERE `continent_id`='$get_num'
+        WHERE `continent_id`='$num_get'
         LIMIT 1";
 $continent_sql = $mysqli->query($sql);
 
@@ -67,7 +67,7 @@ $count_page = $count_page->fetch_all(MYSQLI_ASSOC);
 $count_page = $count_page[0]['count_page'];
 $count_page = ceil($count_page / 30);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $continent_name;
 
 include (__DIR__ . '/view/main.php');

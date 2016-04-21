@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `name_name`,
@@ -38,7 +38,7 @@ $sql = "SELECT `name_name`,
         ON `statusrent_id`=`player_statusrent_id`
         LEFT JOIN `statusteam`
         ON `statusteam_id`=`player_statusteam_id`
-        WHERE `player_id`='$get_num'
+        WHERE `player_id`='$num_get'
         LIMIT 1";
 $player_sql = $mysqli->query($sql);
 
@@ -68,7 +68,7 @@ if (isset($_POST['data']) &&
                 FROM `player`
                 WHERE `player_team_id`='$team_id'
                 AND `player_statustransfer_id`='2'
-                AND `player_id`!='$get_num'";
+                AND `player_id`!='$num_get'";
         $count_sql = $mysqli->query($sql);
 
         $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
@@ -80,7 +80,7 @@ if (isset($_POST['data']) &&
             $_SESSION['message_class']  = 'error';
             $_SESSION['message_text']   = 'Нельзя выставить на трансфер более 5 игроков.';
 
-            redirect('player_transfer_status.php?num=' . $get_num);
+            redirect('player_transfer_status.php?num=' . $num_get);
         }
 
         $position_id = $player_array[0]['player_position_id'];
@@ -92,7 +92,7 @@ if (isset($_POST['data']) &&
                     WHERE `player_team_id`='$team_id'
                     AND `player_statustransfer_id`!='2'
                     AND `player_position_id`='1'
-                    AND `player_id`!='$get_num'";
+                    AND `player_id`!='$num_get'";
             $count_sql = $mysqli->query($sql);
 
             $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
@@ -104,7 +104,7 @@ if (isset($_POST['data']) &&
                 $_SESSION['message_class']  = 'error';
                 $_SESSION['message_text']   = 'В команде должно остаться не менее 2 вратарей.';
 
-                redirect('player_transfer_status.php?num=' . $get_num);
+                redirect('player_transfer_status.php?num=' . $num_get);
             }
         }
         else
@@ -114,7 +114,7 @@ if (isset($_POST['data']) &&
                     WHERE `player_team_id`='$team_id'
                     AND `player_statustransfer_id`!='2'
                     AND `player_position_id`!='1'
-                    AND `player_id`!='$get_num'";
+                    AND `player_id`!='$num_get'";
             $count_sql = $mysqli->query($sql);
 
             $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
@@ -126,7 +126,7 @@ if (isset($_POST['data']) &&
                 $_SESSION['message_class']  = 'error';
                 $_SESSION['message_text']   = 'В команде должно остаться не менее 16 полевых игроков.';
 
-                redirect('player_transfer_status.php?num=' . $get_num);
+                redirect('player_transfer_status.php?num=' . $num_get);
             }
         }
     }
@@ -136,14 +136,14 @@ if (isset($_POST['data']) &&
                 `player_statusrent_id`='$statusrent_id',
                 `player_statusteam_id`='$statusteam_id',
                 `player_transfer_price`='$transfer_price'
-            WHERE `player_id`='$get_num'
+            WHERE `player_id`='$num_get'
             LIMIT 1";
     $mysqli->query($sql);
 
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
-    redirect('player_transfer_status.php?num=' . $get_num);
+    redirect('player_transfer_status.php?num=' . $num_get);
 }
 
 $player_name    = $player_array[0]['name_name'];
@@ -156,7 +156,7 @@ $sql = "SELECT `team_id`,
         FROM `playeroffer`
         LEFT JOIN `team`
         ON `team_id`=`playeroffer_team_id`
-        WHERE `playeroffer_player_id`='$get_num'
+        WHERE `playeroffer_player_id`='$num_get'
         AND `playeroffer_offertype_id`='1'
         ORDER BY `playeroffer_date` DESC
         LIMIT 5";
@@ -189,7 +189,7 @@ $statusrent_sql = $mysqli->query($sql);
 
 $statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $player_name . ' ' . $player_surname;
 
 include (__DIR__ . '/view/main.php');

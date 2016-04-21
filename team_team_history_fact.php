@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -75,7 +75,7 @@ $sql = "SELECT `cheap_salary`,
             ON `name_id`=`player_name_id`
             LEFT JOIN `surname`
             ON `surname_id`=`player_surname_id`
-            WHERE `player_team_id`='$get_num'
+            WHERE `player_team_id`='$num_get'
             ORDER BY `player_height` DESC
             LIMIT 1
         ) AS `t1`
@@ -85,7 +85,7 @@ $sql = "SELECT `cheap_salary`,
             SELECT ROUND(AVG(`player_height`),0) AS `height_height`,
                    `player_team_id` AS `height_team_id`
             FROM `player`
-            WHERE `player_team_id`='$get_num'
+            WHERE `player_team_id`='$num_get'
         ) AS `t2`
         ON `player_team_id`=`height_team_id`
         LEFT JOIN
@@ -100,7 +100,7 @@ $sql = "SELECT `cheap_salary`,
             ON `name_id`=`player_name_id`
             LEFT JOIN `surname`
             ON `surname_id`=`player_surname_id`
-            WHERE `player_team_id`='$get_num'
+            WHERE `player_team_id`='$num_get'
             ORDER BY `player_weight` ASC
             LIMIT 1
         ) AS `t3`
@@ -117,7 +117,7 @@ $sql = "SELECT `cheap_salary`,
             ON `name_id`=`player_name_id`
             LEFT JOIN `surname`
             ON `surname_id`=`player_surname_id`
-            WHERE `player_team_id`='$get_num'
+            WHERE `player_team_id`='$num_get'
             ORDER BY `player_weight` DESC
             LIMIT 1
         ) AS `t4`
@@ -127,7 +127,7 @@ $sql = "SELECT `cheap_salary`,
             SELECT ROUND(AVG(`player_weight`),0) AS `weight_weight`,
                    `player_team_id` AS `weight_team_id`
             FROM `player`
-            WHERE `player_team_id`='$get_num'
+            WHERE `player_team_id`='$num_get'
         ) AS `t5`
         ON `player_team_id`=`weight_team_id`
         LEFT JOIN
@@ -142,7 +142,7 @@ $sql = "SELECT `cheap_salary`,
             ON `name_id`=`player_name_id`
             LEFT JOIN `surname`
             ON `surname_id`=`player_surname_id`
-            WHERE `player_team_id`='$get_num'
+            WHERE `player_team_id`='$num_get'
             ORDER BY `player_salary` ASC
             LIMIT 1
         ) AS `t6`
@@ -159,7 +159,7 @@ $sql = "SELECT `cheap_salary`,
             ON `name_id`=`player_name_id`
             LEFT JOIN `surname`
             ON `surname_id`=`player_surname_id`
-            WHERE `player_team_id`='$get_num'
+            WHERE `player_team_id`='$num_get'
             ORDER BY `player_salary` DESC
             LIMIT 1
         ) AS `t7`
@@ -169,7 +169,7 @@ $sql = "SELECT `cheap_salary`,
             SELECT ROUND(AVG(`player_salary`),0) AS `salary_salary`,
                    `player_team_id` AS `salary_team_id`
             FROM `player`
-            WHERE `player_team_id`='$get_num'
+            WHERE `player_team_id`='$num_get'
         ) AS `t8`
         ON `player_team_id`=`salary_team_id`
         LEFT JOIN
@@ -177,14 +177,14 @@ $sql = "SELECT `cheap_salary`,
             SELECT COUNT(`player_id`) AS `count_native`,
                    `player_team_id` AS `native_team_id`
             FROM `player`
-            WHERE `player_team_id`='$get_num'
+            WHERE `player_team_id`='$num_get'
             AND `player_country_id`=
             (
                 SELECT `city_country_id`
                 FROM `team`
                 LEFT JOIN `city`
                 ON `team_city_id`=`city_id`
-                WHERE `team_id`='$get_num'
+                WHERE `team_id`='$num_get'
             )
         ) AS `t9`
         ON `player_team_id`=`native_team_id`
@@ -193,10 +193,10 @@ $sql = "SELECT `cheap_salary`,
             SELECT COUNT(DISTINCT `player_country_id`) AS `count_country`,
                    `player_team_id` AS `country_team_id`
             FROM `player`
-            WHERE `player_team_id`='$get_num'
+            WHERE `player_team_id`='$num_get'
         ) AS `t10`
         ON `player_team_id`=`country_team_id`
-        WHERE `player_team_id`='$get_num'
+        WHERE `player_team_id`='$num_get'
         ORDER BY `player_height` ASC
         LIMIT 1";
 $team_fact_sql = $mysqli->query($sql);
@@ -210,7 +210,7 @@ $sql = "SELECT `tournament_id`,
         ON `standing_tournament_id`=`tournament_id`
         WHERE `tournament_tournamenttype_id`='2'
         AND `standing_season_id`='$igosja_season_id'
-        AND `standing_team_id`='$get_num'
+        AND `standing_team_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -402,7 +402,7 @@ $sql = "SELECT `cheap_salary`,
                 FROM `team`
                 LEFT JOIN `city`
                 ON `team_city_id`=`city_id`
-                WHERE `team_id`='$get_num'
+                WHERE `team_id`='$num_get'
             )
         ) AS `t9`
         ON `standing_tournament_id`=`native_tournament_id`
@@ -425,7 +425,7 @@ $tournament_fact_sql = $mysqli->query($sql);
 
 $tournament_fact_array = $tournament_fact_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

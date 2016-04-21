@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournament_tournamenttype_id`
         FROM `tournament`
-        WHERE `tournament_id`='$get_num'
+        WHERE `tournament_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -23,19 +23,19 @@ $tournamenttype_id = $tournament_array[0]['tournament_tournamenttype_id'];
 
 if (TOURNAMENT_TYPE_CHAMPIONSHIP == $tournamenttype_id)
 {
-    redirect('championship_review_profile.php?num=' . $get_num);
+    redirect('championship_review_profile.php?num=' . $num_get);
 }
 elseif (TOURNAMENT_TYPE_CUP == $tournamenttype_id)
 {
-    redirect('cup_review_profile.php?num=' . $get_num);
+    redirect('cup_review_profile.php?num=' . $num_get);
 }
 elseif (TOURNAMENT_TYPE_CHAMPIONS_LEAGUE == $tournamenttype_id)
 {
-    redirect('league_review_profile.php?num=' . $get_num);
+    redirect('league_review_profile.php?num=' . $num_get);
 }
 elseif (TOURNAMENT_TYPE_WORLD_CUP == $tournamenttype_id)
 {
-    redirect('worldcup_review_profile.php?num=' . $get_num);
+    redirect('worldcup_review_profile.php?num=' . $num_get);
 }
 elseif (TOURNAMENT_TYPE_FRIENDLY == $tournamenttype_id)
 {

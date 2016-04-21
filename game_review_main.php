@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `game_home_team_id`
         FROM `game`
-        WHERE `game_id`='$get_num'
+        WHERE `game_id`='$num_get'
         LIMIT 1";
 $game_sql = $mysqli->query($sql);
 
@@ -98,7 +98,7 @@ $sql = "SELECT `city_name`,
         ON `city_id`=`t3`.`team_city_id`
         LEFT JOIN `weather`
         ON `weather_id`=`game_weather_id`
-        WHERE `game_id`='$get_num'
+        WHERE `game_id`='$num_get'
         LIMIT 1";
 $game_sql = $mysqli->query($sql);
 
@@ -112,7 +112,7 @@ $header_2_guest_name    = $game_array[0]['game_guest_' . $team_country . '_name'
 
 if (0 == $game_played)
 {
-    redirect('game_before_before.php?num=' . $get_num);
+    redirect('game_before_before.php?num=' . $num_get);
 }
 
 $home_score     = $game_array[0]['game_home_score'];
@@ -145,7 +145,7 @@ $sql = "SELECT `event_minute`,
         ON `surname_id`=`player_surname_id`
         LEFT JOIN `eventtype`
         ON `event_eventtype_id`=`eventtype_id`
-        WHERE `event_game_id`='$get_num'
+        WHERE `event_game_id`='$num_get'
         AND `event_" . $team_country . "_id`='$header_2_home_id'
         ORDER BY `event_minute` ASC";
 $home_event_sql = $mysqli->query($sql);
@@ -167,7 +167,7 @@ $sql = "SELECT `event_minute`,
         ON `surname_id`=`player_surname_id`
         LEFT JOIN `eventtype`
         ON `event_eventtype_id`=`eventtype_id`
-        WHERE `event_game_id`='$get_num'
+        WHERE `event_game_id`='$num_get'
         AND `event_" . $team_country . "_id`='$header_2_guest_id'
         ORDER BY `event_minute` ASC";
 
@@ -191,7 +191,7 @@ $sql = "SELECT `lineup_condition`,
         ON `surname_id`=`player_surname_id`
         LEFT JOIN `position`
         ON `lineup_position_id`=`position_id`
-        WHERE `lineup_game_id`='$get_num'
+        WHERE `lineup_game_id`='$num_get'
         AND `lineup_" . $team_country . "_id`='$header_2_home_id'
         ORDER BY `lineup_id` ASC";
 $home_player_sql = $mysqli->query($sql);
@@ -214,14 +214,14 @@ $sql = "SELECT `lineup_condition`,
         ON `surname_id`=`player_surname_id`
         LEFT JOIN `position`
         ON `lineup_position_id`=`position_id`
-        WHERE `lineup_game_id`='$get_num'
+        WHERE `lineup_game_id`='$num_get'
         AND `lineup_" . $team_country . "_id`='$header_2_guest_id'
         ORDER BY `lineup_id` ASC";
 $guest_player_sql = $mysqli->query($sql);
 
 $guest_player_array = $guest_player_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;
 
 include (__DIR__ . '/view/main.php');

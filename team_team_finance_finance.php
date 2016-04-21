@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
-    $get_num = $authorization_team_id;
+    $num_get = $authorization_team_id;
 }
 else
 {
@@ -15,7 +15,7 @@ else
 $sql = "SELECT `team_finance`,
                `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -71,7 +71,7 @@ $sql = "SELECT `finance_expense_agent`+
                `finance_income_tv`
         FROM `finance`
         WHERE `finance_season_id`='$igosja_season_id'
-        AND `finance_team_id`='$get_num'
+        AND `finance_team_id`='$num_get'
         LIMIT 1";
 $finance_sql = $mysqli->query($sql);
 
@@ -83,14 +83,14 @@ $sql = "SELECT `historyfinanceteam_date`,
         FROM `historyfinanceteam`
         LEFT JOIN `historytext`
         ON `historyfinanceteam_historytext_id`=`historytext_id`
-        WHERE `historyfinanceteam_team_id`='$get_num'
+        WHERE `historyfinanceteam_team_id`='$num_get'
         AND `historyfinanceteam_season_id`='$igosja_season_id'
         ORDER BY `historyfinanceteam_date` DESC";
 $history_sql = $mysqli->query($sql);
 
 $history_array = $history_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

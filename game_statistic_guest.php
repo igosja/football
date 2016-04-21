@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `game_home_team_id`
         FROM `game`
-        WHERE `game_id`='$get_num'
+        WHERE `game_id`='$num_get'
         LIMIT 1";
 $game_sql = $mysqli->query($sql);
 
@@ -84,7 +84,7 @@ $sql = "SELECT `game_guest_" . $team_country . "_id`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `position`
         ON `position_id`=`lineup_position_id`
-        WHERE `game_id`='$get_num'
+        WHERE `game_id`='$num_get'
         ORDER BY `lineup_id` ASC";
 $game_sql = $mysqli->query($sql);
 
@@ -98,7 +98,7 @@ $header_2_guest_name  = $game_array[0]['game_guest_' . $team_country . '_name'];
 
 if (0 == $game_played)
 {
-    redirect('game_before_before.php?num=' . $get_num);
+    redirect('game_before_before.php?num=' . $num_get);
 }
 
 $home_score     = $game_array[0]['game_home_score'];
@@ -116,7 +116,7 @@ else
     $header_2_shootout = '';
 }
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;
 
 include (__DIR__ . '/view/main.php');

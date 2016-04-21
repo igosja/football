@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `name_name`,
@@ -31,7 +31,7 @@ $sql = "SELECT `name_name`,
         ON `positionrole_position_id`=`position_id`
         LEFT JOIN `role`
         ON `positionrole_role_id`=`role_id`
-        WHERE `player_id`='$get_num'
+        WHERE `player_id`='$num_get'
         ORDER BY `positionrole_position_id` ASC";
 $player_sql = $mysqli->query($sql);
 
@@ -48,7 +48,7 @@ $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $player_name . ' ' . $player_surname;
 
 include (__DIR__ . '/view/main.php');

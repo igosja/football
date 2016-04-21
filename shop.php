@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_id))
 {
-    $get_num = $authorization_id;
+    $num_get = $authorization_id;
 }
 else
 {
@@ -30,7 +30,7 @@ elseif (isset($_GET['point']))
 {
     $sql = "SELECT `user_money`
             FROM `user`
-            WHERE `user_id`='$get_num'
+            WHERE `user_id`='$num_get'
             LIMIT 1";
     $user_sql = $mysqli->query($sql);
 
@@ -51,14 +51,14 @@ elseif (isset($_GET['point']))
         $sql = "UPDATE `user`
                 SET `user_money`=`user_money`-'1',
                     `user_money_training`=`user_money_training`+'1'
-                WHERE `user_id`='$get_num'
+                WHERE `user_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
 
         $sql = "INSERT INTO `historyfinanceuser`
                 SET `historyfinanceuser_date`=SYSDATE(),
                     `historyfinanceuser_sum`='-1',
-                    `historyfinanceuser_user_id`='$get_num'";
+                    `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
 
         $_SESSION['message_class']  = 'success';
@@ -76,7 +76,7 @@ elseif (isset($_GET['position']))
 {
     $sql = "SELECT `user_money`
             FROM `user`
-            WHERE `user_id`='$get_num'
+            WHERE `user_id`='$num_get'
             LIMIT 1";
     $user_sql = $mysqli->query($sql);
 
@@ -97,14 +97,14 @@ elseif (isset($_GET['position']))
         $sql = "UPDATE `user`
                 SET `user_money`=`user_money`-'5',
                     `user_money_position`=`user_money_position`+'1'
-                WHERE `user_id`='$get_num'
+                WHERE `user_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
 
         $sql = "INSERT INTO `historyfinanceuser`
                 SET `historyfinanceuser_date`=SYSDATE(),
                     `historyfinanceuser_sum`='-5',
-                    `historyfinanceuser_user_id`='$get_num'";
+                    `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
 
         $_SESSION['message_class']  = 'success';
@@ -131,7 +131,7 @@ elseif (isset($_GET['money']))
 
     $sql = "SELECT `user_money`
             FROM `user`
-            WHERE `user_id`='$get_num'
+            WHERE `user_id`='$num_get'
             LIMIT 1";
     $user_sql = $mysqli->query($sql);
 
@@ -151,14 +151,14 @@ elseif (isset($_GET['money']))
     {
         $sql = "UPDATE `user`
                 SET `user_money`=`user_money`-'10'
-                WHERE `user_id`='$get_num'
+                WHERE `user_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
 
         $sql = "INSERT INTO `historyfinanceuser`
                 SET `historyfinanceuser_date`=SYSDATE(),
                     `historyfinanceuser_sum`='-10',
-                    `historyfinanceuser_user_id`='$get_num'";
+                    `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
 
         $sql = "UPDATE `team`
@@ -224,7 +224,7 @@ elseif (isset($_POST['data']))
     $sql = "INSERT INTO `robokassa`
             SET `robokassa_date`=SYSDATE(),
                 `robokassa_sum`='$sum',
-                `robokassa_user_id`='$get_num'";
+                `robokassa_user_id`='$num_get'";
     $mysqli->query($sql);
 
     $IsTest         = 1;
@@ -258,7 +258,7 @@ elseif (isset($_POST['data']))
 
 $sql = "SELECT `user_money`
         FROM `user`
-        WHERE `user_id`='$get_num'
+        WHERE `user_id`='$num_get'
         LIMIT 1";
 $user_sql = $mysqli->query($sql);
 

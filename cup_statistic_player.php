@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournament_name`
         FROM `tournament`
-        WHERE `tournament_id`='$get_num'
+        WHERE `tournament_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -44,7 +44,7 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_game` DESC, `player_id` ASC
         LIMIT 5";
@@ -67,7 +67,7 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_win` DESC, `player_id` ASC
         LIMIT 5";
@@ -90,7 +90,7 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_best` DESC, `player_id` ASC
         LIMIT 5";
@@ -113,7 +113,7 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_goal` DESC, `player_id` ASC
         LIMIT 5";
@@ -136,7 +136,7 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_pass_scoring` DESC, `player_id` ASC
         LIMIT 5";
@@ -159,7 +159,7 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         AND `statisticplayer_shot`>'0'
         ORDER BY `statisticplayer_ontarget`/`statisticplayer_shot` DESC, `player_id` ASC
@@ -183,7 +183,7 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_red` DESC, `player_id` ASC
         LIMIT 5";
@@ -206,7 +206,7 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_yellow` DESC, `player_id` ASC
         LIMIT 5";
@@ -229,7 +229,7 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_distance` DESC, `player_id` ASC
         LIMIT 5";
@@ -237,7 +237,7 @@ $distance_sql = $mysqli->query($sql);
 
 $distance_array = $distance_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $tournament_name;
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

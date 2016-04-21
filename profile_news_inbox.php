@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_id))
 {
-    $get_num = $authorization_id;
+    $num_get = $authorization_id;
 }
 else
 {
@@ -20,7 +20,7 @@ $sql = "SELECT `inbox_id`,
         FROM `inbox`
         LEF JOIN `user`
         ON `user_id`=`inbox_sender_id`
-        WHERE `inbox_user_id`='$get_num'
+        WHERE `inbox_user_id`='$num_get'
         AND `inbox_support`='0'
         ORDER BY `inbox_date` DESC";
 $inbox_sql = $mysqli->query($sql);

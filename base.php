@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
-    $get_num = $authorization_team_id;
+    $num_get = $authorization_team_id;
 }
 else
 {
@@ -25,7 +25,7 @@ $sql = "SELECT `building_end_date`,
             WHERE `building_buildingtype_id`='1'
         ) AS `t1`
         ON `building_team_id`=`team_id`
-        WHERE `team_id`='$get_num'";
+        WHERE `team_id`='$num_get'";
 $base_sql = $mysqli->query($sql);
 
 $base_array = $base_sql->fetch_all(MYSQLI_ASSOC);
@@ -63,19 +63,19 @@ if (isset($_GET['level']) &&
             $sql = "INSERT INTO `building`
                     SET `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 30 DAY),
                         `building_buildingtype_id`='1',
-                        `building_team_id`='$get_num'";
+                        `building_team_id`='$num_get'";
             $mysqli->query($sql);
 
             $sql = "UPDATE `team`
                     SET `team_finance`=`team_finance`-'$price'
-                    WHERE `team_id`='$get_num'
+                    WHERE `team_id`='$num_get'
                     LIMIT 1";
             $mysqli->query($sql);
 
             $sql = "SELECT COUNT(`finance_id`) AS `count`
                     FROM `finance`
                     WHERE `finance_season_id`='$igosja_season_id'
-                    AND `finance_team_id`='$get_num'
+                    AND `finance_team_id`='$num_get'
                     LIMIT 1";
             $finance_sql = $mysqli->query($sql);
 
@@ -86,7 +86,7 @@ if (isset($_GET['level']) &&
             {
                 $sql = "INSERT INTO `finance`
                         SET `finance_expense_build`='$price',
-                            `finance_team_id`='$get_num',
+                            `finance_team_id`='$num_get',
                             `finance_season_id`='$igosja_season_id'";
                 $mysqli->query($sql);
             }
@@ -94,7 +94,7 @@ if (isset($_GET['level']) &&
             {
                 $sql = "UPDATE `finance`
                         SET `finance_expense_build`=`finance_expense_build`+'$price'
-                        WHERE `finance_team_id`='$get_num'
+                        WHERE `finance_team_id`='$num_get'
                         AND `finance_season_id`='$igosja_season_id'
                         LIMIT 1";
                 $mysqli->query($sql);
@@ -104,14 +104,14 @@ if (isset($_GET['level']) &&
                     SET `historyfinanceteam_date`=SYSDATE(),
                         `historyfinanceteam_historytext_id`='" .HISTORY_TEXT_EXPENCE_BUILD_TRAINING . "',
                         `historyfinanceteam_season_id`='$igosja_season_id',
-                        `historyfinanceteam_team_id`='$get_num',
+                        `historyfinanceteam_team_id`='$num_get',
                         `historyfinanceteam_value`='$price'";
             $mysqli->query($sql);
 
             $_SESSION['message_class']  = 'success';
             $_SESSION['message_text']   = 'Строительство началось успешно.';
 
-            redirect('team_team_information_condition.php?num=' . $get_num);
+            redirect('team_team_information_condition.php?num=' . $num_get);
         }
     }
     elseif (0 == $level)
@@ -128,13 +128,13 @@ if (isset($_GET['level']) &&
         {
             $sql = "UPDATE `team`
                     SET `team_training_level`=`team_training_level`-'1'
-                    WHERE `team_id`='$get_num'";
+                    WHERE `team_id`='$num_get'";
             $mysqli->query($sql);
 
             $_SESSION['message_class']  = 'success';
             $_SESSION['message_text']   = 'Строительство прошло успешно.';
 
-            redirect('team_team_information_condition.php?num=' . $get_num);
+            redirect('team_team_information_condition.php?num=' . $num_get);
         }
     }
 }

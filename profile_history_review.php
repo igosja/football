@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_id))
 {
-    $get_num = $authorization_id;
+    $num_get = $authorization_id;
 }
 else
 {
@@ -22,7 +22,7 @@ $sql = "SELECT SUM(`statisticuser_draw`) AS `draw`,
         FROM `statisticuser`
         LEFT JOIN `user`
         ON `user_id`=`statisticuser_user_id`
-        WHERE `statisticuser_user_id`='$get_num'";
+        WHERE `statisticuser_user_id`='$num_get'";
 $career_sql = $mysqli->query($sql);
 
 $career_array = $career_sql->fetch_all(MYSQLI_ASSOC);
@@ -39,7 +39,7 @@ $sql = "SELECT `user_buy_max`,
                `user_team_time_min`,
                `user_trophy`
         FROM `user`
-        WHERE `user_id`='$get_num'
+        WHERE `user_id`='$num_get'
         LIMIT 1";
 $summary_sql = $mysqli->query($sql);
 

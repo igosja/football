@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `country_name`
         FROM `country`
-        WHERE `country_id`='$get_num'
+        WHERE `country_id`='$num_get'
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
 
@@ -36,7 +36,7 @@ $sql = "SELECT `worldcup_place`,
         FROM `worldcup`
         LEFT JOIN `tournament`
         ON `worldcup_tournament_id`=`tournament_id`
-        WHERE `worldcup_country_id`='$get_num'
+        WHERE `worldcup_country_id`='$num_get'
         AND `worldcup_season_id`<'$igosja_season_id'
         ORDER BY `worldcup_season_id` DESC";
 $tournament_sql = $mysqli->query($sql);
@@ -48,14 +48,14 @@ $sql = "SELECT `history_date`,
         FROM `history`
         LEFT JOIN `user`
         ON `history_user_id`=`user_id`
-        WHERE `history_country_id`='$get_num'
+        WHERE `history_country_id`='$num_get'
         AND `history_historytext_id`='22'
         ORDER BY `history_date` DESC";
 $manager_sql = $mysqli->query($sql);
 
 $manager_array = $manager_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $country_name;
 
 include (__DIR__ . '/view/main.php');

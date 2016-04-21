@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_id))
 {
-    $get_num = $authorization_id;
+    $num_get = $authorization_id;
 }
 else
 {
@@ -47,7 +47,7 @@ if (isset($_POST['data']))
 
         if (0 == $count_user)
         {
-            redirect('profile_news_outbox.php?num=' . $get_num);
+            redirect('profile_news_outbox.php?num=' . $num_get);
         }
 
         $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
@@ -60,7 +60,7 @@ if (isset($_POST['data']))
                     `inbox_title`=?,
                     `inbox_text`=?,
                     `inbox_user_id`='$inbox_user_id',
-                    `inbox_sender_id`='$get_num'";
+                    `inbox_sender_id`='$num_get'";
         $prepare = $mysqli->prepare($sql);
         $prepare->bind_param('ss', $inbox_title, $inbox_text);
         $prepare->execute();
@@ -70,7 +70,7 @@ if (isset($_POST['data']))
         $_SESSION['message_text']   = 'Сообщение успешно отправлено.';
     }
 
-    redirect('profile_news_outbox.php?num=' . $get_num);
+    redirect('profile_news_outbox.php?num=' . $num_get);
 }
 
 $sql = "SELECT `inbox_id`,
@@ -82,7 +82,7 @@ $sql = "SELECT `inbox_id`,
         FROM `inbox`
         LEFT JOIN `user`
         ON `user_id`=`inbox_user_id`
-        WHERE `inbox_sender_id`='$get_num'
+        WHERE `inbox_sender_id`='$num_get'
         ORDER BY `inbox_date` DESC";
 $inbox_sql = $mysqli->query($sql);
 
@@ -92,7 +92,7 @@ $sql = "SELECT `user_id`,
                `user_login`
         FROM `user`
         WHERE `user_last_visit`>DATE_ADD(CURDATE(), INTERVAL -7 DAY)
-        AND `user_id` NOT IN ('0', '$get_num')
+        AND `user_id` NOT IN ('0', '$num_get')
         ORDER BY `user_login` ASC";
 $user_sql = $mysqli->query($sql);
 

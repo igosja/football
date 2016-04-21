@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournament_name`
         FROM `tournament`
-        WHERE `tournament_id`='$get_num'
+        WHERE `tournament_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -50,14 +50,14 @@ $sql = "SELECT DATEDIFF(`injury_end_date`, SYSDATE()) AS `day`,
         LEFT JOIN `standing`
         ON `standing_team_id`=`team_id`
         WHERE `injury_end_date`>SYSDATE()
-        AND `standing_tournament_id`='$get_num'
+        AND `standing_tournament_id`='$num_get'
         AND `standing_season_id`='$igosja_season_id'
         ORDER BY `team_id` ASC, `injury_id` ASC";
 $injury_sql = $mysqli->query($sql);
 
 $injury_array = $injury_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $tournament_name;
 
 include (__DIR__ . '/view/main.php');

@@ -5,11 +5,6 @@ function f_igosja_season_cup_game()
     global $igosja_season_id;
     global $mysqli;
 
-    $sql = "UPDATE `cupparticipant`
-            SET `cupparticipant_out`='-1'
-            WHERE `cupparticipant_out`='0'";
-    f_igosja_mysqli_query($sql);
-
     $sql = "SELECT `tournament_id`,
                    `tournament_country_id`
             FROM `tournament`

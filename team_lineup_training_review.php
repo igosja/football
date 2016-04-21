@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
-    $get_num = $authorization_team_id;
+    $num_get = $authorization_team_id;
 }
 else
 {
@@ -14,7 +14,7 @@ else
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -53,7 +53,7 @@ if (isset($_POST['data']))
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
-    redirect('team_lineup_training_review.php?num=' . $get_num);
+    redirect('team_lineup_training_review.php?num=' . $num_get);
 }
 
 $sql = "SELECT `name_name`,
@@ -72,7 +72,7 @@ $sql = "SELECT `name_name`,
         ON `surname_id`=`player_surname_id`
         LEFT JOIN `position`
         ON `position_id`=`player_position_id`
-        WHERE `player_team_id`='$get_num'
+        WHERE `player_team_id`='$num_get'
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
@@ -103,7 +103,7 @@ $attribute_sql = $mysqli->query($sql);
 
 $gk_attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

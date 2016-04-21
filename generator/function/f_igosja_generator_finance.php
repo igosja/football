@@ -84,14 +84,13 @@ function f_igosja_generator_finance()
         $staff_salary       = $team_array[$i]['staff_salary'];
         $standing_place     = $team_array[$i]['standing_place'];
         $training_level     = $team_array[$i]['team_training_level'];
-        $finance_tv         = 50000;
         $finance_attributes = (100 - $standing_place) * 10000 / 105;
         $finance_sponsor    = $finance_attributes;
         $finance_agent      = round($player_salary / 100);
         $finance_scout      = pow($training_level, 2) * 100;
         $finance_salary     = $player_salary + $staff_salary;
         $finance_base       = pow($school_level, 2) * 1000000 / 105 + pow($training_level, 2) * 1000000 / 105;
-        $finance            = $finance_tv + $finance_attributes + $finance_sponsor - $finance_agent - $finance_scout - $finance_salary - $finance_base;
+        $finance            = $finance_attributes + $finance_sponsor - $finance_agent - $finance_scout - $finance_salary - $finance_base;
 
         $sql = "UPDATE `team`
                 SET `team_finance`=`team_finance`+'$finance'
@@ -100,8 +99,7 @@ function f_igosja_generator_finance()
         f_igosja_mysqli_query($sql);
 
         $sql = "UPDATE `finance`
-                SET `finance_income_tv`=`finance_income_tv`+'$finance_tv',
-                    `finance_income_attributes`=`finance_income_attributes`+'$finance_attributes',
+                SET `finance_income_attributes`=`finance_income_attributes`+'$finance_attributes',
                     `finance_income_sponsor`=`finance_income_sponsor`+'$finance_sponsor',
                     `finance_expense_agent`=`finance_expense_agent`+'$finance_agent',
                     `finance_expense_scout`=`finance_expense_scout`+'$finance_scout',
@@ -113,8 +111,7 @@ function f_igosja_generator_finance()
         f_igosja_mysqli_query($sql);
 
         $sql = "INSERT INTO `historyfinanceteam` (`historyfinanceteam_date`, `historyfinanceteam_historytext_id`, `historyfinanceteam_season_id`, `historyfinanceteam_team_id`, `historyfinanceteam_value`)
-                VALUES (CURDATE(), '" . HISTORY_TEXT_INCOME_TV . "', '$igosja_season_id', '$team_id', '$finance_tv'),
-                       (CURDATE(), '" . HISTORY_TEXT_INCOME_ATTRIBUTE . "', '$igosja_season_id', '$team_id', '$finance_attributes'),
+                VALUES (CURDATE(), '" . HISTORY_TEXT_INCOME_ATTRIBUTE . "', '$igosja_season_id', '$team_id', '$finance_attributes'),
                        (CURDATE(), '" . HISTORY_TEXT_INCOME_SPONSOR . "', '$igosja_season_id', '$team_id', '$finance_sponsor'),
                        (CURDATE(), '" . HISTORY_TEXT_EXPENCE_AGENT . "', '$igosja_season_id', '$team_id', '$finance_agent'),
                        (CURDATE(), '" . HISTORY_TEXT_EXPENCE_SCOUT . "', '$igosja_season_id', '$team_id', '$finance_scout'),

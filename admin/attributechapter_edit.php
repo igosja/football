@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `attributechapter_name`
         FROM `attributechapter`
-        WHERE `attributechapter_id`='$get_num'
+        WHERE `attributechapter_id`='$num_get'
         LIMIT 1";
 $chapter_sql = $mysqli->query($sql);
 
@@ -32,7 +32,7 @@ if (isset($_POST['chapter_name']))
 
     $sql = "UPDATE `attributechapter` 
             SET `attributechapter_name`=?
-            WHERE `attributechapter_id`='$get_num'
+            WHERE `attributechapter_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('s', $chapter_name);

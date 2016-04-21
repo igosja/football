@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `city_country_id`, `city_name`
         FROM `city`
-        WHERE `city_id`='$get_num'
+        WHERE `city_id`='$num_get'
         LIMIT 1";
 $city_sql = $mysqli->query($sql);
 
@@ -33,7 +33,7 @@ if (isset($_POST['country_id']))
     $sql = "UPDATE `city` 
             SET `city_name`=?, 
                 `city_country_id`=?
-            WHERE `city_id`='$get_num'
+            WHERE `city_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('si', $city_name, $country_id);

@@ -31,7 +31,7 @@ f_igosja_generator_league_standing();
 f_igosja_generator_world_cup_standing();
 f_igosja_generator_standing_history();
 f_igosja_generator_cup_next_stage();
-f_igosja_generator_champions_league_next_stage();
+f_igosja_generator_league_next_stage();
 f_igosja_generator_game_series();
 f_igosja_generator_team_series_to_record();
 f_igosja_generator_country_series_to_record();
@@ -51,6 +51,7 @@ f_igosja_generator_tournament_reputation();
 f_igosja_generator_user_reputation();
 f_igosja_generator_user_time_in_club();
 f_igosja_generator_finance();
+f_igosja_generator_finance_tv();
 f_igosja_generator_make_played();
 f_igosja_generator_scout();
 f_igosja_generator_field_worse();
@@ -73,10 +74,18 @@ if (0 == $count_shedule)
     include (__DIR__ . '/../include/season.php');
 
     f_igosja_season_player_age();
+    f_igosja_season_participant_to_winner();
+    f_igosja_season_user_worldcup_trophy();
     f_igosja_season_user_championship_trophy();
     f_igosja_season_user_cup_trophy();
+    f_igosja_season_user_league_trophy();
+    f_igosja_season_worldcup_most_titled_record();
+    f_igosja_season_worldcup_position_record();
     f_igosja_season_championship_most_titled_record();
+    f_igosja_season_championship_position_record();
+    f_igosja_season_league_most_titled_record();
     f_igosja_season_cup_most_titled_record();
+    f_igosja_season_league_prize();
     f_igosja_season_championship_prize();
     f_igosja_season_cup_prize();
     f_igosja_season_national_coach();
@@ -95,6 +104,6 @@ if (0 == $count_shedule)
 
 f_igosja_generator_site_open();
 
-print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
-       <br/>Запросов к базе данных: ' . $count_sql . '
-       <br/>Потребление памяти: ' . number_format(memory_get_usage(), 0, ",", " ") . ' Б';
+print '<br />Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
+       <br />Запросов к базе данных: ' . $count_sql . '
+       <br />Потребление памяти: ' . number_format(memory_get_usage(), 0, ",", " ") . ' Б';

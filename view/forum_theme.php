@@ -47,12 +47,12 @@
                 <tr>
                     <td class="w25">
                         <strong><?= $head_array[0]['user_login']; ?></strong>
-                        <br/>
+                        <br />
                         <a href="team_team_review_profile.php?num=<?= $head_array[0]['team_id']; ?>">
                             <?= $head_array[0]['team_name']; ?>
                             (<?= $head_array[0]['city_name']; ?>, <?= $head_array[0]['country_name']; ?>)
                         </a>
-                        <br/>
+                        <br />
                         <?php if (isset($authorization_id) && $authorization_id != $head_array[0]['user_id']) { ?>
                             <button>
                                 <a href="profile_news_outbox.php?answer=<?= $head_array[0]['user_id']; ?>">
@@ -69,12 +69,12 @@
                     <tr>
                         <td class="w25">
                             <strong><?= $forum_array[$i]['user_login']; ?></strong>
-                            <br/>
+                            <br />
                             <a href="team_team_review_profile.php?num=<?= $forum_array[$i]['team_id']; ?>">
                                 <?= $forum_array[$i]['team_name']; ?>
                                 (<?= $forum_array[$i]['city_name']; ?>, <?= $forum_array[$i]['country_name']; ?>)
                             </a>
-                            <br/>
+                            <br />
                             <?php if (isset($authorization_id) && $authorization_id != $forum_array[$i]['user_id']) { ?>
                                 <button>
                                     <a href="profile_news_outbox.php?answer=<?= $forum_array[$i]['user_id']; ?>">

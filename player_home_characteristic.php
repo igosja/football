@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `country_id`,
@@ -51,13 +51,13 @@ $sql = "SELECT `country_id`,
             ON `lineup_game_id`=`game_id`
             LEFT JOIN `shedule`
             ON `shedule_id`=`game_shedule_id`
-            WHERE `lineup_player_id`='$get_num'
+            WHERE `lineup_player_id`='$num_get'
             AND `game_played`='1'
             ORDER BY `shedule_date` DESC
             LIMIT 5
         ) AS `t1`
         ON `lineup_player_id`=`player_id`
-        WHERE `player_id`='$get_num'
+        WHERE `player_id`='$num_get'
         LIMIT 1";
 $player_sql = $mysqli->query($sql);
 
@@ -82,7 +82,7 @@ $sql = "SELECT `attribute_name`,
         ON `attribute_id`=`playerattribute_attribute_id`
         LEFT JOIN `attributechapter`
         ON `attributechapter_id`=`attribute_attributechapter_id`
-        WHERE `playerattribute_player_id`='$get_num'
+        WHERE `playerattribute_player_id`='$num_get'
         ORDER BY `attributechapter_id` ASC, `attribute_id` ASC";
 $attribute_sql = $mysqli->query($sql);
 
@@ -107,7 +107,7 @@ $sql = "SELECT `statisticplayer_best`,
         ON `tournament_id`=`statisticplayer_tournament_id`
         LEFT JOIN `tournamenttype`
         ON `tournamenttype_id`=`tournament_tournamenttype_id`
-        WHERE `statisticplayer_player_id`='$get_num'
+        WHERE `statisticplayer_player_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `tournament_id` ASC";
 $statistic_sql = $mysqli->query($sql);
@@ -128,7 +128,7 @@ $sql = "SELECT SUM(`statisticplayer_best`) AS `count_best`,
                SUM(`statisticplayer_shot`) AS `count_shot`,
                SUM(`statisticplayer_yellow`) AS `count_yellow`
         FROM `statisticplayer`
-        WHERE `statisticplayer_player_id`='$get_num'
+        WHERE `statisticplayer_player_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'";
 $total_statistic_sql = $mysqli->query($sql);
 
@@ -138,7 +138,7 @@ if (isset($authorization_team_id))
 {
     $sql = "SELECT COUNT(`scout_id`) AS `count`
             FROM `scout`
-            WHERE `scout_player_id`='$get_num'
+            WHERE `scout_player_id`='$num_get'
             AND `scout_team_id`='$authorization_team_id'";
     $scout_sql = $mysqli->query($sql);
 
@@ -150,7 +150,7 @@ else
     $count_scout = 0;
 }
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $player_name . ' ' . $player_surname;;
 
 include (__DIR__ . '/view/main.php');

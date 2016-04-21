@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_country_id))
 {
-    $get_num = $authorization_country_id;
+    $num_get = $authorization_country_id;
 }
 else
 {
@@ -14,7 +14,7 @@ else
 
 $sql = "SELECT `country_name`
         FROM `country`
-        WHERE `country_id`='$get_num'
+        WHERE `country_id`='$num_get'
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
 
@@ -41,7 +41,7 @@ if (isset($_POST['data']))
 
         $sql = "UPDATE `country`
                 SET `country_penalty_player_id_" . $penalty_id . "`='$player_id'
-                WHERE `country_id`='$get_num'
+                WHERE `country_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
     }
@@ -49,7 +49,7 @@ if (isset($_POST['data']))
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
-    redirect('national_lineup_tactic_penalty.php?num=' . $get_num);
+    redirect('national_lineup_tactic_penalty.php?num=' . $num_get);
 }
 
 $sql = "SELECT `composure`,
@@ -83,7 +83,7 @@ $sql = "SELECT `composure`,
         ON `playerposition_player_id`=`player_id`
         LEFT JOIN `position`
         ON `playerposition_position_id`=`position_id`
-        WHERE `player_national_id`='$get_num'
+        WHERE `player_national_id`='$num_get'
         AND `playerposition_value`='100'
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
@@ -114,7 +114,7 @@ $sql = "SELECT `name_name`,
             WHERE `playerattribute_attribute_id`='26'
         ) AS `t2`
         ON `t2`.`playerattribute_player_id`=`player_id`
-        WHERE `player_national_id`='$get_num'
+        WHERE `player_national_id`='$num_get'
         ORDER BY `penalty` DESC, `composure` DESC, `player_id` ASC";
 $penaltyplayer_sql = $mysqli->query($sql);
 
@@ -128,13 +128,13 @@ $sql = "SELECT `country_penalty_player_id_1`,
                `country_penalty_player_id_6`,
                `country_penalty_player_id_7`
         FROM `country`
-        WHERE `country_id`='$get_num'
+        WHERE `country_id`='$num_get'
         LIMIT 1";
 $penalty_sql = $mysqli->query($sql);
 
 $penalty_array = $penalty_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $country_name;
 
 include (__DIR__ . '/view/main.php');

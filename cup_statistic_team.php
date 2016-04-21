@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournament_name`
         FROM `tournament`
-        WHERE `tournament_id`='$get_num'
+        WHERE `tournament_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -35,7 +35,7 @@ $sql = "SELECT `statisticteam_goal`,
         FROM `statisticteam`
         LEFT JOIN `team`
         ON `team_id`=`statisticteam_team_id`
-        WHERE `statisticteam_tournament_id`='$get_num'
+        WHERE `statisticteam_tournament_id`='$num_get'
         AND `statisticteam_season_id`='$igosja_season_id'
         ORDER BY `statisticteam_goal` DESC, `team_id` ASC
         LIMIT 5";
@@ -49,7 +49,7 @@ $sql = "SELECT `statisticteam_pass`,
         FROM `statisticteam`
         LEFT JOIN `team`
         ON `team_id`=`statisticteam_team_id`
-        WHERE `statisticteam_tournament_id`='$get_num'
+        WHERE `statisticteam_tournament_id`='$num_get'
         AND `statisticteam_season_id`='$igosja_season_id'
         ORDER BY `statisticteam_pass` DESC, `team_id` ASC
         LIMIT 5";
@@ -63,7 +63,7 @@ $sql = "SELECT `statisticteam_red`,
         FROM `statisticteam`
         LEFT JOIN `team`
         ON `team_id`=`statisticteam_team_id`
-        WHERE `statisticteam_tournament_id`='$get_num'
+        WHERE `statisticteam_tournament_id`='$num_get'
         AND `statisticteam_season_id`='$igosja_season_id'
         ORDER BY `statisticteam_red` DESC, `team_id` ASC
         LIMIT 5";
@@ -77,7 +77,7 @@ $sql = "SELECT `statisticteam_yellow`,
         FROM `statisticteam`
         LEFT JOIN `team`
         ON `team_id`=`statisticteam_team_id`
-        WHERE `statisticteam_tournament_id`='$get_num'
+        WHERE `statisticteam_tournament_id`='$num_get'
         AND `statisticteam_season_id`='$igosja_season_id'
         ORDER BY `statisticteam_yellow` DESC, `team_id` ASC
         LIMIT 5";
@@ -91,7 +91,7 @@ $sql = "SELECT `team_id`,
         FROM `series`
         LEFT JOIN `team`
         ON `team_id`=`series_team_id`
-        WHERE `series_tournament_id`='$get_num'
+        WHERE `series_tournament_id`='$num_get'
         AND `series_seriestype_id`='" . SERIES_WIN . "'
         ORDER BY `series_value` DESC, `team_id` ASC
         LIMIT 5";
@@ -105,7 +105,7 @@ $sql = "SELECT `series_value`,
         FROM `series`
         LEFT JOIN `team`
         ON `team_id`=`series_team_id`
-        WHERE `series_tournament_id`='$get_num'
+        WHERE `series_tournament_id`='$num_get'
         AND `series_seriestype_id`='" . SERIES_NO_LOOSE . "'
         ORDER BY `series_value` DESC, `team_id` ASC
         LIMIT 5";
@@ -119,7 +119,7 @@ $sql = "SELECT `series_value`,
         FROM `series`
         LEFT JOIN `team`
         ON `team_id`=`series_team_id`
-        WHERE `series_tournament_id`='$get_num'
+        WHERE `series_tournament_id`='$num_get'
         AND `series_seriestype_id`='" . SERIES_LOOSE . "'
         ORDER BY `series_value` DESC, `team_id` ASC
         LIMIT 5";
@@ -133,7 +133,7 @@ $sql = "SELECT `series_value`,
         FROM `series`
         LEFT JOIN `team`
         ON `team_id`=`series_team_id`
-        WHERE `series_tournament_id`='$get_num'
+        WHERE `series_tournament_id`='$num_get'
         AND `series_seriestype_id`='" . SERIES_NO_PASS . "'
         ORDER BY `series_value` DESC, `team_id` ASC
         LIMIT 5";
@@ -141,7 +141,7 @@ $nopass_sql = $mysqli->query($sql);
 
 $nopass_array = $nopass_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $tournament_name;
 
 include (__DIR__ . '/view/main.php');

@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `position_coordinate_x`, `position_coordinate_y`, `position_available`, `position_description`, `position_name`
         FROM `position`
-        WHERE `position_id`='$get_num'
+        WHERE `position_id`='$num_get'
         LIMIT 1";
 $position_sql = $mysqli->query($sql);
 
@@ -40,7 +40,7 @@ if (isset($_POST['position_name']))
                 `position_available`=?,
                 `position_coordinate_x`=?,
                 `position_coordinate_y`=?
-            WHERE `position_id`='$get_num'
+            WHERE `position_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('ssiii', $position_name, $position_description, $position_available, $position_coordinate_x, $position_coordinate_y);
@@ -48,7 +48,7 @@ if (isset($_POST['position_name']))
     $prepare->close();
 
     $sql = "DELETE FROM `positionrole`
-            WHERE `positionrole_position_id`='$get_num'";
+            WHERE `positionrole_position_id`='$num_get'";
     $mysqli->query($sql);
 
     $sql_array = array();
@@ -56,7 +56,7 @@ if (isset($_POST['position_name']))
     foreach($_POST['role'] as $key=>$value)
     {
         $value       = (int) $value;
-        $sql_array[] = "('$get_num', '$value')";
+        $sql_array[] = "('$num_get', '$value')";
     }
 
     $sql = "INSERT INTO `positionrole` (`positionrole_position_id`, `positionrole_role_id`)
@@ -83,7 +83,7 @@ $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `positionrole_role_id`
         FROM `positionrole`
-        WHERE `positionrole_position_id`='$get_num'
+        WHERE `positionrole_position_id`='$num_get'
         ORDER BY `positionrole_id` ASC";
 $positionrole_sql = $mysqli->query($sql);
 

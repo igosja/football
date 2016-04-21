@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `stadiumquality_name`
         FROM `stadiumquality`
-        WHERE `stadiumquality_id`='$get_num'
+        WHERE `stadiumquality_id`='$num_get'
         LIMIT 1";
 $stadiumquality_sql = $mysqli->query($sql);
 
@@ -32,7 +32,7 @@ if (isset($_POST['stadiumquality_name']))
 
     $sql = "UPDATE `stadiumquality` 
             SET `stadiumquality_name`=?
-            WHERE `stadiumquality_id`='$get_num'
+            WHERE `stadiumquality_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('s', $stadiumquality_name);

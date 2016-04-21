@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournament_name`
         FROM `tournament`
-        WHERE `tournament_id`='$get_num'
+        WHERE `tournament_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -36,7 +36,7 @@ $sql = "SELECT `team_id`,
         FROM `standing`
         LEFT JOIN `team`
         ON `standing_team_id`=`team_id`
-        WHERE `standing_tournament_id`='$get_num'
+        WHERE `standing_tournament_id`='$num_get'
         AND `standing_season_id`='$igosja_season_id'
         ORDER BY `team_name` ASC";
 $team_sql = $mysqli->query($sql);
@@ -54,7 +54,7 @@ for ($i=0; $i<$count_team; $i++)
     $sql = "SELECT `standinghistory_place`
             FROM `standinghistory`
             WHERE `standinghistory_team_id`='$team_id'
-            AND `standinghistory_tournament_id`='$get_num'
+            AND `standinghistory_tournament_id`='$num_get'
             ORDER BY `standinghistory_stage_id` ASC";
     $position_sql = $mysqli->query($sql);
 
@@ -77,7 +77,7 @@ $script_stage = array();
 
 $sql = "SELECT MAX(`standinghistory_stage_id`) AS `standinghistory_stage_id`
         FROM `standinghistory`
-        WHERE `standinghistory_tournament_id`='$get_num'";
+        WHERE `standinghistory_tournament_id`='$num_get'";
 $standing_sql = $mysqli->query($sql);
 
 $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
@@ -91,7 +91,7 @@ for ($i=1; $i<=$max_stage; $i++)
 
 $script_stage = implode(', ', $script_stage);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $tournament_name;
 
 include (__DIR__ . '/view/main.php');

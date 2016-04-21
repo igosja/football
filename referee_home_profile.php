@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `average_mark`,
@@ -38,10 +38,10 @@ $sql = "SELECT `average_mark`,
                    SUM(`statisticreferee_yellow`) AS `count_yellow`,
                    `statisticreferee_referee_id`
             FROM `statisticreferee`
-            WHERE `statisticreferee_referee_id`='$get_num'
+            WHERE `statisticreferee_referee_id`='$num_get'
         ) AS `t1`
         ON `statisticreferee_referee_id`=`referee_id`
-        WHERE `referee_id`='$get_num'";
+        WHERE `referee_id`='$num_get'";
 $referee_sql = $mysqli->query($sql);
 
 $count_referee = $referee_sql->num_rows;
@@ -88,7 +88,7 @@ $sql = "SELECT `game_guest_country_id`,
         ON `t3`.`country_id`=`game_home_country_id`
         LEFT JOIN `country` AS `t4`
         ON `t4`.`country_id`=`game_guest_country_id`
-        WHERE `game_referee_id`='$get_num'
+        WHERE `game_referee_id`='$num_get'
         AND `game_played`='1'
         ORDER BY `shedule_date` DESC, `game_id` DESC
         LIMIT 10";
@@ -96,7 +96,7 @@ $game_sql = $mysqli->query($sql);
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $referee_name . ' ' . $referee_surname;
 
 include (__DIR__ . '/view/main.php');

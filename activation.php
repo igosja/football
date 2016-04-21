@@ -25,7 +25,7 @@ if ($code != $check)
     $mysqli->query($sql);
 
     $_SESSION['message_class']  = 'error';
-    $_SESSION['message_text']   = 'Активировать профиль не удалось.<br/>Зарегистрируйтесь повторно.';
+    $_SESSION['message_text']   = 'Активировать профиль не удалось.<br />Зарегистрируйтесь повторно.';
 
     redirect('index.php');
 }

@@ -4,17 +4,17 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `newstheme_name`,
                `newstheme_text`
         FROM `newstheme`
-        WHERE `newstheme_id`='$get_num'
+        WHERE `newstheme_id`='$num_get'
         LIMIT 1";
 $newstheme_sql = $mysqli->query($sql);
 
@@ -35,7 +35,7 @@ if (isset($_POST['newstheme_name']))
     $sql = "UPDATE `newstheme` 
             SET `newstheme_name`=?,
                 `newstheme_text`=?
-            WHERE `newstheme_id`='$get_num'
+            WHERE `newstheme_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('ss', $newstheme_name, $newstheme_text);

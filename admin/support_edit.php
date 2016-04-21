@@ -4,18 +4,18 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `inbox_sender_id`,
                `inbox_title`,
                `inbox_text`
         FROM `inbox`
-        WHERE `inbox_id`='$get_num'
+        WHERE `inbox_id`='$num_get'
         LIMIT 1";
 $inbox_sql = $mysqli->query($sql);
 
@@ -50,7 +50,7 @@ if (isset($_POST['inbox_text']))
 
     $sql = "UPDATE `inbox`
             SET `inbox_read`='1'
-            WHERE `inbox_id`='$get_num'
+            WHERE `inbox_id`='$num_get'
             LIMIT 1";
     $mysqli->query($sql);
 

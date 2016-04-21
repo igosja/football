@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `country_name`,
@@ -28,7 +28,7 @@ $sql = "SELECT `country_name`,
         ON `team_city_id`=`city_id`
         LEFT JOIN `stadiumquality`
         ON `stadiumquality_id`=`stadium_stadiumquality_id`
-        WHERE `city_country_id`='$get_num'
+        WHERE `city_country_id`='$num_get'
         ORDER BY `stadium_capacity` DESC
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
@@ -45,7 +45,7 @@ $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 $country_name = $country_array[0]['country_name'];
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $country_name;
 
 include (__DIR__ . '/view/main.php');

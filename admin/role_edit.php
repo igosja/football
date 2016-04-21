@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `role_description`, `role_name`, `role_short`
         FROM `role`
-        WHERE `role_id`='$get_num'
+        WHERE `role_id`='$num_get'
         LIMIT 1";
 $role_sql = $mysqli->query($sql);
 
@@ -36,7 +36,7 @@ if (isset($_POST['role_name']))
             SET `role_name`=?,
                 `role_description`=?,
                 `role_short`=?
-            WHERE `role_id`='$get_num'
+            WHERE `role_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('sss', $role_name, $role_description, $role_short);

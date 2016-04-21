@@ -4,18 +4,18 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `forumthemegroup_description`,
                `forumthemegroup_forumchapter_id`,
                `forumthemegroup_name`
         FROM `forumthemegroup`
-        WHERE `forumthemegroup_id`='$get_num'
+        WHERE `forumthemegroup_id`='$num_get'
         LIMIT 1";
 $chapter_sql = $mysqli->query($sql);
 
@@ -38,7 +38,7 @@ if (isset($_POST['chapter_name']))
             SET `forumthemegroup_name`=?,
                 `forumthemegroup_description`=?,
                 `forumthemegroup_forumchapter_id`=?
-            WHERE `forumthemegroup_id`='$get_num'
+            WHERE `forumthemegroup_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('ssi', $chapter_name, $chapter_description, $chapter_id);

@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournament_name`
         FROM `tournament`
-        WHERE `tournament_id`='$get_num'
+        WHERE `tournament_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -42,7 +42,7 @@ else
             LEFT JOIN `game`
             ON `game_shedule_id`=`shedule_id`
             WHERE `shedule_date`<='$today'
-            AND `game_tournament_id`='$get_num'
+            AND `game_tournament_id`='$num_get'
             AND `shedule_season_id`='$igosja_season_id'
             ORDER BY `shedule_date` DESC
             LIMIT 1";
@@ -57,7 +57,7 @@ else
                 LEFT JOIN `game`
                 ON `game_shedule_id`=`shedule_id`
                 WHERE `shedule_date`>'$today'
-                AND `game_tournament_id`='$get_num'
+                AND `game_tournament_id`='$num_get'
                 AND `shedule_season_id`='$igosja_season_id'
                 ORDER BY `shedule_date` ASC
                 LIMIT 1";
@@ -83,7 +83,7 @@ $sql = "SELECT `game_id`,
         ON `home_team`.`team_id`=`game_home_team_id`
         LEFT JOIN `team` AS `guest_team`
         ON `guest_team`.`team_id`=`game_guest_team_id`
-        WHERE `game_tournament_id`='$get_num'
+        WHERE `game_tournament_id`='$num_get'
         AND `game_shedule_id`='$shedule_id'
         ORDER BY `game_id` ASC";
 $game_sql = $mysqli->query($sql);
@@ -98,7 +98,7 @@ $sql = "SELECT `shedule_date`,
         ON `game_stage_id`=`stage_id`
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
-        WHERE `game_tournament_id`='$get_num'
+        WHERE `game_tournament_id`='$num_get'
         AND `shedule_season_id`='$igosja_season_id'
         GROUP BY `shedule_id`
         ORDER BY `shedule_date` ASC";
@@ -106,7 +106,7 @@ $shedule_sql = $mysqli->query($sql);
 
 $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $tournament_name;
 
 include (__DIR__ . '/view/main.php');

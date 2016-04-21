@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `country_continent_id`, `country_name`
         FROM `country`
-        WHERE `country_id`='$get_num'
+        WHERE `country_id`='$num_get'
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
 
@@ -34,7 +34,7 @@ if (isset($_POST['continent_id']))
     $sql = "UPDATE `country` 
             SET `country_name`=?, 
                 `country_continent_id`=?
-            WHERE `country_id`='$get_num'
+            WHERE `country_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('si', $country_name, $continent_id);
@@ -43,17 +43,17 @@ if (isset($_POST['continent_id']))
 
     if ('image/png' == $_FILES['country_flag_90']['type'])
     {
-        copy($_FILES['country_flag_90']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/flag/90/' . $get_num . '.png');
+        copy($_FILES['country_flag_90']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/flag/90/' . $num_get . '.png');
     }
 
     if ('image/png' == $_FILES['country_flag_50']['type'])
     {
-        copy($_FILES['country_flag_50']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/flag/50/' . $get_num . '.png');
+        copy($_FILES['country_flag_50']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/flag/50/' . $num_get . '.png');
     }
 
     if ('image/png' == $_FILES['country_flag_12']['type'])
     {
-        copy($_FILES['country_flag_12']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/flag/12/' . $get_num . '.png');
+        copy($_FILES['country_flag_12']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/flag/12/' . $num_get . '.png');
     }
 
     redirect('country_list.php');

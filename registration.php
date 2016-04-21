@@ -61,7 +61,7 @@ if (isset($_POST['data']))
     $mail       = mail($registration_email, $subject, $message, $from);
 
     $_SESSION['message_class']  = 'success';
-    $_SESSION['message_text']   = 'Профиль создан успешно.<br/>Для завершения регистрации перейдите по ссылке, которая выслана вам на электронную почту.';
+    $_SESSION['message_text']   = 'Профиль создан успешно.<br />Для завершения регистрации перейдите по ссылке, которая выслана вам на электронную почту.';
 
     redirect('registration.php');
 }

@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_country_id))
 {
-    $get_num = $authorization_country_id;
+    $num_get = $authorization_country_id;
 }
 else
 {
@@ -14,7 +14,7 @@ else
 
 $sql = "SELECT `country_name`
         FROM `country`
-        WHERE `country_id`='$get_num'
+        WHERE `country_id`='$num_get'
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
 
@@ -41,7 +41,7 @@ if (isset($_POST['data']))
 
         $sql = "UPDATE `country`
                 SET `country_corner_left_player_id_" . $corner_left . "`='$player_id'
-                WHERE `country_id`='$get_num'
+                WHERE `country_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
     }
@@ -53,7 +53,7 @@ if (isset($_POST['data']))
 
         $sql = "UPDATE `country`
                 SET `country_corner_right_player_id_" . $corner_right . "`='$player_id'
-                WHERE `country_id`='$get_num'
+                WHERE `country_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
     }
@@ -65,7 +65,7 @@ if (isset($_POST['data']))
 
         $sql = "UPDATE `country`
                 SET `country_freekick_left_player_id_" . $freekick_left . "`='$player_id'
-                WHERE `country_id`='$get_num'
+                WHERE `country_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
     }
@@ -77,7 +77,7 @@ if (isset($_POST['data']))
 
         $sql = "UPDATE `country`
                 SET `country_freekick_right_player_id_" . $freekick_right . "`='$player_id'
-                WHERE `country_id`='$get_num'
+                WHERE `country_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
     }
@@ -89,7 +89,7 @@ if (isset($_POST['data']))
 
         $sql = "UPDATE `country`
                 SET `country_out_left_player_id_" . $out_left . "`='$player_id'
-                WHERE `country_id`='$get_num'
+                WHERE `country_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
     }
@@ -101,7 +101,7 @@ if (isset($_POST['data']))
 
         $sql = "UPDATE `country`
                 SET `country_out_right_player_id_" . $out_right . "`='$player_id'
-                WHERE `country_id`='$get_num'
+                WHERE `country_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
     }
@@ -109,7 +109,7 @@ if (isset($_POST['data']))
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
-    redirect('national_lineup_tactic_standard.php?num=' . $get_num);
+    redirect('national_lineup_tactic_standard.php?num=' . $num_get);
 }
 
 $sql = "SELECT `corner`,
@@ -152,7 +152,7 @@ $sql = "SELECT `corner`,
         ON `playerposition_player_id`=`player_id`
         LEFT JOIN `position`
         ON `playerposition_position_id`=`position_id`
-        WHERE `player_national_id`='$get_num'
+        WHERE `player_national_id`='$num_get'
         ORDER BY `position_id` ASC";
 $player_sql = $mysqli->query($sql);
 
@@ -174,7 +174,7 @@ $sql = "SELECT `name_name`,
             WHERE `playerattribute_attribute_id`='14'
         ) AS `t3`
         ON `t3`.`playerattribute_player_id`=`player_id`
-        WHERE `player_national_id`='$get_num'
+        WHERE `player_national_id`='$num_get'
         ORDER BY `corner` DESC";
 $corner_sql = $mysqli->query($sql);
 
@@ -196,7 +196,7 @@ $sql = "SELECT `name_name`,
             WHERE `playerattribute_attribute_id`='6'
         ) AS `t3`
         ON `t3`.`playerattribute_player_id`=`player_id`
-        WHERE `player_national_id`='$get_num'
+        WHERE `player_national_id`='$num_get'
         ORDER BY `freekick` DESC";
 $freekick_sql = $mysqli->query($sql);
 
@@ -218,7 +218,7 @@ $sql = "SELECT `name_name`,
             WHERE `playerattribute_attribute_id`='1'
         ) AS `t3`
         ON `t3`.`playerattribute_player_id`=`player_id`
-        WHERE `player_national_id`='$get_num'
+        WHERE `player_national_id`='$num_get'
         ORDER BY `out` DESC";
 $out_sql = $mysqli->query($sql);
 
@@ -255,13 +255,13 @@ $sql = "SELECT `country_corner_left_player_id_1`,
                `country_out_right_player_id_4`,
                `country_out_right_player_id_5`
         FROM `country`
-        WHERE `country_id`='$get_num'
+        WHERE `country_id`='$num_get'
         LIMIT 1";
 $standard_sql = $mysqli->query($sql);
 
 $standard_array = $standard_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $country_name;
 
 include (__DIR__ . '/view/main.php');

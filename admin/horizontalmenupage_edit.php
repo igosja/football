@@ -4,18 +4,18 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `horizontalmenuchapter_id`, `horizontalmenupage_name`
         FROM `horizontalmenupage`
         LEFT JOIN `horizontalmenuchapter`
         ON `horizontalmenuchapter_id`=`horizontalmenupage_horizontalmenuchapter_id`
-        WHERE `horizontalmenupage_id`='$get_num'
+        WHERE `horizontalmenupage_id`='$num_get'
         LIMIT 1";
 $horizontalmenupage_sql = $mysqli->query($sql);
 
@@ -35,7 +35,7 @@ if (isset($_POST['horizontalmenupage_name']))
     $sql = "UPDATE `horizontalmenupage` 
             SET `horizontalmenupage_name`=?,
                 `horizontalmenupage_horizontalmenuchapter_id`=?
-            WHERE `horizontalmenupage_id`='$get_num'
+            WHERE `horizontalmenupage_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('si', $horizontalmenupage_name, $chapter_id);

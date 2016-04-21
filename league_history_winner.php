@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournament_name`
         FROM `tournament`
-        WHERE `tournament_id`='$get_num'
+        WHERE `tournament_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -41,7 +41,7 @@ $sql = "SELECT `leagueparticipant_season_id`,
         ON `country_id`=`city_country_id`
         WHERE `leagueparticipant_out`='" . CUP_WINNER_STAGE . "'
         AND `leagueparticipant_season_id`<'$igosja_season_id'
-        AND `leagueparticipant_tournament_id`='$get_num'
+        AND `leagueparticipant_tournament_id`='$num_get'
         ORDER BY `leagueparticipant_season_id` DESC";
 $winner_sql = $mysqli->query($sql);
 
@@ -59,13 +59,13 @@ $sql = "SELECT `team_id`,
         ON `country_id`=`city_country_id`
         WHERE `leagueparticipant_out`='" . CUP_FINAL_STAGE . "'
         AND `leagueparticipant_season_id`<'$igosja_season_id'
-        AND `leagueparticipant_tournament_id`='$get_num'
+        AND `leagueparticipant_tournament_id`='$num_get'
         ORDER BY `leagueparticipant_season_id` DESC";
 $looser_sql = $mysqli->query($sql);
 
 $looser_array = $looser_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $tournament_name;
 
 include (__DIR__ . '/view/main.php');

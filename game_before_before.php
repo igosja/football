@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `game_home_team_id`,
@@ -18,7 +18,7 @@ $sql = "SELECT `game_home_team_id`,
         FROM `game`
         LEFT JOIN `tournament`
         ON `tournament_id`=`game_tournament_id`
-        WHERE `game_id`='$get_num'
+        WHERE `game_id`='$num_get'
         LIMIT 1";
 $game_sql = $mysqli->query($sql);
 
@@ -87,7 +87,7 @@ $sql = "SELECT `city_name`,
         ON `t3`.`team_id`=`stadium_team_id`
         LEFT JOIN `city`
         ON `city_id`=`t3`.`team_city_id`
-        WHERE `game_id`='$get_num'
+        WHERE `game_id`='$num_get'
         LIMIT 1";
 
 $game_sql = $mysqli->query($sql);
@@ -110,7 +110,7 @@ $header_2_guest_name    = $game_array[0]['game_guest_' . $team_country . '_name'
 
 if (1 == $game_played)
 {
-    redirect('game_review_main.php?num=' . $get_num);
+    redirect('game_review_main.php?num=' . $num_get);
 }
 
 $header_2_score = '-';
@@ -121,7 +121,7 @@ $sql = "SELECT `statisticreferee_game`,
         FROM `game`
         LEFT JOIN `statisticreferee`
         ON `game_referee_id`=`statisticreferee_referee_id`
-        WHERE `game_id`='$get_num'
+        WHERE `game_id`='$num_get'
         AND `statisticreferee_season_id`='$igosja_season_id'
         LIMIT 1";
 $referee_sql = $mysqli->query($sql);
@@ -212,7 +212,7 @@ if (TOURNAMENT_TYPE_WORLD_CUP == $tournamenttype_id)
             LEFT JOIN `country`
             ON `country_id`=`worldcup_country_id`
             WHERE `worldcup_season_id`='$igosja_season_id'
-            AND `game_id`='$get_num'
+            AND `game_id`='$num_get'
             ORDER BY `worldcup_place` ASC";
 }
 elseif (TOURNAMENT_TYPE_CHAMPIONSHIP == $tournamenttype_id)
@@ -227,7 +227,7 @@ elseif (TOURNAMENT_TYPE_CHAMPIONSHIP == $tournamenttype_id)
             LEFT JOIN `team`
             ON `team_id`=`standing_team_id`
             WHERE `standing_season_id`='$igosja_season_id'
-            AND `game_id`='$get_num'
+            AND `game_id`='$num_get'
             ORDER BY `standing_place` ASC";
 }
 elseif (TOURNAMENT_TYPE_CUP == $tournamenttype_id)
@@ -252,7 +252,7 @@ $position_sql = $mysqli->query($sql);
 
 $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_guest_name;
 
 include (__DIR__ . '/view/main.php');

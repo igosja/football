@@ -1276,5 +1276,5 @@ $sql = "INSERT INTO `game`
                 ('$country_2','$country_1','1','10','10','15'+RAND()*'15','" . TOURNAMENT_WORLD_CUP . "','1'+RAND()*'3');";
 $mysqli->query($sql);
 
-print '<br/>Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
-       <br/>Потребление памяти: ' . number_format(memory_get_usage(), 0, ",", " ") . ' Б';
+print '<br />Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
+       <br />Потребление памяти: ' . number_format(memory_get_usage(), 0, ",", " ") . ' Б';

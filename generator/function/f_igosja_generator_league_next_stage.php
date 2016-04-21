@@ -1,6 +1,6 @@
 <?php
 
-function f_igosja_generator_champions_league_next_stage()
+function f_igosja_generator_league_next_stage()
 //Лига чемпионов - следующая стадия
 {
     global $mysqli;
@@ -301,7 +301,19 @@ function f_igosja_generator_champions_league_next_stage()
                         SELECT `league_team_id`
                         FROM `league`
                         WHERE `league_season_id`='$igosja_season_id'
-                        AND `league_place`>='3'
+                        AND `league_place`='4'
+                    )
+                    AND `leagueparticipant_season_id`='$igosja_season_id'";
+            f_igosja_mysqli_query($sql);
+
+            $sql = "UPDATE `leagueparticipant`
+                    SET `leagueparticipant_out`='5'
+                    WHERE `leagueparticipant_team_id` IN
+                    (
+                        SELECT `league_team_id`
+                        FROM `league`
+                        WHERE `league_season_id`='$igosja_season_id'
+                        AND `league_place`='3'
                     )
                     AND `leagueparticipant_season_id`='$igosja_season_id'";
             f_igosja_mysqli_query($sql);

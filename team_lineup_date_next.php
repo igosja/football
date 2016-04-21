@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -36,9 +36,9 @@ $sql = "SELECT `game_id`,
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
         LEFT JOIN `team`
-        ON IF (`game_home_team_id`='$get_num', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
-        WHERE (`game_home_team_id`='$get_num'
-        OR `game_guest_team_id`='$get_num')
+        ON IF (`game_home_team_id`='$num_get', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
+        WHERE (`game_home_team_id`='$num_get'
+        OR `game_guest_team_id`='$num_get')
         AND `game_played`='0'
         ORDER BY `shedule_date` ASC
         LIMIT 1";
@@ -67,9 +67,9 @@ $sql = "SELECT `game_guest_score`,
         ON `game_tournament_id`=`tournament_id`
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
-        WHERE ((`game_home_team_id`='$get_num'
+        WHERE ((`game_home_team_id`='$num_get'
         AND `game_guest_team_id`='$opponent_id')
-        OR (`game_guest_team_id`='$get_num'
+        OR (`game_guest_team_id`='$num_get'
         AND `game_home_team_id`='$opponent_id'))
         AND `game_played`='1'
         ORDER BY `game_id`";
@@ -93,7 +93,7 @@ for ($i=0; $i<$game; $i++)
 
     if ($home_score > $guest_score)
     {
-        if ($team_id == $get_num)
+        if ($team_id == $num_get)
         {
             $win++;
         }
@@ -108,7 +108,7 @@ for ($i=0; $i<$game; $i++)
     }
     elseif ($home_score < $guest_score)
     {
-        if ($team_id == $get_num)
+        if ($team_id == $num_get)
         {
             $loose++;
         }
@@ -118,7 +118,7 @@ for ($i=0; $i<$game; $i++)
         }
     }
 
-    if ($team_id == $get_num)
+    if ($team_id == $num_get)
     {
         $score = $score + $home_score;
         $pass  = $pass + $guest_score;
@@ -130,7 +130,7 @@ for ($i=0; $i<$game; $i++)
     }
 }
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

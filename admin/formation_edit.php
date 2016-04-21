@@ -4,11 +4,11 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `formation_name`, 
@@ -24,7 +24,7 @@ $sql = "SELECT `formation_name`,
                `formation_position_id_10`,
                `formation_position_id_11`
         FROM `formation`
-        WHERE `formation_id`='$get_num'
+        WHERE `formation_id`='$num_get'
         LIMIT 1";
 $formation_sql = $mysqli->query($sql);
 
@@ -71,7 +71,7 @@ if (isset($_POST['formation_name']))
                 `formation_position_id_9` = ?,
                 `formation_position_id_10` = ?,
                 `formation_position_id_11` = ?
-            WHERE `formation_id`='$get_num'";
+            WHERE `formation_id`='$num_get'";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param
                 (

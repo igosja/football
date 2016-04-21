@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_id))
 {
-    $get_num = $authorization_id;
+    $num_get = $authorization_id;
 }
 else
 {

@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `name_name`,
@@ -22,7 +22,7 @@ $sql = "SELECT `name_name`,
         ON `surname_id`=`player_surname_id`
         LEFT JOIN `team`
         ON `team_id`=`player_team_id`
-        WHERE `player_id`='$get_num'
+        WHERE `player_id`='$num_get'
         LIMIT 1";
 $player_sql = $mysqli->query($sql);
 
@@ -56,7 +56,7 @@ $sql = "SELECT `team_id`,
         ON `team_id`=`statisticplayer_team_id`
         LEFT JOIN `tournament`
         ON `tournament_id`=`standing_tournament_id`
-        WHERE `statisticplayer_player_id`='$get_num'
+        WHERE `statisticplayer_player_id`='$num_get'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONSHIP . "'
         ORDER BY `statisticplayer_season_id` DESC";
 $championship_sql = $mysqli->query($sql);
@@ -80,7 +80,7 @@ $sql = "SELECT `team_id`,
         ON `tournament_id`=`cupparticipant_tournament_id`
         LEFT JOIN `stage`
         ON `cupparticipant_out`=`stage_id`
-        WHERE `statisticplayer_player_id`='$get_num'
+        WHERE `statisticplayer_player_id`='$num_get'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CUP . "'
         ORDER BY `statisticplayer_season_id` DESC";
 $cup_sql = $mysqli->query($sql);
@@ -104,7 +104,7 @@ $sql = "SELECT `team_id`,
         ON `tournament_id`=`leagueparticipant_tournament_id`
         LEFT JOIN `stage`
         ON `leagueparticipant_out`=`stage_id`
-        WHERE `statisticplayer_player_id`='$get_num'
+        WHERE `statisticplayer_player_id`='$num_get'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONS_LEAGUE . "'
         ORDER BY `statisticplayer_season_id` DESC";
 $league_sql = $mysqli->query($sql);
@@ -126,7 +126,7 @@ $sql = "SELECT `country_id`,
         ON `country_id`=`statisticplayer_country_id`
         LEFT JOIN `tournament`
         ON `tournament_id`=`worldcup_tournament_id`
-        WHERE `statisticplayer_player_id`='$get_num'
+        WHERE `statisticplayer_player_id`='$num_get'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_WORLD_CUP . "'
         ORDER BY `statisticplayer_season_id` DESC";
 $worldcup_sql = $mysqli->query($sql);
@@ -137,7 +137,7 @@ $trophy_array = array_merge($championship_array, $worldcup_array, $cup_array, $l
 
 usort($trophy_array, 'f_igosja_trophy_sort');
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $player_name . ' ' . $player_surname;
 
 include (__DIR__ . '/view/main.php');

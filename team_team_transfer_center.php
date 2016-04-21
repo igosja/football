@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
-    $get_num = $authorization_team_id;
+    $num_get = $authorization_team_id;
 }
 else
 {
@@ -14,7 +14,7 @@ else
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -36,7 +36,7 @@ if (isset($_GET['from_del']))
 
     $sql = "DELETE FROM `playeroffer`
             WHERE `playeroffer_id`='$delete'
-            AND `playeroffer_team_id`='$get_num'";
+            AND `playeroffer_team_id`='$num_get'";
     $mysqli->query($sql);
 
     $sql = "DELETE FROM `inbox`
@@ -47,7 +47,7 @@ if (isset($_GET['from_del']))
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Предложение успешно удалено.';
 
-    redirect('team_team_transfer_center.php?num=' . $get_num);
+    redirect('team_team_transfer_center.php?num=' . $num_get);
 }
 elseif (isset($_GET['to_del']))
 {
@@ -58,7 +58,7 @@ elseif (isset($_GET['to_del']))
             LEFT JOIN `player`
             ON `playeroffer_player_id`=`player_id`
             WHERE `playeroffer_id`='$delete'
-            AND `player_team_id`='$get_num'";
+            AND `player_team_id`='$num_get'";
     $mysqli->query($sql);
 
     $sql = "DELETE FROM `inbox`
@@ -92,7 +92,7 @@ elseif (isset($_GET['to_ok']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'Такая заявка не найдена.';
 
-        redirect('team_team_transfer_center.php?num=' . $get_num);
+        redirect('team_team_transfer_center.php?num=' . $num_get);
     }
 
     $sql = "SELECT COUNT(`transfer_id`) AS `count`
@@ -147,7 +147,7 @@ elseif (isset($_GET['to_ok']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'Трансфер этого игрока уже согласован.';
 
-        redirect('team_team_transfer_center.php?num=' . $get_num);
+        redirect('team_team_transfer_center.php?num=' . $num_get);
     }
 
     $sql = "INSERT INTO `transfer`
@@ -169,7 +169,7 @@ elseif (isset($_GET['to_ok']))
             LEFT JOIN `player`
             ON `playeroffer_player_id`=`player_id`
             WHERE `playeroffer_id`='$ok'
-            AND `player_team_id`='$get_num'";
+            AND `player_team_id`='$num_get'";
     $mysqli->query($sql);
 
     $sql = "DELETE `playeroffer`
@@ -177,7 +177,7 @@ elseif (isset($_GET['to_ok']))
             LEFT JOIN `player`
             ON `playeroffer_player_id`=`player_id`
             WHERE `playeroffer_id`='$ok'
-            AND `player_team_id`='$get_num'";
+            AND `player_team_id`='$num_get'";
     $mysqli->query($sql);
 
     $sql = "DELETE FROM `inbox`
@@ -188,7 +188,7 @@ elseif (isset($_GET['to_ok']))
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Предложение успешно принято.';
 
-    redirect('team_team_transfer_center.php?num=' . $get_num);
+    redirect('team_team_transfer_center.php?num=' . $num_get);
 }
 
 $sql = "SELECT `name_name`,
@@ -212,13 +212,13 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `offertype`
         ON `transfer_offertype_id`=`offertype_id`
         LEFT JOIN `team`
-        ON IF (`transfer_seller_id`='$get_num', `transfer_buyer_id`, `transfer_seller_id`)=`team_id`
+        ON IF (`transfer_seller_id`='$num_get', `transfer_buyer_id`, `transfer_seller_id`)=`team_id`
         LEFT JOIN `standing`
         ON `standing_team_id`=`team_id`
         LEFT JOIN `tournament`
         ON `tournament_id`=`standing_tournament_id`
-        WHERE (`transfer_buyer_id`='$get_num'
-        OR `transfer_seller_id`='$get_num')
+        WHERE (`transfer_buyer_id`='$num_get'
+        OR `transfer_seller_id`='$num_get')
         AND `standing_season_id`='$igosja_season_id'
         AND `tournament_tournamenttype_id`='2'
         ORDER BY `transfer_id` ASC";
@@ -252,7 +252,7 @@ $sql = "SELECT `name_name`,
         ON `standing_team_id`=`team_id`
         LEFT JOIN `tournament`
         ON `tournament_id`=`standing_tournament_id`
-        WHERE `playeroffer_team_id`='$get_num'
+        WHERE `playeroffer_team_id`='$num_get'
         AND `standing_season_id`='$igosja_season_id'
         AND `tournament_tournamenttype_id`='2'
         ORDER BY `playeroffer_id` ASC";
@@ -286,7 +286,7 @@ $sql = "SELECT `name_name`,
         ON `standing_team_id`=`team_id`
         LEFT JOIN `tournament`
         ON `tournament_id`=`standing_tournament_id`
-        WHERE `player_team_id`='$get_num'
+        WHERE `player_team_id`='$num_get'
         AND `standing_season_id`='$igosja_season_id'
         AND `tournament_tournamenttype_id`='2'
         ORDER BY `playeroffer_id` ASC";
@@ -294,7 +294,7 @@ $offer_to_me_sql = $mysqli->query($sql);
 
 $offer_to_me_array = $offer_to_me_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

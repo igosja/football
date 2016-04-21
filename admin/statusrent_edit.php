@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `statusrent_name`
         FROM `statusrent`
-        WHERE `statusrent_id`='$get_num'
+        WHERE `statusrent_id`='$num_get'
         LIMIT 1";
 $statusrent_sql = $mysqli->query($sql);
 
@@ -32,7 +32,7 @@ if (isset($_POST['statusrent_name']))
 
     $sql = "UPDATE `statusrent` 
             SET `statusrent_name`=?
-            WHERE `statusrent_id`='$get_num'
+            WHERE `statusrent_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('s', $statusrent_name);

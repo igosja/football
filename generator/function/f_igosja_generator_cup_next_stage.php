@@ -189,5 +189,54 @@ function f_igosja_generator_cup_next_stage()
                 }
             }
         }
+
+        $sql = "SELECT `game_guest_score`,
+                       `game_guest_shoot_out`,
+                       `game_guest_team_id`,
+                       `game_home_score`,
+                       `game_home_shoot_out`,
+                       `game_home_team_id`,
+                       `game_stage_id`,
+                       `game_tournament_id`
+                FROM `game`
+                LEFT JOIN `shedule`
+                ON `shedule_id`=`game_shedule_id`
+                WHERE `shedule_date`=CURDATE()
+                AND `game_played`='0'
+                AND `game_stage_id`='" . CUP_FINAL_STAGE . "'
+                ORDER BY `game_id` ASC";
+        $game_sql = f_igosja_mysqli_query($sql);
+
+        $count_game = $game_sql->num_rows;
+        $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+
+        for ($i=0; $i<$count_game; $i++)
+        {
+            $home_score      = $game_array[$i]['game_home_score'];
+            $home_shoot_out  = $game_array[$i]['game_home_shoot_out'];
+            $home_team_id    = $game_array[$i]['game_home_team_id'];
+            $guest_score     = $game_array[$i]['game_guest_score'];
+            $guest_shoot_out = $game_array[$i]['game_guest_shoot_out'];
+            $guest_team_id   = $game_array[$i]['game_guest_team_id'];
+            $stage_id        = $game_array[$i]['game_stage_id'];
+            $tournament_id   = $game_array[$i]['game_tournament_id'];
+
+            if ($home_score + $home_shoot_out > $guest_score + $guest_shoot_out)
+            {
+                $looser = $guest_team_id;
+            }
+            else
+            {
+                $looser = $home_team_id;
+            }
+
+            $sql = "UPDATE `cupparticipant`
+                    SET `cupparticipant_out`='$stage_id'
+                    WHERE `cupparticipant_tournament_id`='$tournament_id'
+                    AND `cupparticipant_team_id`='$looser'
+                    AND `cupparticipant_season_id`='$igosja_season_id'
+                    LIMIT 1";
+            f_igosja_mysqli_query($sql);
+        }
     }
 }

@@ -4,11 +4,11 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournament_country_id`,
@@ -16,7 +16,7 @@ $sql = "SELECT `tournament_country_id`,
                `tournament_name`,
                `tournament_tournamenttype_id`
         FROM `tournament`
-        WHERE `tournament_id`='$get_num'
+        WHERE `tournament_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -41,7 +41,7 @@ if (isset($_POST['tournamenttype_id']))
                 `tournament_tournamenttype_id`=?,
                 `tournament_level`=?,
                 `tournament_country_id`=?
-            WHERE `tournament_id`='$get_num'";
+            WHERE `tournament_id`='$num_get'";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('siii', $tournament_name, $tournamenttype_id, $tournament_level, $country_id);
     $prepare->execute();
@@ -49,17 +49,17 @@ if (isset($_POST['tournamenttype_id']))
 
     if ('image/png' == $_FILES['tournament_logo_90']['type'])
     {
-        copy($_FILES['tournament_logo_90']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/tournament/90/' . $get_num . '.png');
+        copy($_FILES['tournament_logo_90']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/tournament/90/' . $num_get . '.png');
     }
 
     if ('image/png' == $_FILES['tournament_logo_50']['type'])
     {
-        copy($_FILES['tournament_logo_50']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/tournament/50/' . $get_num . '.png');
+        copy($_FILES['tournament_logo_50']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/tournament/50/' . $num_get . '.png');
     }
 
     if ('image/png' == $_FILES['tournament_logo_12']['type'])
     {
-        copy($_FILES['tournament_logo_12']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/tournament/12/' . $get_num . '.png');
+        copy($_FILES['tournament_logo_12']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/tournament/12/' . $num_get . '.png');
     }
 
     redirect('tournament_list.php');

@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_country_id))
 {
-    $get_num = $authorization_country_id;
+    $num_get = $authorization_country_id;
 }
 else
 {
@@ -14,7 +14,7 @@ else
 
 $sql = "SELECT `country_name`
         FROM `country`
-        WHERE `country_id`='$get_num'
+        WHERE `country_id`='$num_get'
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
 
@@ -55,14 +55,14 @@ $sql = "SELECT `mood_id`,
         ON `player_mood_id`=`mood_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `player_country_id`='$get_num'
+        WHERE `player_country_id`='$num_get'
         AND `player_statusnational_id`='1'
         ORDER BY `player_position_id` ASC, `player_reputation` DESC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $country_name;
 
 include (__DIR__ . '/view/main.php');

@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `city_name`,
@@ -28,7 +28,7 @@ $sql = "SELECT `city_name`,
         ON `team_city_id`=`city_id`
         LEFT JOIN `stadiumquality`
         ON `stadiumquality_id`=`stadium_stadiumquality_id`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -50,13 +50,13 @@ $sql = "SELECT `building_capacity`,
         FROM `building`
         LEFT JOIN `buildingtype`
         ON `building_buildingtype_id`=`buildingtype_id`
-        WHERE `building_team_id`='$get_num'
+        WHERE `building_team_id`='$num_get'
         ORDER BY `building_end_date` ASC";
 $building_sql = $mysqli->query($sql);
 
 $building_array = $building_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

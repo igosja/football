@@ -4,7 +4,7 @@
             <p class="header">Профиль страны</p>
             <table class="center w100">
                 <tr>
-                    <td><img alt="" class="img-90" src="/img/flag/90/<?= $get_num; ?>.png" /></td>
+                    <td><img alt="" class="img-90" src="/img/flag/90/<?= $num_get; ?>.png" /></td>
                 </tr>
                 <tr>
                     <td>

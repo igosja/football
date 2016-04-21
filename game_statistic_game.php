@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `game_home_team_id`
         FROM `game`
-        WHERE `game_id`='$get_num'
+        WHERE `game_id`='$num_get'
         LIMIT 1";
 $game_sql = $mysqli->query($sql);
 
@@ -82,7 +82,7 @@ $sql = "SELECT `game_guest_corner`,
             SELECT ROUND(AVG(`lineup_mark`),2) AS `home_average`,
                    `lineup_" . $team_country . "_id`
             FROM `lineup`
-            WHERE `lineup_game_id`='$get_num'
+            WHERE `lineup_game_id`='$num_get'
             AND `lineup_position_id`<='25'
             GROUP BY `lineup_" . $team_country . "_id`
         ) AS `t3`
@@ -92,12 +92,12 @@ $sql = "SELECT `game_guest_corner`,
             SELECT ROUND(AVG(`lineup_mark`),2) AS `guest_average`,
                    `lineup_" . $team_country . "_id`
             FROM `lineup`
-            WHERE `lineup_game_id`='$get_num'
+            WHERE `lineup_game_id`='$num_get'
             AND `lineup_position_id`<='25'
             GROUP BY `lineup_" . $team_country . "_id`
         ) AS `t4`
         ON `t4`.`lineup_" . $team_country . "_id`=`game_guest_" . $team_country . "_id`
-        WHERE `game_id`='$get_num'
+        WHERE `game_id`='$num_get'
         LIMIT 1";
 $game_sql = $mysqli->query($sql);
 
@@ -111,7 +111,7 @@ $header_2_guest_name  = $game_array[0]['game_guest_' . $team_country . '_name'];
 
 if (0 == $game_played)
 {
-    redirect('game_before_before.php?num=' . $get_num);
+    redirect('game_before_before.php?num=' . $num_get);
 }
 
 $home_score     = $game_array[0]['game_home_score'];
@@ -129,7 +129,7 @@ else
     $header_2_shootout = '';
 }
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;
 
 include (__DIR__ . '/view/main.php');

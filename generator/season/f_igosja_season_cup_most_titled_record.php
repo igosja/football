@@ -4,14 +4,10 @@ function f_igosja_season_cup_most_titled_record()
 {
     global $igosja_season_id;
 
-    $sql = "SELECT `game_tournament_id`
-            FROM `game`
-            LEFT JOIN `shedule`
-            ON `game_shedule_id`=`shedule_id`
-            WHERE `shedule_season_id`='$igosja_season_id'
-            AND `shedule_tournamenttype_id`='" . TOURNAMENT_TYPE_CUP. "'
-            AND `game_stage_id`='" . CUP_FINAL_STAGE . "'
-            ORDER BY `game_tournament_id` ASC";
+    $sql = "SELECT `cupparticipant_tournament_id`
+            FROM `cupparticipant`
+            WHERE `cupparticipant_season_id`='$igosja_season_id'
+            ORDER BY `cupparticipant_tournament_id` ASC";
     $tournament_sql = f_igosja_mysqli_query($sql);
 
     $count_tournament = $tournament_sql->num_rows;
@@ -19,20 +15,21 @@ function f_igosja_season_cup_most_titled_record()
 
     for ($i=0; $i<$count_tournament; $i++)
     {
-        $tournament_id = $tournament_array[$i]['game_tournament_id'];
+        $tournament_id = $tournament_array[$i]['cupparticipant_tournament_id'];
 
-        $sql = "SELECT IF(`game_home_score`+`game_home_shoot_out`>`game_guest_score`+`game_guest_shoot_out`, `game_home_team_id`, `game_guest_team_id`) AS `winner_id`,
-                       COUNT(`game_id`) AS `count`
-                FROM `game`
-                WHERE `game_stage_id`='" . CUP_FINAL_STAGE . "'
-                AND `game_tournament_id`='$tournament_id'
+        $sql = "SELECT COUNT(`cupparticipant_id`) AS `count`,
+                       `cupparticipant_team_id`
+                FROM `cupparticipant`
+                WHERE `cupparticipant_out`='-1'
+                AND `cupparticipant_tournament_id`='$tournament_id'
+                GROUP BY `cupparticipant_team_id`
                 ORDER BY `count` DESC
                 LIMIT 1";
         $winner_sql = f_igosja_mysqli_query($sql);
 
         $winner_array = $winner_sql->fetch_all(MYSQLI_ASSOC);
 
-        $winner_id      = $winner_array[0]['winner_id'];
+        $winner_id      = $winner_array[0]['cupparticipant_team_id'];
         $winner_count   = $winner_array[0]['count'];
 
         $sql = "SELECT `recordtournament_value_1`

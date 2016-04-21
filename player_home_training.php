@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `country_id`,
@@ -51,13 +51,13 @@ $sql = "SELECT `country_id`,
             ON `lineup_game_id`=`game_id`
             LEFT JOIN `shedule`
             ON `shedule_id`=`game_shedule_id`
-            WHERE `lineup_player_id`='$get_num'
+            WHERE `lineup_player_id`='$num_get'
             AND `game_played`='1'
             ORDER BY `shedule_date` DESC
             LIMIT 5
         ) AS `t1`
         ON `lineup_player_id`=`player_id`
-        WHERE `player_id`='$get_num'
+        WHERE `player_id`='$num_get'
         AND `player_team_id`='$authorization_team_id'
         LIMIT 1";
 $player_sql = $mysqli->query($sql);
@@ -93,7 +93,7 @@ if (isset($_GET['char']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'У вас нет доступных баллов для платной тренировки.';
 
-        redirect('player_home_training.php?num=' . $get_num);
+        redirect('player_home_training.php?num=' . $num_get);
     }
 
     $char = (int) $_GET['char'];
@@ -104,7 +104,7 @@ if (isset($_GET['char']))
             LEFT JOIN `playerattribute`
             ON `attribute_id`=`playerattribute_attribute_id`
             WHERE `attribute_id`='$char'
-            AND `playerattribute_player_id`='$get_num'
+            AND `playerattribute_player_id`='$num_get'
             LIMIT 1";
     $attribute_sql = $mysqli->query($sql);
 
@@ -115,7 +115,7 @@ if (isset($_GET['char']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'Характеристика выбрана неправильно.';
 
-        redirect('player_home_training.php?num=' . $get_num);
+        redirect('player_home_training.php?num=' . $num_get);
     }
 
     $attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
@@ -126,7 +126,7 @@ if (isset($_GET['char']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'Эта характеристика имеет максимальный уровень, больше ее увеличить нельзя.';
 
-        redirect('player_home_training.php?num=' . $get_num);
+        redirect('player_home_training.php?num=' . $num_get);
     }
 
     if (isset($_GET['ok']))
@@ -134,7 +134,7 @@ if (isset($_GET['char']))
         $sql = "UPDATE `playerattribute`
                 SET `playerattribute_value`=`playerattribute_value`+'1'
                 WHERE `playerattribute_attribute_id`='$char'
-                AND `playerattribute_player_id`='$get_num'
+                AND `playerattribute_player_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
 
@@ -156,17 +156,17 @@ if (isset($_GET['char']))
                 SET `player_salary`=ROUND(POW(`power`, 1.3)),
                     `player_price`=`player_salary`*'987',
                     `player_reputation`=`power`/'" . MAX_PLAYER_POWER . "'*'100'
-                WHERE `player_id`='$get_num'";
+                WHERE `player_id`='$num_get'";
         $mysqli->query($sql);
 
         $_SESSION['message_class']  = 'success';
         $_SESSION['message_text']   = 'Тренировка прошла успешно.';
 
-        redirect('player_home_training.php?num=' . $get_num);
+        redirect('player_home_training.php?num=' . $num_get);
     }
 
     $tpl            = 'submit_training';
-    $num            = $get_num;
+    $num            = $num_get;
     $header_title   = $player_name . ' ' . $player_surname;
 
     include (__DIR__ . '/view/main.php');
@@ -181,7 +181,7 @@ elseif (isset($_GET['position']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'У вас нет доступных баллов для платной тренировки.';
 
-        redirect('player_home_training.php?num=' . $get_num);
+        redirect('player_home_training.php?num=' . $num_get);
     }
 
     $position = (int) $_GET['position'];
@@ -200,7 +200,7 @@ elseif (isset($_GET['position']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'Позиция выбрана неправильно.';
 
-        redirect('player_home_training.php?num=' . $get_num);
+        redirect('player_home_training.php?num=' . $num_get);
     }
 
     $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
@@ -209,7 +209,7 @@ elseif (isset($_GET['position']))
                    `playerposition_value`
             FROM `playerposition`
             WHERE `playerposition_position_id`='$position'
-            AND `playerposition_player_id`='$get_num'
+            AND `playerposition_player_id`='$num_get'
             LIMIT 1";
     $playerposition_sql = $mysqli->query($sql);
 
@@ -226,7 +226,7 @@ elseif (isset($_GET['position']))
             $_SESSION['message_class']  = 'error';
             $_SESSION['message_text']   = 'Навык игры на этой позиции имеет максимальный уровень, больше его увеличить нельзя.';
 
-            redirect('player_home_training.php?num=' . $get_num);
+            redirect('player_home_training.php?num=' . $num_get);
         }
     }
 
@@ -245,7 +245,7 @@ elseif (isset($_GET['position']))
             $sql = "INSERT INTO `playerposition`
                     SET `playerposition_value`='100',
                         `playerposition_position_id`='$position',
-                        `playerposition_player_id`='$get_num'";
+                        `playerposition_player_id`='$num_get'";
             $mysqli->query($sql);
         }
 
@@ -258,11 +258,11 @@ elseif (isset($_GET['position']))
         $_SESSION['message_class']  = 'success';
         $_SESSION['message_text']   = 'Тренировка прошла успешно.';
 
-        redirect('player_home_training.php?num=' . $get_num);
+        redirect('player_home_training.php?num=' . $num_get);
     }
 
     $tpl            = 'submit_position';
-    $num            = $get_num;
+    $num            = $num_get;
     $header_title   = $player_name . ' ' . $player_surname;
 
     include (__DIR__ . '/view/main.php');
@@ -278,7 +278,7 @@ $sql = "SELECT `attribute_id`,
         ON `attribute_id`=`playerattribute_attribute_id`
         LEFT JOIN `attributechapter`
         ON `attributechapter_id`=`attribute_attributechapter_id`
-        WHERE `playerattribute_player_id`='$get_num'
+        WHERE `playerattribute_player_id`='$num_get'
         ORDER BY `attributechapter_id` ASC, `attribute_id` ASC";
 $attribute_sql = $mysqli->query($sql);
 
@@ -293,7 +293,7 @@ $sql = "SELECT `playerposition_value`,
         FROM `playerposition`
         LEFT JOIN `position`
         ON `position_id`=`playerposition_position_id`
-        WHERE `playerposition_player_id`='$get_num'
+        WHERE `playerposition_player_id`='$num_get'
         ORDER BY `playerposition_value` DESC";
 $playerposition_sql = $mysqli->query($sql);
 
@@ -306,7 +306,7 @@ $sql = "SELECT `position_id`,
         (
             SELECT `playerposition_position_id`
             FROM `playerposition`
-            WHERE `playerposition_player_id`='$get_num'
+            WHERE `playerposition_player_id`='$num_get'
         )
         AND `position_available`='1'
         ORDER BY `position_id` DESC";
@@ -314,7 +314,7 @@ $position_sql = $mysqli->query($sql);
 
 $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $player_name . ' ' . $player_surname;
 
 include (__DIR__ . '/view/main.php');

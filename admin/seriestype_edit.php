@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `seriestype_name`
         FROM `seriestype`
-        WHERE `seriestype_id`='$get_num'
+        WHERE `seriestype_id`='$num_get'
         LIMIT 1";
 $seriestype_sql = $mysqli->query($sql);
 
@@ -32,7 +32,7 @@ if (isset($_POST['seriestype_name']))
 
     $sql = "UPDATE `seriestype` 
             SET `seriestype_name`=?
-            WHERE `seriestype_id`='$get_num'
+            WHERE `seriestype_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('s', $seriestype_name);

@@ -5,10 +5,8 @@ function f_igosja_season_user_championship_trophy()
     global $igosja_season_id;
 
     $sql = "UPDATE `user`
-            LEFT JOIN `team`
-            ON `team_user_id`=`user_id`
             LEFT JOIN `standing`
-            ON `standing_team_id`=`team_id`
+            ON `standing_user_id`=`user_id`
             SET `user_trophy`=`user_trophy`+'1'
             WHERE `standing_season_id`='$igosja_season_id'
             AND `standing_place`='1'

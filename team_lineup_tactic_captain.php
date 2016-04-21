@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
-    $get_num = $authorization_team_id;
+    $num_get = $authorization_team_id;
 }
 else
 {
@@ -14,7 +14,7 @@ else
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -41,7 +41,7 @@ if (isset($_POST['data']))
 
         $sql = "UPDATE `team`
                 SET `team_captain_player_id_" . $captain_id . "`='$player_id'
-                WHERE `team_id`='$get_num'
+                WHERE `team_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
     }
@@ -49,7 +49,7 @@ if (isset($_POST['data']))
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
-    redirect('team_lineup_tactic_captain.php?num=' . $get_num);
+    redirect('team_lineup_tactic_captain.php?num=' . $num_get);
 }
 
 $sql = "SELECT `leader`,
@@ -73,7 +73,7 @@ $sql = "SELECT `leader`,
         ON `playerattribute_player_id`=`player_id`
         LEFT JOIN `position`
         ON `player_position_id`=`position_id`
-        WHERE `player_team_id`='$get_num'
+        WHERE `player_team_id`='$num_get'
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
@@ -96,7 +96,7 @@ $sql = "SELECT `leader`,
             WHERE `playerattribute_attribute_id`='22'
         ) AS `t1`
         ON `playerattribute_player_id`=`player_id`
-        WHERE `player_team_id`='$get_num'
+        WHERE `player_team_id`='$num_get'
         ORDER BY `leader` DESC, `player_id` ASC";
 $leader_sql = $mysqli->query($sql);
 
@@ -108,13 +108,13 @@ $sql = "SELECT `team_captain_player_id_1`,
                `team_captain_player_id_4`,
                `team_captain_player_id_5`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $captain_sql = $mysqli->query($sql);
 
 $captain_array = $captain_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

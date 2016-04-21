@@ -4,11 +4,11 @@ include (__DIR__ . 'include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 if (isset($_GET['page']))
@@ -46,7 +46,7 @@ $sql = "SELECT `city_name`,
         ON `team_city_id`=`city_id`
         LEFT JOIN `country`
         ON `country_id`=`city_country_id`
-        WHERE `forumtheme_id`='$get_num'
+        WHERE `forumtheme_id`='$num_get'
         LIMIT 1";
 $head_sql = $mysqli->query($sql);
 
@@ -82,7 +82,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `team_city_id`=`city_id`
         LEFT JOIN `country`
         ON `country_id`=`city_country_id`
-        WHERE `forumpost_forumtheme_id`='$get_num'
+        WHERE `forumpost_forumtheme_id`='$num_get'
         ORDER BY `forumpost_id` ASC
         LIMIT $offset, $limit";
 $forum_sql = $mysqli->query($sql);
@@ -100,7 +100,7 @@ if (isset($authorization_user_id))
 {
     $sql = "SELECT `forumpost_id`
             FROM `forumpost`
-            WHERE `forumpost_forumtheme_id`='$get_num'
+            WHERE `forumpost_forumtheme_id`='$num_get'
             ORDER BY `forumpost_id` DESC
             LIMIT 1";
     $forumpost_sql = $mysqli->query($sql);
@@ -120,7 +120,7 @@ if (isset($authorization_user_id))
 
     $sql = "SELECT COUNT(`forumread_id`) AS `count`
             FROM `forumread`
-            WHERE `forumread_forumtheme_id`='$get_num'
+            WHERE `forumread_forumtheme_id`='$num_get'
             AND `forumread_user_id`='$authorization_user_id'";
     $count_sql = $mysqli->query($sql);
 
@@ -131,7 +131,7 @@ if (isset($authorization_user_id))
     if (0 == $count_check)
     {
         $sql = "INSERT INTO `forumread`
-                SET `forumread_forumtheme_id`='$get_num',
+                SET `forumread_forumtheme_id`='$num_get',
                     `forumread_forumpost_id`='$forumpost_id',
                     `forumread_user_id`='$authorization_user_id'";
         $mysqli->query($sql);
@@ -140,13 +140,13 @@ if (isset($authorization_user_id))
     {
         $sql = "UPDATE `forumread`
                 SET `forumread_forumpost_id`='$forumpost_id'
-                WHERE `forumread_forumtheme_id`='$get_num'
+                WHERE `forumread_forumtheme_id`='$num_get'
                 AND `forumread_user_id`='$authorization_user_id'
                 LIMIT 1";
         $mysqli->query($sql);
     }
 }
 
-$num = $get_num;
+$num = $num_get;
 
 include (__DIR__ . '/view/main.php');

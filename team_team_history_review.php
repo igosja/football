@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -36,7 +36,7 @@ $sql = "SELECT `standing_place`,
         FROM `standing`
         LEFT JOIN `tournament`
         ON `standing_tournament_id`=`tournament_id`
-        WHERE `standing_team_id`='$get_num'
+        WHERE `standing_team_id`='$num_get'
         ORDER BY `standing_season_id` DESC";
 $championship_sql = $mysqli->query($sql);
 
@@ -51,7 +51,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         ON `cupparticipant_tournament_id`=`tournament_id`
         LEFT JOIN `stage`
         ON `stage_id`=`cupparticipant_out`
-        WHERE `cupparticipant_team_id`='$get_num'
+        WHERE `cupparticipant_team_id`='$num_get'
         ORDER BY `cupparticipant_season_id` DESC";
 $cup_sql = $mysqli->query($sql);
 
@@ -66,7 +66,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         ON `leagueparticipant_tournament_id`=`tournament_id`
         LEFT JOIN `stage`
         ON `stage_id`=`leagueparticipant_out`
-        WHERE `leagueparticipant_team_id`='$get_num'
+        WHERE `leagueparticipant_team_id`='$num_get'
         ORDER BY `leagueparticipant_season_id` DESC";
 $league_sql = $mysqli->query($sql);
 
@@ -81,14 +81,14 @@ $sql = "SELECT `history_date`,
         FROM `history`
         LEFT JOIN `user`
         ON `history_user_id`=`user_id`
-        WHERE `history_team_id`='$get_num'
+        WHERE `history_team_id`='$num_get'
         AND `history_historytext_id`='1'
         ORDER BY `history_date` DESC";
 $manager_sql = $mysqli->query($sql);
 
 $manager_array = $manager_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

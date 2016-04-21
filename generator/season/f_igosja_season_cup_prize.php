@@ -19,7 +19,7 @@ function f_igosja_season_cup_prize()
         $team_id    = $cupparticipant_array[$i]['cupparticipant_team_id'];
         $out        = $cupparticipant_array[$i]['cupparticipant_out'];
 
-        if      (0 == $out) { $prize = 5000000; }
+        if     (-1 == $out) { $prize = 5000000; }
         elseif (49 == $out) { $prize = 4400000; }
         elseif (48 == $out) { $prize = 3800000; }
         elseif (47 == $out) { $prize = 3200000; }

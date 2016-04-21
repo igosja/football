@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `statusnational_name`
         FROM `statusnational`
-        WHERE `statusnational_id`='$get_num'
+        WHERE `statusnational_id`='$num_get'
         LIMIT 1";
 $statusnational_sql = $mysqli->query($sql);
 
@@ -32,7 +32,7 @@ if (isset($_POST['statusnational_name']))
 
     $sql = "UPDATE `statusnational` 
             SET `statusnational_name`=?
-            WHERE `statusnational_id`='$get_num'
+            WHERE `statusnational_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('s', $statusnational_name);

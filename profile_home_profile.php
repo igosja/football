@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_id))
 {
-    $get_num = $authorization_id;
+    $num_get = $authorization_id;
 }
 else
 {
@@ -37,7 +37,7 @@ $sql = "SELECT `country_id`,
                    `statisticuser_user_id`,
                    SUM(`statisticuser_win`) AS `statisticuser_win`
             FROM `statisticuser`
-            WHERE `statisticuser_user_id`='$get_num'
+            WHERE `statisticuser_user_id`='$num_get'
         ) AS `t0`
         ON `statisticuser_user_id`=`user_id`
         LEFT JOIN
@@ -47,7 +47,7 @@ $sql = "SELECT `country_id`,
             FROM `usergamestyle`
             LEFT JOIN `gamestyle`
             ON `gamestyle_id`=`usergamestyle_gamestyle_id`
-            WHERE `usergamestyle_user_id`='$get_num'
+            WHERE `usergamestyle_user_id`='$num_get'
             ORDER BY `usergamestyle_value` DESC
             LIMIT 1
         ) AS `t1`
@@ -59,7 +59,7 @@ $sql = "SELECT `country_id`,
             FROM `usergamemood`
             LEFT JOIN `gamemood`
             ON `gamemood_id`=`usergamemood_gamemood_id`
-            WHERE `usergamemood_user_id`='$get_num'
+            WHERE `usergamemood_user_id`='$num_get'
             ORDER BY `usergamemood_value` DESC
             LIMIT 1
         ) AS `t2`
@@ -71,12 +71,12 @@ $sql = "SELECT `country_id`,
             FROM `userformation`
             LEFT JOIN `formation`
             ON `formation_id`=`userformation_formation_id`
-            WHERE `userformation_user_id`='$get_num'
+            WHERE `userformation_user_id`='$num_get'
             ORDER BY `userformation_value` DESC
             LIMIT 1
         ) AS `t3`
         ON `userformation_user_id`=`user_id`
-        WHERE `user_id`='$get_num'
+        WHERE `user_id`='$num_get'
         LIMIT 1";
 $user_sql = $mysqli->query($sql);
 
@@ -95,7 +95,7 @@ $sql = "SELECT `country_id`,
         LEFT JOIN `country`
         ON `country_id`=`city_country_id`
         WHERE `history_historytext_id`='1'
-        AND `history_user_id`='$get_num'
+        AND `history_user_id`='$num_get'
         ORDER BY `history_id` ASC";
 $career_sql = $mysqli->query($sql);
 

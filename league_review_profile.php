@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournament_name`
         FROM `tournament`
-        WHERE `tournament_id`='$get_num'
+        WHERE `tournament_id`='$num_get'
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
@@ -50,7 +50,7 @@ $sql = "SELECT `game_first_game_id`,
         ON `home_team`.`team_id`=`game_home_team_id`
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
-        WHERE `game_tournament_id`='$get_num'
+        WHERE `game_tournament_id`='$num_get'
         AND `shedule_season_id`<'$igosja_season_id'
         AND `game_stage_id`='" . CUP_FINAL_STAGE . "'
         ORDER BY `shedule_season_id` DESC, `game_first_game_id` ASC
@@ -141,7 +141,7 @@ $sql = "SELECT `game_id`,
         ON `home_team`.`team_id`=`game_home_team_id`
         LEFT JOIN `team` AS `guest_team`
         ON `guest_team`.`team_id`=`game_guest_team_id`
-        WHERE `game_tournament_id`='$get_num'
+        WHERE `game_tournament_id`='$num_get'
         AND `shedule_season_id`='$igosja_season_id'
         AND `shedule_date`=
         (
@@ -150,7 +150,7 @@ $sql = "SELECT `game_id`,
             LEFT JOIN `game`
             ON `game_shedule_id`=`shedule_id`
             WHERE `shedule_date`<='$today'
-            AND `game_tournament_id`='$get_num'
+            AND `game_tournament_id`='$num_get'
             AND `shedule_season_id`='$igosja_season_id'
             ORDER BY `shedule_date` DESC
             LIMIT 1
@@ -180,7 +180,7 @@ if (0 == $count_game)
             ON `home_team`.`team_id`=`game_home_team_id`
             LEFT JOIN `team` AS `guest_team`
             ON `guest_team`.`team_id`=`game_guest_team_id`
-            WHERE `game_tournament_id`='$get_num'
+            WHERE `game_tournament_id`='$num_get'
             AND `shedule_season_id`='$igosja_season_id'
             AND `shedule_date`=
             (
@@ -189,7 +189,7 @@ if (0 == $count_game)
                 LEFT JOIN `game`
                 ON `game_shedule_id`=`shedule_id`
                 WHERE `shedule_date`>'$today'
-                AND `game_tournament_id`='$get_num'
+                AND `game_tournament_id`='$num_get'
                 AND `shedule_season_id`='$igosja_season_id'
                 ORDER BY `shedule_date` ASC
                 LIMIT 1
@@ -211,7 +211,7 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_goal` DESC
         LIMIT 5";
@@ -230,7 +230,7 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_pass_scoring` DESC
         LIMIT 5";
@@ -249,7 +249,7 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_tournament_id`='$get_num'
+        WHERE `statisticplayer_tournament_id`='$num_get'
         AND `statisticplayer_season_id`='$igosja_season_id'
         ORDER BY `statisticplayer_mark` DESC
         LIMIT 5";
@@ -257,7 +257,7 @@ $player_mark_sql = $mysqli->query($sql);
 
 $player_mark_array = $player_mark_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $tournament_name;
 
 include (__DIR__ . '/view/main.php');

@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `country_name`
         FROM `country`
-        WHERE `country_id`='$get_num'";
+        WHERE `country_id`='$num_get'";
 $country_sql = $mysqli->query($sql);
 
 $count_country = $country_sql->num_rows;
@@ -38,7 +38,7 @@ $sql = "SELECT `team_id`,
         LEFT JOIN `team`
         ON `team_id`=`standing_team_id`
         WHERE `standing_season_id`='$igosja_season_id'-'1'
-        AND `tournament_country_id`='$get_num'
+        AND `tournament_country_id`='$num_get'
         ORDER BY `standing_place` ASC
         LIMIT 1";
 $championship_sql = $mysqli->query($sql);
@@ -127,7 +127,7 @@ $sql = "SELECT `team_id`,
         ON `team_id`=`cupparticipant_team_id`
         WHERE `cupparticipant_season_id`='$igosja_season_id'-'1'
         AND `cupparticipant_out`='-1'
-        AND `tournament_country_id`='$get_num'
+        AND `tournament_country_id`='$num_get'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CUP . "'
         LIMIT 1";
 $cup_sql = $mysqli->query($sql);
@@ -212,7 +212,7 @@ $sql = "SELECT `team_id`,
         ON `leagueparticipant_team_id`=`team_id`
         LEFT JOIN `city`
         ON `city_id`=`team_city_id`
-        WHERE `city_country_id`='$get_num'
+        WHERE `city_country_id`='$num_get'
         AND `leagueparticipant_in`='1'
         AND `leagueparticipant_season_id`='$igosja_season_id'
         ORDER BY `leagueparticipant_in` DESC";
@@ -230,7 +230,7 @@ $sql = "SELECT `stage_name`,
         ON `city_id`=`team_city_id`
         LEFT JOIN `stage`
         ON `leagueparticipant_in`=`stage_id`
-        WHERE `city_country_id`='$get_num'
+        WHERE `city_country_id`='$num_get'
         AND `leagueparticipant_in`!='1'
         AND `leagueparticipant_season_id`='$igosja_season_id'
         ORDER BY `leagueparticipant_in` DESC";
@@ -248,14 +248,14 @@ $sql = "SELECT `stage_name`,
         ON `city_id`=`team_city_id`
         LEFT JOIN `stage`
         ON `leagueparticipant_out`=`stage_id`
-        WHERE `city_country_id`='$get_num'
+        WHERE `city_country_id`='$num_get'
         AND `leagueparticipant_season_id`='$igosja_season_id'
         ORDER BY `leagueparticipant_out` DESC";
 $champions_out_sql = $mysqli->query($sql);
 
 $champions_out_array = $champions_out_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $country_name;
 
 include (__DIR__ . '/view/main.php');

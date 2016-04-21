@@ -4,17 +4,17 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `tournamenttype_name`,
                `tournamenttype_visitor`
         FROM `tournamenttype`
-        WHERE `tournamenttype_id`='$get_num'
+        WHERE `tournamenttype_id`='$num_get'
         LIMIT 1";
 $tournamenttype_sql = $mysqli->query($sql);
 
@@ -35,7 +35,7 @@ if (isset($_POST['tournamenttype_name']))
     $sql = "UPDATE `tournamenttype`
             SET `tournamenttype_name`=?,
                 `tournamenttype_visitor`=?
-            WHERE `tournamenttype_id`='$get_num'";
+            WHERE `tournamenttype_id`='$num_get'";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('sd', $tournamenttype_name, $tournamenttype_visitor);
     $prepare->execute();

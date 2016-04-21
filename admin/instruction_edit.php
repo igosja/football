@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `instruction_instructionchapter_id`, `instruction_name`
         FROM `instruction`
-        WHERE `instruction_id`='$get_num'
+        WHERE `instruction_id`='$num_get'
         LIMIT 1";
 $instruction_sql = $mysqli->query($sql);
 
@@ -34,7 +34,7 @@ if (isset($_POST['chapter_id']))
     $sql = "UPDATE `instruction` 
             SET `instruction_name`=?, 
                 `instruction_instructionchapter_id`=?
-            WHERE `instruction_id`='$get_num'
+            WHERE `instruction_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('si', $instruction_name, $chapter_id);

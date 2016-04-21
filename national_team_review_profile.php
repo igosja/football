@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `t1`.`country_name` AS `country_name`,
@@ -33,7 +33,7 @@ $sql = "SELECT `t1`.`country_name` AS `country_name`,
         ON `country_user_id`=`user_id`
         LEFT JOIN `country` AS `t2`
         ON `user_country_id`=`t2`.`country_id`
-        WHERE `t1`.`country_id`='$get_num'
+        WHERE `t1`.`country_id`='$num_get'
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
 
@@ -54,7 +54,7 @@ $sql = "SELECT `team_id`,
         FROM `team`
         LEFT JOIN `city`
         ON `team_city_id`=`city_id`
-        WHERE `city_country_id`='$get_num'
+        WHERE `city_country_id`='$num_get'
         AND `team_id`!='0'
         ORDER BY `team_reputation` DESC, `team_id` ASC
         LIMIT 7";
@@ -78,7 +78,7 @@ $sql = "SELECT `name_name`,
         ON `team_city_id`=`city_id`
         LEFT JOIN `country`
         ON `city_country_id`=`country_id`
-        WHERE `country_id`='$get_num'
+        WHERE `country_id`='$num_get'
         AND `team_id`!='0'
         ORDER BY `player_reputation` DESC, `player_id` ASC
         LIMIT 7";
@@ -95,11 +95,11 @@ $sql = "SELECT `game_id`,
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
         LEFT JOIN `country`
-        ON IF (`game_home_country_id`='$get_num', `game_guest_country_id`=`country_id`, `game_home_country_id`=`country_id`)
+        ON IF (`game_home_country_id`='$num_get', `game_guest_country_id`=`country_id`, `game_home_country_id`=`country_id`)
         LEFT JOIN `tournament`
         ON `game_tournament_id`=`tournament_id`
-        WHERE (`game_home_country_id`='$get_num'
-        OR `game_guest_country_id`='$get_num')
+        WHERE (`game_home_country_id`='$num_get'
+        OR `game_guest_country_id`='$num_get')
         AND `game_played`='0'
         ORDER BY `shedule_date` ASC
         LIMIT 1";
@@ -109,7 +109,7 @@ $nearest_game_array = $nearest_game_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `ratingcountry_position`
         FROM `ratingcountry`
-        WHERE `ratingcountry_country_id`='$get_num'
+        WHERE `ratingcountry_country_id`='$num_get'
         LIMIT 1";
 $rating_sql = $mysqli->query($sql);
 
@@ -138,15 +138,15 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         LEFT JOIN `city` AS `seller_city`
         ON `seller`.`team_city_id`=`seller_city`.`city_id`
         WHERE `transferhistory_season_id`='$igosja_season_id'-'1'
-        AND (`seller_city`.`city_country_id`='$get_num'
-        OR `buyer_city`.`city_country_id`='$get_num')
+        AND (`seller_city`.`city_country_id`='$num_get'
+        OR `buyer_city`.`city_country_id`='$num_get')
         ORDER BY `transferhistory_price` DESC, `transferhistory_id` ASC
         LIMIT 10";
 $transfer_sql = $mysqli->query($sql);
 
 $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $country_name;
 
 include (__DIR__ . '/view/main.php');

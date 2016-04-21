@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = $authorization_team_id;
+    $num_get = $authorization_team_id;
 }
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -200,7 +200,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `player_country_id`=`country_id`
         LEFT JOIN `position`
         ON `player_position_id`=`position_id`
-        WHERE `player_team_id`!='$get_num'
+        WHERE `player_team_id`!='$num_get'
         AND `player_statustransfer_id`='2'
         AND `player_age` BETWEEN '$sql_age_min' AND '$sql_age_max'
         AND `player_weight` BETWEEN '$sql_weight_min' AND '$sql_weight_max'
@@ -245,7 +245,7 @@ $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

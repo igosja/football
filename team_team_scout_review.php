@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
-    $get_num = $authorization_team_id;
+    $num_get = $authorization_team_id;
 }
 else
 {
@@ -14,7 +14,7 @@ else
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -39,7 +39,7 @@ $sql = "SELECT `name_name`,
         ON `name_id`=`staff_name_id`
         LEFT JOIN `surname`
         ON `surname_id`=`staff_surname_id`
-        WHERE `staff_team_id`='$get_num'
+        WHERE `staff_team_id`='$num_get'
         AND `staff_staffpost_id`='6'
         ORDER BY `staff_id` ASC";
 $scout_sql = $mysqli->query($sql);
@@ -66,14 +66,14 @@ $sql = "SELECT ROUND(COUNT(DISTINCT `scout_player_id`)/`count_player`*100) AS `c
         ON `t1`.`player_country_id`=`country_id`
         LEFT JOIN `staff`
         ON `scout_team_id`=`staff_team_id`
-        WHERE `staff_team_id`='$get_num'
+        WHERE `staff_team_id`='$num_get'
         GROUP BY `player`.`player_country_id`
         ORDER BY `player`.`player_country_id` ASC";
 $knowledge_sql = $mysqli->query($sql);
 
 $knowledge_array = $knowledge_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

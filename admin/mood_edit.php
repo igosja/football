@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `mood_name`
         FROM `mood`
-        WHERE `mood_id`='$get_num'
+        WHERE `mood_id`='$num_get'
         LIMIT 1";
 $mood_sql = $mysqli->query($sql);
 
@@ -32,7 +32,7 @@ if (isset($_POST['mood_name']))
 
     $sql = "UPDATE `mood` 
             SET `mood_name`=?
-            WHERE `mood_id`='$get_num'
+            WHERE `mood_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('s', $mood_name);
@@ -41,7 +41,7 @@ if (isset($_POST['mood_name']))
 
     if ('image/png' == $_FILES['mood_logo']['type'])
     {
-        copy($_FILES['mood_logo']['tmp_name'], '../img/mood/' . $get_num . '.png');
+        copy($_FILES['mood_logo']['tmp_name'], '../img/mood/' . $num_get . '.png');
     }
 
     redirect('mood_list.php');

@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `positioncreate_position_id`
         FROM `positioncreate`
-        WHERE `positioncreate_id`='$get_num'
+        WHERE `positioncreate_id`='$num_get'
         LIMIT 1";
 $position_sql = $mysqli->query($sql);
 
@@ -32,7 +32,7 @@ if (isset($_POST['position_id']))
 
     $sql = "UPDATE `positioncreate` 
             SET `positioncreate_position_id`='$position_id'
-            WHERE `positioncreate_id`='$get_num'";
+            WHERE `positioncreate_id`='$num_get'";
     $mysqli->query($sql);
 
     redirect('positioncreate_list.php');

@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `captain_country_id`,
@@ -90,7 +90,7 @@ $sql = "SELECT `captain_country_id`,
             ON `player_country_id`=`country_id`
         ) AS `t3`
         ON `vicecaptain_id`=`team_captain_player_id_2`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONSHIP . "'
         AND `standing_season_id`='$igosja_season_id'
         LIMIT 1";
@@ -115,11 +115,11 @@ $sql = "SELECT `game_id`,
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
         LEFT JOIN `team`
-        ON IF (`game_home_team_id`='$get_num', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
+        ON IF (`game_home_team_id`='$num_get', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
         LEFT JOIN `tournament`
         ON `game_tournament_id`=`tournament_id`
-        WHERE (`game_home_team_id`='$get_num'
-        OR `game_guest_team_id`='$get_num')
+        WHERE (`game_home_team_id`='$num_get'
+        OR `game_guest_team_id`='$num_get')
         AND `game_played`='0'
         ORDER BY `shedule_date` ASC
         LIMIT 1";
@@ -128,9 +128,9 @@ $nearest_game_sql = $mysqli->query($sql);
 $nearest_game_array = $nearest_game_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `game_home_team_id`,
-               IF (`game_home_team_id`='$get_num', `game_home_score`, `game_guest_score`) AS `home_score`,
+               IF (`game_home_team_id`='$num_get', `game_home_score`, `game_guest_score`) AS `home_score`,
                `game_id`,
-               IF (`game_home_team_id`='$get_num', `game_guest_score`, `game_home_score`) AS `guest_score`,
+               IF (`game_home_team_id`='$num_get', `game_guest_score`, `game_home_score`) AS `guest_score`,
                `shedule_date`,
                `team_id`,
                `team_name`,
@@ -139,11 +139,11 @@ $sql = "SELECT `game_home_team_id`,
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
         LEFT JOIN `team`
-        ON IF (`game_home_team_id`='$get_num', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
+        ON IF (`game_home_team_id`='$num_get', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
         LEFT JOIN `tournament`
         ON `game_tournament_id`=`tournament_id`
-        WHERE (`game_home_team_id`='$get_num'
-        OR `game_guest_team_id`='$get_num')
+        WHERE (`game_home_team_id`='$num_get'
+        OR `game_guest_team_id`='$num_get')
         AND `game_played`='1'
         ORDER BY `shedule_date` DESC
         LIMIT 5";
@@ -153,7 +153,7 @@ $latest_game_array = $latest_game_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT SUM(`statisticteam_game`) AS `count_game`
         FROM `statisticteam`
-        WHERE `statisticteam_team_id`='$get_num'
+        WHERE `statisticteam_team_id`='$num_get'
         AND `statisticteam_season_id`='$igosja_season_id'";
 $count_game_sql = $mysqli->query($sql);
 
@@ -170,7 +170,7 @@ $sql = "SELECT SUM(`statisticplayer_goal`) AS `goal`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_team_id`='$get_num'
+        WHERE `statisticplayer_team_id`='$num_get'
         GROUP BY `statisticplayer_player_id`
         ORDER BY `statisticplayer_goal` DESC
         LIMIT 1";
@@ -189,7 +189,7 @@ $sql = "SELECT `name_name`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_team_id`='$get_num'
+        WHERE `statisticplayer_team_id`='$num_get'
         GROUP BY `statisticplayer_player_id`
         ORDER BY `statisticplayer_pass_scoring` DESC
         LIMIT 1";
@@ -208,7 +208,7 @@ $sql = "SELECT SUM(`statisticplayer_best`) AS `best`,
         ON `player_name_id`=`name_id`
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
-        WHERE `statisticplayer_team_id`='$get_num'
+        WHERE `statisticplayer_team_id`='$num_get'
         GROUP BY `statisticplayer_player_id`
         ORDER BY `statisticplayer_best` DESC
         LIMIT 1";
@@ -218,7 +218,7 @@ $player_best_array = $player_best_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

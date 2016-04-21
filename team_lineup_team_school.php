@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
-    $get_num = $authorization_team_id;
+    $num_get = $authorization_team_id;
 }
 else
 {
@@ -14,7 +14,7 @@ else
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -36,18 +36,27 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
     $ok         = (int) $_GET['ok'];
 
     $sql = "SELECT `city_country_id`,
+                   `name_name`,
+                   `position_description`,
                    `school_height`,
                    `school_name_id`,
                    `school_position_id`,
                    `school_surname_id`,
                    `school_weight`,
+                   `surname_name`,
                    `team_school_level`
             FROM `school`
             LEFT JOIN `team`
             ON `team_id`=`school_team_id`
             LEFT JOIN `city`
             ON `team_city_id`=`city_id`
-            WHERE `school_team_id`='$get_num'
+            LEFT JOIN `name`
+            ON `school_name_id`=`name_id`
+            LEFT JOIN `surname`
+            ON `school_surname_id`=`surname_id`
+            LEFT JOIN `position`
+            ON `school_position_id`=`position_id`
+            WHERE `school_team_id`='$num_get'
             AND `school_id`='$school_id'";
     $school_sql = $mysqli->query($sql);
 
@@ -58,7 +67,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'Игрок выбран неправильно.';
 
-        redirect('team_lineup_team_school.php?num=' . $get_num);
+        redirect('team_lineup_team_school.php?num=' . $num_get);
     }
 
     $school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
@@ -66,7 +75,10 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
     $country_id     = $school_array[0]['city_country_id'];
     $position_id    = $school_array[0]['school_position_id'];
     $name_id        = $school_array[0]['school_name_id'];
+    $name           = $school_array[0]['name_name'];
     $surname_id     = $school_array[0]['school_surname_id'];
+    $surname        = $school_array[0]['surname_name'];
+    $position       = $school_array[0]['position_description'];
     $height         = $school_array[0]['school_height'];
     $weight         = $school_array[0]['school_weight'];
     $school_level   = $school_array[0]['team_school_level'];
@@ -84,7 +96,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
                     `player_name_id`='$name_id',
                     `player_age`='$age',
                     `player_surname_id`='$surname_id',
-                    `player_team_id`='$get_num',
+                    `player_team_id`='$num_get',
                     `player_leg_left`='$leg_left',
                     `player_leg_right`='$leg_right',
                     `player_ability`='$ability',
@@ -141,7 +153,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
                 ON `city_country_id`=`countryname_country_id`
                 LEFT JOIN `team`
                 ON `team_city_id`=`city_id`
-                WHERE `team_id`='$get_num'
+                WHERE `team_id`='$num_get'
                 ORDER BY RAND()
                 LIMIT 1";
         $name_sql = $mysqli->query($sql);
@@ -156,7 +168,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
                 ON `city_country_id`=`countrysurname_country_id`
                 LEFT JOIN `team`
                 ON `team_city_id`=`city_id`
-                WHERE `team_id`='$get_num'
+                WHERE `team_id`='$num_get'
                 ORDER BY RAND()
                 LIMIT 1";
         $surname_sql = $mysqli->query($sql);
@@ -177,7 +189,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
         $_SESSION['message_class']  = 'success';
         $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
-        redirect('team_lineup_team_player.php?num=' . $get_num);
+        redirect('team_lineup_team_player.php?num=' . $num_get);
     }
 }
 
@@ -191,7 +203,7 @@ $count_position = $position_array[0]['count'];
 
 $sql = "SELECT COUNT(`school_id`) AS `count`
         FROM `school`
-        WHERE `school_team_id`='$get_num'";
+        WHERE `school_team_id`='$num_get'";
 $school_sql = $mysqli->query($sql);
 
 $school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
@@ -213,7 +225,7 @@ if ($count_position > $count_school)
 
         $sql = "SELECT COUNT(`school_id`) AS `count`
                 FROM `school`
-                WHERE `school_team_id`='$get_num'
+                WHERE `school_team_id`='$num_get'
                 AND `school_position_id`='$position_id'";
         $school_sql = $mysqli->query($sql);
 
@@ -228,7 +240,7 @@ if ($count_position > $count_school)
                     ON `city_country_id`=`countryname_country_id`
                     LEFT JOIN `team`
                     ON `team_city_id`=`city_id`
-                    WHERE `team_id`='$get_num'
+                    WHERE `team_id`='$num_get'
                     ORDER BY RAND()
                     LIMIT 1";
             $name_sql = $mysqli->query($sql);
@@ -243,7 +255,7 @@ if ($count_position > $count_school)
                     ON `city_country_id`=`countrysurname_country_id`
                     LEFT JOIN `team`
                     ON `team_city_id`=`city_id`
-                    WHERE `team_id`='$get_num'
+                    WHERE `team_id`='$num_get'
                     ORDER BY RAND()
                     LIMIT 1";
             $surname_sql = $mysqli->query($sql);
@@ -257,7 +269,7 @@ if ($count_position > $count_school)
                         `school_name_id`='$name_id',
                         `school_position_id`='$position_id',
                         `school_surname_id`='$surname_id',
-                        `school_team_id`='$get_num',
+                        `school_team_id`='$num_get',
                         `school_weight`=`school_height`-'95'-'5'*RAND()";
             $mysqli->query($sql);
         }
@@ -291,13 +303,13 @@ $sql = "SELECT `country_id`,
         ON `team_city_id`=`city_id`
         LEFT JOIN `country`
         ON `city_country_id`=`country_id`
-        WHERE `school_team_id`='$get_num'
+        WHERE `school_team_id`='$num_get'
         ORDER BY `school_position_id` ASC";
 $school_sql = $mysqli->query($sql);
 
 $school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

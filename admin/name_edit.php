@@ -4,18 +4,18 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `countryname_country_id`, `name_name`
         FROM `name`
         LEFT JOIN `countryname`
         ON `name_id`=`countryname_name_id`
-        WHERE `name_id`='$get_num'
+        WHERE `name_id`='$num_get'
         LIMIT 1";
 $name_sql = $mysqli->query($sql);
 
@@ -35,7 +35,7 @@ if (isset($_POST['name_name']))
 
     $sql = "UPDATE `name` 
             SET `name_name`=?
-            WHERE `name_id`='$get_num'
+            WHERE `name_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('s', $name_name);
@@ -44,7 +44,7 @@ if (isset($_POST['name_name']))
 
     $sql = "SELECT `countryname_id`
             FROM `countryname`
-            WHERE `countryname_name_id`='$get_num'
+            WHERE `countryname_name_id`='$num_get'
             AND `countryname_country_id`='$country_id'
             LIMIT 1";
     $check_sql = $mysqli->query($sql);
@@ -54,7 +54,7 @@ if (isset($_POST['name_name']))
     if (0 == $count_check)
     {
         $sql = "INSERT INTO `countryname`
-                SET `countryname_name_id`='$get_num',
+                SET `countryname_name_id`='$num_get',
                     `countryname_country_id`='$country_id'";
         $mysqli->query($sql);
     }

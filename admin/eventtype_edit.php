@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `eventtype_name`
         FROM `eventtype`
-        WHERE `eventtype_id`='$get_num'
+        WHERE `eventtype_id`='$num_get'
         LIMIT 1";
 $eventtype_sql = $mysqli->query($sql);
 
@@ -32,7 +32,7 @@ if (isset($_POST['eventtype_name']))
 
     $sql = "UPDATE `eventtype` 
             SET `eventtype_name`=?
-            WHERE `eventtype_id`='$get_num'
+            WHERE `eventtype_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('s', $eventtype_name);
@@ -41,7 +41,7 @@ if (isset($_POST['eventtype_name']))
 
     if ('image/png' == $_FILES['eventtype_logo']['type'])
     {
-        copy($_FILES['eventtype_logo']['tmp_name'], '../img/eventtype/' . $get_num . '.png');
+        copy($_FILES['eventtype_logo']['tmp_name'], '../img/eventtype/' . $num_get . '.png');
     }
 
     redirect('eventtype_list.php');

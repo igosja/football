@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `continent_name`
         FROM `continent`
-        WHERE `continent_id`='$get_num'
+        WHERE `continent_id`='$num_get'
         LIMIT 1";
 $continent_sql = $mysqli->query($sql);
 
@@ -38,13 +38,13 @@ $sql = "SELECT `country_id`,
         ON `continent_id`=`country_continent_id`
         CROSS JOIN `ratingcountry`
         ON `ratingcountry_country_id`=`country_id`
-        WHERE `country_continent_id`='$get_num'
+        WHERE `country_continent_id`='$num_get'
         ORDER BY `ratingcountry_position` ASC";
 $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $continent_name;
 
 include (__DIR__ . '/view/main.php');

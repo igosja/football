@@ -75,9 +75,23 @@
                                                     alt="Сообщения"
                                                     class="img-12"
                                                     src="/img/inbox.png"
+                                                    title="Сообщения"
                                                 />
                                                 <?php if (isset($count_message) && 0 < $count_message) { ?>
                                                     <sup class="inbox-sup"><?= $count_message; ?></sup>
+                                                <?php } ?>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="profile_news_support.php" class="main-menu-link">
+                                                <img
+                                                    alt="Техподдержка"
+                                                    class="img-12"
+                                                    src="/img/support.png"
+                                                    title="Техподдержка"
+                                                />
+                                                <?php if (isset($count_support) && 0 < $count_support) { ?>
+                                                    <sup class="inbox-sup"><?= $count_support; ?></sup>
                                                 <?php } ?>
                                             </a>
                                         </li>
@@ -107,19 +121,7 @@
                                     <?php if (isset($authorization_id)) { ?>
                                         <li><a href="shop.php" class="main-menu-link">Магазин</a></li>
                                     <?php } ?>
-                                    <li><a href="rule.php" class="main-menu-link">Правила</a></li>
-                                    <li>
-                                        <a href="profile_news_support.php" class="main-menu-last">
-                                            <img
-                                                alt="Техподдержка"
-                                                class="img-12"
-                                                src="/img/support.png"
-                                            />
-                                            <?php if (isset($count_support) && 0 < $count_support) { ?>
-                                                <sup class="inbox-sup"><?= $count_support; ?></sup>
-                                            <?php } ?>
-                                        </a>
-                                    </li>
+                                    <li><a href="rule.php" class="main-menu-last">Правила</a></li>
                                 </ul>
                             </td>
                         </tr>

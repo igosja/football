@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
-    $get_num = $authorization_team_id;
+    $num_get = $authorization_team_id;
 }
 else
 {
@@ -29,7 +29,7 @@ $sql = "SELECT `building_end_date`,
             WHERE `building_buildingtype_id`='5'
         ) AS `t1`
         ON `building_team_id`=`stadium_team_id`
-        WHERE `stadium_team_id`='$get_num'";
+        WHERE `stadium_team_id`='$num_get'";
 $stadium_sql = $mysqli->query($sql);
 
 $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
@@ -54,25 +54,25 @@ if (isset($_GET['data']) &&
             $_SESSION['message_class']  = 'error';
             $_SESSION['message_text']   = 'Не правильно введены размеры поля.';
 
-            redirect('fieldsize.php?num=' . $get_num);
+            redirect('fieldsize.php?num=' . $num_get);
         }
 
         $sql = "INSERT INTO `building`
                 SET `building_buildingtype_id`='5',
                     `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 1 DAY),
                     `building_length`='$length',
-                    `building_team_id`='$get_num',
+                    `building_team_id`='$num_get',
                     `building_width`='$width'";
         $mysqli->query($sql);
 
         $_SESSION['message_class']  = 'success';
         $_SESSION['message_text']   = 'Работы по смене размеров поля начались успешно.';
 
-        redirect('team_team_information_condition.php?num=' . $get_num);
+        redirect('team_team_information_condition.php?num=' . $num_get);
     }
 }
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $authorization_team_name;
 
 include (__DIR__ . '/view/main.php');

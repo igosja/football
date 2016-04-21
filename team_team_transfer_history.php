@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -49,7 +49,7 @@ $sql = "SELECT `name_name`,
         ON `transferhistory_offertype_id`=`offertype_id`
         LEFT JOIN `team`
         ON `transferhistory_buyer_id`=`team_id`
-        WHERE `transferhistory_seller_id`='$get_num'
+        WHERE `transferhistory_seller_id`='$num_get'
         ORDER BY `transferhistory_date` DESC";
 $transferhistory_sell_sql = $mysqli->query($sql);
 
@@ -57,7 +57,7 @@ $transferhistory_sell_array = $transferhistory_sell_sql->fetch_all(MYSQLI_ASSOC)
 
 $sql = "SELECT SUM(`transferhistory_price`) AS `transferhistory_total_price`
         FROM `transferhistory`
-        WHERE `transferhistory_seller_id`='$get_num'";
+        WHERE `transferhistory_seller_id`='$num_get'";
 $transferhistory_sell_sql = $mysqli->query($sql);
 
 $transferhistory_sell_summ = $transferhistory_sell_sql->fetch_all(MYSQLI_ASSOC);
@@ -82,7 +82,7 @@ $sql = "SELECT `name_name`,
         ON `transferhistory_offertype_id`=`offertype_id`
         LEFT JOIN `team`
         ON `transferhistory_seller_id`=`team_id`
-        WHERE `transferhistory_buyer_id`='$get_num'
+        WHERE `transferhistory_buyer_id`='$num_get'
         ORDER BY `transferhistory_date` DESC";
 $transferhistory_buy_sql = $mysqli->query($sql);
 
@@ -90,12 +90,12 @@ $transferhistory_buy_array = $transferhistory_buy_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT SUM(`transferhistory_price`) AS `transferhistory_total_price`
         FROM `transferhistory`
-        WHERE `transferhistory_buyer_id`='$get_num'";
+        WHERE `transferhistory_buyer_id`='$num_get'";
 $transferhistory_buy_sql = $mysqli->query($sql);
 
 $transferhistory_buy_summ = $transferhistory_buy_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

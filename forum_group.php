@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 if (isset($_GET['page']))
@@ -26,7 +26,7 @@ $offset = ($page - 1) * $limit;
 $sql = "SELECT `forumthemegroup_id`,
                `forumthemegroup_name`
         FROM `forumthemegroup`
-        WHERE `forumthemegroup_id`='$get_num'
+        WHERE `forumthemegroup_id`='$num_get'
         LIMIT 1";
 $head_sql = $mysqli->query($sql);
 
@@ -75,7 +75,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
             ON `forumpost_user_id`=`user_id`
         ) AS `t3`
         ON `t3`.`forumpost_id`=`t2`.`forumpost_id`
-        WHERE `forumtheme_forumthemegroup_id`='$get_num'
+        WHERE `forumtheme_forumthemegroup_id`='$num_get'
         ORDER BY `forumtheme_id` ASC
         LIMIT $offset, $limit";
 $forum_sql = $mysqli->query($sql);
@@ -97,13 +97,13 @@ if (isset($authorization_user_id))
             LEFT JOIN `forumtheme`
             ON `forumtheme_id`=`forumread_forumtheme_id`
             WHERE `forumread_user_id`='$authorization_user_id'
-            AND `forumtheme_forumthemegroup_id`='$get_num'
+            AND `forumtheme_forumthemegroup_id`='$num_get'
             ORDER BY `forumread_id`";
     $forumread_sql = $mysqli->query($sql);
 
     $forumread_array = $forumread_sql->fetch_all(MYSQLI_ASSOC);
 }
 
-$num = $get_num;
+$num = $num_get;
 
 include (__DIR__ . '/view/main.php');

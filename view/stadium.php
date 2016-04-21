@@ -4,21 +4,21 @@
             <p class="header">Вместимость стадиона</p>
             <?php if (isset($stadium_array[0]['building_capacity'])) { ?>
                 <p class="center warning">
-                    Сейчас проходит увеличение стадиона до <?= $stadium_array[0]['building_capacity']; ?> мест.<br/>
+                    Сейчас проходит увеличение стадиона до <?= $stadium_array[0]['building_capacity']; ?> мест.<br />
                     Строительство продлится до <?= f_igosja_ufu_date($stadium_array[0]['building_end_date']); ?>
                 </p>
             <?php } elseif (isset($new_capacity) && isset($increase) && 0 == $increase) { ?>
                 <p class="center info">
-                    Вы собираетесь уменьшить вместимость своего стадиона<br/>
-                    Строительство бесплатно и пройдет мгновенно.<br/>
+                    Вы собираетесь уменьшить вместимость своего стадиона<br />
+                    Строительство бесплатно и пройдет мгновенно.<br />
                     <a href="stadium.php?data[capacity]=<?= $new_capacity; ?>; ?>&ok=1">Изменить вместимость</a> |
                     <a href="stadium.php">Отказаться</a>
                 </p>
             <?php } elseif (isset($new_capacity) && isset($increase) && 1 == $increase) { ?>
                 <p class="center info">
-                    Вы собираетесь увеличить вместимость своего стадиона<br/>
+                    Вы собираетесь увеличить вместимость своего стадиона<br />
                     Стоимость строительльтва составит <?= f_igosja_money($price); ?>.
-                    Строительство продлится до <?= f_igosja_ufu_date(date('d.m.Y', time()+30*24*60*60)); ?><br/>
+                    Строительство продлится до <?= f_igosja_ufu_date(date('d.m.Y', time()+30*24*60*60)); ?><br />
                     <a href="stadium.php?data[capacity]=<?= $new_capacity; ?>; ?>&ok=1">Изменить вместимость</a> |
                     <a href="stadium.php">Отказаться</a>
                 </p>

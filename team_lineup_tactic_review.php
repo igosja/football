@@ -4,7 +4,7 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($authorization_team_id))
 {
-    $get_num = $authorization_team_id;
+    $num_get = $authorization_team_id;
 }
 else
 {
@@ -14,7 +14,7 @@ else
 
 $sql = "SELECT `team_name`
         FROM `team`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         LIMIT 1";
 $team_sql = $mysqli->query($sql);
 
@@ -36,8 +36,8 @@ else
             FROM `game`
             LEFT JOIN `shedule`
             ON `shedule_id`=`game_shedule_id`
-            WHERE (`game_home_team_id`='$get_num'
-            OR `game_guest_team_id`='$get_num')
+            WHERE (`game_home_team_id`='$num_get'
+            OR `game_guest_team_id`='$num_get')
             AND `game_played`='0'
             ORDER BY `shedule_date` ASC
             LIMIT 1";
@@ -59,8 +59,8 @@ else
 $sql = "SELECT COUNT(`game_id`) AS `count`
         FROM `game`
         WHERE `game_id`='$game_id'
-        AND (`game_home_team_id`='$get_num'
-        OR `game_guest_team_id`='$get_num')";
+        AND (`game_home_team_id`='$num_get'
+        OR `game_guest_team_id`='$num_get')";
 $count_sql = $mysqli->query($sql);
 
 $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
@@ -110,7 +110,7 @@ if (isset($_POST['data']))
                     SET `lineup_player_id`='" . $$player . "',
                         `lineup_position_id`='" . $$position . "',
                         `lineup_role_id`='" . $$role . "',
-                        `lineup_team_id`='$get_num',
+                        `lineup_team_id`='$num_get',
                         `lineup_game_id`='$game_id'";
         }
         else
@@ -129,7 +129,7 @@ if (isset($_POST['data']))
     $sql = "SELECT COUNT(`lineupmain_id`) AS `count`
             FROM `lineupmain`
             WHERE `lineupmain_game_id`='$game_id'
-            AND `lineupmain_team_id`='$get_num'";
+            AND `lineupmain_team_id`='$num_get'";
     $count_sql = $mysqli->query($sql);
 
     $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
@@ -142,7 +142,7 @@ if (isset($_POST['data']))
                 SET `lineupmain_formation_id`='$formation_id',
                     `lineupmain_gamemood_id`='$gamemood_id',
                     `lineupmain_gamestyle_id`='$gamestyle_id',
-                    `lineupmain_team_id`='$get_num',
+                    `lineupmain_team_id`='$num_get',
                     `lineupmain_game_id`='$game_id'";
     }
     else
@@ -151,7 +151,7 @@ if (isset($_POST['data']))
                 SET `lineupmain_formation_id`='$formation_id',
                     `lineupmain_gamemood_id`='$gamemood_id',
                     `lineupmain_gamestyle_id`='$gamestyle_id'
-                WHERE `lineupmain_team_id`='$get_num'
+                WHERE `lineupmain_team_id`='$num_get'
                 AND `lineupmain_game_id`='$game_id'
                 LIMIT 1";
     }
@@ -161,7 +161,7 @@ if (isset($_POST['data']))
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
-    redirect('team_lineup_tactic_review.php?num=' . $get_num . '&game=' . $game_id);
+    redirect('team_lineup_tactic_review.php?num=' . $num_get . '&game=' . $game_id);
 }
 
 $sql = "SELECT `game_home_team_id`,
@@ -179,16 +179,16 @@ $sql = "SELECT `game_home_team_id`,
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
         LEFT JOIN `team`
-        ON IF (`game_home_team_id`='$get_num', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
+        ON IF (`game_home_team_id`='$num_get', `game_guest_team_id`=`team_id`, `game_home_team_id`=`team_id`)
         LEFT JOIN `tournament`
         ON `game_tournament_id`=`tournament_id`
         LEFT JOIN `weather`
         ON `weather_id`=`game_weather_id`
         LEFT JOIN `lineupmain`
         ON (`lineupmain_game_id`=`game_id`
-        AND `lineupmain_team_id`='$get_num')
-        WHERE (`game_home_team_id`='$get_num'
-        OR `game_guest_team_id`='$get_num')
+        AND `lineupmain_team_id`='$num_get')
+        WHERE (`game_home_team_id`='$num_get'
+        OR `game_guest_team_id`='$num_get')
         AND `game_played`='0'
         ORDER BY `shedule_date` ASC
         LIMIT 5";
@@ -213,7 +213,7 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
-        WHERE `team_id`='$get_num'
+        WHERE `team_id`='$num_get'
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
@@ -244,7 +244,7 @@ $sql = "SELECT `lineupmain_formation_id`,
                `lineupmain_gamemood_id`,
                `lineupmain_gamestyle_id`
         FROM `lineupmain`
-        WHERE `lineupmain_team_id`='$get_num'
+        WHERE `lineupmain_team_id`='$num_get'
         AND `lineupmain_game_id`='$game_id'
         LIMIT 1";
 $lineupmain_sql = $mysqli->query($sql);
@@ -256,7 +256,7 @@ $sql = "SELECT `lineup_id`,
                `lineup_position_id`,
                `lineup_role_id`
         FROM `lineup`
-        WHERE `lineup_team_id`='$get_num'
+        WHERE `lineup_team_id`='$num_get'
         AND `lineup_game_id`='$game_id'
         ORDER BY `lineup_id` ASC";
 $lineup_sql = $mysqli->query($sql);
@@ -264,7 +264,7 @@ $lineup_sql = $mysqli->query($sql);
 $count_lineup = $lineup_sql->num_rows;
 $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $team_name;
 
 include (__DIR__ . '/view/main.php');

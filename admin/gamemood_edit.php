@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `gamemood_description`, `gamemood_name`
         FROM `gamemood`
-        WHERE `gamemood_id`='$get_num'
+        WHERE `gamemood_id`='$num_get'
         LIMIT 1";
 $gamemood_sql = $mysqli->query($sql);
 
@@ -34,7 +34,7 @@ if (isset($_POST['gamemood_name']))
     $sql = "UPDATE `gamemood` 
             SET `gamemood_name`=?,
                 `gamemood_description`=?
-            WHERE `gamemood_id`='$get_num'
+            WHERE `gamemood_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('ss', $gamemood_name, $gamemood_description);

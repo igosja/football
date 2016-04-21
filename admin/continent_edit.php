@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `continent_name`
         FROM `continent`
-        WHERE `continent_id`='$get_num'
+        WHERE `continent_id`='$num_get'
         LIMIT 1";
 $continent_sql = $mysqli->query($sql);
 
@@ -32,7 +32,7 @@ if (isset($_POST['continent_name']))
 
     $sql = "UPDATE `continent` 
             SET `continent_name`=?
-            WHERE `continent_id`='$get_num'
+            WHERE `continent_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('s', $continent_name);
@@ -41,7 +41,7 @@ if (isset($_POST['continent_name']))
 
     if ('image/png' == $_FILES['continent_logo']['type'])
     {
-        copy($_FILES['continent_logo']['tmp_name'], '../img/continent/' . $get_num . '.png');
+        copy($_FILES['continent_logo']['tmp_name'], '../img/continent/' . $num_get . '.png');
     }
 
     redirect('continent_list.php');

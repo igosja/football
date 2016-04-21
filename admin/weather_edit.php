@@ -4,16 +4,16 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `weather_name`
         FROM `weather`
-        WHERE `weather_id`='$get_num'
+        WHERE `weather_id`='$num_get'
         LIMIT 1";
 $weather_sql = $mysqli->query($sql);
 
@@ -31,7 +31,7 @@ if (isset($_POST['weather_name']))
 
     $sql = "UPDATE `weather` 
             SET `weather_name`=?
-            WHERE `weather_id`='$get_num'
+            WHERE `weather_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('s', $weather_name);
@@ -40,12 +40,12 @@ if (isset($_POST['weather_name']))
 
     if ('image/png' == $_FILES['weather_logo']['type'])
     {
-        copy($_FILES['weather_logo']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/weather/' . $get_num . '.png');
+        copy($_FILES['weather_logo']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/weather/' . $num_get . '.png');
     }
 
     if ('image/png' == $_FILES['weather_logo_12']['type'])
     {
-        copy($_FILES['weather_logo_12']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/weather/12/' . $get_num . '.png');
+        copy($_FILES['weather_logo_12']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/weather/12/' . $num_get . '.png');
     }
 
     redirect('weather_list.php');

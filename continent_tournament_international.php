@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `continent_name`
         FROM `continent`
-        WHERE `continent_id`='$get_num'
+        WHERE `continent_id`='$num_get'
         LIMIT 1";
 $continent_sql = $mysqli->query($sql);
 
@@ -125,7 +125,7 @@ else
 $tournament_array = array_merge($tournament_array, $league_array);
 $count_tournament = count($tournament_array);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $continent_name;
 
 include (__DIR__ . '/view/main.php');

@@ -4,16 +4,16 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `country_name`
         FROM `country`
-        WHERE `country_id`='$get_num'
+        WHERE `country_id`='$num_get'
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
 
@@ -54,14 +54,14 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         LEFT JOIN `city` AS `seller_city`
         ON `seller`.`team_city_id`=`seller_city`.`city_id`
         WHERE `transferhistory_season_id`='$igosja_season_id'-'1'
-        AND (`seller_city`.`city_country_id`='$get_num'
-        OR `buyer_city`.`city_country_id`='$get_num')
+        AND (`seller_city`.`city_country_id`='$num_get'
+        OR `buyer_city`.`city_country_id`='$num_get')
         ORDER BY `transferhistory_price` DESC";
 $transfer_sql = $mysqli->query($sql);
 
 $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $country_name;
 
 include (__DIR__ . '/view/main.php');

@@ -4,11 +4,11 @@ include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `team_id`,
@@ -16,7 +16,7 @@ $sql = "SELECT `team_id`,
         FROM `transfer`
         LEFT JOIN `team`
         ON `transfer_buyer_id`=`team_id`
-        WHERE `transfer_player_id`='$get_num'
+        WHERE `transfer_player_id`='$num_get'
         LIMIT 1";
 $transfer_sql = $mysqli->query($sql);
 
@@ -44,7 +44,7 @@ $sql = "SELECT `name_name`,
         ON `statusteam_id`=`player_statusteam_id`
         LEFT JOIN `statustransfer`
         ON `statustransfer_id`=`player_statustransfer_id`
-        WHERE `player_id`='$get_num'
+        WHERE `player_id`='$num_get'
         LIMIT 1";
 $player_sql = $mysqli->query($sql);
 
@@ -78,7 +78,7 @@ if (isset($_POST['data']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'У вашего клуба недостаточно денег для проведения этой сделки.';
 
-        redirect('player_transfer_offer.php?num=' . $get_num);
+        redirect('player_transfer_offer.php?num=' . $num_get);
     }
 
     $team_id = $player_array[0]['team_id'];
@@ -88,7 +88,7 @@ if (isset($_POST['data']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'Нельзя купить своего игрока.';
 
-        redirect('player_transfer_offer.php?num=' . $get_num);
+        redirect('player_transfer_offer.php?num=' . $num_get);
     }
 
     $statustransfer_id = $player_array[0]['player_statustransfer_id'];
@@ -98,12 +98,12 @@ if (isset($_POST['data']))
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'Этот игрок не продается.';
 
-        redirect('player_transfer_offer.php?num=' . $get_num);
+        redirect('player_transfer_offer.php?num=' . $num_get);
     }
 
     $sql = "SELECT `playeroffer_id`
             FROM `playeroffer`
-            WHERE `playeroffer_player_id`='$get_num'
+            WHERE `playeroffer_player_id`='$num_get'
             AND `playeroffer_team_id`='$authorization_team_id'
             AND `playeroffer_offertype_id`='$offer_type'
             LIMIT 1";
@@ -114,7 +114,7 @@ if (isset($_POST['data']))
     if (0 == $count_check)
     {
         $sql = "INSERT INTO `playeroffer`
-                SET `playeroffer_player_id`='$get_num',
+                SET `playeroffer_player_id`='$num_get',
                     `playeroffer_offertype_id`='$offer_type',
                     `playeroffer_price`='$offer_price',
                     `playeroffer_team_id`='$authorization_team_id',
@@ -133,7 +133,7 @@ if (isset($_POST['data']))
                 ON `surname_id`=`player_surname_id`
                 LEFT JOIN `team`
                 ON `team_id`=`player_team_id`
-                WHERE `player_id`='$get_num'
+                WHERE `player_id`='$num_get'
                 LIMIT 1";
         $player_sql = $mysqli->query($sql);
 
@@ -172,7 +172,7 @@ if (isset($_POST['data']))
                 SET `playeroffer_offertype_id`='$offer_type',
                     `playeroffer_price`='$offer_price',
                     `playeroffer_date`=SYSDATE()
-                WHERE `playeroffer_player_id`='$get_num'
+                WHERE `playeroffer_player_id`='$num_get'
                 AND `playeroffer_team_id`='$authorization_team_id'
                 LIMIT 1";
         $mysqli->query($sql);
@@ -181,7 +181,7 @@ if (isset($_POST['data']))
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Ваше предложение успешно сохранено.';
 
-    redirect('player_transfer_offer.php?num=' . $get_num);
+    redirect('player_transfer_offer.php?num=' . $num_get);
 }
 
 $player_name    = $player_array[0]['name_name'];
@@ -197,7 +197,7 @@ $offertype_sql = $mysqli->query($sql);
 $offertype_array = $offertype_sql->fetch_all(MYSQLI_ASSOC);
 
 
-$num            = $get_num;
+$num            = $num_get;
 $header_title   = $player_name . ' ' . $player_surname;
 
 include (__DIR__ . '/view/main.php');

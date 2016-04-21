@@ -133,7 +133,7 @@
                         </td>
                         <td>
                             <h6>
-                                <?= $item['shedule_season_id']; ?>
+                                <?= $item['cupparticipant_season_id']; ?>
                             </h6>
                         </td>
                     </tr>

@@ -4,17 +4,17 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_GET['num']))
 {
-    $get_num = (int) $_GET['num'];
+    $num_get = (int) $_GET['num'];
 }
 else
 {
-    $get_num = 1;
+    $num_get = 1;
 }
 
 $sql = "SELECT `rule_name`,
                `rule_text`
         FROM `rule`
-        WHERE `rule_id`='$get_num'
+        WHERE `rule_id`='$num_get'
         LIMIT 1";
 $rule_sql = $mysqli->query($sql);
 
@@ -35,7 +35,7 @@ if (isset($_POST['rule_name']))
     $sql = "UPDATE `rule` 
             SET `rule_name`=?,
                 `rule_text`=?
-            WHERE `rule_id`='$get_num'
+            WHERE `rule_id`='$num_get'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('ss', $rule_name, $rule_text);
