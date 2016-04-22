@@ -175,11 +175,11 @@ if (isset($authorization_country_id))
     $next_country_array = $next_sql->fetch_all(MYSQLI_ASSOC);
 
     $next_array = array_merge($next_array, $next_country_array);
-
-    usort($next_array, 'f_igosja_nearest_game_sort');
-
-    $next_array = array_slice($next_array, 0, 1);
 }
+
+usort($next_array, 'f_igosja_nearest_game_sort');
+
+$next_array = array_slice($next_array, 0, 1);
 
 $sql = "SELECT `game_home_team_id`,
                IF (`game_home_team_id`='$authorization_team_id', `game_home_score`, `game_guest_score`) AS `home_score`,
@@ -232,9 +232,9 @@ if (isset($authorization_country_id))
     $latest_country_array = $latest_sql->fetch_all(MYSQLI_ASSOC);
 
     $latest_array = array_merge($latest_array, $latest_country_array);
-
-    usort($latest_array, 'f_igosja_nearest_game_sort');
 }
+
+usort($latest_array, 'f_igosja_nearest_game_sort');
 
 $sql = "SELECT `game_home_team_id`,
                `game_id`,
@@ -291,9 +291,9 @@ if (isset($authorization_country_id))
     $nearest_country_array = $nearest_sql->fetch_all(MYSQLI_ASSOC);
 
     $nearest_array = array_merge($nearest_array, $nearest_country_array);
-
-    usort($nearest_array, 'f_igosja_nearest_game_sort');
 }
+
+usort($nearest_array, 'f_igosja_nearest_game_sort');
 
 $sql = "SELECT `team_id`,
                `team_name`,

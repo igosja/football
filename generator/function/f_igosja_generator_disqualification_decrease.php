@@ -21,15 +21,15 @@ function f_igosja_generator_disqualification_decrease()
         $tournament_id = $tournament_array[$i]['game_tournament_id'];
 
         $sql = "UPDATE `disqualification`
-                SET `disqualification_yellow`='0'
-                WHERE `disqualification_yellow`='2'
+                SET `disqualification_yellow`=`disqualification_yellow`-'2'
+                WHERE `disqualification_yellow`>='2'
                 AND `disqualification_red`='0'
                 AND `disqualification_tournament_id`='$tournament_id'";
         f_igosja_mysqli_query($sql);
 
         $sql = "UPDATE `disqualification`
-                SET `disqualification_red`='0'
-                WHERE `disqualification_red`='1'
+                SET `disqualification_red`=`disqualification_red`-'1'
+                WHERE `disqualification_red`>='1'
                 AND `disqualification_tournament_id`='$tournament_id'";
         f_igosja_mysqli_query($sql);
 

@@ -201,6 +201,8 @@ $sql = "SELECT `name_name`,
                `player_id`,
                `player_practice`,
                `position_name`,
+               `statisticplayer_red`,
+               `statisticplayer_yellow`,
                `surname_name`,
                `team_id`,
                `team_name`
@@ -213,6 +215,22 @@ $sql = "SELECT `name_name`,
         ON `player_surname_id`=`surname_id`
         LEFT JOIN `team`
         ON `player_team_id`=`team_id`
+        LEFT JOIN
+        (
+            SELECT `statisticplayer_player_id`,
+                   `statisticplayer_red`,
+                   `statisticplayer_yellow`
+            FROM `statisticplayer`
+            WHERE `statisticplayer_team_id`='$num_get'
+            AND `statisticplayer_season_id`='$igosja_season_id'
+            AND `statisticplayer_tournament_id`=
+            (
+                SELECT `game_tournament_id`
+                FROM `game`
+                WHERE `game_id`='$game_id'
+            )
+        ) AS `t1`
+        ON `player_id`=`statisticplayer_player_id`
         WHERE `team_id`='$num_get'
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
