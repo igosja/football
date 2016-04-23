@@ -99,6 +99,9 @@
                                         data-position="<?= $lineup['lineup_position_id']; ?>"
                                     <?php } ?>
                                 <?php } ?>
+                                <?php if ($item['disqualification_player_id']) { ?>
+                                    disabled
+                                <?php } ?>
                             >
                             </select>
                         </td>
@@ -110,6 +113,9 @@
                                         data-role="<?= $lineup['lineup_role_id']; ?>"
                                     <?php } ?>
                                 <?php } ?>
+                                <?php if ($item['disqualification_player_id']) { ?>
+                                    disabled
+                                <?php } ?>
                             >
                             </select>
                         </td>
@@ -117,6 +123,14 @@
                             <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
                                 <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
+                            <?php if ($item['disqualification_player_id']) { ?>
+                                <img
+                                    alt="Дисквалификация"
+                                    class="img-12"
+                                    src="/img/card/red.png"
+                                    title="Дисквалификация"
+                                />
+                            <?php } ?>
                         </td>
                         <td class="center"><?= $item['position_name']; ?></td>
                         <td class="center"><?= $item['player_condition']; ?> %</td>

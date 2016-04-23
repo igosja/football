@@ -3,10 +3,11 @@
 
 <head>
     <title>Виртуальная футбольная лига</title>
-    <meta name="description" content="Футбольный онлайн менеджер" />
+    <meta name="description" content="Виртуальная футбольная лига - футбольный онлайн менеджер. Выберите футбольный клуб и приведите его к победам." />
     <meta name="keywords" content="футбол, игра, менеджер, онлайн" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="interkassa-verification" content="30e192f6e10c881f23f379df29422aa2" />
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -18,7 +19,6 @@
             В вашем браузере отключен javasript. Для корректной работы сайт рекомендуем включить javasript.
         </p>
     </noscript>
-    <?php if (1 == 0) { ?>
     <!--LiveInternet counter-->
     <script type="text/javascript">
         new Image().src = "//counter.yadro.ru/hit?r"
@@ -44,7 +44,6 @@
         ga('send', 'pageview');
     </script>
     <!--/GoogleAnalytics-->
-    <?php } ?>
     <div class="page-header">
         <table class="header-inner">
             <tr>

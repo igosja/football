@@ -2,18 +2,6 @@
 
 $start_time = microtime(true);
 
-if (!defined('_SAPE_USER'))
-{
-    define('_SAPE_USER', 'c5bcf069b3ccb0d8c2b5dfba420b8478');
-}
-
-require_once (realpath($_SERVER['DOCUMENT_ROOT'] . '/' . _SAPE_USER . '/sape.php'));
-
-$o              = array();
-$o['charset']   = 'UTF-8'; 
-$sape           = new SAPE_client($o); 
-unset($o);
-
 $phpstorm_licence = 'http://idea.qinxi1992.cn/';
 $wind_php_command = 'D:\xampp\php\php-cgi.exe D:\xampp\htdocs\fm.local.net\www\generator\generator.php';
 $denw_php_command = '\usr\local\php5\php-cgi.exe \home\fm.local.net\www\generator\generator.php';

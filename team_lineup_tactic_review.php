@@ -196,13 +196,12 @@ $nearest_sql = $mysqli->query($sql);
 
 $nearest_array = $nearest_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `name_name`,
+$sql = "SELECT `disqualification_player_id`,
+               `name_name`,
                `player_condition`,
                `player_id`,
                `player_practice`,
                `position_name`,
-               `statisticplayer_red`,
-               `statisticplayer_yellow`,
                `surname_name`,
                `team_id`,
                `team_name`
@@ -217,20 +216,18 @@ $sql = "SELECT `name_name`,
         ON `player_team_id`=`team_id`
         LEFT JOIN
         (
-            SELECT `statisticplayer_player_id`,
-                   `statisticplayer_red`,
-                   `statisticplayer_yellow`
-            FROM `statisticplayer`
-            WHERE `statisticplayer_team_id`='$num_get'
-            AND `statisticplayer_season_id`='$igosja_season_id'
-            AND `statisticplayer_tournament_id`=
+            SELECT `disqualification_player_id`
+            FROM `disqualification`
+            WHERE `disqualification_tournament_id`=
             (
                 SELECT `game_tournament_id`
                 FROM `game`
                 WHERE `game_id`='$game_id'
             )
+            AND `disqualification_red`>'0'
+            OR `disqualification_yellow`>'1'
         ) AS `t1`
-        ON `player_id`=`statisticplayer_player_id`
+        ON `player_id`=`disqualification_player_id`
         WHERE `team_id`='$num_get'
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
