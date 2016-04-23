@@ -2,15 +2,13 @@
 
 include (__DIR__ . '/include/include.php');
 
-$mrh_pass2  = "RNVK948h0sUWiOcvkSq8";
-$shp_item   = 1;
-$out_summ   = $_POST["OutSum"];
-$inv_id     = $_POST["InvId"];
-$crc        = $_POST["SignatureValue"];
-$crc        = strtoupper($crc);
-$my_crc     = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2:Shp_item=$shp_item"));
+$interkassa_id = '571b23043d1eaf784c8b456b';
 
-if (strtoupper($my_crc) != strtoupper($crc))
+if (!isset($_POST['ik_co_id']) ||
+    !isset($_POST['ik_pm_no']) ||
+    !isset($_POST['ik_inv_st']) ||
+    !isset($_POST['ik_inv_id']) ||
+    $interkassa_id != $_POST['ik_co_id'])
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
@@ -18,17 +16,21 @@ if (strtoupper($my_crc) != strtoupper($crc))
     redirect('shop.php');
 }
 
-$sql = "SELECT `robokassa_status`,
-               `robokassa_sum`,
-               `robokassa_user_id`
-        FROM `robokassa`
-        WHERE `robokassa_id`='$inv_id'
+$form_id        = $_POST['ik_co_id'];
+$payment_id     = $_POST['ik_pm_no'];
+$form_status    = $_POST['ik_inv_st'];
+
+$sql = "SELECT `interkassa_status`,
+               `interkassa_sum`,
+               `interkassa_user_id`
+        FROM `interkassa`
+        WHERE `interkassa_id`='$payment_id'
         LIMIT 1";
-$robokassa_sql = $mysqli->query($sql);
+$interkassa_sql = $mysqli->query($sql);
 
-$count_robokassa = $robokassa_sql->num_rows;
+$count_interkassa = $interkassa_sql->num_rows;
 
-if (0 == $count_robokassa)
+if (0 == $count_interkassa)
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
@@ -36,11 +38,11 @@ if (0 == $count_robokassa)
     redirect('shop.php');
 }
 
-$robokassa_array = $robokassa_sql->fetch_all(MYSQLI_ASSOC);
+$interkassa_array = $interkassa_sql->fetch_all(MYSQLI_ASSOC);
 
-$status     = $robokassa_array[0]['robokassa_status'];
+$status = $interkassa_array[0]['interkassa_status'];
 
-if (1 == $status)
+if (1 == $status || 'success' != $form_status)
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
@@ -48,12 +50,12 @@ if (1 == $status)
     redirect('shop.php');
 }
 
-$user_id    = $robokassa_array[0]['robokassa_user_id'];
-$sum        = $robokassa_array[0]['robokassa_sum'];
+$user_id    = $interkassa_array[0]['interkassa_user_id'];
+$sum        = $interkassa_array[0]['interkassa_sum'];
 
-$sql = "UPDATE `robokassa`
-        SET `robokassa_status`='1'
-        WHERE `robokassa_id`='$inv_id'";
+$sql = "UPDATE `interkassa`
+        SET `interkassa_status`='1'
+        WHERE `interkassa_id`='$payment_id'";
 $mysqli->query($sql);
 
 $sql = "UPDATE `user`

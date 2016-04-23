@@ -38,7 +38,7 @@ elseif (isset($_GET['point']))
 
     $user_money = $user_array[0]['user_money'];
 
-    if (1 > $user_money)
+    if (30 > $user_money)
     {
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'На вашем счету недостаточно денег для покупки этого товара';
@@ -49,7 +49,7 @@ elseif (isset($_GET['point']))
     if (isset($_GET['ok']))
     {
         $sql = "UPDATE `user`
-                SET `user_money`=`user_money`-'1',
+                SET `user_money`=`user_money`-'30',
                     `user_money_training`=`user_money_training`+'1'
                 WHERE `user_id`='$num_get'
                 LIMIT 1";
@@ -57,7 +57,7 @@ elseif (isset($_GET['point']))
 
         $sql = "INSERT INTO `historyfinanceuser`
                 SET `historyfinanceuser_date`=SYSDATE(),
-                    `historyfinanceuser_sum`='-1',
+                    `historyfinanceuser_sum`='-30',
                     `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
 
@@ -71,6 +71,7 @@ elseif (isset($_GET['point']))
     $header_title   = 'Магазин';
 
     include (__DIR__ . '/view/main.php');
+    exit;
 }
 elseif (isset($_GET['position']))
 {
@@ -84,7 +85,7 @@ elseif (isset($_GET['position']))
 
     $user_money = $user_array[0]['user_money'];
 
-    if (5 > $user_money)
+    if (200 > $user_money)
     {
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'На вашем счету недостаточно денег для покупки этого товара';
@@ -95,7 +96,7 @@ elseif (isset($_GET['position']))
     if (isset($_GET['ok']))
     {
         $sql = "UPDATE `user`
-                SET `user_money`=`user_money`-'5',
+                SET `user_money`=`user_money`-'200',
                     `user_money_position`=`user_money_position`+'1'
                 WHERE `user_id`='$num_get'
                 LIMIT 1";
@@ -103,7 +104,7 @@ elseif (isset($_GET['position']))
 
         $sql = "INSERT INTO `historyfinanceuser`
                 SET `historyfinanceuser_date`=SYSDATE(),
-                    `historyfinanceuser_sum`='-5',
+                    `historyfinanceuser_sum`='-200',
                     `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
 
@@ -139,7 +140,7 @@ elseif (isset($_GET['money']))
 
     $user_money = $user_array[0]['user_money'];
 
-    if (10 > $user_money)
+    if (500 > $user_money)
     {
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'На вашем счету недостаточно денег для покупки этого товара';
@@ -150,14 +151,14 @@ elseif (isset($_GET['money']))
     if (isset($_GET['ok']))
     {
         $sql = "UPDATE `user`
-                SET `user_money`=`user_money`-'10'
+                SET `user_money`=`user_money`-'500'
                 WHERE `user_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
 
         $sql = "INSERT INTO `historyfinanceuser`
                 SET `historyfinanceuser_date`=SYSDATE(),
-                    `historyfinanceuser_sum`='-10',
+                    `historyfinanceuser_sum`='-500',
                     `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
 
@@ -221,40 +222,38 @@ elseif (isset($_POST['data']))
         $sum = 1;
     }
 
-    $sql = "INSERT INTO `robokassa`
-            SET `robokassa_date`=SYSDATE(),
-                `robokassa_sum`='$sum',
-                `robokassa_user_id`='$num_get'";
+    $sql = "INSERT INTO `interkassa`
+            SET `interkassa_date`=SYSDATE(),
+                `interkassa_sum`='$sum',
+                `interkassa_user_id`='$num_get'";
     $mysqli->query($sql);
 
-    $IsTest         = 1;
-    $inv_id         = $mysqli->insert_id;
-    $mrh_login      = 'virtual-football-league';
-    $mrh_pass1      = 'v4Sz7y0D0JOe0JjDjWQU';
-    $inv_desc       = 'Пополнение счета на сайте Виртуальной футбольной лиги';
-    $out_summ       = $sum;
-    $out_currency   = "USD";
-    $culture        = "ru";
-    $encoding       = "utf-8";
-    $shp_item       = 1;
+    $secret_key = 'KFDEdXkx598iVRCe';
+    $ik_pm_no   = $mysqli->insert_id;
+    $ik_co_id   = '571b23043d1eaf784c8b456b';
+    $ik_desc    = 'Пополнение счета на сайте Виртуальной футбольной лиги';
+    $ik_am      = $sum;
+    $ik_cur     = "RUB";
 
-    $crc    = md5("$mrh_login:$out_summ:$inv_id:$out_currency:$mrh_pass1:Shp_item=$shp_item");
     $params = array(
-        'IsTest'            => $IsTest,
-        'InvId'             => $inv_id,
-        'MrchLogin'         => $mrh_login,
-        'OutSum'            => $out_summ,
-        'Desc'              => $inv_desc,
-        'Shp_item'          => $shp_item,
-        'Culture'           => $culture,
-        'OutSumCurrency'    => $out_currency,
-        'SignatureValue'    => $crc
+        'ik_co_id'  => $ik_co_id,
+        'ik_pm_no'  => $ik_pm_no,
+        'ik_am'     => $ik_am,
+        'ik_cur'    => $ik_cur,
+        'ik_desc'   => $ik_desc,
     );
 
-    $url = 'https://auth.robokassa.ru/Merchant/Index.aspx?' . http_build_query($params);;
+    ksort($params, SORT_STRING);
+    array_push($params, $secret_key);
+    $str_sign   = implode(':', $params);
+    $ik_sign    = base64_encode(md5($str_sign, true));
+
+    $params['ik_sign'] = $ik_sign;
+
+    $url = 'https://sci.interkassa.com/?' . http_build_query($params);
 
     redirect($url);
-    exit;}
+}
 
 $sql = "SELECT `user_money`
         FROM `user`
