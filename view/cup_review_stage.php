@@ -1,7 +1,7 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page w30">
-            <p class="header">Встречи и результаты</p>
+            <p class="header">Стадии</p>
             <form id="tournament-stage-form" method="GET" class="center">
                 <input type="hidden" name="num" value="<?= $num; ?>">
                 Стадия:

@@ -29,99 +29,23 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$today = date('Y-m-d');
+$sql = "SELECT `leagueparticipant_season_id`,
+               `team_id`,
+               `team_name`
+        FROM `leagueparticipant`
+        LEFT JOIN `team`
+        ON `leagueparticipant_team_id`=`team_id`
+        LEFT JOIN `city`
+        ON `team_city_id`=`city_id`
+        LEFT JOIN `country`
+        ON `country_id`=`city_country_id`
+        WHERE `leagueparticipant_out`='" . CUP_WINNER_STAGE . "'
+        AND `leagueparticipant_season_id`<'$igosja_season_id'
+        AND `leagueparticipant_tournament_id`='$num_get'
+        ORDER BY `leagueparticipant_season_id` DESC";
+$winner_sql = $mysqli->query($sql);
 
-$standing_array = array();
-
-$sql = "SELECT `game_first_game_id`,
-               `game_guest_score`,
-               `game_guest_shoot_out`,
-               `game_guest_team_id`,
-               `game_home_score`,
-               `game_home_shoot_out`,
-               `game_home_team_id`,
-               `guest_team`.`team_name` AS `guest_team_name`,
-               `home_team`.`team_name` AS `home_team_name`,
-               `shedule_season_id`
-        FROM `game`
-        LEFT JOIN `team` AS `guest_team`
-        ON `guest_team`.`team_id`=`game_guest_team_id`
-        LEFT JOIN `team` AS `home_team`
-        ON `home_team`.`team_id`=`game_home_team_id`
-        LEFT JOIN `shedule`
-        ON `shedule_id`=`game_shedule_id`
-        WHERE `game_tournament_id`='$num_get'
-        AND `shedule_season_id`<'$igosja_season_id'
-        AND `game_stage_id`='" . CUP_FINAL_STAGE . "'
-        ORDER BY `shedule_season_id` DESC, `game_first_game_id` ASC
-        LIMIT 8";
-$game_sql = $mysqli->query($sql);
-
-$count_game = $game_sql->num_rows;
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
-
-$final_game_array   = array();
-$winner_array       = array();
-
-for ($i=0; $i<$count_game; $i++)
-{
-    $first_game_id  = $game_array[$i]['game_first_game_id'];
-    $season_id      = $game_array[$i]['shedule_season_id'];
-
-    if (0 == $first_game_id)
-    {
-        $home_team_id       = $game_array[$i]['game_home_team_id'];
-        $home_team_name     = $game_array[$i]['home_team_name'];
-        $home_score_1       = $game_array[$i]['game_home_score'] + $game_array[$i]['game_home_shoot_out'];
-        $guest_team_id      = $game_array[$i]['game_guest_team_id'];
-        $guest_team_name    = $game_array[$i]['guest_team_name'];
-        $guest_score_1      = $game_array[$i]['game_guest_score'] + $game_array[$i]['game_guest_shoot_out'];
-
-        $final_game_array[$season_id] = array
-        (
-            'home_team_id'          => $home_team_id,
-            'home_team_name'        => $home_team_name,
-            'home_score_1'          => $home_score_1,
-            'guest_team_id'         => $guest_team_id,
-            'guest_team_name'       => $guest_team_name,
-            'guest_score_1'         => $guest_score_1,
-            'season_id'             => $season_id,
-        );
-    }
-    else
-    {
-        $home_score_2   = $game_array[$i]['game_guest_score'] + $game_array[$i]['game_guest_shoot_out'];;
-        $guest_score_2  = $game_array[$i]['game_home_score'] + $game_array[$i]['game_home_shoot_out'];;
-
-        $final_game_array[$season_id]['home_score_2']   = $home_score_2;
-        $final_game_array[$season_id]['guest_score_2']  = $guest_score_2;
-    }
-}
-
-foreach ($final_game_array as $item)
-{
-    $home_score     = $item['home_score_1'] + $item['home_score_2'];
-    $guest_score    = $item['guest_score_1'] + $item['guest_score_2'];
-    $season_id      = $item['season_id'];
-
-    if ($home_score > $guest_score)
-    {
-        $winner_id          = $item['home_team_id'];
-        $winner_name        = $item['home_team_name'];
-    }
-    else
-    {
-        $winner_id          = $item['guest_team_id'];
-        $winner_name        = $item['guest_team_name'];
-    }
-
-    $winner_array[] = array
-    (
-        'standing_season_id'    => $season_id,
-        'team_id'               => $winner_id,
-        'team_name'             => $winner_name,
-    );
-}
+$winner_array = $winner_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `game_id`,
                `game_guest_score`,
@@ -133,7 +57,9 @@ $sql = "SELECT `game_id`,
                `home_team`.`team_name` AS `home_team_name`,
                `shedule_date`,
                DATE_FORMAT(`shedule_date`,'%W') AS `shedule_day`,
-               `shedule_id`
+               `shedule_id`,
+               `stage_id`,
+               `stage_name`
         FROM `game`
         LEFT JOIN `shedule`
         ON `game_shedule_id`=`shedule_id`
@@ -141,6 +67,8 @@ $sql = "SELECT `game_id`,
         ON `home_team`.`team_id`=`game_home_team_id`
         LEFT JOIN `team` AS `guest_team`
         ON `guest_team`.`team_id`=`game_guest_team_id`
+        LEFT JOIN `stage`
+        ON `game_stage_id`=`stage_id`
         WHERE `game_tournament_id`='$num_get'
         AND `shedule_season_id`='$igosja_season_id'
         AND `shedule_date`=
@@ -149,7 +77,7 @@ $sql = "SELECT `game_id`,
             FROM `shedule`
             LEFT JOIN `game`
             ON `game_shedule_id`=`shedule_id`
-            WHERE `shedule_date`<='$today'
+            WHERE `shedule_date`<=CURDATE()
             AND `game_tournament_id`='$num_get'
             AND `shedule_season_id`='$igosja_season_id'
             ORDER BY `shedule_date` DESC
@@ -172,7 +100,9 @@ if (0 == $count_game)
                    `home_team`.`team_name` AS `home_team_name`,
                    `shedule_date`,
                    DATE_FORMAT(`shedule_date`,'%W') AS `shedule_day`,
-                   `shedule_id`
+                   `shedule_id`,
+                   `stage_id`,
+                   `stage_name`
             FROM `game`
             LEFT JOIN `shedule`
             ON `game_shedule_id`=`shedule_id`
@@ -180,6 +110,8 @@ if (0 == $count_game)
             ON `home_team`.`team_id`=`game_home_team_id`
             LEFT JOIN `team` AS `guest_team`
             ON `guest_team`.`team_id`=`game_guest_team_id`
+            LEFT JOIN `stage`
+            ON `game_stage_id`=`stage_id`
             WHERE `game_tournament_id`='$num_get'
             AND `shedule_season_id`='$igosja_season_id'
             AND `shedule_date`=
@@ -199,6 +131,83 @@ if (0 == $count_game)
 }
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+
+$stage_id = $game_array[0]['stage_id'];
+
+if (6 >= $stage_id)
+{
+    $stage_name = 'Групповой этап';
+}
+else
+{
+    $stage_name = $game_array[0]['stage_name'];
+
+    $sql = "SELECT `game_first_game_id`,
+                   `game_guest_score`,
+                   `game_guest_team_id`,
+                   `game_home_score`,
+                   `game_home_team_id`,
+                   `game_id`,
+                   `game_played`,
+                   `guest_team`.`team_name` AS `guest_team_name`,
+                   `home_team`.`team_name` AS `home_team_name`
+            FROM `game`
+            LEFT JOIN `team` AS `guest_team`
+            ON `guest_team`.`team_id`=`game_guest_team_id`
+            LEFT JOIN `team` AS `home_team`
+            ON `home_team`.`team_id`=`game_home_team_id`
+            LEFT JOIN `shedule`
+            ON `game_shedule_id`=`shedule_id`
+            WHERE `game_stage_id`='$stage_id'
+            AND `game_tournament_id`='$num_get'
+            AND `shedule_season_id`='$igosja_season_id'
+            ORDER BY `game_first_game_id` ASC, `game_id` ASC";
+    $stage_game_sql = $mysqli->query($sql);
+
+    $count_stage_game = $stage_game_sql->num_rows;
+    $stage_game_array = $stage_game_sql->fetch_all(MYSQLI_ASSOC);
+
+    $stage_array = array();
+
+    for ($i=0; $i<$count_stage_game; $i++)
+    {
+        $first_game_id  = $stage_game_array[$i]['game_first_game_id'];
+        $game_played    = $stage_game_array[$i]['game_played'];
+        $game_id        = $stage_game_array[$i]['game_id'];
+
+        if (0 == $first_game_id)
+        {
+            $home_team_id       = $stage_game_array[$i]['game_home_team_id'];
+            $home_team_name     = $stage_game_array[$i]['home_team_name'];
+            $home_score_1       = $stage_game_array[$i]['game_home_score'];
+            $guest_team_id      = $stage_game_array[$i]['game_guest_team_id'];
+            $guest_team_name    = $stage_game_array[$i]['guest_team_name'];
+            $guest_score_1      = $stage_game_array[$i]['game_guest_score'];
+
+            $stage_array[$game_id] = array
+            (
+                'home_team_id' => $home_team_id,
+                'home_team_name' => $home_team_name,
+                'home_score_1' => $home_score_1,
+                'guest_team_id' => $guest_team_id,
+                'guest_team_name' => $guest_team_name,
+                'guest_score_1' => $guest_score_1,
+                'game_played_1' => $game_played,
+                'game_id_1' => $game_id,
+            );
+        }
+        else
+        {
+            $home_score_2   = $stage_game_array[$i]['game_guest_score'];
+            $guest_score_2  = $stage_game_array[$i]['game_home_score'];
+
+            $stage_array[$first_game_id]['home_score_2']    = $home_score_2;
+            $stage_array[$first_game_id]['guest_score_2']   = $guest_score_2;
+            $stage_array[$first_game_id]['game_played_2']   = $game_played;
+            $stage_array[$first_game_id]['game_id_2']       = $game_id;
+        }
+    }
+}
 
 $sql = "SELECT `name_name`,
                `player_id`,

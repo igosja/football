@@ -1,37 +1,59 @@
 <table class="block-table w100">
     <tr>
         <td rowspan="2" class="block-page">
-            <p class="header">Турнирная таблица</p>
-            <table class="striped w100">
+            <p class="header">Стадия</p>
+            <table class="center striped vcenter">
                 <tr>
-                    <th class="w8">№</th>
-                    <th colspan="2">Команда</th>
-                    <th class="w8">И</th>
-                    <th class="w8">В</th>
-                    <th class="w8">Н</th>
-                    <th class="w8">П</th>
-                    <th class="w8">О</th>
+                    <td>
+                        <img
+                            alt="Предыдущая"
+                            class="img-12"
+                            data-tournament="<?= $num; ?>"
+                            data-stage="<?= $game_array[0]['stage_id']; ?>"
+                            id="tournament-stage-prev"
+                            src="/img/arrow/left.png"
+                        />
+                    </td>
+                    <td id="stage-name">
+                        <?= $stage_name; ?>
+                    </td>
+                    <td>
+                        <img
+                            alt="Следующая"
+                            class="img-12"
+                            data-tournament="<?= $num; ?>"
+                            data-stage="<?= $game_array[0]['stage_id']; ?>"
+                            id="tournament-stage-next"
+                            src="/img/arrow/right.png"
+                        />
+                    </td>
                 </tr>
-                <?php foreach ($standing_array as $item) { ?>
-                    <tr <?php if (isset($authorization_team_id) && $authorization_team_id == $item['team_id']) { ?>class="current"<?php } ?>>
-                        <td class="center"><?= $item['standing_place']; ?></td>
-                        <td class="w1">
-                            <img
-                                alt="<?= $item['team_name']; ?>"
-                                class="img-12"
-                                src="/img/team/12/<?= $item['team_id']; ?>.png"
-                            />
-                        </td>
-                        <td>
-                            <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
-                                <?= $item['team_name']; ?>
+            </table>
+            <table class="striped w100" id="tournament-stage">
+                <?php foreach ($stage_array as $item) { ?>
+                    <tr>
+                        <td class="right w40">
+                            <a href="team_team_review_profile.php?num=<?= $item['home_team_id']; ?>">
+                                <?= $item['home_team_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?= $item['standing_game']; ?></td>
-                        <td class="center"><?= $item['standing_win']; ?></td>
-                        <td class="center"><?= $item['standing_draw']; ?></td>
-                        <td class="center"><?= $item['standing_loose']; ?></td>
-                        <td class="center"><?= $item['standing_point']; ?></td>
+                        <td class="center">
+                            <a href="game_review_main.php?num=<?= $item['game_id_2']; ?>">
+                                <?php if (1 == $item['game_played_2']) { ?>
+                                    <?= $item['home_score_2']; ?>:<?= $item['guest_score_2']; ?>
+                                <?php } ?>
+                            </a>
+                            <a href="game_review_main.php?num=<?= $item['game_id_1']; ?>">
+                                <?php if (1 == $item['game_played_1']) { ?>
+                                    (<?= $item['home_score_1']; ?>:<?= $item['guest_score_1']; ?>)
+                                <?php } ?>
+                            </a>
+                        </td>
+                        <td class="w40">
+                            <a href="team_team_review_profile.php?num=<?= $item['guest_team_id']; ?>">
+                                <?= $item['guest_team_name']; ?>
+                            </a>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>
@@ -111,7 +133,7 @@
                         </td>
                         <td>
                             <h6>
-                                <?= $item['standing_season_id']; ?>
+                                <?= $item['leagueparticipant_season_id']; ?>
                             </h6>
                         </td>
                     </tr>

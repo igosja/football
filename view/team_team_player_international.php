@@ -35,7 +35,12 @@
                             <td class="center"><?= $item['player_height']; ?> см</td>
                             <td class="center"><?= $item['player_weight']; ?> кг</td>
                             <td class="nopadding">
-                                <select name="data[<?= $item['player_id']; ?>]">
+                                <select
+                                    name="data[<?= $item['player_id']; ?>]"
+                                    <?php if (0 != $item['player_national_id']) { ?>
+                                        disabled
+                                    <?php } ?>
+                                >
                                     <?php foreach ($statusnational_array as $status) { ?>
                                         <option value="<?= $status['statusnational_id']; ?>"
                                             <?php if ($status['statusnational_id'] == $item['player_statusnational_id']) { ?>
