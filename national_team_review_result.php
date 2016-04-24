@@ -49,6 +49,10 @@ if (isset($championship_array[0]['tournament_id']))
 {
     $tournament_id = $championship_array[0]['tournament_id'];
 }
+else
+{
+    $tournament_id = 1;
+}
 
 $sql = "SELECT `name_name`,
                `player_id`,
