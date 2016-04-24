@@ -38,7 +38,7 @@ elseif (isset($_GET['point']))
 
     $user_money = $user_array[0]['user_money'];
 
-    if (30 > $user_money)
+    if (1 > $user_money)
     {
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'На вашем счету недостаточно денег для покупки этого товара';
@@ -49,7 +49,7 @@ elseif (isset($_GET['point']))
     if (isset($_GET['ok']))
     {
         $sql = "UPDATE `user`
-                SET `user_money`=`user_money`-'30',
+                SET `user_money`=`user_money`-'1',
                     `user_money_training`=`user_money_training`+'1'
                 WHERE `user_id`='$num_get'
                 LIMIT 1";
@@ -57,7 +57,7 @@ elseif (isset($_GET['point']))
 
         $sql = "INSERT INTO `historyfinanceuser`
                 SET `historyfinanceuser_date`=SYSDATE(),
-                    `historyfinanceuser_sum`='-30',
+                    `historyfinanceuser_sum`='-1',
                     `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
 
@@ -85,7 +85,7 @@ elseif (isset($_GET['position']))
 
     $user_money = $user_array[0]['user_money'];
 
-    if (200 > $user_money)
+    if (5 > $user_money)
     {
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'На вашем счету недостаточно денег для покупки этого товара';
@@ -96,7 +96,7 @@ elseif (isset($_GET['position']))
     if (isset($_GET['ok']))
     {
         $sql = "UPDATE `user`
-                SET `user_money`=`user_money`-'200',
+                SET `user_money`=`user_money`-'5',
                     `user_money_position`=`user_money_position`+'1'
                 WHERE `user_id`='$num_get'
                 LIMIT 1";
@@ -104,7 +104,7 @@ elseif (isset($_GET['position']))
 
         $sql = "INSERT INTO `historyfinanceuser`
                 SET `historyfinanceuser_date`=SYSDATE(),
-                    `historyfinanceuser_sum`='-200',
+                    `historyfinanceuser_sum`='-5',
                     `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
 
@@ -140,7 +140,7 @@ elseif (isset($_GET['money']))
 
     $user_money = $user_array[0]['user_money'];
 
-    if (500 > $user_money)
+    if (10 > $user_money)
     {
         $_SESSION['message_class']  = 'error';
         $_SESSION['message_text']   = 'На вашем счету недостаточно денег для покупки этого товара';
@@ -151,14 +151,14 @@ elseif (isset($_GET['money']))
     if (isset($_GET['ok']))
     {
         $sql = "UPDATE `user`
-                SET `user_money`=`user_money`-'500'
+                SET `user_money`=`user_money`-'10'
                 WHERE `user_id`='$num_get'
                 LIMIT 1";
         $mysqli->query($sql);
 
         $sql = "INSERT INTO `historyfinanceuser`
                 SET `historyfinanceuser_date`=SYSDATE(),
-                    `historyfinanceuser_sum`='-500',
+                    `historyfinanceuser_sum`='-10',
                     `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
 
@@ -222,35 +222,43 @@ elseif (isset($_POST['data']))
         $sum = 1;
     }
 
-    $sql = "INSERT INTO `interkassa`
-            SET `interkassa_date`=SYSDATE(),
-                `interkassa_sum`='$sum',
-                `interkassa_user_id`='$num_get'";
-    $mysqli->query($sql);
+    // $sql = "INSERT INTO `payment`
+            // SET `payment_date`=SYSDATE(),
+                // `payment_sum`='$sum',
+                // `payment_user_id`='$num_get'";
+    // $mysqli->query($sql);
 
-    $secret_key = 'KFDEdXkx598iVRCe';
-    $ik_pm_no   = $mysqli->insert_id;
-    $ik_co_id   = '571b23043d1eaf784c8b456b';
-    $ik_desc    = 'Пополнение счета на сайте Виртуальной футбольной лиги';
-    $ik_am      = $sum;
-    $ik_cur     = "RUB";
+    $private_key    = 'xjaJgqw2L2zCMT1Bs7lVcM7xRXzAwayVO1h1nZbz';
+    $version        = '3';
+    $public_key     = 'i33620494410';
+    $order_id       = 'id_123';$mysqli->insert_id;
+    $action         = 'pay';
+    $description    = 'Пополнение счета на сайте Виртуальной футбольной лиги';
+    $amount         = $sum;
+    $currency       = 'USD';
+    $sandbox        = '1';
 
-    $params = array(
-        'ik_co_id'  => $ik_co_id,
-        'ik_pm_no'  => $ik_pm_no,
-        'ik_am'     => $ik_am,
-        'ik_cur'    => $ik_cur,
-        'ik_desc'   => $ik_desc,
+    $json = array
+    (
+        'version'       => $version,
+        'public_key'    => $public_key,
+        'action'        => $action,
+        'amount'        => $amount,
+        'currency'      => $currency,
+        'description'   => $description,
+        'sandbox'       => $sandbox,
     );
 
-    ksort($params, SORT_STRING);
-    array_push($params, $secret_key);
-    $str_sign   = implode(':', $params);
-    $ik_sign    = base64_encode(md5($str_sign, true));
+    $data       = base64_encode(json_encode($json));
+    $signature  = base64_encode(sha1($private_key . $data . $private_key, 1));
 
-    $params['ik_sign'] = $ik_sign;
+    $params = array
+    (
+        'data'      => $data,
+        'signature' => $signature,
+    );
 
-    $url = 'https://sci.interkassa.com/?' . http_build_query($params);
+    $url = 'https://www.liqpay.com/api/3/checkout?' . http_build_query($params);
 
     redirect($url);
 }

@@ -2,10 +2,18 @@
 
 include (__DIR__ . '/include/include.php');
 
-$interkassa_id = '571b23043d1eaf784c8b456b';
+$fp = fopen('liqpay.txt', 'w');
 
-if (!isset($_POST['ik_co_id']) ||
-    !isset($_POST['ik_pm_no']) ||
+foreach ($_POST as $key => $value)
+{
+    fwrite($fp, $key . '-' . $value . '/r/n');
+}
+
+fclose($fp);
+
+exit;
+if (!isset($_POST['data']) ||
+    !isset($_POST['signature']) ||
     !isset($_POST['ik_inv_st']) ||
     !isset($_POST['ik_inv_id']) ||
     $interkassa_id != $_POST['ik_co_id'])

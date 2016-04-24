@@ -6,12 +6,12 @@
                 <tr>
                     <td colspan="2">
                         <p class="justify">Развитие команды не требует обязательного совершения покупок в магазине, но если вы не привыкли ждать, хотите "всё и сразу" и имеете возможность "ускорить процесс", то добро пожаловать в магазин игровых товаров! Цены для разных команд разные - чем сильнее команда, тем сложнее её усилить с помощью магазина.</p>
-                        <p class="justify">Покупка происходит через сервис <a href="https://www.interkassa.com/" target="_blank">Interkassa</a>.</p>
+                        <p class="justify">Покупка происходит через сервис <a href="https://www.liqpay.com/" target="_blank">liqpay</a>.</p>
                     </td>
                 </tr>
                 <tr>
                     <td class="w50">Баланс личного счета</td>
-                    <td class="right"><?= $user_array[0]['user_money']; ?> р.</td>
+                    <td class="right"><?= $user_array[0]['user_money']; ?> ед.</td>
                 </tr>
                 <tr>
                     <td class="center" colspan="2">
@@ -39,7 +39,7 @@
                     <td class="right">
                         <button>
                             <a href="shop.php?point=1">
-                                Купить за 30 р.
+                                Купить за 1 ед.
                             </a>
                         </button>
                     </td>
@@ -49,7 +49,7 @@
                     <td class="right">
                         <button>
                             <a href="shop.php?position=1">
-                                Купить за 200 р.
+                                Купить за 5 ед.
                             </a>
                         </button>
                     </td>
@@ -59,7 +59,7 @@
                     <td class="right">
                         <button>
                             <a href="shop.php?money=1">
-                                Купить за 500 р.
+                                Купить за 10 ед.
                             </a>
                         </button>
                     </td>
