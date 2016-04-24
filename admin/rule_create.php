@@ -4,8 +4,8 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_POST['rule_name']))
 {
-    $rule_name    = $_POST['rule_name'];
-    $rule_text      = $_POST['rule_text'];
+    $rule_name  = $_POST['rule_name'];
+    $rule_text  = $_POST['rule_text'];
 
     $sql = "INSERT INTO `rule`
             SET `rule_name`=?,

@@ -23,7 +23,6 @@ $count_rule = $rule_sql->num_rows;
 if (0 == $count_rule)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
     exit;
 }
 
@@ -47,11 +46,9 @@ if (isset($_POST['rule_name']))
 
 $rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);
 
-$rule_name    = $rule_array[0]['rule_name'];
-$rule_text      = $rule_array[0]['rule_text'];
+$rule_name  = $rule_array[0]['rule_name'];
+$rule_text  = $rule_array[0]['rule_text'];
 
-$smarty->assign('rule_name', $rule_name);
-$smarty->assign('rule_text', $rule_text);
-$smarty->assign('tpl', 'rule_create');
+$tpl = 'rule_create';
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');

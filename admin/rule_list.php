@@ -10,6 +10,4 @@ $rule_sql = $mysqli->query($sql);
 
 $rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('rule_array', $rule_array);
-
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
