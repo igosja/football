@@ -143,7 +143,8 @@ else
 
 if (6 >= $stage_id)
 {
-    $stage_name = 'Групповой этап';
+    $stage_name     = 'Групповой этап';
+    $stage_array    = array();
 }
 else
 {
