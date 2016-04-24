@@ -101,7 +101,13 @@
             <p class="header">Мировой рейтинг</p>
             <table class="center w100">
                 <tr>
-                    <td><h1><?= $rating_array[0]['ratingcountry_position']; ?></h1></td>
+                    <td>
+                        <h1>
+                            <?php if ($rating_array[0]['ratingcountry_position']) { ?>
+                                <?= $rating_array[0]['ratingcountry_position']; ?>
+                            <?php } ?>
+                        </h1>
+                    </td>
                 </tr>
             </table>
         </td>

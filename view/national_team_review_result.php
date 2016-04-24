@@ -2,6 +2,7 @@
     <tr>
         <td class="block-page">
             <p class="header">Итоги</p>
+            <?php if (isset($championship_array[0]['tournament_name'])) { ?>
             <table class="striped w100">
                 <tr>
                     <th colspan="2"><?= $championship_array[0]['tournament_name']; ?> (прошлый сезон)</th>
@@ -221,6 +222,7 @@
                     </tr>
                 <?php } ?>
             </table>
+            <?php } ?>
         </td>
     </tr>
 </table>

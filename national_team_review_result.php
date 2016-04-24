@@ -45,7 +45,10 @@ $championship_sql = $mysqli->query($sql);
 
 $championship_array = $championship_sql->fetch_all(MYSQLI_ASSOC);
 
-$tournament_id = $championship_array[0]['tournament_id'];
+if (isset($championship_array[0]['tournament_id']))
+{
+    $tournament_id = $championship_array[0]['tournament_id'];
+}
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -134,7 +137,10 @@ $cup_sql = $mysqli->query($sql);
 
 $cup_array = $cup_sql->fetch_all(MYSQLI_ASSOC);
 
-$tournament_id = $cup_array[0]['tournament_id'];
+if (isset($cup_array[0]['tournament_id']))
+{
+    $tournament_id = $cup_array[0]['tournament_id'];
+}
 
 $sql = "SELECT `name_name`,
                `player_id`,
