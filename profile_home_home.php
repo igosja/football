@@ -62,7 +62,7 @@ if (!isset($authorization_team_id))
 
             $sql = "UPDATE `user`
                     SET `user_team`=`user_team`+'1'
-                    WHERE `user_id`='$user_id'
+                    WHERE `user_id`='$authorization_id'
                     LIMIT 1";
             $mysqli->query($sql);
 
