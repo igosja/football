@@ -236,7 +236,6 @@ elseif (isset($_POST['data']))
     $description    = 'Пополнение счета на сайте Виртуальной футбольной лиги';
     $amount         = $sum;
     $currency       = 'USD';
-    $sandbox        = '1';
 
     $json = array
     (
@@ -247,7 +246,6 @@ elseif (isset($_POST['data']))
         'amount'        => $amount,
         'currency'      => $currency,
         'description'   => $description,
-        'sandbox'       => $sandbox,
     );
 
     $data       = base64_encode(json_encode($json));

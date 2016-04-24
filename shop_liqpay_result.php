@@ -40,7 +40,7 @@ if ($public_key != $public_check)
 
 $status = $json['status'];
 
-if ('sandbox' != $status)
+if ('success' != $status)
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
