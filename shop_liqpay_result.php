@@ -2,21 +2,8 @@
 
 include (__DIR__ . '/include/include.php');
 
-$fp = fopen('liqpay.txt', 'w');
-
-foreach ($_POST as $key => $value)
-{
-    fwrite($fp, $key . '-' . $value . '/r/n');
-}
-
-fclose($fp);
-
-exit;
 if (!isset($_POST['data']) ||
-    !isset($_POST['signature']) ||
-    !isset($_POST['ik_inv_st']) ||
-    !isset($_POST['ik_inv_id']) ||
-    $interkassa_id != $_POST['ik_co_id'])
+    !isset($_POST['signature']))
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
@@ -24,21 +11,56 @@ if (!isset($_POST['data']) ||
     redirect('shop.php');
 }
 
-$form_id        = $_POST['ik_co_id'];
-$payment_id     = $_POST['ik_pm_no'];
-$form_status    = $_POST['ik_inv_st'];
+$private_key    = 'xjaJgqw2L2zCMT1Bs7lVcM7xRXzAwayVO1h1nZbz';
+$public_key     = 'i33620494410';
+$data           = $_POST['data'];
+$signature      = $_POST['signature'];
+$sign_check     = base64_encode(sha1($private_key . $data . $private_key, 1));
 
-$sql = "SELECT `interkassa_status`,
-               `interkassa_sum`,
-               `interkassa_user_id`
-        FROM `interkassa`
-        WHERE `interkassa_id`='$payment_id'
+if ($sign_check != $signature)
+{
+    $_SESSION['message_class']  = 'error';
+    $_SESSION['message_text']   = 'Счет пополнить не удалось';
+
+    redirect('shop.php');
+}
+
+$json = base64_decode($data);
+$json = json_decode($json, true);
+
+$public_check = $json['public_key'];
+
+if ($public_key != $public_check)
+{
+    $_SESSION['message_class']  = 'error';
+    $_SESSION['message_text']   = 'Счет пополнить не удалось';
+
+    redirect('shop.php');
+}
+
+$status = $json['status'];
+
+if ('sandbox' != $status)
+{
+    $_SESSION['message_class']  = 'error';
+    $_SESSION['message_text']   = 'Счет пополнить не удалось';
+
+    redirect('shop.php');
+}
+
+$payment_id = $json['order_id'];
+
+$sql = "SELECT `payment_status`,
+               `payment_sum`,
+               `payment_user_id`
+        FROM `payment`
+        WHERE `payment_id`='$payment_id'
         LIMIT 1";
-$interkassa_sql = $mysqli->query($sql);
+$payment_sql = $mysqli->query($sql);
 
-$count_interkassa = $interkassa_sql->num_rows;
+$count_payment = $payment_sql->num_rows;
 
-if (0 == $count_interkassa)
+if (0 == $count_payment)
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
@@ -46,11 +68,11 @@ if (0 == $count_interkassa)
     redirect('shop.php');
 }
 
-$interkassa_array = $interkassa_sql->fetch_all(MYSQLI_ASSOC);
+$payment_array = $payment_sql->fetch_all(MYSQLI_ASSOC);
 
-$status = $interkassa_array[0]['interkassa_status'];
+$status = $payment_array[0]['payment_status'];
 
-if (1 == $status || 'success' != $form_status)
+if (1 == $status)
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
@@ -58,12 +80,12 @@ if (1 == $status || 'success' != $form_status)
     redirect('shop.php');
 }
 
-$user_id    = $interkassa_array[0]['interkassa_user_id'];
-$sum        = $interkassa_array[0]['interkassa_sum'];
+$user_id    = $payment_array[0]['payment_user_id'];
+$sum        = $payment_array[0]['payment_sum'];
 
-$sql = "UPDATE `interkassa`
-        SET `interkassa_status`='1'
-        WHERE `interkassa_id`='$payment_id'";
+$sql = "UPDATE `payment`
+        SET `payment_status`='1'
+        WHERE `payment_id`='$payment_id'";
 $mysqli->query($sql);
 
 $sql = "UPDATE `user`

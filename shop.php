@@ -222,16 +222,16 @@ elseif (isset($_POST['data']))
         $sum = 1;
     }
 
-    // $sql = "INSERT INTO `payment`
-            // SET `payment_date`=SYSDATE(),
-                // `payment_sum`='$sum',
-                // `payment_user_id`='$num_get'";
-    // $mysqli->query($sql);
+    $sql = "INSERT INTO `payment`
+            SET `payment_date`=SYSDATE(),
+                `payment_sum`='$sum',
+                `payment_user_id`='$num_get'";
+    $mysqli->query($sql);
 
     $private_key    = 'xjaJgqw2L2zCMT1Bs7lVcM7xRXzAwayVO1h1nZbz';
     $version        = '3';
     $public_key     = 'i33620494410';
-    $order_id       = 'id_123';$mysqli->insert_id;
+    $order_id       = $mysqli->insert_id;
     $action         = 'pay';
     $description    = 'Пополнение счета на сайте Виртуальной футбольной лиги';
     $amount         = $sum;
@@ -243,6 +243,7 @@ elseif (isset($_POST['data']))
         'version'       => $version,
         'public_key'    => $public_key,
         'action'        => $action,
+        'order_id'      => $order_id,
         'amount'        => $amount,
         'currency'      => $currency,
         'description'   => $description,
