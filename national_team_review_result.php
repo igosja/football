@@ -141,6 +141,10 @@ if (isset($cup_array[0]['tournament_id']))
 {
     $tournament_id = $cup_array[0]['tournament_id'];
 }
+else
+{
+    $tournament_id = 1;
+}
 
 $sql = "SELECT `name_name`,
                `player_id`,
