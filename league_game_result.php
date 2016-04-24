@@ -66,7 +66,14 @@ else
 
     $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
-    $shedule_id = $shedule_array[0]['game_shedule_id'];
+    if (isset($shedule_array[0]['game_shedule_id']))
+    {
+        $shedule_id = $shedule_array[0]['game_shedule_id'];
+    }
+    else
+    {
+        $shedule_id = 0;
+    }
 }
 
 $sql = "SELECT `game_id`,
