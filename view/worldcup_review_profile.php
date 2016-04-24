@@ -38,34 +38,36 @@
         </td>
         <td class="block-page w35" id="game-block">
             <p class="header">Матчи</p>
-            <table class="center striped vcenter">
-                <tr>
-                    <td>
-                        <img
-                            alt="Предыдущие"
-                            class="img-12"
-                            data-tournament="<?= $num; ?>"
-                            data-shedule="<?= $game_array[0]['shedule_id']; ?>"
-                            id="worldcup-game-prev"
-                            src="/img/arrow/left.png"
-                        />
-                    </td>
-                    <td id="shedule-date">
-                        <?= $game_array[0]['shedule_day']; ?>,
-                        <?= date('d.m.Y', strtotime($game_array[0]['shedule_date'])); ?>
-                    </td>
-                    <td>
-                        <img
-                            alt="Следующие"
-                            class="img-12"
-                            data-tournament="<?= $num; ?>"
-                            data-shedule="<?= $game_array[0]['shedule_id']; ?>"
-                            id="worldcup-game-next"
-                            src="/img/arrow/right.png"
-                        />
-                    </td>
-                </tr>
-            </table>
+            <?php if (isset($game_array[0]['shedule_id'])) { ?>
+                <table class="center striped vcenter">
+                    <tr>
+                        <td>
+                            <img
+                                alt="Предыдущие"
+                                class="img-12"
+                                data-tournament="<?= $num; ?>"
+                                data-shedule="<?= $game_array[0]['shedule_id']; ?>"
+                                id="worldcup-game-prev"
+                                src="/img/arrow/left.png"
+                            />
+                        </td>
+                        <td id="shedule-date">
+                            <?= $game_array[0]['shedule_day']; ?>,
+                            <?= date('d.m.Y', strtotime($game_array[0]['shedule_date'])); ?>
+                        </td>
+                        <td>
+                            <img
+                                alt="Следующие"
+                                class="img-12"
+                                data-tournament="<?= $num; ?>"
+                                data-shedule="<?= $game_array[0]['shedule_id']; ?>"
+                                id="worldcup-game-next"
+                                src="/img/arrow/right.png"
+                            />
+                        </td>
+                    </tr>
+                </table>
+            <?php } ?>
             <table class="striped w100" id="tournament-game">
                 <?php foreach ($game_array as $item) { ?>
                     <tr>
