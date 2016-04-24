@@ -255,7 +255,7 @@ $shedule_insert_sql = array();
 for ($i=0; $i<70; $i++)
 {
     $date = date('Y-m-d');
-    $date = strtotime($date . ' +' . $i . 'days');
+    $date = strtotime($date . ' +' . ($i + 1) . 'days');
     $date = date('Y-m-d', $date);
 
     if (14 > $i || 61 == $i || 62 == $i)
