@@ -1,26 +1,31 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Пользователи</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th>Пользователь</th>
-                    <th>Последний визит</th>
-                </tr>
-                {section name=i loop=$user_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Пользователи</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="user.php?num={$user_array[i].user_id}">
-                                {$user_array[i].user_login}
-                            </a>
-                        </td>
-                        <td>{f_igosja_ufu_last_visit($user_array[i].user_last_visit)}</td>
+                        <th>Пользователь</th>
+                        <th>Последний визит</th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($user_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="user.php?num=<?= $item['user_id']; ?>">
+                                    <?= $item['user_login']; ?>
+                                </a>
+                            </td>
+                            <td><?= f_igosja_ufu_last_visit($item['user_last_visit']); ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>
