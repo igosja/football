@@ -64,7 +64,14 @@ else
 
     $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
 
-    $stage_id = $stage_array[0]['game_stage_id'];
+    if (isset($stage_sql[0]['game_stage_id']))
+    {
+        $stage_id = $stage_sql[0]['game_stage_id'];
+    }
+    else
+    {
+        $stage_id = 0;
+    }
 }
 
 if (39 <= $stage_id)
