@@ -19,8 +19,7 @@ foreach ($user_array as $user)
     $header     = "From: <admin@" . $_SERVER['HTTP_HOST'] . ">\r\n";
     $header     = $header . "Content-type:text/html; charset=utf-8\r\n";
 
-    print $message;
-    //mail($email, $subject, $message, $header);
+    mail($email, $subject, $message, $header);
 }
 
 print '<br />Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
