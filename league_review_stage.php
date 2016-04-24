@@ -64,9 +64,9 @@ else
 
     $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
 
-    if (isset($stage_sql[0]['game_stage_id']))
+    if (isset($stage_array[0]['game_stage_id']))
     {
-        $stage_id = $stage_sql[0]['game_stage_id'];
+        $stage_id = $stage_array[0]['game_stage_id'];
     }
     else
     {
