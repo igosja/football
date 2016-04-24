@@ -132,7 +132,10 @@ if (0 == $count_game)
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-$stage_id = $game_array[0]['stage_id'];
+if (isset($game_array[0]['stage_id']))
+{
+    $stage_id = 1;
+}
 
 if (6 >= $stage_id)
 {
