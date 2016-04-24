@@ -4,8 +4,9 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 if (isset($_POST['chapter_name']))
 {
-    $chapter_name = $_POST['chapter_name'];
-    $chapter_id   = $_POST['chapter_id'];
+    $chapter_description    = $_POST['chapter_description'];
+    $chapter_name           = $_POST['chapter_name'];
+    $chapter_id             = $_POST['chapter_id'];
 
     $sql = "INSERT INTO `forumthemegroup`
             SET `forumthemegroup_name`=?,
