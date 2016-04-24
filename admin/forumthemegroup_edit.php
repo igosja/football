@@ -24,7 +24,6 @@ $count_chapter = $chapter_sql->num_rows;
 if (0 == $count_chapter)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
     exit;
 }
 
@@ -62,10 +61,6 @@ $forumchapter_sql = $mysqli->query($sql);
 
 $forumchapter_array = $forumchapter_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('chapter_description', $chapter_description);
-$smarty->assign('chapter_name', $chapter_name);
-$smarty->assign('chapter_id', $chapter_id);
-$smarty->assign('forumchapter_array', $forumchapter_array);
-$smarty->assign('tpl', 'forumthemegroup_create');
+$tpl = 'forumthemegroup_create';
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
