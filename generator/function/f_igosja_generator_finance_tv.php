@@ -11,10 +11,11 @@ function f_igosja_generator_finance_tv()
                    `tournament_tournamenttype_id`
             FROM `game`
             LEFT JOIN `shedule`
-            ON `game_shedule_id`
+            ON `game_shedule_id`=`shedule_id`
             LEFT JOIN `tournament`
             ON `game_tournament_id`=`tournament_id`
-            WHERE `shedule_date`=CURDATE()";
+            WHERE `shedule_date`=CURDATE()
+            AND `game_played`='0'";
     $game_sql = f_igosja_mysqli_query($sql);
 
     $count_game = $game_sql->num_rows;
@@ -63,15 +64,13 @@ function f_igosja_generator_finance_tv()
         {
             $sql = "UPDATE `team`
                     SET `team_finance`=`team_finance`+'$finance_tv'
-                    WHERE `team_id` IN ('$home_team_id', '$guest_team_id')
-                    LIMIT 1";
+                    WHERE `team_id` IN ('$home_team_id', '$guest_team_id')";
             f_igosja_mysqli_query($sql);
 
             $sql = "UPDATE `finance`
-                    SET `finance_income_tv`=`finance_income_tv`+'$finance_tv',
+                    SET `finance_income_tv`=`finance_income_tv`+'$finance_tv'
                     WHERE `finance_team_id` IN ('$home_team_id', '$guest_team_id')
-                    AND `finance_season_id`='$igosja_season_id'
-                    LIMIT 1";
+                    AND `finance_season_id`='$igosja_season_id'";
             f_igosja_mysqli_query($sql);
 
             $sql = "INSERT INTO `historyfinanceteam` (`historyfinanceteam_date`, `historyfinanceteam_historytext_id`, `historyfinanceteam_season_id`, `historyfinanceteam_team_id`, `historyfinanceteam_value`)
