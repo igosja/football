@@ -62,6 +62,13 @@ if (isset($button[0]) &&
             array('href' => 'national_lineup_team_player.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Состав'),
         );
     }
+    elseif ('player' == $button[0] &&
+            isset($_GET['num']))
+    {
+        $num_get = (int) $_GET['num'];
+
+        $button_array = f_igosja_player_to_scout_button($num_get);
+    }
 }
 
 $sql = "SELECT `site_status`,

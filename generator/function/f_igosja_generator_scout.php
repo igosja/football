@@ -23,6 +23,33 @@ function f_igosja_generator_scout()
         $training_level = $team_array[$i]['team_training_level'];
         $limit          = $reputation * $training_level;
 
+        $sql = "SELECT `scoutnearest_id`,
+                       `scoutnearest_player_id`
+                FROM `scoutnearest`
+                WHERE `scoutnearest_team_id`='$team_id'
+                LIMIT $limit";
+        $scout_sql = f_igosja_mysqli_query($sql);
+
+        $count_scout = $scout_sql->num_rows;
+        $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+
+        for ($j=0; $j<$count_scout; $j++)
+        {
+            $player_id  = $scout_array[$j]['scoutnearest_player_id'];
+            $scout_id   = $scout_array[$j]['scoutnearest_id'];
+
+            $sql = "INSERT INTO `scout`
+                    SET `scout_team_id`='$team_id',
+                        `scout_player_id`='$player_id'";
+            f_igosja_mysqli_query($sql);
+
+            $sql = "DELETE FROM `scoutnearest`
+                    WHERE `scoutnearest_id`='$scout_id'";
+            f_igosja_mysqli_query($sql);
+        }
+
+        $limit = $limit - $count_scout;
+
         $sql = "INSERT INTO `scout` (`scout_team_id`, `scout_player_id`)
                 SELECT '$team_id', `player_id`
                 FROM `player`
@@ -41,5 +68,19 @@ function f_igosja_generator_scout()
 
         print '.';
         flush();
+    }
+
+    $sql = "SELECT COUNT(`scoutnearest_id`) AS `count`
+            FROM `scoutnearest`";
+    $scout_sql = f_igosja_mysqli_query($sql);
+
+    $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+
+    $count_scout = $scout_array[0]['count'];
+
+    if (0 == $count_scout)
+    {
+        $sql = "TRUNCATE `scoutnearest`";
+        f_igosja_mysqli_query($sql);
     }
 }

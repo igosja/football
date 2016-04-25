@@ -568,3 +568,53 @@ function f_igosja_trophy_sort($a, $b)
 
     return $sort_result;
 }
+
+function f_igosja_player_to_scout_button($player_id)
+{
+    global $mysqli;
+    global $authorization_team_id;
+
+    $button_array = array();
+
+    if (isset($authorization_team_id))
+    {
+        $sql = "SELECT COUNT(`scout_id`) AS `count`
+                FROM `scout`
+                WHERE `scout_player_id`='$player_id'
+                AND `scout_team_id`='$authorization_team_id'";
+        $scout_sql = $mysqli->query($sql);
+
+        $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+        $count_scout = $scout_array[0]['count'];
+
+        $sql = "SELECT COUNT(`player_id`) AS `count`
+                FROM `player`
+                WHERE `player_id`='$player_id'
+                AND `player_team_id`='$authorization_team_id'";
+        $player_sql = $mysqli->query($sql);
+
+        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $count_player = $player_array[0]['count'];
+
+        $sql = "SELECT COUNT(`scoutnearest_id`) AS `count`
+                FROM `scoutnearest`
+                WHERE `scoutnearest_player_id`='$player_id'
+                AND `scoutnearest_team_id`='$authorization_team_id'";
+        $scoutnearest_sql = $mysqli->query($sql);
+
+        $scoutnearest_array = $scoutnearest_sql->fetch_all(MYSQLI_ASSOC);
+        $count_scoutnearest = $scoutnearest_array[0]['count'];
+
+        if (0 == $count_scout &&
+            0 == $count_scoutnearest &&
+            0 == $count_player)
+        {
+            $button_array = array
+            (
+                array('href' => 'player_home_scout.php?num=' . $player_id, 'class' => '', 'text' => 'Изучить'),
+            );
+        }
+    }
+
+    return $button_array;
+}

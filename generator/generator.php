@@ -41,6 +41,7 @@ f_igosja_generator_country_record();
 f_igosja_generator_tournament_record();
 f_igosja_generator_mood_after_game();
 f_igosja_generator_injury_after_game();
+f_igosja_generator_make_injury();
 f_igosja_generator_training();
 f_igosja_generator_after_training();
 f_igosja_generator_player_salary();
