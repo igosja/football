@@ -7,6 +7,7 @@ $sql = "SELECT `user_id`,
                `user_login`
         FROM `user`
         WHERE `user_id`!='0'
+        AND `user_activation`='0'
         ORDER BY `user_last_visit` DESC";
 $user_sql = $mysqli->query($sql);
 
