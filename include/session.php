@@ -10,6 +10,11 @@ if (isset($_SESSION['authorization_id']))
     $authorization_id       = $_SESSION['authorization_id'];
     $authorization_login    = $_SESSION['authorization_login'];
 
+    if (!$authorization_login)
+    {
+        $authorization_login = 'Новый менеджер';
+    }
+
     $sql = "SELECT `country_id`,
                    `country_name`,
                    `team_id`,
