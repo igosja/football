@@ -54,7 +54,7 @@ if (isset($_POST['data']))
 
     $user_id    = $mysqli->insert_id;
     $code       = f_igosja_chiper_password($user_id);
-    $href       = SITE_URL . '/activation.php?id=' . $user_id . '&code=' . $code;
+    $href       = 'http://' . SITE_URL . '/activation.php?id=' . $user_id . '&code=' . $code;
     $subject    = 'Регистрация в футбольном онлайн менеджере';
     $message    = 'Для завершения регистрации перейдите по следующей ссылке - ' . $href;
     $from       = 'From: noreply@' . SITE_URL;
