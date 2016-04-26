@@ -41,7 +41,7 @@ $sql = "SELECT `country_id`,
         ON `worldcup_country_id`=`country_id`
         WHERE `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_WORLD_CUP . "'
         AND `worldcup_place`='1'
-        AND `worldcup_season_id`='$igosja_season_id'
+        AND `worldcup_season_id`='$igosja_season_id'-'1'
         ORDER BY `tournament_reputation` DESC, `tournament_id` ASC";
 $tournament_sql = $mysqli->query($sql);
 

@@ -297,6 +297,15 @@ $cupparticipant_sql = $mysqli->query($sql);
 
 $cupparticipant_array = $cupparticipant_sql->fetch_all(MYSQLI_ASSOC);
 
+$sql = "SELECT `leagueparticipant_out`
+        FROM `leagueparticipant`
+        WHERE `leagueparticipant_team_id`='$num_get'
+        AND `leagueparticipant_season_id`='$igosja_season_id'
+        LIMIT 1";
+$leagueparticipant_sql = $mysqli->query($sql);
+
+$leagueparticipant_array = $leagueparticipant_sql->fetch_all(MYSQLI_ASSOC);
+
 $num            = $num_get;
 $header_title   = $team_name;
 

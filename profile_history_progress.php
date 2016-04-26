@@ -24,6 +24,7 @@ $sql = "SELECT `standing_place`,
         LEFT JOIN `team`
         ON `team_id`=`standing_team_id`
         WHERE `standing_user_id`='$authorization_id'
+        AND `standing_season_id`<'$igosja_season_id'
         ORDER BY `standing_season_id` DESC";
 $championship_sql = $mysqli->query($sql);
 
@@ -43,6 +44,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         LEFT JOIN `stage`
         ON `stage_id`=`cupparticipant_out`
         WHERE `cupparticipant_user_id`='$authorization_id'
+        AND `cupparticipant_season_id`<'$igosja_season_id'
         ORDER BY `cupparticipant_season_id` DESC";
 $cup_sql = $mysqli->query($sql);
 
@@ -62,6 +64,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         LEFT JOIN `stage`
         ON `stage_id`=`leagueparticipant_out`
         WHERE `leagueparticipant_user_id`='$authorization_id'
+        AND `leagueparticipant_season_id`<'$igosja_season_id'
         ORDER BY `leagueparticipant_season_id` DESC";
 $league_sql = $mysqli->query($sql);
 
@@ -79,6 +82,7 @@ $sql = "SELECT `worldcup_place` AS `standing_place`,
         LEFT JOIN `country`
         ON `country_id`=`worldcup_country_id`
         WHERE `worldcup_user_id`='$authorization_id'
+        AND `worldcup_season_id`<'$igosja_season_id'
         ORDER BY `worldcup_season_id` DESC";
 $worldcup_sql = $mysqli->query($sql);
 

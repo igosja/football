@@ -43,19 +43,16 @@ $sql = "SELECT `country_id`,
         ON `tournament_country_id`=`country_id`
         LEFT JOIN
         (
-            SELECT `game_tournament_id`,
+            SELECT `cupparticipant_tournament_id`,
                    `team_id`,
                    `team_name`
-            FROM `game`
-            LEFT JOIN `shedule`
-            ON `game_shedule_id`=`shedule_id`
+            FROM `cupparticipant`
             LEFT JOIN `team`
-            ON IF(`game_home_score`+`game_home_shoot_out`>`game_guest_score`+`game_guest_shoot_out`, `game_home_team_id`, `game_guest_team_id`)=`team_id`
-            WHERE `shedule_season_id`='$igosja_season_id'-'1'
-            AND `game_stage_id`='" . CUP_FINAL_STAGE . "'
-            AND `shedule_tournamenttype_id`='" . TOURNAMENT_TYPE_CUP . "'
+            ON `cupparticipant_team_id`=`team_id`
+            WHERE `cupparticipant_season_id`='$igosja_season_id'-'1'
+            AND `cupparticipant_out`='" . CUP_WINNER_STAGE . "'
         ) AS `t1`
-        ON `tournament_id`=`game_tournament_id`
+        ON `tournament_id`=`cupparticipant_tournament_id`
         WHERE `country_continent_id`='$num_get'
         AND `tournament_tournamenttype_id`='3'
         ORDER BY `tournament_reputation` DESC, `tournament_id` ASC";

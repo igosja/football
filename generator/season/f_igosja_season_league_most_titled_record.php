@@ -15,7 +15,7 @@ function f_igosja_season_league_most_titled_record()
 
     for ($i=0; $i<$count_tournament; $i++)
     {
-        $tournament_id = $tournament_array[$i]['game_tournament_id'];
+        $tournament_id = $tournament_array[$i]['leagueparticipant_tournament_id'];
 
         $sql = "SELECT COUNT(`leagueparticipant_id`) AS `count`,
                        `leagueparticipant_team_id`
@@ -53,7 +53,7 @@ function f_igosja_season_league_most_titled_record()
         else
         {
             $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
-            $record_score = $record_array[$i]['recordtournament_value_1'];
+            $record_score = $record_array[0]['recordtournament_value_1'];
 
             if ($winner_count > $record_score)
             {

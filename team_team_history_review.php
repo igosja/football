@@ -37,6 +37,7 @@ $sql = "SELECT `standing_place`,
         LEFT JOIN `tournament`
         ON `standing_tournament_id`=`tournament_id`
         WHERE `standing_team_id`='$num_get'
+        AND `standing_season_id`<'$igosja_season_id'
         ORDER BY `standing_season_id` DESC";
 $championship_sql = $mysqli->query($sql);
 
@@ -52,6 +53,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         LEFT JOIN `stage`
         ON `stage_id`=`cupparticipant_out`
         WHERE `cupparticipant_team_id`='$num_get'
+        AND `cupparticipant_season_id`<'$igosja_season_id'
         ORDER BY `cupparticipant_season_id` DESC";
 $cup_sql = $mysqli->query($sql);
 
@@ -67,6 +69,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         LEFT JOIN `stage`
         ON `stage_id`=`leagueparticipant_out`
         WHERE `leagueparticipant_team_id`='$num_get'
+        AND `leagueparticipant_season_id`<'$igosja_season_id'
         ORDER BY `leagueparticipant_season_id` DESC";
 $league_sql = $mysqli->query($sql);
 

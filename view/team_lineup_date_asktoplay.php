@@ -47,7 +47,10 @@
                         <td class="center">
                             <?php if ($item['team_id'] ||
                                      (0 == $cupparticipant_array[0]['cupparticipant_out'] &&
-                                     TOURNAMENT_TYPE_CUP == $item['shedule_tournamenttype_id'])) { ?>
+                                     TOURNAMENT_TYPE_CUP == $item['shedule_tournamenttype_id']) ||
+                                     (isset($leagueparticipant_array[0]['leagueparticipant_out']) &&
+                                     0 == $leagueparticipant_array[0]['leagueparticipant_out'] &&
+                                     TOURNAMENT_TYPE_CHAMPIONS_LEAGUE == $item['shedule_tournamenttype_id'])) { ?>
                                 Недоступен
                             <?php } else { ?>
                                 <a href="javascript:;" class="asktoplay-link" data-shedule="<?= $item['shedule_id']; ?>">

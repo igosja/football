@@ -40,7 +40,15 @@
                                 </tr>
                                 <tr>
                                     <td class="center">
-                                        Текущий обладатель титула: -
+                                        Текущий обладатель титула:
+                                        <img
+                                            alt="<?= $tournament_array[$i]['team_name']; ?>"
+                                            class="img-12"
+                                            src="/img/team/12/<?= $tournament_array[$i]['team_id']; ?>.png"
+                                        />
+                                        <a href="team_team_review_profile.php?num=<?= $tournament_array[$i]['team_id']; ?>">
+                                            <?= $tournament_array[$i]['team_name']; ?>
+                                        </a>
                                     </td>
                                 </tr>
                                 <tr>
