@@ -1,6 +1,6 @@
 $(document).ready(function ($) {
     $('#select-ajax-give-1').change(function ()
-        //Зависимые селекты
+    //Зависимые селекты
     {
         var ajax_give_2 = $("#select-ajax-give-2");
         var option_selected = $(this).find("option:selected");
@@ -13,10 +13,12 @@ $(document).ready(function ($) {
             {
                 url: '/json.php?select_value=' + value_select + '&select_give=' + give + '&select_need=' + need,
                 dataType: "json",
-                success: function (data) {
+                success: function (data)
+                {
                     var select = '';
 
-                    for (var i = 0; i < data.select_array.length; i++) {
+                    for (var i = 0; i < data.select_array.length; i++)
+                    {
                         select = select
                             + '<option value="'
                             + data.select_array[i].value
@@ -117,4 +119,28 @@ $(document).ready(function ($) {
             data: [4, 3, 6]
         }]
     });
+
+    setInterval(get_count_support_message, 60000);
 });
+
+function get_count_support_message()
+{
+    $.ajax
+    (
+        {
+            url: '/admin/json.php?count_support=0',
+            dataType: "json",
+            success: function (data)
+            {
+                var count_support = data.count_support;
+
+                if (0 == count_support)
+                {
+                    count_support = '';
+                }
+
+                $('#admin-support-badge').text(count_support);
+            }
+        }
+    );
+}

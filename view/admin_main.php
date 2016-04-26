@@ -29,6 +29,11 @@
 
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
+                        <a href="support_list.php">
+                            <i class="fa fa-comment-o fa-fw"></i> <span class="badge" id="admin-support-badge"></span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-gear fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
@@ -52,19 +57,6 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li class="sidebar-search">
-                                <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="Поиск...">
-                                    <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="index.php">Общая информация</a>
-                            </li>
                             <li>
                                 <a href="#">Горизонтальное меню<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">

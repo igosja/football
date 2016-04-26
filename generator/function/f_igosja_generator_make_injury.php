@@ -3,8 +3,6 @@
 function f_igosja_generator_make_injury()
 //Добавляем травмы парочке игроков
 {
-    global $igosja_season_id;
-
     $sql = "SELECT COUNT(`game_id`) AS `count`
             FROM `game`
             LEFT JOIN `shedule`
