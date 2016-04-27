@@ -18,8 +18,8 @@ if (!isset($_POST['xml']) ||
 $secret_key = 'hRCuJWDxBpG5eNj';
 $hidden_key = '9cCCtEqwPcgzZKf';
 $api_key    = '2rC7Xb3lbg2OAwr';
-$xml        = $_POST['data'];
-$sign       = $_POST['signature'];
+$xml        = $_POST['xml'];
+$sign       = $_POST['sign'];
 $xml        = str_replace(' ', '+', $xml);
 $sign       = str_replace(' ', '+', $sign);
 $xml        = base64_decode($xml);
