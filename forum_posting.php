@@ -1,6 +1,6 @@
 <?php
 
-include (__DIR__ . 'include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['group']))
 {

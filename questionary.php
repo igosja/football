@@ -6,11 +6,19 @@ if (isset($_POST['data']))
 {
     $firstname  = strip_tags($_POST['data']['firstname']);
     $lastname   = strip_tags($_POST['data']['lastname']);
-    $gender     = (int) $_POST['data']['gender'];
     $day        = (int) $_POST['data']['birth']['day'];
     $month      = (int) $_POST['data']['birth']['month'];
     $year       = (int) $_POST['data']['birth']['year'];
     $country_id = (int) $_POST['data']['country'];
+
+    if (isset($_POST['data']['gender']))
+    {
+        $gender = (int) $_POST['data']['gender'];
+    }
+    else
+    {
+        $gender = 1;
+    }
 
     $sql = "UPDATE `user`
             SET `user_firstname`=?,
