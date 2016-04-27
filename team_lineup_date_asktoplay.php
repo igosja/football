@@ -32,7 +32,7 @@ $team_name = $team_array[0]['team_name'];
 
 if (isset($_GET['ok']))
 {
-    $askroplay_id   = (int) $_GET['ok'];
+    $asktoplay_id   = (int) $_GET['ok'];
     $shedule_id     = (int) $_GET['shedule'];
     $team_id        = (int) $_GET['team'];
 
@@ -79,7 +79,7 @@ if (isset($_GET['ok']))
         $mysqli->query($sql);
 
         $sql = "DELETE FROM `inbox`
-                WHERE `inbox_asktoplay_id`='$askroplay_id'";
+                WHERE `inbox_asktoplay_id`='$asktoplay_id'";
         $mysqli->query($sql);
 
         $_SESSION['message_class']  = 'error';
@@ -163,7 +163,7 @@ if (isset($_GET['ok']))
         $inboxtheme_text = sprintf($inboxtheme_text, $authorization_team_name);
 
         $sql = "INSERT INTO `inbox`
-                SET `inbox_asktoplay_id`='$askroplay_id',
+                SET `inbox_asktoplay_id`='$asktoplay_id',
                     `inbox_date`=CURDATE(),
                     `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_YES . "',
                     `inbox_title`='$inboxtheme_name',
@@ -191,7 +191,8 @@ if (isset($_GET['ok']))
                 ON `team_id`=`asktoplay_inviter_team_id`
                 WHERE (`asktoplay_invitee_team_id`='$num_get'
                 OR `asktoplay_inviter_team_id`='$num_get')
-                AND `asktoplay_shedule_id`='$shedule_id'";
+                AND `asktoplay_shedule_id`='$shedule_id'
+                AND `asktoplay_id`='$asktoplay_id'";
         $asktoplay_sql = $mysqli->query($sql);
 
         $count_asktoplay = $asktoplay_sql->num_rows;
@@ -210,7 +211,7 @@ if (isset($_GET['ok']))
             if($authorization_user_id != $user_id)
             {
                 $sql = "INSERT INTO `inbox`
-                        SET `inbox_asktoplay_id`='$askroplay_id',
+                        SET `inbox_asktoplay_id`='$asktoplay_id',
                             `inbox_date`=CURDATE(),
                             `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_YES . "',
                             `inbox_title`='$inboxtheme_name',

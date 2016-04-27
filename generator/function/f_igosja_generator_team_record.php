@@ -140,7 +140,7 @@ function f_igosja_generator_team_record()
 
                 $record_value = $record_array[0]['recordteam_value'];
 
-                if ($total_score < $record_value)
+                if ($total_score > $record_value)
                 {
                     $sql = "UPDATE `recordteam`
                             SET `recordteam_value`='$total_score',
@@ -179,7 +179,7 @@ function f_igosja_generator_team_record()
 
                     $record_value = $record_array[0]['recordteam_value'];
 
-                    if ($score < $record_value)
+                    if ($score > $record_value)
                     {
                         $sql = "UPDATE `recordteam`
                                 SET `recordteam_value`='$score',
@@ -218,7 +218,7 @@ function f_igosja_generator_team_record()
 
                     $record_value = $record_array[0]['recordteam_value'];
 
-                    if ($score < $record_value)
+                    if ($score > $record_value)
                     {
                         $sql = "UPDATE `recordteam`
                                 SET `recordteam_value`='$score',

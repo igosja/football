@@ -139,7 +139,7 @@ function f_igosja_generator_country_record()
 
                 $record_value = $record_array[0]['recordcountry_value'];
 
-                if ($total_score < $record_value)
+                if ($total_score > $record_value)
                 {
                     $sql = "UPDATE `recordcountry`
                             SET `recordcountry_value`='$total_score',
@@ -178,7 +178,7 @@ function f_igosja_generator_country_record()
 
                     $record_value = $record_array[0]['recordcountry_value'];
 
-                    if ($score < $record_value)
+                    if ($score > $record_value)
                     {
                         $sql = "UPDATE `recordcountry`
                                 SET `recordcountry_value`='$score',
@@ -217,7 +217,7 @@ function f_igosja_generator_country_record()
 
                     $record_value = $record_array[0]['recordcountry_value'];
 
-                    if ($score < $record_value)
+                    if ($score > $record_value)
                     {
                         $sql = "UPDATE `recordcountry`
                                 SET `recordcountry_value`='$score',
