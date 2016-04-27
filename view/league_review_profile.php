@@ -3,31 +3,33 @@
         <td rowspan="2" class="block-page">
             <p class="header">Стадия</p>
             <table class="center striped vcenter">
-                <tr>
-                    <td>
-                        <img
-                            alt="Предыдущая"
-                            class="img-12"
-                            data-tournament="<?= $num; ?>"
-                            data-stage="<?= $game_array[0]['stage_id']; ?>"
-                            id="tournament-stage-prev"
-                            src="/img/arrow/left.png"
-                        />
-                    </td>
-                    <td id="stage-name">
-                        <?= $stage_name; ?>
-                    </td>
-                    <td>
-                        <img
-                            alt="Следующая"
-                            class="img-12"
-                            data-tournament="<?= $num; ?>"
-                            data-stage="<?= $game_array[0]['stage_id']; ?>"
-                            id="tournament-stage-next"
-                            src="/img/arrow/right.png"
-                        />
-                    </td>
-                </tr>
+                <?php if (isset($game_array[0]['stage_id'])) { ?>
+                    <tr>
+                        <td>
+                            <img
+                                alt="Предыдущая"
+                                class="img-12"
+                                data-tournament="<?= $num; ?>"
+                                data-stage="<?= $game_array[0]['stage_id']; ?>"
+                                id="tournament-stage-prev"
+                                src="/img/arrow/left.png"
+                            />
+                        </td>
+                        <td id="stage-name">
+                            <?= $stage_name; ?>
+                        </td>
+                        <td>
+                            <img
+                                alt="Следующая"
+                                class="img-12"
+                                data-tournament="<?= $num; ?>"
+                                data-stage="<?= $game_array[0]['stage_id']; ?>"
+                                id="tournament-stage-next"
+                                src="/img/arrow/right.png"
+                            />
+                        </td>
+                    </tr>
+                <?php } ?>
             </table>
             <table class="striped w100" id="tournament-stage">
                 <?php if (isset($stage_array)) { ?>

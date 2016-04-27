@@ -103,7 +103,7 @@
                 <tr>
                     <td>
                         <h1>
-                            <?php if ($rating_array[0]['ratingcountry_position']) { ?>
+                            <?php if (isset($rating_array[0]['ratingcountry_position'])) { ?>
                                 <?= $rating_array[0]['ratingcountry_position']; ?>
                             <?php } ?>
                         </h1>
