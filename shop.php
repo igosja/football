@@ -192,7 +192,7 @@ elseif (isset($_GET['money']))
                 AND `finance_season_id`='$igosja_season_id'
                 LIMIT 1";
         $mysqli->query($sql);
-        
+
         $sql = "INSERT INTO `historyfinanceteam`
                 SET `historyfinanceteam_date`=CURDATE(),
                     `historyfinanceteam_historytext_id`='" . HISTORY_TEXT_INCOME_INVESTOR . "',
@@ -222,42 +222,47 @@ elseif (isset($_POST['data']))
         $sum = 1;
     }
 
-    $sql = "INSERT INTO `payment`
-            SET `payment_date`=SYSDATE(),
-                `payment_sum`='$sum',
-                `payment_user_id`='$num_get'";
-    $mysqli->query($sql);
+//    $sql = "INSERT INTO `payment`
+//            SET `payment_date`=SYSDATE(),
+//                `payment_sum`='$sum',
+//                `payment_user_id`='$num_get'";
+//    $mysqli->query($sql);
 
-    $private_key    = 'xjaJgqw2L2zCMT1Bs7lVcM7xRXzAwayVO1h1nZbz';
-    $version        = '3';
-    $public_key     = 'i33620494410';
-    $order_id       = $mysqli->insert_id;
-    $action         = 'pay';
-    $description    = 'Пополнение счета на сайте Виртуальной футбольной лиги';
+    $secret_key     = 'hRCuJWDxBpG5eNj';
+    $hidden_key     = '9cCCtEqwPcgzZKf';
+    $api_key        = '2rC7Xb3lbg2OAwr';
+
+    $merchant_id    = 57065;
+//    $order_id       = $mysqli->insert_id;
+    $order_id       = 'ID_1';
     $amount         = $sum;
+    $amount         = '54';
     $currency       = 'USD';
+    $desc           = 'Пополнение счета на сайте Виртуальной футбольной лиги';
+    $test_mode      = 1;
 
-    $json = array
-    (
-        'version'       => $version,
-        'public_key'    => $public_key,
-        'action'        => $action,
-        'order_id'      => $order_id,
-        'amount'        => $amount,
-        'currency'      => $currency,
-        'description'   => $description,
-    );
+    $xml =  '<?xml version="1.0" encoding="UTF-8"?>
+             <request>
+                 <version>1.3</version>
+                 <merchant_id>' . $merchant_id . '</merchant_id>
+                 <language>ru</language>
+                 <order_id>' . $order_id . '</order_id>
+                 <amount>' . $amount . '</amount>
+                 <currency>' . $currency . '</currency>
+                 <description>' . $desc . '</description>
+                 <test_mode>' . $test_mode . '</test_mode>
+             </request>';
 
-    $data       = base64_encode(json_encode($json));
-    $signature  = base64_encode(sha1($private_key . $data . $private_key, 1));
+    $sign   = base64_encode(md5($secret_key . $xml . $secret_key));
+    $xml    = base64_encode($xml);
 
     $params = array
     (
-        'data'      => $data,
-        'signature' => $signature,
+        'xml'   => $xml,
+        'sign'  => $sign,
     );
 
-    $url = 'https://www.liqpay.com/api/3/checkout?' . http_build_query($params);
+    $url = 'https://merchant.pay2pay.com/?page=init&' . http_build_query($params);
 
     redirect($url);
 }

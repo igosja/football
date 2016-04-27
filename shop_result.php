@@ -2,8 +2,8 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (!isset($_POST['data']) ||
-    !isset($_POST['signature']))
+if (!isset($_POST['xml']) ||
+    !isset($_POST['sign']))
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
@@ -11,13 +11,27 @@ if (!isset($_POST['data']) ||
     redirect('shop.php');
 }
 
-$private_key    = 'xjaJgqw2L2zCMT1Bs7lVcM7xRXzAwayVO1h1nZbz';
-$public_key     = 'i33620494410';
-$data           = $_POST['data'];
-$signature      = $_POST['signature'];
-$sign_check     = base64_encode(sha1($private_key . $data . $private_key, 1));
+$fp = fopen('payment.txt', 'w');
 
-if ($sign_check != $signature)
+foreach ($_POST as $key => $value)
+{
+    fwrite($fp, $key . '-' . $value . '/r/n');
+}
+
+fclose($fp);
+exit;
+
+$secret_key = 'hRCuJWDxBpG5eNj';
+$hidden_key = '9cCCtEqwPcgzZKf';
+$api_key    = '2rC7Xb3lbg2OAwr';
+$xml        = $_POST['data'];
+$sign       = $_POST['signature'];
+$xml        = str_replace(' ', '+', $xml);
+$sign       = str_replace(' ', '+', $sign);
+$xml        = base64_decode($xml);
+$sign_check = base64_encode(md5($hidden_key . $xml . $hidden_key));
+
+if ($sign_check != $sign)
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
@@ -25,20 +39,9 @@ if ($sign_check != $signature)
     redirect('shop.php');
 }
 
-$json = base64_decode($data);
-$json = json_decode($json, true);
+$xml = simplexml_load_string($xml);
 
-$public_check = $json['public_key'];
-
-if ($public_key != $public_check)
-{
-    $_SESSION['message_class']  = 'error';
-    $_SESSION['message_text']   = 'Счет пополнить не удалось';
-
-    redirect('shop.php');
-}
-
-$status = $json['status'];
+$status = $xml->status;
 
 if ('success' != $status)
 {
@@ -48,7 +51,7 @@ if ('success' != $status)
     redirect('shop.php');
 }
 
-$payment_id = $json['order_id'];
+$payment_id = $xml->order_id;
 
 $sql = "SELECT `payment_status`,
                `payment_sum`,
