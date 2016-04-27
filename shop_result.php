@@ -2,15 +2,11 @@
 
 include (__DIR__ . '/include/include.php');
 
-$fp = fopen('payment.txt', 'w');
-
 if (!isset($_POST['xml']) ||
     !isset($_POST['sign']))
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
-
-    fwrite($fp, '1');
 
     redirect('shop.php');
 }
@@ -30,8 +26,6 @@ if ($sign_check != $sign)
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
 
-    fwrite($fp, '2');
-
     redirect('shop.php');
 }
 
@@ -43,8 +37,6 @@ if ('success' != $status)
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
-
-    fwrite($fp, '3');
 
     redirect('shop.php');
 }
@@ -66,8 +58,6 @@ if (0 == $count_payment)
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
 
-    fwrite($fp, '4');
-
     redirect('shop.php');
 }
 
@@ -79,8 +69,6 @@ if (1 == $status)
 {
     $_SESSION['message_class']  = 'error';
     $_SESSION['message_text']   = 'Счет пополнить не удалось';
-
-    fwrite($fp, '5');
 
     redirect('shop.php');
 }
@@ -106,9 +94,5 @@ $mysqli->query($sql);
 
 $_SESSION['message_class']  = 'success';
 $_SESSION['message_text']   = 'Счет успешно пополнен';
-
-fwrite($fp, '6');
-
-fclose($fp);
 
 redirect('shop.php');
