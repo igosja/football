@@ -237,7 +237,7 @@ elseif (isset($_POST['data']))
     $amount         = $sum;
     $currency       = 'USD';
     $desc           = 'Пополнение счета на сайте Виртуальной футбольной лиги';
-    $test_mode      = 1;
+    $test_mode      = 0;
 
     $xml =  '<?xml version="1.0" encoding="UTF-8"?>
              <request>
