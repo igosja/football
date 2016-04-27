@@ -4,6 +4,11 @@ function f_igosja_season_national_coach()
 {
     global $igosja_season_id;
 
+    $sql = "UPDATE `country`
+            SET `country_user_id`='0'
+            WHERE `country_user_id`!='0'";
+    f_igosja_mysqli_query($sql);
+
     $sql = "SELECT `country_id`
             FROM `country`
             WHERE `country_id` IN

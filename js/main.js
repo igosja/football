@@ -710,8 +710,8 @@ $(document).ready(function($)
                     $('#tournament-game').html(table_data);
                     $('#shedule-date').html(shedule_date);
 
-                    $('#tournament-game-prev').data('shedule', data.game_array[0].shedule_id);
-                    $('#tournament-game-next').data('shedule', data.game_array[0].shedule_id);
+                    $('#worldcup-game-prev').data('shedule', data.game_array[0].shedule_id);
+                    $('#worldcup-game-next').data('shedule', data.game_array[0].shedule_id);
                     $('#game-block').removeClass('loading');
                 }
             }
@@ -768,8 +768,8 @@ $(document).ready(function($)
                     $('#tournament-game').html(table_data);
                     $('#shedule-date').html(shedule_date);
 
-                    $('#tournament-game-prev').data('shedule', data.game_array[0].shedule_id);
-                    $('#tournament-game-next').data('shedule', data.game_array[0].shedule_id);
+                    $('#worldcup-game-prev').data('shedule', data.game_array[0].shedule_id);
+                    $('#worldcup-game-next').data('shedule', data.game_array[0].shedule_id);
                     $('#game-block').removeClass('loading');
                 }
             }

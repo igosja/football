@@ -21,8 +21,6 @@
                                         />
                                         <?= $player_array[0]['country_name']; ?>
                                     </a>
-                                    <br />
-                                    Не вызывался
                                 </td>
                                 <td>
                                     <?= $player_array[0]['player_age']; ?>
@@ -88,7 +86,9 @@
                             <tr>
                                 <td><?= $attribute_array[$i]['attribute_name']; ?></td>
                                 <td class="center w33">
-                                    <?php if (1 == $count_scout) { ?>
+                                    <?php if (1 == $count_scout ||
+                                             (isset($authorization_team_id) &&
+                                              $player_array[0]['team_id'] == $authorization_team_id)) { ?>
                                         <div class="progress">
                                             <div class="progress-bar" style="width: <?= $attribute_array[$i]['playerattribute_value']; ?>%"></div>
                                         </div>

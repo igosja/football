@@ -57,6 +57,7 @@ $sql = "SELECT `team_id`,
         LEFT JOIN `tournament`
         ON `tournament_id`=`standing_tournament_id`
         WHERE `statisticplayer_player_id`='$num_get'
+        AND `statisticplayer_season_id`<'$igosja_season_id'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONSHIP . "'
         ORDER BY `statisticplayer_season_id` DESC";
 $championship_sql = $mysqli->query($sql);
@@ -81,6 +82,7 @@ $sql = "SELECT `team_id`,
         LEFT JOIN `stage`
         ON `cupparticipant_out`=`stage_id`
         WHERE `statisticplayer_player_id`='$num_get'
+        AND `statisticplayer_season_id`<'$igosja_season_id'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CUP . "'
         ORDER BY `statisticplayer_season_id` DESC";
 $cup_sql = $mysqli->query($sql);
@@ -105,6 +107,7 @@ $sql = "SELECT `team_id`,
         LEFT JOIN `stage`
         ON `leagueparticipant_out`=`stage_id`
         WHERE `statisticplayer_player_id`='$num_get'
+        AND `statisticplayer_season_id`<'$igosja_season_id'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONS_LEAGUE . "'
         ORDER BY `statisticplayer_season_id` DESC";
 $league_sql = $mysqli->query($sql);
@@ -127,6 +130,7 @@ $sql = "SELECT `country_id`,
         LEFT JOIN `tournament`
         ON `tournament_id`=`worldcup_tournament_id`
         WHERE `statisticplayer_player_id`='$num_get'
+        AND `statisticplayer_season_id`<'$igosja_season_id'
         AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_WORLD_CUP . "'
         ORDER BY `statisticplayer_season_id` DESC";
 $worldcup_sql = $mysqli->query($sql);

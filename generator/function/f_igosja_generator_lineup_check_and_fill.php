@@ -148,8 +148,8 @@ function f_igosja_generator_lineup_check_and_fill()
                         $sql = "SELECT COUNT(`disqualification_id`) AS `count`
                                 FROM `disqualification`
                                 WHERE `disqualification_player_id`='$player_id'
-                                AND (`disqualification_red`='1'
-                                OR `disqualification_yellow`='2')
+                                AND (`disqualification_red`>'0'
+                                OR `disqualification_yellow`>'1')
                                 AND `disqualification_tournament_id`='$tournament_id'";
                         $disqualification_sql = f_igosja_mysqli_query($sql);
 
@@ -322,8 +322,8 @@ function f_igosja_generator_lineup_check_and_fill()
                         $sql = "SELECT COUNT(`disqualification_id`) AS `count`
                                 FROM `disqualification`
                                 WHERE `disqualification_player_id`='$player_id'
-                                AND (`disqualification_red`='1'
-                                OR `disqualification_yellow`='2')
+                                AND (`disqualification_red`>'0'
+                                OR `disqualification_yellow`>'1')
                                 AND `disqualification_tournament_id`='$tournament_id'";
                         $disqualification_sql = f_igosja_mysqli_query($sql);
 

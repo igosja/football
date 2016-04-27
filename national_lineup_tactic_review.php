@@ -224,8 +224,8 @@ $sql = "SELECT `disqualification_player_id`,
                 FROM `game`
                 WHERE `game_id`='$game_id'
             )
-            AND `disqualification_red`>'0'
-            OR `disqualification_yellow`>'1'
+            AND (`disqualification_red`>'0'
+            OR `disqualification_yellow`>'1')
         ) AS `t1`
         ON `player_id`=`disqualification_player_id`
         WHERE `country_id`='$num_get'

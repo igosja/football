@@ -38,6 +38,7 @@ $sql = "SELECT `shedule_date`,
         LEFT JOIN `shedule`
         ON `shedule_id`=`game_shedule_id`
         WHERE `game_tournament_id`='$num_get'
+        AND `shedule_season_id`='$igosja_season_id'
         GROUP BY `shedule_id`
         ORDER BY `shedule_date` ASC";
 $shedule_sql = $mysqli->query($sql);

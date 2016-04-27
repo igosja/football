@@ -83,6 +83,7 @@ $sql = "SELECT `inbox_id`,
         LEFT JOIN `user`
         ON `user_id`=`inbox_user_id`
         WHERE `inbox_sender_id`='$num_get'
+        AND `inbox_support`='0'
         ORDER BY `inbox_date` DESC";
 $inbox_sql = $mysqli->query($sql);
 

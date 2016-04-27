@@ -154,7 +154,9 @@
                                 <tr>
                                     <td><?= $attribute_array[$i]['attribute_name']; ?></td>
                                     <td class="center w25">
-                                        <?php if (1 == $count_scout) { ?>
+                                        <?php if (1 == $count_scout ||
+                                                 (isset($authorization_team_id) &&
+                                                  $player_array[0]['team_id'] == $authorization_team_id))  { ?>
                                             <div class="progress">
                                                 <div class="progress-bar" style="width: <?= $attribute_array[$i]['playerattribute_value']; ?>%"></div>
                                             </div>
@@ -273,12 +275,22 @@
                 <?php foreach ($disqualification_array as $item) { ?>
                     <tr>
                         <td class="w1" rowspan="2">
-                            <img alt="Желтая карточка" class="img-30" src="/img/card/yellow.png" />
+                            <?php if (2 >= $item['disqualification_yellow'] || 1 >= $item['disqualification_red']) { ?>
+                                <img alt="Красная карточка" class="img-30" src="/img/card/red.png" />
+                            <?php } else { ?>
+                                <img alt="Желтая карточка" class="img-30" src="/img/card/yellow.png" />
+                            <?php } ?>
                         </td>
                         <td class="w1">
                             <?= SPACE; ?>
                         </td>
-                        <td><?= 2-$item['disqualification_yellow']; ?> ЖК до дисквалификации на 1 игру</td>
+                        <td>
+                            <?php if (2 >= $item['disqualification_yellow'] || 1 >= $item['disqualification_red']) { ?>
+                                Дисквалифицирован на 1 игру
+                            <?php } else { ?>
+                                <?= 2 - $item['disqualification_yellow']; ?> ЖК до дисквалификации на 1 игру
+                            <?php } ?>
+                        </td>
                     </tr>
                     <tr>
                         <td class="w1">

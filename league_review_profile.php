@@ -143,8 +143,36 @@ else
 
 if (6 >= $stage_id)
 {
-    $stage_name     = 'Групповой этап';
-    $stage_array    = array();
+    $stage_name = 'Групповой этап';
+
+    $sql = "SELECT `city_name`,
+                   `country_name`,
+                   `league_score`-`league_pass` AS `league_difference`,
+                   `league_draw`,
+                   `league_game`,
+                   `league_place`,
+                   `league_group`,
+                   `league_loose`,
+                   `league_pass`,
+                   `league_point`,
+                   `league_score`,
+                   `league_win`,
+                   `team_id`,
+                   `team_name`
+            FROM `league`
+            LEFT JOIN `team`
+            ON `league_team_id`=`team_id`
+            LEFT JOIN `city`
+            ON `city_id`=`team_city_id`
+            LEFT JOIN `country`
+            ON `country_id`=`city_country_id`
+            WHERE `league_season_id`='$igosja_season_id'
+            ORDER BY `league_group` ASC, `league_place` ASC";
+    $league_sql = $mysqli->query($sql);
+
+    $league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
+
+    $group = '';
 }
 else
 {

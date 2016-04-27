@@ -68,7 +68,7 @@ $sql = "SELECT `statisticplayer_best`,
         ON `season_id`=`statisticplayer_season_id`
         WHERE `statisticplayer_player_id`='$num_get'
         GROUP BY `statisticplayer_season_id`
-        ORDER BY `statisticplayer_season_id` ASC";
+        ORDER BY `statisticplayer_season_id` DESC";
 $season_statistic_sql = $mysqli->query($sql);
 
 $season_statistic_array = $season_statistic_sql->fetch_all(MYSQLI_ASSOC);

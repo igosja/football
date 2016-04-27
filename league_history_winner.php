@@ -29,7 +29,9 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$sql = "SELECT `leagueparticipant_season_id`,
+$sql = "SELECT `city_name`,
+               `country_name`,
+               `leagueparticipant_season_id`,
                `team_id`,
                `team_name`
         FROM `leagueparticipant`
@@ -48,7 +50,9 @@ $winner_sql = $mysqli->query($sql);
 $count_winner = $winner_sql->num_rows;
 $winner_array = $winner_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `team_id`,
+$sql = "SELECT `city_name`,
+               `country_name`,
+               `team_id`,
                `team_name`
         FROM `leagueparticipant`
         LEFT JOIN `team`

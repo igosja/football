@@ -116,7 +116,8 @@ $last_five_sql = $mysqli->query($sql);
 
 $last_five_array = $last_five_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `disqualification_yellow`,
+$sql = "SELECT `disqualification_red`,
+               `disqualification_yellow`,
                `tournament_id`,
                `tournament_name`
         FROM `player`

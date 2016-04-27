@@ -52,11 +52,11 @@
                                                     <?= $item['home_name']; ?>
                                                 </a>
                                                 против
-                                                <a href="national_team_review_profile.php?num=<?= $item['guest_id']; ?>">
+                                                <a href="team_team_review_profile.php?num=<?= $item['guest_id']; ?>">
                                                     <?= $item['guest_name']; ?>
                                                 </a>
                                             <?php } else { ?>
-                                                <a href="team_team_review_profile.php?num=<?= $item['home_id']; ?>">
+                                                <a href="national_team_review_profile.php?num=<?= $item['home_id']; ?>">
                                                     <?= $item['home_country_name']; ?>
                                                 </a>
                                                 против

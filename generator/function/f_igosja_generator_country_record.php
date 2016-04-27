@@ -82,7 +82,7 @@ function f_igosja_generator_country_record()
             $sql = "SELECT `recordcountry_value`
                     FROM `recordcountry`
                     WHERE `recordcountry_country_id`='$country_id'
-                    AND `recordcountry_recordcountrytype_id`='" . RECORD_TEAM_HIGHEST_ATTENDANCE . "'
+                    AND `recordcountry_recordcountrytype_id`='" . RECORD_TEAM_LOWEST_ATTENDANCE . "'
                     LIMIT 1";
             $record_sql = f_igosja_mysqli_query($sql);
 

@@ -80,7 +80,12 @@ $sql = "SELECT ROUND(COUNT(`scout_id`)/`count_player`*100) AS `count_scout`,
             ORDER BY `player_country_id` ASC
         ) AS `t1`
         ON `t1`.`player_country_id`=`country_id`
-        WHERE `scout_team_id`='$num_get'
+        WHERE `scout_team_id`=
+        (
+            SELECT `staff_team_id`
+            FROM `staff`
+            WHERE `staff_id`='$num_get'
+        )
         GROUP BY `player`.`player_country_id`
         ORDER BY `player`.`player_country_id` ASC";
 $scout_sql = $mysqli->query($sql);
