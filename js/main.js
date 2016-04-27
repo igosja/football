@@ -1333,4 +1333,21 @@ $(document).ready(function($)
         var rule_id = $(this).data('id');
         $('#rule-' + rule_id).toggle('slow');
     });
+
+    $('#pay2pay-button').on('click', function()
+    //Описание pay2pay
+    {
+        var text = $(this).text();
+
+        if ('Подробнее' == text)
+        {
+            $(this).text('Свернуть');
+        }
+        else
+        {
+            $(this).text('Подробнее');
+        }
+
+        $('#pay2pay-description').toggle('slow');
+    });
 });
