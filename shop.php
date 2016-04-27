@@ -222,21 +222,19 @@ elseif (isset($_POST['data']))
         $sum = 1;
     }
 
-//    $sql = "INSERT INTO `payment`
-//            SET `payment_date`=SYSDATE(),
-//                `payment_sum`='$sum',
-//                `payment_user_id`='$num_get'";
-//    $mysqli->query($sql);
+    $sql = "INSERT INTO `payment`
+            SET `payment_date`=SYSDATE(),
+                `payment_sum`='$sum',
+                `payment_user_id`='$num_get'";
+    $mysqli->query($sql);
 
     $secret_key     = 'hRCuJWDxBpG5eNj';
     $hidden_key     = '9cCCtEqwPcgzZKf';
     $api_key        = '2rC7Xb3lbg2OAwr';
 
     $merchant_id    = 57065;
-//    $order_id       = $mysqli->insert_id;
-    $order_id       = 'ID_1';
+    $order_id       = $mysqli->insert_id;
     $amount         = $sum;
-    $amount         = '54';
     $currency       = 'USD';
     $desc           = 'Пополнение счета на сайте Виртуальной футбольной лиги';
     $test_mode      = 1;

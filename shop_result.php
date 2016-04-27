@@ -11,16 +11,6 @@ if (!isset($_POST['xml']) ||
     redirect('shop.php');
 }
 
-$fp = fopen('payment.txt', 'w');
-
-foreach ($_POST as $key => $value)
-{
-    fwrite($fp, $key . '-' . $value . '/r/n');
-}
-
-fclose($fp);
-exit;
-
 $secret_key = 'hRCuJWDxBpG5eNj';
 $hidden_key = '9cCCtEqwPcgzZKf';
 $api_key    = '2rC7Xb3lbg2OAwr';
