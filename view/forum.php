@@ -15,7 +15,7 @@
                 <tr>
                     <td>
                         <a href="forum_group.php?num=<?= $forum_array[$i]['forumthemegroup_id']; ?>">
-                            <?= $forum_array[$i]['forumthemegroup_name']; ?>
+                            <strong><?= $forum_array[$i]['forumthemegroup_name']; ?></strong>
                         </a>
                         <br />
                         <?= $forum_array[$i]['forumthemegroup_description']; ?>

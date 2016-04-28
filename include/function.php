@@ -149,6 +149,15 @@ function f_igosja_ufu_date_time($date)
 //Форматирование даты
 {
     $date = strtotime($date);
+
+    if ($date)
+    {
+        $date = date('H:i d.m.Y', $date);
+    }
+    else
+    {
+        $date = '';
+    }
     $date = date('H:i d.m.Y', $date);
 
     return $date;
