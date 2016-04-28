@@ -6,10 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Административный раздел">
         <title>Административный раздел</title>
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/metisMenu.min.css" rel="stylesheet">
-        <link href="/css/timeline.css" rel="stylesheet">
-        <link href="/css/sb-admin-2.css" rel="stylesheet">
+        <link href="/css/admin.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     </head>
     <body>
@@ -282,9 +279,7 @@
             </div>
         </div>
         <script src="/js/jquery.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/metisMenu.min.js"></script>
-        <script src="/js/sb-admin-2.js"></script>
+        <script src="/js/admin.min.js"></script>
         <script src="/js/highcharts.js"></script>
         <script src="/js/admin.js"></script>
     </body>

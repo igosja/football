@@ -23,7 +23,7 @@
             <p class="justify">Мы предлагаем вам интересное общение и новые знакомства. Всех участников Лиги объединяет только одна вещь - футбол. А участие в игре - бесплатное. Скачивать ничего не нужно. Достаточно иметь возможность посещать сайт хотя бы несколько раз в неделю и работающий почтовый ящик.</p>
         </td>
         <td class="block-page w1">
-            <p class="header">Счетчик</p>
+            <p class="header">Кнопки</p>
             <a href="//www.liveinternet.ru/click" target="_blank">
                 <img
                     alt="LiveInternet"
@@ -36,8 +36,13 @@
             </a>
             <br />
             <br />
+            <a href="http://www.pay2pay.com/" target="_blank">
+                <img src="/img/pay2pay.png" width="88" />
+            </a>
+            <br />
+            <br />
             <a href="https://passport.webmoney.ru/asp/certview.asp?wmid=274662367507" target="_blank">
-                <img src="/img/webmoney.png">
+                <img src="/img/webmoney.png" />
             </a>
         </td>
     </tr>

@@ -27,7 +27,6 @@
                 <tr>
                     <td>Текст</td>
                     <td>
-                        <textarea name="rule_text" rows="10" cols="100">{if (isset($rule_text))}{$rule_text}{/if}</textarea>
                         <textarea
                             class="form-control"
                             name="rule_text"
