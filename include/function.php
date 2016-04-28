@@ -158,7 +158,6 @@ function f_igosja_ufu_date_time($date)
     {
         $date = '';
     }
-    $date = date('H:i d.m.Y', $date);
 
     return $date;
 }
