@@ -132,7 +132,15 @@ function f_igosja_ufu_date($date)
 //Форматирование даты
 {
     $date = strtotime($date);
-    $date = date('d.m.Y', $date);
+
+    if (0 != $date)
+    {
+        $date = date('d.m.Y', $date);
+    }
+    else
+    {
+        $date = '';
+    }
 
     return $date;
 }
