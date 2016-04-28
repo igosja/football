@@ -133,7 +133,7 @@ function f_igosja_ufu_date($date)
 {
     $date = strtotime($date);
 
-    if (0 != $date)
+    if ($date)
     {
         $date = date('d.m.Y', $date);
     }
