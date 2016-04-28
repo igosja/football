@@ -56,7 +56,7 @@ $sql = "SELECT `inbox_id`,
         WHERE (`inbox_sender_id`='$num_get'
         OR `inbox_user_id`='$num_get')
         AND `inbox_support`='1'
-        ORDER BY `inbox_date` DESC";
+        ORDER BY `inbox_date` DESC, `inbox_id` DESC";
 $inbox_sql = $mysqli->query($sql);
 
 $inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);

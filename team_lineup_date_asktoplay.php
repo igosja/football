@@ -166,6 +166,7 @@ if (isset($_GET['ok']))
                 SET `inbox_asktoplay_id`='$asktoplay_id',
                     `inbox_date`=CURDATE(),
                     `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_YES . "',
+                    `inbox_sender_id`='$authorization_id',
                     `inbox_title`='$inboxtheme_name',
                     `inbox_text`='$inboxtheme_text',
                     `inbox_user_id`='$user_id'";
@@ -192,7 +193,7 @@ if (isset($_GET['ok']))
                 WHERE (`asktoplay_invitee_team_id`='$num_get'
                 OR `asktoplay_inviter_team_id`='$num_get')
                 AND `asktoplay_shedule_id`='$shedule_id'
-                AND `asktoplay_id`='$asktoplay_id'";
+                AND `asktoplay_id`!='$asktoplay_id'";
         $asktoplay_sql = $mysqli->query($sql);
 
         $count_asktoplay = $asktoplay_sql->num_rows;
@@ -214,6 +215,7 @@ if (isset($_GET['ok']))
                         SET `inbox_asktoplay_id`='$asktoplay_id',
                             `inbox_date`=CURDATE(),
                             `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_YES . "',
+                            `inbox_sender_id`='$authorization_user_id',
                             `inbox_title`='$inboxtheme_name',
                             `inbox_text`='$inboxtheme_text',
                             `inbox_user_id`='$user_id'";

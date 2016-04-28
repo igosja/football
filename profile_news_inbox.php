@@ -22,7 +22,7 @@ $sql = "SELECT `inbox_id`,
         ON `user_id`=`inbox_sender_id`
         WHERE `inbox_user_id`='$num_get'
         AND `inbox_support`='0'
-        ORDER BY `inbox_date` DESC";
+        ORDER BY `inbox_date` DESC, `inbox_id` DESC";
 $inbox_sql = $mysqli->query($sql);
 
 $inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);

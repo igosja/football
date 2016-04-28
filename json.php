@@ -1166,6 +1166,7 @@ elseif (isset($_GET['asktoplay']))
                         `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_NO . "',
                         `inbox_title`='$inboxtheme_name',
                         `inbox_text`='$inboxtheme_text',
+                        `inbox_sender_id`='$authorization_id',
                         `inbox_user_id`='$user_id'";
             $mysqli->query($sql);
 
@@ -1273,6 +1274,7 @@ elseif (isset($_GET['asktoplay']))
                     SET `inbox_asktoplay_id`='$asktoplay_id',
                         `inbox_date`=CURDATE(),
                         `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY . "',
+                        `inbox_sender_id`='$authorization_id',
                         `inbox_title`='$inboxtheme_name',
                         `inbox_text`='$inboxtheme_text',
                         `inbox_user_id`='$user_id'";
