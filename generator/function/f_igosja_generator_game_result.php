@@ -14,10 +14,13 @@ function f_igosja_generator_game_result()
                    `game_guest_country_id`,
                    `game_guest_team_id`,
                    `game_home_country_id`,
-                   `game_home_team_id`
+                   `game_home_team_id`,
+                   `referee_rigor`
             FROM `game`
             LEFT JOIN `shedule`
             ON `shedule_id`=`game_shedule_id`
+            LEFT JOIN `referee`
+            ON `game_referee_id`=`referee_id`
             WHERE `game_played`='0'
             AND `shedule_date`=CURDATE()
             ORDER BY `game_id` ASC";
@@ -28,7 +31,8 @@ function f_igosja_generator_game_result()
 
     for ($i=0; $i<$count_game; $i++)
     {
-        $game_id = $game_array[$i]['game_id'];
+        $game_id        = $game_array[$i]['game_id'];
+        $referee_rigor  = $game_array[$i]['referee_rigor'];
 
         $home_team_power        = 0;
         $home_gk                = 0;
@@ -410,18 +414,18 @@ function f_igosja_generator_game_result()
         $guest_corner       = $guest_corner + rand(3, 8);
         $home_offside       = $home_offside  + rand(1, 4);
         $guest_offside      = $guest_offside + rand(1, 4);
-        $home_foul          = $home_foul  + rand(8, 17);
-        $guest_foul         = $guest_foul + rand(8, 17);
-        $home_penalty       = $home_penalty  + floor(rand(0, 7) / 7);
-        $guest_penalty      = $guest_penalty + floor(rand(0, 7) / 7);
+        $home_foul          = $home_foul  + rand(8, 16 + $referee_rigor);
+        $guest_foul         = $guest_foul + rand(8, 16 + $referee_rigor);
+        $home_penalty       = $home_penalty  + floor(rand(0, 6 + $referee_rigor) / 7);
+        $guest_penalty      = $guest_penalty + floor(rand(0, 6 + $referee_rigor) / 7);
         $home_shot          = $home_shot + $home_penalty;
         $guest_shot         = $guest_shot + $guest_penalty;
         $home_on_target     = $home_on_target + $home_penalty;
         $guest_on_target    = $guest_on_target + $guest_penalty;
-        $home_yellow        = $home_yellow  + rand(0, 3);
-        $guest_yellow       = $guest_yellow + rand(0, 3);
-        $home_red           = $home_red  + floor(rand(0, 8) / 8);
-        $guest_red          = $guest_red + floor(rand(0, 8) / 8);
+        $home_yellow        = $home_yellow  + rand(0, 2 + $referee_rigor);
+        $guest_yellow       = $guest_yellow + rand(0, 2 + $referee_rigor);
+        $home_red           = $home_red  + floor(rand(0, 7 + $referee_rigor) / 8);
+        $guest_red          = $guest_red + floor(rand(0, 7 + $referee_rigor) / 8);
         $home_possesion     = round($home_team_power / ( $home_team_power + $guest_team_power ) * 100 + rand(-10, 10));
         $guest_possesion    = 100 - $home_possesion;
 
