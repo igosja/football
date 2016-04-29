@@ -10,7 +10,9 @@ function f_igosja_generator_player_condition_practice()
             ON `game_id`=`lineup_game_id`
             LEFT JOIN `shedule`
             ON `shedule_id`=`game_shedule_id`
-            SET `lineup_condition`=`lineup_condition`-'15'-`player_age`/'5',
+            LEFT JOIN `stadium`
+            ON `stadium_id`=`game_stadium_id`
+            SET `lineup_condition`=`lineup_condition`-'13'-`player_age`/'5'-`stadium_stadiumquality_id`,
                 `lineup_practice`=`lineup_practice`+'10'+`player_age`/'5'
             WHERE `shedule_date`=CURDATE()
             AND `lineup_position_id`<='25'
