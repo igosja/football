@@ -1,6 +1,6 @@
 <?php
 
-function f_igosja_season_cup_prize()
+function f_igosja_prize_cup_prize()
 {
     global $igosja_season_id;
 

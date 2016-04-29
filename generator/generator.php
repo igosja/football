@@ -63,6 +63,26 @@ f_igosja_generator_ticket_price();
 $sql = "SELECT COUNT(`shedule_id`) AS `count`
         FROM `shedule`
         WHERE `shedule_date`>CURRENT_DATE()
+        AND `shedule_season_id`='$igosja_season_id'
+        AND `shedule_tournamenttype_id`='" . TOURNAMENT_TYPE_OFF_SEASON . "'";
+$shedule_sql = $mysqli->query($sql);
+
+$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+
+$count_shedule = $shedule_array[0]['count'];
+
+if (6 == $count_shedule)
+{
+    include (__DIR__ . '/../include/prize.php');
+
+    f_igosja_prize_league_prize();
+    f_igosja_prize_championship_prize();
+    f_igosja_prize_cup_prize();
+}
+
+$sql = "SELECT COUNT(`shedule_id`) AS `count`
+        FROM `shedule`
+        WHERE `shedule_date`>CURRENT_DATE()
         AND `shedule_season_id`='$igosja_season_id'";
 $shedule_sql = $mysqli->query($sql);
 
@@ -86,10 +106,7 @@ if (0 == $count_shedule)
     f_igosja_season_championship_position_record();
     f_igosja_season_league_most_titled_record();
     f_igosja_season_cup_most_titled_record();
-    f_igosja_season_league_prize();
-    f_igosja_season_championship_prize();
     f_igosja_season_championship_visitor();
-    f_igosja_season_cup_prize();
     f_igosja_season_national_coach();
     f_igosja_season_truncate();
     f_igosja_season_user_fire();
