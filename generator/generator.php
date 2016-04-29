@@ -88,6 +88,7 @@ if (0 == $count_shedule)
     f_igosja_season_cup_most_titled_record();
     f_igosja_season_league_prize();
     f_igosja_season_championship_prize();
+    f_igosja_season_championship_visitor();
     f_igosja_season_cup_prize();
     f_igosja_season_national_coach();
     f_igosja_season_truncate();
