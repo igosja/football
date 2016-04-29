@@ -1350,4 +1350,104 @@ $(document).ready(function($)
 
         $('#pay2pay-description').toggle('slow');
     });
+
+    $('#registration-login-input').on('change', function()
+    //Регистрация - проверка логина
+    {
+        var login = $(this).val();
+
+        $.ajax
+        (
+            {
+                url: 'json.php?registration_login=' + login,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (0 == data.count_user)
+                    {
+                        $('#registration-login-tr').hide();
+                    }
+                    else
+                    {
+                        $('#registration-login-tr').show();
+                    }
+                }
+            }
+        );
+    });
+
+    $('#registration-email-input').on('change', function()
+    //Регистрация - проверка email
+    {
+        var email = $(this).val();
+
+        $.ajax
+        (
+            {
+                url: 'json.php?registration_email=' + email,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (0 == data.count_user)
+                    {
+                        $('#registration-email-tr').hide();
+                    }
+                    else
+                    {
+                        $('#registration-email-tr').show();
+                    }
+                }
+            }
+        );
+    });
+
+    $('#questionary-login-input').on('change', function()
+    //Анкета - проверка логина
+    {
+        var login = $(this).val();
+
+        $.ajax
+        (
+            {
+                url: 'json.php?questionary_login=' + login,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (0 == data.count_user)
+                    {
+                        $('#questionary-login-span').hide();
+                    }
+                    else
+                    {
+                        $('#questionary-login-span').show();
+                    }
+                }
+            }
+        );
+    });
+
+    $('#questionary-email-input').on('change', function()
+    //Анкета - проверка email
+    {
+        var email = $(this).val();
+
+        $.ajax
+        (
+            {
+                url: 'json.php?questionary_email=' + email,
+                dataType: "json",
+                success: function(data)
+                {
+                    if (0 == data.count_user)
+                    {
+                        $('#questionary-email-span').hide();
+                    }
+                    else
+                    {
+                        $('#questionary-email-span').show();
+                    }
+                }
+            }
+        );
+    });
 });

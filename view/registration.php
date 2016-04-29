@@ -6,13 +6,19 @@
                 <table class="center">
                     <tr>
                         <td>
-                            <input name="data[registration_login]" placeholder="Логин" type="text" autofocus />
+                            <input name="data[registration_login]" placeholder="Логин" type="text" autofocus id="registration-login-input" />
                         </td>
+                    </tr>
+                    <tr id="registration-login-tr" style="display:none;">
+                        <td class="center red">Этот логин занят</td>
                     </tr>
                     <tr>
                         <td>
-                            <input name="data[registration_email]" placeholder="Email" type="email" />
+                            <input name="data[registration_email]" placeholder="Email" type="email" id="registration-email-input" />
                         </td>
+                    </tr>
+                    <tr id="registration-email-tr" style="display:none;">
+                        <td class="center red">Этот Email занят</td>
                     </tr>
                     <tr>
                         <td>

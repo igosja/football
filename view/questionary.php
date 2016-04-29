@@ -7,7 +7,8 @@
                     <tr>
                         <td class="right">Логин</td>
                         <td class="left">
-                            <input name="data[login]" type="text" value="<?= $user_array[0]['user_login']; ?>" <?php if (!empty($user_array[0]['user_login'])) { ?>disabled<?php } ?>/>
+                            <input name="data[login]" type="text" value="<?= $user_array[0]['user_login']; ?>" <?php if (!empty($user_array[0]['user_login'])) { ?>disabled<?php } ?> id="questionary-login-input" />
+                            <span class="center red" id="questionary-login-span" style="display: none;">Этот логин занят</span>
                         </td>
                     </tr>
                     <tr>
@@ -20,7 +21,8 @@
                     <tr>
                         <td class="right">Email</td>
                         <td class="left">
-                            <input name="data[email]" type="text" value="<?= $user_array[0]['user_email']; ?>" />
+                            <input name="data[email]" type="text" value="<?= $user_array[0]['user_email']; ?>" id="questionary-email-input" />
+                            <span class="center red" id="questionary-email-span" style="display: none;">Этот Email занят</span>
                         </td>
                     </tr>
                     <tr>

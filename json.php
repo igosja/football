@@ -1437,5 +1437,87 @@ elseif (isset($_GET['application_country_id']))
         $json_data['coachapplication_text'] = $application_array[0]['coachapplication_text'];
     }
 }
+elseif (isset($_GET['registration_login']))
+{
+    $registration_login = $_GET['registration_login'];
+
+    $sql = "SELECT COUNT(`user_id`) AS `count`
+            FROM `user`
+            WHERE `user_login`=?";
+    $prepare = $mysqli->prepare($sql);
+    $prepare->bind_param('s', $registration_login);
+    $prepare->execute();
+
+    $user_sql = $prepare->get_result();
+
+    $prepare->close();
+
+    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $count_user = $user_array[0]['count'];
+
+    $json_data['count_user'] = $count_user;
+}
+elseif (isset($_GET['registration_email']))
+{
+    $registration_email = $_GET['registration_email'];
+
+    $sql = "SELECT COUNT(`user_id`) AS `count`
+            FROM `user`
+            WHERE `user_email`=?";
+    $prepare = $mysqli->prepare($sql);
+    $prepare->bind_param('s', $registration_email);
+    $prepare->execute();
+
+    $user_sql = $prepare->get_result();
+
+    $prepare->close();
+
+    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $count_user = $user_array[0]['count'];
+
+    $json_data['count_user'] = $count_user;
+}
+elseif (isset($_GET['questionary_login']))
+{
+    $questionary_login = $_GET['questionary_login'];
+
+    $sql = "SELECT COUNT(`user_id`) AS `count`
+            FROM `user`
+            WHERE `user_login`=?
+            AND `user_id`!='$authorization_user_id'";
+    $prepare = $mysqli->prepare($sql);
+    $prepare->bind_param('s', $questionary_login);
+    $prepare->execute();
+
+    $user_sql = $prepare->get_result();
+
+    $prepare->close();
+
+    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $count_user = $user_array[0]['count'];
+
+    $json_data['count_user'] = $count_user;
+}
+elseif (isset($_GET['questionary_email']))
+{
+    $questionary_email = $_GET['questionary_email'];
+
+    $sql = "SELECT COUNT(`user_id`) AS `count`
+            FROM `user`
+            WHERE `user_email`=?
+            AND `user_id`!='$authorization_user_id'";
+    $prepare = $mysqli->prepare($sql);
+    $prepare->bind_param('s', $questionary_email);
+    $prepare->execute();
+
+    $user_sql = $prepare->get_result();
+
+    $prepare->close();
+
+    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $count_user = $user_array[0]['count'];
+
+    $json_data['count_user'] = $count_user;
+}
 
 print json_encode($json_data);
