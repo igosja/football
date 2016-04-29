@@ -119,40 +119,43 @@ if (isset($_POST['data']))
             WHERE `teaminstruction_team_id`='$num_get'
             AND `teaminstruction_game_id`='$game_id'";
     $mysqli->query($sql);
-
-    foreach ($data['instruction'] as $item)
+    
+    if (isset($data['instruction']))
     {
-        $instruction_id = (int) $item;
-
-        $sql = "SELECT `teaminstruction_id`
-                FROM `teaminstruction`
-                WHERE `teaminstruction_team_id`='$authorization_team_id'
-                AND `teaminstruction_instruction_id`='$instruction_id'
-                AND `teaminstruction_game_id`='$game_id'
-                LIMIT 1";
-        $teaminstruction_sql = $mysqli->query($sql);
-
-        $count_teaminstruction = $teaminstruction_sql->num_rows;
-
-        if (0 == $count_teaminstruction)
+        foreach ($data['instruction'] as $item)
         {
-            $sql = "INSERT INTO `teaminstruction`
-                    SET `teaminstruction_team_id`='$authorization_team_id',
-                        `teaminstruction_instruction_id`='$instruction_id',
-                        `teaminstruction_game_id`='$game_id'";
-            $mysqli->query($sql);
-        }
-        else
-        {
-            $teaminstruction_array = $teaminstruction_sql->fetch_all(MYSQLI_ASSOC);
+            $instruction_id = (int) $item;
 
-            $teaminstruction_id = $teaminstruction_array[0]['teaminstruction_id'];
-
-            $sql = "UPDATE `teaminstruction`
-                    SET `teaminstruction_status`='1'
-                    WHERE `teaminstruction_id`='$teaminstruction_id'
+            $sql = "SELECT `teaminstruction_id`
+                    FROM `teaminstruction`
+                    WHERE `teaminstruction_team_id`='$authorization_team_id'
+                    AND `teaminstruction_instruction_id`='$instruction_id'
+                    AND `teaminstruction_game_id`='$game_id'
                     LIMIT 1";
-            $mysqli->query($sql);
+            $teaminstruction_sql = $mysqli->query($sql);
+
+            $count_teaminstruction = $teaminstruction_sql->num_rows;
+
+            if (0 == $count_teaminstruction)
+            {
+                $sql = "INSERT INTO `teaminstruction`
+                        SET `teaminstruction_team_id`='$authorization_team_id',
+                            `teaminstruction_instruction_id`='$instruction_id',
+                            `teaminstruction_game_id`='$game_id'";
+                $mysqli->query($sql);
+            }
+            else
+            {
+                $teaminstruction_array = $teaminstruction_sql->fetch_all(MYSQLI_ASSOC);
+
+                $teaminstruction_id = $teaminstruction_array[0]['teaminstruction_id'];
+
+                $sql = "UPDATE `teaminstruction`
+                        SET `teaminstruction_status`='1'
+                        WHERE `teaminstruction_id`='$teaminstruction_id'
+                        LIMIT 1";
+                $mysqli->query($sql);
+            }
         }
     }
 
