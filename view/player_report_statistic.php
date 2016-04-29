@@ -61,7 +61,7 @@
                         <div class="progress">
                             <div 
                                 class="progress-bar" 
-                                style="width: <?= $total_statistic_array[0]['count_best'] / $total_statistic_array[0]['count_game'] * 100; ?>%"
+                                style="width: <?= $total_statistic_array[0]['count_best'] / $count_total_game * 100; ?>%"
                             ></div>
                         </div>
                     </td>
@@ -73,7 +73,7 @@
                         <div class="progress">
                             <div 
                                 class="progress-bar" 
-                                style="width: <?= $total_statistic_array[0]['count_win'] / $total_statistic_array[0]['count_game'] * 100; ?>%"
+                                style="width: <?= $total_statistic_array[0]['count_win'] / $count_total_game * 100; ?>%"
                             ></div>
                         </div>
                     </td>
@@ -85,7 +85,7 @@
                         <div class="progress">
                             <div 
                                 class="progress-bar" 
-                                style="width: <?= $total_statistic_array[0]['count_goal'] / $total_statistic_array[0]['count_shot'] * 100; ?>%"
+                                style="width: <?= $total_statistic_array[0]['count_goal'] / $count_total_shot * 100; ?>%"
                             ></div>
                         </div>
                     </td>
@@ -97,7 +97,7 @@
                         <div class="progress">
                             <div 
                                 class="progress-bar" 
-                                style="width: <?= $total_statistic_array[0]['count_ontarget'] / $total_statistic_array[0]['count_shot'] * 100; ?>%"
+                                style="width: <?= $total_statistic_array[0]['count_ontarget'] / $count_total_shot * 100; ?>%"
                             ></div>
                         </div>
                     </td>
@@ -109,7 +109,7 @@
                         <div class="progress">
                             <div 
                                 class="progress-bar" 
-                                style="width: <?= $total_statistic_array[0]['count_penalty_goal'] / $total_statistic_array[0]['count_penalty'] * 100; ?>%"
+                                style="width: <?= $total_statistic_array[0]['count_penalty_goal'] / $count_total_penalty * 100; ?>%"
                             ></div>
                         </div>
                     </td>
@@ -133,7 +133,7 @@
                         <div class="progress">
                             <div 
                                 class="progress-bar" 
-                                style="width: <?= $total_statistic_array[0]['count_yellow'] / $total_statistic_array[0]['count_game'] * 100; ?>%"
+                                style="width: <?= $total_statistic_array[0]['count_yellow'] / $count_total_game * 100; ?>%"
                             ></div>
                         </div>
                     </td>
@@ -145,7 +145,7 @@
                         <div class="progress">
                             <div 
                                 class="progress-bar" 
-                                style="width: <?= $total_statistic_array[0]['count_red'] / $total_statistic_array[0]['count_game'] * 100; ?>%"
+                                style="width: <?= $total_statistic_array[0]['count_red'] / $count_total_game * 100; ?>%"
                             ></div>
                         </div>
                     </td>

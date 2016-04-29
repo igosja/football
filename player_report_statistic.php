@@ -85,6 +85,33 @@ $total_statistic_sql = $mysqli->query($sql);
 
 $total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
 
+if (0 == $total_statistic_array[0]['count_game'])
+{
+    $count_total_game = 1;
+}
+else
+{
+    $count_total_game = $total_statistic_array[0]['count_game'];
+}
+
+if (0 == $total_statistic_array[0]['count_shot'])
+{
+    $count_total_shot = 1;
+}
+else
+{
+    $count_total_shot = $total_statistic_array[0]['count_shot'];
+}
+
+if (0 == $total_statistic_array[0]['count_penalty'])
+{
+    $count_total_penalty = 1;
+}
+else
+{
+    $count_total_penalty = $total_statistic_array[0]['count_penalty'];
+}
+
 $num            = $num_get;
 $header_title   = $player_name . ' ' . $player_surname;
 
