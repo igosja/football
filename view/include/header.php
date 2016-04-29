@@ -64,6 +64,7 @@
                                         <li><a href="profile_home_home.php" class="main-menu-link"><?= $authorization_login; ?></a>
                                             <ul>
                                                 <li><a href="questionary.php">Личные данные</a></li>
+                                                <li><a href="referral.php">Подопечные</a></li>
                                                 <li><a href="logout.php">Выйти</a></li>
                                             </ul>
                                         </li>
@@ -116,7 +117,7 @@
                                         <?php } ?>
                                     <?php } ?>
                                     <li><a href="forum.php" class="main-menu-link">Форум</a></li>
-                                    <?php if (isset($authorization_id)) { ?>
+                                    <?php if (isset($authorization_id) && 1 == 0) { ?>
                                         <li><a href="shop.php" class="main-menu-link">Магазин</a></li>
                                     <?php } ?>
                                     <li><a href="rule.php" class="main-menu-last">Правила</a></li>

@@ -68,8 +68,18 @@ if ($result)
         }
         else
         {
+            if (isset($_COOKIE['referal']))
+            {
+                $referrer = (int) $_COOKIE['referal'];
+            }
+            else
+            {
+                $referrer = 0;
+            }
+
             $sql = "INSERT INTO `user`
                     SET `user_social_fb`='$fb_id',
+                        `user_referrer`='$referrer',
                         `user_registration_date`=SYSDATE(),
                         `user_activation`='1'";
             $mysqli->query($sql);

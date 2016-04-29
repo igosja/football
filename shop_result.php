@@ -78,12 +78,14 @@ $sum        = $payment_array[0]['payment_sum'];
 
 $sql = "UPDATE `payment`
         SET `payment_status`='1'
-        WHERE `payment_id`='$payment_id'";
+        WHERE `payment_id`='$payment_id'
+        LIMIT 1";
 $mysqli->query($sql);
 
 $sql = "UPDATE `user`
         SET `user_money`=`user_money`+'$sum'
-        WHERE `user_id`='$user_id'";
+        WHERE `user_id`='$user_id'
+        LIMIT 1";
 $mysqli->query($sql);
 
 $sql = "INSERT INTO `historyfinanceuser`
@@ -91,6 +93,33 @@ $sql = "INSERT INTO `historyfinanceuser`
             `historyfinanceuser_sum`='$sum',
             `historyfinanceuser_user_id`='$user_id'";
 $mysqli->query($sql);
+
+$sql = "SELECT `user_referrer`
+        FROM `user`
+        WHERE `user_id`='$user_id'
+        LIMIT 1";
+$user_sql = $mysqli->query($sql);
+
+$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+
+$refferer = $user_array[0]['user_referrer'];
+
+if (0 != $refferer)
+{
+    $sum = round($sum / 10);
+
+    $sql = "UPDATE `user`
+            SET `user_money`=`user_money`+'$sum'
+            WHERE `user_id`='$refferer'
+            LIMIT 1";
+    $mysqli->query($sql);
+
+    $sql = "INSERT INTO `historyfinanceuser`
+            SET `historyfinanceuser_date`=SYSDATE(),
+                `historyfinanceuser_sum`='$sum',
+                `historyfinanceuser_user_id`='$refferer'";
+    $mysqli->query($sql);
+}
 
 $_SESSION['message_class']  = 'success';
 $_SESSION['message_text']   = 'Счет успешно пополнен';

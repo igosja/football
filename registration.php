@@ -42,10 +42,20 @@ if (isset($_POST['data']))
 
     $password = f_igosja_chiper_password($registration_password);
 
+    if (isset($_COOKIE['referal']))
+    {
+        $referrer = (int) $_COOKIE['referal'];
+    }
+    else
+    {
+        $referrer = 0;
+    }
+
     $sql = "INSERT INTO `user`
             SET `user_login`=?,
                 `user_email`=?,
                 `user_password`=?,
+                `user_referrer`='$referrer',
                 `user_registration_date`=SYSDATE()";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('sss', $registration_login, $registration_email, $password);
