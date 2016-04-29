@@ -22,7 +22,6 @@ $count_injurytype = $injurytype_sql->num_rows;
 if (0 == $count_injurytype)
 {
     include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
     exit;
 }
 
@@ -49,8 +48,6 @@ $injurytype_array = $injurytype_sql->fetch_all(MYSQLI_ASSOC);
 $injurytype_day  = $injurytype_array[0]['injurytype_day'];
 $injurytype_name = $injurytype_array[0]['injurytype_name'];
 
-$smarty->assign('injurytype_day', $injurytype_day);
-$smarty->assign('injurytype_name', $injurytype_name);
-$smarty->assign('tpl', 'injurytype_create');
+$tpl = 'injurytype_create';
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
