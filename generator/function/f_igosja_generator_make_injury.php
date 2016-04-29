@@ -41,9 +41,15 @@ function f_igosja_generator_make_injury()
 
             $team_id = $team_array[0]['team_id'];
 
-            $sql = "SELECT `player_id`
-                    FROM `player`
-                    WHERE `player_team_id`='$team_id'
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    LEFT JOIN `game`
+                    ON `lineup_game_id`=`game_id`
+                    LEFT JOIN `shedule`
+                    ON `shedule_id`=`game_shedule_id`
+                    WHERE `lineup_team_id`='$team_id'
+                    AND `shedule_date`=CURDATE()
+                    AND `game_played`='0'
                     ORDER BY RAND()
                     LIMIT 1";
             $player_sql = f_igosja_mysqli_query($sql);
