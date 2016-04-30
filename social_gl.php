@@ -65,7 +65,7 @@ if ($result)
 
         $sql = "SELECT COUNT(`ip_id`) AS `count`
                 FROM `ip`
-                WHERE `ip_user_id`='$authorization_user_id'";
+                WHERE `ip_user_id`='$user_id'";
         $ip_sql = $mysqli->query($sql);
 
         $ip_array = $ip_sql->fetch_all(MYSQLI_ASSOC);
