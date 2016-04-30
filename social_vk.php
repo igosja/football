@@ -46,9 +46,37 @@ if ($result)
 
         $user_id    = $user_array[0]['user_id'];
         $user_login = $user_array[0]['user_login'];
+        $user_ip    = $_SERVER['REMOTE_ADDR'];
 
         $_SESSION['authorization_id']    = $user_id;
         $_SESSION['authorization_login'] = $user_login;
+
+        $sql = "SELECT COUNT(`ip_id`) AS `count`
+                FROM `ip`
+                WHERE `ip_user_id`='$authorization_user_id'";
+        $ip_sql = $mysqli->query($sql);
+
+        $ip_array = $ip_sql->fetch_all(MYSQLI_ASSOC);
+        $count_ip = $ip_array[0]['count'];
+
+        if (10 == $count_ip)
+        {
+            $sql = "UPDATE `ip`
+                    SET `ip_ip`='$user_ip',
+                        `ip_date`=UNIX_TIMESTAMP()
+                    WHERE `ip_user_id`='$authorization_user_id'
+                    ORDER BY `ip_date` ASC
+                    LIMIT 1";
+        }
+        else
+        {
+            $sql = "INSERT INTO `ip`
+                    SET `ip_ip`='$user_ip',
+                        `ip_date`=UNIX_TIMESTAMP(),
+                        `ip_user_id`='$authorization_user_id'";
+        }
+
+        $mysqli->query($sql);
 
         redirect('profile_home_home.php');
     }

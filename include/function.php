@@ -131,7 +131,10 @@ function f_igosja_generate_password()
 function f_igosja_ufu_date($date)
 //Форматирование даты
 {
-    $date = strtotime($date);
+    if (!is_numeric($date))
+    {
+        $date = strtotime($date);
+    }
 
     if ($date)
     {
@@ -148,7 +151,10 @@ function f_igosja_ufu_date($date)
 function f_igosja_ufu_date_time($date)
 //Форматирование даты
 {
-    $date = strtotime($date);
+    if (!is_numeric($date))
+    {
+        $date = strtotime($date);
+    }
 
     if ($date)
     {
