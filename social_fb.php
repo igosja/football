@@ -66,7 +66,7 @@ if ($result)
             $sql = "UPDATE `ip`
                     SET `ip_ip`='$user_ip',
                         `ip_date`=UNIX_TIMESTAMP()
-                    WHERE `ip_user_id`='$authorization_user_id'
+                    WHERE `ip_user_id`='$user_id'
                     ORDER BY `ip_date` ASC
                     LIMIT 1";
         }
@@ -75,7 +75,7 @@ if ($result)
             $sql = "INSERT INTO `ip`
                     SET `ip_ip`='$user_ip',
                         `ip_date`=UNIX_TIMESTAMP(),
-                        `ip_user_id`='$authorization_user_id'";
+                        `ip_user_id`='$user_id'";
         }
 
         $mysqli->query($sql);
