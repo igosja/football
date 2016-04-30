@@ -87,19 +87,21 @@
                     <td class="text-right">Количество трофеев</td>
                     <td><?= $user_array[0]['user_trophy']; ?></td>
                 </tr>
-                <tr>
-                    <td class="text-right">Клуб</td>
-                    <td>
-                        <img src="/img/team/12/<?= $user_array[0]['team_id']; ?>.png" />
-                        <a href="team.php?num=<?= $user_array[0]['team_id']; ?>">
-                            <?= $user_array[0]['team_name']; ?>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-right">Баланс клуба</td>
-                    <td><?= f_igosja_money($user_array[0]['team_finance']); ?></td>
-                </tr>
+                <?php if ($user_array[0]['team_id']) { ?>
+                    <tr>
+                        <td class="text-right">Клуб</td>
+                        <td>
+                            <img src="/img/team/12/<?= $user_array[0]['team_id']; ?>.png" />
+                            <a href="team.php?num=<?= $user_array[0]['team_id']; ?>">
+                                <?= $user_array[0]['team_name']; ?>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">Баланс клуба</td>
+                        <td><?= f_igosja_money($user_array[0]['team_finance']); ?></td>
+                    </tr>
+                <?php } ?>
             </table>
         </div>
     </div>
