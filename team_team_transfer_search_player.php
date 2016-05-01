@@ -245,7 +245,10 @@ $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Поиск игроков. ' . $seo_title;
+$seo_description    = $header_title . '. Поиск игроков. ' . $seo_description;
+$seo_keywords       = $header_title . ', поиск игроков, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

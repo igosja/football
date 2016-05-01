@@ -56,7 +56,10 @@ $building_sql = $mysqli->query($sql);
 
 $building_array = $building_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Условия клуба. ' . $seo_title;
+$seo_description    = $header_title . '. Условия клуба. ' . $seo_description;
+$seo_keywords       = $header_title . ', условия клуба, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -141,7 +141,10 @@ $nopass_sql = $mysqli->query($sql);
 
 $nopass_array = $nopass_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $header_title . '. Статистика сборных. ' . $seo_title;
+$seo_description    = $header_title . '. Статистика сборных. ' . $seo_description;
+$seo_keywords       = $header_title . ', статистика сборных, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

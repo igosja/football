@@ -279,7 +279,10 @@ $lineup_sql = $mysqli->query($sql);
 $count_lineup = $lineup_sql->num_rows;
 $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $country_name;
+$num                = $num_get;
+$header_title       = $country_name;
+$seo_title          = $header_title . '. Выбор тактической схемы. ' . $seo_title;
+$seo_description    = $header_title . '. Выбор тактической схемы. ' . $seo_description;
+$seo_keywords       = $header_title . ', выбор тактической схемы, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -29,7 +29,10 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $tournament_name . '. Правила турнира. ' . $seo_title;
+$seo_description    = $tournament_name . '. Правила турнира. ' . $seo_description;
+$seo_keywords       = $tournament_name . ', правила турнира, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

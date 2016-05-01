@@ -237,7 +237,10 @@ $distance_sql = $mysqli->query($sql);
 
 $distance_array = $distance_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $tournament_name . '. Статистика футболистов. ' . $seo_title;
+$seo_description    = $tournament_name . '. Статистика футболистов. ' . $seo_description;
+$seo_keywords       = $tournament_name . ', статистика футболистов, ' . $seo_keywords;
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');

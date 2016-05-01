@@ -67,7 +67,10 @@ if (isset($authorization_country_id))
     usort($shedule_array, 'f_igosja_nearest_game_sort');
 }
 
-$num            = $authorization_id;
-$header_title   = $authorization_login;
+$num                = $authorization_id;
+$header_title       = $authorization_login;
+$seo_title          = $header_title . '. Матчи менеджера. ' . $seo_title;
+$seo_description    = $header_title . '. Матчи менеджера. ' . $seo_description;
+$seo_keywords       = $header_title . ', Матчи менеджера, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -70,7 +70,10 @@ $third_sql = $mysqli->query($sql);
 
 $third_array = $third_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $header_title . '. Победители турнира. ' . $seo_title;
+$seo_description    = $header_title . '. Победители турнира. ' . $seo_description;
+$seo_keywords       = $header_title . ', победители турнира, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

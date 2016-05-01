@@ -252,7 +252,10 @@ $position_sql = $mysqli->query($sql);
 
 $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_guest_name;
+$num                = $num_get;
+$header_title       = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_guest_name;
+$seo_title          = $header_title . '. Перед матчем. ' . $seo_title;
+$seo_description    = $header_title . '. Перед матчем. ' . $seo_description;
+$seo_keywords       = $header_title . ', перед матчем, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

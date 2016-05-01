@@ -302,7 +302,10 @@ $player_mark_sql = $mysqli->query($sql);
 
 $player_mark_array = $player_mark_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $header_title . '. Профиль турнира. ' . $seo_title;
+$seo_description    = $header_title . '. Профиль турнира. ' . $seo_description;
+$seo_keywords       = $header_title . ', профиль турнира, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

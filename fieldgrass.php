@@ -109,7 +109,10 @@ if (isset($_GET['change']) &&
     }
 }
 
-$num            = $num_get;
-$header_title   = $authorization_team_name;
+$num                = $num_get;
+$header_title       = $authorization_team_name;
+$seo_title          = $authorization_team_name . '. Замена газона. ' . $seo_title;
+$seo_description    = $authorization_team_name . '. Замена газона. ' . $seo_description;
+$seo_keywords       = $authorization_team_name . ', замена газона, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

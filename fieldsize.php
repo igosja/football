@@ -72,7 +72,10 @@ if (isset($_GET['data']) &&
     }
 }
 
-$num            = $num_get;
-$header_title   = $authorization_team_name;
+$num                = $num_get;
+$header_title       = $authorization_team_name;
+$seo_title          = $authorization_team_name . '. Изменение размеров поля. ' . $seo_title;
+$seo_description    = $authorization_team_name . '. Изменение размеров поля. ' . $seo_description;
+$seo_keywords       = $authorization_team_name . ', изменение размеров поля, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

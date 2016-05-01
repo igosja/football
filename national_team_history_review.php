@@ -55,7 +55,10 @@ $manager_sql = $mysqli->query($sql);
 
 $manager_array = $manager_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $country_name;
+$num                = $num_get;
+$header_title       = $country_name;
+$seo_title          = $header_title . '. История сборной. ' . $seo_title;
+$seo_description    = $header_title . '. История сборной. ' . $seo_description;
+$seo_keywords       = $header_title . ', история сборной, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

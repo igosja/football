@@ -125,7 +125,10 @@ else
 $tournament_array = array_merge($tournament_array, $league_array);
 $count_tournament = count($tournament_array);
 
-$num            = $num_get;
-$header_title   = $continent_name;
+$num                = $num_get;
+$header_title       = $continent_name;
+$seo_title          = $continent_name . '. Рейтинг международных турниров. ' . $seo_title;
+$seo_description    = $continent_name . '. Рейтинг международных турниров. ' . $seo_description;
+$seo_keywords       = $continent_name . ', рейтинг международных турниров, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

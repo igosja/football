@@ -45,7 +45,10 @@ $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
 $country_name = $country_array[0]['country_name'];
 
-$num            = $num_get;
-$header_title   = $country_name;
+$num                = $num_get;
+$header_title       = $country_name;
+$seo_title          = $header_title . '. Условия сборной. ' . $seo_title;
+$seo_description    = $header_title . '. Условия сборной. ' . $seo_description;
+$seo_keywords       = $header_title . ', условия сборной, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

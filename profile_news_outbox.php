@@ -99,7 +99,10 @@ $user_sql = $mysqli->query($sql);
 
 $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $authorization_id;
-$header_title   = $authorization_login;
+$num                = $authorization_id;
+$header_title       = $authorization_login;
+$seo_title          = $header_title . '. Исходящие сообщения. ' . $seo_title;
+$seo_description    = $header_title . '. Исходящие сообщения. ' . $seo_description;
+$seo_keywords       = $header_title . ', исходящие сообщения, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

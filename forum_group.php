@@ -104,6 +104,9 @@ if (isset($authorization_user_id))
     $forumread_array = $forumread_sql->fetch_all(MYSQLI_ASSOC);
 }
 
-$num = $num_get;
+$num                = $num_get;
+$seo_title          = $header_title . '. Форум. ' . $seo_title;
+$seo_description    = $header_title . '. Форум. ' . $seo_description;
+$seo_keywords       = $header_title . ', Форум, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

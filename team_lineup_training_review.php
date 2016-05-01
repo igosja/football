@@ -103,7 +103,10 @@ $attribute_sql = $mysqli->query($sql);
 
 $gk_attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Тренровка футболистов. ' . $seo_title;
+$seo_description    = $header_title . '. Тренровка футболистов. ' . $seo_description;
+$seo_keywords       = $header_title . ', тренровка футболистов, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

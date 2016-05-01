@@ -425,7 +425,10 @@ $tournament_fact_sql = $mysqli->query($sql);
 
 $tournament_fact_array = $tournament_fact_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Факты о клубе. ' . $seo_title;
+$seo_description    = $header_title . '. Факты о клубе. ' . $seo_description;
+$seo_keywords       = $header_title . ', факты о клубе, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

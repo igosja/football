@@ -74,7 +74,10 @@ $count_page = $count_page->fetch_all(MYSQLI_ASSOC);
 $count_page = $count_page[0]['count_page'];
 $count_page = ceil($count_page / 30);
 
-$num            = $num_get;
-$header_title   = $continent_name;
+$num                = $num_get;
+$header_title       = $continent_name;
+$seo_title          = $continent_name . '. Список трансферов. ' . $seo_title;
+$seo_description    = $continent_name . '. Список трансферов. ' . $seo_description;
+$seo_keywords       = $continent_name . ', список трансферов, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -52,7 +52,10 @@ $referee_sql = $mysqli->query($sql);
 
 $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $tournament_name . '. Статистика арбитов. ' . $seo_title;
+$seo_description    = $tournament_name . '. Статистика арбитов. ' . $seo_description;
+$seo_keywords       = $tournament_name . ', статистика арбитов, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

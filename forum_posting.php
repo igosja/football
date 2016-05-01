@@ -77,6 +77,9 @@ else
     $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
 }
 
-$header_title = 'Форум';
+$header_title       = 'Форум';
+$seo_title          = 'Форум. ' . $seo_title;
+$seo_description    = 'Форум. ' . $seo_description;
+$seo_keywords       = 'Форум, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

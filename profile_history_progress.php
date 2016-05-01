@@ -92,7 +92,10 @@ $progress_array = array_merge($championship_array, $worldcup_array, $cup_array, 
 
 usort($progress_array, 'f_igosja_trophy_sort');
 
-$num            = $authorization_id;
-$header_title   = $authorization_login;
+$num                = $authorization_id;
+$header_title       = $authorization_login;
+$seo_title          = $header_title . '. Достижения менеджера. ' . $seo_title;
+$seo_description    = $header_title . '. Достижения менеджера. ' . $seo_description;
+$seo_keywords       = $header_title . ', достижения менеджера, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -135,7 +135,10 @@ $guest_player_sql = $mysqli->query($sql);
 
 $guest_player_array = $guest_player_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;
+$num                = $num_get;
+$header_title       = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;
+$seo_title          = $header_title . '. Оценки игроков. ' . $seo_title;
+$seo_description    = $header_title . '. Оценки игроков. ' . $seo_description;
+$seo_keywords       = $header_title . ', оценки игроков, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

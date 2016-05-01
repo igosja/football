@@ -197,7 +197,10 @@ $offertype_sql = $mysqli->query($sql);
 $offertype_array = $offertype_sql->fetch_all(MYSQLI_ASSOC);
 
 
-$num            = $num_get;
-$header_title   = $player_name . ' ' . $player_surname;
+$num                = $num_get;
+$header_title       = $player_name . ' ' . $player_surname;
+$seo_title          = $header_title . '. Трансферное предложение. ' . $seo_title;
+$seo_description    = $header_title . '. Трансферное предложение. ' . $seo_description;
+$seo_keywords       = $header_title . ', трансферное предложение, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

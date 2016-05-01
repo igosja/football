@@ -48,7 +48,10 @@ $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
 
-$num            = $num_get;
-$header_title   = $player_name . ' ' . $player_surname;
+$num                = $num_get;
+$header_title       = $player_name . ' ' . $player_surname;
+$seo_title          = $header_title . '. Отчет от тренера. ' . $seo_title;
+$seo_description    = $header_title . '. Отчет от тренера. ' . $seo_description;
+$seo_keywords       = $header_title . ', отчет от тренера, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

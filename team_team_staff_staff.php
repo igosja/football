@@ -51,7 +51,10 @@ $staff_sql = $mysqli->query($sql);
 
 $staff_array = $staff_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Персонал клуба. ' . $seo_title;
+$seo_description    = $header_title . '. Персонал клуба. ' . $seo_description;
+$seo_keywords       = $header_title . ', персонал клуба, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -106,7 +106,10 @@ $shedule_sql = $mysqli->query($sql);
 
 $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $tournament_name . '. Результаты матчей. ' . $seo_title;
+$seo_description    = $tournament_name . '. Результаты матчей. ' . $seo_description;
+$seo_keywords       = $tournament_name . ', результаты матчей, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

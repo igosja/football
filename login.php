@@ -109,7 +109,10 @@ if (isset($_POST['data']))
     redirect('profile_home_home.php');
 }
 
-$header_title = 'Вход';
-$social_array = f_igosja_social_array();
+$header_title       = 'Вход';
+$social_array       = f_igosja_social_array();
+$seo_title          = $header_title . '. ' . $seo_title;
+$seo_description    = $header_title . '. ' . $seo_description;
+$seo_keywords       = $header_title . ', ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

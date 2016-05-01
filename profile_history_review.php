@@ -45,7 +45,10 @@ $summary_sql = $mysqli->query($sql);
 
 $user_array = $summary_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $authorization_id;
-$header_title   = $authorization_login;
+$num                = $authorization_id;
+$header_title       = $authorization_login;
+$seo_title          = $header_title . '. Обзор. ' . $seo_title;
+$seo_description    = $header_title . '. Обзор. ' . $seo_description;
+$seo_keywords       = $header_title . ', обзор, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

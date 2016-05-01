@@ -53,7 +53,10 @@ $injury_sql = $mysqli->query($sql);
 
 $injury_array = $injury_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $player_name . ' ' . $player_surname;
+$num                = $num_get;
+$header_title       = $player_name . ' ' . $player_surname;
+$seo_title          = $header_title . '. Полученные травмы. ' . $seo_title;
+$seo_description    = $header_title . '. Полученные травмы. ' . $seo_description;
+$seo_keywords       = $header_title . ', полученные травмы, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

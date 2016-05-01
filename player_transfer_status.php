@@ -189,7 +189,10 @@ $statusrent_sql = $mysqli->query($sql);
 
 $statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $player_name . ' ' . $player_surname;
+$num                = $num_get;
+$header_title       = $player_name . ' ' . $player_surname;
+$seo_title          = $header_title . '. Трансферный статус. ' . $seo_title;
+$seo_description    = $header_title . '. Трансферный статус. ' . $seo_description;
+$seo_keywords       = $header_title . ', трансферный статус, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

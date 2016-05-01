@@ -91,7 +91,10 @@ for ($i=1; $i<=$max_stage; $i++)
 
 $script_stage = implode(', ', $script_stage);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $tournament_name . '. Позиции участников. ' . $seo_title;
+$seo_description    = $tournament_name . '. Позиции участников. ' . $seo_description;
+$seo_keywords       = $tournament_name . ', позиции участников, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -63,7 +63,10 @@ $manager_old_sql = $mysqli->query($sql);
 
 $manager_old_array = $manager_old_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $tournament_name . '. Переходы менеджеров. ' . $seo_title;
+$seo_description    = $tournament_name . '. Переходы менеджеров. ' . $seo_description;
+$seo_keywords       = $tournament_name . ', переходы менеджеров, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

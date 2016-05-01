@@ -91,7 +91,10 @@ $manager_sql = $mysqli->query($sql);
 
 $manager_array = $manager_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. История клуба. ' . $seo_title;
+$seo_description    = $header_title . '. История клуба. ' . $seo_description;
+$seo_keywords       = $header_title . ', История клуба, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

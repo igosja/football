@@ -85,7 +85,10 @@ $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $authorization_id;
-$header_title   = $authorization_login;
+$num                = $authorization_id;
+$header_title       = $authorization_login;
+$seo_title          = $header_title . '. Ситуация на рынке труда. ' . $seo_title;
+$seo_description    = $header_title . '. Ситуация на рынке труда. ' . $seo_description;
+$seo_keywords       = $header_title . ', ситуация на рынке труда, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

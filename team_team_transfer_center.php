@@ -294,7 +294,10 @@ $offer_to_me_sql = $mysqli->query($sql);
 
 $offer_to_me_array = $offer_to_me_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Трансферный центр. ' . $seo_title;
+$seo_description    = $header_title . '. Трансферный центр. ' . $seo_description;
+$seo_keywords       = $header_title . ', трансферный центр, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

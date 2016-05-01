@@ -91,6 +91,9 @@ $coachvote_sql = $mysqli->query($sql);
 
 $coachvote_array = $coachvote_sql->fetch_all(MYSQLI_ASSOC);
 
-$header_title = 'Выборы';
+$header_title       = 'Выборы';
+$seo_title          = $header_title . ' тренеров национальных сборных. ' . $seo_title;
+$seo_description    = $header_title . ' тренеров национальных сборных. ' . $seo_description;
+$seo_keywords       = $header_title . ' тренеров национальных сборных, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

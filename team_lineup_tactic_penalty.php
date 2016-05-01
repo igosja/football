@@ -134,7 +134,10 @@ $penalty_sql = $mysqli->query($sql);
 
 $penalty_array = $penalty_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Выбор исполнителей пенальти. ' . $seo_title;
+$seo_description    = $header_title . '. Выбор исполнителей пенальти. ' . $seo_description;
+$seo_keywords       = $header_title . ', выбор исполнителей пенальти, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -130,7 +130,10 @@ for ($i=0; $i<$game; $i++)
     }
 }
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Следующий соперник. ' . $seo_title;
+$seo_description    = $header_title . '. Следующий соперник. ' . $seo_description;
+$seo_keywords       = $header_title . ', следующий соперник, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

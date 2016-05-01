@@ -112,7 +112,10 @@ else
     $count_total_penalty = $total_statistic_array[0]['count_penalty'];
 }
 
-$num            = $num_get;
-$header_title   = $player_name . ' ' . $player_surname;
+$num                = $num_get;
+$header_title       = $player_name . ' ' . $player_surname;
+$seo_title          = $header_title . '. Статистика футболиста. ' . $seo_title;
+$seo_description    = $header_title . '. Статистика футболиста. ' . $seo_description;
+$seo_keywords       = $header_title . ', статистика футболиста, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

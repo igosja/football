@@ -139,6 +139,9 @@ if (isset($_GET['level']) &&
     }
 }
 
-$header_title = $authorization_team_name;
+$header_title       = $authorization_team_name;
+$seo_title          = $authorization_team_name . '. База команды. ' . $seo_title;
+$seo_description    = $authorization_team_name . '. База команды. ' . $seo_description;
+$seo_keywords       = $authorization_team_name . ', база команды, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

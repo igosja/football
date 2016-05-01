@@ -95,7 +95,10 @@ $transferhistory_buy_sql = $mysqli->query($sql);
 
 $transferhistory_buy_summ = $transferhistory_buy_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. История трансферов. ' . $seo_title;
+$seo_description    = $header_title . '. История трансферов. ' . $seo_description;
+$seo_keywords       = $header_title . ', история трансферов, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

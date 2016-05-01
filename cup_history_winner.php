@@ -57,7 +57,10 @@ $looser_sql = $mysqli->query($sql);
 
 $looser_array = $looser_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $tournament_name . '. Побудители турнира. ' . $seo_title;
+$seo_description    = $tournament_name . '. Побудители турнира. ' . $seo_description;
+$seo_keywords       = $tournament_name . ', побудители турнира, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -102,7 +102,10 @@ $career_sql = $mysqli->query($sql);
 $count_career = $career_sql->num_rows;
 $career_array = $career_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $authorization_id;
-$header_title   = $authorization_login;
+$num                = $authorization_id;
+$header_title       = $authorization_login;
+$seo_title          = $header_title . '. Профиль менеджера. ' . $seo_title;
+$seo_description    = $header_title . '. Профиль менеджера. ' . $seo_description;
+$seo_keywords       = $header_title . ', профиль менеджера, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -248,7 +248,10 @@ $teaminstruction_sql = $mysqli->query($sql);
 
 $teaminstruction_array = $teaminstruction_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Выбор командных инструкций. ' . $seo_title;
+$seo_description    = $header_title . '. Выбор командных инструкций. ' . $seo_description;
+$seo_keywords       = $header_title . ', выбор командных инструкций, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

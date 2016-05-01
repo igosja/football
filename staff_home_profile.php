@@ -95,7 +95,10 @@ $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
 $staff_name     = $staff_array[0]['name_name'];
 $staff_surname  = $staff_array[0]['surname_name'];
 
-$num            = $num_get;
-$header_title   = $staff_name . ' ' . $staff_surname;
+$num                = $num_get;
+$header_title       = $staff_name . ' ' . $staff_surname;
+$seo_title          = $header_title . '. Профиль персонала. ' . $seo_title;
+$seo_description    = $header_title . '. Профиль персонала. ' . $seo_description;
+$seo_keywords       = $header_title . ', профиль персонала, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

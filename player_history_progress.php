@@ -141,7 +141,10 @@ $trophy_array = array_merge($championship_array, $worldcup_array, $cup_array, $l
 
 usort($trophy_array, 'f_igosja_trophy_sort');
 
-$num            = $num_get;
-$header_title   = $player_name . ' ' . $player_surname;
+$num                = $num_get;
+$header_title       = $player_name . ' ' . $player_surname;
+$seo_title          = $header_title . '. Достижения футболиста. ' . $seo_title;
+$seo_description    = $header_title . '. Достижения футболиста. ' . $seo_description;
+$seo_keywords       = $header_title . ', достижения футболиста, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

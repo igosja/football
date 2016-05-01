@@ -129,7 +129,10 @@ else
     $header_2_shootout = '';
 }
 
-$num            = $num_get;
-$header_title   = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;
+$num                = $num_get;
+$header_title       = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;
+$seo_title          = $header_title . '. Статистика матча. ' . $seo_title;
+$seo_description    = $header_title . '. Статистика матча. ' . $seo_description;
+$seo_keywords       = $header_title . ', статистика матча, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

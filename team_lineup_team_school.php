@@ -309,7 +309,10 @@ $school_sql = $mysqli->query($sql);
 
 $school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Спортшкола. ' . $seo_title;
+$seo_description    = $header_title . '. Спортшкола. ' . $seo_description;
+$seo_keywords       = $header_title . ', спортшкола, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

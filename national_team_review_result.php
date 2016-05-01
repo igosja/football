@@ -269,7 +269,10 @@ $champions_out_sql = $mysqli->query($sql);
 
 $champions_out_array = $champions_out_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $country_name;
+$num                = $num_get;
+$header_title       = $country_name;
+$seo_title          = $header_title . '. Итоги клубных соревнований. ' . $seo_title;
+$seo_description    = $header_title . '. Итоги клубных соревнований. ' . $seo_description;
+$seo_keywords       = $header_title . ', итоги клубных соревнований, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -65,7 +65,10 @@ $note_sql = $mysqli->query($sql);
 
 $note_array = $note_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $authorization_id;
-$header_title   = $authorization_login;
+$num                = $authorization_id;
+$header_title       = $authorization_login;
+$seo_title          = $header_title . '. Записная книжка. ' . $seo_title;
+$seo_description    = $header_title . '. Записная книжка. ' . $seo_description;
+$seo_keywords       = $header_title . ', записная книжка, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

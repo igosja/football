@@ -146,7 +146,10 @@ $transfer_sql = $mysqli->query($sql);
 
 $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $country_name;
+$num                = $num_get;
+$header_title       = $country_name;
+$seo_title          = $header_title . '. Профиль сборной. ' . $seo_title;
+$seo_description    = $header_title . '. Профиль сборной. ' . $seo_description;
+$seo_keywords       = $header_title . ', профиль сборной, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

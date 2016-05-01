@@ -105,7 +105,10 @@ $record_sql = $mysqli->query($sql);
 $count_record = $record_sql->num_rows;
 $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Рекорды клуба. ' . $seo_title;
+$seo_description    = $header_title . '. Рекорды клуба. ' . $seo_description;
+$seo_keywords       = $header_title . ', рекорды клуба, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

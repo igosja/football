@@ -96,7 +96,10 @@ $game_sql = $mysqli->query($sql);
 
 $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $referee_name . ' ' . $referee_surname;
+$num                = $num_get;
+$header_title       = $referee_name . ' ' . $referee_surname;
+$seo_title          = $header_title . '. Профиль арбитра. ' . $seo_title;
+$seo_description    = $header_title . '. Профиль арбитра. ' . $seo_description;
+$seo_keywords       = $header_title . ', профиль арбитра, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

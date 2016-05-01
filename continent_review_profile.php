@@ -119,7 +119,10 @@ $transfer_sql = $mysqli->query($sql);
 
 $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $continent_name;
+$num                = $num_get;
+$header_title       = $continent_name;
+$seo_title          = $continent_name . '. Обзор. ' . $seo_title;
+$seo_description    = $continent_name . '. Обзор. ' . $seo_description;
+$seo_keywords       = $continent_name . ', обзор, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

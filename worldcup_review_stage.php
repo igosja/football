@@ -50,7 +50,10 @@ $standing_sql = $mysqli->query($sql);
 
 $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $header_title . '. Стадии турнира. ' . $seo_title;
+$seo_description    = $header_title . '. Стадии турнира. ' . $seo_description;
+$seo_keywords       = $header_title . ', стадии турнира, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

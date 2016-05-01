@@ -273,7 +273,10 @@ $user_sql = $mysqli->query($sql);
 
 $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $authorization_id;
-$header_title   = 'Магазин';
+$num                = $authorization_id;
+$header_title       = 'Магазин';
+$seo_title          = $header_title . '. ' . $seo_title;
+$seo_description    = $header_title . '. ' . $seo_description;
+$seo_keywords       = $header_title . ', ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

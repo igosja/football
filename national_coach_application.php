@@ -83,6 +83,9 @@ $application_sql = $mysqli->query($sql);
 
 $application_array = $application_sql->fetch_all(MYSQLI_ASSOC);
 
-$header_title = 'Выборы';
+$header_title       = 'Выборы';
+$seo_title          = $header_title . ' тренеров национальных сборных. Подача заявок. ' . $seo_title;
+$seo_description    = $header_title . ' тренеров национальных сборных. Подача заявок. ' . $seo_description;
+$seo_keywords       = $header_title . ' тренеров национальных сборных, Подача заявок. ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

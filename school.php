@@ -139,6 +139,9 @@ if (isset($_GET['level']) &&
     }
 }
 
-$header_title = $authorization_team_name;
+$header_title       = $authorization_team_name;
+$seo_title          = $header_title . '. Строительство спортшколы. ' . $seo_title;
+$seo_description    = $header_title . '. Строительство спортшколы. ' . $seo_description;
+$seo_keywords       = $header_title . ', строительство спортшколы, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

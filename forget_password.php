@@ -55,6 +55,9 @@ if (isset($_POST['data']))
     redirect('forget_password.php');
 }
 
-$header_title = 'Восстановление пароля';
+$header_title       = 'Восстановление пароля';
+$seo_title          = 'Восстановление пароля. ' . $seo_title;
+$seo_description    = 'Восстановление пароля. ' . $seo_description;
+$seo_keywords       = 'восстановление пароля, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

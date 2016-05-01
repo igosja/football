@@ -624,7 +624,10 @@ if (isset($authorization_country_id))
     $tournament_worldcup_array = $tournament_worldcup_sql->fetch_all(MYSQLI_ASSOC);
 }
 
-$num            = $authorization_id;
-$header_title   = $authorization_login;
+$num                = $authorization_id;
+$header_title       = $authorization_login;
+$seo_title          = $header_title . '. Профиль менеджера. ' . $seo_title;
+$seo_description    = $header_title . '. Профиль менеджера. ' . $seo_description;
+$seo_keywords       = $header_title . ', профиль менеджера, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

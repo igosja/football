@@ -76,7 +76,10 @@ if (isset($_POST['data']))
     redirect('registration.php');
 }
 
-$header_title = 'Регистрация';
-$social_array = f_igosja_social_array();
+$header_title       = 'Регистрация';
+$social_array       = f_igosja_social_array();
+$seo_title          = $header_title . '. ' . $seo_title;
+$seo_description    = $header_title . '. ' . $seo_description;
+$seo_keywords       = $header_title . ', ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

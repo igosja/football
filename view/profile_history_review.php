@@ -1,7 +1,7 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page">
-            <p class="header">Поиск персонала</p>
+            <p class="header">Обзор</p>
             <table class="striped w100">
                 <tr>
                     <th colspan="2">Статистика менеджера</th>

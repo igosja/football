@@ -47,7 +47,10 @@ $team_sql = $mysqli->query($sql);
 $count_team = $team_sql->num_rows;
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $country_name;
+$num                = $num_get;
+$header_title       = $country_name;
+$seo_title          = $header_title . '. Финансовое положение клубов. ' . $seo_title;
+$seo_description    = $header_title . '. Финансовое положение клубов. ' . $seo_description;
+$seo_keywords       = $header_title . ', финансовое положение клубов, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

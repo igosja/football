@@ -114,7 +114,10 @@ $captain_sql = $mysqli->query($sql);
 
 $captain_array = $captain_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $country_name;
+$num                = $num_get;
+$header_title       = $country_name;
+$seo_title          = $header_title . '. Выбор капитанов. ' . $seo_title;
+$seo_description    = $header_title . '. Выбор капитанов. ' . $seo_description;
+$seo_keywords       = $header_title . ', выбор капитанов, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

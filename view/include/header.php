@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <title>Виртуальная футбольная лига</title>
-    <meta name="description" content="Виртуальная футбольная лига - футбольный онлайн менеджер. Выберите футбольный клуб и приведите его к победам." />
-    <meta name="keywords" content="футбол, игра, менеджер, онлайн" />
+    <title><?= $seo_title; ?></title>
+    <meta name="description" content="<?= $seo_description; ?>" />
+    <meta name="keywords" content="<?= $seo_keywords; ?>" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="/css/style.css">

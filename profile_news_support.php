@@ -67,7 +67,10 @@ $sql = "UPDATE `inbox`
         AND `inbox_user_id`='$num_get'";
 $mysqli->query($sql);
 
-$num            = $authorization_id;
-$header_title   = $authorization_login;
+$num                = $authorization_id;
+$header_title       = $authorization_login;
+$seo_title          = $header_title . '. Техподдержка. ' . $seo_title;
+$seo_description    = $header_title . '. Техподдержка. ' . $seo_description;
+$seo_keywords       = $header_title . ', техподдержка, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

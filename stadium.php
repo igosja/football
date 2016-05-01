@@ -141,6 +141,9 @@ if (isset($_GET['data']) &&
     }
 }
 
-$header_title = $authorization_team_name;
+$header_title       = $authorization_team_name;
+$seo_title          = $header_title . '. Изменение размера стадиона. ' . $seo_title;
+$seo_description    = $header_title . '. Изменение размера стадиона. ' . $seo_description;
+$seo_keywords       = $header_title . ', изменение размера стадиона, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

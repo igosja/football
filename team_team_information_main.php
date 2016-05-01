@@ -71,7 +71,10 @@ $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Информация о клубе. ' . $seo_title;
+$seo_description    = $header_title . '. Информация о клубе. ' . $seo_description;
+$seo_keywords       = $header_title . ', информация о клубе, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

@@ -150,7 +150,10 @@ else
     $count_scout = 0;
 }
 
-$num            = $num_get;
-$header_title   = $player_name . ' ' . $player_surname;;
+$num                = $num_get;
+$header_title       = $player_name . ' ' . $player_surname;
+$seo_title          = $header_title . '. Характеристики футболиста. ' . $seo_title;
+$seo_description    = $header_title . '. Характеристики футболиста. ' . $seo_description;
+$seo_keywords       = $header_title . ', Характеристики футболиста, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

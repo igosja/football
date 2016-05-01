@@ -314,7 +314,10 @@ $position_sql = $mysqli->query($sql);
 
 $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $player_name . ' ' . $player_surname;
+$num                = $num_get;
+$header_title       = $player_name . ' ' . $player_surname;
+$seo_title          = $header_title . '. Тренировка футболиста. ' . $seo_title;
+$seo_description    = $header_title . '. Тренировка футболиста. ' . $seo_description;
+$seo_keywords       = $header_title . ', тренировка футболиста, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

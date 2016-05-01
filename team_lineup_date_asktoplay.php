@@ -307,7 +307,10 @@ $leagueparticipant_sql = $mysqli->query($sql);
 
 $leagueparticipant_array = $leagueparticipant_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Товарищеские матчи. ' . $seo_title;
+$seo_description    = $header_title . '. Товарищеские матчи. ' . $seo_description;
+$seo_keywords       = $header_title . ', товарищеские матчи, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

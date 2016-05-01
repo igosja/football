@@ -218,7 +218,10 @@ $player_best_array = $player_best_sql->fetch_all(MYSQLI_ASSOC);
 
 $team_name = $team_array[0]['team_name'];
 
-$num            = $num_get;
-$header_title   = $team_name;
+$num                = $num_get;
+$header_title       = $team_name;
+$seo_title          = $header_title . '. Профиль клуба. ' . $seo_title;
+$seo_description    = $header_title . '. Профиль клуба. ' . $seo_description;
+$seo_keywords       = $header_title . ', профиль клуба, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

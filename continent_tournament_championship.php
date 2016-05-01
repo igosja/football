@@ -60,7 +60,10 @@ $tournament_sql = $mysqli->query($sql);
 
 $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $continent_name;
+$num                = $num_get;
+$header_title       = $continent_name;
+$seo_title          = $continent_name . '. Рейтинг национальных чемпионатов. ' . $seo_title;
+$seo_description    = $continent_name . '. Рейтинг национальных чемпионатов. ' . $seo_description;
+$seo_keywords       = $continent_name . ', рейтинг национальных чемпионатов, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

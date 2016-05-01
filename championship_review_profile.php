@@ -198,7 +198,10 @@ $player_mark_sql = $mysqli->query($sql);
 
 $player_mark_array = $player_mark_sql->fetch_all(MYSQLI_ASSOC);
 
-$num            = $num_get;
-$header_title   = $tournament_name;
+$num                = $num_get;
+$header_title       = $tournament_name;
+$seo_title          = $tournament_name . '. Профиль турнира. ' . $seo_title;
+$seo_description    = $tournament_name . '. Профиль турнира. ' . $seo_description;
+$seo_keywords       = $tournament_name . ', профиль турнира, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');

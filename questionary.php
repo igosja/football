@@ -164,6 +164,9 @@ $gender_sql = $mysqli->query($sql);
 
 $gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);
 
-$header_title = $authorization_login;
+$header_title       = $authorization_login;
+$seo_title          = $header_title . '. Анкета менеджера. ' . $seo_title;
+$seo_description    = $header_title . '. Анкета менеджера. ' . $seo_description;
+$seo_keywords       = $header_title . ', анкета менеджера, ' . $seo_keywords;
 
 include (__DIR__ . '/view/main.php');
