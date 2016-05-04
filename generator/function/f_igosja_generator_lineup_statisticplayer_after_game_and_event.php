@@ -153,23 +153,33 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
 
                 for ($j=0; $j<$penalty; $j++)
                 {
-                    $sql = "SELECT `lineup_id`,
-                                   `lineup_player_id`
-                            FROM `lineup`
-                            WHERE `lineup_team_id`='$team_id'
-                            AND `lineup_position_id` BETWEEN '2' AND '25'
-                            AND `lineup_game_id`='$game_id'
-                            AND `lineup_red`='0'
-                            AND `lineup_yellow`<'2'
-                            AND `lineup_ontarget`>`lineup_goal`
-                            ORDER BY RAND()
-                            LIMIT 1";
-                    $player_sql = f_igosja_mysqli_query($sql);
+                    $penalty_array = f_igosja_penalty_player_select($team_id, $game_id);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    if (isset($penalty_array['player_id']))
+                    {
+                        $player_id = $penalty_array['player_id'];
+                        $lineup_id = $penalty_array['lineup_id'];
+                    }
+                    else
+                    {
+                        $sql = "SELECT `lineup_id`,
+                                       `lineup_player_id`
+                                FROM `lineup`
+                                WHERE `lineup_team_id`='$team_id'
+                                AND `lineup_position_id` BETWEEN '2' AND '25'
+                                AND `lineup_game_id`='$game_id'
+                                AND `lineup_red`='0'
+                                AND `lineup_yellow`<'2'
+                                AND `lineup_ontarget`>`lineup_goal`
+                                ORDER BY RAND()
+                                LIMIT 1";
+                        $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_id = $player_array[0]['lineup_player_id'];
-                    $lineup_id = $player_array[0]['lineup_id'];
+                        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+                        $player_id = $player_array[0]['lineup_player_id'];
+                        $lineup_id = $player_array[0]['lineup_id'];
+                    }
 
                     $sql = "UPDATE `statisticplayer`
                             SET `statisticplayer_goal`=`statisticplayer_goal`+'1',
@@ -543,23 +553,33 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
 
                 for ($j=0; $j<$penalty; $j++)
                 {
-                    $sql = "SELECT `lineup_id`,
-                                   `lineup_player_id`
-                            FROM `lineup`
-                            WHERE `lineup_country_id`='$country_id'
-                            AND `lineup_position_id` BETWEEN '2' AND '25'
-                            AND `lineup_game_id`='$game_id'
-                            AND `lineup_red`='0'
-                            AND `lineup_yellow`<'2'
-                            AND `lineup_ontarget`>`lineup_goal`
-                            ORDER BY RAND()
-                            LIMIT 1";
-                    $player_sql = f_igosja_mysqli_query($sql);
+                    $penalty_array = f_igosja_penalty_player_country_select($country_id, $game_id);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    if (isset($penalty_array['player_id']))
+                    {
+                        $player_id = $penalty_array['player_id'];
+                        $lineup_id = $penalty_array['lineup_id'];
+                    }
+                    else
+                    {
+                        $sql = "SELECT `lineup_id`,
+                                       `lineup_player_id`
+                                FROM `lineup`
+                                WHERE `lineup_country_id`='$country_id'
+                                AND `lineup_position_id` BETWEEN '2' AND '25'
+                                AND `lineup_game_id`='$game_id'
+                                AND `lineup_red`='0'
+                                AND `lineup_yellow`<'2'
+                                AND `lineup_ontarget`>`lineup_goal`
+                                ORDER BY RAND()
+                                LIMIT 1";
+                        $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_id = $player_array[0]['lineup_player_id'];
-                    $lineup_id = $player_array[0]['lineup_id'];
+                        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+                        $player_id = $player_array[0]['lineup_player_id'];
+                        $lineup_id = $player_array[0]['lineup_id'];
+                    }
 
                     $sql = "UPDATE `statisticplayer`
                             SET `statisticplayer_goal`=`statisticplayer_goal`+'1',

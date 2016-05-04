@@ -67,7 +67,7 @@
                         <td class="right"></td>
                     </tr>
                     <tr>
-                        <td>Тарнсферные доходы</td>
+                        <td>Трансферные доходы</td>
                         <td class="right"><?= f_igosja_money($item['finance_income_transfer']); ?></td>
                         <td class="right"></td>
                     </tr>
@@ -101,6 +101,11 @@
                     <tr>
                         <td>Скаутские расходы</td>
                         <td class="right"><?= f_igosja_money($item['finance_expense_scout']); ?></td>
+                        <td class="right"></td>
+                    </tr>
+                    <tr>
+                        <td>Транспортные расходы</td>
+                        <td class="right"><?= f_igosja_money($item['finance_expense_transport']); ?></td>
                         <td class="right"></td>
                     </tr>
                     <tr>

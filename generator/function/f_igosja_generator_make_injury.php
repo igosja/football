@@ -56,7 +56,7 @@ function f_igosja_generator_make_injury()
 
             $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-            $player_id = $player_array[0]['player_id'];
+            $player_id = $player_array[0]['lineup_player_id'];
 
             $sql = "SELECT `injurytype_id`,
                            `injurytype_day`

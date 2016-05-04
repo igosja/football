@@ -7,7 +7,7 @@
                     <tr>
                         <td class="right">Логин</td>
                         <td class="left">
-                            <input name="data[login]" type="text" value="<?= $user_array[0]['user_login']; ?>" <?php if (!empty($user_array[0]['user_login'])) { ?>disabled<?php } ?> id="questionary-login-input" />
+                            <input name="data[login]" type="text" value="<?= $user_array[0]['user_login']; ?>" id="questionary-login-input" />
                             <span class="center red" id="questionary-login-span" style="display: none;">Этот логин занят</span>
                         </td>
                     </tr>
