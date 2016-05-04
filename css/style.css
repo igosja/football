@@ -127,6 +127,7 @@ textarea
 {
     background-color: #002F77;
     border-bottom: 4px solid #000000;
+    min-width: 960px;
 }
 
 .header-inner
