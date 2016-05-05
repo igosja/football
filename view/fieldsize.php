@@ -2,18 +2,20 @@
     <tr>
         <td class="block-page">
             <p class="header">Изменение размеров поля</p>
-            <?php if (isset($stadium_array[0]['building_end_date'])) { ?>
+            <?php if (isset($stadium_array[0]['shedule_date'])) { ?>
                 <p class="center warning">
                     Сейчас проходит изменение размеров поля до
                     <?= $stadium_array[0]['building_length']; ?>x<?= $stadium_array[0]['building_width']; ?>м<br />
                     Изменения вступят в силу после игр ближайшего дня
                 </p>
             <?php } elseif (isset($data)) { ?>
-                <p class="center info">
+                <p class="center">
                     Вы собираетесь изменить размеры газона своего стадиона<br />
-                    Работы продлятся до <?= f_igosja_ufu_date(date('d.m.Y', time()+24*60*60)); ?><br />
-                    <a href="fieldsize.php?data[length]=<?= $data['length']; ?>&data[width]=<?= $data['width']; ?>&ok=1">Изменить размеры</a> |
-                    <a href="fieldsize.php">Отказаться</a>
+                    Работы продлятся до <?= f_igosja_ufu_date(date('d.m.Y', time()+24*60*60)); ?>
+                </p>
+                <p class="center">
+                    <button><a href="fieldsize.php?data[length]=<?= $data['length']; ?>&data[width]=<?= $data['width']; ?>&ok=1">Изменить размеры</a></button>
+                    <button><a href="fieldsize.php">Отказаться</a></button>
                 </p>
             <?php } else { ?>
                 <form method="GET">

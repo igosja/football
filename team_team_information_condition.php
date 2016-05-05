@@ -45,13 +45,15 @@ $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 $team_name = $team_array[0]['team_name'];
 
 $sql = "SELECT `building_capacity`,
-               `building_end_date`,
+               `shedule_date`,
                `buildingtype_name`
         FROM `building`
         LEFT JOIN `buildingtype`
         ON `building_buildingtype_id`=`buildingtype_id`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`building_shedule_id`
         WHERE `building_team_id`='$num_get'
-        ORDER BY `building_end_date` ASC";
+        ORDER BY `shedule_id` ASC";
 $building_sql = $mysqli->query($sql);
 
 $building_array = $building_sql->fetch_all(MYSQLI_ASSOC);

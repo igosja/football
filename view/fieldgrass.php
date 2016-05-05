@@ -2,18 +2,20 @@
     <tr>
         <td class="block-page">
             <p class="header">Изменение размеров поля</p>
-            <?php if (isset($stadium_array[0]['building_end_date'])) { ?>
+            <?php if (isset($stadium_array[0]['shedule_date'])) { ?>
                 <p class="center warning">
                     Сейчас проходит замена газона<br />
                     Работы завершатся после игр ближайшего дня
                 </p>
             <?php } elseif (isset($change) && 1 == $change) { ?>
-                <p class="center info">
+                <p class="center">
                     Вы собираетесь заменить газон своего стадиона<br />
                     Стоимость работ составит <?= f_igosja_money($price); ?>.
-                    Замена газона продлится до <?= date('d.m.Y', time()+24*60*60); ?><br />
-                    <a href="fieldgrass.php?change=1&ok=1">Заменить газон</a> |
-                    <a href="fieldgrass.php">Отказаться от замены</a>
+                    Замена газона продлится до <?= date('d.m.Y', time()+24*60*60); ?>
+                </p>
+                <p class="center">
+                    <button><a href="fieldgrass.php?change=1&ok=1">Заменить газон</a></button>
+                    <button><a href="fieldgrass.php">Отказаться от замены</a></button>
                 </p>
             <?php } else { ?>
                 <table class="striped w100">
@@ -25,6 +27,7 @@
                         <td class="right">Состояние газона</td>
                         <td><?= $stadium_array[0]['stadiumquality_name']; ?></td>
                     </tr>
+                    <tr>
                         <td class="right">Стоимоть замены газона</td>
                         <td><?= f_igosja_money($price); ?></td>
                     </tr>

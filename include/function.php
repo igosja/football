@@ -591,7 +591,7 @@ function f_igosja_trophy_sort($a, $b)
     return $sort_result;
 }
 
-function f_igosja_player_to_scout_button($player_id)
+function f_igosja_player_to_scout_and_fire_button($player_id)
 {
     global $mysqli;
     global $authorization_team_id;
@@ -631,10 +631,12 @@ function f_igosja_player_to_scout_button($player_id)
             0 == $count_scoutnearest &&
             0 == $count_player)
         {
-            $button_array = array
-            (
-                array('href' => 'player_home_scout.php?num=' . $player_id, 'class' => '', 'text' => 'Изучить'),
-            );
+            $button_array[] = array('href' => 'player_home_scout.php?num=' . $player_id, 'class' => '', 'text' => 'Изучить');
+        }
+
+        if (1 == $count_player)
+        {
+            $button_array[] = array('href' => 'player_home_fire.php?num=' . $player_id, 'class' => '', 'text' => 'Уволить');
         }
     }
 

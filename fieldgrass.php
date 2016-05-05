@@ -12,7 +12,7 @@ else
     exit;
 }
 
-$sql = "SELECT `building_end_date`,
+$sql = "SELECT `shedule_date`,
                `stadium_name`,
                `stadiumquality_name`,
                `team_finance`
@@ -23,9 +23,11 @@ $sql = "SELECT `building_end_date`,
         ON `team_id`=`stadium_team_id`
         LEFT JOIN
         (
-            SELECT `building_end_date`,
+            SELECT `shedule_date`,
                    `building_team_id`
             FROM `building`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`building_shedule_id`
             WHERE `building_buildingtype_id`='4'
         ) AS `t1`
         ON `building_team_id`=`stadium_team_id`
@@ -39,7 +41,7 @@ $team_finance   = $stadium_array[0]['team_finance'];
 
 if (isset($_GET['change']) &&
     isset($_GET['ok']) &&
-    !$stadium_array[0]['building_end_date'])
+    !$stadium_array[0]['shedule_date'])
 {
     if ($team_finance < $price)
     {
@@ -56,7 +58,12 @@ if (isset($_GET['change']) &&
     {
         $sql = "INSERT INTO `building`
                 SET `building_buildingtype_id`='4',
-                    `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 1 DAY),
+                    `building_shedule_id`=
+                    (
+                        SELECT `shedule_id`+'1'
+                        FROM `shedule`
+                        WHERE `shedule_date`=CURDATE()
+                    ),
                     `building_team_id`='$num_get'";
         $mysqli->query($sql);
 

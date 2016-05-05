@@ -9,12 +9,8 @@
                 <?= $header_title; ?>.
             </p>
             <p class="center">
-                <button>
-                    <a href="player_home_training.php?num=<?= $num; ?>&position=<?= $position; ?>&ok=1">Подвердить</a>
-                </button>
-                <button>
-                    <a href="player_home_training.php?num=<?= $num; ?>">Отказаться</a>
-                </button>
+                <button><a href="player_home_training.php?num=<?= $num; ?>&position=<?= $position; ?>&ok=1">Подвердить</a></button>
+                <button><a href="player_home_training.php?num=<?= $num; ?>">Отказаться</a></button>
             </p>
         </td>
     </tr>

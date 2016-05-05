@@ -107,6 +107,14 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
 
         $player_id = $mysqli->insert_id;
 
+        $sql = "INSERT INTO `history`
+                SET `history_date`=SYSDATE(),
+                    `history_historytext_id`='" . HISTORY_TEXT_PLAYER_COME_FROM_SCHOOL . "',
+                    `history_player_id`='$player_id',
+                    `history_season_id`='$igosja_season_id',
+                    `history_team_id`='$num_get'";
+        $mysqli->query($sql);
+
         if (GK_POSITION_ID == $position_id)
         {
             $sql = "INSERT INTO `playerattribute` (`playerattribute_player_id`, `playerattribute_attribute_id`, `playerattribute_value`)

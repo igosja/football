@@ -70,7 +70,7 @@ if (isset($button[0]) &&
     {
         $num_get = (int) $_GET['num'];
 
-        $button_array = f_igosja_player_to_scout_button($num_get);
+        $button_array = f_igosja_player_to_scout_and_fire_button($num_get);
     }
 }
 

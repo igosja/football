@@ -12,7 +12,7 @@ else
     exit;
 }
 
-$sql = "SELECT `building_end_date`,
+$sql = "SELECT `shedule_date`,
                `building_length`,
                `building_width`,
                `stadium_length`,
@@ -21,11 +21,13 @@ $sql = "SELECT `building_end_date`,
         FROM `stadium`
         LEFT JOIN
         (
-            SELECT `building_end_date`,
+            SELECT `shedule_date`,
                    `building_length`,
                    `building_team_id`,
                    `building_width`
             FROM `building`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`building_shedule_id`
             WHERE `building_buildingtype_id`='5'
         ) AS `t1`
         ON `building_team_id`=`stadium_team_id`
@@ -35,8 +37,8 @@ $stadium_sql = $mysqli->query($sql);
 $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
 
 if (isset($_GET['data']) &&
-    $_GET['ok'] &&
-    !$stadium_array[0]['building_end_date'])
+    isset($_GET['ok']) &&
+    !$stadium_array[0]['shedule_date'])
 {
     $data   = $_GET['data'];
     $ok     = (int) $_GET['ok'];
@@ -59,7 +61,12 @@ if (isset($_GET['data']) &&
 
         $sql = "INSERT INTO `building`
                 SET `building_buildingtype_id`='5',
-                    `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 1 DAY),
+                    `building_shedule_id`=
+                    (
+                        SELECT `shedule_id`+'1'
+                        FROM `shedule`
+                        WHERE `shedule_date`=CURDATE()
+                    ),
                     `building_length`='$length',
                     `building_team_id`='$num_get',
                     `building_width`='$width'";

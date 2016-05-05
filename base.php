@@ -12,16 +12,18 @@ else
     exit;
 }
 
-$sql = "SELECT `building_end_date`,
+$sql = "SELECT `shedule_date`,
                `team_training_level`,
                `team_finance`,
                `team_name`
         FROM `team`
         LEFT JOIN
         (
-            SELECT `building_end_date`,
+            SELECT `shedule_date`,
                    `building_team_id`
             FROM `building`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`building_shedule_id`
             WHERE `building_buildingtype_id`='1'
         ) AS `t1`
         ON `building_team_id`=`team_id`
@@ -36,7 +38,7 @@ $team_finance   = $base_array[0]['team_finance'];
 
 if (isset($_GET['level']) &&
     isset($_GET['ok']) &&
-    !$base_array[0]['building_end_date'])
+    !$base_array[0]['shedule_date'])
 {
     $level  = (int) $_GET['level'];
     $ok     = (int) $_GET['ok'];
@@ -61,7 +63,12 @@ if (isset($_GET['level']) &&
         if (1 == $ok)
         {
             $sql = "INSERT INTO `building`
-                    SET `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 30 DAY),
+                    SET `building_shedule_id`=
+                        (
+                            SELECT `shedule_id`+'30'
+                            FROM `shedule`
+                            WHERE `shedule_date`=CURDATE()
+                        ),
                         `building_buildingtype_id`='1',
                         `building_team_id`='$num_get'";
             $mysqli->query($sql);

@@ -13,7 +13,7 @@ else
 }
 
 $sql = "SELECT `building_capacity`,
-               `building_end_date`,
+               `shedule_date`,
                `stadium_capacity`,
                `stadium_name`,
                `team_finance`
@@ -23,9 +23,11 @@ $sql = "SELECT `building_capacity`,
         LEFT JOIN
         (
             SELECT `building_capacity`,
-                   `building_end_date`,
+                   `shedule_date`,
                    `building_team_id`
             FROM `building`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`building_shedule_id`
             WHERE `building_buildingtype_id`='3'
         ) AS `t1`
         ON `building_team_id`=`team_id`
@@ -87,7 +89,12 @@ if (isset($_GET['data']) &&
     {
         $sql = "INSERT INTO `building`
                 SET `building_capacity`='$new_capacity',
-                    `building_end_date`=DATE_ADD(CURDATE(), INTERVAL 30 DAY),
+                    `building_shedule_id`=
+                    (
+                        SELECT `shedule_id`+'30'
+                        FROM `shedule`
+                        WHERE `shedule_date`=CURDATE()
+                    ),
                     `building_buildingtype_id`='3',
                     `building_team_id`='$num_get'";
         $mysqli->query($sql);

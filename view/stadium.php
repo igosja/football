@@ -5,22 +5,26 @@
             <?php if (isset($stadium_array[0]['building_capacity'])) { ?>
                 <p class="center warning">
                     Сейчас проходит увеличение стадиона до <?= $stadium_array[0]['building_capacity']; ?> мест.<br />
-                    Строительство продлится до <?= f_igosja_ufu_date($stadium_array[0]['building_end_date']); ?>
+                    Строительство продлится до <?= f_igosja_ufu_date($stadium_array[0]['shedule_date']); ?>
                 </p>
             <?php } elseif (isset($new_capacity) && isset($increase) && 0 == $increase) { ?>
-                <p class="center info">
+                <p class="center">
                     Вы собираетесь уменьшить вместимость своего стадиона<br />
-                    Строительство бесплатно и пройдет мгновенно.<br />
-                    <a href="stadium.php?data[capacity]=<?= $new_capacity; ?>; ?>&ok=1">Изменить вместимость</a> |
-                    <a href="stadium.php">Отказаться</a>
+                    Строительство бесплатно и пройдет мгновенно.
+                </p>
+                <p class="center">
+                    <button><a href="stadium.php?data[capacity]=<?= $new_capacity; ?>; ?>&ok=1">Изменить вместимость</a></button>
+                    <button><a href="stadium.php">Отказаться</a></button>
                 </p>
             <?php } elseif (isset($new_capacity) && isset($increase) && 1 == $increase) { ?>
-                <p class="center info">
+                <p class="center">
                     Вы собираетесь увеличить вместимость своего стадиона<br />
                     Стоимость строительльтва составит <?= f_igosja_money($price); ?>.
-                    Строительство продлится до <?= f_igosja_ufu_date(date('d.m.Y', time()+30*24*60*60)); ?><br />
-                    <a href="stadium.php?data[capacity]=<?= $new_capacity; ?>; ?>&ok=1">Изменить вместимость</a> |
-                    <a href="stadium.php">Отказаться</a>
+                    Строительство продлится до <?= f_igosja_ufu_date(date('d.m.Y', time()+30*24*60*60)); ?>
+                </p>
+                <p class="center">
+                    <button><a href="stadium.php?data[capacity]=<?= $new_capacity; ?>; ?>&ok=1">Изменить вместимость</a></button>
+                    <button><a href="stadium.php">Отказаться</a></button>
                 </p>
             <?php } else { ?>
                 <form method="GET">

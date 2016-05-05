@@ -69,7 +69,7 @@
                     <td>Запланированное работы</td>
                     <td>
                         <?php foreach ($building_array as $item) { ?>
-                            <?= $item['buildingtype_name']; ?> (дата заврешения - <?= f_igosja_ufu_date($item['building_end_date']); ?>)<br />
+                            <?= $item['buildingtype_name']; ?> (дата заврешения - <?= f_igosja_ufu_date($item['shedule_date']); ?>)<br />
                         <?php } ?>
                     </td>
                 </tr>
