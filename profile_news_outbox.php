@@ -55,7 +55,7 @@ if (isset($_POST['data']))
         $inbox_user_id = $user_array[0]['user_id'];
 
         $sql = "INSERT INTO `inbox`
-                SET `inbox_date`=SYSDATE(),
+                SET `inbox_date`=UNIX_TIMESTAMP(),
                     `inbox_inboxtheme_id`='" . INBOXTHEME_PERSONAL . "',
                     `inbox_title`=?,
                     `inbox_text`=?,

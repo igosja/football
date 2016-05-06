@@ -56,7 +56,7 @@ elseif (isset($_GET['point']))
         $mysqli->query($sql);
 
         $sql = "INSERT INTO `historyfinanceuser`
-                SET `historyfinanceuser_date`=SYSDATE(),
+                SET `historyfinanceuser_date`=UNIX_TIMESTAMP(),
                     `historyfinanceuser_sum`='-1',
                     `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
@@ -103,7 +103,7 @@ elseif (isset($_GET['position']))
         $mysqli->query($sql);
 
         $sql = "INSERT INTO `historyfinanceuser`
-                SET `historyfinanceuser_date`=SYSDATE(),
+                SET `historyfinanceuser_date`=UNIX_TIMESTAMP(),
                     `historyfinanceuser_sum`='-5',
                     `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
@@ -157,7 +157,7 @@ elseif (isset($_GET['money']))
         $mysqli->query($sql);
 
         $sql = "INSERT INTO `historyfinanceuser`
-                SET `historyfinanceuser_date`=SYSDATE(),
+                SET `historyfinanceuser_date`=UNIX_TIMESTAMP(),
                     `historyfinanceuser_sum`='-10',
                     `historyfinanceuser_user_id`='$num_get'";
         $mysqli->query($sql);
@@ -194,7 +194,7 @@ elseif (isset($_GET['money']))
         $mysqli->query($sql);
 
         $sql = "INSERT INTO `historyfinanceteam`
-                SET `historyfinanceteam_date`=CURDATE(),
+                SET `historyfinanceteam_date`=UNIX_TIMESTAMP(),
                     `historyfinanceteam_historytext_id`='" . HISTORY_TEXT_INCOME_INVESTOR . "',
                     `historyfinanceteam_season_id`='$igosja_season_id',
                     `historyfinanceteam_team_id`='$authorization_team_id',
@@ -223,7 +223,7 @@ elseif (isset($_POST['data']))
     }
 
     $sql = "INSERT INTO `payment`
-            SET `payment_date`=SYSDATE(),
+            SET `payment_date`=UNIX_TIMESTAMP(),
                 `payment_sum`='$sum',
                 `payment_user_id`='$num_get'";
     $mysqli->query($sql);

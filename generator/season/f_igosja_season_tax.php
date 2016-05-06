@@ -51,7 +51,7 @@ function f_igosja_season_tax()
             f_igosja_mysqli_query($sql);
 
             $sql = "INSERT INTO `historyfinanceteam`
-                    SET `historyfinanceteam_date`=SYSDATE(),
+                    SET `historyfinanceteam_date`=UNIX_TIMESTAMP(),
                         `historyfinanceteam_historytext_id`='" . HISTORY_TEXT_EXPENCE_TAX. "',
                         `historyfinanceteam_season_id`='$igosja_season_id',
                         `historyfinanceteam_team_id`='$team_id',

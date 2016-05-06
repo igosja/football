@@ -28,7 +28,7 @@ if (isset($_POST['data']))
     if (!empty($inbox_text))
     {
         $sql = "INSERT INTO `inbox`
-                SET `inbox_date`=SYSDATE(),
+                SET `inbox_date`=UNIX_TIMESTAMP(),
                     `inbox_text`=?,
                     `inbox_support`='1',
                     `inbox_sender_id`='$num_get'";

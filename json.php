@@ -1162,7 +1162,7 @@ elseif (isset($_GET['asktoplay']))
 
             $sql = "INSERT INTO `inbox`
                     SET `inbox_asktoplay_id`='$delete',
-                        `inbox_date`=CURDATE(),
+                        `inbox_date`=UNIX_TIMESTAMP(),
                         `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_NO . "',
                         `inbox_title`='$inboxtheme_name',
                         `inbox_text`='$inboxtheme_text',
@@ -1272,7 +1272,7 @@ elseif (isset($_GET['asktoplay']))
 
             $sql = "INSERT INTO `inbox`
                     SET `inbox_asktoplay_id`='$asktoplay_id',
-                        `inbox_date`=CURDATE(),
+                        `inbox_date`=UNIX_TIMESTAMP(),
                         `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY . "',
                         `inbox_sender_id`='$authorization_id',
                         `inbox_title`='$inboxtheme_name',

@@ -108,7 +108,7 @@ if (isset($_GET['level']) &&
             }
 
             $sql = "INSERT INTO `historyfinanceteam`
-                    SET `historyfinanceteam_date`=SYSDATE(),
+                    SET `historyfinanceteam_date`=UNIX_TIMESTAMP(),
                         `historyfinanceteam_historytext_id`='" .HISTORY_TEXT_EXPENCE_BUILD_TRAINING . "',
                         `historyfinanceteam_season_id`='$igosja_season_id',
                         `historyfinanceteam_team_id`='$num_get',

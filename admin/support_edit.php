@@ -37,7 +37,7 @@ if (isset($_POST['inbox_text']))
         $sql = "INSERT INTO `inbox`
                 SET `inbox_text`=?,
                     `inbox_title`='Ответ на обращение',
-                    `inbox_date`=SYSDATE(),
+                    `inbox_date`=UNIX_TIMESTAMP(),
                     `inbox_sender_id`='0',
                     `inbox_support`='1',
                     `inbox_inboxtheme_id`='" . INBOXTHEME_PERSONAL . "',

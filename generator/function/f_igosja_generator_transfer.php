@@ -114,7 +114,7 @@ function f_igosja_generator_transfer()
 
                 $sql = "INSERT INTO `transferhistory`
                         SET `transferhistory_buyer_id`='$buyer_id',
-                            `transferhistory_date`=SYSDATE(),
+                            `transferhistory_date`=UNIX_TIMESTAMP(),
                             `transferhistory_offertype_id`='$offertype_id',
                             `transferhistory_player_id`='$player_id',
                             `transferhistory_price`='$price',

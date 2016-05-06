@@ -89,7 +89,7 @@ $sql = "UPDATE `user`
 $mysqli->query($sql);
 
 $sql = "INSERT INTO `historyfinanceuser`
-        SET `historyfinanceuser_date`=SYSDATE(),
+        SET `historyfinanceuser_date`=UNIX_TIMESTAMP(),
             `historyfinanceuser_sum`='$sum',
             `historyfinanceuser_user_id`='$user_id'";
 $mysqli->query($sql);
@@ -115,7 +115,7 @@ if (0 != $refferer)
     $mysqli->query($sql);
 
     $sql = "INSERT INTO `historyfinanceuser`
-            SET `historyfinanceuser_date`=SYSDATE(),
+            SET `historyfinanceuser_date`=UNIX_TIMESTAMP(),
                 `historyfinanceuser_sum`='$sum',
                 `historyfinanceuser_user_id`='$refferer'";
     $mysqli->query($sql);

@@ -158,7 +158,7 @@ if (isset($_POST['data']))
         $inboxtheme_text = sprintf($inboxtheme_text, $authorization_team_name, $player_name);
 
         $sql = "INSERT INTO `inbox`
-                SET `inbox_date`=CURDATE(),
+                SET `inbox_date`=UNIX_TIMESTAMP(),
                     `inbox_inboxtheme_id`='" . INBOXTHEME_TRANSFER . "',
                     `inbox_playeroffer_id`='$playeroffer_id',
                     `inbox_title`='$inboxtheme_name',
