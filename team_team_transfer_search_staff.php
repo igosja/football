@@ -33,7 +33,8 @@ $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 $team_name  = $team_array[0]['team_name'];
 $country_id = $team_array[0]['city_country_id'];
 
-if (isset($_GET['staff_id']) && isset($_GET['ok']))
+if (isset($_GET['staff_id'])
+    && isset($_GET['ok']))
 {
     $staff_id   = (int) $_GET['staff_id'];
     $ok         = (int) $_GET['ok'];
@@ -50,7 +51,8 @@ if (isset($_GET['staff_id']) && isset($_GET['ok']))
             LEFT JOIN `surname`
             ON `staff_surname_id`=`surname_id`
             WHERE `staff_team_id`='0'
-            AND `staff_id`='$staff_id'";
+            AND `staff_id`='$staff_id'
+            LIMIT 1";
     $staff_sql = $mysqli->query($sql);
 
     $count_staff = $staff_sql->num_rows;
@@ -156,10 +158,10 @@ for ($i=0; $i<$count_staffpost; $i++)
                         `staff_age`='$age'";
             $mysqli->query($sql);
 
-            $staff_id = $mysqli->insert_id;
+            $last_staff_id = $mysqli->insert_id;
 
             $sql = "INSERT INTO `staffattribute` (`staffattribute_staff_id`, `staffattribute_attributestaff_id`, `staffattribute_value`)
-                    SELECT '$staff_id', `attributestaff_id`, '$min_reputation'+RAND()*'10'
+                    SELECT '$last_staff_id', `attributestaff_id`, '$min_reputation'+RAND()*'10'
                     FROM `attributestaff`
                     ORDER BY `attributestaff_id` ASC";
             $mysqli->query($sql);

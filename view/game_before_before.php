@@ -115,7 +115,7 @@
                         </tr>
                     <?php } ?>
                 </table>
-            <?php } else { ?>
+            <?php } elseif (in_array($tournamenttype_id, array(TOURNAMENT_TYPE_WORLDCUP, TOURNAMENT_TYPE_CHAMPIONSHIP))) { ?>
                 <table class="striped w100">
                     <tr>
                         <th class="w10">М</th>
