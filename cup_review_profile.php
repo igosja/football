@@ -82,7 +82,7 @@ if (0 == $count_game)
                    `home_team`.`team_name` AS `home_team_name`,
                    `shedule_date`,
                    DATE_FORMAT(`shedule_date`,'%W') AS `shedule_day`,
-                   `shedule_id`
+                   `shedule_id`,
                    `stage_id`,
                    `stage_name`
             FROM `game`
