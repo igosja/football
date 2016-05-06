@@ -116,7 +116,7 @@ if ($result)
             }
 
             $sql = "INSERT INTO `user`
-                    SET `user_login`=`fb_$gl_id`,
+                    SET `user_login`='gl_$gl_id',
                         `user_social_gl`='$gl_id',
                         `user_referrer`='$referrer',
                         `user_registration_date`=SYSDATE(),

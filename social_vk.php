@@ -104,7 +104,7 @@ if ($result)
             }
 
             $sql = "INSERT INTO `user`
-                    SET `user_login`=`vk_$gl_id`,
+                    SET `user_login`='vk_$vk_id',
                         `user_social_vk`='$vk_id',
                         `user_referrer`='$referrer',
                         `user_registration_date`=SYSDATE(),

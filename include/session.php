@@ -47,7 +47,7 @@ if (isset($_SESSION['authorization_id']))
     $authorization_permission   = $user_array[0]['userrole_permission'];
 
     $sql = "UPDATE `user`
-            SET `user_last_visit`=SYSDATE()
+            SET `user_last_visit`=UNIX_TIMESTAMP()
             WHERE `user_id`='$authorization_id'
             LIMIT 1";
     $mysqli->query($sql);
