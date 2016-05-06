@@ -1,4 +1,6 @@
 $(document).ready(function ($) {
+    var div_on_page_array  = $('div');
+
     $('#select-ajax-give-1').change(function ()
     //Зависимые селекты
     {
@@ -33,92 +35,41 @@ $(document).ready(function ($) {
         );
     });
 
-    $('#highcharts-bar-chart').highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: 'Pie chart'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
+    if ($(div_on_page_array).is('#index-registration-chart'))
+    {
+        $('#index-registration-chart').highcharts({
+            title: {
+                text: 'Регистрации за месяц',
+                x: -20 //center
+            },
+            xAxis: {
+                categories: registration_date
+            },
+            yAxis: {
+                title: {
+                    text: 'Регистрации'
                 },
-                showInLegend: true
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: ' чел.'
+            },
+            legend: {
+                enabled: false
+            },
+            series: [{
+                name: 'Зарегистрировано',
+                data: registration_user
+            }],
+            credits: {
+                enabled: false
             }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: 'Brand 1',
-                y: 10
-            }, {
-                name: 'Brand 2',
-                y: 12
-            }, {
-                name: 'Brand 3',
-                y: 38
-            }, {
-                name: 'Brand 4',
-                y: 25
-            }, {
-                name: 'Brand 5',
-                y: 13
-            }]
-        }]
-    });
-
-    $('#highcharts-line-chart').highcharts({
-        title: {
-            text: 'График',
-            x: -20 //center
-        },
-        xAxis: {
-            title: {
-                text: 'Время'
-            },
-            categories: ['Начало', 'Середина', 'Конец']
-        },
-        yAxis: {
-            title: {
-                text: 'Количество'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Первая линия',
-            data: [1, 5, 2]
-        }, {
-            name: 'Вторая линия',
-            data: [4, 3, 6]
-        }]
-    });
+        });
+    }
 
     setInterval(get_count_support_message, 60000);
 });
