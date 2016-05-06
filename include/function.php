@@ -171,10 +171,19 @@ function f_igosja_ufu_date_time($date)
 function f_igosja_ufu_last_visit($date)
 //Время последнего посещения
 {
-    $min_5  = strtotime($date . '+5 min');
-    $min_60 = strtotime($date . '+60 min');
-    $now    = strtotime(date('Y-m-d H:i:s'));
-    $date   = strtotime($date);
+    if (!is_numeric($date))
+    {
+        $min_5  = strtotime($date . '+5 min');
+        $min_60 = strtotime($date . '+60 min');
+        $now    = strtotime(date('Y-m-d H:i:s'));
+        $date   = strtotime($date);
+    }
+    else
+    {
+        $min_5  = $date + 5 * 60;
+        $min_60 = $date + 60 * 60;
+        $now    = time();
+    }
 
     if ($min_5 >= $now)
     {
