@@ -29,8 +29,6 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$today = date('Y-m-d');
-
 $sql = "SELECT `game_id`,
                `game_guest_score`,
                `game_guest_team_id`,
@@ -61,7 +59,7 @@ $sql = "SELECT `game_id`,
             FROM `shedule`
             LEFT JOIN `game`
             ON `game_shedule_id`=`shedule_id`
-            WHERE `shedule_date`<='$today'
+            WHERE `shedule_date`<=CURDATE()
             AND `game_tournament_id`='$num_get'
             AND `shedule_season_id`='$igosja_season_id'
             ORDER BY `shedule_date` DESC
@@ -104,7 +102,7 @@ if (0 == $count_game)
                 FROM `shedule`
                 LEFT JOIN `game`
                 ON `game_shedule_id`=`shedule_id`
-                WHERE `shedule_date`>'$today'
+                WHERE `shedule_date`>CURDATE()
                 AND `game_tournament_id`='$num_get'
                 AND `shedule_season_id`='$igosja_season_id'
                 ORDER BY `shedule_date` ASC
