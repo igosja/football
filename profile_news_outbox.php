@@ -92,7 +92,7 @@ $inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);
 $sql = "SELECT `user_id`,
                `user_login`
         FROM `user`
-        WHERE `user_last_visit`>DATE_ADD(CURDATE(), INTERVAL -7 DAY)
+        WHERE `user_last_visit`>UNIX_TIMESTAMP() - 7 * 24 * 60 * 60
         AND `user_id` NOT IN ('0', '$num_get')
         ORDER BY `user_login` ASC";
 $user_sql = $mysqli->query($sql);

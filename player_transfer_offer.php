@@ -118,7 +118,7 @@ if (isset($_POST['data']))
                     `playeroffer_offertype_id`='$offer_type',
                     `playeroffer_price`='$offer_price',
                     `playeroffer_team_id`='$authorization_team_id',
-                    `playeroffer_date`=SYSDATE()";
+                    `playeroffer_date`=UNIX_TIMESTAMP()";
         $mysqli->query($sql);
 
         $playeroffer_id = $mysqli->insert_id;
@@ -171,7 +171,7 @@ if (isset($_POST['data']))
         $sql = "UPDATE `playeroffer`
                 SET `playeroffer_offertype_id`='$offer_type',
                     `playeroffer_price`='$offer_price',
-                    `playeroffer_date`=SYSDATE()
+                    `playeroffer_date`=UNIX_TIMESTAMP()
                 WHERE `playeroffer_player_id`='$num_get'
                 AND `playeroffer_team_id`='$authorization_team_id'
                 LIMIT 1";

@@ -92,9 +92,9 @@ function f_igosja_generator_transfer()
                             `historyfinanceteam_team_id`,
                             `historyfinanceteam_value`
                         )
-                        VALUES (SYSDATE(), '" . HISTORY_TEXT_EXPENCE_TRANSFER. "', '$igosja_season_id', '$buyer_id', '$price'),
-                               (SYSDATE(), '" . HISTORY_TEXT_EXPENCE_TAX. "', '$igosja_season_id', '$seller_id', '$tax'),
-                               (SYSDATE(), '" . HISTORY_TEXT_INCOME_TRANSFER. "', '$igosja_season_id', '$seller_id', '$price');";
+                        VALUES (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_EXPENCE_TRANSFER. "', '$igosja_season_id', '$buyer_id', '$price'),
+                               (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_EXPENCE_TAX. "', '$igosja_season_id', '$seller_id', '$tax'),
+                               (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_INCOME_TRANSFER. "', '$igosja_season_id', '$seller_id', '$price');";
                 f_igosja_mysqli_query($sql);
 
                 $sql = "UPDATE `finance`

@@ -74,8 +74,8 @@ function f_igosja_generator_finance_tv()
             f_igosja_mysqli_query($sql);
 
             $sql = "INSERT INTO `historyfinanceteam` (`historyfinanceteam_date`, `historyfinanceteam_historytext_id`, `historyfinanceteam_season_id`, `historyfinanceteam_team_id`, `historyfinanceteam_value`)
-                    VALUES (CURDATE(), '" . HISTORY_TEXT_INCOME_TV . "', '$igosja_season_id', '$home_team_id', '$finance_tv'),
-                           (CURDATE(), '" . HISTORY_TEXT_INCOME_TV . "', '$igosja_season_id', '$guest_team_id', '$finance_tv');";
+                    VALUES (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_INCOME_TV . "', '$igosja_season_id', '$home_team_id', '$finance_tv'),
+                           (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_INCOME_TV . "', '$igosja_season_id', '$guest_team_id', '$finance_tv');";
             f_igosja_mysqli_query($sql);
 
             usleep(1);

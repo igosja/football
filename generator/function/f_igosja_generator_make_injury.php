@@ -77,10 +77,10 @@ function f_igosja_generator_make_injury()
             f_igosja_mysqli_query($sql);
 
             $sql = "INSERT INTO `injury`
-                    SET `injury_end_date`=DATE_ADD(CURDATE(), INTERVAL " . $injurytype_day . " DAY),
+                    SET `injury_end_date`=UNIX_TIMESTAMP() + $injurytype_day * 60 * 60,
                         `injury_injurytype_id`='$injurytype_id',
                         `injury_player_id`='$player_id',
-                        `injury_start_date`=CURDATE()";
+                        `injury_start_date`=UNIX_TIMESTAMP()";
             f_igosja_mysqli_query($sql);
         }
     }

@@ -488,7 +488,7 @@ $statistic_player_sql = $mysqli->query($sql);
 
 $statistic_player_array = $statistic_player_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT DATEDIFF(`injury_end_date`,SYSDATE()) AS `day`,
+$sql = "SELECT ROUND((`injury_end_date` - UNIX_TIMESTAMP()) / 60 / 60 / 24) AS `day`,
                `injurytype_name`,
                `name_name`,
                `player_id`,
@@ -502,7 +502,7 @@ $sql = "SELECT DATEDIFF(`injury_end_date`,SYSDATE()) AS `day`,
         ON `surname_id`=`player_surname_id`
         LEFT JOIN `injurytype`
         ON `injury_injurytype_id`=`injurytype_id`
-        WHERE `injury_end_date`>SYSDATE()
+        WHERE `injury_end_date`>UNIX_TIMESTAMP()
         AND `player_team_id`='$authorization_team_id'
         ORDER BY `injury_id` ASC";
 $injury_sql = $mysqli->query($sql);

@@ -18,7 +18,7 @@ $sql = "SELECT SUM(`statisticuser_draw`) AS `draw`,
                SUM(`statisticuser_pass`) AS `pass`,
                SUM(`statisticuser_score`) AS `score`,
                SUM(`statisticuser_win`) AS `win`,
-               TO_DAYS(SYSDATE()) - TO_DAYS(`user_registration_date`) AS `day`
+               ROUND((UNIX_TIMESTAMP() - `user_registration_date`) / 24 / 60 / 60) AS `day`
         FROM `statisticuser`
         LEFT JOIN `user`
         ON `user_id`=`statisticuser_user_id`

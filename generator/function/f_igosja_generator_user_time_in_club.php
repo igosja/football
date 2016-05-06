@@ -6,7 +6,7 @@ function f_igosja_generator_user_time_in_club()
     $sql = "UPDATE `team`
             LEFT JOIN
             (
-                SELECT DATEDIFF(CURDATE(), MAX(`history_date`)) AS `day`,
+                SELECT ROUND((UNIX_TIMESTAMP() - MAX(`history_date`)) / 60 / 60 / 24) AS `day`,
                        MAX(`history_date`) AS `history_date`,
                        `history_user_id`
                 FROM `history`

@@ -7,7 +7,7 @@ function f_igosja_season_user_fire()
             FROM `team`
             LEFT JOIN `user`
             ON `user_id`=`team_user_id`
-            WHERE `user_last_visit`<NOW()-INTERVAL 14 DAY
+            WHERE `user_last_visit`<UNIX_TIMESTAMP() - 14 * 24 * 24 * 60
             ORDER BY `team_id` ASC";
     $user_sql = f_igosja_mysqli_query($sql);
 

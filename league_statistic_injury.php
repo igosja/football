@@ -29,7 +29,7 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$sql = "SELECT DATEDIFF(`injury_end_date`, SYSDATE()) AS `day`,
+$sql = "SELECT ROUND((`injury_end_date` - UNIX_TIMESTAMP()) / 60 / 60 / 24) AS `day`,
                `injurytype_name`,
                `name_name`,
                `player_id`,
@@ -49,7 +49,7 @@ $sql = "SELECT DATEDIFF(`injury_end_date`, SYSDATE()) AS `day`,
         ON `player_team_id`=`team_id`
         LEFT JOIN `leagueparticipant`
         ON `leagueparticipant_team_id`=`team_id`
-        WHERE `injury_end_date`>SYSDATE()
+        WHERE `injury_end_date`>UNIX_TIMESTAMP()
         AND `leagueparticipant_tournament_id`='$num_get'
         AND `leagueparticipant_out`='0'
         AND `leagueparticipant_season_id`='$igosja_season_id'

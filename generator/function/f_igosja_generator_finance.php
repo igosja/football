@@ -111,12 +111,12 @@ function f_igosja_generator_finance()
         f_igosja_mysqli_query($sql);
 
         $sql = "INSERT INTO `historyfinanceteam` (`historyfinanceteam_date`, `historyfinanceteam_historytext_id`, `historyfinanceteam_season_id`, `historyfinanceteam_team_id`, `historyfinanceteam_value`)
-                VALUES (CURDATE(), '" . HISTORY_TEXT_INCOME_ATTRIBUTE . "', '$igosja_season_id', '$team_id', '$finance_attributes'),
-                       (CURDATE(), '" . HISTORY_TEXT_INCOME_SPONSOR . "', '$igosja_season_id', '$team_id', '$finance_sponsor'),
-                       (CURDATE(), '" . HISTORY_TEXT_EXPENCE_AGENT . "', '$igosja_season_id', '$team_id', '$finance_agent'),
-                       (CURDATE(), '" . HISTORY_TEXT_EXPENCE_SCOUT . "', '$igosja_season_id', '$team_id', '$finance_scout'),
-                       (CURDATE(), '" . HISTORY_TEXT_EXPENCE_SALARY . "', '$igosja_season_id', '$team_id', '$finance_salary'),
-                       (CURDATE(), '" . HISTORY_TEXT_EXPENCE_BASE . "', '$igosja_season_id', '$team_id', '$finance_base');";
+                VALUES (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_INCOME_ATTRIBUTE . "', '$igosja_season_id', '$team_id', '$finance_attributes'),
+                       (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_INCOME_SPONSOR . "', '$igosja_season_id', '$team_id', '$finance_sponsor'),
+                       (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_EXPENCE_AGENT . "', '$igosja_season_id', '$team_id', '$finance_agent'),
+                       (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_EXPENCE_SCOUT . "', '$igosja_season_id', '$team_id', '$finance_scout'),
+                       (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_EXPENCE_SALARY . "', '$igosja_season_id', '$team_id', '$finance_salary'),
+                       (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_EXPENCE_BASE . "', '$igosja_season_id', '$team_id', '$finance_base');";
         f_igosja_mysqli_query($sql);
 
         usleep(1);
@@ -174,9 +174,9 @@ function f_igosja_generator_finance()
         f_igosja_mysqli_query($sql);
 
         $sql = "INSERT INTO `historyfinanceteam` (`historyfinanceteam_date`, `historyfinanceteam_historytext_id`, `historyfinanceteam_season_id`, `historyfinanceteam_team_id`, `historyfinanceteam_value`)
-                VALUES (CURDATE(), '" . HISTORY_TEXT_INCOME_TICKET . "', '$igosja_season_id', '$home_team_id', '$finance_ticket_home'),
-                       (CURDATE(), '" . HISTORY_TEXT_INCOME_SUBSCRIPTION . "', '$igosja_season_id', '$home_team_id', '$finance_subscription'),
-                       (CURDATE(), '" . HISTORY_TEXT_EXPENCE_STADIUM . "', '$igosja_season_id', '$home_team_id', '$finance_stadium');";
+                VALUES (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_INCOME_TICKET . "', '$igosja_season_id', '$home_team_id', '$finance_ticket_home'),
+                       (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_INCOME_SUBSCRIPTION . "', '$igosja_season_id', '$home_team_id', '$finance_subscription'),
+                       (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_EXPENCE_STADIUM . "', '$igosja_season_id', '$home_team_id', '$finance_stadium');";
         f_igosja_mysqli_query($sql);
 
         $sql = "UPDATE `team`
@@ -194,8 +194,8 @@ function f_igosja_generator_finance()
         f_igosja_mysqli_query($sql);
 
         $sql = "INSERT INTO `historyfinanceteam` (`historyfinanceteam_date`, `historyfinanceteam_historytext_id`, `historyfinanceteam_season_id`, `historyfinanceteam_team_id`, `historyfinanceteam_value`)
-                VALUES (CURDATE(), '" . HISTORY_TEXT_INCOME_TICKET . "', '$igosja_season_id', '$guest_team_id', '$finance_ticket_guest'),
-                       (CURDATE(), '" . HISTORY_TEXT_EXPENCE_TRANSPORT . "', '$igosja_season_id', '$guest_team_id', '$finance_transport');";
+                VALUES (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_INCOME_TICKET . "', '$igosja_season_id', '$guest_team_id', '$finance_ticket_guest'),
+                       (UNIX_TIMESTAMP(), '" . HISTORY_TEXT_EXPENCE_TRANSPORT . "', '$igosja_season_id', '$guest_team_id', '$finance_transport');";
         f_igosja_mysqli_query($sql);
 
         usleep(1);
