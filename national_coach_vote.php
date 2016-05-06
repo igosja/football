@@ -34,7 +34,7 @@ if (isset($_POST['application_id']))
 
     $sql = "INSERT INTO `coachvote`
             SET `coachvote_coachapplication_id`='$application_id',
-                `coachvote_date`=SYSDATE(),
+                `coachvote_date`=UNIX_TIMESTAMP(),
                 `coachvote_season_id`='$igosja_season_id',
                 `coachvote_user_id`='$authorization_user_id'";
     $mysqli->query($sql);

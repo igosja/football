@@ -51,7 +51,7 @@ if (isset($_GET['ok']))
     $mysqli->query($sql);
 
     $sql = "INSERT INTO `history`
-            SET `history_date`=SYSDATE(),
+            SET `history_date`=UNIX_TIMESTAMP(),
                 `history_historytext_id`='" . HISTORY_TEXT_PLAYER_FIRE . "',
                 `history_player_id`='$num_get',
                 `history_season_id`='$igosja_season_id',

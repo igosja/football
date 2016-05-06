@@ -93,7 +93,7 @@ function f_igosja_history($history_id, $user_id=0, $country_id=0, $team_id=0, $p
                 `history_user_id`='$user_id',
                 `history_season_id`='$igosja_season_id',
                 `history_player_id`='$player_id',
-                `history_date`=SYSDATE()";
+                `history_date`=UNIX_TIMESTAMP()";
     $mysqli->query($sql);
 }
 

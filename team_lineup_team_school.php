@@ -108,7 +108,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
         $player_id = $mysqli->insert_id;
 
         $sql = "INSERT INTO `history`
-                SET `history_date`=SYSDATE(),
+                SET `history_date`=UNIX_TIMESTAMP(),
                     `history_historytext_id`='" . HISTORY_TEXT_PLAYER_COME_FROM_SCHOOL . "',
                     `history_player_id`='$player_id',
                     `history_season_id`='$igosja_season_id',

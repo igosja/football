@@ -33,7 +33,7 @@ if (isset($_POST['country_id']))
     {
         $sql = "INSERT INTO `coachapplication`
                 SET `coachapplication_country_id`='$country_id',
-                    `coachapplication_date`=SYSDATE(),
+                    `coachapplication_date`=UNIX_TIMESTAMP(),
                     `coachapplication_season_id`='$igosja_season_id',
                     `coachapplication_text`=?,
                     `coachapplication_user_id`='$authorization_user_id'";
@@ -41,7 +41,7 @@ if (isset($_POST['country_id']))
     else
     {
         $sql = "UPDATE `coachapplication`
-                SET `coachapplication_date`=SYSDATE(),
+                SET `coachapplication_date`=UNIX_TIMESTAMP(),
                     `coachapplication_text`=?
                 WHERE `coachapplication_country_id`='$country_id'
                 AND `coachapplication_season_id`='$igosja_season_id'

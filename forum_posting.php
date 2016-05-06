@@ -16,7 +16,7 @@ if (isset($_GET['group']))
                     `forumtheme_name`=?,
                     `forumtheme_text`=?,
                     `forumtheme_user_id`='$authorization_id',
-                    `forumtheme_date`=SYSDATE()";
+                    `forumtheme_date`=UNIX_TIMESTAMP()";
         $prepare = $mysqli->prepare($sql);
         $prepare->bind_param('ss', $name, $text);
         $prepare->execute();
@@ -57,7 +57,7 @@ else
                     `forumpost_name`=?,
                     `forumpost_text`=?,
                     `forumpost_user_id`='$authorization_id',
-                    `forumpost_date`=SYSDATE()";
+                    `forumpost_date`=UNIX_TIMESTAMP()";
         $prepare = $mysqli->prepare($sql);
         $prepare->bind_param('ss', $name, $text);
         $prepare->execute();
