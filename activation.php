@@ -3,7 +3,7 @@
 include (__DIR__ . '/include/include.php');
 
 $sql = "DELETE FROM `user`
-        WHERE UNIX_TIMESTAMP(SYSDATE())-UNIX_TIMESTAMP(`user_registration_date`)>'86400'
+        WHERE UNIX_TIMESTAMP()-`user_registration_date`>'86400'
         AND `user_activation`='0'";
 $mysqli->query($sql);
 

@@ -56,7 +56,7 @@ if (isset($_POST['data']))
                 `user_email`=?,
                 `user_password`=?,
                 `user_referrer`='$referrer',
-                `user_registration_date`=SYSDATE()";
+                `user_registration_date`=UNIX_TIMESTAMP()";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('sss', $registration_login, $registration_email, $password);
     $prepare->execute();

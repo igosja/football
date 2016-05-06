@@ -107,7 +107,7 @@ if ($result)
                     SET `user_login`='vk_$vk_id',
                         `user_social_vk`='$vk_id',
                         `user_referrer`='$referrer',
-                        `user_registration_date`=SYSDATE(),
+                        `user_registration_date`=UNIX_TIMESTAMP(),
                         `user_activation`='1'";
             $mysqli->query($sql);
 
