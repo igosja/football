@@ -1,44 +1,52 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Редактирование первой строки меню</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="horizontalmenu_list.php" class="link-img link-list"></a>
-            </p>
-            <form action="" method="POST">
-                <table class="center striped">
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Редактирование странцы</h1>
+        <button type="button" class="btn btn-default">
+            <a href="horizontalmenu_list.php">
+                <i class="fa fa-list"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<form method="POST">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="dataTable_wrapper">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <td>Название</td>
+                        <td>
+                            <input
+                                class="form-control"
+                                name="menu_name"
+                                type="text"
+                                value="<?php if (isset($menu_array[0]['horizontalmenu_name'])) { print $menu_array[0]['horizontalmenu_name']; } ?>"
+                            />
+                        </td>
+                    </tr>
                     <tr>
                         <td>Раздел</td>
                         <td>
-                            <select name="horizontalmenuchapter_id">
-                                {section name=i loop=$horizontalmenuchapter_array}
-                                    <option 
-                                        value="{$horizontalmenuchapter_array[i].horizontalmenuchapter_id}"
-                                        {if (isset($horizontalmenuchapter_id) && 
-                                             $horizontalmenuchapter_id == $horizontalmenuchapter_array[i].horizontalmenuchapter_id)}
+                            <select class="form-control" name="horizontalmenuchapter_id">
+                                <?php foreach ($horizontalmenuchapter_array as $item) { ?>
+                                    <option value="<?= $item['horizontalmenuchapter_id']; ?>"
+                                        <?php if (isset($menu_array[0]['horizontalmenu_horizontalmenuchapter_id']) && $menu_array[0]['horizontalmenu_horizontalmenuchapter_id'] == $item['horizontalmenuchapter_id']) { ?>
                                             selected
-                                        {/if}
+                                        <?php } ?>
                                     >
-                                        {$horizontalmenuchapter_array[i].horizontalmenuchapter_name}
+                                        <?= $item['horizontalmenuchapter_name']; ?>
                                     </option>
-                                {/section}
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>Название</td>
-                        <td>
-                            <input name="menu_name" type="text" value="{if (isset($menu_name))}{$menu_name}{/if}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Сохранить"/>
+                        <td colspan="2" class="text-center">
+                            <input class="btn btn-default" type="submit" value="Сохранить" />
                         </td>
                     </tr>
                 </table>
-            </form>
-        </td>
-    </tr>
-</table>
+            </div>
+        </div>
+    </div>
+</form>

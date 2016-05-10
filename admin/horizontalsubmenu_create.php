@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_POST['menu_id']))
 {
@@ -20,7 +20,8 @@ if (isset($_POST['menu_id']))
     redirect('horizontalsubmenu_list.php');
 }
 
-$sql = "SELECT `horizontalmenuchapter_id`, `horizontalmenuchapter_name`
+$sql = "SELECT `horizontalmenuchapter_id`,
+               `horizontalmenuchapter_name`
         FROM `horizontalmenuchapter`
         ORDER BY `horizontalmenuchapter_name` ASC";
 $horizontalmenuchapter_sql = $mysqli->query($sql);
@@ -29,11 +30,12 @@ $horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(MYSQLI_ASSO
 
 $horizontalmenuchapter_id = $horizontalmenuchapter_array[0]['horizontalmenuchapter_id'];
 
-$sql = "SELECT `horizontalmenu_id`, `horizontalmenu_name`
+$sql = "SELECT `horizontalmenu_id`,
+               `horizontalmenu_name`
         FROM `horizontalmenu`
         WHERE `horizontalmenu_horizontalmenuchapter_id`='$horizontalmenuchapter_id'";
 $horizontalmenu_sql = $mysqli->query($sql);
 
 $horizontalmenu_array = $horizontalmenu_sql->fetch_all(MYSQLI_ASSOC);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

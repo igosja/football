@@ -45,7 +45,7 @@
                             >
                                 <?php foreach ($horizontalmenu_array as $item) { ?>
                                     <option value="<?= $item['horizontalmenu_id']; ?>"
-                                        <?php if (isset($parent_id) && $parent_id == $item['horizontalmenu_id']) { ?>
+                                        <?php if (isset($menu_array[0]['horizontalsubmenu_horizontalmenu_id']) && $menu_array[0]['horizontalsubmenu_horizontalmenu_id'] == $item['horizontalmenu_id']) { ?>
                                             selected
                                         <?php } ?>
                                     >
@@ -62,7 +62,7 @@
                                 class="form-control"
                                 name="menu_name"
                                 type="text"
-                                value="<?php if (isset($menu_name)) { print $menu_name; } ?>"
+                                value="<?php if (isset($menu_array[0]['horizontalsubmenu_name'])) { print $menu_array[0]['horizontalsubmenu_name']; } ?>"
                             />
                         </td>
                     </tr>
@@ -73,7 +73,7 @@
                                 class="form-control"
                                 name="menu_href"
                                 type="text"
-                                value="<?php if (isset($menu_href)) { print $menu_href; } ?>"
+                                value="<?php if (isset($menu_array[0]['horizontalsubmenu_href'])) { print $menu_array[0]['horizontalsubmenu_href']; } ?>"
                             />
                         </td>
                     </tr>

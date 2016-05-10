@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_statusnational = $statusnational_sql->num_rows;
 
 if (0 == $count_statusnational)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -44,9 +43,6 @@ if (isset($_POST['statusnational_name']))
 
 $statusnational_array = $statusnational_sql->fetch_all(MYSQLI_ASSOC);
 
-$statusnational_name = $statusnational_array[0]['statusnational_name'];
+$tpl = 'statusnational_create';
 
-$smarty->assign('statusnational_name', $statusnational_name);
-$smarty->assign('tpl', 'statusnational_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

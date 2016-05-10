@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_statusrent = $statusrent_sql->num_rows;
 
 if (0 == $count_statusrent)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -44,9 +43,6 @@ if (isset($_POST['statusrent_name']))
 
 $statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);
 
-$statusrent_name = $statusrent_array[0]['statusrent_name'];
+$tpl = 'statusrent_create';
 
-$smarty->assign('statusrent_name', $statusrent_name);
-$smarty->assign('tpl', 'statusrent_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

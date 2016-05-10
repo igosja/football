@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_POST['name_name']))
 {
@@ -25,8 +25,8 @@ if (isset($_POST['name_name']))
 
         if (0 == $count_name)
         {
-            $sql = "INSERT INTO `name` (`name_name`)
-                    VALUES (?)";
+            $sql = "INSERT INTO `name`
+                    SET `name_name`=?";
             $prepare = $mysqli->prepare($sql);
             $prepare->bind_param('s', $name_name);
             $prepare->execute();
@@ -52,8 +52,9 @@ if (isset($_POST['name_name']))
 
         if (0 == $count_check)
         {
-            $sql = "INSERT INTO `countryname` (`countryname_name_id`, `countryname_country_id`)
-                    VALUES ('$name_id', '$country_id')";
+            $sql = "INSERT INTO `countryname`
+                    SET `countryname_name_id`='$name_id',
+                        `countryname_country_id`='$country_id'";
             $mysqli->query($sql);
         }
     }
@@ -61,13 +62,12 @@ if (isset($_POST['name_name']))
     redirect('name_list.php');
 }
 
-$sql = "SELECT `country_id`, `country_name`
+$sql = "SELECT `country_id`,
+               `country_name`
         FROM `country`
         ORDER BY `country_id` ASC";
 $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('country_array', $country_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

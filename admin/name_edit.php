@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,8 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `countryname_country_id`, `name_name`
+$sql = "SELECT `countryname_country_id`,
+               `name_name`
         FROM `name`
         LEFT JOIN `countryname`
         ON `name_id`=`countryname_name_id`
@@ -23,8 +24,7 @@ $count_name = $name_sql->num_rows;
 
 if (0 == $count_name)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -64,19 +64,13 @@ if (isset($_POST['name_name']))
 
 $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
 
-$name_name  = $name_array[0]['name_name'];
-$country_id = $name_array[0]['countryname_country_id'];
-
-$sql = "SELECT `country_id`, `country_name`
+$sql = "SELECT `country_id`,
+               `country_name`
         FROM `country`
         ORDER BY `country_id` ASC";
 $country_sql = $mysqli->query($sql);
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$tpl = 'name_create';
 
-$smarty->assign('country_id', $country_id);
-$smarty->assign('name_name', $name_name);
-$smarty->assign('country_array', $country_array);
-$smarty->assign('tpl', 'name_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

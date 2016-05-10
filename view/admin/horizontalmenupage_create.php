@@ -20,7 +20,7 @@
                             class="form-control"
                             name="horizontalmenupage_name"
                             type="text"
-                            value="<?php if (isset($horizontalmenupage_name)) { print $horizontalmenupage_name; } ?>"
+                            value="<?php if (isset($horizontalmenupage_array[0]['horizontalmenupage_name'])) { print $horizontalmenupage_array[0]['horizontalmenupage_name']; } ?>"
                         />
                     </td>
                 </tr>
@@ -30,7 +30,7 @@
                         <select class="form-control" name="chapter_id">
                             <?php foreach ($chapter_array as $item) { ?>
                                 <option value="<?= $item['horizontalmenuchapter_id']; ?>"
-                                    <?php if (isset($chapter_id) && $chapter_id == $item['horizontalmenuchapter_id']) { ?>
+                                    <?php if (isset($horizontalmenupage_array[0]['horizontalmenuchapter_id']) && $horizontalmenupage_array[0]['horizontalmenuchapter_id'] == $item['horizontalmenuchapter_id']) { ?>
                                         selected
                                     <?php } ?>
                                 >

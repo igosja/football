@@ -1,26 +1,31 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Редактирование имени</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="name_list.php" class="link-img link-list"></a>
-            </p>
-            <form action="" method="POST">
-                <table class="center striped">
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Редактирование имени</h1>
+        <button type="button" class="btn btn-default">
+            <a href="name_list.php">
+                <i class="fa fa-list"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<form method="POST">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="dataTable_wrapper">
+                <table class="table table-striped table-bordered">
                     <tr>
                         <td>Страна</td>
                         <td>
-                            <select name="country_id">
-                                {section name=i loop=$country_array}
-                                    <option value="{$country_array[i].country_id}"
-                                        {if (isset($country_id) && $country_id == $country_array[i].country_id)}
+                            <select class="form-control" name="country_id">
+                                <?php foreach ($country_array as $item) { ?>
+                                    <option value="<?= $item['country_id']; ?>"
+                                        <?php if (isset($name_array[0]['countryname_country_id']) && $name_array[0]['countryname_country_id'] == $item['country_id']) { ?>
                                             selected
-                                        {/if}
+                                        <?php } ?>
                                     >
-                                        {$country_array[i].country_name}
+                                        <?= $item['country_name']; ?>
                                     </option>
-                                {/section}
+                                <?php } ?>
                             </select>
                         </td>
                     </tr>
@@ -28,18 +33,19 @@
                         <td>Имя (через запятую)</td>
                         <td>
                             <textarea
-                                class="w100"
+                                class="form-control"
                                 name="name_name"
-                                rows="5">{if (isset($name_name))}{$name_name}{/if}</textarea>
+                                rows="5"
+                            ><?php if (isset($name_array[0]['name_name'])) { print $name_array[0]['name_name']; } ?></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Сохранить"/>
+                        <td colspan="2" class="text-center">
+                            <input class="btn btn-default" type="submit" value="Сохранить" />
                         </td>
                     </tr>
                 </table>
-            </form>
-        </td>
-    </tr>
-</table>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,33 +1,40 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Разделы сайта</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="horizontalmenuchapter_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Разделы сайта</h1>
+        <button type="button" class="btn btn-default">
+            <a href="horizontalmenuchapter_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                 <tr>
                     <th>Раздел</th>
-                    <th>Действия</th>
+                    <th class="col-lg-1"></th>
                 </tr>
-                {section name=i loop=$horizontalmenuchapter_array}
-                    <tr>
-                        <td>
-                            <a href="horizontalmenuchapter.php?num={$horizontalmenuchapter_array[i].horizontalmenuchapter_id}">
-                                {$horizontalmenuchapter_array[i].horizontalmenuchapter_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a 
-                                href="horizontalmenuchapter_edit.php?num={$horizontalmenuchapter_array[i].horizontalmenuchapter_id}" 
-                                class="link-img link-pencil"
-                            >
-                            </a>
-                        </td>
-                    </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($horizontalmenuchapter_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="horizontalmenuchapter.php?num=<?= $item['horizontalmenuchapter_id']; ?>">
+                                    <?= $item['horizontalmenuchapter_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="horizontalmenuchapter_edit.php?num=<?= $item['horizontalmenuchapter_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

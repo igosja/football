@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_mood = $mood_sql->num_rows;
 
 if (0 == $count_mood)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -41,7 +40,7 @@ if (isset($_POST['mood_name']))
 
     if ('image/png' == $_FILES['mood_logo']['type'])
     {
-        copy($_FILES['mood_logo']['tmp_name'], '../img/mood/' . $num_get . '.png');
+        copy($_FILES['mood_logo']['tmp_name'], __DIR__ . '/../img/mood/' . $num_get . '.png');
     }
 
     redirect('mood_list.php');
@@ -49,9 +48,6 @@ if (isset($_POST['mood_name']))
 
 $mood_array = $mood_sql->fetch_all(MYSQLI_ASSOC);
 
-$mood_name = $mood_array[0]['mood_name'];
+$tpl = 'mood_create';
 
-$smarty->assign('mood_name', $mood_name);
-$smarty->assign('tpl', 'mood_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

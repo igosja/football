@@ -21,7 +21,7 @@ $count_city = $city_sql->num_rows;
 
 if (0 == $count_city)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
     exit;
 }
 

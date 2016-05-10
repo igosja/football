@@ -24,7 +24,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
 
     exit;
 }

@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,10 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `horizontalmenu_horizontalmenuchapter_id`, `horizontalsubmenu_href`, `horizontalsubmenu_horizontalmenu_id`, `horizontalsubmenu_name`
+$sql = "SELECT `horizontalmenu_horizontalmenuchapter_id`,
+               `horizontalsubmenu_href`,
+               `horizontalsubmenu_horizontalmenu_id`,
+               `horizontalsubmenu_name`
         FROM `horizontalsubmenu`
         LEFT JOIN `horizontalmenu`
         ON `horizontalmenu_id`=`horizontalsubmenu_horizontalmenu_id`
@@ -23,7 +26,7 @@ $count_menu = $menu_sql->num_rows;
 
 if (0 == $count_menu)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -50,18 +53,17 @@ if (isset($_POST['menu_id']))
 $menu_array = $menu_sql->fetch_all(MYSQLI_ASSOC);
 
 $page_id    = $menu_array[0]['horizontalmenu_horizontalmenuchapter_id'];
-$parent_id  = $menu_array[0]['horizontalsubmenu_horizontalmenu_id'];
-$menu_name  = $menu_array[0]['horizontalsubmenu_name'];
-$menu_href  = $menu_array[0]['horizontalsubmenu_href'];
 
-$sql = "SELECT `horizontalmenuchapter_id`, `horizontalmenuchapter_name`
+$sql = "SELECT `horizontalmenuchapter_id`,
+               `horizontalmenuchapter_name`
         FROM `horizontalmenuchapter`
         ORDER BY `horizontalmenuchapter_name` ASC";
 $horizontalmenuchapter_sql = $mysqli->query($sql);
 
 $horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `horizontalmenu_id`, `horizontalmenu_name`
+$sql = "SELECT `horizontalmenu_id`,
+               `horizontalmenu_name`
         FROM `horizontalmenu`
         WHERE `horizontalmenu_horizontalmenuchapter_id`='$page_id'";
 $horizontalmenu_sql = $mysqli->query($sql);
@@ -70,4 +72,4 @@ $horizontalmenu_array = $horizontalmenu_sql->fetch_all(MYSQLI_ASSOC);
 
 $tpl = 'horizontalsubmenu_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

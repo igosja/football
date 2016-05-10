@@ -32,7 +32,7 @@ $count_formation = $formation_sql->num_rows;
 
 if (0 == $count_formation)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
 
     exit;
 }

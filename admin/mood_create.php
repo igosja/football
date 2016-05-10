@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_POST['mood_name']))
 {
@@ -23,13 +23,12 @@ if (isset($_POST['mood_name']))
     redirect('mood_list.php');
 }
 
-$sql = "SELECT `mood_id`, `mood_name`
+$sql = "SELECT `mood_id`,
+               `mood_name`
         FROM `mood`
         ORDER BY `mood_id` ASC";
 $mood_sql = $mysqli->query($sql);
 
 $mood_array = $mood_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('mood_array', $mood_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

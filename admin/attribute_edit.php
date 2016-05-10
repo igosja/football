@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,8 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `attribute_attributechapter_id`, `attribute_name`
+$sql = "SELECT `attribute_attributechapter_id`,
+               `attribute_name`
         FROM `attribute`
         WHERE `attribute_id`='$num_get'
         LIMIT 1";
@@ -21,8 +22,7 @@ $count_attribute = $attribute_sql->num_rows;
 
 if (0 == $count_attribute)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -32,7 +32,7 @@ if (isset($_POST['chapter_id']))
     $attribute_name = $_POST['attribute_name'];
 
     $sql = "UPDATE `attribute` 
-            SET `attribute_name`=?, 
+            SET `attribute_name`=?,
                 `attribute_attributechapter_id`=?
             WHERE `attribute_id`='$num_get'
             LIMIT 1";
@@ -46,19 +46,14 @@ if (isset($_POST['chapter_id']))
 
 $attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
 
-$attribute_name = $attribute_array[0]['attribute_name'];
-$chapter_id     = $attribute_array[0]['attribute_attributechapter_id'];
-
-$sql = "SELECT `attributechapter_id`, `attributechapter_name`
+$sql = "SELECT `attributechapter_id`,
+               `attributechapter_name`
         FROM `attributechapter`
         ORDER BY `attributechapter_id` ASC";
 $chapter_sql = $mysqli->query($sql);
 
 $chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('chapter_array', $chapter_array);
-$smarty->assign('attribute_name', $attribute_name);
-$smarty->assign('chapter_id', $chapter_id);
-$smarty->assign('tpl', 'attribute_create');
+$tpl = 'attribute_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

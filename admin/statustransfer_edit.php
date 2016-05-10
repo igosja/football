@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_statustransfer = $statustransfer_sql->num_rows;
 
 if (0 == $count_statustransfer)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -44,9 +43,6 @@ if (isset($_POST['statustransfer_name']))
 
 $statustransfer_array = $statustransfer_sql->fetch_all(MYSQLI_ASSOC);
 
-$statustransfer_name = $statustransfer_array[0]['statustransfer_name'];
+$tpl = 'statustransfer_create';
 
-$smarty->assign('statustransfer_name', $statustransfer_name);
-$smarty->assign('tpl', 'statustransfer_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

@@ -1,8 +1,10 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
-$sql = "SELECT `horizontalmenu_id`, `horizontalmenu_name`, `horizontalmenuchapter_name`
+$sql = "SELECT `horizontalmenu_id`,
+               `horizontalmenu_name`,
+               `horizontalmenuchapter_name`
         FROM `horizontalmenu`
         LEFT JOIN `horizontalmenuchapter`
         ON `horizontalmenuchapter_id`=`horizontalmenu_horizontalmenuchapter_id`
@@ -11,6 +13,4 @@ $menu_sql = $mysqli->query($sql);
 
 $menu_array = $menu_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('menu_array', $menu_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_statusteam = $statusteam_sql->num_rows;
 
 if (0 == $count_statusteam)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -44,9 +43,6 @@ if (isset($_POST['statusteam_name']))
 
 $statusteam_array = $statusteam_sql->fetch_all(MYSQLI_ASSOC);
 
-$statusteam_name = $statusteam_array[0]['statusteam_name'];
+$tpl = 'statusteam_create';
 
-$smarty->assign('statusteam_name', $statusteam_name);
-$smarty->assign('tpl', 'statusteam_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

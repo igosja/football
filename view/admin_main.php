@@ -90,9 +90,6 @@
                                         <a href="mood_list.php">Настроение</a>
                                     </li>
                                     <li>
-                                        <a href="gameready_list.php">Готовность к матчу</a>
-                                    </li>
-                                    <li>
                                         <a href="statusteam_list.php">Командный статус</a>
                                     </li>
                                     <li>

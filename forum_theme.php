@@ -50,6 +50,14 @@ $sql = "SELECT `city_name`,
         LIMIT 1";
 $head_sql = $mysqli->query($sql);
 
+$count_head = $head_sql->num_rows;
+
+if (0 == $count_head)
+{
+    include (__DIR__ . '/view/wrong_page.php');
+    exit;
+}
+
 $head_array = $head_sql->fetch_all(MYSQLI_ASSOC);
 
 $header_title   = $head_array[0]['forumtheme_name'];

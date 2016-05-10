@@ -1,32 +1,41 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Настроение игроков</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="mood_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th colspan="2">Настроение</th>
-                    <th>Действия</th>
-                </tr>
-                {section name=i loop=$mood_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Настроение игроков</h1>
+        <button type="button" class="btn btn-default">
+            <a href="mood_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td class="w1">
-                            <img src="/img/mood/{$mood_array[i].mood_id}.png" class="img-12">
-                        </td>
-                        <td>
-                            <a href="mood.php?num={$mood_array[i].mood_id}">
-                                {$mood_array[i].mood_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="mood_edit.php?num={$mood_array[i].mood_id}" class="link-img link-pencil"></a>
-                        </td>
+                        <th>Настроение</th>
+                        <th class="col-lg-1"></th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($mood_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <img src="/img/mood/<?= $item['mood_id']; ?>.png" />
+                                <a href="mood.php?num=<?= $item['mood_id']; ?>">
+                                    <?= $item['mood_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="mood_edit.php?num=<?= $item['mood_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

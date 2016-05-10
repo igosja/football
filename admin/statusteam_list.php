@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 $sql = "SELECT `statusteam_id`, `statusteam_name`
         FROM `statusteam`
@@ -9,6 +9,4 @@ $statusteam_sql = $mysqli->query($sql);
 
 $statusteam_array = $statusteam_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('statusteam_array', $statusteam_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

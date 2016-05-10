@@ -21,7 +21,7 @@ $count_historytext = $historytext_sql->num_rows;
 
 if (0 == $count_historytext)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.html');
+    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
     exit;
 }
 

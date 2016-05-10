@@ -1,11 +1,11 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_POST['horizontalmenuchapter_id']))
 {
     $horizontalmenuchapter_id    = (int) $_POST['horizontalmenuchapter_id'];
-    $menu_name  = $_POST['menu_name'];
+    $menu_name                   = $_POST['menu_name'];
 
     $sql = "INSERT INTO `horizontalmenu`
             SET `horizontalmenu_name`=?,
@@ -25,6 +25,4 @@ $horizontalmenuchapter_sql = $mysqli->query($sql);
 
 $horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('horizontalmenuchapter_array', $horizontalmenuchapter_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');
