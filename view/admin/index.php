@@ -27,3 +27,19 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> График регистраций
+            </div>
+            <div class="panel-body">
+                <div id="index-registration-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var registration_date = [<?= $registration_date; ?>];
+    var registration_user = [<?= $registration_user; ?>];
+</script>
