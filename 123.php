@@ -2,7 +2,7 @@
 
 include (__DIR__ . '/include/include.php');
 
-$sql = "SELECT `game_id`,
+/*$sql = "SELECT `game_id`,
                `game_guest_foul`,
                `game_guest_offside`,
                `game_guest_ontarget`,
