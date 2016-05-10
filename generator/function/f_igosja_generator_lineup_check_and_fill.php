@@ -45,7 +45,8 @@ function f_igosja_generator_lineup_check_and_fill()
                 for ($k=0; $k<18; $k++)
                 {
                     $sql = "SELECT `lineup_id`,
-                                   `lineup_player_id`
+                                   `lineup_player_id`,
+                                   `lineup_position_id`
                             FROM `lineup`
                             WHERE `lineup_game_id`='$game_id'
                             AND `lineup_team_id`='$team_id'
@@ -130,8 +131,9 @@ function f_igosja_generator_lineup_check_and_fill()
                     {
                         $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
-                        $lineup_id = $lineup_array[0]['lineup_id'];
-                        $player_id = $lineup_array[0]['lineup_player_id'];
+                        $lineup_id      = $lineup_array[0]['lineup_id'];
+                        $player_id      = $lineup_array[0]['lineup_player_id'];
+                        $position_id    = $lineup_array[0]['lineup_position_id'];
 
                         $sql = "SELECT COUNT(`lineup_id`) AS `count`
                                 FROM `lineup`
@@ -209,6 +211,34 @@ function f_igosja_generator_lineup_check_and_fill()
                                     LIMIT 1";
                             f_igosja_mysqli_query($sql);
                         }
+                        elseif (0 == $position_id)
+                        {
+                            if      (0 == $k) {$position_id =  1; $role_id =  1;}
+                            elseif  (1 == $k) {$position_id =  3; $role_id =  5;}
+                            elseif  (2 == $k) {$position_id =  4; $role_id =  9;}
+                            elseif  (3 == $k) {$position_id =  6; $role_id =  9;}
+                            elseif  (4 == $k) {$position_id =  7; $role_id =  5;}
+                            elseif  (5 == $k) {$position_id = 13; $role_id =  18;}
+                            elseif  (6 == $k) {$position_id = 14; $role_id =  21;}
+                            elseif  (7 == $k) {$position_id = 16; $role_id =  21;}
+                            elseif  (8 == $k) {$position_id = 17; $role_id =  18;}
+                            elseif  (9 == $k) {$position_id = 23; $role_id =  30;}
+                            elseif (10 == $k) {$position_id = 25; $role_id =  30;}
+                            elseif (11 == $k) {$position_id = 26; $role_id =  0;}
+                            elseif (12 == $k) {$position_id = 27; $role_id =  0;}
+                            elseif (13 == $k) {$position_id = 28; $role_id =  0;}
+                            elseif (14 == $k) {$position_id = 29; $role_id =  0;}
+                            elseif (15 == $k) {$position_id = 30; $role_id =  0;}
+                            elseif (16 == $k) {$position_id = 31; $role_id =  0;}
+                            else              {$position_id = 32; $role_id =  0;}
+
+                            $sql = "UPDATE `lineup`
+                                    SET `lineup_position_id`='$position_id',
+                                        `lineup_role_id`='$role_id'
+                                    WHERE `lineup_id`='$lineup_id'
+                                    LIMIT 1";
+                            f_igosja_mysqli_query($sql);
+                        }
                     }
                 }
             }
@@ -219,7 +249,8 @@ function f_igosja_generator_lineup_check_and_fill()
                 for ($k=0; $k<18; $k++)
                 {
                     $sql = "SELECT `lineup_id`,
-                                   `lineup_player_id`
+                                   `lineup_player_id`,
+                                   `lineup_position_id`
                             FROM `lineup`
                             WHERE `lineup_game_id`='$game_id'
                             AND `lineup_country_id`='$country_id'
@@ -304,8 +335,9 @@ function f_igosja_generator_lineup_check_and_fill()
                     {
                         $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
-                        $lineup_id = $lineup_array[0]['lineup_id'];
-                        $player_id = $lineup_array[0]['lineup_player_id'];
+                        $lineup_id      = $lineup_array[0]['lineup_id'];
+                        $player_id      = $lineup_array[0]['lineup_player_id'];
+                        $position_id    = $lineup_array[0]['lineup_position_id'];
 
                         $sql = "SELECT COUNT(`lineup_id`) AS `count`
                                 FROM `lineup`
@@ -378,6 +410,34 @@ function f_igosja_generator_lineup_check_and_fill()
 
                             $sql = "UPDATE `lineup`
                                     SET `lineup_player_id`='$player_id'
+                                    WHERE `lineup_id`='$lineup_id'
+                                    LIMIT 1";
+                            f_igosja_mysqli_query($sql);
+                        }
+                        elseif (0 == $position_id)
+                        {
+                            if      (0 == $k) {$position_id =  1; $role_id =  1;}
+                            elseif  (1 == $k) {$position_id =  3; $role_id =  5;}
+                            elseif  (2 == $k) {$position_id =  4; $role_id =  9;}
+                            elseif  (3 == $k) {$position_id =  6; $role_id =  9;}
+                            elseif  (4 == $k) {$position_id =  7; $role_id =  5;}
+                            elseif  (5 == $k) {$position_id = 13; $role_id =  18;}
+                            elseif  (6 == $k) {$position_id = 14; $role_id =  21;}
+                            elseif  (7 == $k) {$position_id = 16; $role_id =  21;}
+                            elseif  (8 == $k) {$position_id = 17; $role_id =  18;}
+                            elseif  (9 == $k) {$position_id = 23; $role_id =  30;}
+                            elseif (10 == $k) {$position_id = 25; $role_id =  30;}
+                            elseif (11 == $k) {$position_id = 26; $role_id =  0;}
+                            elseif (12 == $k) {$position_id = 27; $role_id =  0;}
+                            elseif (13 == $k) {$position_id = 28; $role_id =  0;}
+                            elseif (14 == $k) {$position_id = 29; $role_id =  0;}
+                            elseif (15 == $k) {$position_id = 30; $role_id =  0;}
+                            elseif (16 == $k) {$position_id = 31; $role_id =  0;}
+                            else              {$position_id = 32; $role_id =  0;}
+
+                            $sql = "UPDATE `lineup`
+                                    SET `lineup_position_id`='$position_id',
+                                        `lineup_role_id`='$role_id'
                                     WHERE `lineup_id`='$lineup_id'
                                     LIMIT 1";
                             f_igosja_mysqli_query($sql);
