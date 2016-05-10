@@ -211,7 +211,8 @@ function f_igosja_generator_lineup_check_and_fill()
                                     LIMIT 1";
                             f_igosja_mysqli_query($sql);
                         }
-                        elseif (0 == $position_id)
+
+                        if (0 == $position_id)
                         {
                             if      (0 == $k) {$position_id =  1; $role_id =  1;}
                             elseif  (1 == $k) {$position_id =  3; $role_id =  5;}

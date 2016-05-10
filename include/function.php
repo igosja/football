@@ -654,7 +654,6 @@ function f_igosja_player_to_scout_and_fire_button($player_id)
 
 function f_igosja_penalty_player_select($team_id, $game_id, $i = 0)
 {
-    global $mysqli;
     $i++;
 
     if ($i < 7)
@@ -663,7 +662,7 @@ function f_igosja_penalty_player_select($team_id, $game_id, $i = 0)
                 FROM `team`
                 WHERE `team_id`='$team_id'
                 LIMIT 1";
-        $penalty_sql = $mysqli->query($sql);//f_igosja_mysqli_query($sql);
+        $penalty_sql = f_igosja_mysqli_query($sql);
 
         $penalty_array = $penalty_sql->fetch_all(MYSQLI_ASSOC);
 
@@ -683,8 +682,9 @@ function f_igosja_penalty_player_select($team_id, $game_id, $i = 0)
                     AND `lineup_game_id`='$game_id'
                     AND `lineup_red`='0'
                     AND `lineup_yellow`<'2'
+                    AND `linup_position_id` BETWEEN '2' AND '25'
                     LIMIT 1";
-            $player_sql = $mysqli->query($sql);//f_igosja_mysqli_query($sql);
+            $player_sql = f_igosja_mysqli_query($sql);
 
             $count_player = $player_sql->num_rows;
 
@@ -741,6 +741,7 @@ function f_igosja_penalty_player_country_select($country_id, $game_id, $i = 0)
                     AND `lineup_game_id`='$game_id'
                     AND `lineup_red`='0'
                     AND `lineup_yellow`<'2'
+                    AND `linup_position_id` BETWEEN '2' AND '25'
                     LIMIT 1";
             $player_sql = f_igosja_mysqli_query($sql);
 
