@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_stadiumquality = $stadiumquality_sql->num_rows;
 
 if (0 == $count_stadiumquality)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -44,9 +43,6 @@ if (isset($_POST['stadiumquality_name']))
 
 $stadiumquality_array = $stadiumquality_sql->fetch_all(MYSQLI_ASSOC);
 
-$stadiumquality_name = $stadiumquality_array[0]['stadiumquality_name'];
+$tpl = 'stadiumquality_create';
 
-$smarty->assign('stadiumquality_name', $stadiumquality_name);
-$smarty->assign('tpl', 'stadiumquality_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

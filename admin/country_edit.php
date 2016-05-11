@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,9 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `country_continent_id`, `country_name`
+$sql = "SELECT `country_continent_id`,
+               `country_id`,
+               `country_name`
         FROM `country`
         WHERE `country_id`='$num_get'
         LIMIT 1";
@@ -21,8 +23,7 @@ $count_country = $country_sql->num_rows;
 
 if (0 == $count_country)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -61,19 +62,14 @@ if (isset($_POST['continent_id']))
 
 $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
 
-$country_name = $country_array[0]['country_name'];
-$continent_id = $country_array[0]['country_continent_id'];
-
-$sql = "SELECT `continent_id`, `continent_name`
+$sql = "SELECT `continent_id`,
+               `continent_name`
         FROM `continent`
         ORDER BY `continent_id` ASC";
 $continent_sql = $mysqli->query($sql);
 
 $continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('country_name', $country_name);
-$smarty->assign('continent_id', $continent_id);
-$smarty->assign('continent_array', $continent_array);
-$smarty->assign('tpl', 'country_create');
+$tpl = 'country_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

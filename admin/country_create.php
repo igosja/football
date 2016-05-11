@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_POST['continent_id']))
 {
@@ -35,13 +35,12 @@ if (isset($_POST['continent_id']))
     redirect('country_list.php');
 }
 
-$sql = "SELECT `continent_id`, `continent_name`
+$sql = "SELECT `continent_id`,
+               `continent_name`
         FROM `continent`
         ORDER BY `continent_id` ASC";
 $continent_sql = $mysqli->query($sql);
 
 $continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('continent_array', $continent_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

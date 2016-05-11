@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,10 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `stadium_name`, `team_city_id`, `team_name`
+$sql = "SELECT `stadium_name`,
+               `team_city_id`,
+               `team_id`,
+               `team_name`
         FROM `team`
         LEFT JOIN `stadium`
         ON `stadium_team_id`=`team_id`
@@ -23,8 +26,7 @@ $count_team = $team_sql->num_rows;
 
 if (0 == $count_team)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -54,22 +56,22 @@ if (isset($_POST['city_id']))
 
     if ('image/png' == $_FILES['team_logo_120']['type'])
     {
-        copy($_FILES['team_logo_120']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/team/120/' . $num_get . '.png');
+        copy($_FILES['team_logo_120']['tmp_name'], __DIR__ . '/../img/team/120/' . $num_get . '.png');
     }
 
     if ('image/png' == $_FILES['team_logo_90']['type'])
     {
-        copy($_FILES['team_logo_90']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/team/90/' . $num_get . '.png');
+        copy($_FILES['team_logo_90']['tmp_name'], __DIR__ . '/../img/team/90/' . $num_get . '.png');
     }
 
     if ('image/png' == $_FILES['team_logo_50']['type'])
     {
-        copy($_FILES['team_logo_50']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/team/50/' . $num_get . '.png');
+        copy($_FILES['team_logo_50']['tmp_name'], __DIR__ . '/../img/team/50/' . $num_get . '.png');
     }
 
     if ('image/png' == $_FILES['team_logo_12']['type'])
     {
-        copy($_FILES['team_logo_12']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/team/12/' . $num_get . '.png');
+        copy($_FILES['team_logo_12']['tmp_name'], __DIR__ . '/../img/team/12/' . $num_get . '.png');
     }
 
     redirect('team_list.php');
@@ -77,21 +79,14 @@ if (isset($_POST['city_id']))
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
-$team_name      = $team_array[0]['team_name'];
-$stadium_name   = $team_array[0]['stadium_name'];
-$city_id        = $team_array[0]['team_city_id'];
-
-$sql = "SELECT `city_id`, `city_name`
+$sql = "SELECT `city_id`,
+               `city_name`
         FROM `city`
         ORDER BY `city_name` ASC";
 $city_sql = $mysqli->query($sql);
 
 $city_array = $city_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('team_name', $team_name);
-$smarty->assign('stadium_name', $stadium_name);
-$smarty->assign('city_id', $city_id);
-$smarty->assign('city_array', $city_array);
-$smarty->assign('tpl', 'team_create');
+$tpl = 'team_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

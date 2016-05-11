@@ -20,7 +20,7 @@
                                 class="form-control"
                                 name="historytext_name"
                                 type="text"
-                                value="<?php if (isset($historytext_name)) { print $historytext_name; } ?>"
+                                value="<?php if (isset($historytext_array[0]['historytext_name'])) { print $historytext_array[0]['historytext_name']; } ?>"
                             />
                         </td>
                     </tr>

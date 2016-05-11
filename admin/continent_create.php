@@ -1,6 +1,8 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
+
+unset ($continent_array);
 
 if (isset($_POST['continent_name']))
 {
@@ -17,10 +19,10 @@ if (isset($_POST['continent_name']))
 
     if ('image/png' == $_FILES['continent_logo']['type'])
     {
-        copy($_FILES['continent_logo']['tmp_name'], '../img/continent/' . $continent_id . '.png');
+        copy($_FILES['continent_logo']['tmp_name'], __DIR__ . '/../img/continent/' . $continent_id . '.png');
     }
 
     redirect('continent_list.php');
 }
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

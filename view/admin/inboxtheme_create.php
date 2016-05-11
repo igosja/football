@@ -20,7 +20,7 @@
                                 class="form-control"
                                 name="inboxtheme_name" 
                                 type="text" 
-                                value="<?php if (isset($inboxtheme_name)) { print $inboxtheme_name; } ?>"
+                                value="<?php if (isset($inboxtheme_array[0]['inboxtheme_name'])) { print $inboxtheme_array[0]['inboxtheme_name']; } ?>"
                             />
                         </td>
                     </tr>
@@ -31,7 +31,7 @@
                                 class="form-control"
                                 name="inboxtheme_text" 
                                 rows="5" 
-                            ><?php if (isset($inboxtheme_text)) { print $inboxtheme_text; } ?></textarea>
+                            ><?php if (isset($inboxtheme_array[0]['inboxtheme_text'])) { print $inboxtheme_array[0]['inboxtheme_text']; } ?></textarea>
                         </td>
                     </tr>
                     <tr>

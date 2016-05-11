@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_POST['city_id']))
 {
@@ -95,13 +95,12 @@ if (isset($_POST['city_id']))
     redirect('team_list.php');
 }
 
-$sql = "SELECT `city_id`, `city_name`
+$sql = "SELECT `city_id`,
+               `city_name`
         FROM `city`
         ORDER BY `city_name` ASC";
 $city_sql = $mysqli->query($sql);
 
 $city_array = $city_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('city_array', $city_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

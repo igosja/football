@@ -1,12 +1,20 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['continent_id']))
 {
     $continent_id = (int) $_GET['continent_id'];
 
-    $sql = "SELECT `city_id`, `city_name`, `continent_id`, `continent_name`, `country_id`, `country_name`, `stadium_name`, `team_id`, `team_name`
+    $sql = "SELECT `city_id`,
+                   `city_name`,
+                   `continent_id`,
+                   `continent_name`,
+                   `country_id`,
+                   `country_name`,
+                   `stadium_name`,
+                   `team_id`,
+                   `team_name`
             FROM `team`
             LEFT JOIN `stadium`
             ON `stadium_team_id`=`team_id`
@@ -23,7 +31,15 @@ elseif (isset($_GET['country_id']))
 {
     $country_id = (int) $_GET['country_id'];
 
-    $sql = "SELECT `city_id`, `city_name`, `continent_id`, `continent_name`, `country_id`, `country_name`, `stadium_name`, `team_id`, `team_name`
+    $sql = "SELECT `city_id`,
+                   `city_name`,
+                   `continent_id`,
+                   `continent_name`,
+                   `country_id`,
+                   `country_name`,
+                   `stadium_name`,
+                   `team_id`,
+                   `team_name`
             FROM `team`
             LEFT JOIN `stadium`
             ON `stadium_team_id`=`team_id`
@@ -40,7 +56,15 @@ elseif (isset($_GET['city_id']))
 {
     $city_id = (int) $_GET['city_id'];
 
-    $sql = "SELECT `city_id`, `city_name`, `continent_id`, `continent_name`, `country_id`, `country_name`, `stadium_name`, `team_id`, `team_name`
+    $sql = "SELECT `city_id`,
+                   `city_name`,
+                   `continent_id`,
+                   `continent_name`,
+                   `country_id`,
+                   `country_name`,
+                   `stadium_name`,
+                   `team_id`,
+                   `team_name`
             FROM `team`
             LEFT JOIN `stadium`
             ON `stadium_team_id`=`team_id`
@@ -55,7 +79,15 @@ elseif (isset($_GET['city_id']))
 }
 else
 {
-    $sql = "SELECT `city_id`, `city_name`, `continent_id`, `continent_name`, `country_id`, `country_name`, `stadium_name`, `team_id`, `team_name`
+    $sql = "SELECT `city_id`,
+                   `city_name`,
+                   `continent_id`,
+                   `continent_name`,
+                   `country_id`,
+                   `country_name`,
+                   `stadium_name`,
+                   `team_id`,
+                   `team_name`
             FROM `team`
             LEFT JOIN `stadium`
             ON `stadium_team_id`=`team_id`
@@ -72,6 +104,4 @@ $team_sql = $mysqli->query($sql);
 
 $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('team_array', $team_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

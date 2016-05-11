@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_historytext = $historytext_sql->num_rows;
 
 if (0 == $count_historytext)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -43,8 +43,6 @@ if (isset($_POST['historytext_name']))
 
 $historytext_array = $historytext_sql->fetch_all(MYSQLI_ASSOC);
 
-$historytext_name = $historytext_array[0]['historytext_name'];
-
 $tpl = 'historytext_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

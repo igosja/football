@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -22,7 +22,7 @@ $count_inboxtheme = $inboxtheme_sql->num_rows;
 
 if (0 == $count_inboxtheme)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -46,9 +46,6 @@ if (isset($_POST['inboxtheme_name']))
 
 $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
 
-$inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
-$inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
-
 $tpl = 'inboxtheme_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

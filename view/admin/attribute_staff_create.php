@@ -1,42 +1,52 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Редактирование характеристики</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="attribute_staff_list.php" class="link-img link-list"></a>
-            </p>
-            <form action="" method="POST">
-                <table class="center striped">
-                    <tr>
-                        <td>Группа</td>
-                        <td>
-                            <select name="chapter_id">
-                                {section name=i loop=$chapter_array}
-                                    <option value="{$chapter_array[i].attributechapterstaff_id}"
-                                        {if (isset($chapter_id) && $chapter_id == $chapter_array[i].attributechapterstaff_id)}
-                                            selected
-                                        {/if}
-                                    >
-                                        {$chapter_array[i].attributechapterstaff_name}
-                                    </option>
-                                {/section}
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Харатеристика</td>
-                        <td>
-                            <input name="attribute_name" type="text" value="{if (isset($attribute_name))}{$attribute_name}{/if}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Сохранить"/>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </td>
-    </tr>
-</table>
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Редактирование характеристики</h1>
+        <button type="button" class="btn btn-default">
+            <a href="attribute_staff_list.php">
+                <i class="fa fa-list"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<form method="POST">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <td>Харатеристика</td>
+                    <td>
+                        <input
+                            class="form-control"
+                            name="attribute_name"
+                            type="text"
+                            value="<?php if (isset($attribute_array[0]['attributestaff_name'])) { print $attribute_array[0]['attributestaff_name']; } ?>"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Группа</td>
+                    <td>
+                        <select class="form-control" name="chapter_id">
+                            <?php foreach ($chapter_array as $item) { ?>
+                                <option value="<?= $item['attributechapterstaff_id']; ?>"
+                                    <?php if (isset($attribute_array[0]['attributestaff_attributechapterstaff_id']) && $attribute_array[0]['attributestaff_attributechapterstaff_id'] == $item['attributechapterstaff_id']) { ?>
+                                        selected
+                                    <?php } ?>
+                                >
+                                    <?= $item['attributechapterstaff_name']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <input class="btn btn-default" type="submit" value="Сохранить" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</form>

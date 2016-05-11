@@ -682,7 +682,7 @@ function f_igosja_penalty_player_select($team_id, $game_id, $i = 0)
                     AND `lineup_game_id`='$game_id'
                     AND `lineup_red`='0'
                     AND `lineup_yellow`<'2'
-                    AND `linup_position_id` BETWEEN '2' AND '25'
+                    AND `lineup_position_id` BETWEEN '2' AND '25'
                     LIMIT 1";
             $player_sql = f_igosja_mysqli_query($sql);
 

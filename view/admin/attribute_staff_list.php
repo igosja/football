@@ -1,36 +1,51 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Характеристики</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="attributechapter_staff_list.php" class="link-img link-list"></a>
-                <a href="attribute_staff_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th>Характеристика</th>
-                    <th>Группа</th>
-                    <th>Действия</th>
-                </tr>
-                {section name=i loop=$attribute_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Характеристики</h1>
+        <button type="button" class="btn btn-default">
+            <a href="attributechapter_staff_list.php">
+                <i class="fa fa-list"></i>
+            </a>
+        </button>
+        <button type="button" class="btn btn-default">
+            <a href="attribute_staff_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="attribute_staff_list.php?chapter_id={$attribute_array[i].attributestaff_id}">
-                                {$attribute_array[i].attributestaff_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="attribute_staff.php?num={$attribute_array[i].attributechapterstaff_id}">
-                                {$attribute_array[i].attributechapterstaff_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="attribute_staff_edit.php?num={$attribute_array[i].attributestaff_id}" class="link-img link-pencil"></a>
-                        </td>
+                        <th>Характеристика</th>
+                        <th>Группа</th>
+                        <th class="col-lg-1"></th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($attribute_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="attribute_staff_list.php?num=<?= $item['attributestaff_id']; ?>">
+                                    <?= $item['attributestaff_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="attribute_staff.php?num=<?= $item['attributechapterstaff_id']; ?>">
+                                    <?= $item['attributechapterstaff_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="attribute_staff_edit.php?num=<?= $item['attributestaff_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

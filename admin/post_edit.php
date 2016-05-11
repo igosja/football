@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_post = $post_sql->num_rows;
 
 if (0 == $count_post)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -44,9 +43,6 @@ if (isset($_POST['post_name']))
 
 $post_array = $post_sql->fetch_all(MYSQLI_ASSOC);
 
-$post_name = $post_array[0]['staffpost_name'];
+$tpl = 'post_create';
 
-$smarty->assign('post_name', $post_name);
-$smarty->assign('tpl', 'post_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

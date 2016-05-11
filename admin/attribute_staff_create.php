@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_POST['chapter_id']))
 {
@@ -18,13 +18,12 @@ if (isset($_POST['chapter_id']))
     redirect('attribute_staff_list.php');
 }
 
-$sql = "SELECT `attributechapterstaff_id`, `attributechapterstaff_name`
+$sql = "SELECT `attributechapterstaff_id`,
+               `attributechapterstaff_name`
         FROM `attributechapterstaff`
         ORDER BY `attributechapterstaff_id` ASC";
 $chapter_sql = $mysqli->query($sql);
 
 $chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('chapter_array', $chapter_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

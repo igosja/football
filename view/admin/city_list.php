@@ -1,51 +1,64 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Города</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="country_list.php" class="link-img link-list"></a>
-                <a href="city_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th>Город</th>
-                    <th>Команд</th>
-                    <th colspan="2">Страна</th>
-                    <th>Континент</th>
-                    <th>Действия</th>
-                </tr>
-                {section name=i loop=$city_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Города</h1>
+        <button type="button" class="btn btn-default">
+            <a href="country_list.php">
+                <i class="fa fa-list"></i>
+            </a>
+        </button>
+        <button type="button" class="btn btn-default">
+            <a href="city_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="city.php?num={$city_array[i].city_id}">
-                                {$city_array[i].city_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="team_list.php?num={$city_array[i].city_id}">
-                                {$city_array[i].count_team}
-                            </a>
-                        </td>
-                        <td>
-                            <img alt="" src="/img/flag/12/{$city_array[i].country_id}.png" class="img-12"/>
-                        </td>
-                        <td>
-                            <a href="continent.php?num={$city_array[i].country_id}">
-                                {$city_array[i].country_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="continent.php?num={$city_array[i].continent_id}">
-                                {$city_array[i].continent_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="city_edit.php?num={$city_array[i].city_id}" class="link-img link-pencil"></a>
-                        </td>
+                        <th>Город</th>
+                        <th>Команд</th>
+                        <th>Страна</th>
+                        <th>Континент</th>
+                        <th class="col-lg-1"></th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($city_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="city.php?num=<?= $item['city_id']; ?>">
+                                    <?= $item['city_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="team_list.php?city_id=<?= $item['city_id']; ?>">
+                                    <?= $item['count_team']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <img src="/img/flag/12/<?= $item['country_id']; ?>.png" />
+                                <a href="country.php?num=<?= $item['country_id']; ?>">
+                                    <?= $item['country_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="continent.php?num=<?= $item['continent_id']; ?>">
+                                    <?= $item['continent_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="city_edit.php?num=<?= $item['city_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

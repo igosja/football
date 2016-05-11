@@ -1,12 +1,15 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
-$sql = "SELECT `attributechapterstaff_id`, `attributechapterstaff_name`, `count_attributestaff`
+$sql = "SELECT `attributechapterstaff_id`,
+               `attributechapterstaff_name`,
+               `count_attributestaff`
         FROM `attributechapterstaff` AS `t1`
         LEFT JOIN
         (
-            SELECT `attributestaff_attributechapterstaff_id`, COUNT(`attributestaff_attributechapterstaff_id`) AS `count_attributestaff`
+            SELECT `attributestaff_attributechapterstaff_id`,
+                   COUNT(`attributestaff_attributechapterstaff_id`) AS `count_attributestaff`
             FROM `attributestaff`
             GROUP BY `attributestaff_attributechapterstaff_id`
         ) AS `t2`
@@ -16,8 +19,6 @@ $chapter_sql = $mysqli->query($sql);
 
 $chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('chapter_array', $chapter_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');
 
 ?>

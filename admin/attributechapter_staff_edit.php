@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_chapter = $chapter_sql->num_rows;
 
 if (0 == $count_chapter)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -44,9 +43,6 @@ if (isset($_POST['chapter_name']))
 
 $chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
 
-$chapter_name = $chapter_array[0]['attributechapterstaff_name'];
+$tpl = 'attributechapter_staff_create';
 
-$smarty->assign('chapter_name', $chapter_name);
-$smarty->assign('tpl', 'attributechapter_staff_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

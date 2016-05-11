@@ -1,82 +1,113 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Редактирование команды</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="city_list.php" class="link-img link-list"></a>
-            </p>
-            <form action="" enctype="multipart/form-data" method="POST">
-                <table class="center striped">
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Редактирование команды</h1>
+        <button type="button" class="btn btn-default">
+            <a href="team_list.php">
+                <i class="fa fa-list"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<form method="POST" enctype="multipart/form-data">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <td>Команда</td>
+                    <td>
+                        <input
+                            class="form-control"
+                            name="team_name"
+                            type="text"
+                            value="<?php if (isset($team_array[0]['team_name'])) { print $team_array[0]['team_name']; } ?>"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Город</td>
+                    <td>
+                        <select class="form-control" name="city_id">
+                            <?php foreach ($city_array as $item) { ?>
+                                <option value="<?= $item['city_id']; ?>"
+                                    <?php if (isset($team_array[0]['team_city_id']) && $team_array[0]['team_city_id'] == $item['city_id']) { ?>
+                                        selected
+                                    <?php } ?>
+                                >
+                                    <?= $item['city_name']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Стадион</td>
+                    <td>
+                        <input
+                            class="form-control"
+                            name="stadium_name"
+                            type="text"
+                            value="<?php if (isset($team_array[0]['stadium_name'])) { print $team_array[0]['stadium_name']; } ?>"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Эмблема (120x120, png)</td>
+                    <td>
+                        <input
+                            class="form-control"
+                            name="team_logo_120"
+                            type="file"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Эмблема (90x90, png)</td>
+                    <td>
+                        <input
+                            class="form-control"
+                            name="team_logo_90"
+                            type="file"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Эмблема (50x50, png)</td>
+                    <td>
+                        <input
+                            class="form-control"
+                            name="team_logo_50"
+                            type="file"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Эмблема (12x12, png)</td>
+                    <td>
+                        <input
+                            class="form-control"
+                            name="team_logo_12"
+                            type="file"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <input class="btn btn-default" type="submit" value="Сохранить" />
+                    </td>
+                </tr>
+                <?php if (isset($team_array[0]['team_id'])) { ?>
                     <tr>
-                        <td>Город</td>
-                        <td>
-                            <select name="city_id">
-                                {section name=i loop=$city_array}
-                                    <option value="{$city_array[i].city_id}"
-                                        {if (isset($city_id) && $city_id == $city_array[i].city_id)}
-                                            selected
-                                        {/if}
-                                    >
-                                        {$city_array[i].city_name}
-                                    </option>
-                                {/section}
-                            </select>
+                        <td colspan="2" class="text-center">
+                            <img src="/img/team/120/<?= $team_array[0]['team_id']; ?>.png" />
+                            <img src="/img/team/90/<?= $team_array[0]['team_id']; ?>.png" />
+                            <img src="/img/team/50/<?= $team_array[0]['team_id']; ?>.png" />
+                            <img src="/img/team/12/<?= $team_array[0]['team_id']; ?>.png" />
                         </td>
                     </tr>
-                    <tr>
-                        <td>Команда</td>
-                        <td>
-                            <input name="team_name" type="text" value="{if (isset($team_name))}{$team_name}{/if}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Стадион</td>
-                        <td>
-                            <input name="stadium_name" type="text" value="{if (isset($stadium_name))}{$stadium_name}{/if}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Эмблема (120x120, png)</td>
-                        <td>
-                            <input name="team_logo_120" type="file"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Эмблема (90x90, png)</td>
-                        <td>
-                            <input name="team_logo_90" type="file"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Эмблема (50x50, png)</td>
-                        <td>
-                            <input name="team_logo_50" type="file"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Эмблема (12x12, png)</td>
-                        <td>
-                            <input name="team_logo_12" type="file"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Сохранить"/>
-                        </td>
-                    </tr>
-                    {if (isset($smarty.get.num))}
-                        <tr>
-                            <td colspan="2">
-                                <img src="/img/team/120/{$smarty.get.num}.png" />
-                                <img src="/img/team/90/{$smarty.get.num}.png" />
-                                <img src="/img/team/50/{$smarty.get.num}.png" />
-                                <img src="/img/team/12/{$smarty.get.num}.png" />
-                            </td>
-                        </tr>
-                    {/if}
-                </table>
-            </form>
-        </td>
-    </tr>
-</table>
+                <?php } ?>
+            </table>
+        </div>
+    </div>
+</div>
+</form>
