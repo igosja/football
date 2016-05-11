@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,8 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `gamemood_description`, `gamemood_name`
+$sql = "SELECT `gamemood_description`,
+               `gamemood_name`
         FROM `gamemood`
         WHERE `gamemood_id`='$num_get'
         LIMIT 1";
@@ -21,8 +22,7 @@ $count_gamemood = $gamemood_sql->num_rows;
 
 if (0 == $count_gamemood)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -46,11 +46,6 @@ if (isset($_POST['gamemood_name']))
 
 $gamemood_array = $gamemood_sql->fetch_all(MYSQLI_ASSOC);
 
-$gamemood_name          = $gamemood_array[0]['gamemood_name'];
-$gamemood_description   = $gamemood_array[0]['gamemood_description'];
+$tpl = 'gamemood_create';
 
-$smarty->assign('gamemood_name', $gamemood_name);
-$smarty->assign('gamemood_description', $gamemood_description);
-$smarty->assign('tpl', 'gamemood_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

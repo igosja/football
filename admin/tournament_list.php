@@ -1,8 +1,9 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
-$sql = "SELECT `country_name`,
+$sql = "SELECT `country_id`,
+               `country_name`,
                `tournament_id`,
                `tournament_level`,
                `tournament_name`,
@@ -17,6 +18,4 @@ $tournament_sql = $mysqli->query($sql);
 
 $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('tournament_array', $tournament_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

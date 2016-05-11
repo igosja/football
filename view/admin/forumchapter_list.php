@@ -1,35 +1,46 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Разделы форумов</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="forumchapter_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th>Раздел</th>
-                    <th>Тем</th>
-                    <th>Действия</th>
-                </tr>
-                {section name=i loop=$chapter_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Разделы форумов</h1>
+        <button type="button" class="btn btn-default">
+            <a href="forumchapter_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="forumchapter.php?num={$chapter_array[i].forumchapter_id}">
-                                {$chapter_array[i].forumchapter_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="forumgrouptheme_list.php?chapter_id={$chapter_array[i].forumchapter_id}">
-                                {$chapter_array[i].count_group}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="forumchapter_edit.php?num={$chapter_array[i].forumchapter_id}" class="link-img link-pencil"></a>
-                        </td>
+                        <th>Раздел</th>
+                        <th>Тем</th>
+                        <th class="col-lg-1"></th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($chapter_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="forumchapter.php?num=<?= $item['forumchapter_id']; ?>">
+                                    <?= $item['forumchapter_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="forumthemegroup_list.php?chapter_id=<?= $item['forumchapter_id']; ?>">
+                                    <?= $item['count_group']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="forumchapter_edit.php?num=<?= $item['forumchapter_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

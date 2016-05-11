@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,9 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `role_description`, `role_name`, `role_short`
+$sql = "SELECT `role_description`,
+               `role_name`,
+               `role_short`
         FROM `role`
         WHERE `role_id`='$num_get'
         LIMIT 1";
@@ -21,8 +23,7 @@ $count_role = $role_sql->num_rows;
 
 if (0 == $count_role)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -48,13 +49,6 @@ if (isset($_POST['role_name']))
 
 $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
 
-$role_name          = $role_array[0]['role_name'];
-$role_description   = $role_array[0]['role_description'];
-$role_short         = $role_array[0]['role_short'];
+$tpl = 'role_create';
 
-$smarty->assign('role_name', $role_name);
-$smarty->assign('role_description', $role_description);
-$smarty->assign('role_short', $role_short);
-$smarty->assign('tpl', 'role_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

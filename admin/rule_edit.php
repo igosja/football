@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -22,7 +22,7 @@ $count_rule = $rule_sql->num_rows;
 
 if (0 == $count_rule)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -46,9 +46,6 @@ if (isset($_POST['rule_name']))
 
 $rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);
 
-$rule_name  = $rule_array[0]['rule_name'];
-$rule_text  = $rule_array[0]['rule_text'];
-
 $tpl = 'rule_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

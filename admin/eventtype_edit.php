@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,8 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `eventtype_name`
+$sql = "SELECT `eventtype_name`,
+               `eventtype_id`
         FROM `eventtype`
         WHERE `eventtype_id`='$num_get'
         LIMIT 1";
@@ -21,8 +22,7 @@ $count_eventtype = $eventtype_sql->num_rows;
 
 if (0 == $count_eventtype)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -41,7 +41,7 @@ if (isset($_POST['eventtype_name']))
 
     if ('image/png' == $_FILES['eventtype_logo']['type'])
     {
-        copy($_FILES['eventtype_logo']['tmp_name'], '../img/eventtype/' . $num_get . '.png');
+        copy($_FILES['eventtype_logo']['tmp_name'], __DIR__ . '/../img/eventtype/' . $num_get . '.png');
     }
 
     redirect('eventtype_list.php');
@@ -49,9 +49,6 @@ if (isset($_POST['eventtype_name']))
 
 $eventtype_array = $eventtype_sql->fetch_all(MYSQLI_ASSOC);
 
-$eventtype_name = $eventtype_array[0]['eventtype_name'];
+$tpl = 'eventtype_create';
 
-$smarty->assign('eventtype_name', $eventtype_name);
-$smarty->assign('tpl', 'eventtype_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

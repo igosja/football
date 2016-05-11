@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_offertype = $offertype_sql->num_rows;
 
 if (0 == $count_offertype)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -44,9 +43,6 @@ if (isset($_POST['offertype_name']))
 
 $offertype_array = $offertype_sql->fetch_all(MYSQLI_ASSOC);
 
-$offertype_name = $offertype_array[0]['offertype_name'];
+$tpl = 'offertype_create';
 
-$smarty->assign('offertype_name', $offertype_name);
-$smarty->assign('tpl', 'offertype_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

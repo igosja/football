@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,11 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `position_coordinate_x`, `position_coordinate_y`, `position_available`, `position_description`, `position_name`
+$sql = "SELECT `position_coordinate_x`,
+               `position_coordinate_y`,
+               `position_available`,
+               `position_description`,
+               `position_name`
         FROM `position`
         WHERE `position_id`='$num_get'
         LIMIT 1";
@@ -21,8 +25,7 @@ $count_position = $position_sql->num_rows;
 
 if (0 == $count_position)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -74,7 +77,8 @@ $position_available     = $position_array[0]['position_available'];
 $position_coordinate_x  = $position_array[0]['position_coordinate_x'];
 $position_coordinate_y  = $position_array[0]['position_coordinate_y'];
 
-$sql = "SELECT `role_id`, `role_name`
+$sql = "SELECT `role_id`,
+               `role_name`
         FROM `role`
         ORDER BY `role_id` ASC";
 $role_sql = $mysqli->query($sql);
@@ -89,13 +93,6 @@ $positionrole_sql = $mysqli->query($sql);
 
 $positionrole_array = $positionrole_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('position_name', $position_name);
-$smarty->assign('position_description', $position_description);
-$smarty->assign('position_available', $position_available);
-$smarty->assign('position_coordinate_x', $position_coordinate_x);
-$smarty->assign('position_coordinate_y', $position_coordinate_y);
-$smarty->assign('role_array', $role_array);
-$smarty->assign('positionrole_array', $positionrole_array);
-$smarty->assign('tpl', 'position_create');
+$tpl = 'position_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

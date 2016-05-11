@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,8 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `injurytype_day`, `injurytype_name`
+$sql = "SELECT `injurytype_day`,
+               `injurytype_name`
         FROM `injurytype`
         WHERE `injurytype_id`='$num_get'
         LIMIT 1";
@@ -21,7 +22,7 @@ $count_injurytype = $injurytype_sql->num_rows;
 
 if (0 == $count_injurytype)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -45,9 +46,6 @@ if (isset($_POST['injurytype_name']))
 
 $injurytype_array = $injurytype_sql->fetch_all(MYSQLI_ASSOC);
 
-$injurytype_day  = $injurytype_array[0]['injurytype_day'];
-$injurytype_name = $injurytype_array[0]['injurytype_name'];
-
 $tpl = 'injurytype_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

@@ -1,29 +1,40 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Вид сделки</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="offertype_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th>Название</th>
-                    <th>Действия</th>
-                </tr>
-                {section name=i loop=$offertype_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Вид сделки</h1>
+        <button type="button" class="btn btn-default">
+            <a href="offertype_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="offertype.php?num={$offertype_array[i].offertype_id}">
-                                {$offertype_array[i].offertype_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="offertype_edit.php?num={$offertype_array[i].offertype_id}" class="link-img link-pencil"></a>
-                        </td>
+                        <th>Название</th>
+                        <th class="col-lg-1"></th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($offertype_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="offertype.php?num=<?= $item['offertype_id']; ?>">
+                                    <?= $item['offertype_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="offertype_edit.php?num=<?= $item['offertype_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

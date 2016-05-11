@@ -1,14 +1,13 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
-$sql = "SELECT `gamemood_id`, `gamemood_name`
+$sql = "SELECT `gamemood_id`,
+               `gamemood_name`
         FROM `gamemood`
         ORDER BY `gamemood_id` ASC";
 $gamemood_sql = $mysqli->query($sql);
 
 $gamemood_array = $gamemood_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('gamemood_array', $gamemood_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

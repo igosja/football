@@ -1,37 +1,46 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Главные позиции</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-            </p>
-            <form action="" method="POST">
-                <table class="center striped">
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Редактирование пола</h1>
+        <button type="button" class="btn btn-default">
+            <a href="gender_list.php">
+                <i class="fa fa-list"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<form method="POST">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th></th>
+                    <th>Позиция</th>
+                </tr>
+                <?php foreach ($position_array as $item) { ?>
                     <tr>
-                        <th></th>
-                        <th>Позиция</th>
-                    </tr>
-                    {section name=i loop=$position_array}
-                        <tr>
-                            <td>
-                                <input name="position_id[]" type="checkbox" value="{$position_array[i].position_id}" 
-                                    {if (0 < $position_array[i].positionmain_id)}
-                                        checked
-                                    {/if}
-                                />
-                            </td>
-                            <td>
-                                {$position_array[i].position_description}
-                            </td>
-                        </tr>
-                    {/section}
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Сохранить"/>
+                        <td>
+                            <input
+                                name="position_id[]"
+                                type="checkbox"
+                                value="<?= $item['position_id']; ?>"
+                                <?php if (0 != $item['positionmain_id']) { ?>
+                                    checked
+                                <?php } ?>
+                            />
+                        </td>
+                        <td>
+                            <?= $item['position_description']; ?>
                         </td>
                     </tr>
-                </table>
-            </form>
-        </td>
-    </tr>
-</table>
+                <?php } ?>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <input class="btn btn-default" type="submit" value="Сохранить" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</form>

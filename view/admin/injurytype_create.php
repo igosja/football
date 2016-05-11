@@ -20,7 +20,7 @@
                             class="form-control"
                             name="injurytype_name"
                             type="text"
-                            value="<?php if (isset($injurytype_name)) { print $injurytype_name; } ?>"
+                            value="<?php if (isset($injurytype_array[0]['injurytype_name'])) { print $injurytype_array[0]['injurytype_name']; } ?>"
                         />
                     </td>
                 </tr>
@@ -31,7 +31,7 @@
                             class="form-control"
                             name="injurytype_day"
                             type="text"
-                            value="<?php if (isset($injurytype_day)) { print $injurytype_day; } ?>"
+                            value="<?php if (isset($injurytype_array[0]['injurytype_day'])) { print $injurytype_array[0]['injurytype_day']; } ?>"
                         />
                     </td>
                 </tr>

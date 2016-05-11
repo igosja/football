@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,14 +21,13 @@ $count_stage = $stage_sql->num_rows;
 
 if (0 == $count_stage)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
 if (isset($_POST['stage_name']))
 {
-    $stage_name          = $_POST['stage_name'];
+    $stage_name = $_POST['stage_name'];
 
     $sql = "UPDATE `stage` 
             SET `stage_name`=?
@@ -44,9 +43,6 @@ if (isset($_POST['stage_name']))
 
 $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
 
-$stage_name          = $stage_array[0]['stage_name'];
+$tpl = 'stage_create';
 
-$smarty->assign('stage_name', $stage_name);
-$smarty->assign('tpl', 'stage_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

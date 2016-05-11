@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_POST['weather_name']))
 {
@@ -17,15 +17,15 @@ if (isset($_POST['weather_name']))
 
     if ('image/png' == $_FILES['weather_logo']['type'])
     {
-        copy($_FILES['weather_logo']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/weather/' . $weather_id . '.png');
+        copy($_FILES['weather_logo']['tmp_name'], __DIR__ . '/../img/weather/' . $weather_id . '.png');
     }
 
     if ('image/png' == $_FILES['weather_logo_12']['type'])
     {
-        copy($_FILES['weather_logo_12']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img/weather/12/' . $weather_id . '.png');
+        copy($_FILES['weather_logo_12']['tmp_name'], __DIR__ . '/../img/weather/12/' . $weather_id . '.png');
     }
 
     redirect('weather_list.php');
 }
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

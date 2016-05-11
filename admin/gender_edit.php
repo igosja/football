@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_gender = $gender_sql->num_rows;
 
 if (0 == $count_gender)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -43,9 +43,6 @@ if (isset($_POST['gender_name']))
 
 $gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);
 
-$gender_name = $gender_array[0]['gender_name'];
+$tpl = 'gender_create';
 
-$smarty->assign('gender_name', $gender_name);
-$smarty->assign('tpl', 'gender_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

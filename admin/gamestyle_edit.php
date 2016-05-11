@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -11,7 +11,8 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `gamestyle_description`, `gamestyle_name`
+$sql = "SELECT `gamestyle_description`,
+               `gamestyle_name`
         FROM `gamestyle`
         WHERE `gamestyle_id`='$num_get'
         LIMIT 1";
@@ -21,8 +22,7 @@ $count_gamestyle = $gamestyle_sql->num_rows;
 
 if (0 == $count_gamestyle)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -46,11 +46,6 @@ if (isset($_POST['gamestyle_name']))
 
 $gamestyle_array = $gamestyle_sql->fetch_all(MYSQLI_ASSOC);
 
-$gamestyle_name          = $gamestyle_array[0]['gamestyle_name'];
-$gamestyle_description   = $gamestyle_array[0]['gamestyle_description'];
+$tpl = 'gamestyle_create';
 
-$smarty->assign('gamestyle_name', $gamestyle_name);
-$smarty->assign('gamestyle_description', $gamestyle_description);
-$smarty->assign('tpl', 'gamestyle_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

@@ -1,62 +1,70 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Редактирование расстановки</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="formation_list.php" class="link-img link-list"></a>
-            </p>
-            <form action="" method="POST">
-                <table class="center striped">
-                    <tr>
-                        <td>Формация</td>
-                        <td>
-                            <input 
-                                name="formation_name" 
-                                type="text" 
-                                value="{if (isset($formation_name))}{$formation_name}{/if}"
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Игроки</td>
-                        <td>
-                            <table class="center striped">
-                                {section name=i loop=$position_array}
-                                    {$number = ''}
-                                    <tr>
-                                        <td>
-                                            <input 
-                                                name="position_id[]" 
-                                                type="checkbox" 
-                                                value="{$position_array[i].position_id}"
-                                                {section name=j loop=$formation_position}
-                                                    {if $formation_position[j] == $position_array[i].position_id}
-                                                        checked
-                                                    {/if}
-                                                {/section}
-                                            /> {$position_array[i].position_name}
-                                        </td>
-                                        <td>
-                                            {section name=j loop=$formation_position}
-                                                {if $formation_position[j] == $position_array[i].position_id}
-                                                    <!--{$number++}-->
-                                                {/if}
-                                            {/section}
-                                            <input name="position_number[]" type="text" value="{$number}"/>
-                                        </td>
-                                    </tr>
-                                {/section}
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Сохранить"/>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </td>
-    </tr>
-</table>
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Редактирование расстановки</h1>
+        <button type="button" class="btn btn-default">
+            <a href="formation_list.php">
+                <i class="fa fa-list"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<form method="POST">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <td>Формация</td>
+                    <td>
+                        <input
+                            class="form-control"
+                            name="formation_name"
+                            type="text"
+                            value="<?php if (isset($formation_array[0]['formation_name'])) { print $formation_array[0]['formation_name']; } ?>"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Игроки</td>
+                    <td>
+                        <table class="table table-striped">
+                            <?php foreach ($position_array as $position) { $number = ''; ?>
+                                <tr>
+                                    <td>
+                                        <input 
+                                            name="position_id[]" 
+                                            type="checkbox" 
+                                            value="<?= $position['position_id']; ?>"
+                                            <?php foreach ($formation_position as $formation) { ?>
+                                                <?php if ($formation == $position['position_id']) { ?>
+                                                    checked
+                                                <?php } ?>
+                                            <?php } ?>
+                                        /> <?= $position['position_name']; ?>
+                                    </td>
+                                    <td>
+                                        <?php foreach ($formation_position as $formation) { ?>
+                                            <?php if ($formation == $position['position_id']) { $number++; } ?>
+                                        <?php } ?>
+                                        <input
+                                            class="form-control"
+                                            name="position_number[]"
+                                            type="text"
+                                            value="<?= $number; ?>"
+                                        />
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <input class="btn btn-default" type="submit" value="Сохранить" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</form>

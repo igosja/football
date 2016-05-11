@@ -20,7 +20,7 @@
                             class="form-control"
                             name="rule_name"
                             type="text"
-                            value="<?php if (isset($rule_name)) { print $rule_name; } ?>"
+                            value="<?php if (isset($rule_array[0]['rule_name'])) { print $rule_array[0]['rule_name']; } ?>"
                         />
                     </td>
                 </tr>
@@ -31,7 +31,7 @@
                             class="form-control"
                             name="rule_text"
                             rows="10"
-                        ><?php if (isset($rule_text)) { print $rule_text; } ?></textarea>
+                        ><?php if (isset($rule_array[0]['rule_text'])) { print $rule_array[0]['rule_text']; } ?></textarea>
                     </td>
                 </tr>
                 <tr>

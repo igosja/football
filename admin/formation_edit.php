@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -32,8 +32,7 @@ $count_formation = $formation_sql->num_rows;
 
 if (0 == $count_formation)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -97,8 +96,6 @@ if (isset($_POST['formation_name']))
 
 $formation_array = $formation_sql->fetch_all(MYSQLI_ASSOC);
 
-$formation_name = $formation_array[0]['formation_name'];
-
 $formation_position = array(
                             $formation_array[0]['formation_position_id_1'],
                             $formation_array[0]['formation_position_id_2'],
@@ -113,16 +110,14 @@ $formation_position = array(
                             $formation_array[0]['formation_position_id_11']
                            );
 
-$sql = "SELECT `position_id`, `position_name`
+$sql = "SELECT `position_id`,
+               `position_name`
         FROM `position`
         ORDER BY `position_id` ASC";
 $position_sql = $mysqli->query($sql);
 
 $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('formation_position', $formation_position);
-$smarty->assign('position_array', $position_array);
-$smarty->assign('formation_name', $formation_name);
-$smarty->assign('tpl', 'formation_create');
+$tpl = 'formation_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

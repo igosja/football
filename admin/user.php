@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -41,7 +41,7 @@ $count_user = $user_sql->num_rows;
 
 if (0 == $count_user)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -56,4 +56,4 @@ $ip_sql = $mysqli->query($sql);
 
 $ip_array = $ip_sql->fetch_all(MYSQLI_ASSOC);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_seriestype = $seriestype_sql->num_rows;
 
 if (0 == $count_seriestype)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -44,9 +43,6 @@ if (isset($_POST['seriestype_name']))
 
 $seriestype_array = $seriestype_sql->fetch_all(MYSQLI_ASSOC);
 
-$seriestype_name = $seriestype_array[0]['seriestype_name'];
+$tpl = 'seriestype_create';
 
-$smarty->assign('seriestype_name', $seriestype_name);
-$smarty->assign('tpl', 'seriestype_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

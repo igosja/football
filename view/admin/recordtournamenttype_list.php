@@ -1,29 +1,40 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Турнирные рекорды</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="recordtournamenttype_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th>Название</th>
-                    <th>Действия</th>
-                </tr>
-                {section name=i loop=$recordtournamenttype_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Турнирные рекорды</h1>
+        <button type="button" class="btn btn-default">
+            <a href="recordtournamenttype_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="recordtournamenttype.php?num={$recordtournamenttype_array[i].recordtournamenttype_id}">
-                                {$recordtournamenttype_array[i].recordtournamenttype_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="recordtournamenttype_edit.php?num={$recordtournamenttype_array[i].recordtournamenttype_id}" class="link-img link-pencil"></a>
-                        </td>
+                        <th>Название</th>
+                        <th class="col-lg-1"></th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($recordtournamenttype_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="recordtournamenttype.php?num=<?= $item['recordtournamenttype_id']; ?>">
+                                    <?= $item['recordtournamenttype_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="recordtournamenttype_edit.php?num=<?= $item['recordtournamenttype_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

@@ -1,29 +1,40 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Пол</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="gender_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th>Пол</th>
-                    <th>Действия</th>
-                </tr>
-                {section name=i loop=$gender_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Пол</h1>
+        <button type="button" class="btn btn-default">
+            <a href="gender_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="gender.php?num={$gender_array[i].gender_id}">
-                                {$gender_array[i].gender_name}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="gender_edit.php?num={$gender_array[i].gender_id}" class="link-img link-pencil"></a>
-                        </td>
+                        <th>Пол</th>
+                        <th class="col-lg-1"></th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($gender_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="gender.php?num=<?= $item['gender_id']; ?>">
+                                    <?= $item['gender_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="gender_edit.php?num=<?= $item['gender_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

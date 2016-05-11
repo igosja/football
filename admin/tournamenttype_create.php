@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_POST['tournamenttype_name']))
 {
@@ -18,4 +18,4 @@ if (isset($_POST['tournamenttype_name']))
     redirect('tournamenttype_list.php');
 }
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

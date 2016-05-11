@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,8 +21,7 @@ $count_position = $position_sql->num_rows;
 
 if (0 == $count_position)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -42,15 +41,14 @@ $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
 
 $position_id = $position_array[0]['positioncreate_position_id'];
 
-$sql = "SELECT `position_description`, `position_id`
+$sql = "SELECT `position_description`,
+               `position_id`
         FROM `position`
         ORDER BY `position_id`";
 $position_sql = $mysqli->query($sql);
 
 $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('position_id', $position_id);
-$smarty->assign('position_array', $position_array);
-$smarty->assign('tpl', 'positioncreate_create');
+$tpl = 'positioncreate_create';
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

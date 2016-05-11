@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_POST['eventtype_name']))
 {
@@ -17,10 +17,10 @@ if (isset($_POST['eventtype_name']))
 
     if ('image/png' == $_FILES['eventtype_logo']['type'])
     {
-        copy($_FILES['eventtype_logo']['tmp_name'], '../img/eventtype/' . $eventtype_id . '.png');
+        copy($_FILES['eventtype_logo']['tmp_name'], __DIR__ . '/../img/eventtype/' . $eventtype_id . '.png');
     }
 
     redirect('eventtype_list.php');
 }
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

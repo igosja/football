@@ -1,8 +1,10 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
-$sql = "SELECT `position_description`, `position_id`, `positioncreate_id`
+$sql = "SELECT `position_description`,
+               `position_id`,
+               `positioncreate_id`
         FROM `positioncreate`
         LEFT JOIN `position`
         ON `positioncreate_position_id`=`position_id`
@@ -11,6 +13,4 @@ $position_sql = $mysqli->query($sql);
 
 $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
 
-$smarty->assign('position_array', $position_array);
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

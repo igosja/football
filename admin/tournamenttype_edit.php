@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -22,8 +22,7 @@ $count_tournamenttype = $tournamenttype_sql->num_rows;
 
 if (0 == $count_tournamenttype)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
-
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -46,11 +45,6 @@ if (isset($_POST['tournamenttype_name']))
 
 $tournamenttype_array = $tournamenttype_sql->fetch_all(MYSQLI_ASSOC);
 
-$tournamenttype_name    = $tournamenttype_array[0]['tournamenttype_name'];
-$tournamenttype_visitor = $tournamenttype_array[0]['tournamenttype_visitor'];
+$tpl = 'tournamenttype_create';
 
-$smarty->assign('tournamenttype_name', $tournamenttype_name);
-$smarty->assign('tournamenttype_visitor', $tournamenttype_visitor);
-$smarty->assign('tpl', 'tournamenttype_create');
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

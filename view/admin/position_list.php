@@ -1,29 +1,40 @@
-<table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header center">Позиции игроков</p>
-            <p class="center">
-                <a href="index.php" class="link-img link-home"></a>
-                <a href="position_create.php" class="link-img link-plus"></a>
-            </p>
-            <table class="center striped">
-                <tr>
-                    <th>Позиция</th>
-                    <th>Действия</th>
-                </tr>
-                {section name=i loop=$position_array}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header">Позиции игроков</h1>
+        <button type="button" class="btn btn-default">
+            <a href="position_create.php">
+                <i class="fa fa-plus"></i>
+            </a>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="position.php?num={$position_array[i].position_id}">
-                                {$position_array[i].position_name} - {$position_array[i].position_description}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="position_edit.php?num={$position_array[i].position_id}" class="link-img link-pencil"></a>
-                        </td>
+                        <th>Позиция</th>
+                        <th class="col-lg-1"></th>
                     </tr>
-                {/section}
+                </thead>
+                <tbody>
+                    <?php foreach ($position_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="position.php?num=<?= $item['position_id']; ?>">
+                                    <?= $item['position_name']; ?> - <?= $item['position_description']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="position_edit.php?num=<?= $item['position_id']; ?>">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

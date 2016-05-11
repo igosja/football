@@ -13,20 +13,23 @@
         <div class="dataTable_wrapper">
             <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
                 <thead>
-                <tr>
-                    <th>Погода</th>
-                    <th class="col-lg-1"></th>
-                </tr>
+                    <tr>
+                        <th>Погода</th>
+                        <th class="col-lg-1"></th>
+                    </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($weather_array as $item) { ?>
-                    <tr>
-                        <td><?= $item['weather_name']; ?></td>
-                        <td>
-                            <a href="weather_edit.php?num=<?= $item['weather_id']; ?>"><i class="fa fa-pencil"></i></a>
-                        </td>
-                    </tr>
-                <?php } ?>
+                    <?php foreach ($weather_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <img src="/img/weather/<?= $item['weather_id']; ?>.png" />
+                                <?= $item['weather_name']; ?>
+                            </td>
+                            <td>
+                                <a href="weather_edit.php?num=<?= $item['weather_id']; ?>"><i class="fa fa-pencil"></i></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
