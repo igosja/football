@@ -56,6 +56,7 @@ if (isset($_GET['player_tactic_position_id']))
             LIMIT 1";
     $lineup_sql = $mysqli->query($sql);
 
+    $count_lineup = $lineup_sql->num_rows;
     $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
 
     $sql = "SELECT `role_id`,
@@ -69,15 +70,30 @@ if (isset($_GET['player_tactic_position_id']))
 
     $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
 
-    $json_data['lineup_id']             = $lineup_array[0]['lineup_id'];
-    $json_data['position_name']         = $lineup_array[0]['position_name'];
-    $json_data['position_description']  = $lineup_array[0]['position_description'];
-    $json_data['player_name']           = $lineup_array[0]['name_name'] . ' ' . $lineup_array[0]['surname_name'];
-    $json_data['role_id']               = $lineup_array[0]['role_id'];
-    $json_data['role_description']      = $lineup_array[0]['role_description'];
-    $json_data['game']                  = $lineup_array[0]['count_game'];
-    $json_data['mark']                  = $lineup_array[0]['mark'];
-    $json_data['role_array']            = $role_array;
+    if (0 != $count_lineup)
+    {
+        $json_data['lineup_id']             = $lineup_array[0]['lineup_id'];
+        $json_data['position_name']         = $lineup_array[0]['position_name'];
+        $json_data['position_description']  = $lineup_array[0]['position_description'];
+        $json_data['player_name']           = $lineup_array[0]['name_name'] . ' ' . $lineup_array[0]['surname_name'];
+        $json_data['role_id']               = $lineup_array[0]['role_id'];
+        $json_data['role_description']      = $lineup_array[0]['role_description'];
+        $json_data['game']                  = $lineup_array[0]['count_game'];
+        $json_data['mark']                  = $lineup_array[0]['mark'];
+    }
+    else
+    {
+        $json_data['lineup_id']             = 0;
+        $json_data['position_name']         = '-';
+        $json_data['position_description']  = '-';
+        $json_data['player_name']           = '-';
+        $json_data['role_id']               = 0;
+        $json_data['role_description']      = '-';
+        $json_data['game']                  = 0;
+        $json_data['mark']                  = 0;
+    }
+
+    $json_data['role_array'] = $role_array;
 }
 elseif (isset($_GET['national_player_tactic_position_id']))
 {

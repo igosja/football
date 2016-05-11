@@ -52,7 +52,6 @@
                     </td>
                     <td class="right">
                         <form method="GET" id="page-form">
-                            Старница:
                             <select name="page" id="page-select">
                                 <?php for ($i=0; $i<$count_page; $i++) { ?>
                                     <option value="<?= $i + 1; ?>"

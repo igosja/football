@@ -29,12 +29,28 @@ $button     = explode('_', $file_name);
 if (isset($button[0]) &&
     isset($button[1]))
 {
+    if (!isset($_GET['num']))
+    {
+        if (isset($authorization_team_id))
+        {
+            $num_get = $authorization_team_id;
+        }
+        else
+        {
+            $num_get = 0;
+        }
+    }
+    else
+    {
+        $num_get = $_GET['num'];
+    }
+
     if ('team' == $button[0] &&
         'lineup' == $button[1])
     {
         $button_array = array
         (
-            array('href' => 'team_team_review_profile.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Команда'),
+            array('href' => 'team_team_review_profile.php?num=' . $num_get, 'class' => '', 'text' => 'Команда'),
             array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Состав'),
         );
     }
@@ -44,7 +60,7 @@ if (isset($button[0]) &&
         $button_array = array
         (
             array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Команда'),
-            array('href' => 'team_lineup_team_player.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Состав'),
+            array('href' => 'team_lineup_team_player.php?num=' . $num_get, 'class' => '', 'text' => 'Состав'),
         );
     }
     elseif ('national' == $button[0] &&
@@ -52,7 +68,7 @@ if (isset($button[0]) &&
     {
         $button_array = array
         (
-            array('href' => 'national_team_review_profile.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Команда'),
+            array('href' => 'national_team_review_profile.php?num=' . $num_get, 'class' => '', 'text' => 'Команда'),
             array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Состав'),
         );
     }
@@ -62,7 +78,7 @@ if (isset($button[0]) &&
         $button_array = array
         (
             array('href' => 'javascript:;', 'class' => 'active', 'text' => 'Команда'),
-            array('href' => 'national_lineup_team_player.php?num=' . $_GET['num'], 'class' => '', 'text' => 'Состав'),
+            array('href' => 'national_lineup_team_player.php?num=' . $num_get, 'class' => '', 'text' => 'Состав'),
         );
     }
     elseif ('player' == $button[0] &&

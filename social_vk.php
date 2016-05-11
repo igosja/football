@@ -14,12 +14,33 @@ if (isset($_GET['code']))
         'redirect_uri'  => VK_REDIRECT_URI
     );
 
-    $token = json_decode(file_get_contents('https://oauth.vk.com/access_token?' . urldecode(http_build_query($params))), true);
+    try
+    {
+        $token = json_decode(file_get_contents('https://oauth.vk.com/access_token?' . urldecode(http_build_query($params))), true);
+    }
+    catch (Exception $e)
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Сайт Вконтакте предоставил не правильный ответ. Попробуйте еще раз.';
+
+        redirect('index.php');
+    }
 
     if (isset($token['access_token']))
     {
         $params     = array('uids' => $token['user_id'], 'fields' => 'uid', 'access_token' => $token['access_token']);
-        $user_info  = json_decode(file_get_contents('https://api.vk.com/method/users.get' . '?' . urldecode(http_build_query($params))), true);
+
+        try
+        {
+            $user_info  = json_decode(file_get_contents('https://api.vk.com/method/users.get' . '?' . urldecode(http_build_query($params))), true);
+        }
+        catch (Exception $e)
+        {
+            $_SESSION['message_class']  = 'error';
+            $_SESSION['message_text']   = 'Сайт Вконтакте предоставил не правильный ответ. Попробуйте еще раз.';
+
+            redirect('index.php');
+        }
 
         if (isset($user_info['response'][0]['uid']))
         {
