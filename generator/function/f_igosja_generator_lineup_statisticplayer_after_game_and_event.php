@@ -345,6 +345,28 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
 
                     $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
+                    $eventtype = EVENT_YELLOW;
+
+                    if (!isset($player_array[0]))
+                    {
+                        $sql = "SELECT `lineup_id`,
+                                   `lineup_player_id`
+                            FROM `lineup`
+                            WHERE `lineup_team_id`='$team_id'
+                            AND `lineup_position_id` BETWEEN '2' AND '25'
+                            AND `lineup_game_id`='$game_id'
+                            AND `lineup_foul_made`>'0'
+                            AND `lineup_yellow`='1'
+                            AND `lineup_red`='0'
+                            ORDER BY RAND()
+                            LIMIT 1";
+                        $player_sql = f_igosja_mysqli_query($sql);
+
+                        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+                        $eventtype = EVENT_YELLOW_SECOND;
+                    }
+
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
 
@@ -369,13 +391,26 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             WHERE `lineup_id`='$lineup_id'
                             LIMIT 1";
                     f_igosja_mysqli_query($sql);
+                    
+                    if (EVENT_YELLOW == $eventtype)
+                    {
+                        $sql = "INSERT INTO `event`
+                                SET `event_eventtype_id`='" . EVENT_YELLOW . "',
+                                    `event_game_id`='$game_id',
+                                    `event_minute`='1'+'89'*RAND(),
+                                    `event_player_id`='$player_id',
+                                    `event_team_id`='$team_id'";
+                    }
+                    else
+                    {
+                        $sql = "INSERT INTO `event`
+                                SET `event_eventtype_id`='" . EVENT_YELLOW_SECOND . "',
+                                    `event_game_id`='$game_id',
+                                    `event_minute`='70'+'20'*RAND(),
+                                    `event_player_id`='$player_id',
+                                    `event_team_id`='$team_id'";
+                    }
 
-                    $sql = "INSERT INTO `event`
-                            SET `event_eventtype_id`='" . EVENT_YELLOW . "',
-                                `event_game_id`='$game_id',
-                                `event_minute`='1'+'89'*RAND(),
-                                `event_player_id`='$player_id',
-                                `event_team_id`='$team_id'";
                     f_igosja_mysqli_query($sql);
                 }
 
@@ -387,9 +422,9 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             WHERE `lineup_team_id`='$team_id'
                             AND `lineup_position_id` BETWEEN '2' AND '25'
                             AND `lineup_game_id`='$game_id'
-                            AND `lineup_foul_made`>'0'
                             AND `lineup_foul_made`>`lineup_yellow`
                             AND `lineup_red`='0'
+                            AND `lineup_yellow`<'2'
                             AND `lineup_goal`='0'
                             AND `lineup_penalty_goal`='0'
                             AND `lineup_penalty`='0'
