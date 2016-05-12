@@ -88,6 +88,14 @@ if (isset($button[0]) &&
 
         $button_array = f_igosja_player_to_scout_and_fire_button($num_get);
     }
+    elseif ('profile' == $button[0] &&
+            isset($authorization_team_id))
+    {
+        $button_array = array
+        (
+            array('href' => 'profile_team_refuse.php', 'class' => '', 'text' => 'Отказаться от команды'),
+        );
+    }
 }
 
 $sql = "SELECT `site_status`,
