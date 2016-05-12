@@ -58,7 +58,7 @@ if (!isset($authorization_team_id))
                     LIMIT 1";
             $mysqli->query($sql);
 
-            f_igosja_history(1, $authorization_id, 0, $team_id);
+            f_igosja_history(HISTORY_TEXT_GET_TEAM, $authorization_id, 0, $team_id);
 
             $sql = "UPDATE `user`
                     SET `user_team`=`user_team`+'1'

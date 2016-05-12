@@ -50,13 +50,7 @@ if (isset($_GET['ok']))
             LIMIT 1";
     $mysqli->query($sql);
 
-    $sql = "INSERT INTO `history`
-            SET `history_date`=UNIX_TIMESTAMP(),
-                `history_historytext_id`='" . HISTORY_TEXT_PLAYER_FIRE . "',
-                `history_player_id`='$num_get',
-                `history_season_id`='$igosja_season_id',
-                `history_team_id`='$authorization_team_id'";
-    $mysqli->query($sql);
+    f_igosja_history(HISTORY_TEXT_PLAYER_FIRE, $authorization_id, 0, $authorization_team_id, $num_get);
 
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Игрок успешно уволен.';
