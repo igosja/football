@@ -16,7 +16,7 @@ if (isset($_GET['code']))
 
     try
     {
-        $token = json_decode(file_get_contents('https://oauth.vk.com/access_token?' . urldecode(http_build_query($params))), true);
+        $token = json_decode(@file_get_contents('https://oauth.vk.com/access_token?' . urldecode(http_build_query($params))), true);
     }
     catch (Exception $e)
     {
@@ -32,7 +32,7 @@ if (isset($_GET['code']))
 
         try
         {
-            $user_info  = json_decode(file_get_contents('https://api.vk.com/method/users.get' . '?' . urldecode(http_build_query($params))), true);
+            $user_info  = json_decode(@file_get_contents('https://api.vk.com/method/users.get' . '?' . urldecode(http_build_query($params))), true);
         }
         catch (Exception $e)
         {
