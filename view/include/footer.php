@@ -1,6 +1,6 @@
     </div>
     <div class="footer">
-        <p>Связь с администраницей: info@virtual-football-league.ru<p>
+        <p>Связь с администраницей: info@virtual-football-league.ru, skype - igosja87<p>
         <?php if (1 < $authorization_permission && 1 == 0) { ?>
         <p>Страница сгенерирована за <?= round(microtime(true) - $start_time, 5); ?> сек.<p>
         <p>Потребление памяти: <?= number_format(memory_get_usage(), 0, ",", " "); ?> Б</p>
