@@ -40,7 +40,11 @@
                     <tr>
                         <td class="center w25"><?= f_igosja_ufu_date($item['history_date']); ?></td>
                         <td class="center w25"></td>
-                        <td><?= $item['user_login']; ?></td>
+                        <td>
+                            <a href="manager_home_profile.php?num=<?= $item['user_id']; ?>">
+                                <?= $item['user_login']; ?>
+                            </a>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>

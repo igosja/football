@@ -45,7 +45,7 @@
                             ?>
                         </td>
                         <td>
-                            <a href="player_home_profile.php?num=<?= $user_array[$i]['user_id']; ?>">
+                            <a href="manager_home_profile.php?num=<?= $user_array[$i]['user_id']; ?>">
                                 <?= $user_array[$i]['user_login']; ?>
                             </a>
                         </td>

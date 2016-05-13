@@ -20,7 +20,11 @@
                                 <?php } ?>
                             </td>
                             <td>
-                                <strong><?=nl2br($item['user_login'])?></strong>
+                                <strong>
+                                    <a href="manager_home_profile.php?num=<?= $item['user_id']; ?>">
+                                        <?= $item['user_login']; ?>
+                                    </a>
+                                </strong>
                                 <br />
                                 Дата регистрации - <?=f_igosja_ufu_date($item['user_registration_date'])?>
                                 <br />

@@ -38,7 +38,7 @@
                     <td>
                         <?= $country_array[0]['user_firstname']; ?> <?= $country_array[0]['user_lastname']; ?>
                         <br />
-                        (<?= $country_array[0]['user_login']; ?>)
+                        (<a href="manager_home_profile.php?num=<?= $country_array[0]['user_id']; ?>"><?= $country_array[0]['user_login']; ?></a>)
                     </td>
                 </tr>
                 <tr>

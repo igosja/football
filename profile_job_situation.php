@@ -49,6 +49,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
                `team_name`,
                `tournament_id`,
                `tournament_name`,
+               `user_id`,
                `user_login`
         FROM `team`
         LEFT JOIN `user`

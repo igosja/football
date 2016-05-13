@@ -80,6 +80,7 @@ $tournament_array = array_merge($championship_array, $cup_array, $league_array);
 usort($tournament_array, 'f_igosja_trophy_sort');
 
 $sql = "SELECT `history_date`,
+               `user_id`,
                `user_login`
         FROM `history`
         LEFT JOIN `user`

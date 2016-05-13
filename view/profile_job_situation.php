@@ -47,7 +47,11 @@
                 </tr>
                 <?php foreach ($team_array as $item) { ?>
                     <tr>
-                        <td><?= $item['user_login']; ?></td>
+                        <td>
+                            <a href="manager_home_profile.php?num=<?= $item['user_id']; ?>">
+                                <?= $item['user_login']; ?>
+                            </a>
+                        </td>
                         <td class="w1">
                             <img
                                 alt="<?= $item['team_name']; ?>"

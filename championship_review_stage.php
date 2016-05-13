@@ -40,6 +40,7 @@ $sql = "SELECT `standing_score`-`standing_pass` AS `standing_difference`,
                `standing_win`,
                `team_id`,
                `team_name`,
+               `user_id`,
                `user_login`
         FROM `standing`
         LEFT JOIN `team`

@@ -16,6 +16,7 @@ $sql = "SELECT `inbox_id`,
                `inbox_date`,
                `inbox_read`,
                `inbox_title`,
+               `user_id`,
                `user_login`
         FROM `inbox`
         LEF JOIN `user`

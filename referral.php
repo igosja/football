@@ -14,6 +14,7 @@ else
 
 $sql = "SELECT `team_id`,
                `team_name`,
+               `user_id`,
                `user_last_visit`,
                `user_login`,
                `user_registration_date`

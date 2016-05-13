@@ -27,11 +27,13 @@
                             <?= $forum_array[$i]['forumtheme_name']; ?>
                         </a>
                         <br />
-                        <?= $forum_array[$i]['user_login']; ?> (<?= f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?>)
+                        <a href="manager_home_profile.php?num=<?= $forum_array[$i]['user_id']; ?>">
+                            <?= $forum_array[$i]['user_login']; ?>
+                        </a>
+                        (<?= f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?>)
                     </td>
                 </tr>
-                <?php if (!isset($forum_array[$i+1]['forumchapter_id']) ||
-                          $forum_array[$i+1]['forumchapter_id'] != $forum_array[$i]['forumchapter_id']) { ?>
+                <?php if (!isset($forum_array[$i+1]['forumchapter_id']) || $forum_array[$i+1]['forumchapter_id'] != $forum_array[$i]['forumchapter_id']) { ?>
                     </table>
                 <?php } ?>
             <?php } ?>

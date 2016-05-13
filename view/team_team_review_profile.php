@@ -149,7 +149,7 @@
                 <tr>
                     <td>Менеджер</td>
                     <td>
-                        <a href="profile_home_home.php?num=<?= $team_array[0]['user_id']; ?>">
+                        <a href="manager_home_profile.php?num=<?= $team_array[0]['user_id']; ?>">
                             <?= $team_array[0]['user_login']; ?>
                         </a>
                     </td>

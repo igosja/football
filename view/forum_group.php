@@ -74,12 +74,16 @@
                                 <?= $item['forumtheme_name']; ?>
                             </a>
                             <br />
-                            <?= $item['user_login']; ?>,
+                            <a href="manager_home_profile.php?num=<?= $item['user_id']; ?>">
+                                <?= $item['user_login']; ?>
+                            </a>,
                             <?= f_igosja_ufu_date_time($item['forumtheme_date']); ?>
                         </td>
                         <td class="center vcenter"><?= $item['count_post']; ?></td>
                         <td>
-                            <?= $item['post_login']; ?>
+                            <a href="manager_home_profile.php?num=<?= $item['post_id']; ?>">
+                                <?= $item['post_login']; ?>
+                            </a>
                             <br />
                             <?= f_igosja_ufu_date_time($item['forumpost_date']); ?>
                         </td>

@@ -43,7 +43,9 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
                `forumtheme_date`,
                `forumtheme_id`,
                `forumtheme_name`,
+               `post_id`,
                `post_login`,
+               `user_id`,
                `user_login`
         FROM `forumtheme`
         LEFT JOIN `user`
@@ -68,7 +70,8 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `t2`.`forumpost_forumtheme_id`=`forumtheme_id`
         LEFT JOIN
         (
-            SELECT `user_login` AS `post_login`,
+            SELECT `user_id` AS `post_id`,
+                   `user_login` AS `post_login`,
                    `forumpost_id`
             FROM `forumpost`
             LEFT JOIN `user`

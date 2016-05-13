@@ -46,7 +46,11 @@
             <table class="forum-group w100">
                 <tr>
                     <td class="w25">
-                        <strong><?= $head_array[0]['user_login']; ?></strong>
+                        <strong>
+                            <a href="manager_home_profile.php?num=<?= $head_array[0]['user_id']; ?>">
+                                <?= $head_array[0]['user_login']; ?>
+                            </a>
+                        </strong>
                         <br />
                         <a href="team_team_review_profile.php?num=<?= $head_array[0]['team_id']; ?>">
                             <?= $head_array[0]['team_name']; ?>
@@ -71,7 +75,11 @@
                 <?php for ($i=0; $i<$count; $i++) { ?>
                     <tr>
                         <td class="w25">
-                            <strong><?= $forum_array[$i]['user_login']; ?></strong>
+                            <strong>
+                                <a href="manager_home_profile.php?num=<?= $forum_array[$i]['user_id']; ?>">
+                                    <?= $forum_array[$i]['user_login']; ?>
+                                </a>
+                            </strong>
                             <br />
                             <a href="team_team_review_profile.php?num=<?= $forum_array[$i]['team_id']; ?>">
                                 <?= $forum_array[$i]['team_name']; ?>

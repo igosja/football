@@ -9,7 +9,7 @@
                         <tr>
                             <td class="outbox-title <?php if (0 == $item['inbox_read']) { ?>strong<?php } ?>" data-id="<?= $item['inbox_id']; ?>">
                                 <?= $item['inbox_title']; ?>
-                                <p class="grey"><?= f_igosja_ufu_date($item['inbox_date']); ?> (<?= $item['user_login']; ?>)</p>
+                                <p class="grey"><?= f_igosja_ufu_date($item['inbox_date']); ?> (<a href="manager_home_profile.php?num=<?= $item['user_id']; ?>"><?= $item['user_login']; ?></a>)</p>
                             </td>
                         </tr>
                     <?php } ?>

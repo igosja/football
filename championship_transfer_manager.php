@@ -32,6 +32,7 @@ $tournament_name = $tournament_array[0]['tournament_name'];
 $sql = "SELECT `history_date`,
                `team_id`,
                `team_name`,
+               `user_id`,
                `user_login`
         FROM `history`
         LEFT JOIN `user`
@@ -51,6 +52,7 @@ $manager_new_array = $manager_new_sql->fetch_all(MYSQLI_ASSOC);
 $sql = "SELECT `history_date`,
                `team_id`,
                `team_name`,
+               `user_id`,
                `user_login`
         FROM `history`
         LEFT JOIN `user`

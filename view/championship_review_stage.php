@@ -31,7 +31,11 @@
                                 <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td><?= $item['user_login']; ?></td>
+                        <td>
+                            <a href="manager_home_profile.php?num=<?= $item['user_id']; ?>">
+                                <?= $item['user_login']; ?>
+                            </a>
+                        </td>
                         <td class="center"><?= $item['standing_game']; ?></td>
                         <td class="center"><?= $item['standing_win']; ?></td>
                         <td class="center"><?= $item['standing_draw']; ?></td>

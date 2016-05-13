@@ -44,6 +44,7 @@ $tournament_sql = $mysqli->query($sql);
 $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $sql = "SELECT `history_date`,
+               `user_id`,
                `user_login`
         FROM `history`
         LEFT JOIN `user`

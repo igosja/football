@@ -31,6 +31,7 @@ $tournament_name = $tournament_array[0]['tournament_name'];
 
 $sql = "SELECT `country_id`,
                `country_name`,
+               `user_id`,
                `user_login`,
                `worldcup_score`-`worldcup_pass` AS `worldcup_difference`,
                `worldcup_draw`,

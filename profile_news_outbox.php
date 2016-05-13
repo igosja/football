@@ -78,6 +78,7 @@ $sql = "SELECT `inbox_id`,
                `inbox_read`,
                `inbox_title`,
                `inbox_user_id`,
+               `user_id`,
                `user_login`
         FROM `inbox`
         LEFT JOIN `user`

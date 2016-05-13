@@ -12,6 +12,7 @@ $sql = "SELECT `count_post`,
                `forumthemegroup_description`,
                `forumthemegroup_id`,
                `forumthemegroup_name`,
+               `user_id`,
                `user_login`
         FROM `forumthemegroup`
         LEFT JOIN `forumchapter`
@@ -40,6 +41,7 @@ $sql = "SELECT `count_post`,
                    `forumtheme_id`,
                    `forumtheme_name`,
                    `forumtheme_forumthemegroup_id`,
+                   `user_id`,
                    `user_login`
             FROM `forumpost`
             LEFT JOIN `user`

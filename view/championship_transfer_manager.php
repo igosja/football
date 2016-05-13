@@ -23,7 +23,11 @@
                             </a>
                         </td>
                         <td class="center"><?= f_igosja_ufu_date($item['history_date']); ?></td>
-                        <td class="w40"><?= $item['user_login']; ?></td>
+                        <td class="w40">
+                            <a href="manager_home_profile.php?num=<?= $item['user_id']; ?>">
+                                <?= $item['user_login']; ?>
+                            </a>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>
@@ -50,8 +54,12 @@
                                 <?= $item['team_name']; ?>
                             </a>
                         </td>
-                        <td class="center"><?= $item['history_date|date_format:"%d.%m.%Y"']; ?></td>
-                        <td class="w40"><?= $item['user_login']; ?></td>
+                        <td class="center"><?= f_igosja_ufu_date($item['history_date']); ?></td>
+                        <td class="w40">
+                            <a href="manager_home_profile.php?num=<?= $item['user_id']; ?>">
+                                <?= $item['user_login']; ?>
+                            </a>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>
