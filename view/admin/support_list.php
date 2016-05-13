@@ -17,7 +17,7 @@
                 <tbody>
                     <?php foreach ($support_array as $item) { ?>
                         <tr>
-                            <td></i><?= $item['inbox_date']; ?></td>
+                            <td></i><?= f_igosja_ufu_date_time($item['inbox_date']); ?></td>
                             <td>
                                 <?php if (0 == $item['inbox_read']) { ?><i class="fa fa-comment-o"><?php } ?>
                                 <?= $item['user_login']; ?>

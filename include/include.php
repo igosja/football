@@ -119,6 +119,24 @@ if (SITE_CLOSED == $site_status && 'admin' != $chapter)
     exit;
 }
 
+if ('admin' == $chapter)
+{
+    $sql = "SELECT COUNT(`inbox_id`) AS `count`
+            FROM `inbox`
+            WHERE `inbox_support`='1'
+            AND `inbox_user_id`='0'
+            AND `inbox_read`='0'";
+    $admin_support_sql = $mysqli->query($sql);
+
+    $admin_support_array = $admin_support_sql->fetch_all(MYSQLI_ASSOC);
+    $count_admin_support = $admin_support_array[0]['count'];
+
+    if (0 == $count_admin_support)
+    {
+        $count_admin_support = '';
+    }
+}
+
 $sql = "SELECT `season_id`
         FROM `season`
         ORDER BY `season_id` DESC

@@ -27,7 +27,7 @@
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
                         <a href="support_list.php">
-                            <i class="fa fa-comment-o fa-fw"></i> <span class="badge" id="admin-support-badge"></span>
+                            <i class="fa fa-comment-o fa-fw"></i> <span class="badge" id="admin-support-badge"><?= $count_admin_support; ?></span>
                         </a>
                     </li>
                     <li class="dropdown">

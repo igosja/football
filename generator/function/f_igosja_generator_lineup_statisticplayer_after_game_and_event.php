@@ -391,7 +391,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             WHERE `lineup_id`='$lineup_id'
                             LIMIT 1";
                     f_igosja_mysqli_query($sql);
-                    
+
                     if (EVENT_YELLOW == $eventtype)
                     {
                         $sql = "INSERT INTO `event`
