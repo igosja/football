@@ -46,6 +46,7 @@ $(document).ready(function ($) {
                 categories: registration_date
             },
             yAxis: {
+                allowDecimals: 0,
                 title: {
                     text: 'Регистрации'
                 },
