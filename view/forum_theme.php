@@ -62,6 +62,9 @@
                         <?php } ?>
                     </td>
                     <td>
+                        <p class="justify w100">
+                            <span class="grey"><?= f_igosja_ufu_date_time($head_array[0]['forumtheme_date']); ?></span>
+                        </p>
                         <p class="justify"><?= nl2br($head_array[0]['forumtheme_text']); ?></p>
                     </td>
                 </tr>
@@ -85,7 +88,7 @@
                         </td>
                         <td>
                             <p class="justify w100">
-                                <?= f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?>
+                                <span class="grey"><?= f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?></span>
                                 <?php if (isset($authorization_id) && $authorization_id == $forum_array[$i]['user_id']) { ?>
                                     <button class="fright">
                                         <a href="forum_post_delete.php?num=<?= $forum_array[$i]['forumpost_id']; ?>">

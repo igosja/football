@@ -14,6 +14,8 @@
                                         <?php if (0 == $item['inbox_read']) { ?>strong<?php } ?>
                                         "
                                     >
+                                        <span class="grey"><?= f_igosja_ufu_date_time($item['inbox_date']); ?></span>
+                                        <br />
                                         <?= nl2br($item['inbox_text']); ?>
                                     </td>
                                 </tr>
@@ -32,7 +34,7 @@
                 <table id="outbox-form" class="w100">
                     <tr>
                         <td>
-                            <textarea class="w98" name="data[inbox_text]" placeholder="Текст сообщения"  rows="10" required></textarea>
+                            <textarea class="w98" name="data[inbox_text]" placeholder="Текст сообщения" rows="10" required></textarea>
                         </td>
                     </tr>
                     <tr>
