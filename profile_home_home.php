@@ -38,6 +38,12 @@ if (!isset($authorization_team_id))
             $mysqli->query($sql);
 
             $sql = "UPDATE `standing`
+                    SET `standing_user_id`='0'
+                    WHERE `standing_user_id`='$authorization_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `standing`
                     SET `standing_user_id`='$authorization_id'
                     WHERE `standing_team_id`='$team_id'
                     AND `standing_season_id`='$igosja_season_id'
@@ -45,9 +51,23 @@ if (!isset($authorization_team_id))
             $mysqli->query($sql);
 
             $sql = "UPDATE `cupparticipant`
+                    SET `cupparticipant_user_id`='0'
+                    WHERE `cupparticipant_user_id`='$authorization_id'
+                    AND `cupparticipant_season_id`='$igosja_season_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `cupparticipant`
                     SET `cupparticipant_user_id`='$authorization_id'
                     WHERE `cupparticipant_team_id`='$team_id'
                     AND `cupparticipant_season_id`='$igosja_season_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `leagueparticipant`
+                    SET `leagueparticipant_user_id`='0'
+                    WHERE `leagueparticipant_user_id`='$authorization_id'
+                    AND `leagueparticipant_season_id`='$igosja_season_id'
                     LIMIT 1";
             $mysqli->query($sql);
 

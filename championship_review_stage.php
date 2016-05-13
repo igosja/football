@@ -29,9 +29,7 @@ $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
-$sql = "SELECT `team_id`,
-               `team_name`,
-               `standing_score`-`standing_pass` AS `standing_difference`,
+$sql = "SELECT `standing_score`-`standing_pass` AS `standing_difference`,
                `standing_draw`,
                `standing_game`,
                `standing_loose`,
@@ -39,10 +37,15 @@ $sql = "SELECT `team_id`,
                `standing_place`,
                `standing_point`,
                `standing_score`,
-               `standing_win`
+               `standing_win`,
+               `team_id`,
+               `team_name`,
+               `user_login`
         FROM `standing`
         LEFT JOIN `team`
         ON `standing_team_id`=`team_id`
+        LEFT JOIN `user`
+        ON `user_id`=`team_user_id`
         WHERE `standing_tournament_id`='$num_get'
         AND `standing_season_id`='$igosja_season_id'
         ORDER BY `standing_place` ASC";

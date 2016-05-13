@@ -31,6 +31,7 @@ $tournament_name = $tournament_array[0]['tournament_name'];
 
 $sql = "SELECT `country_id`,
                `country_name`,
+               `user_login`,
                `worldcup_score`-`worldcup_pass` AS `worldcup_difference`,
                `worldcup_draw`,
                `worldcup_game`,
@@ -43,6 +44,8 @@ $sql = "SELECT `country_id`,
         FROM `worldcup`
         LEFT JOIN `country`
         ON `worldcup_country_id`=`country_id`
+        LEFT JOIN `user`
+        ON `user_id`=`country_user_id`
         WHERE `worldcup_tournament_id`='$num_get'
         AND `worldcup_season_id`='$igosja_season_id'
         ORDER BY `worldcup_place` ASC";
