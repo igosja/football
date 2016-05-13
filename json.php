@@ -1186,7 +1186,8 @@ elseif (isset($_GET['asktoplay']))
                         `inbox_user_id`='$user_id'";
             $mysqli->query($sql);
 
-            $sql = "DELETE FROM `asktoplay`
+            $sql = "UPDATE `asktoplay`
+                    SET `asktoplay_delete`='1'
                     WHERE `asktoplay_id`='$delete'
                     LIMIT 1";
             $mysqli->query($sql);
@@ -1358,7 +1359,8 @@ elseif (isset($_GET['asktoplay']))
             LEFT JOIN `team`
             ON `team_id`=`asktoplay_inviter_team_id`
             WHERE `asktoplay_shedule_id`='$shedule_id'
-            AND `asktoplay_invitee_team_id`='$authorization_team_id'";
+            AND `asktoplay_invitee_team_id`='$authorization_team_id'
+            AND `asktoplay_delete`='0'";
     $invitee_sql = $mysqli->query($sql);
 
     $invitee_array = $invitee_sql->fetch_all(MYSQLI_ASSOC);
@@ -1371,7 +1373,8 @@ elseif (isset($_GET['asktoplay']))
             LEFT JOIN `team`
             ON `team_id`=`asktoplay_invitee_team_id`
             WHERE `asktoplay_shedule_id`='$shedule_id'
-            AND `asktoplay_inviter_team_id`='$authorization_team_id'";
+            AND `asktoplay_inviter_team_id`='$authorization_team_id'
+            AND `asktoplay_delete`='0'";
     $inviter_sql = $mysqli->query($sql);
 
     $inviter_array = $inviter_sql->fetch_all(MYSQLI_ASSOC);

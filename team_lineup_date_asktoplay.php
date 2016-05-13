@@ -48,7 +48,8 @@ if (isset($_GET['ok']))
 
     if (0 != $count_check)
     {
-        $sql = "DELETE FROM `asktoplay`
+        $sql = "UPDATE `asktoplay`
+                SET `asktoplay_delete`='1'
                 WHERE (`asktoplay_invitee_team_id`='$num_get'
                 OR `asktoplay_inviter_team_id`='$num_get')
                 AND `asktoplay_shedule_id`='$shedule_id'";
@@ -72,7 +73,8 @@ if (isset($_GET['ok']))
 
     if (0 != $count_check)
     {
-        $sql = "DELETE FROM `asktoplay`
+        $sql = "UPDATE `asktoplay`
+                SET `asktoplay_delete`='1'
                 WHERE (`asktoplay_invitee_team_id`='$team_id'
                 OR `asktoplay_inviter_team_id`='$team_id')
                 AND `asktoplay_shedule_id`='$shedule_id'";
@@ -203,7 +205,8 @@ if (isset($_GET['ok']))
             $asktoplay_id = $asktoplay_array[$i]['asktoplay_id'];
             $user_id      = $asktoplay_array[$i]['team_user_id'];
 
-            $sql = "DELETE FROM `asktoplay`
+            $sql = "UPDATE `asktoplay`
+                    SET `asktoplay_delete`='1'
                     WHERE `asktoplay_id`='$asktoplay_id'";
             $mysqli->query($sql);
 
@@ -236,7 +239,8 @@ if (isset($_GET['ok']))
         {
             $asktoplay_id = $asktoplay_array[$i]['asktoplay_id'];
 
-            $sql = "DELETE FROM `asktoplay`
+            $sql = "UPDATE `asktoplay`
+                    SET `asktoplay_delete`='1'
                     WHERE `asktoplay_id`='$asktoplay_id'";
             $mysqli->query($sql);
         }
@@ -278,6 +282,7 @@ $sql = "SELECT `asktoplay_shedule_id`,
             SELECT `asktoplay_shedule_id`
             FROM `asktoplay`
             WHERE `asktoplay_invitee_team_id`='$num_get'
+            AND `asktoplay_delete`='0'
             GROUP BY `asktoplay_shedule_id`
         ) AS `t2`
         ON `shedule_id`=`asktoplay_shedule_id`
