@@ -1,19 +1,32 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page">
-            <p class="header">Правила</p>
-            <table class="bordered w100">
-                <?php foreach ($rule_array as $item) { ?>
+            <?php if (0 == $num_get) { ?>
+                <p class="header">Правила</p>
+                <table class="bordered w100">
+                    <?php foreach ($rule_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="rule.php?num=<?= $item['rule_id']; ?>"><?= $item['rule_name']; ?></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            <?php } else { ?>
+                <p class="header"><?= $rule_array[0]['rule_name']; ?></p>
+                <table class="bordered w100">
                     <tr>
                         <td>
-                            <a href="javascript:;" class="bordered rule" data-id="<?= $item['rule_id']; ?>"><?= $item['rule_name']; ?></a>
+                            <?= $rule_array[0]['rule_text']; ?>
+                            <p class="center">
+                                <button>
+                                    <a href="rule.php">Назад</a>
+                                </button>
+                            </p>
                         </td>
                     </tr>
-                    <tr style="display: none;" id="rule-<?= $item['rule_id']; ?>" class="rule-text">
-                        <td><?= $item['rule_text']; ?></td>
-                    </tr>
-                <?php } ?>
-            </table>
+                </table>
+            <?php } ?>
         </td>
     </tr>
 </table>

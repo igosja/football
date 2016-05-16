@@ -1327,13 +1327,6 @@ $(document).ready(function($)
         );
     });
 
-    $('.rule').on('click', function()
-    //Правила
-    {
-        var rule_id = $(this).data('id');
-        $('#rule-' + rule_id).toggle('slow');
-    });
-
     $('#pay2pay-button').on('click', function()
     //Описание pay2pay
     {
