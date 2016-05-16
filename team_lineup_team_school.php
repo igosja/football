@@ -190,7 +190,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
                     `school_name_id`='$name_id',
                     `school_surname_id`='$surname_id',
                     `school_weight`=`school_height`-'95'-'5'*RAND()
-                WHERE `school_id`='$ok'
+                WHERE `school_id`='$school_id'
                 LIMIT 1";
         $mysqli->query($sql);
 
