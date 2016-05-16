@@ -599,6 +599,7 @@ td.nopadding
 {
     font-weight: bold;
     padding: 5px;
+    text-align: center;
 }
 
 /*Выравнивание*/
