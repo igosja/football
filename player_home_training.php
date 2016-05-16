@@ -289,6 +289,7 @@ $sql = "SELECT `playerposition_value`,
                `position_coordinate_x`,
                `position_coordinate_y`,
                `position_description`,
+               `position_id`,
                `position_name`
         FROM `playerposition`
         LEFT JOIN `position`
