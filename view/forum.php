@@ -27,7 +27,9 @@
                             <?= $forum_array[$i]['forumtheme_name']; ?>
                         </a>
                         <br />
-                        <a href="manager_home_profile.php?num=<?= $forum_array[$i]['user_id']; ?>">
+                        <a href="manager_home_profile.php?num=<?= $forum_array[$i]['user_id']; ?>"
+                            <?php if (1 == $forum_array[$i]['user_id']) { ?>class="red"<?php } ?>
+                        >
                             <?= $forum_array[$i]['user_login']; ?>
                         </a>
                         (<?= f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?>)

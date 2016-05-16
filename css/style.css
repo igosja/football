@@ -860,7 +860,8 @@ td.nopadding
     color: #4F8A10;
 }
 
-.red
+.red,
+a.red
 {
     color: #D8000C;
 }

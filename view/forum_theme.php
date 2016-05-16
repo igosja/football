@@ -47,7 +47,9 @@
                 <tr>
                     <td class="w25">
                         <strong>
-                            <a href="manager_home_profile.php?num=<?= $head_array[0]['user_id']; ?>">
+                            <a href="manager_home_profile.php?num=<?= $head_array[0]['user_id']; ?>"
+                               <?php if (1 == $head_array[0]['user_id']) { ?>class="red"<?php } ?>
+                            >
                                 <?= $head_array[0]['user_login']; ?>
                             </a>
                         </strong>
@@ -76,7 +78,9 @@
                     <tr>
                         <td class="w25">
                             <strong>
-                                <a href="manager_home_profile.php?num=<?= $forum_array[$i]['user_id']; ?>">
+                                <a href="manager_home_profile.php?num=<?= $forum_array[$i]['user_id']; ?>"
+                                   <?php if (1 == $forum_array[$i]['user_id']) { ?>class="red"<?php } ?>
+                                >
                                     <?= $forum_array[$i]['user_login']; ?>
                                 </a>
                             </strong>

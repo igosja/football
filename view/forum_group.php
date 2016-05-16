@@ -81,7 +81,9 @@
                         </td>
                         <td class="center vcenter"><?= $item['count_post']; ?></td>
                         <td>
-                            <a href="manager_home_profile.php?num=<?= $item['post_id']; ?>">
+                            <a href="manager_home_profile.php?num=<?= $item['post_id']; ?>"
+                               <?php if (1 == $item['post_id']) { ?>class="red"<?php } ?>
+                            >
                                 <?= $item['post_login']; ?>
                             </a>
                             <br />

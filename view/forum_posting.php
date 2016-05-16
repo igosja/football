@@ -9,12 +9,12 @@
                 <?php } ?>
             </p>
             <form method="POST" class="center">
-                <input type="text" class="w100" placeholder="Заголовок" name="name" 
+                <input type="text" class="w98" placeholder="Заголовок" name="name"
                     <?php if (isset($forum_array[0]['forumtheme_name'])) { ?>
                         value="RE: <?= $forum_array[0]['forumtheme_name']; ?>"
                     <?php } ?>
                 />
-                <textarea class="w100" rows="10" placeholder="Сообщение" name="text" ></textarea>
+                <textarea class="w98" rows="10" placeholder="Сообщение" name="text" ></textarea>
                 <input type="submit" />
             </form>
         </td>
