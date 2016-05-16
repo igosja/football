@@ -15,12 +15,17 @@ function f_igosja_generator_game_result()
                    `game_guest_team_id`,
                    `game_home_country_id`,
                    `game_home_team_id`,
-                   `referee_rigor`
+                   `game_weather_id`,
+                   `referee_rigor`,
+                   `stadium_length`,
+                   `stadium_width`
             FROM `game`
             LEFT JOIN `shedule`
             ON `shedule_id`=`game_shedule_id`
             LEFT JOIN `referee`
             ON `game_referee_id`=`referee_id`
+            LEFT JOIN `stadium`
+            ON `stadium_id`=`game_stadium_id`
             WHERE `game_played`='0'
             AND `shedule_date`=CURDATE()
             ORDER BY `game_id` ASC";
@@ -33,6 +38,9 @@ function f_igosja_generator_game_result()
     {
         $game_id        = $game_array[$i]['game_id'];
         $referee_rigor  = $game_array[$i]['referee_rigor'];
+        $weather_id     = $game_array[$i]['game_weather_id'];
+        $stadium_length = $game_array[$i]['stadium_length'];
+        $stadium_width  = $game_array[$i]['stadium_width'];
 
         $home_team_power        = 0;
         $home_gk                = 0;
@@ -173,6 +181,8 @@ function f_igosja_generator_game_result()
 
                 $player_power           = $player_power - $player_power * $field_bonus * 5 / 100;
                 $player_power           = $player_power * $power_koeff / 100;
+                $player_power           = $player_power + ($weather_id - 1) * 35;
+                $player_power           = $player_power + 110 - $stadium_length + 75 - $stadium_width;
                 $$team_power            = $$team_power + $player_power;
                 $player_power_main_3    = (2 - $$gamestyle) * $player_power / 3;
                 $player_power_extra_3   = ($player_power - $player_power_main_3) / 2;
