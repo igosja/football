@@ -74,7 +74,9 @@
                                 <?= $item['forumtheme_name']; ?>
                             </a>
                             <br />
-                            <a href="manager_home_profile.php?num=<?= $item['user_id']; ?>">
+                            <a href="manager_home_profile.php?num=<?= $item['user_id']; ?>"
+                                <?php if (1 == $item['user_id']) { ?>class="red"<?php } ?>
+                            >
                                 <?= $item['user_login']; ?>
                             </a>,
                             <?= f_igosja_ufu_date_time($item['forumtheme_date']); ?>
@@ -82,7 +84,7 @@
                         <td class="center vcenter"><?= $item['count_post']; ?></td>
                         <td>
                             <a href="manager_home_profile.php?num=<?= $item['post_id']; ?>"
-                               <?php if (1 == $item['post_id']) { ?>class="red"<?php } ?>
+                                <?php if (1 == $item['post_id']) { ?>class="red"<?php } ?>
                             >
                                 <?= $item['post_login']; ?>
                             </a>
