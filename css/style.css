@@ -1,8 +1,8 @@
 body
 {
     background-color: #E1E2E4;
-    background-image: url('/img/background.png');
-    background-position: 50% 0%;
+    background-image: url('../img/background.png');
+    background-position: 50% 0;
     background-repeat: no-repeat;
     color: #010101;
     font-family: Tahoma, sans-serif;
@@ -104,7 +104,7 @@ button, input, select, textarea
     border: 1px solid #E1E2E4;
     border-radius: 3px; 
     color: #3B3A38;
-    font-family: Tahoma;
+    font-family: Tahoma, Geneva, sans-serif;
     font-size: 11px;
 }
 
@@ -874,7 +874,7 @@ a.red
 /*Аякс загрузка*/
 .loading:before
 {
-    background-image: url('/img/loading.gif');
+    background-image: url('../img/loading.gif');
     background-repeat: no-repeat;
     background-position: center;
     bottom: 0;
@@ -901,7 +901,7 @@ a.red
 input.es-input
 {
     padding-right:20px!important;
-
+    width: 50%;
 }
 
 input.es-input:focus
@@ -921,7 +921,6 @@ input.es-input:focus
     padding:0;
     margin:0;
     border:1px solid #d1d1d1;
-    display:none;
     z-index:1000;
     background:#fff;
     max-height:160px;
