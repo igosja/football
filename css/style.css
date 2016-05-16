@@ -594,6 +594,13 @@ td.nopadding
     font-weight: bold;
 }
 
+/*Оформление текста*/
+.formula
+{
+    font-weight: bold;
+    padding: 5px;
+}
+
 /*Выравнивание*/
 .left
 {
