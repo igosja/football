@@ -17,7 +17,14 @@ if (isset($_GET['page']))
 }
 else
 {
-    $page = 1;
+    $sql = "SELECT COUNT(`forumtheme_id`) AS `count`
+            FROM `forumtheme`
+            WHERE `forumtheme_id`='$num_get'";
+    $page_sql = $mysqli->query($sql);
+
+    $page_array = $page_sql->fetch_all(MYSQLI_ASSOC);
+    $count_page = $page_array[0]['count'];
+    $page       = ceil($count_page / 10) + 1;
 }
 
 $limit  = 10;

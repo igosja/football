@@ -555,6 +555,11 @@ td.nopadding
     vertical-align: middle !important;
 }
 
+.button-active
+{
+    background-color: #EBEBEB;
+}
+
 /*Сообщения*/
 .info
 {
