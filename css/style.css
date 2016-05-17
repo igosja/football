@@ -514,7 +514,8 @@ textarea
     padding: 3px;
 }
 
-.forum-group strong
+.forum-group strong,
+.forum_group_link
 {
     font-size: 12px;
 }

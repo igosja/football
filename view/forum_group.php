@@ -54,22 +54,19 @@
                         <td>
                             <a
                                 href="forum_theme.php?num=<?= $item['forumtheme_id']; ?>"
+                                class="forum_group_link
                                 <?php
-
                                 if (isset($forumread_array)) {
                                     foreach ($forumread_array as $read) {
                                         if ($read['forumread_forumtheme_id'] == $item['forumtheme_id'] &&
                                             $read['forumread_forumpost_id'] < $item['forumpost_id']) {
-
                                 ?>
-                                            class="strong"
+                                    strong
                                 <?php
-
                                         }
                                     }
                                 }
-
-                                ?>
+                                ?>"
                             >
                                 <?= $item['forumtheme_name']; ?>
                             </a>

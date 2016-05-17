@@ -24,13 +24,32 @@ $limit  = 20;
 $offset = ($page - 1) * $limit;
 
 $sql = "SELECT `forumthemegroup_id`,
-               `forumthemegroup_name`
+               `forumthemegroup_name`,
+               `forumthemegroup_country_id`
         FROM `forumthemegroup`
         WHERE `forumthemegroup_id`='$num_get'
         LIMIT 1";
 $head_sql = $mysqli->query($sql);
 
+$count_head = $head_sql->num_rows;
+
+if (0 == $count_head)
+{
+    include (__DIR__ . '/view/wrong_page.php');
+    exit;
+}
+
 $head_array = $head_sql->fetch_all(MYSQLI_ASSOC);
+
+$forumthemegroup_country_id = $head_array[0]['forumthemegroup_country_id'];
+
+if (0 != $forumthemegroup_country_id &&
+    (!isset($authorization_forumcountry_id) ||
+    $authorization_forumcountry_id != $forumthemegroup_country_id))
+{
+    include (__DIR__ . '/view/wrong_page.php');
+    exit;
+}
 
 $header_title   = $head_array[0]['forumthemegroup_name'];
 $bread_array    = array(array('url' => 'forum.php', 'text' => 'Форум'));

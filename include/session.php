@@ -46,6 +46,18 @@ if (isset($_SESSION['authorization_id']))
     $authorization_country_name = $user_array[0]['country_name'];
     $authorization_permission   = $user_array[0]['userrole_permission'];
 
+    $sql = "SELECT `city_country_id`
+            FROM `team`
+            LEFT JOIN `city`
+            ON `city_id`=`team_city_id`
+            WHERE `team_id`='$authorization_team_id'
+            LIMIT 1";
+    $forumcountry_sql = $mysqli->query($sql);
+
+    $forumcountry_array = $forumcountry_sql->fetch_all(MYSQLI_ASSOC);
+
+    $authorization_forumcountry_id = $forumcountry_array[0]['city_country_id'];
+
     $sql = "UPDATE `user`
             SET `user_last_visit`=UNIX_TIMESTAMP()
             WHERE `user_id`='$authorization_id'

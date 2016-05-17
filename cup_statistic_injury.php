@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -21,7 +21,7 @@ $count_tournament = $tournament_sql->num_rows;
 
 if (0 == $count_tournament)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/view/wrong_page.php');
     exit;
 }
 
@@ -64,4 +64,4 @@ $seo_title          = $tournament_name . '. Травмы футболистов.
 $seo_description    = $tournament_name . '. Травмы футболистов. ' . $seo_description;
 $seo_keywords       = $tournament_name . ', травмы футболистов, ' . $seo_keywords;
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/main.php');
+include (__DIR__ . '/view/main.php');

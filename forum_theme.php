@@ -17,14 +17,21 @@ if (isset($_GET['page']))
 }
 else
 {
-    $sql = "SELECT COUNT(`forumtheme_id`) AS `count`
-            FROM `forumtheme`
+    $sql = "SELECT COUNT(`forumpost_id`) AS `count`
+            FROM `forumpost`
+            LEFT JOIN `forumtheme`
+            ON `forumtheme_id`=`forumpost_forumtheme_id`
             WHERE `forumtheme_id`='$num_get'";
     $page_sql = $mysqli->query($sql);
 
     $page_array = $page_sql->fetch_all(MYSQLI_ASSOC);
     $count_page = $page_array[0]['count'];
-    $page       = ceil($count_page / 10) + 1;
+    $page       = ceil($count_page / 10);
+}
+
+if (1 > $page)
+{
+    $page = 1;
 }
 
 $limit  = 10;
@@ -33,6 +40,7 @@ $offset = ($page - 1) * $limit;
 $sql = "SELECT `city_name`,
                `country_name`,
                `forumthemegroup_id`,
+               `forumthemegroup_country_id`,
                `forumthemegroup_name`,
                `forumtheme_date`,
                `forumtheme_id`,
@@ -66,6 +74,16 @@ if (0 == $count_head)
 }
 
 $head_array = $head_sql->fetch_all(MYSQLI_ASSOC);
+
+$forumthemegroup_country_id = $head_array[0]['forumthemegroup_country_id'];
+
+if (0 != $forumthemegroup_country_id &&
+    (!isset($authorization_forumcountry_id) ||
+    $authorization_forumcountry_id != $forumthemegroup_country_id))
+{
+    include (__DIR__ . '/view/wrong_page.php');
+    exit;
+}
 
 $header_title   = $head_array[0]['forumtheme_name'];
 $group_id       = $head_array[0]['forumthemegroup_id'];
