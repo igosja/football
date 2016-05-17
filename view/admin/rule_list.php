@@ -10,11 +10,13 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
+        <form method="POST">
         <div class="dataTable_wrapper">
             <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
                 <thead>
                     <tr>
                         <th>Правило</th>
+                        <th class="col-lg-1">Порядок</th>
                         <th class="col-lg-1"></th>
                     </tr>
                 </thead>
@@ -27,6 +29,14 @@
                                 </a>
                             </td>
                             <td>
+                                <input
+                                    class="form-control"
+                                    name="data[<?= $item['rule_id']; ?>]"
+                                    type="text"
+                                    value="<?= $item['rule_order']; ?>"
+                                />
+                            </td>
+                            <td>
                                 <a href="rule_edit.php?num=<?= $item['rule_id']; ?>">
                                     <i class="fa fa-pencil"></i>
                                 </a>
@@ -36,5 +46,9 @@
                 </tbody>
             </table>
         </div>
+        <p class="text-center">
+            <input type="submit" value="Сохранить" class="btn btn-default">
+        </p>
+        </form>
     </div>
 </div>

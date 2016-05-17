@@ -16,7 +16,7 @@ if (0 == $num_get)
     $sql = "SELECT `rule_id`,
                    `rule_name`
             FROM `rule`
-            ORDER BY `rule_id` ASC";
+            ORDER BY `rule_order` ASC";
 }
 else
 {
