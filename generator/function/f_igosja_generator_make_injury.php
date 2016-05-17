@@ -50,7 +50,7 @@ function f_igosja_generator_make_injury()
                     WHERE `lineup_team_id`='$team_id'
                     AND `shedule_date`=CURDATE()
                     AND `game_played`='0'
-                    ORDER BY RAND()
+                    ORDER BY `lineup_condition` ASC
                     LIMIT 1";
             $player_sql = f_igosja_mysqli_query($sql);
 

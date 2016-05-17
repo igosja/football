@@ -23,7 +23,7 @@ else
 
 if (isset($_POST['data']))
 {
-    $inbox_user  = (int) $_POST['data']['inbox_user_id'];
+    $inbox_user  = strip_tags($_POST['data']['inbox_user_id']);
     $inbox_title = strip_tags($_POST['data']['inbox_title']);
     $inbox_text  = strip_tags($_POST['data']['inbox_text']);
 
