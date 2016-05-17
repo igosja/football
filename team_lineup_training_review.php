@@ -78,7 +78,8 @@ $player_sql = $mysqli->query($sql);
 
 $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `position_id`, `position_description`
+$sql = "SELECT `position_id`,
+               `position_description`
         FROM `position`
         WHERE `position_available`='1'
         AND `position_id`>'1'
@@ -87,9 +88,10 @@ $position_sql = $mysqli->query($sql);
 
 $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
 
-$sql = "SELECT `attribute_id`, `attribute_name`
+$sql = "SELECT `attribute_id`,
+               `attribute_name`
         FROM `attribute`
-        WHERE `attribute_attributechapter_id` NOT IN ('1','2')
+        WHERE `attribute_attributechapter_id` NOT IN ('2','3')
         ORDER BY `attribute_name` ASC";
 $attribute_sql = $mysqli->query($sql);
 
