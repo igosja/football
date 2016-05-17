@@ -20,7 +20,7 @@
                             class="form-control"
                             name="chapter_name"
                             type="text"
-                            value="<?php if (isset($chapter_name)) { print $chapter_name; } ?>"
+                            value="<?php if (isset($chapter_array[0]['forumthemegroup_name'])) { print $chapter_array[0]['forumthemegroup_name']; } ?>"
                         />
                     </td>
                 </tr>
@@ -31,7 +31,7 @@
                             class="form-control"
                             name="chapter_description"
                             type="text"
-                            value="<?php if (isset($chapter_description)) { print $chapter_description; } ?>"
+                            value="<?php if (isset($chapter_array[0]['forumthemegroup_description'])) { print $chapter_array[0]['forumthemegroup_description']; } ?>"
                         />
                     </td>
                 </tr>
@@ -41,11 +41,27 @@
                         <select class="form-control" name="chapter_id">
                             <?php foreach ($forumchapter_array as $item) { ?>
                                 <option value="<?= $item['forumchapter_id']; ?>"
-                                    <?php if (isset($chapter_id) && $chapter_id == $item['forumchapter_id']) { ?>
+                                    <?php if (isset($chapter_array[0]['forumthemegroup_forumchapter_id']) && $chapter_array[0]['forumthemegroup_forumchapter_id'] == $item['forumchapter_id']) { ?>
                                         selected
                                     <?php } ?>
                                 >
                                     <?= $item['forumchapter_name']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Страна</td>
+                    <td>
+                        <select class="form-control" name="country_id">
+                            <?php foreach ($country_array as $item) { ?>
+                                <option value="<?= $item['country_id']; ?>"
+                                    <?php if (isset($chapter_array[0]['forumthemegroup_country_id']) && $chapter_array[0]['forumthemegroup_country_id'] == $item['country_id']) { ?>
+                                        selected
+                                    <?php } ?>
+                                >
+                                    <?= $item['country_name']; ?>
                                 </option>
                             <?php } ?>
                         </select>

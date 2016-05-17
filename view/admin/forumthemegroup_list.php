@@ -21,6 +21,7 @@
                     <tr>
                         <th>Группа</th>
                         <th>Раздел</th>
+                        <th>Страна</th>
                         <th>Тем</th>
                         <th class="col-lg-1"></th>
                     </tr>
@@ -36,6 +37,11 @@
                             <td>
                                 <a href="forumchapter.php?num=<?= $item['forumchapter_id']; ?>">
                                     <?= $item['forumchapter_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="country.php?num=<?= $item['country_id']; ?>">
+                                    <?= $item['country_name']; ?>
                                 </a>
                             </td>
                             <td>

@@ -3,6 +3,8 @@
 include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
 
 $sql = "SELECT `count_theme`,
+               `country_id`,
+               `country_name`,
                `forumchapter_name`,
                `forumthemegroup_id`,
                `forumthemegroup_name`
@@ -17,7 +19,9 @@ $sql = "SELECT `count_theme`,
         ON `t1`.`forumthemegroup_id`=`t2`.`forumtheme_forumthemegroup_id`
         LEFT JOIN `forumchapter`
         ON `forumchapter_id`=`forumthemegroup_forumchapter_id`
-        ORDER BY `forumthemegroup_id` ASC";
+        LEFT JOIN `country`
+        ON `country_id`=`forumthemegroup_country_id`
+        ORDER BY `forumchapter_id` ASC, `forumthemegroup_id` ASC";
 $chapter_sql = $mysqli->query($sql);
 
 $chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
