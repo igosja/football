@@ -157,9 +157,7 @@
                                         <?php if (1 == $count_scout ||
                                                  (isset($authorization_team_id) &&
                                                   $player_array[0]['team_id'] == $authorization_team_id))  { ?>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: <?= $attribute_array[$i]['playerattribute_value']; ?>%"></div>
-                                            </div>
+                                            <?= $attribute_array[$i]['playerattribute_value']; ?>
                                         <?php } else { ?>
                                             ?
                                         <?php } ?>

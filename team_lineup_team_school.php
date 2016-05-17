@@ -118,7 +118,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
         if (GK_POSITION_ID == $position_id)
         {
             $sql = "INSERT INTO `playerattribute` (`playerattribute_player_id`, `playerattribute_attribute_id`, `playerattribute_value`)
-                    SELECT '$player_id', `attribute_id`, '$school_level' * '10' - '10' * RAND()
+                    SELECT '$player_id', `attribute_id`, '$school_level' * '10' - '9' * RAND()
                     FROM `attribute`
                     WHERE `attribute_attributechapter_id`!=" . FIELD_ATTRIBUTE_CHAPTER . "
                     ORDER BY `attribute_id` ASC";
@@ -127,7 +127,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
         else
         {
             $sql = "INSERT INTO `playerattribute` (`playerattribute_player_id`, `playerattribute_attribute_id`, `playerattribute_value`)
-                    SELECT '$player_id', `attribute_id`, '$school_level' * '10' - '10' * RAND()
+                    SELECT '$player_id', `attribute_id`, '$school_level' * '10' - '9' * RAND()
                     FROM `attribute`
                     WHERE `attribute_attributechapter_id`!=" . GK_ATTRIBUTE_CHAPTER . "
                     ORDER BY `attribute_id` ASC";
