@@ -1,6 +1,6 @@
 <?php
 
-function f_igosja_season_user_fire()
+function f_igosja_generator_user_fire()
 {
     $sql = "SELECT `team_id`,
                    `user_id`

@@ -59,6 +59,7 @@ f_igosja_generator_field_worse();
 f_igosja_generator_building();
 f_igosja_generator_transfer();
 f_igosja_generator_ticket_price();
+f_igosja_generator_user_fire();
 
 $sql = "SELECT COUNT(`shedule_id`) AS `count`
         FROM `shedule`
@@ -109,7 +110,6 @@ if (0 == $count_shedule)
     f_igosja_season_championship_visitor();
     f_igosja_season_national_coach();
     f_igosja_season_truncate();
-    f_igosja_season_user_fire();
     f_igosja_season_tax();
     f_igosja_season_new_season();
     f_igosja_season_worldcup_standing();
