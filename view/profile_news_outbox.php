@@ -46,7 +46,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <input class="w98" name="data[inbox_title]" placeholder="Тема сообщения" type="text" required />
+                            <input class="w98" name="data[inbox_title]" placeholder="Тема сообщения" type="text"
+                                <?php if (0 != $answer) { ?>
+                                    value="RE"
+                                <?php } ?>
+                            required />
                         </td>
                     </tr>
                     <tr>
