@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 $sql = "SELECT COUNT(`team_id`) AS `count`
         FROM `team`
@@ -37,4 +37,32 @@ foreach ($registration_array as $item)
 $registration_date = implode(', ', $registration_date);
 $registration_user = implode(', ', $registration_user);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+$sql = "SELECT `history_date`,
+               `historytext_name`,
+               `country_name`,
+               `name_name`,
+               `surname_name`,
+               `team_name`,
+               `user_login`
+        FROM `history`
+        LEFT JOIN `historytext`
+        ON `history_historytext_id`=`historytext_id`
+        LEFT JOIN `player`
+        ON `history_player_id`=`player_id`
+        LEFT JOIN `name`
+        ON `player_name_id`=`name_id`
+        LEFT JOIN `surname`
+        ON `surname_id`=`player_surname_id`
+        LEFT JOIN `country`
+        ON `history_country_id`=`country_id`
+        LEFT JOIN `team`
+        ON `history_team_id`=`team_id`
+        LEFT JOIN `user`
+        ON `user_id`=`history_user_id`
+        ORDER BY `history_id` DESC
+        LIMIT 100";
+$history_sql = $mysqli->query($sql);
+
+$history_array = $history_sql->fetch_all(MYSQLI_ASSOC);
+
+include (__DIR__ . '/../view/admin_main.php');

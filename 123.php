@@ -8,6 +8,7 @@ $sql = "SELECT `team_id`,
         LEFT JOIN `user`
         ON `user_id`=`team_user_id`
         WHERE `user_last_visit`<UNIX_TIMESTAMP() - 14 * 24 * 24 * 60
+        AND `user_id`!='0'
         ORDER BY `team_id` ASC";
 $user_sql = $mysqli->query($sql);
 
@@ -20,9 +21,9 @@ for ($i=0; $i<$count_user; $i++)
     $team_id = $user_array[$i]['team_id'];
 
     $sql = "UPDATE `team`
-                SET `team_user_id`='0'
-                WHERE `team_id`='$team_id'
-                LIMIT 1";
+            SET `team_user_id`='0'
+            WHERE `team_id`='$team_id'
+            LIMIT 1";
     $mysqli->query($sql);
 
     f_igosja_history(2, $user_id, 0, $team_id);

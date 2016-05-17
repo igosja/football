@@ -43,3 +43,40 @@
     var registration_date = [<?= $registration_date; ?>];
     var registration_user = [<?= $registration_user; ?>];
 </script>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Последние пользователи
+            </div>
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Событие</th>
+                                <th>Пользователь</th>
+                                <th>Страна</th>
+                                <th>Команда</th>
+                                <th>Игрок</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($history_array as $item) { ?>
+                                <tr>
+                                    <td><?= f_igosja_ufu_date_time($item['history_date']); ?></td>
+                                    <td><?= $item['historytext_name']; ?></td>
+                                    <td><?= $item['user_login']; ?></td>
+                                    <td><?= $item['country_name']; ?></td>
+                                    <td><?= $item['team_name']; ?></td>
+                                    <td><?= $item['name_name']; ?> <?= $item['surname_name']; ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

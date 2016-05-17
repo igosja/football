@@ -8,6 +8,7 @@ function f_igosja_generator_user_fire()
             LEFT JOIN `user`
             ON `user_id`=`team_user_id`
             WHERE `user_last_visit`<UNIX_TIMESTAMP() - 14 * 24 * 24 * 60
+            AND `user_id`!='0'
             ORDER BY `team_id` ASC";
     $user_sql = f_igosja_mysqli_query($sql);
 
