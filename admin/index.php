@@ -60,7 +60,7 @@ $sql = "SELECT `history_date`,
         LEFT JOIN `user`
         ON `user_id`=`history_user_id`
         ORDER BY `history_id` DESC
-        LIMIT 100";
+        LIMIT 25";
 $history_sql = $mysqli->query($sql);
 
 $history_array = $history_sql->fetch_all(MYSQLI_ASSOC);

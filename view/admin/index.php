@@ -47,7 +47,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Последние пользователи
+                <i class="fa fa-bar-chart-o fa-fw"></i> Последние пользователи (<a href="history.php">Подробнее</a>)
             </div>
             <div class="panel-body">
                 <div class="dataTable_wrapper">

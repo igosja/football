@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 $limit  = 100;
 $page   = 0;
@@ -51,5 +51,4 @@ if ($count_pagination < $end_pagination)
     $end_pagination = $count_pagination;
 }
 
-
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

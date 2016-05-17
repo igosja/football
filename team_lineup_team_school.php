@@ -162,6 +162,13 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
                 LEFT JOIN `team`
                 ON `team_city_id`=`city_id`
                 WHERE `team_id`='$num_get'
+                AND `countryname_name_id`
+                NOT IN
+                (
+                    SELECT `player_name_id`
+                    FROM `player`
+                    WHERE `player_team_id`='$num_get'
+                )
                 ORDER BY RAND()
                 LIMIT 1";
         $name_sql = $mysqli->query($sql);
@@ -177,6 +184,13 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
                 LEFT JOIN `team`
                 ON `team_city_id`=`city_id`
                 WHERE `team_id`='$num_get'
+                AND `countrysurname_surname_id`
+                NOT IN
+                (
+                    SELECT `player_surname_id`
+                    FROM `player`
+                    WHERE `player_team_id`='$num_get'
+                )
                 ORDER BY RAND()
                 LIMIT 1";
         $surname_sql = $mysqli->query($sql);
@@ -249,6 +263,13 @@ if ($count_position > $count_school)
                     LEFT JOIN `team`
                     ON `team_city_id`=`city_id`
                     WHERE `team_id`='$num_get'
+                    AND `countryname_name_id`
+                    NOT IN
+                    (
+                        SELECT `player_name_id`
+                        FROM `player`
+                        WHERE `player_team_id`='$num_get'
+                    )
                     ORDER BY RAND()
                     LIMIT 1";
             $name_sql = $mysqli->query($sql);
@@ -264,6 +285,13 @@ if ($count_position > $count_school)
                     LEFT JOIN `team`
                     ON `team_city_id`=`city_id`
                     WHERE `team_id`='$num_get'
+                    AND `countrysurname_surname_id`
+                    NOT IN
+                    (
+                        SELECT `player_surname_id`
+                        FROM `player`
+                        WHERE `player_team_id`='$num_get'
+                    )
                     ORDER BY RAND()
                     LIMIT 1";
             $surname_sql = $mysqli->query($sql);
