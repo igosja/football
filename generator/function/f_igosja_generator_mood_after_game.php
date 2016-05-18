@@ -10,7 +10,7 @@ function f_igosja_generator_mood_after_game()
             ON `shedule_id`=`game_shedule_id`
             LEFT JOIN `player`
             ON `player_id`=`lineup_player_id`
-            SET `player_mood_id`=IF(`game_home_score`>`game_guest_score`, `player_mood_id`+'1', IF(`game_home_score`<`game_guest_score`, `player_mood_id`-'1', `player_mood_id`))
+            SET `player_mood_id`=IF(`game_home_score`>`game_guest_score`, `player_mood_id`-'1', IF(`game_home_score`<`game_guest_score`, `player_mood_id`+'1', `player_mood_id`))
             WHERE `shedule_date`=CURDATE()
             AND `game_played`='0'";
     f_igosja_mysqli_query($sql);
@@ -22,7 +22,7 @@ function f_igosja_generator_mood_after_game()
             ON `shedule_id`=`game_shedule_id`
             LEFT JOIN `player`
             ON `player_id`=`lineup_player_id`
-            SET `player_mood_id`=IF(`game_home_score`<`game_guest_score`, `player_mood_id`+'1', IF(`game_home_score`>`game_guest_score`, `player_mood_id`-'1', `player_mood_id`))
+            SET `player_mood_id`=IF(`game_home_score`<`game_guest_score`, `player_mood_id`-'1', IF(`game_home_score`>`game_guest_score`, `player_mood_id`+'1', `player_mood_id`))
             WHERE `shedule_date`=CURDATE()
             AND `game_played`='0'";
     f_igosja_mysqli_query($sql);
