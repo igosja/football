@@ -60,7 +60,8 @@ function f_igosja_generator_training()
             $reputation = $player_array[$i]['coach_reputation'];
         }
 
-        $percent = ceil($training_level * $reputation * $ability / 10000);
+        $percent            = ceil($training_level * $reputation * $ability / 10000);
+        $training_percent   = ceil($percent * $intensity / 10);
 
         if (0 != $position_id)
         {
@@ -79,19 +80,19 @@ function f_igosja_generator_training()
                 $sql = "INSERT INTO `playerposition`
                         SET `playerposition_player_id`='$player_id',
                             `playerposition_position_id`='$position_id',
-                            `playerposition_value`='$percent'*'$intensity'";
+                            `playerposition_value`='$training_percent'";
                 f_igosja_mysqli_query($sql);
             }
             else
             {
                 $sql = "UPDATE `playerposition`
-                        SET `playerposition_value`=`playerposition_value`+'$percent'*'$intensity'
+                        SET `playerposition_value`=`playerposition_value`+'$training_percent'
                         WHERE `playerposition_player_id`='$player_id'
                         AND `playerposition_position_id`='$position_id'";
                 f_igosja_mysqli_query($sql);
             }
 
-            $percent_minus = $percent_minus + $percent * $intensity;
+            $percent_minus = $percent_minus + $training_percent;
         }
 
         if (0 != $attribute_id)
@@ -111,23 +112,24 @@ function f_igosja_generator_training()
                 $sql = "INSERT INTO `training`
                         SET `training_player_id`='$player_id',
                             `training_attribute_id`='$attribute_id',
-                            `training_percent`='$percent'*'$intensity'";
+                            `training_percent`='$training_percent'";
                 f_igosja_mysqli_query($sql);
             }
             else
             {
                 $sql = "UPDATE `training`
-                        SET `training_percent`=`training_percent`+'$percent'*'$intensity'
+                        SET `training_percent`=`training_percent`+'$training_percent'
                         WHERE `training_player_id`='$player_id'
                         AND `training_attribute_id`='$attribute_id'";
                 f_igosja_mysqli_query($sql);
             }
 
-            $percent_minus = $percent_minus + $percent * $intensity;
+            $percent_minus = $percent_minus + $training_percent;
         }
 
         $percent    = ceil(($percent - $percent_minus) / TRAINING_ATTRIBUTES_COUNT);
-        $insert     = $update = array();
+        $insert     = array();
+        $update     = array();
 
         $sql = "SELECT `training_attribute_id`
                 FROM `training`

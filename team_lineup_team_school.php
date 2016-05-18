@@ -82,7 +82,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
     $height         = $school_array[0]['school_height'];
     $weight         = $school_array[0]['school_weight'];
     $school_level   = $school_array[0]['team_school_level'];
-    $ability        = $school_level * 10 - rand(0, 10);
+    $ability        = $school_level * 10 - rand(0, 9);
     $age            = 17;
 
     if (1 == $ok)
@@ -107,7 +107,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
 
         $player_id = $mysqli->insert_id;
 
-        f_igosja_history(HISTORY_TEXT_PLAYER_COME_FROM_SCHOOL, $authorization_user_id, 0, $num_get, $player_id);
+        f_igosja_history(HISTORY_TEXT_PLAYER_COME_FROM_SCHOOL, $authorization_user_id, 0, $num_get, $player_id); 
 
         if (GK_POSITION_ID == $position_id)
         {
@@ -156,13 +156,6 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
                 LEFT JOIN `team`
                 ON `team_city_id`=`city_id`
                 WHERE `team_id`='$num_get'
-                AND `countryname_name_id`
-                NOT IN
-                (
-                    SELECT `player_name_id`
-                    FROM `player`
-                    WHERE `player_team_id`='$num_get'
-                )
                 ORDER BY RAND()
                 LIMIT 1";
         $name_sql = $mysqli->query($sql);
@@ -257,13 +250,6 @@ if ($count_position > $count_school)
                     LEFT JOIN `team`
                     ON `team_city_id`=`city_id`
                     WHERE `team_id`='$num_get'
-                    AND `countryname_name_id`
-                    NOT IN
-                    (
-                        SELECT `player_name_id`
-                        FROM `player`
-                        WHERE `player_team_id`='$num_get'
-                    )
                     ORDER BY RAND()
                     LIMIT 1";
             $name_sql = $mysqli->query($sql);
