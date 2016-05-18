@@ -7,8 +7,8 @@ $sql = "SELECT `count_post`,
                `forumchapter_id`,
                `forumchapter_name`,
                `t3`.`forumpost_date` AS `forumpost_date`,
-               `forumtheme_id`,
-               `forumtheme_name`,
+               `t5`.`forumtheme_id` AS `forumtheme_id`,
+               `t5`.`forumtheme_name` AS `forumtheme_name`,
                `forumthemegroup_country_id`,
                `forumthemegroup_description`,
                `forumthemegroup_id`,
@@ -40,7 +40,7 @@ $sql = "SELECT `count_post`,
         (
             SELECT MAX(`forumpost_date`) AS `forumpost_date`,
                    MAX(`forumpost_id`) AS `forumpost_id`,
-                   `forumtheme_id` AS `forumtheme_id`,
+                   `forumtheme_id`,
                    `forumtheme_name`,
                    `forumtheme_forumthemegroup_id`
             FROM `forumpost`
@@ -52,6 +52,8 @@ $sql = "SELECT `count_post`,
         ON `t3`.`forumtheme_forumthemegroup_id`=`forumthemegroup_id`
         LEFT JOIN `forumpost` AS `t4`
         ON `t4`.`forumpost_id`=`t3`.`forumpost_id`
+        LEFT JOIN `forumtheme` AS `t5`
+        ON `t5`.`forumtheme_id`=`t4`.`forumpost_forumtheme_id`
         LEFT JOIN `user`
         ON `user_id`=`t4`.`forumpost_user_id`
         ORDER BY `forumchapter_id` ASC, `forumthemegroup_id` ASC";
