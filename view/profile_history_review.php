@@ -26,20 +26,20 @@
                     <td class="center"><?= $user_array[0]['user_sell_player']; ?></td>
                 </tr>
                 <tr>
-                    <td>Наименьшее время в клубе</td>
-                    <td class="center"><?= $user_array[0]['user_team_time_min']; ?> дн.</td>
+                    <td>Число трофеев</td>
+                    <td class="center"><?= $user_array[0]['user_trophy']; ?></td>
                     <td>Общая стоимость проданных игроков</td>
                     <td class="center"><?= f_igosja_money($user_array[0]['user_sell_price']); ?></td>
                 </tr>
                 <tr>
-                    <td>Число трофеев</td>
-                    <td class="center"><?= $user_array[0]['user_trophy']; ?></td>
+                    <td>Общее игровое время</td>
+                    <td class="center"><?= $career_array[0]['day']; ?> дн.</td>
                     <td>Наибольшая потраченная сумма</td>
                     <td class="center"><?= f_igosja_money($user_array[0]['user_sell_max']); ?></td>
                 </tr>
                 <tr>
-                    <td>Общее игровое время</td>
-                    <td class="center"><?= $career_array[0]['day']; ?> дн.</td>
+                    <td></td>
+                    <td></td>
                     <td>Наибольшая полученная сумма</td>
                     <td class="center"><?= f_igosja_money($user_array[0]['user_buy_max']); ?></td>
                 </tr>

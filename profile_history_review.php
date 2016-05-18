@@ -36,7 +36,6 @@ $sql = "SELECT `user_buy_max`,
                `user_sell_price`,
                `user_team`,
                `user_team_time_max`,
-               `user_team_time_min`,
                `user_trophy`
         FROM `user`
         WHERE `user_id`='$num_get'
