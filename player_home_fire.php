@@ -17,6 +17,44 @@ else
     $num_get = 1;
 }
 
+$sql = "SELECT COUNT(`player_id`) AS `count_player`
+        FROM `player`
+        WHERE `player_team_id`='$authorization_team_id'
+        AND `player_position_id`='1'
+        AND `player_id`!='$num_get'";
+$count_sql = $mysqli->query($sql);
+
+$count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+$count = $count_array[0]['count_player'];
+
+if (2 > $count)
+{
+    $_SESSION['message_class']  = 'error';
+    $_SESSION['message_text']   = 'В команде должно остаться не менее 2 вратарей.';
+
+    redirect('player_home_profile.php?num=' . $num_get);
+}
+
+$sql = "SELECT COUNT(`player_id`) AS `count_player`
+        FROM `player`
+        WHERE `player_team_id`='$authorization_team_id'
+        AND `player_position_id`!='1'
+        AND `player_id`!='$num_get'";
+$count_sql = $mysqli->query($sql);
+
+$count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+
+$count = $count_array[0]['count_player'];
+
+if (16 > $count)
+{
+    $_SESSION['message_class']  = 'error';
+    $_SESSION['message_text']   = 'В команде должно остаться не менее 16 полевых игроков.';
+
+    redirect('player_transfer_status.php?num=' . $num_get);
+}
+
 $sql = "SELECT `name_name`,
                `surname_name`
         FROM `player`
@@ -48,6 +86,14 @@ if (isset($_GET['ok']))
             SET `player_team_id`='0'
             WHERE `player_id`='$num_get'
             LIMIT 1";
+    $mysqli->query($sql);
+
+    $sql = "DELETE FROM `playeroffer`
+            WHERE `playeroffer_player_id`='$num_get'";
+    $mysqli->query($sql);
+
+    $sql = "DELETE FROM `transfer`
+            WHERE `transfer_player_id`='$num_get'";
     $mysqli->query($sql);
 
     f_igosja_history(HISTORY_TEXT_PLAYER_FIRE, $authorization_id, 0, $authorization_team_id, $num_get);
