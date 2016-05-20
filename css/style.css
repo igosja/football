@@ -786,37 +786,37 @@ td.nopadding
     background-color: #E1E2E4;
 }
 
-.link-home
+.link-home:before
 {
     content: url('../img/icon/home.png');
 }
 
-.link-list
+.link-list:before
 {
     content: url('../img/icon/list.png');
 }
 
-.link-pencil
+.link-pencil:before
 {
     content: url('../img/icon/pencil.png');
 }
 
-.link-plus
+.link-plus:before
 {
     content: url('../img/icon/plus.png');
 }
 
-.link-delete
+.link-delete:before
 {
     content: url('../img/icon/delete.png');
 }
 
-.link-eye
+.link-eye:before
 {
     content: url('../img/icon/eye.png');
 }
 
-.link-ok
+.link-ok:before
 {
     content: url('../img/icon/ok.png');
 }
