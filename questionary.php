@@ -2,6 +2,12 @@
 
 include (__DIR__ . '/include/include.php');
 
+if (!isset($authorization_id))
+{
+    include (__DIR__ . '/view/wrong_page.php');
+    exit;
+}
+
 if (isset($_POST['data']))
 {
     $firstname  = strip_tags($_POST['data']['firstname']);

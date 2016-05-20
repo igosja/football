@@ -187,7 +187,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
         $surname_id = $surname_array[0]['countrysurname_surname_id'];
 
         $sql = "UPDATE `school`
-                SET `school_height`='150'+'50'*RAND(),
+                SET `school_height`='165'+'35'*RAND(),
                     `school_name_id`='$name_id',
                     `school_surname_id`='$surname_id',
                     `school_weight`=`school_height`-'95'-'5'*RAND()
@@ -281,7 +281,7 @@ if ($count_position > $count_school)
             $surname_id = $surname_array[0]['countrysurname_surname_id'];
 
             $sql = "INSERT INTO `school`
-                    SET `school_height`='150'+'50'*RAND(),
+                    SET `school_height`='165'+'35'*RAND(),
                         `school_name_id`='$name_id',
                         `school_position_id`='$position_id',
                         `school_surname_id`='$surname_id',

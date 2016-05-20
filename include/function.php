@@ -311,7 +311,7 @@ function f_igosja_player_create($team_id, $i)
 
     $name_id    = $name_array[0]['countryname_name_id'];
     $surname_id = $name_array[0]['countrysurname_surname_id'];
-    $height     = rand (155, 195);
+    $height     = rand (165, 195);
     $weight     = $height - rand (95, 110);
     $age        = rand (17, 30);
 

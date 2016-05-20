@@ -5,6 +5,7 @@ include (__DIR__ . '/../include/include.php');
 $sql = "SELECT `count_theme`,
                `country_id`,
                `country_name`,
+               `forumchapter_id`,
                `forumchapter_name`,
                `forumthemegroup_id`,
                `forumthemegroup_name`
