@@ -13,8 +13,8 @@
                     Строительство бесплатно и пройдет мгновенно.
                 </p>
                 <p class="center">
-                    <button><a href="stadium.php?data[capacity]=<?= $new_capacity; ?>; ?>&ok=1">Изменить вместимость</a></button>
-                    <button><a href="stadium.php">Отказаться</a></button>
+                    <a href="stadium.php?data[capacity]=<?= $new_capacity; ?>; ?>&ok=1" class="button-link"><button>Изменить вместимость</button></a>
+                    <a href="stadium.php" class="button-link"><button>Отказаться</button></a>
                 </p>
             <?php } elseif (isset($new_capacity) && isset($increase) && 1 == $increase) { ?>
                 <p class="center">
@@ -23,8 +23,8 @@
                     Строительство продлится до <?= f_igosja_ufu_date(date('d.m.Y', time()+30*24*60*60)); ?>
                 </p>
                 <p class="center">
-                    <button><a href="stadium.php?data[capacity]=<?= $new_capacity; ?>; ?>&ok=1">Изменить вместимость</a></button>
-                    <button><a href="stadium.php">Отказаться</a></button>
+                    <a href="stadium.php?data[capacity]=<?= $new_capacity; ?>; ?>&ok=1" class="button-link"><button>Изменить вместимость</button></a>
+                    <a href="stadium.php" class="button-link"><button>Отказаться</button></a>
                 </p>
             <?php } else { ?>
                 <form method="GET">

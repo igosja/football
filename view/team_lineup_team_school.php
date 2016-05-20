@@ -5,12 +5,16 @@
             <?php if (isset($school_id)) { ?>
                 <p class="center">
                     Вы собираетесь перевести игрока <?= $name; ?> <?= $surname; ?>, <?= $position; ?> из моложедной команды в основную.<br />
-                    <button>
-                        <a href="team_lineup_team_school.php?num=<?= $num; ?>&school_id=<?= $school_id; ?>&ok=1">Подтверить</a>
-                    </button>
-                    <button>
-                        <a href="team_lineup_team_school.php?num=<?= $num; ?>">Отказаться</a>
-                    </button>
+                    <a href="team_lineup_team_school.php?num=<?= $num; ?>&school_id=<?= $school_id; ?>&ok=1" class="button-link">
+                        <button>
+                            Подтверить
+                        </button>
+                    </a>
+                    <a href="team_lineup_team_school.php?num=<?= $num; ?>" class="button-link">
+                        <button>
+                            Отказаться
+                        </button>
+                    </a>
                 </p>
             <?php } else { ?>
                 <table class="striped w100">

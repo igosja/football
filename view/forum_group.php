@@ -15,11 +15,11 @@
                 <tr>
                     <td>
                         <?php if (isset($authorization_id)) { ?>
-                            <button>
-                                <a href="forum_posting.php?group=<?= $head_array[0]['forumthemegroup_id']; ?>">
+                            <a href="forum_posting.php?group=<?= $head_array[0]['forumthemegroup_id']; ?>" class="button-link">
+                                <button>
                                     Создать тему
-                                </a>
-                            </button>
+                                </button>
+                            </a>
                         <?php } ?>
                     </td>
                     <td class="right">
@@ -29,15 +29,15 @@
                                       $i == $count_forum ||
                                      ($i >= $page - 2 &&
                                       $i <= $page + 2)) { ?>
-                                <button
-                                    <?php if ($i == $page) { ?>
-                                        class="button-active"
-                                    <?php } ?>
-                                >
-                                    <a href="forum_group.php?num=<?= $num; ?>&page=<?= $i; ?>">
+                                <a href="forum_group.php?num=<?= $num; ?>&page=<?= $i; ?>" class="button-link">
+                                    <button
+                                        <?php if ($i == $page) { ?>
+                                            class="button-active"
+                                        <?php } ?>
+                                    >
                                         <?= $i; ?>
-                                    </a>
-                                </button>
+                                    </button>
+                                </a>
                             <?php } ?>
                         <?php } ?>
                     </td>
@@ -95,11 +95,11 @@
                 <tr>
                     <td>
                         <?php if (isset($authorization_id)) { ?>
-                            <button>
-                                <a href="forum_posting.php?group=<?= $head_array[0]['forumthemegroup_id']; ?>">
+                            <a href="forum_posting.php?group=<?= $head_array[0]['forumthemegroup_id']; ?>" class="button-link">
+                                <button>
                                     Создать тему
-                                </a>
-                            </button>
+                                </button>
+                            </a>
                         <?php } ?>
                     </td>
                     <td class="right">
@@ -109,15 +109,15 @@
                                       $i == $count_forum ||
                                      ($i >= $page - 2 &&
                                       $i <= $page + 2)) { ?>
-                            <button
-                                <?php if ($i == $page) { ?>
-                                    class="button-active"
-                                <?php } ?>
-                            >
-                                <a href="forum_group.php?num=<?= $num; ?>&page=<?= $i; ?>">
-                                    <?= $i; ?>
+                                <a href="forum_group.php?num=<?= $num; ?>&page=<?= $i; ?>" class="button-link">
+                                    <button
+                                        <?php if ($i == $page) { ?>
+                                            class="button-active"
+                                        <?php } ?>
+                                    >
+                                        <?= $i; ?>
+                                    </button>
                                 </a>
-                            </button>
                             <?php } ?>
                         <?php } ?>
                     </td>

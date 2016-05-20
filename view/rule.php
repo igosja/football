@@ -19,9 +19,11 @@
                         <td>
                             <?= $rule_array[0]['rule_text']; ?>
                             <p class="center">
-                                <button>
-                                    <a href="rule.php">Назад</a>
-                                </button>
+                                <a href="rule.php" class="button-link">
+                                    <button>
+                                        Назад
+                                    </button>
+                                </a>
                             </p>
                         </td>
                     </tr>

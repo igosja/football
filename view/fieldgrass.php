@@ -14,8 +14,8 @@
                     Замена газона продлится до <?= date('d.m.Y', time()+24*60*60); ?>
                 </p>
                 <p class="center">
-                    <button><a href="fieldgrass.php?change=1&ok=1">Заменить газон</a></button>
-                    <button><a href="fieldgrass.php">Отказаться от замены</a></button>
+                    <a href="fieldgrass.php?change=1&ok=1" class="button-link"><button>Заменить газон</button></a>
+                    <a href="fieldgrass.php" class="button-link"><button>Отказаться от замены</button></a>
                 </p>
             <?php } else { ?>
                 <table class="striped w100">
@@ -37,9 +37,11 @@
                     </tr>
                     <tr>
                         <td class="center" colspan="2">
-                            <button>
-                                <a href="fieldgrass.php?change=1&ok=0">Заменить газон</a>
-                            </button>
+                            <a href="fieldgrass.php?change=1&ok=0" class="button-link">
+                                <button>
+                                    Заменить газон
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 </table>

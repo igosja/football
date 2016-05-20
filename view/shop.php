@@ -83,31 +83,31 @@
                 <tr>
                     <td>1 балл для улучшения характеристик игрока своей команды</td>
                     <td class="right">
-                        <button>
-                            <a href="shop.php?point=1">
+                        <a href="shop.php?point=1" class="button-link">
+                            <button>
                                 Купить за 1 ед.
-                            </a>
-                        </button>
+                            </button>
+                        </a>
                     </td>
                 </tr>
                 <tr>
                     <td>Дополнительная позиция для игрока своей команды</td>
                     <td class="right">
-                        <button>
-                            <a href="shop.php?position=1">
+                        <a href="shop.php?position=1" class="button-link">
+                            <button>
                                 Купить за 5 ед.
-                            </a>
-                        </button>
+                            </button>
+                        </a>
                     </td>
                 </tr>
                 <tr>
                     <td>1 млн. $ на счёт своей команды</td>
                     <td class="right">
-                        <button>
-                            <a href="shop.php?money=1">
+                        <a href="shop.php?money=1" class="button-link">
+                            <button>
                                 Купить за 10 ед.
-                            </a>
-                        </button>
+                            </button>
+                        </a>
                     </td>
                 </tr>
             </table>

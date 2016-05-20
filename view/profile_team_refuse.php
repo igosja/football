@@ -5,8 +5,8 @@
             <p class="center">Вы собираетесь отказаться от управления своей командой:</p>
             <h6 class="center"><?= $authorization_team_name; ?></h6>
             <p class="center">
-                <button><a href="profile_team_refuse.php?ok=1">Покинуть команду</a></button>
-                <button><a href="profile_home_home.php">Остаться в команде</a></button>
+                <a href="profile_team_refuse.php?ok=1" class="button-link"><button>Покинуть команду</button></a>
+                <a href="profile_home_home.php" class="button-link"><button>Остаться в команде</button></a>
             </p>
         </td>
     </tr>

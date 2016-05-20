@@ -14,8 +14,8 @@
                     Строительство продлится до <?= f_igosja_ufu_date(date('d.m.Y', time()+30*24*60*60)); ?>
                 </p>
                 <p class="center">
-                    <button><a href="school.php?level=1&ok=1">Начать строительство</a></button>
-                    <button><a href="school.php">Отказаться от строительства</a></button>
+                    <a href="school.php?level=1&ok=1" class="button-link"><button>Начать строительство</button></a>
+                    <a href="school.php" class="button-link"><button>Отказаться от строительства</button></a>
                 </p>
             <?php } elseif (isset($level) && 0 == $level) { ?>
                 <p class="center">
@@ -23,8 +23,8 @@
                     Строительство бесплатно и пройдет мгновенно.
                 </p>
                 <p class="center">
-                    <button><a href="school.php?level=0&ok=1">Провести строительство</a></button>
-                    <button><a href="school.php">Отказаться от строительства</a></button>
+                    <a href="school.php?level=0&ok=1" class="button-link"><button>Провести строительство</button></a>
+                    <a href="school.php" class="button-link"><button>Отказаться от строительства</button></a>
                 </p>
             <?php } else { ?>
                 <table class="striped w100">
@@ -45,8 +45,8 @@
                         <td><?= f_igosja_money($team_finance); ?></td>
                     </tr>
                     <tr>
-                        <td class="right"><button><a href="school.php?level=1&ok=0">Увеличить уровень</a></button></td>
-                        <td><button><a href="school.php?level=0&ok=0">Уменьшить уровень</a></button></td>
+                        <td class="right"><a href="school.php?level=1&ok=0" class="button-link"><button>Увеличить уровень</button></a></td>
+                        <td><a href="school.php?level=0&ok=0" class="button-link"><button>Уменьшить уровень</button></a></td>
                     </tr>
                 </table>
             <?php } ?>

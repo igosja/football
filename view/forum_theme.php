@@ -15,11 +15,11 @@
                 <tr>
                     <td>
                         <?php if (isset($authorization_id)) { ?>
-                            <button>
-                                <a href="forum_posting.php?theme=<?= $head_array[0]['forumtheme_id']; ?>">
+                            <a href="forum_posting.php?theme=<?= $head_array[0]['forumtheme_id']; ?>" class="button-link">
+                                <button>
                                     Ответить
-                                </a>
-                            </button>
+                                </button>
+                            </a>
                         <?php } ?>
                     </td>
                     <td class="right">
@@ -29,15 +29,15 @@
                                       $i == $count_forum ||
                                      ($i >= $page - 2 &&
                                       $i <= $page + 2)) { ?>
-                                <button
-                                    <?php if ($i == $page) { ?>
-                                        class="button-active"
-                                    <?php } ?>
-                                >
-                                    <a href="forum_theme.php?num=<?= $num; ?>&page=<?= $i; ?>">
+                                <a href="forum_theme.php?num=<?= $num; ?>&page=<?= $i; ?>" class="button-link">
+                                    <button
+                                        <?php if ($i == $page) { ?>
+                                            class="button-active"
+                                        <?php } ?>
+                                    >
                                         <?= $i; ?>
-                                    </a>
-                                </button>
+                                    </button>
+                                </a>
                             <?php } ?>
                         <?php } ?>
                     </td>
@@ -60,11 +60,11 @@
                         </a>
                         <br />
                         <?php if (isset($authorization_id) && $authorization_id != $head_array[0]['user_id']) { ?>
-                            <button>
-                                <a href="profile_news_outbox.php?answer=<?= $head_array[0]['user_id']; ?>">
+                            <a href="profile_news_outbox.php?answer=<?= $head_array[0]['user_id']; ?>" class="button-link">
+                                <button>
                                     ЛC
-                                </a>
-                            </button>
+                                </button>
+                            </a>
                         <?php } ?>
                     </td>
                     <td>
@@ -91,22 +91,22 @@
                             </a>
                             <br />
                             <?php if (isset($authorization_id) && $authorization_id != $forum_array[$i]['user_id']) { ?>
-                                <button>
-                                    <a href="profile_news_outbox.php?answer=<?= $forum_array[$i]['user_id']; ?>">
+                                <a href="profile_news_outbox.php?answer=<?= $forum_array[$i]['user_id']; ?>" class="button-link">
+                                    <button>
                                         ЛC
-                                    </a>
-                                </button>
+                                    </button>
+                                </a>
                             <?php } ?>
                         </td>
                         <td>
                             <p class="justify w100">
                                 <span class="grey"><?= f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?></span>
                                 <?php if (isset($authorization_id) && $authorization_id == $forum_array[$i]['user_id']) { ?>
-                                    <button class="fright">
-                                        <a href="forum_post_delete.php?num=<?= $forum_array[$i]['forumpost_id']; ?>">
+                                    <a href="forum_post_delete.php?num=<?= $forum_array[$i]['forumpost_id']; ?>" class="button-link">
+                                        <button class="fright">
                                             Удалить
-                                        </a>
-                                    </button>
+                                        </button>
+                                    </a>
                                 <?php }?>
                             </p>
                             <p class="justify"><?= nl2br($forum_array[$i]['forumpost_text']); ?></p>
@@ -118,11 +118,11 @@
                 <tr>
                     <td>
                         <?php if (isset($authorization_id)) { ?>
-                            <button>
-                                <a href="forum_posting.php?theme=<?= $head_array[0]['forumtheme_id']; ?>">
+                            <a href="forum_posting.php?theme=<?= $head_array[0]['forumtheme_id']; ?>" class="button-link">
+                                <button>
                                     Ответить
-                                </a>
-                            </button>
+                                </button>
+                            </a>
                         <?php } ?>
                     </td>
                     <td class="right">
@@ -132,15 +132,15 @@
                                       $i == $count_forum ||
                                      ($i >= $page - 2 &&
                                       $i <= $page + 2)) { ?>
-                                <button
-                                    <?php if ($i == $page) { ?>
-                                        class="button-active"
-                                    <?php } ?>
-                                >
-                                    <a href="forum_theme.php?num=<?= $num; ?>&page=<?= $i; ?>">
+                                <a href="forum_theme.php?num=<?= $num; ?>&page=<?= $i; ?>" class="button-link">
+                                    <button
+                                        <?php if ($i == $page) { ?>
+                                            class="button-active"
+                                        <?php } ?>
+                                    >
                                         <?= $i; ?>
-                                    </a>
-                                </button>
+                                    </button>
+                                </a>
                             <?php } ?>
                         <?php } ?>
                     </td>

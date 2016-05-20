@@ -15,7 +15,7 @@
                     <?php } ?>
                 />
                 <textarea class="w98" rows="10" placeholder="Сообщение" name="text" ></textarea>
-                <input type="submit" />
+                <input type="submit" value="Добавить сообщение" />
             </form>
         </td>
     </tr>

@@ -6,8 +6,8 @@
                 Вы собираетесь приобрести тренировку характеристики для игрока за 1 единицу.
             </p>
             <p class="center">
-                <button><a href="shop.php?point=1&ok=1">Подвердить</a></button>
-                <button><a href="shop.php">Отказаться</a></button>
+                <a href="shop.php?point=1&ok=1" class="button-link"><button>Подвердить</button></a>
+                <a href="shop.php" class="button-link"><button>Отказаться</button></a>
             </p>
         </td>
     </tr>

@@ -1070,15 +1070,15 @@ elseif (isset($_GET['inbox_id']))
 
     if (in_array($inboxtheme_id, array(INBOXTHEME_ASKTOPLAY, INBOXTHEME_ASKTOPLAY_YES, INBOXTHEME_ASKTOPLAY_NO)))
     {
-        $inbox_array[0]['inbox_button'] = '<button><a href="team_lineup_date_asktoplay.php?num=' . $authorization_team_id . '">Подробнее</a></button>';
+        $inbox_array[0]['inbox_button'] = '<a href="team_lineup_date_asktoplay.php?num=' . $authorization_team_id . '" class="button-link"><button>Подробнее</button></a>';
     }
     elseif (INBOXTHEME_TRANSFER == $inboxtheme_id)
     {
-        $inbox_array[0]['inbox_button'] = '<button><a href="team_team_transfer_center.php?num=' . $authorization_team_id . '">Подробнее</a></button>';
+        $inbox_array[0]['inbox_button'] = '<a href="team_team_transfer_center.php?num=' . $authorization_team_id . '" class="button-link"><button>Подробнее</button></a>';
     }
     elseif (INBOXTHEME_PERSONAL == $inboxtheme_id)
     {
-        $inbox_array[0]['inbox_button'] = '<button><a href="profile_news_outbox.php?num=' . $authorization_user_id . '&answer=' . $user_id . '">Ответить</a></button>';
+        $inbox_array[0]['inbox_button'] = '<a href="profile_news_outbox.php?num=' . $authorization_user_id . '&answer=' . $user_id . '" class="button-link"><button>Ответить</button></a>';
     }
     else
     {

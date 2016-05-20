@@ -14,8 +14,8 @@
                     Работы продлятся до <?= f_igosja_ufu_date(date('d.m.Y', time()+24*60*60)); ?>
                 </p>
                 <p class="center">
-                    <button><a href="fieldsize.php?data[length]=<?= $data['length']; ?>&data[width]=<?= $data['width']; ?>&ok=1">Изменить размеры</a></button>
-                    <button><a href="fieldsize.php">Отказаться</a></button>
+                    <a href="fieldsize.php?data[length]=<?= $data['length']; ?>&data[width]=<?= $data['width']; ?>&ok=1" class="button-link"><button>Изменить размеры</button></a>
+                    <a href="fieldsize.php" class="button-link"><button>Отказаться</button></a>
                 </p>
             <?php } else { ?>
                 <form method="GET">
