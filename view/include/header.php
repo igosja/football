@@ -97,14 +97,14 @@
                                         </li>
                                         <?php if (isset($authorization_team_id)) { ?>
                                             <li>
-                                                <a href="team_lineup_team_player.php?num=<?= $authorization_team_id ?>" class="main-menu-link">
+                                                <a href="team_team_review_profile.php?num=<?= $authorization_team_id ?>" class="main-menu-link">
                                                     <?= $authorization_team_name; ?>
                                                 </a>
                                             </li>
                                         <?php } ?>
                                         <?php if (isset($authorization_country_id)) { ?>
                                             <li>
-                                                <a href="national_lineup_team_player.php?num=<?= $authorization_country_id ?>" class="main-menu-link">
+                                                <a href="national_team_review_profile.php?num=<?= $authorization_country_id ?>" class="main-menu-link">
                                                     <?= $authorization_country_name; ?>
                                                 </a>
                                             </li>

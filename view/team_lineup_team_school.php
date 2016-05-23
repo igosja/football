@@ -4,7 +4,7 @@
             <p class="header">Игроки</p>
             <?php if (isset($school_id)) { ?>
                 <p class="center">
-                    Вы собираетесь перевести игрока <?= $name; ?> <?= $surname; ?>, <?= $position; ?> из моложедной команды в основную.<br />
+                    Вы собираетесь перевести игрока <?= $name; ?> <?= $surname; ?>, <?= $position; ?> из молодежной команды в основную.<br />
                     <a href="team_lineup_team_school.php?num=<?= $num; ?>&school_id=<?= $school_id; ?>&ok=1" class="button-link">
                         <button>
                             Подтверить
