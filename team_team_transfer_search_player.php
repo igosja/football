@@ -200,7 +200,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `player_country_id`=`country_id`
         LEFT JOIN `position`
         ON `player_position_id`=`position_id`
-        WHERE `player_team_id`!='$num_get'
+        WHERE `player_team_id`!='0'
         AND `player_statustransfer_id`='2'
         AND `player_age` BETWEEN '$sql_age_min' AND '$sql_age_max'
         AND `player_weight` BETWEEN '$sql_weight_min' AND '$sql_weight_max'
