@@ -273,7 +273,7 @@
                 <?php foreach ($disqualification_array as $item) { ?>
                     <tr>
                         <td class="w1" rowspan="2">
-                            <?php if (2 >= $item['disqualification_yellow'] || 1 >= $item['disqualification_red']) { ?>
+                            <?php if (2 <= $item['disqualification_yellow'] || 1 <= $item['disqualification_red']) { ?>
                                 <img alt="Красная карточка" class="img-30" src="/img/card/red.png" />
                             <?php } else { ?>
                                 <img alt="Желтая карточка" class="img-30" src="/img/card/yellow.png" />
@@ -283,7 +283,7 @@
                             <?= SPACE; ?>
                         </td>
                         <td>
-                            <?php if (2 >= $item['disqualification_yellow'] || 1 >= $item['disqualification_red']) { ?>
+                            <?php if (2 <= $item['disqualification_yellow'] || 1 <= $item['disqualification_red']) { ?>
                                 Дисквалифицирован на 1 игру
                             <?php } else { ?>
                                 <?= 2 - $item['disqualification_yellow']; ?> ЖК до дисквалификации на 1 игру
