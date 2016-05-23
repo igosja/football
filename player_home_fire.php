@@ -96,6 +96,11 @@ if (isset($_GET['ok']))
             WHERE `transfer_player_id`='$num_get'";
     $mysqli->query($sql);
 
+    $sql = "DELETE FROM `teamwork`
+            WHERE `teamwork_first_id`='$num_get'
+            OR `teamwork_second_id`='$num_get'";
+    $mysqli->query($sql);
+
     f_igosja_history(HISTORY_TEXT_PLAYER_FIRE, $authorization_id, 0, $authorization_team_id, $num_get);
 
     $_SESSION['message_class']  = 'success';
