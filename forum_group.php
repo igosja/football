@@ -98,7 +98,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ) AS `t3`
         ON `t3`.`forumpost_id`=`t2`.`forumpost_id`
         WHERE `forumtheme_forumthemegroup_id`='$num_get'
-        ORDER BY `forumtheme_id` ASC
+        ORDER BY `post_id` DESC
         LIMIT $offset, $limit";
 $forum_sql = $mysqli->query($sql);
 
