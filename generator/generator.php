@@ -44,6 +44,7 @@ f_igosja_generator_injury_after_game();
 f_igosja_generator_make_injury();
 f_igosja_generator_training();
 f_igosja_generator_after_training();
+f_igosja_generator_player_power();
 f_igosja_generator_player_salary();
 f_igosja_generator_staff_salary();
 f_igosja_generator_team_price();
