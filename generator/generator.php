@@ -14,6 +14,7 @@ f_igosja_generator_team_to_statistic();
 f_igosja_generator_country_to_statistic();
 f_igosja_generator_user_to_statistic();
 f_igosja_generator_disqualification_decrease();
+f_igosja_generator_teamwork_decrease();
 f_igosja_generator_visitor();
 f_igosja_generator_game_result();
 f_igosja_generator_game_result_overtime();

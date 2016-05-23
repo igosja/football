@@ -84,6 +84,7 @@ function f_igosja_generator_game_result()
 
             $team_id    = $game_array[$i][$team_sql];
             $country_id = $game_array[$i][$country_sql];
+            $teamwork   = 0;
 
             if (0 != $team_id)
             {
@@ -95,6 +96,95 @@ function f_igosja_generator_game_result()
                 $team_country_lineup_sql        = "`lineup_country_id`='$country_id'";
                 $team_country_lineupmain_sql    = "`lineupmain_country_id`='$country_id'";
             }
+
+            $sql = "SELECT `lineup_player_id`
+                    FROM `lineup`
+                    WHERE `lineup_game_id`='$game_id'
+                    AND $team_country_lineup_sql
+                    AND `lineup_position_id`<='25'
+                    ORDER BY `lineup_position_id` ASC";
+            $lineup_sql = f_igosja_mysqli_query($sql);
+
+            $count_lineup = $lineup_sql->num_rows;
+            $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+
+            for ($k=0; $k<$count_lineup; $k++)
+            {
+                $num            = $k + 1;
+                $lineup_player  = 'lineup_' . $num;
+                $$lineup_player = $lineup_array[$k]['lineup_player_id'];
+            }
+
+            for ($k=0; $k<55; $k++)
+            {
+                if     ($k < 10) { $first = $lineup_1; }
+                elseif ($k < 19) { $first = $lineup_2; }
+                elseif ($k < 27) { $first = $lineup_3; }
+                elseif ($k < 34) { $first = $lineup_4; }
+                elseif ($k < 40) { $first = $lineup_5; }
+                elseif ($k < 45) { $first = $lineup_6; }
+                elseif ($k < 49) { $first = $lineup_7; }
+                elseif ($k < 52) { $first = $lineup_8; }
+                elseif ($k < 54) { $first = $lineup_9; }
+                elseif ($k < 55) { $first = $lineup_10; }
+                else             { $first = 0; }
+
+                if     (in_array($k, array(0)))                                     { $second = $lineup_2; }
+                elseif (in_array($k, array(1, 10)))                                 { $second = $lineup_3; }
+                elseif (in_array($k, array(2, 11, 19)))                             { $second = $lineup_4; }
+                elseif (in_array($k, array(3, 12, 20, 27)))                         { $second = $lineup_5; }
+                elseif (in_array($k, array(4, 13, 21, 28, 34)))                     { $second = $lineup_6; }
+                elseif (in_array($k, array(5, 14, 22, 29, 35, 40)))                 { $second = $lineup_7; }
+                elseif (in_array($k, array(6, 15, 23, 30, 36, 41, 45)))             { $second = $lineup_8; }
+                elseif (in_array($k, array(7, 16, 24, 31, 37, 42, 46, 49)))         { $second = $lineup_9; }
+                elseif (in_array($k, array(8, 17, 25, 32, 38, 43, 47, 50, 52)))     { $second = $lineup_10; }
+                elseif (in_array($k, array(9, 18, 26, 33, 39, 44, 48, 51, 53, 54))) { $second = $lineup_11; }
+                else                                                                { $second = 0; }
+
+                $sql = "SELECT `teamwork_id`,
+                               `teamwork_value`
+                        FROM `teamwork`
+                        WHERE (`teamwork_first_id`='$first'
+                        AND `teamwork_second_id`='$second')
+                        OR (`teamwork_first_id`='$second'
+                        AND `teamwork_second_id`='$first')
+                        LIMIT 1";
+                $teamwork_sql = f_igosja_mysqli_query($sql);
+
+                $count_teamwork = $teamwork_sql->num_rows;
+
+                if (0 != $count_teamwork)
+                {
+                    $teamwork_array = $teamwork_sql->fetch_all(MYSQLI_ASSOC);
+
+                    $teamwork_id    = $teamwork_array[0]['teamwork_id'];
+                    $teamwork_value = $teamwork_array[0]['teamwork_value'];
+
+                    $teamwork = $teamwork + $teamwork_value;
+
+                    if (0 != $first && 0 != $second)
+                    {
+                        $sql = "UPDATE `teamwork`
+                                SET `teamwork_value`=`teamwork_value`+'3'
+                                WHERE `teamwork_id`='$teamwork_id'
+                                LIMIT 1";
+                        f_igosja_mysqli_query($sql);
+                    }
+                }
+                else
+                {
+                    if (0 != $first && 0 != $second)
+                    {
+                        $sql = "INSERT INTO `teamwork`
+                                SET `teamwork_first_id`='$first',
+                                    `teamwork_second_id`='$second',
+                                    `teamwork_value`='3'";
+                        f_igosja_mysqli_query($sql);
+                    }
+                }
+            }
+
+            $teamwork = $teamwork / 55;
 
             $sql = "SELECT `lineupmain_gamemood_id`,
                            `lineupmain_gamestyle_id`
@@ -183,6 +273,7 @@ function f_igosja_generator_game_result()
                 $player_power           = $player_power * $power_koeff / 100;
                 $player_power           = $player_power + ($weather_id - 1) * 35;
                 $player_power           = $player_power + 110 - $stadium_length + 75 - $stadium_width;
+                $player_power           = $player_power + $player_power * $teamwork / 4 / 100;
                 $$team_power            = $$team_power + $player_power;
                 $player_power_main_3    = (2 - $$gamestyle) * $player_power / 3;
                 $player_power_extra_3   = ($player_power - $player_power_main_3) / 2;
