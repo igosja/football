@@ -14,7 +14,8 @@
                         value="RE: <?= $forum_array[0]['forumtheme_name']; ?>"
                     <?php } ?>
                 />
-                <textarea class="w98" rows="10" placeholder="Сообщение" name="text" ></textarea>
+                <textarea class="w98" rows="10" placeholder="Сообщение" name="text"><?php
+                    if (isset($answer_array[0]['forumpost_text'])) { ?>[quote]<?= $answer_array[0]['forumpost_text']; ?>[/quote]<?php } ?></textarea>
                 <input type="submit" value="Добавить сообщение" />
             </form>
         </td>

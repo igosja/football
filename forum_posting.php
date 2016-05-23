@@ -75,6 +75,19 @@ else
     $forum_sql = $mysqli->query($sql);
 
     $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
+
+    if (isset($_GET['answer']))
+    {
+        $answer = (int) $_GET['answer'];
+
+        $sql = "SELECT `forumpost_text`
+                FROM `forumpost`
+                WHERE `forumpost_id`='$answer'
+                LIMIT 1";
+        $answer_sql = $mysqli->query($sql);
+
+        $answer_array = $answer_sql->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
 $header_title       = 'Форум';

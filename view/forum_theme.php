@@ -108,8 +108,15 @@
                                         </button>
                                     </a>
                                 <?php }?>
+                                <?php if (isset($authorization_id) && $authorization_id != $forum_array[$i]['user_id']) { ?>
+                                    <a href="forum_posting.php?theme=<?= $head_array[0]['forumtheme_id']; ?>&answer=<?= $forum_array[$i]['forumpost_id']; ?>" class="button-link">
+                                        <button class="fright">
+                                            Цитата
+                                        </button>
+                                    </a>
+                                <?php } ?>
                             </p>
-                            <p class="justify"><?= nl2br($forum_array[$i]['forumpost_text']); ?></p>
+                            <p class="justify"><?= nl2br(str_replace('[/quote]', '</q>', str_replace('[quote]', '<q>', $forum_array[$i]['forumpost_text']))); ?></p>
                         </td>
                     </tr>
                 <?php } ?>
