@@ -11,6 +11,12 @@ else
     $num_get = 1;
 }
 
+if (!isset($authorization_team_id))
+{
+    include (__DIR__ . '/view/wrong_page.php');
+    exit;
+}
+
 $sql = "SELECT `country_id`,
                `country_name`,
                `mood_id`,

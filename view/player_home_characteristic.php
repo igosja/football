@@ -54,7 +54,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    Имеет сонтракт с клубом 
+                                    Имеет контракт с клубом
                                     <a href="team_team_review_profile.php?num=<?= $player_array[0]['team_id']; ?>">
                                         <?= $player_array[0]['team_name']; ?>
                                     </a>
