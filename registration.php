@@ -66,7 +66,9 @@ if (isset($_POST['data']))
     $code       = f_igosja_chiper_password($user_id);
     $href       = 'http://' . SITE_URL . '/activation.php?id=' . $user_id . '&code=' . $code;
     $subject    = 'Регистрация в футбольном онлайн менеджере';
-    $message    = 'Для завершения регистрации перейдите по следующей ссылке - ' . $href;
+    $message    =
+'Для завершения регистрации перейдите по следующей ссылке - ' . $href . '
+Команда Виртуальной футбольной лиги';
     $from       = 'From: noreply@' . SITE_URL;
     $mail       = mail($registration_email, $subject, $message, $from);
 

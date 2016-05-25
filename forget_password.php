@@ -45,8 +45,10 @@ if (isset($_POST['data']))
     $prepare->close();
 
     $subject    = 'Восстановление пароля в футбольном онлайн менеджере';
-    $message    = 'Вы можете зайти на сайт под логином ' . $user_login . ' и паролем ' . $password;
-    $from       = 'From: admin@' . SITE_URL;
+    $message    =
+'Вы можете зайти на сайт под логином ' . $user_login . ' и паролем ' . $password . '.
+Команда Виртуальной футбольной лиги';
+    $from       = 'From: noreply@' . SITE_URL;
     $mail       = mail($email, $subject, $message, $from);
 
     $_SESSION['message_class']  = 'success';
