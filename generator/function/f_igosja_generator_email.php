@@ -1,28 +1,29 @@
 <?php
 
-include (__DIR__ . '/include/include.php');
-
-$sql = "SELECT `user_email`,
-               `user_login`
-        FROM `user`
-        WHERE `user_last_visit`<UNIX_TIMESTAMP()-'1728000'
-        AND `user_letter_third`='0'
-        AND `user_letter_second`='1'
-        AND `user_letter_first`='1'
-        AND `user_email` IS NOT NULL
-        AND `user_email`!=''
-        AND `user_id`!='0'";
-$user_sql = $mysqli->query($sql);
-
-$count_user = $user_sql->num_rows;
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
-
-for ($i=0; $i<$count_user; $i++)
+function f_igosja_generator_email()
+//Отправка письма менеджерам, которые давно не заходили на сайт
 {
-    $user_login = $user_array[$i]['user_login'];
-    $user_email = $user_array[$i]['user_email'];
+    $sql = "SELECT `user_email`,
+                   `user_login`
+            FROM `user`
+            WHERE `user_last_visit`<UNIX_TIMESTAMP()-'1728000'
+            AND `user_letter_third`='0'
+            AND `user_letter_second`='1'
+            AND `user_letter_first`='1'
+            AND `user_email` IS NOT NULL
+            AND `user_email`!=''
+            AND `user_id`!='0'";
+    $user_sql = f_igosja_mysqli_query($sql);
 
-    $message    =
+    $count_user = $user_sql->num_rows;
+    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+
+    for ($i=0; $i<$count_user; $i++)
+    {
+        $user_login = $user_array[$i]['user_login'];
+        $user_email = $user_array[$i]['user_email'];
+
+        $message    =
 'Здравствуйте, ' . $user_login . '.
 
 Мы заметили, что вы давно не заходили на сайт Виртуальной футбольной лиги (virtual-football-league.net).
@@ -33,41 +34,42 @@ for ($i=0; $i<$count_user; $i++)
 Наслаждайтесь!
 
 Команда Виртуальной футбольной лиги.';
-    $subject    = 'Виртуальная футбольная лига';
-    $from       = 'From: noreply@' . SITE_URL;
-    $mail       = mail($user_email, $subject, $message, $from);
-}
+        $subject    = 'Виртуальная футбольная лига';
+        $from       = 'From: noreply@virtual-football-league.net';
 
-$sql = "UPDATE `user`
-        SET `user_letter_third`='1'
-        WHERE `user_last_visit`<UNIX_TIMESTAMP()-'1728000'
-        AND `user_email` IS NOT NULL
-        AND `user_email`!=''
-        AND `user_letter_second`='1'
-        AND `user_letter_first`='1'
-        AND `user_id`!='0'";
-$mysqli->query($sql);
+        mail($user_email, $subject, $message, $from);
+    }
 
-$sql = "SELECT `user_email`,
-               `user_login`
-        FROM `user`
-        WHERE `user_last_visit`<UNIX_TIMESTAMP()-'864000'
-        AND `user_letter_second`='0'
-        AND `user_letter_first`='1'
-        AND `user_email` IS NOT NULL
-        AND `user_email`!=''
-        AND `user_id`!='0'";
-$user_sql = $mysqli->query($sql);
+    $sql = "UPDATE `user`
+            SET `user_letter_third`='1'
+            WHERE `user_last_visit`<UNIX_TIMESTAMP()-'1728000'
+            AND `user_email` IS NOT NULL
+            AND `user_email`!=''
+            AND `user_letter_second`='1'
+            AND `user_letter_first`='1'
+            AND `user_id`!='0'";
+    f_igosja_mysqli_query($sql);
 
-$count_user = $user_sql->num_rows;
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $sql = "SELECT `user_email`,
+                   `user_login`
+            FROM `user`
+            WHERE `user_last_visit`<UNIX_TIMESTAMP()-'864000'
+            AND `user_letter_second`='0'
+            AND `user_letter_first`='1'
+            AND `user_email` IS NOT NULL
+            AND `user_email`!=''
+            AND `user_id`!='0'";
+    $user_sql = f_igosja_mysqli_query($sql);
 
-for ($i=0; $i<$count_user; $i++)
-{
-    $user_login = $user_array[$i]['user_login'];
-    $user_email = $user_array[$i]['user_email'];
+    $count_user = $user_sql->num_rows;
+    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
 
-    $message    =
+    for ($i=0; $i<$count_user; $i++)
+    {
+        $user_login = $user_array[$i]['user_login'];
+        $user_email = $user_array[$i]['user_email'];
+
+        $message    =
 'Здравствуйте, ' . $user_login . '.
 
 Мы заметили, что вы давно не заходили на сайт Виртуальной футбольной лиги (virtual-football-league.net).
@@ -78,39 +80,40 @@ for ($i=0; $i<$count_user; $i++)
 Наслаждайтесь!
 
 Команда Виртуальной футбольной лиги.';
-    $subject    = 'Виртуальная футбольная лига';
-    $from       = 'From: noreply@' . SITE_URL;
-    $mail       = mail($user_email, $subject, $message, $from);
-}
+        $subject    = 'Виртуальная футбольная лига';
+        $from       = 'From: noreply@virtual-football-league.net';
 
-$sql = "UPDATE `user`
-        SET `user_letter_second`='1'
-        WHERE `user_last_visit`<UNIX_TIMESTAMP()-'864000'
-        AND `user_email` IS NOT NULL
-        AND `user_email`!=''
-        AND `user_letter_first`='1'
-        AND `user_id`!='0'";
-$mysqli->query($sql);
+        mail($user_email, $subject, $message, $from);
+    }
 
-$sql = "SELECT `user_email`,
-               `user_login`
-        FROM `user`
-        WHERE `user_last_visit`<UNIX_TIMESTAMP()-'432000'
-        AND `user_letter_first`='0'
-        AND `user_email` IS NOT NULL
-        AND `user_email`!=''
-        AND `user_id`!='0'";
-$user_sql = $mysqli->query($sql);
+    $sql = "UPDATE `user`
+            SET `user_letter_second`='1'
+            WHERE `user_last_visit`<UNIX_TIMESTAMP()-'864000'
+            AND `user_email` IS NOT NULL
+            AND `user_email`!=''
+            AND `user_letter_first`='1'
+            AND `user_id`!='0'";
+    f_igosja_mysqli_query($sql);
 
-$count_user = $user_sql->num_rows;
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $sql = "SELECT `user_email`,
+                   `user_login`
+            FROM `user`
+            WHERE `user_last_visit`<UNIX_TIMESTAMP()-'432000'
+            AND `user_letter_first`='0'
+            AND `user_email` IS NOT NULL
+            AND `user_email`!=''
+            AND `user_id`!='0'";
+    $user_sql = f_igosja_mysqli_query($sql);
 
-for ($i=0; $i<$count_user; $i++)
-{
-    $user_login = $user_array[$i]['user_login'];
-    $user_email = $user_array[$i]['user_email'];
+    $count_user = $user_sql->num_rows;
+    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
 
-    $message    =
+    for ($i=0; $i<$count_user; $i++)
+    {
+        $user_login = $user_array[$i]['user_login'];
+        $user_email = $user_array[$i]['user_email'];
+
+        $message    =
 'Здравствуйте, ' . $user_login . '.
 
 Мы заметили, что вы давно не заходили на сайт Виртуальной футбольной лиги (virtual-football-league.net).
@@ -121,18 +124,22 @@ for ($i=0; $i<$count_user; $i++)
 Наслаждайтесь!
 
 Команда Виртуальной футбольной лиги.';
-    $subject    = 'Виртуальная футбольная лига';
-    $from       = 'From: noreply@' . SITE_URL;
-    $mail       = mail($user_email, $subject, $message, $from);
+        $subject    = 'Виртуальная футбольная лига';
+        $from       = 'From: noreply@virtual-football-league.net';
+
+        mail($user_email, $subject, $message, $from);
+    }
+
+    $sql = "UPDATE `user`
+            SET `user_letter_first`='1'
+            WHERE `user_last_visit`<UNIX_TIMESTAMP()-'432000'
+            AND `user_email` IS NOT NULL
+            AND `user_email`!=''
+            AND `user_id`!='0'";
+    f_igosja_mysqli_query($sql);
+
+    usleep(1);
+
+    print '.';
+    flush();
 }
-
-$sql = "UPDATE `user`
-        SET `user_letter_first`='1'
-        WHERE `user_last_visit`<UNIX_TIMESTAMP()-'432000'
-        AND `user_email` IS NOT NULL
-        AND `user_email`!=''
-        AND `user_id`!='0'";
-$mysqli->query($sql);
-
-print '<br />Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
-       <br />Потребление памяти: ' . number_format(memory_get_usage(), 0, ",", " ") . ' Б';
