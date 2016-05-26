@@ -92,10 +92,99 @@ function f_igosja_generator_game_result_overtime()
                 {
                     if (0 == $j)
                     {
+                        $instruction    = 'home_instruction';
+                        $team_sql       = 'game_home_team_id';
+                        $country_sql    = 'game_home_country_id';
+                    }
+                    else
+                    {
+                        $instruction    = 'guest_instruction';
+                        $team_sql       = 'game_guest_team_id';
+                        $country_sql    = 'game_guest_country_id';
+                    }
+
+                    $team_id    = $game_array[$i][$team_sql];
+                    $country_id = $game_array[$i][$country_sql];
+
+                    $sql = "SELECT COUNT(`teaminstruction_instruction_id`) AS `count`
+                            FROM `teaminstruction`
+                            WHERE `teaminstruction_game_id`='$game_id'
+                            AND `teaminstruction_team_id`='$team_id'
+                            AND `teaminstruction_country_id`='$country_id'";
+                    $instruction_sql = f_igosja_mysqli_query($sql);
+
+                    $instruction_array = $instruction_sql->fetch_all(MYSQLI_ASSOC);
+
+                    $$instruction = $instruction_array[0]['count'];
+
+                    if (0 == $$instruction)
+                    {
+                        $$instruction = 0;
+                    }
+                    elseif (0 == $$instruction % 3)
+                    {
+                        $$instruction = 1;
+                    }
+                    elseif (1 == $$instruction % 3)
+                    {
+                        $$instruction = 2;
+                    }
+                    else
+                    {
+                        $$instruction = 3;
+                    }
+                }
+
+                if (0 == $home_instruction || 0 == $guest_instruction)
+                {
+                    $home_instruction   = 0;
+                    $guest_instruction  = 0;
+                }
+                elseif ($home_instruction == $guest_instruction)
+                {
+                    $home_instruction   = 0;
+                    $guest_instruction  = 0;
+                }
+                elseif (1 == $home_instruction && 2 == $guest_instruction)
+                {
+                    $home_instruction   = 1;
+                    $guest_instruction  = 0;
+                }
+                elseif (2 == $home_instruction && 3 == $guest_instruction)
+                {
+                    $home_instruction   = 1;
+                    $guest_instruction  = 0;
+                }
+                elseif (3 == $home_instruction && 1 == $guest_instruction)
+                {
+                    $home_instruction   = 1;
+                    $guest_instruction  = 0;
+                }
+                elseif (2 == $home_instruction && 1 == $guest_instruction)
+                {
+                    $home_instruction   = 0;
+                    $guest_instruction  = 1;
+                }
+                elseif (3 == $home_instruction && 2 == $guest_instruction)
+                {
+                    $home_instruction   = 0;
+                    $guest_instruction  = 1;
+                }
+                elseif (1 == $home_instruction && 3 == $guest_instruction)
+                {
+                    $home_instruction   = 0;
+                    $guest_instruction  = 1;
+                }
+
+                for ($j=0; $j<HOME_GUEST_LOOP; $j++)
+                {
+                    if (0 == $j)
+                    {
                         $team           = 'home';
                         $team_sql       = 'game_home_team_id';
                         $country_sql    = 'game_home_country_id';
                         $field_bonus    = 0;
+                        $instruction    = 'home_instruction';
                     }
                     else
                     {
@@ -103,6 +192,7 @@ function f_igosja_generator_game_result_overtime()
                         $team_sql       = 'game_guest_team_id';
                         $country_sql    = 'game_guest_country_id';
                         $field_bonus    = $game_array[$i]['game_field_bonus'];
+                        $instruction    = 'guest_instruction';
                     }
 
                     $team_id    = $game_array[$i][$team_sql];
@@ -314,6 +404,8 @@ function f_igosja_generator_game_result_overtime()
                         $player_power           = $player_power + ($weather_id - 1) * 35;
                         $player_power           = $player_power + 110 - $stadium_length + 75 - $stadium_width;
                         $player_power           = $player_power + $player_power * $teamwork / 4 / 100;
+                        $player_power           = $player_power + $player_power * $$instruction / 10;
+                        $player_power           = round($player_power);
                         $$team_power            = $$team_power + $player_power;
                         $player_power_main_3    = (2 - $$gamestyle) * $player_power / 3;
                         $player_power_extra_3   = ($player_power - $player_power_main_3) / 2;
