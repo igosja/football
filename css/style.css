@@ -673,6 +673,16 @@ td.nopadding
     overflow: auto;
 }
 
+.overflow-manager
+{
+    height: 200px;
+}
+
+.overflow-profile
+{
+    height: 250px;
+}
+
 /*Ширина*/
 .h20
 {

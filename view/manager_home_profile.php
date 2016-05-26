@@ -32,41 +32,43 @@
         </td>
         <td class="block-page" rowspan="2">
             <p class="header">Краткое изложение карьеры</p>
-            <table class="striped w100">
-                <?php for ($i=0; $i<$count_career; $i++) { ?>
-                    <tr>
-                        <td class="w1" rowspan="3">
-                            <img
-                                alt="<?= $career_array[$i]['team_name']; ?>"
-                                class="img-50"
-                                src="/img/team/50/<?= $career_array[$i]['team_id']; ?>.png"
-                            />
-                        </td>
-                        <td><?= $career_array[$i]['team_name']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img
-                                alt="<?= $career_array[$i]['country_name']; ?>"
-                                class="img-12"
-                                src="/img/flag/12/<?= $career_array[$i]['country_id']; ?>.png"
-                            />
-                            <?= $career_array[$i]['country_name']; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Сезоны: <?= $career_array[$i]['history_season_id']; ?>
-                            -
-                            <?php if (isset($career_array[$i+1]['history_season_id'])) { ?>
-                                <?= $career_array[$i+1]['history_season_id']; ?>
-                            <?php } else { ?>
-                                н.в.
-                            <?php } ?>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </table>
+            <div class="overflow overflow-manager">
+                <table class="striped w100">
+                    <?php for ($i=0; $i<$count_career; $i++) { ?>
+                        <tr>
+                            <td class="w1" rowspan="3">
+                                <img
+                                    alt="<?= $career_array[$i]['team_name']; ?>"
+                                    class="img-50"
+                                    src="/img/team/50/<?= $career_array[$i]['team_id']; ?>.png"
+                                />
+                            </td>
+                            <td><?= $career_array[$i]['team_name']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img
+                                    alt="<?= $career_array[$i]['country_name']; ?>"
+                                    class="img-12"
+                                    src="/img/flag/12/<?= $career_array[$i]['country_id']; ?>.png"
+                                />
+                                <?= $career_array[$i]['country_name']; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Сезоны: <?= $career_array[$i]['history_season_id']; ?>
+                                -
+                                <?php if (isset($career_array[$i+1]['history_season_id'])) { ?>
+                                    <?= $career_array[$i+1]['history_season_id']; ?>
+                                <?php } else { ?>
+                                    н.в.
+                                <?php } ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
         </td>
     </tr>
     <tr>

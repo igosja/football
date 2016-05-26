@@ -66,7 +66,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Запланированное работы</td>
+                    <td>Запланированные работы</td>
                     <td>
                         <?php foreach ($building_array as $item) { ?>
                             <?= $item['buildingtype_name']; ?> (дата заврешения - <?= f_igosja_ufu_date($item['shedule_date']); ?>)<br />

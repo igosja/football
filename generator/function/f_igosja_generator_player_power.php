@@ -12,7 +12,7 @@ function f_igosja_generator_player_power()
                 GROUP BY `playerattribute_player_id`
             ) AS `t1`
             ON `player_id`=`playerattribute_player_id`
-            SET `player_power`=ROUND(POW(`power`, 1.3))
+            SET `player_power`=`power`
             WHERE `player_id`!='0'";
     f_igosja_mysqli_query($sql);
 

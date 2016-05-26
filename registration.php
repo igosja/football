@@ -68,6 +68,7 @@ if (isset($_POST['data']))
     $subject    = 'Регистрация в футбольном онлайн менеджере';
     $message    =
 'Для завершения регистрации перейдите по следующей ссылке - ' . $href . '
+
 Команда Виртуальной футбольной лиги';
     $from       = 'From: noreply@' . SITE_URL;
     $mail       = mail($registration_email, $subject, $message, $from);

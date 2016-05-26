@@ -46,7 +46,8 @@ if (isset($_POST['data']))
 
     $subject    = 'Восстановление пароля в футбольном онлайн менеджере';
     $message    =
-'Вы можете зайти на сайт под логином ' . $user_login . ' и паролем ' . $password . '.
+'Вы можете зайти на сайт под логином ' . $user_login . ' и паролем ' . $password . '
+
 Команда Виртуальной футбольной лиги';
     $from       = 'From: noreply@' . SITE_URL;
     $mail       = mail($email, $subject, $message, $from);
