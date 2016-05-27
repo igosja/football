@@ -4,13 +4,15 @@ function f_igosja_generator_email()
 //Отправка письма менеджерам, которые давно не заходили на сайт
 {
     $sql = "SELECT `user_email`,
-                   `user_login`
+                   `user_login`,
+                   `user_id`
             FROM `user`
             WHERE `user_last_visit`<UNIX_TIMESTAMP()-'1728000'
             AND `user_letter`='2'
             AND `user_email` IS NOT NULL
             AND `user_email`!=''
-            AND `user_id`!='0'";
+            AND `user_id`!='0'
+            LIMIT 10";
     $user_sql = f_igosja_mysqli_query($sql);
 
     $count_user = $user_sql->num_rows;
@@ -18,6 +20,7 @@ function f_igosja_generator_email()
 
     for ($i=0; $i<$count_user; $i++)
     {
+        $user_id    = $user_array[$i]['user_id'];
         $user_login = $user_array[$i]['user_login'];
         $user_email = $user_array[$i]['user_email'];
 
@@ -36,25 +39,24 @@ function f_igosja_generator_email()
         $from       = 'From: noreply@virtual-football-league.ru';
 
         mail($user_email, $subject, $message, $from);
+
+        $sql = "UPDATE `user`
+                SET `user_letter`='3'
+                WHERE `user_id`='$user_id'
+                LIMIT 1";
+        f_igosja_mysqli_query($sql);
     }
 
-    $sql = "UPDATE `user`
-            SET `user_letter`='3'
-            WHERE `user_last_visit`<UNIX_TIMESTAMP()-'1728000'
-            AND `user_email` IS NOT NULL
-            AND `user_email`!=''
-            AND `user_letter`='2'
-            AND `user_id`!='0'";
-    f_igosja_mysqli_query($sql);
-
     $sql = "SELECT `user_email`,
-                   `user_login`
+                   `user_login`,
+                   `user_id`
             FROM `user`
             WHERE `user_last_visit`<UNIX_TIMESTAMP()-'864000'
             AND `user_letter`='1'
             AND `user_email` IS NOT NULL
             AND `user_email`!=''
-            AND `user_id`!='0'";
+            AND `user_id`!='0'
+            LIMIT 10";
     $user_sql = f_igosja_mysqli_query($sql);
 
     $count_user = $user_sql->num_rows;
@@ -62,6 +64,7 @@ function f_igosja_generator_email()
 
     for ($i=0; $i<$count_user; $i++)
     {
+        $user_id    = $user_array[$i]['user_id'];
         $user_login = $user_array[$i]['user_login'];
         $user_email = $user_array[$i]['user_email'];
 
@@ -80,25 +83,24 @@ function f_igosja_generator_email()
         $from       = 'From: noreply@virtual-football-league.ru';
 
         mail($user_email, $subject, $message, $from);
+
+        $sql = "UPDATE `user`
+                SET `user_letter`='2'
+                WHERE `user_id`='$user_id'
+                LIMIT 1";
+        f_igosja_mysqli_query($sql);
     }
 
-    $sql = "UPDATE `user`
-            SET `user_letter`='2'
-            WHERE `user_last_visit`<UNIX_TIMESTAMP()-'864000'
-            AND `user_email` IS NOT NULL
-            AND `user_email`!=''
-            AND `user_letter`='1'
-            AND `user_id`!='0'";
-    f_igosja_mysqli_query($sql);
-
     $sql = "SELECT `user_email`,
-                   `user_login`
+                   `user_login`,
+                   `user_id`
             FROM `user`
             WHERE `user_last_visit`<UNIX_TIMESTAMP()-'432000'
             AND `user_letter`='0'
             AND `user_email` IS NOT NULL
             AND `user_email`!=''
-            AND `user_id`!='0'";
+            AND `user_id`!='0'
+            LIMIT 10";
     $user_sql = f_igosja_mysqli_query($sql);
 
     $count_user = $user_sql->num_rows;
@@ -106,6 +108,7 @@ function f_igosja_generator_email()
 
     for ($i=0; $i<$count_user; $i++)
     {
+        $user_id    = $user_array[$i]['user_id'];
         $user_login = $user_array[$i]['user_login'];
         $user_email = $user_array[$i]['user_email'];
 
@@ -124,16 +127,13 @@ function f_igosja_generator_email()
         $from       = 'From: noreply@virtual-football-league.ru';
 
         mail($user_email, $subject, $message, $from);
-    }
 
-    $sql = "UPDATE `user`
-            SET `user_letter`='1'
-            WHERE `user_last_visit`<UNIX_TIMESTAMP()-'432000'
-            AND `user_email` IS NOT NULL
-            AND `user_email`!=''
-            AND `user_letter`='0'
-            AND `user_id`!='0'";
-    f_igosja_mysqli_query($sql);
+        $sql = "UPDATE `user`
+                SET `user_letter`='1'
+                WHERE `user_id`='$user_id'
+                LIMIT 1";
+        f_igosja_mysqli_query($sql);
+    }
 
     usleep(1);
 

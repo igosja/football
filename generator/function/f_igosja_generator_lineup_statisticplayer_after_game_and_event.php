@@ -702,6 +702,37 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                                 `event_player_id`='$player_id',
                                 `event_country_id`='$country_id'";
                     f_igosja_mysqli_query($sql);
+
+                    $sql = "SELECT `lineup_id`,
+                                   `lineup_player_id`
+                            FROM `lineup`
+                            WHERE `lineup_country_id`='$country_opp_id'
+                            AND `lineup_position_id`='1'
+                            AND `lineup_game_id`='$game_id'
+                            LIMIT 1";
+                    $gk_sql = f_igosja_mysqli_query($sql);
+
+                    $gk_array = $gk_sql->fetch_all(MYSQLI_ASSOC);
+
+                    $player_id = $gk_array[0]['lineup_player_id'];
+                    $lineup_id = $gk_array[0]['lineup_id'];
+
+                    $sql = "UPDATE `statisticplayer`
+                            SET `statisticplayer_goal`=`statisticplayer_goal`-'1',
+                                `statisticplayer_penalty_goal`=`statisticplayer_penalty_goal`-'1'
+                            WHERE `statisticplayer_player_id`='$player_id'
+                            AND `statisticplayer_season_id`='$igosja_season_id'
+                            AND `statisticplayer_tournament_id`='$tournament_id'
+                            AND `statisticplayer_country_id`='$country_opp_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+
+                    $sql = "UPDATE `lineup`
+                            SET `lineup_goal`=`lineup_goal`-'1',
+                                `lineup_penalty_goal`=`lineup_penalty_goal`-'1'
+                            WHERE `lineup_id`='$lineup_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
                 }
 
                 for ($j=0; $j<$score-$penalty; $j++)
@@ -776,6 +807,35 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
 
                     $sql = "UPDATE `lineup`
                             SET `lineup_pass_scoring`=`lineup_pass_scoring`+'1'
+                            WHERE `lineup_id`='$lineup_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+
+                    $sql = "SELECT `lineup_id`,
+                                   `lineup_player_id`
+                            FROM `lineup`
+                            WHERE `lineup_country_id`='$country_opp_id'
+                            AND `lineup_position_id`='1'
+                            AND `lineup_game_id`='$game_id'
+                            LIMIT 1";
+                    $gk_sql = f_igosja_mysqli_query($sql);
+
+                    $gk_array = $gk_sql->fetch_all(MYSQLI_ASSOC);
+
+                    $player_id = $gk_array[0]['lineup_player_id'];
+                    $lineup_id = $gk_array[0]['lineup_id'];
+
+                    $sql = "UPDATE `statisticplayer`
+                            SET `statisticplayer_goal`=`statisticplayer_goal`-'1'
+                            WHERE `statisticplayer_player_id`='$player_id'
+                            AND `statisticplayer_season_id`='$igosja_season_id'
+                            AND `statisticplayer_tournament_id`='$tournament_id'
+                            AND `statisticplayer_country_id`='$country_opp_id'
+                            LIMIT 1";
+                    f_igosja_mysqli_query($sql);
+
+                    $sql = "UPDATE `lineup`
+                            SET `lineup_goal`=`lineup_goal`-'1'
                             WHERE `lineup_id`='$lineup_id'
                             LIMIT 1";
                     f_igosja_mysqli_query($sql);
