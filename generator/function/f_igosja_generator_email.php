@@ -7,9 +7,7 @@ function f_igosja_generator_email()
                    `user_login`
             FROM `user`
             WHERE `user_last_visit`<UNIX_TIMESTAMP()-'1728000'
-            AND `user_letter_third`='0'
-            AND `user_letter_second`='1'
-            AND `user_letter_first`='1'
+            AND `user_letter`='2'
             AND `user_email` IS NOT NULL
             AND `user_email`!=''
             AND `user_id`!='0'";
@@ -41,12 +39,11 @@ function f_igosja_generator_email()
     }
 
     $sql = "UPDATE `user`
-            SET `user_letter_third`='1'
+            SET `user_letter`='3'
             WHERE `user_last_visit`<UNIX_TIMESTAMP()-'1728000'
             AND `user_email` IS NOT NULL
             AND `user_email`!=''
-            AND `user_letter_second`='1'
-            AND `user_letter_first`='1'
+            AND `user_letter`='2'
             AND `user_id`!='0'";
     f_igosja_mysqli_query($sql);
 
@@ -54,8 +51,7 @@ function f_igosja_generator_email()
                    `user_login`
             FROM `user`
             WHERE `user_last_visit`<UNIX_TIMESTAMP()-'864000'
-            AND `user_letter_second`='0'
-            AND `user_letter_first`='1'
+            AND `user_letter`='1'
             AND `user_email` IS NOT NULL
             AND `user_email`!=''
             AND `user_id`!='0'";
@@ -87,11 +83,11 @@ function f_igosja_generator_email()
     }
 
     $sql = "UPDATE `user`
-            SET `user_letter_second`='1'
+            SET `user_letter`='2'
             WHERE `user_last_visit`<UNIX_TIMESTAMP()-'864000'
             AND `user_email` IS NOT NULL
             AND `user_email`!=''
-            AND `user_letter_first`='1'
+            AND `user_letter`='1'
             AND `user_id`!='0'";
     f_igosja_mysqli_query($sql);
 
@@ -99,7 +95,7 @@ function f_igosja_generator_email()
                    `user_login`
             FROM `user`
             WHERE `user_last_visit`<UNIX_TIMESTAMP()-'432000'
-            AND `user_letter_first`='0'
+            AND `user_letter`='0'
             AND `user_email` IS NOT NULL
             AND `user_email`!=''
             AND `user_id`!='0'";
@@ -131,10 +127,11 @@ function f_igosja_generator_email()
     }
 
     $sql = "UPDATE `user`
-            SET `user_letter_first`='1'
+            SET `user_letter`='1'
             WHERE `user_last_visit`<UNIX_TIMESTAMP()-'432000'
             AND `user_email` IS NOT NULL
             AND `user_email`!=''
+            AND `user_letter`='0'
             AND `user_id`!='0'";
     f_igosja_mysqli_query($sql);
 

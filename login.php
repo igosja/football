@@ -107,9 +107,7 @@ if (isset($_POST['data']))
     $mysqli->query($sql);
 
     $sql = "UPDATE `user`
-            SET `user_letter_first`='0',
-                `user_letter_second`='0',
-                `user_letter_third`='0'
+            SET `user_letter`='0'
             WHERE `user_id`='$authorization_user_id'
             LIMIT 1";
     $mysqli->query($sql);
