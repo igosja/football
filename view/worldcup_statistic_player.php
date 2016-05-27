@@ -221,7 +221,7 @@
             </table>
         </td>
         <td class="block-page">
-            <p class="header">Перодоленное расстояние (км)</p>
+            <p class="header">Преодолённое расстояние (км)</p>
             <table class="striped w100">
                 <?php foreach ($distance_array as $item) { ?>
                     <tr>

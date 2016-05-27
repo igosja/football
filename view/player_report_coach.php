@@ -4,11 +4,15 @@
             <p class="header">Отчет</p>
             <table class="center w100">
                 <tr>
-                    <td>Потенциальные способности</td>
+                    <td class="w50">Потенциальные способности</td>
+                    <td>Текущие способности</td>
                 </tr>
                 <tr>
                     <td>
                         <?= f_igosja_five_star($player_array[0]['player_ability'], 20); ?>
+                    </td>
+                    <td>
+                        <?= f_igosja_five_star($player_array[0]['player_power'], 20); ?>
                     </td>
                 </tr>
             </table>
@@ -20,7 +24,7 @@
             <table class="center w100">
                 <tr>
                     <td class="w50">Позиция</td>
-                    <td>Роль</td>
+                    <td>Лучшая роль</td>
                 </tr>
                 <tr>
                     <td><h5><?= $player_array[0]['position_description']; ?></h5></td>
@@ -31,11 +35,12 @@
         <td class="block-page">
             <p class="header">Пригодность</p>
             <table class="striped w100">
-                <?php foreach ($player_array as $item) { ?>
+                <?php for ($i=0; $i<$count_player; $i++) { ?>
+                    <?php if ($i == $best_place) { $best_bonus = 10; } else { $best_bonus = 0; } ?>
                     <tr>
-                        <td class="w50"><?= $item['role_name']; ?></td>
+                        <td class="w50"><?= $player_array[$i]['role_name']; ?></td>
                         <td class="center">
-                            <?= f_igosja_five_star($item['player_ability'], 12); ?>
+                            <?= f_igosja_five_star($player_array[$i]['player_power'] + $best_bonus, 12); ?>
                         </td>
                     </tr>
                 <?php } ?>

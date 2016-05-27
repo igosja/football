@@ -13,6 +13,7 @@ else
 
 $sql = "SELECT `name_name`,
                `player_ability`,
+               `player_power`/'" . MAX_PLAYER_POWER . "' AS `player_power`,
                `position_description`,
                `role_name`,
                `surname_name`,
@@ -48,6 +49,8 @@ $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
 
+$best_place         = $num_get % 10;
+$best_place         = $best_place % $count_player;
 $num                = $num_get;
 $header_title       = $player_name . ' ' . $player_surname;
 $seo_title          = $header_title . '. Отчет от тренера. ' . $seo_title;
