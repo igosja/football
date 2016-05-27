@@ -122,6 +122,7 @@ define('SITE_CLOSED', 0);
 define('SPACE', '&nbsp;');
 define('STAFFPOST_COACH', 1);
 define('STAFFPOST_GK', 2);
+define('STAFFPOST_SCHOOL', 3);
 define('STAFFPOST_SCOUT', 6);
 define('THREE_DAYS_TO_SECOND', 259200);
 define('TOURNAMENT_TYPE_CHAMPIONS_LEAGUE', 4);

@@ -1443,4 +1443,10 @@ $(document).ready(function($)
             }
         );
     });
+
+    $('#form-school-link').on('click', function()
+    //Выбор молодого игрока из спортшколы
+    {
+        $('#form-school').submit();
+    });
 });
