@@ -235,7 +235,8 @@ $sql = "SELECT `surname_id`,
         ON `countrysurname_country_id`=`city_country_id`
         LEFT JOIN `team`
         ON `team_city_id`=`city_id`
-        WHERE `team_id`='$num_get'";
+        WHERE `team_id`='$num_get'
+        ORDER BY `surname_name` ASC";
 $surname_sql = $mysqli->query($sql);
 
 $surname_array = $surname_sql->fetch_all(MYSQLI_ASSOC);
