@@ -1,8 +1,23 @@
 <table class="block-table w100">
-    <tr>
-        <td class="block-page">
-            <p class="header">Спортшкола</p>
-            <?php if (isset($ok)) { ?>
+    <?php if (isset($school_id)) { ?>
+        <tr>
+            <td class="block-page">
+                <p class="header">Спортшкола</p>
+                <p class="center">
+                    Вы собираетесь перевести игрока <?= $name; ?> <?= $surname; ?>, <?= $position; ?> из моложедной команды в основную.<br />
+                    <button>
+                        <a href="team_lineup_team_school.php?num=<?= $num; ?>&school_id=<?= $school_id; ?>&ok=1">Подтверить</a>
+                    </button>
+                    <button>
+                        <a href="team_lineup_team_school.php?num=<?= $num; ?>">Отказаться</a>
+                    </button>
+                </p>
+            </td>
+        </tr>
+    <?php } elseif (isset($ok)) { ?>
+        <tr>
+            <td class="block-page">
+                <p class="header">Спортшкола</p>
                 <p class="center">
                     Вы собираетесь перевести игрока <?= $name; ?> <?= $surname; ?>, <?= $position; ?> из молодежной команды в основную.<br />
                     <a href="team_lineup_team_school.php?num=<?= $num; ?>&data[weight]=<?= $weight; ?>&data[height]=<?= $height; ?>&data[country_id]=<?= $country_id; ?>&data[name_id]=<?= $name_id; ?>&data[surname_id]=<?= $surname_id; ?>&data[position_id]=<?= $position_id; ?>&ok=1" class="button-link">
@@ -16,7 +31,12 @@
                         </button>
                     </a>
                 </p>
-            <?php } else { ?>
+            </td>
+        </tr>
+    <?php } else { ?>
+        <tr>
+            <td class="block-page">
+                <p class="header">Созать игрока</p>
                 <form method="GET" id="form-school">
                     <table class="striped w100">
                         <tr>
@@ -105,7 +125,60 @@
                     <input type="hidden" name="ok" value="0" />
                     <input type="hidden" name="data[country_id]" value="<?= $country_array[0]['country_id']; ?>" />
                 </form>
-            <?php } ?>
-        </td>
-    </tr>
+            </td>
+        </tr>
+        <tr>
+            <td class="block-page">
+                <p class="header">Игроки</p>
+                <table class="striped w100">
+                    <tr>
+                        <th class="w1"></th>
+                        <th>Имя</th>
+                        <th class="w5">Нац</th>
+                        <th class="w5">Поз</th>
+                        <th class="w5">Воз</th>
+                        <th class="w5">Вес</th>
+                        <th class="w5">Рост</th>
+                        <th class="w15">Настроение</th>
+                        <th class="w5">Конд</th>
+                        <th class="w5">Фит</th>
+                    </tr>
+                    <?php foreach ($school_array as $item) { ?>
+                        <tr>
+                            <td class="nopadding">
+                                <a class="link-img link-ok" href="team_lineup_team_school.php?num=<?= $num; ?>&school_id=<?= $item['school_id']; ?>&ok=0"></a>
+                            </td>
+                            <td>
+                                <?= $item['name_name']; ?>
+                                <?= $item['surname_name']; ?>
+                            </td>
+                            <td class="center">
+                                <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                    <img
+                                        alt="<?= $item['country_name']; ?>"
+                                        class="img-12"
+                                        src="/img/flag/12/<?= $item['country_id']; ?>.png"
+                                    />
+                                </a>
+                            </td>
+                            <td class="center"><?= $item['position_name']; ?></td>
+                            <td class="center">17</td>
+                            <td class="center"><?= $item['school_weight']; ?> кг</td>
+                            <td class="center"><?= $item['school_height']; ?> см</td>
+                            <td>
+                                <img
+                                    alt="<?= $item['mood_name']; ?>"
+                                    class="img-12"
+                                    src="/img/mood/<?= $item['mood_id']; ?>.png"
+                                />
+                                <?= $item['mood_name']; ?>
+                            </td>
+                            <td class="center"><?= $item['school_condition']; ?> %</td>
+                            <td class="center"><?= $item['school_practice']; ?> %</td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </td>
+        </tr>
+    <?php } ?>
 </table>
