@@ -99,9 +99,6 @@
                                         data-position="<?= $lineup['lineup_position_id']; ?>"
                                     <?php } ?>
                                 <?php } ?>
-                                <?php if ($item['disqualification_player_id']) { ?>
-                                    disabled
-                                <?php } ?>
                             >
                             </select>
                         </td>
@@ -112,9 +109,6 @@
                                     <?php if ($lineup['lineup_player_id'] == $item['player_id']) { ?>
                                         data-role="<?= $lineup['lineup_role_id']; ?>"
                                     <?php } ?>
-                                <?php } ?>
-                                <?php if ($item['disqualification_player_id']) { ?>
-                                    disabled
                                 <?php } ?>
                             >
                             </select>
