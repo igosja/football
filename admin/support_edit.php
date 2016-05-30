@@ -27,6 +27,12 @@ if (0 == $count_inbox)
     exit;
 }
 
+$sql = "UPDATE `inbox`
+        SET `inbox_read`='1'
+        WHERE `inbox_id`='$num_get'
+        LIMIT 1";
+$mysqli->query($sql);
+
 if (isset($_POST['inbox_text']))
 {
     $inbox_text = strip_tags($_POST['inbox_text']);
@@ -47,12 +53,6 @@ if (isset($_POST['inbox_text']))
         $prepare->execute();
         $prepare->close();
     }
-
-    $sql = "UPDATE `inbox`
-            SET `inbox_read`='1'
-            WHERE `inbox_id`='$num_get'
-            LIMIT 1";
-    $mysqli->query($sql);
 
     redirect('support_list.php');
 }
