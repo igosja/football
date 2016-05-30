@@ -82,7 +82,7 @@ if ($result)
 
         $sql = "UPDATE `user`
                 SET `user_letter`='0'
-                WHERE `user_id`='$authorization_user_id'
+                WHERE `user_id`='$user_id'
                 LIMIT 1";
         $mysqli->query($sql);
 
