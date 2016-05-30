@@ -75,7 +75,7 @@ function f_igosja_generator_make_injury()
 
             $injurytype_id  = $injurytype_array[0]['injurytype_id'];
             $injurytype_day = $injurytype_array[0]['injurytype_day'];
-            $injurytype_day = rand($injurytype_day - $reputation / 100);
+            $injurytype_day = round($injurytype_day - $reputation / 100);
 
             if (0 >= $injurytype_day)
             {
