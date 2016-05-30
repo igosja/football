@@ -41,22 +41,28 @@ function f_igosja_generator_make_injury()
 
             $team_id = $team_array[0]['team_id'];
 
-            $sql = "SELECT `lineup_player_id`
+            $sql = "SELECT `lineup_player_id`,
+                           `staff_reputation`
                     FROM `lineup`
                     LEFT JOIN `game`
                     ON `lineup_game_id`=`game_id`
                     LEFT JOIN `shedule`
                     ON `shedule_id`=`game_shedule_id`
+                    LEFT JOIN `staff`
+                    ON `staff_team_id`=`lineup_team_id`
                     WHERE `lineup_team_id`='$team_id'
                     AND `shedule_date`=CURDATE()
                     AND `game_played`='0'
+                    AND `staff_staffpost_id`='" . STAFFPOST_DOCTOR . "'
+                    AND `lineup_player_id`!='0'
                     ORDER BY `lineup_condition` ASC
                     LIMIT 1";
             $player_sql = f_igosja_mysqli_query($sql);
 
             $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
 
-            $player_id = $player_array[0]['lineup_player_id'];
+            $player_id  = $player_array[0]['lineup_player_id'];
+            $reputation = $player_array[0]['staff_reputation'];
 
             $sql = "SELECT `injurytype_id`,
                            `injurytype_day`
@@ -69,6 +75,12 @@ function f_igosja_generator_make_injury()
 
             $injurytype_id  = $injurytype_array[0]['injurytype_id'];
             $injurytype_day = $injurytype_array[0]['injurytype_day'];
+            $injurytype_day = rand($injurytype_day - $reputation / 100);
+
+            if (0 >= $injurytype_day)
+            {
+                $injurytype_day = 1;
+            }
 
             $sql = "UPDATE `player`
                     SET `player_injury`='1'

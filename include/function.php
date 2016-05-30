@@ -115,7 +115,7 @@ function f_igosja_generate_password()
 {
     $chars      = 'ABCDEFGHIJKLMNPQRSTVXYZabcdefghijklmnopqrstvxyz123456789'; 
     $max        = 10;
-    $size       = StrLen($chars) - 1; 
+    $size       = strlen($chars) - 1; 
     $password   = ''; 
 
     for ($i=0; $i<$max; $i++)

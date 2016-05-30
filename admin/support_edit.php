@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/include/include.php');
+include (__DIR__ . '/../include/include.php');
 
 if (isset($_GET['num']))
 {
@@ -23,7 +23,7 @@ $count_inbox = $inbox_sql->num_rows;
 
 if (0 == $count_inbox)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/wrong_page.php');
+    include (__DIR__ . '/../view/wrong_page.php');
     exit;
 }
 
@@ -59,4 +59,4 @@ if (isset($_POST['inbox_text']))
 
 $inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);
 
-include ($_SERVER['DOCUMENT_ROOT'] . '/view/admin_main.php');
+include (__DIR__ . '/../view/admin_main.php');

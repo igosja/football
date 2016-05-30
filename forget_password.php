@@ -37,12 +37,9 @@ if (isset($_POST['data']))
 
     $sql = "UPDATE `user` 
             SET `user_password`='$password_sql'
-            WHERE `user_email`=?
+            WHERE `user_id`='$user_id'
             LIMIT 1";
-    $prepare = $mysqli->prepare($sql);
-    $prepare->bind_param('s', $forget_email);
-    $prepare->execute();
-    $prepare->close();
+    $mysqli->query($sql);
 
     $subject    = 'Восстановление пароля в футбольном онлайн менеджере';
     $message    =
@@ -53,7 +50,7 @@ if (isset($_POST['data']))
     $mail       = mail($email, $subject, $message, $from);
 
     $_SESSION['message_class']  = 'success';
-    $_SESSION['message_text']   = 'Пароль успешно выслан на email ' . $forget_email  . '.';
+    $_SESSION['message_text']   = 'Пароль успешно выслан на email ' . $email . '.';
 
     redirect('forget_password.php');
 }
