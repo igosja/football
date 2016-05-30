@@ -16,7 +16,7 @@ $header_title           = 'Лига';
 $horizontalmenu_array   = array();
 $seo_title              = 'Виртуальная футбольная лига.';
 $seo_description        = 'Виртуальная футбольная лига - футбольный онлайн-менеджер.';
-$seo_keywords           = 'футбол, игра, менеджер, онлайн';
+$seo_keywords           = 'футбол, игра, менеджер, онлайн, футбольный онлайн менеджер, онлайн менеджер футбол';
 
 $file_name  = $_SERVER['PHP_SELF'];
 $file_name  = explode('/', $file_name);
