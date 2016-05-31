@@ -140,4 +140,5 @@ define('VK_CLIENT_ID', '5332080');
 define('VK_CLIENT_SECRET', 'Ct5OdNdkS9pALbparFAR');
 
 $HEADER_2_ARRAY = array('team', 'national');
-$LEFT_LEG_POSITION_ARRAY = array(5, 11);
+$LEFT_LEG_POSITION_ARRAY = array(7, 12, 17, 22);
+$RAND_LEG_POSITION_ARRAY = array(1, 2, 5, 10, 15, 20, 24);

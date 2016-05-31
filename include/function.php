@@ -434,6 +434,7 @@ function f_igosja_player_leg($position_id)
 //Рабочая нога игрока (левая/правая)
 {
     global $LEFT_LEG_POSITION_ARRAY;
+    global $RAND_LEG_POSITION_ARRAY;
 
     $leg_array = array();
 
@@ -441,6 +442,21 @@ function f_igosja_player_leg($position_id)
     {
         $leg_array['leg_left']  = 10;
         $leg_array['leg_right'] = 0;
+    }
+    elseif (in_array($position_id, $RAND_LEG_POSITION_ARRAY))
+    {
+        $leg = rand(1, 5);
+
+        if (1 == $leg)
+        {
+            $leg_array['leg_left']  = 10;
+            $leg_array['leg_right'] = 0;
+        }
+        else
+        {
+            $leg_array['leg_left']  = 0;
+            $leg_array['leg_right'] = 10;
+        }
     }
     else
     {
