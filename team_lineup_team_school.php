@@ -88,8 +88,14 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
     $school_level   = $school_array[0]['team_school_level'];
     $staff_level    = $school_array[0]['staff_reputation'];
     $level          = ($school_level * 10 + $staff_level) / 2;
-    $ability        = $level - rand(0, 9);
-    $age            = 17;
+
+    if (10 > $level)
+    {
+        $level = 10;
+    }
+
+    $ability    = $level - rand(0, 9);
+    $age        = 17;
 
     if (1 == $ok)
     {
@@ -326,8 +332,14 @@ elseif (isset($_GET['data']) && isset($_GET['ok']))
     $school_level   = $team_array[0]['team_school_level'];
     $staff_level    = $team_array[0]['staff_reputation'];
     $level          = ($school_level * 10 + $staff_level) / 2;
-    $ability        = $level - rand(0, 9);
-    $age            = 17;
+
+    if (10 > $level)
+    {
+        $level = 10;
+    }
+
+    $ability    = $level - rand(0, 9);
+    $age        = 17;
 
     if (1 == $ok)
     {

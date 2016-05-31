@@ -191,7 +191,94 @@
                         </td>
                     </tr>
                 </table>
-                <br />
+            </td>
+        </tr>
+        <?php if (1 == 0) { ?>
+        <tr>
+            <td class="block-page">
+                <p class="header">Замены</p>
+                <table class="striped w100">
+                    <tr>
+                        <th class="w10">C мин</th>
+                        <th>Условие</th>
+                        <th class="w30">Уходит</th>
+                        <th class="w30">Выходит</th>
+                    </tr>
+                    <?php for ($i=0; $i<5; $i++) { ?>
+                        <tr>
+                            <td class="center">
+                                <input type="text" size="1" value="0" name="data[substitution][<?= $i; ?>][minute]"/>
+                            </td>
+                            <td class="nopadding">
+                                <select class="w100" name="data[substitution][<?= $i; ?>][condition]">
+                                    <?php foreach ($lineupcondition_array as $condition) { ?>
+                                        <option value="<?= $condition['lineupcondition_id']; ?>">
+                                            <?= $condition['lineupcondition_name']; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                            <td class="nopadding">
+                                <select class="w100" name="data[substitution][<?= $i; ?>][out]">
+                                    <option value="0"></option>
+                                    <?php foreach ($player_array as $item) { ?>
+                                        <option value="<?= $item['lineup_id']; ?>"><?= $item['surname_name']; ?> (<?= $item['position_name']; ?>)</option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                            <td class="nopadding">
+                                <select class="w100" name="data[substitution][<?= $i; ?>][in]">
+                                    <option value="0"></option>
+                                    <?php foreach ($reserve_array as $item) { ?>
+                                        <option value="<?= $item['lineup_id']; ?>"><?= $item['surname_name']; ?> (<?= $item['position_name']; ?>)</option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </td>
+            <td class="block-page">
+                <p class="header">Стиль игры</p>
+                <table class="striped w100">
+                    <tr>
+                        <th class="w10">С мин</th>
+                        <th>Условие</th>
+                        <th class="w50">Действие</th>
+                    </tr>
+                    <?php for ($i=0; $i<5; $i++) { ?>
+                        <tr>
+                            <td class="center">
+                                <input type="text" size="1" value="0" name="data[tactic][<?= $i; ?>][minute]" />
+                            </td>
+                            <td class="nopadding">
+                                <select class="w100" name="data[tactic][<?= $i; ?>][condition]">
+                                    <?php foreach ($lineupcondition_array as $condition) { ?>
+                                        <option value="<?= $condition['lineupcondition_id']; ?>">
+                                            <?= $condition['lineupcondition_name']; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                            <td class="nopadding">
+                                <select class="w100" name="data[tactic][<?= $i; ?>][tactic]">
+                                    <option value="0"></option>
+                                    <?php foreach ($gamemood_array as $item) { ?>
+                                        <option value="1;<?= $item['gamemood_id']; ?>">Настрой - <?= $item['gamemood_name']; ?></option>
+                                    <?php } ?>
+                                    <?php foreach ($gamestyle_array as $item) { ?>
+                                        <option value="2;<?= $item['gamestyle_id']; ?>">Стиль - <?= $item['gamestyle_name']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </td>
+        </tr>
+        <?php } ?>
+        <tr>
+            <td class="block-page" colspan="2">
                 <p class="center">
                     <input type="submit" value="Сохранить" />
                 </p>

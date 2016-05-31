@@ -159,6 +159,72 @@ if (isset($_POST['data']))
         }
     }
 
+    if (isset($data['substitution']))
+    {
+        $sql = "DELETE FROM `lineupsubstitution`
+                WHERE `lineupsubstitution_game_id`='$game_id',
+                      `lineupsubstitution_team_id`='$num_get'";
+        $mysqli->query($sql);
+
+        foreach ($data['substitution'] as $item)
+        {
+            if (0 != $item['out'] && 0 != $item['in'])
+            {
+                $minute     = (int) $item['minute'];
+                $condition  = (int) $item['condition'];
+                $out        = (int) $item['out'];
+                $in         = (int) $item['in'];
+
+                $sql = "INSERT INTO `lineupsubstitution`
+                        SET `lineupsubstitution_game_id`='$game_id',
+                            `lineupsubstitution_team_id`='$num_get',
+                            `lineupsubstitution_in`='$in',
+                            `lineupsubstitution_out`='$out',
+                            `lineupsubstitution_minute`='$minute',
+                            `lineupsubstitution_lineupcondition_id`='$condition'";
+                $mysqli->query($sql);
+            }
+        }
+    }
+
+    if (isset($data['tactic']))
+    {
+        $sql = "DELETE FROM `lineuptactic`
+                WHERE `lineuptactic_game_id`='$game_id',
+                      `lineuptactic_team_id`='$num_get'";
+        $mysqli->query($sql);
+
+        foreach ($data['tactic'] as $item)
+        {
+            if (0 != $item['tactic'])
+            {
+                $minute     = (int) $item['minute'];
+                $condition  = (int) $item['condition'];
+                $tactic     = explode(';', $item['tactic']);
+
+                if (1 == $tactic[0])
+                {
+                    $gamemood = (int) $tactic[1];
+                    $gamesyle = 0;
+                }
+                else
+                {
+                    $gamemood = 0;
+                    $gamesyle = (int) $tactic[1];
+                }
+
+                $sql = "INSERT INTO `lineuptactic`
+                        SET `lineuptactic_game_id`='$game_id',
+                            `lineuptactic_team_id`='$num_get',
+                            `lineuptactic_gamemood_id`='$gamemood',
+                            `lineuptactic_gamestyle_id`='$gamesyle',
+                            `lineuptactic_minute`='$minute',
+                            `lineuptactic_lineupcondition_id`='$condition'";
+                $mysqli->query($sql);
+            }
+        }
+    }
+
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
@@ -247,6 +313,72 @@ $sql = "SELECT `teaminstruction_instruction_id`
 $teaminstruction_sql = $mysqli->query($sql);
 
 $teaminstruction_array = $teaminstruction_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `lineup_id`,
+               `position_name`,
+               `surname_name`
+        FROM `lineup`
+        LEFT JOIN `player`
+        ON `lineup_player_id`=`player_id`
+        LEFT JOIN `surname`
+        ON `surname_id`=`player_surname_id`
+        LEFT JOIN `position`
+        ON `position_id`=`lineup_position_id`
+        WHERE `lineup_position_id` BETWEEN '1' AND '25'
+        AND `lineup_team_id`='$num_get'
+        AND `lineup_game_id`='$game_id'
+        ORDER BY `lineup_position_id` ASC";
+$player_sql = $mysqli->query($sql);
+
+$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `lineup_id`,
+               `position_name`,
+               `surname_name`
+        FROM `lineup`
+        LEFT JOIN `player`
+        ON `lineup_player_id`=`player_id`
+        LEFT JOIN `surname`
+        ON `surname_id`=`player_surname_id`
+        LEFT JOIN `position`
+        ON `position_id`=`player_position_id`
+        WHERE `lineup_position_id`>'25'
+        AND `lineup_team_id`='$num_get'
+        AND `lineup_game_id`='$game_id'
+        ORDER BY `lineup_position_id` ASC";
+$reserve_sql = $mysqli->query($sql);
+
+$reserve_array = $reserve_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `lineupsubstitution_in`,
+               `lineupsubstitution_lineupcondition_id`,
+               `lineupsubstitution_minute`,
+               `lineupsubstitution_out`
+        FROM `lineupsubstitution`
+        WHERE `lineupsubstitution_team_id`='$num_get'
+        AND `lineupsubstitution_game_id`='$game_id'";
+$lineupsubstitution_sql = $mysqli->query($sql);
+
+$lineupsubstitution_array = $lineupsubstitution_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `lineuptactic_gamemood_id`,
+               `lineuptactic_gamestyle_id`,
+               `lineuptactic_lineupcondition_id`,
+               `lineuptactic_minute`
+        FROM `lineuptactic`
+        WHERE `lineuptactic_team_id`='$num_get'
+        AND `lineuptactic_game_id`='$game_id'";
+$lineuptactic_sql = $mysqli->query($sql);
+
+$lineuptactic_array = $lineuptactic_sql->fetch_all(MYSQLI_ASSOC);
+
+$sql = "SELECT `lineupcondition_id`,
+               `lineupcondition_name`
+        FROM `lineupcondition`
+        ORDER BY `lineupcondition_id` ASC";
+$lineupcondition_sql = $mysqli->query($sql);
+
+$lineupcondition_array = $lineupcondition_sql->fetch_all(MYSQLI_ASSOC);
 
 $num                = $num_get;
 $header_title       = $team_name;
