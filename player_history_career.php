@@ -34,7 +34,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $team_id        = $player_array[0]['team_id'];
 $team_name      = $player_array[0]['team_name'];
@@ -71,7 +71,7 @@ $sql = "SELECT `statisticplayer_best`,
         ORDER BY `statisticplayer_season_id` DESC";
 $season_statistic_sql = $mysqli->query($sql);
 
-$season_statistic_array = $season_statistic_sql->fetch_all(MYSQLI_ASSOC);
+$season_statistic_array = $season_statistic_sql->fetch_all(1);
 
 $sql = "SELECT `statisticplayer_best`,
                `statisticplayer_foul`,
@@ -96,7 +96,7 @@ $sql = "SELECT `statisticplayer_best`,
         ORDER BY `statisticplayer_season_id` DESC, `tournament_id` ASC";
 $statistic_sql = $mysqli->query($sql);
 
-$statistic_array = $statistic_sql->fetch_all(MYSQLI_ASSOC);
+$statistic_array = $statistic_sql->fetch_all(1);
 
 $sql = "SELECT SUM(`statisticplayer_best`) AS `count_best`,
                SUM(`statisticplayer_foul`) AS `count_foul`,
@@ -114,7 +114,7 @@ $sql = "SELECT SUM(`statisticplayer_best`) AS `count_best`,
         WHERE `statisticplayer_player_id`='$num_get'";
 $total_statistic_sql = $mysqli->query($sql);
 
-$total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
+$total_statistic_array = $total_statistic_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $player_name . ' ' . $player_surname;

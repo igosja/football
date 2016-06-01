@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -50,7 +50,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $game_sql = $mysqli->query($sql);
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -73,7 +73,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $win_sql = $mysqli->query($sql);
 
-$win_array = $win_sql->fetch_all(MYSQLI_ASSOC);
+$win_array = $win_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -96,7 +96,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $best_sql = $mysqli->query($sql);
 
-$best_array = $best_sql->fetch_all(MYSQLI_ASSOC);
+$best_array = $best_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -119,7 +119,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $goal_sql = $mysqli->query($sql);
 
-$goal_array = $goal_sql->fetch_all(MYSQLI_ASSOC);
+$goal_array = $goal_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -142,7 +142,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $pass_sql = $mysqli->query($sql);
 
-$pass_array = $pass_sql->fetch_all(MYSQLI_ASSOC);
+$pass_array = $pass_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -166,7 +166,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $shot_sql = $mysqli->query($sql);
 
-$shot_array = $shot_sql->fetch_all(MYSQLI_ASSOC);
+$shot_array = $shot_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -189,7 +189,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $red_sql = $mysqli->query($sql);
 
-$red_array = $red_sql->fetch_all(MYSQLI_ASSOC);
+$red_array = $red_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -212,7 +212,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $yellow_sql = $mysqli->query($sql);
 
-$yellow_array = $yellow_sql->fetch_all(MYSQLI_ASSOC);
+$yellow_array = $yellow_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -235,7 +235,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $distance_sql = $mysqli->query($sql);
 
-$distance_array = $distance_sql->fetch_all(MYSQLI_ASSOC);
+$distance_array = $distance_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

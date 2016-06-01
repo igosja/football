@@ -7,7 +7,7 @@ $sql = "SELECT `newstheme_id`, `newstheme_name`
         ORDER BY `newstheme_id` ASC";
 $newstheme_sql = $mysqli->query($sql);
 
-$newstheme_array = $newstheme_sql->fetch_all(MYSQLI_ASSOC);
+$newstheme_array = $newstheme_sql->fetch_all(1);
 
 $smarty->assign('newstheme_array', $newstheme_array);
 

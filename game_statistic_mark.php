@@ -25,7 +25,7 @@ if (0 == $count_game)
     exit;
 }
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $home_team_id = $game_array[0]['game_home_team_id'];
 
@@ -59,7 +59,7 @@ $sql = "SELECT `game_guest_" . $team_country . "_id`,
         LIMIT 1";
 $game_sql = $mysqli->query($sql);
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $game_played            = $game_array[0]['game_played'];
 $header_2_home_id       = $game_array[0]['game_home_' . $team_country . '_id'];
@@ -109,7 +109,7 @@ $sql = "SELECT `lineup_condition`,
         ORDER BY `lineup_id` ASC";
 $home_player_sql = $mysqli->query($sql);
 
-$home_player_array = $home_player_sql->fetch_all(MYSQLI_ASSOC);
+$home_player_array = $home_player_sql->fetch_all(1);
 
 $sql = "SELECT `lineup_condition`,
                `lineup_goal`,
@@ -133,7 +133,7 @@ $sql = "SELECT `lineup_condition`,
         ORDER BY `lineup_id` ASC";
 $guest_player_sql = $mysqli->query($sql);
 
-$guest_player_array = $guest_player_sql->fetch_all(MYSQLI_ASSOC);
+$guest_player_array = $guest_player_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_shootout . ' ' . $header_2_guest_name;

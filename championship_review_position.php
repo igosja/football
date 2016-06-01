@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -42,7 +42,7 @@ $sql = "SELECT `team_id`,
 $team_sql = $mysqli->query($sql);
 
 $count_team = $team_sql->num_rows;
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 for ($i=0; $i<$count_team; $i++)
 {
@@ -59,7 +59,7 @@ for ($i=0; $i<$count_team; $i++)
     $position_sql = $mysqli->query($sql);
 
     $count_position = $position_sql->num_rows;
-    $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+    $position_array = $position_sql->fetch_all(1);
 
     for ($j=0; $j<$count_position; $j++)
     {
@@ -80,7 +80,7 @@ $sql = "SELECT MAX(`standinghistory_stage_id`) AS `standinghistory_stage_id`
         WHERE `standinghistory_tournament_id`='$num_get'";
 $standing_sql = $mysqli->query($sql);
 
-$standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+$standing_array = $standing_sql->fetch_all(1);
 
 $max_stage = $standing_array[0]['standinghistory_stage_id'];
 

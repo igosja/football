@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -41,7 +41,7 @@ $sql = "SELECT `statisticcountry_goal`,
         LIMIT 5";
 $goal_sql = $mysqli->query($sql);
 
-$goal_array = $goal_sql->fetch_all(MYSQLI_ASSOC);
+$goal_array = $goal_sql->fetch_all(1);
 
 $sql = "SELECT `statisticcountry_pass`,
                `country_id`,
@@ -55,7 +55,7 @@ $sql = "SELECT `statisticcountry_pass`,
         LIMIT 5";
 $pass_sql = $mysqli->query($sql);
 
-$pass_array = $pass_sql->fetch_all(MYSQLI_ASSOC);
+$pass_array = $pass_sql->fetch_all(1);
 
 $sql = "SELECT `statisticcountry_red`,
                `country_id`,
@@ -69,7 +69,7 @@ $sql = "SELECT `statisticcountry_red`,
         LIMIT 5";
 $red_sql = $mysqli->query($sql);
 
-$red_array = $red_sql->fetch_all(MYSQLI_ASSOC);
+$red_array = $red_sql->fetch_all(1);
 
 $sql = "SELECT `statisticcountry_yellow`,
                `country_id`,
@@ -83,7 +83,7 @@ $sql = "SELECT `statisticcountry_yellow`,
         LIMIT 5";
 $yellow_sql = $mysqli->query($sql);
 
-$yellow_array = $yellow_sql->fetch_all(MYSQLI_ASSOC);
+$yellow_array = $yellow_sql->fetch_all(1);
 
 $sql = "SELECT `country_id`,
                `country_name`,
@@ -97,7 +97,7 @@ $sql = "SELECT `country_id`,
         LIMIT 5";
 $win_sql = $mysqli->query($sql);
 
-$win_array = $win_sql->fetch_all(MYSQLI_ASSOC);
+$win_array = $win_sql->fetch_all(1);
 
 $sql = "SELECT `series_value`,
                `country_id`,
@@ -111,7 +111,7 @@ $sql = "SELECT `series_value`,
         LIMIT 5";
 $no_loose_sql = $mysqli->query($sql);
 
-$no_loose_array = $no_loose_sql->fetch_all(MYSQLI_ASSOC);
+$no_loose_array = $no_loose_sql->fetch_all(1);
 
 $sql = "SELECT `series_value`,
                `country_id`,
@@ -125,7 +125,7 @@ $sql = "SELECT `series_value`,
         LIMIT 5";
 $loose_sql = $mysqli->query($sql);
 
-$loose_array = $loose_sql->fetch_all(MYSQLI_ASSOC);
+$loose_array = $loose_sql->fetch_all(1);
 
 $sql = "SELECT `series_value`,
                `country_id`,
@@ -139,7 +139,7 @@ $sql = "SELECT `series_value`,
         LIMIT 5";
 $nopass_sql = $mysqli->query($sql);
 
-$nopass_array = $nopass_sql->fetch_all(MYSQLI_ASSOC);
+$nopass_array = $nopass_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

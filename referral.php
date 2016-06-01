@@ -24,7 +24,7 @@ $sql = "SELECT `team_id`,
         WHERE `user_referrer`='$num_get'";
 $referral_sql = $mysqli->query($sql);
 
-$referral_array = $referral_sql->fetch_all(MYSQLI_ASSOC);
+$referral_array = $referral_sql->fetch_all(1);
 
 $num                = $authorization_id;
 $header_title       = $authorization_login;

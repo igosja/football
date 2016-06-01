@@ -26,7 +26,7 @@ $sql = "SELECT `inbox_id`,
         ORDER BY `inbox_date` DESC, `inbox_id` DESC";
 $inbox_sql = $mysqli->query($sql);
 
-$inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);
+$inbox_array = $inbox_sql->fetch_all(1);
 
 $num                = $authorization_id;
 $header_title       = $authorization_login;

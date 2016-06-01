@@ -47,7 +47,7 @@ if (isset($_POST['role_name']))
     redirect('role_list.php');
 }
 
-$role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
+$role_array = $role_sql->fetch_all(1);
 
 $tpl = 'role_create';
 

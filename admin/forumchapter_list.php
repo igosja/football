@@ -17,6 +17,6 @@ $sql = "SELECT `forumchapter_id`,
         ORDER BY `forumchapter_id` ASC";
 $chapter_sql = $mysqli->query($sql);
 
-$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

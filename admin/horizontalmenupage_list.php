@@ -11,6 +11,6 @@ $sql = "SELECT `horizontalmenuchapter_name`,
         ORDER BY `horizontalmenupage_name` ASC";
 $horizontalmenupage_sql = $mysqli->query($sql);
 
-$horizontalmenupage_array = $horizontalmenupage_sql->fetch_all(MYSQLI_ASSOC);
+$horizontalmenupage_array = $horizontalmenupage_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

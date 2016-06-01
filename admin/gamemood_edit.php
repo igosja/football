@@ -44,7 +44,7 @@ if (isset($_POST['gamemood_name']))
     redirect('gamemood_list.php');
 }
 
-$gamemood_array = $gamemood_sql->fetch_all(MYSQLI_ASSOC);
+$gamemood_array = $gamemood_sql->fetch_all(1);
 
 $tpl = 'gamemood_create';
 

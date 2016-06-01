@@ -26,7 +26,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -88,7 +88,7 @@ $sql = "SELECT `composure`,
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -118,7 +118,7 @@ $sql = "SELECT `name_name`,
         ORDER BY `penalty` DESC, `composure` DESC, `player_id` ASC";
 $penaltyplayer_sql = $mysqli->query($sql);
 
-$penaltyplayer_array = $penaltyplayer_sql->fetch_all(MYSQLI_ASSOC);
+$penaltyplayer_array = $penaltyplayer_sql->fetch_all(1);
 
 $sql = "SELECT `team_penalty_player_id_1`,
                `team_penalty_player_id_2`,
@@ -132,7 +132,7 @@ $sql = "SELECT `team_penalty_player_id_1`,
         LIMIT 1";
 $penalty_sql = $mysqli->query($sql);
 
-$penalty_array = $penalty_sql->fetch_all(MYSQLI_ASSOC);
+$penalty_array = $penalty_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

@@ -41,7 +41,7 @@ if (isset($_POST['horizontalmenuchapter_name']))
     redirect('horizontalmenuchapter_list.php');
 }
 
-$horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(MYSQLI_ASSOC);
+$horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(1);
 
 $tpl = 'horizontalmenuchapter_create';
 

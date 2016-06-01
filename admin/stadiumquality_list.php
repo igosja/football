@@ -8,6 +8,6 @@ $sql = "SELECT `stadiumquality_id`,
         ORDER BY `stadiumquality_id` ASC";
 $stadiumquality_sql = $mysqli->query($sql);
 
-$stadiumquality_array = $stadiumquality_sql->fetch_all(MYSQLI_ASSOC);
+$stadiumquality_array = $stadiumquality_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

@@ -24,7 +24,7 @@ if (0 == $count_country)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -43,7 +43,7 @@ $sql = "SELECT `team_id`,
         LIMIT 1";
 $championship_sql = $mysqli->query($sql);
 
-$championship_array = $championship_sql->fetch_all(MYSQLI_ASSOC);
+$championship_array = $championship_sql->fetch_all(1);
 
 if (isset($championship_array[0]['tournament_id']))
 {
@@ -75,7 +75,7 @@ $sql = "SELECT `name_name`,
         LIMIT 1";
 $championship_goal_sql = $mysqli->query($sql);
 
-$championship_goal_array = $championship_goal_sql->fetch_all(MYSQLI_ASSOC);
+$championship_goal_array = $championship_goal_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -98,7 +98,7 @@ $sql = "SELECT `name_name`,
         LIMIT 1";
 $championship_pass_sql = $mysqli->query($sql);
 
-$championship_pass_array = $championship_pass_sql->fetch_all(MYSQLI_ASSOC);
+$championship_pass_array = $championship_pass_sql->fetch_all(1);
 
 $sql = "SELECT ROUND(`statisticplayer_mark`/`statisticplayer_game`, '1') AS `mark`,
                `name_name`,
@@ -121,7 +121,7 @@ $sql = "SELECT ROUND(`statisticplayer_mark`/`statisticplayer_game`, '1') AS `mar
         LIMIT 1";
 $championship_mark_sql = $mysqli->query($sql);
 
-$championship_mark_array = $championship_mark_sql->fetch_all(MYSQLI_ASSOC);
+$championship_mark_array = $championship_mark_sql->fetch_all(1);
 
 $sql = "SELECT `team_id`,
                `team_name`,
@@ -139,7 +139,7 @@ $sql = "SELECT `team_id`,
         LIMIT 1";
 $cup_sql = $mysqli->query($sql);
 
-$cup_array = $cup_sql->fetch_all(MYSQLI_ASSOC);
+$cup_array = $cup_sql->fetch_all(1);
 
 if (isset($cup_array[0]['tournament_id']))
 {
@@ -171,7 +171,7 @@ $sql = "SELECT `name_name`,
         LIMIT 1";
 $cup_goal_sql = $mysqli->query($sql);
 
-$cup_goal_array = $cup_goal_sql->fetch_all(MYSQLI_ASSOC);
+$cup_goal_array = $cup_goal_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -194,7 +194,7 @@ $sql = "SELECT `name_name`,
         LIMIT 1";
 $cup_pass_sql = $mysqli->query($sql);
 
-$cup_pass_array = $cup_pass_sql->fetch_all(MYSQLI_ASSOC);
+$cup_pass_array = $cup_pass_sql->fetch_all(1);
 
 $sql = "SELECT ROUND(`statisticplayer_mark`/`statisticplayer_game`, '1') AS `mark`,
                `name_name`,
@@ -217,7 +217,7 @@ $sql = "SELECT ROUND(`statisticplayer_mark`/`statisticplayer_game`, '1') AS `mar
         LIMIT 1";
 $cup_mark_sql = $mysqli->query($sql);
 
-$cup_mark_array = $cup_mark_sql->fetch_all(MYSQLI_ASSOC);
+$cup_mark_array = $cup_mark_sql->fetch_all(1);
 
 $sql = "SELECT `team_id`,
                `team_name`
@@ -232,7 +232,7 @@ $sql = "SELECT `team_id`,
         ORDER BY `leagueparticipant_in` DESC";
 $champions_qualify_group_sql = $mysqli->query($sql);
 
-$champions_qualify_group_array = $champions_qualify_group_sql->fetch_all(MYSQLI_ASSOC);
+$champions_qualify_group_array = $champions_qualify_group_sql->fetch_all(1);
 
 $sql = "SELECT `stage_name`,
                `team_id`,
@@ -250,7 +250,7 @@ $sql = "SELECT `stage_name`,
         ORDER BY `leagueparticipant_in` DESC";
 $champions_qualify_sql = $mysqli->query($sql);
 
-$champions_qualify_array = $champions_qualify_sql->fetch_all(MYSQLI_ASSOC);
+$champions_qualify_array = $champions_qualify_sql->fetch_all(1);
 
 $sql = "SELECT `stage_name`,
                `team_id`,
@@ -267,7 +267,7 @@ $sql = "SELECT `stage_name`,
         ORDER BY `leagueparticipant_out` DESC";
 $champions_out_sql = $mysqli->query($sql);
 
-$champions_out_array = $champions_out_sql->fetch_all(MYSQLI_ASSOC);
+$champions_out_array = $champions_out_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $country_name;

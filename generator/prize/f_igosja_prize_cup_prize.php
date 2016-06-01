@@ -12,7 +12,7 @@ function f_igosja_prize_cup_prize()
     $cupparticipant_sql = f_igosja_mysqli_query($sql);
 
     $count_cupparticipant = $cupparticipant_sql->num_rows;
-    $cupparticipant_array = $cupparticipant_sql->fetch_all(MYSQLI_ASSOC);
+    $cupparticipant_array = $cupparticipant_sql->fetch_all(1);
 
     for ($i=0; $i<$count_cupparticipant; $i++)
     {

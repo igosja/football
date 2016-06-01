@@ -57,6 +57,6 @@ if (isset($_POST['inbox_text']))
     redirect('support_list.php');
 }
 
-$inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);
+$inbox_array = $inbox_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

@@ -41,7 +41,7 @@ if (isset($_POST['statustransfer_name']))
     redirect('statustransfer_list.php');
 }
 
-$statustransfer_array = $statustransfer_sql->fetch_all(MYSQLI_ASSOC);
+$statustransfer_array = $statustransfer_sql->fetch_all(1);
 
 $tpl = 'statustransfer_create';
 

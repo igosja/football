@@ -20,18 +20,18 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         LIMIT $offset, $limit";
 $debug_sql = $mysqli->query($sql);
 
-$debug_array = $debug_sql->fetch_all(MYSQLI_ASSOC);
+$debug_array = $debug_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count_debug`";
 $count_debug = $mysqli->query($sql);
-$count_debug = $count_debug->fetch_all(MYSQLI_ASSOC);
+$count_debug = $count_debug->fetch_all(1);
 $count_debug = $count_debug[0]['count_debug'];
 
 $sql = "SELECT SUM(`debug_time`) AS `time`
         FROM `debug`";
 $time_sql = $mysqli->query($sql);
 
-$time_array = $time_sql->fetch_all(MYSQLI_ASSOC);
+$time_array = $time_sql->fetch_all(1);
 
 $count_pagination   = ceil($count_debug/$limit);
 $start_pagination   = $page - 4;

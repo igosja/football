@@ -26,7 +26,7 @@ if (0 == $count_country)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -156,7 +156,7 @@ $sql = "SELECT `corner`,
         ORDER BY `position_id` ASC";
 $player_sql = $mysqli->query($sql);
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -178,7 +178,7 @@ $sql = "SELECT `name_name`,
         ORDER BY `corner` DESC";
 $corner_sql = $mysqli->query($sql);
 
-$corner_array = $corner_sql->fetch_all(MYSQLI_ASSOC);
+$corner_array = $corner_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -200,7 +200,7 @@ $sql = "SELECT `name_name`,
         ORDER BY `freekick` DESC";
 $freekick_sql = $mysqli->query($sql);
 
-$freekick_array = $freekick_sql->fetch_all(MYSQLI_ASSOC);
+$freekick_array = $freekick_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -222,7 +222,7 @@ $sql = "SELECT `name_name`,
         ORDER BY `out` DESC";
 $out_sql = $mysqli->query($sql);
 
-$out_array = $out_sql->fetch_all(MYSQLI_ASSOC);
+$out_array = $out_sql->fetch_all(1);
 
 $sql = "SELECT `country_corner_left_player_id_1`,
                `country_corner_left_player_id_2`,
@@ -259,7 +259,7 @@ $sql = "SELECT `country_corner_left_player_id_1`,
         LIMIT 1";
 $standard_sql = $mysqli->query($sql);
 
-$standard_array = $standard_sql->fetch_all(MYSQLI_ASSOC);
+$standard_array = $standard_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $country_name;

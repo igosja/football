@@ -50,7 +50,7 @@ if (isset($_POST['menu_id']))
     redirect('horizontalsubmenu_list.php');
 }
 
-$menu_array = $menu_sql->fetch_all(MYSQLI_ASSOC);
+$menu_array = $menu_sql->fetch_all(1);
 
 $page_id    = $menu_array[0]['horizontalmenu_horizontalmenuchapter_id'];
 
@@ -60,7 +60,7 @@ $sql = "SELECT `horizontalmenuchapter_id`,
         ORDER BY `horizontalmenuchapter_name` ASC";
 $horizontalmenuchapter_sql = $mysqli->query($sql);
 
-$horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(MYSQLI_ASSOC);
+$horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(1);
 
 $sql = "SELECT `horizontalmenu_id`,
                `horizontalmenu_name`
@@ -68,7 +68,7 @@ $sql = "SELECT `horizontalmenu_id`,
         WHERE `horizontalmenu_horizontalmenuchapter_id`='$page_id'";
 $horizontalmenu_sql = $mysqli->query($sql);
 
-$horizontalmenu_array = $horizontalmenu_sql->fetch_all(MYSQLI_ASSOC);
+$horizontalmenu_array = $horizontalmenu_sql->fetch_all(1);
 
 $tpl = 'horizontalsubmenu_create';
 

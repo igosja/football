@@ -34,7 +34,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $team_id        = $player_array[0]['team_id'];
 $team_name      = $player_array[0]['team_name'];
@@ -62,7 +62,7 @@ $sql = "SELECT `team_id`,
         ORDER BY `statisticplayer_season_id` DESC";
 $championship_sql = $mysqli->query($sql);
 
-$championship_array = $championship_sql->fetch_all(MYSQLI_ASSOC);
+$championship_array = $championship_sql->fetch_all(1);
 
 $sql = "SELECT `team_id`,
                `team_name`,
@@ -87,7 +87,7 @@ $sql = "SELECT `team_id`,
         ORDER BY `statisticplayer_season_id` DESC";
 $cup_sql = $mysqli->query($sql);
 
-$cup_array = $cup_sql->fetch_all(MYSQLI_ASSOC);
+$cup_array = $cup_sql->fetch_all(1);
 
 $sql = "SELECT `team_id`,
                `team_name`,
@@ -112,7 +112,7 @@ $sql = "SELECT `team_id`,
         ORDER BY `statisticplayer_season_id` DESC";
 $league_sql = $mysqli->query($sql);
 
-$league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
+$league_array = $league_sql->fetch_all(1);
 
 $sql = "SELECT `country_id`,
                `country_name`,
@@ -135,7 +135,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `statisticplayer_season_id` DESC";
 $worldcup_sql = $mysqli->query($sql);
 
-$worldcup_array = $worldcup_sql->fetch_all(MYSQLI_ASSOC);
+$worldcup_array = $worldcup_sql->fetch_all(1);
 
 $trophy_array = array_merge($championship_array, $worldcup_array, $cup_array, $league_array);
 

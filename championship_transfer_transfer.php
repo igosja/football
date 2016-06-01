@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -61,7 +61,7 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         ORDER BY `transferhistory_price` DESC";
 $transfer_sql = $mysqli->query($sql);
 
-$transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
+$transfer_array = $transfer_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

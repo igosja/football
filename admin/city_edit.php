@@ -44,7 +44,7 @@ if (isset($_POST['country_id']))
     redirect('city_list.php');
 }
 
-$city_array = $city_sql->fetch_all(MYSQLI_ASSOC);
+$city_array = $city_sql->fetch_all(1);
 
 $city_name  = $city_array[0]['city_name'];
 $country_id = $city_array[0]['city_country_id'];
@@ -55,7 +55,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `country_id` ASC";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $tpl = 'city_create';
 

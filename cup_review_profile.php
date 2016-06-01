@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -112,7 +112,7 @@ if (0 == $count_game)
     $game_sql = $mysqli->query($sql);
 }
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $stage_id   = $game_array[0]['stage_id'];
 
@@ -139,7 +139,7 @@ $sql = "SELECT `game_first_game_id`,
 $stage_game_sql = $mysqli->query($sql);
 
 $count_stage_game = $stage_game_sql->num_rows;
-$stage_game_array = $stage_game_sql->fetch_all(MYSQLI_ASSOC);
+$stage_game_array = $stage_game_sql->fetch_all(1);
 
 $stage_array = array();
 
@@ -195,7 +195,7 @@ $sql = "SELECT `cupparticipant_season_id`,
         LIMIT 4";
 $winner_sql = $mysqli->query($sql);
 
-$winner_array = $winner_sql->fetch_all(MYSQLI_ASSOC);
+$winner_array = $winner_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -213,7 +213,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $player_goal_sql = $mysqli->query($sql);
 
-$player_goal_array = $player_goal_sql->fetch_all(MYSQLI_ASSOC);
+$player_goal_array = $player_goal_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -231,7 +231,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $player_pass_sql = $mysqli->query($sql);
 
-$player_pass_array = $player_pass_sql->fetch_all(MYSQLI_ASSOC);
+$player_pass_array = $player_pass_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -249,7 +249,7 @@ $sql = "SELECT `name_name`,
         LIMIT 5";
 $player_mark_sql = $mysqli->query($sql);
 
-$player_mark_array = $player_mark_sql->fetch_all(MYSQLI_ASSOC);
+$player_mark_array = $player_mark_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

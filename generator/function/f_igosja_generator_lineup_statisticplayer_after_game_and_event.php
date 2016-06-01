@@ -36,7 +36,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
     $game_sql = f_igosja_mysqli_query($sql);
 
     $count_game = $game_sql->num_rows;
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -96,7 +96,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT $offset, 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -130,7 +130,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -175,7 +175,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                                 LIMIT 1";
                         $player_sql = f_igosja_mysqli_query($sql);
 
-                        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                        $player_array = $player_sql->fetch_all(1);
 
                         $player_id = $player_array[0]['lineup_player_id'];
                         $lineup_id = $player_array[0]['lineup_id'];
@@ -217,7 +217,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $gk_sql = f_igosja_mysqli_query($sql);
 
-                    $gk_array = $gk_sql->fetch_all(MYSQLI_ASSOC);
+                    $gk_array = $gk_sql->fetch_all(1);
 
                     $player_id = $gk_array[0]['lineup_player_id'];
                     $lineup_id = $gk_array[0]['lineup_id'];
@@ -255,7 +255,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -296,7 +296,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -325,7 +325,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $gk_sql = f_igosja_mysqli_query($sql);
 
-                    $gk_array = $gk_sql->fetch_all(MYSQLI_ASSOC);
+                    $gk_array = $gk_sql->fetch_all(1);
 
                     $player_id = $gk_array[0]['lineup_player_id'];
                     $lineup_id = $gk_array[0]['lineup_id'];
@@ -358,7 +358,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -403,7 +403,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $eventtype = EVENT_YELLOW;
 
@@ -422,7 +422,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                         $player_sql = f_igosja_mysqli_query($sql);
 
-                        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                        $player_array = $player_sql->fetch_all(1);
 
                         $eventtype = EVENT_YELLOW_SECOND;
                     }
@@ -493,7 +493,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -553,7 +553,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT $offset, 1";
                     $lineup_sql = f_igosja_mysqli_query($sql);
 
-                    $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+                    $lineup_array = $lineup_sql->fetch_all(1);
 
                     $lineup_id = $lineup_array[0]['lineup_id'];
 
@@ -591,7 +591,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT $offset, 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -625,7 +625,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -670,7 +670,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                                 LIMIT 1";
                         $player_sql = f_igosja_mysqli_query($sql);
 
-                        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                        $player_array = $player_sql->fetch_all(1);
 
                         $player_id = $player_array[0]['lineup_player_id'];
                         $lineup_id = $player_array[0]['lineup_id'];
@@ -712,7 +712,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $gk_sql = f_igosja_mysqli_query($sql);
 
-                    $gk_array = $gk_sql->fetch_all(MYSQLI_ASSOC);
+                    $gk_array = $gk_sql->fetch_all(1);
 
                     $player_id = $gk_array[0]['lineup_player_id'];
                     $lineup_id = $gk_array[0]['lineup_id'];
@@ -750,7 +750,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -791,7 +791,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -820,7 +820,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $gk_sql = f_igosja_mysqli_query($sql);
 
-                    $gk_array = $gk_sql->fetch_all(MYSQLI_ASSOC);
+                    $gk_array = $gk_sql->fetch_all(1);
 
                     $player_id = $gk_array[0]['lineup_player_id'];
                     $lineup_id = $gk_array[0]['lineup_id'];
@@ -853,7 +853,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -898,7 +898,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -953,7 +953,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT 1";
                     $player_sql = f_igosja_mysqli_query($sql);
 
-                    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                    $player_array = $player_sql->fetch_all(1);
 
                     $player_id = $player_array[0]['lineup_player_id'];
                     $lineup_id = $player_array[0]['lineup_id'];
@@ -1013,7 +1013,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game_and_event()
                             LIMIT $offset, 1";
                     $lineup_sql = f_igosja_mysqli_query($sql);
 
-                    $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+                    $lineup_array = $lineup_sql->fetch_all(1);
 
                     $lineup_id = $lineup_array[0]['lineup_id'];
 

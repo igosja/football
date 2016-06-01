@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -46,7 +46,7 @@ $count_record = $record_sql->num_rows;
 
 if ($count_record != $count_recordtype)
 {
-    $recordtype_array = $recordtype_sql->fetch_all(MYSQLI_ASSOC);
+    $recordtype_array = $recordtype_sql->fetch_all(1);
 
     for ($i=0; $i<$count_recordtype; $i++)
     {
@@ -105,7 +105,7 @@ $sql = "SELECT `game_guest_score`,
 $record_sql = $mysqli->query($sql);
 
 $count_record = $record_sql->num_rows;
-$record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+$record_array = $record_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

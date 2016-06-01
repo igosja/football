@@ -37,7 +37,7 @@ function f_igosja_generator_transfer()
         $transfer_sql = f_igosja_mysqli_query($sql);
 
         $count_transfer = $transfer_sql->num_rows;
-        $transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
+        $transfer_array = $transfer_sql->fetch_all(1);
 
         for ($i=0; $i<$count_transfer; $i++)
         {
@@ -59,7 +59,7 @@ function f_igosja_generator_transfer()
                     LIMIT 1";
             $team_sql = f_igosja_mysqli_query($sql);
 
-            $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+            $team_array = $team_sql->fetch_all(1);
 
             $team_finance = $team_array[0]['team_finance'];
 
@@ -143,7 +143,7 @@ function f_igosja_generator_transfer()
                 }
                 else
                 {
-                    $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                    $record_array = $record_sql->fetch_all(1);
 
                     $record_value = $record_array[0]['recordteam_value'];
 
@@ -181,7 +181,7 @@ function f_igosja_generator_transfer()
                 }
                 else
                 {
-                    $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                    $record_array = $record_sql->fetch_all(1);
 
                     $record_value = $record_array[0]['recordteam_value'];
 

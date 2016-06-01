@@ -34,7 +34,7 @@ elseif (isset($_GET['point']))
             LIMIT 1";
     $user_sql = $mysqli->query($sql);
 
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
 
     $user_money = $user_array[0]['user_money'];
 
@@ -81,7 +81,7 @@ elseif (isset($_GET['position']))
             LIMIT 1";
     $user_sql = $mysqli->query($sql);
 
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
 
     $user_money = $user_array[0]['user_money'];
 
@@ -136,7 +136,7 @@ elseif (isset($_GET['money']))
             LIMIT 1";
     $user_sql = $mysqli->query($sql);
 
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
 
     $user_money = $user_array[0]['user_money'];
 
@@ -175,7 +175,7 @@ elseif (isset($_GET['money']))
                 LIMIT 1";
         $finance_sql = $mysqli->query($sql);
 
-        $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
+        $finance_array = $finance_sql->fetch_all(1);
         $count_finance = $finance_array[0]['count'];
 
         if (0 == $count_finance)
@@ -271,7 +271,7 @@ $sql = "SELECT `user_money`
         LIMIT 1";
 $user_sql = $mysqli->query($sql);
 
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+$user_array = $user_sql->fetch_all(1);
 
 $num                = $authorization_id;
 $header_title       = 'Магазин';

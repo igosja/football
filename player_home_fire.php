@@ -24,7 +24,7 @@ $sql = "SELECT COUNT(`player_id`) AS `count_player`
         AND `player_id`!='$num_get'";
 $count_sql = $mysqli->query($sql);
 
-$count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+$count_array = $count_sql->fetch_all(1);
 
 $count = $count_array[0]['count_player'];
 
@@ -43,7 +43,7 @@ $sql = "SELECT COUNT(`player_id`) AS `count_player`
         AND `player_id`!='$num_get'";
 $count_sql = $mysqli->query($sql);
 
-$count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+$count_array = $count_sql->fetch_all(1);
 
 $count = $count_array[0]['count_player'];
 
@@ -75,7 +75,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];

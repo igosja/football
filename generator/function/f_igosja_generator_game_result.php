@@ -32,7 +32,7 @@ function f_igosja_generator_game_result()
     $game_sql = f_igosja_mysqli_query($sql);
 
     $count_game = $game_sql->num_rows;
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -90,7 +90,7 @@ function f_igosja_generator_game_result()
                     AND `teaminstruction_country_id`='$country_id'";
             $instruction_sql = f_igosja_mysqli_query($sql);
 
-            $instruction_array = $instruction_sql->fetch_all(MYSQLI_ASSOC);
+            $instruction_array = $instruction_sql->fetch_all(1);
 
             $$instruction = $instruction_array[0]['count'];
 
@@ -196,7 +196,7 @@ function f_igosja_generator_game_result()
             $lineup_sql = f_igosja_mysqli_query($sql);
 
             $count_lineup = $lineup_sql->num_rows;
-            $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+            $lineup_array = $lineup_sql->fetch_all(1);
 
             for ($k=0; $k<$count_lineup; $k++)
             {
@@ -245,7 +245,7 @@ function f_igosja_generator_game_result()
 
                 if (0 != $count_teamwork)
                 {
-                    $teamwork_array = $teamwork_sql->fetch_all(MYSQLI_ASSOC);
+                    $teamwork_array = $teamwork_sql->fetch_all(1);
 
                     $teamwork_id    = $teamwork_array[0]['teamwork_id'];
                     $teamwork_value = $teamwork_array[0]['teamwork_value'];
@@ -284,7 +284,7 @@ function f_igosja_generator_game_result()
                     LIMIT 1";
             $lineupmain_sql = f_igosja_mysqli_query($sql);
 
-            $lineupmain_array = $lineupmain_sql->fetch_all(MYSQLI_ASSOC);
+            $lineupmain_array = $lineupmain_sql->fetch_all(1);
 
             $gamemood_id        = $team . '_gamemood_id';
             $$gamemood_id       = $lineupmain_array[0]['lineupmain_gamemood_id'];
@@ -329,7 +329,7 @@ function f_igosja_generator_game_result()
             $lineup_sql = f_igosja_mysqli_query($sql);
 
             $count_lineup = $lineup_sql->num_rows;
-            $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+            $lineup_array = $lineup_sql->fetch_all(1);
 
             for ($k=0; $k<$count_lineup; $k++)
             {
@@ -353,7 +353,7 @@ function f_igosja_generator_game_result()
                 }
                 else
                 {
-                    $playerposition_array = $playerposition_sql->fetch_all(MYSQLI_ASSOC);
+                    $playerposition_array = $playerposition_sql->fetch_all(1);
 
                     $power_koeff = $playerposition_array[0]['playerposition_value'];
                     $power_koeff = (100 - $power_koeff) / 2 + $power_koeff;

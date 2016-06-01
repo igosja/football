@@ -25,7 +25,7 @@ if (0 == $count_country)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -45,7 +45,7 @@ $sql = "SELECT `team_id`,
 $team_sql = $mysqli->query($sql);
 
 $count_team = $team_sql->num_rows;
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $country_name;

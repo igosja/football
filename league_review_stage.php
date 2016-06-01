@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -62,7 +62,7 @@ else
         $stage_sql = $mysqli->query($sql);
     }
 
-    $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
+    $stage_array = $stage_sql->fetch_all(1);
 
     if (isset($stage_array[0]['game_stage_id']))
     {
@@ -99,7 +99,7 @@ if (39 <= $stage_id)
     $stage_game_sql = $mysqli->query($sql);
 
     $count_stage_game = $stage_game_sql->num_rows;
-    $stage_game_array = $stage_game_sql->fetch_all(MYSQLI_ASSOC);
+    $stage_game_array = $stage_game_sql->fetch_all(1);
 
     $game_array = array();
 
@@ -169,7 +169,7 @@ else
             ORDER BY `league_group` ASC, `league_place` ASC";
     $league_sql = $mysqli->query($sql);
 
-    $league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
+    $league_array = $league_sql->fetch_all(1);
 }
 
 $sql = "SELECT `stage_id`,
@@ -186,7 +186,7 @@ $sql = "SELECT `stage_id`,
         ORDER BY `shedule_date` ASC";
 $stage_1_sql = $mysqli->query($sql);
 
-$stage_1_array = $stage_1_sql->fetch_all(MYSQLI_ASSOC);
+$stage_1_array = $stage_1_sql->fetch_all(1);
 
 $sql = "SELECT `stage_id`,
                `stage_name`
@@ -227,7 +227,7 @@ $sql = "SELECT `stage_id`,
         ORDER BY `shedule_date` ASC";
 $stage_3_sql = $mysqli->query($sql);
 
-$stage_3_array = $stage_3_sql->fetch_all(MYSQLI_ASSOC);
+$stage_3_array = $stage_3_sql->fetch_all(1);
 
 $stage_array = array_merge($stage_1_array, $stage_2_array, $stage_3_array);
 

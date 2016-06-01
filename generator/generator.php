@@ -71,7 +71,7 @@ $sql = "SELECT COUNT(`shedule_id`) AS `count`
         AND `shedule_tournamenttype_id`='" . TOURNAMENT_TYPE_OFF_SEASON . "'";
 $shedule_sql = $mysqli->query($sql);
 
-$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+$shedule_array = $shedule_sql->fetch_all(1);
 
 $count_shedule = $shedule_array[0]['count'];
 
@@ -90,7 +90,7 @@ $sql = "SELECT COUNT(`shedule_id`) AS `count`
         AND `shedule_season_id`='$igosja_season_id'";
 $shedule_sql = $mysqli->query($sql);
 
-$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+$shedule_array = $shedule_sql->fetch_all(1);
 
 $count_shedule = $shedule_array[0]['count'];
 

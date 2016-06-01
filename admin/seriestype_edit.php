@@ -41,7 +41,7 @@ if (isset($_POST['seriestype_name']))
     redirect('seriestype_list.php');
 }
 
-$seriestype_array = $seriestype_sql->fetch_all(MYSQLI_ASSOC);
+$seriestype_array = $seriestype_sql->fetch_all(1);
 
 $tpl = 'seriestype_create';
 

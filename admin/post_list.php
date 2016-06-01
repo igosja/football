@@ -8,6 +8,6 @@ $sql = "SELECT `staffpost_id`,
         ORDER BY `staffpost_id` ASC";
 $post_sql = $mysqli->query($sql);
 
-$post_array = $post_sql->fetch_all(MYSQLI_ASSOC);
+$post_array = $post_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

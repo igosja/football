@@ -11,7 +11,7 @@ function f_igosja_season_cup_most_titled_record()
     $tournament_sql = f_igosja_mysqli_query($sql);
 
     $count_tournament = $tournament_sql->num_rows;
-    $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+    $tournament_array = $tournament_sql->fetch_all(1);
 
     for ($i=0; $i<$count_tournament; $i++)
     {
@@ -27,7 +27,7 @@ function f_igosja_season_cup_most_titled_record()
                 LIMIT 1";
         $winner_sql = f_igosja_mysqli_query($sql);
 
-        $winner_array = $winner_sql->fetch_all(MYSQLI_ASSOC);
+        $winner_array = $winner_sql->fetch_all(1);
 
         $winner_id      = $winner_array[0]['cupparticipant_team_id'];
         $winner_count   = $winner_array[0]['count'];
@@ -52,7 +52,7 @@ function f_igosja_season_cup_most_titled_record()
         }
         else
         {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_array = $record_sql->fetch_all(1);
             $record_score = $record_array[0]['recordtournament_value_1'];
 
             if ($winner_count > $record_score)

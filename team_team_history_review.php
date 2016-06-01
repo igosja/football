@@ -25,7 +25,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -41,7 +41,7 @@ $sql = "SELECT `standing_place`,
         ORDER BY `standing_season_id` DESC";
 $championship_sql = $mysqli->query($sql);
 
-$championship_array = $championship_sql->fetch_all(MYSQLI_ASSOC);
+$championship_array = $championship_sql->fetch_all(1);
 
 $sql = "SELECT `stage_name` AS `standing_place`,
                `cupparticipant_season_id` AS `season_id`,
@@ -57,7 +57,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         ORDER BY `cupparticipant_season_id` DESC";
 $cup_sql = $mysqli->query($sql);
 
-$cup_array = $cup_sql->fetch_all(MYSQLI_ASSOC);
+$cup_array = $cup_sql->fetch_all(1);
 
 $sql = "SELECT `stage_name` AS `standing_place`,
                `leagueparticipant_season_id` AS `season_id`,
@@ -73,7 +73,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         ORDER BY `leagueparticipant_season_id` DESC";
 $league_sql = $mysqli->query($sql);
 
-$league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
+$league_array = $league_sql->fetch_all(1);
 
 $tournament_array = array_merge($championship_array, $cup_array, $league_array);
 
@@ -90,7 +90,7 @@ $sql = "SELECT `history_date`,
         ORDER BY `history_date` DESC";
 $manager_sql = $mysqli->query($sql);
 
-$manager_array = $manager_sql->fetch_all(MYSQLI_ASSOC);
+$manager_array = $manager_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

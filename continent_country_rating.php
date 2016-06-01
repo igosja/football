@@ -25,7 +25,7 @@ if (0 == $count_continent)
     exit;
 }
 
-$continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
+$continent_array = $continent_sql->fetch_all(1);
 
 $continent_name = $continent_array[0]['continent_name'];
 
@@ -42,7 +42,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `ratingcountry_position` ASC";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $continent_name;

@@ -43,7 +43,7 @@ else
             LIMIT 1";
     $game_sql = $mysqli->query($sql);
 
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     if (isset($game_array[0]['game_id']))
     {
@@ -63,7 +63,7 @@ $sql = "SELECT COUNT(`game_id`) AS `count`
         OR `game_guest_country_id`='$num_get')";
 $count_sql = $mysqli->query($sql);
 
-$count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+$count_array = $count_sql->fetch_all(1);
 
 $count_game = $count_array[0]['count'];
 
@@ -73,7 +73,7 @@ if (0 == $count_game)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -90,7 +90,7 @@ if (isset($_POST['data']))
             AND `lineupmain_country_id`='$num_get'";
     $count_sql = $mysqli->query($sql);
 
-    $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+    $count_array = $count_sql->fetch_all(1);
 
     $count_lineup = $count_array[0]['count'];
 
@@ -144,7 +144,7 @@ if (isset($_POST['data']))
         }
         else
         {
-            $teaminstruction_array = $teaminstruction_sql->fetch_all(MYSQLI_ASSOC);
+            $teaminstruction_array = $teaminstruction_sql->fetch_all(1);
 
             $teaminstruction_id = $teaminstruction_array[0]['teaminstruction_id'];
 
@@ -192,7 +192,7 @@ $sql = "SELECT `game_home_country_id`,
         LIMIT 5";
 $nearest_sql = $mysqli->query($sql);
 
-$nearest_array = $nearest_sql->fetch_all(MYSQLI_ASSOC);
+$nearest_array = $nearest_sql->fetch_all(1);
 
 $sql = "SELECT `gamestyle_description`,
                `gamestyle_id`,
@@ -201,7 +201,7 @@ $sql = "SELECT `gamestyle_description`,
         ORDER BY `gamestyle_id` ASC";
 $gamestyle_sql = $mysqli->query($sql);
 
-$gamestyle_array = $gamestyle_sql->fetch_all(MYSQLI_ASSOC);
+$gamestyle_array = $gamestyle_sql->fetch_all(1);
 
 $sql = "SELECT `gamemood_description`,
                `gamemood_id`,
@@ -210,7 +210,7 @@ $sql = "SELECT `gamemood_description`,
         ORDER BY `gamemood_id` ASC";
 $gamemood_sql = $mysqli->query($sql);
 
-$gamemood_array = $gamemood_sql->fetch_all(MYSQLI_ASSOC);
+$gamemood_array = $gamemood_sql->fetch_all(1);
 
 $sql = "SELECT `lineupmain_gamemood_id`,
                `lineupmain_gamestyle_id`
@@ -220,7 +220,7 @@ $sql = "SELECT `lineupmain_gamemood_id`,
         LIMIT 1";
 $lineup_sql = $mysqli->query($sql);
 
-$lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+$lineup_array = $lineup_sql->fetch_all(1);
 
 $sql = "SELECT `instruction_id`,
                `instruction_name`,
@@ -233,7 +233,7 @@ $sql = "SELECT `instruction_id`,
 $instruction_sql = $mysqli->query($sql);
 
 $count_instruction = $instruction_sql->num_rows;
-$instruction_array = $instruction_sql->fetch_all(MYSQLI_ASSOC);
+$instruction_array = $instruction_sql->fetch_all(1);
 
 $sql = "SELECT `teaminstruction_instruction_id`
         FROM `teaminstruction`
@@ -243,7 +243,7 @@ $sql = "SELECT `teaminstruction_instruction_id`
         ORDER BY `teaminstruction_instruction_id` ASC";
 $teaminstruction_sql = $mysqli->query($sql);
 
-$teaminstruction_array = $teaminstruction_sql->fetch_all(MYSQLI_ASSOC);
+$teaminstruction_array = $teaminstruction_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $country_name;

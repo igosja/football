@@ -20,7 +20,7 @@ function f_igosja_generator_team_record()
 
     $count_game = $game_sql->num_rows;
 
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -65,7 +65,7 @@ function f_igosja_generator_team_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordteam_value'];
 
@@ -100,7 +100,7 @@ function f_igosja_generator_team_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordteam_value'];
 
@@ -136,7 +136,7 @@ function f_igosja_generator_team_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordteam_value'];
 
@@ -175,7 +175,7 @@ function f_igosja_generator_team_record()
                 }
                 else
                 {
-                    $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                    $record_array = $record_sql->fetch_all(1);
 
                     $record_value = $record_array[0]['recordteam_value'];
 
@@ -214,7 +214,7 @@ function f_igosja_generator_team_record()
                 }
                 else
                 {
-                    $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                    $record_array = $record_sql->fetch_all(1);
 
                     $record_value = $record_array[0]['recordteam_value'];
 
@@ -250,7 +250,7 @@ function f_igosja_generator_team_record()
     $team_sql = f_igosja_mysqli_query($sql);
 
     $count_team = $team_sql->num_rows;
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+    $team_array = $team_sql->fetch_all(1);
 
     for ($i=0; $i<$count_team; $i++)
     {
@@ -270,7 +270,7 @@ function f_igosja_generator_team_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
 
         $player_id  = $player_array[0]['lineup_player_id'];
         $goal       = $player_array[0]['lineup_goal'];
@@ -295,7 +295,7 @@ function f_igosja_generator_team_record()
         }
         else
         {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_array = $record_sql->fetch_all(1);
 
             $record_value = $record_array[0]['recordteam_value'];
 
@@ -320,7 +320,7 @@ function f_igosja_generator_team_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
 
         $player_id  = $player_array[0]['statisticplayer_player_id'];
         $goal       = $player_array[0]['goal'];
@@ -345,7 +345,7 @@ function f_igosja_generator_team_record()
         }
         else
         {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_array = $record_sql->fetch_all(1);
             $record_value = $record_array[0]['recordteam_value'];
 
             if ($goal > $record_value)
@@ -369,7 +369,7 @@ function f_igosja_generator_team_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
 
         $player_id  = $player_array[0]['statisticplayer_player_id'];
         $game       = $player_array[0]['game'];
@@ -394,7 +394,7 @@ function f_igosja_generator_team_record()
         }
         else
         {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_array = $record_sql->fetch_all(1);
             $record_value = $record_array[0]['recordteam_value'];
 
             if ($game > $record_value)
@@ -418,7 +418,7 @@ function f_igosja_generator_team_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
 
         $player_id  = $player_array[0]['statisticplayer_player_id'];
         $pass       = $player_array[0]['pass'];
@@ -443,7 +443,7 @@ function f_igosja_generator_team_record()
         }
         else
         {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_array = $record_sql->fetch_all(1);
             $record_value = $record_array[0]['recordteam_value'];
 
             if ($pass > $record_value)

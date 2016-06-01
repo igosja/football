@@ -24,7 +24,7 @@ else
             WHERE `forumtheme_id`='$num_get'";
     $page_sql = $mysqli->query($sql);
 
-    $page_array = $page_sql->fetch_all(MYSQLI_ASSOC);
+    $page_array = $page_sql->fetch_all(1);
     $count_page = $page_array[0]['count'];
     $page       = ceil($count_page / 10);
 }
@@ -73,7 +73,7 @@ if (0 == $count_head)
     exit;
 }
 
-$head_array = $head_sql->fetch_all(MYSQLI_ASSOC);
+$head_array = $head_sql->fetch_all(1);
 
 $forumthemegroup_country_id = $head_array[0]['forumthemegroup_country_id'];
 
@@ -121,11 +121,11 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
 $forum_sql = $mysqli->query($sql);
 
 $count       = $forum_sql->num_rows;
-$forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
+$forum_array = $forum_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count_forum`";
 $count_forum = $mysqli->query($sql);
-$count_forum = $count_forum->fetch_all(MYSQLI_ASSOC);
+$count_forum = $count_forum->fetch_all(1);
 $count_forum = $count_forum[0]['count_forum'];
 $count_forum = ceil($count_forum / $limit);
 
@@ -146,7 +146,7 @@ if (isset($authorization_user_id))
     }
     else
     {
-        $forumpost_array = $forumpost_sql->fetch_all(MYSQLI_ASSOC);
+        $forumpost_array = $forumpost_sql->fetch_all(1);
 
         $forumpost_id = $forumpost_array[0]['forumpost_id'];
     }
@@ -157,7 +157,7 @@ if (isset($authorization_user_id))
             AND `forumread_user_id`='$authorization_user_id'";
     $count_sql = $mysqli->query($sql);
 
-    $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+    $count_array = $count_sql->fetch_all(1);
 
     $count_check = $count_array[0]['count'];
 

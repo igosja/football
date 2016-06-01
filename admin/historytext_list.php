@@ -8,6 +8,6 @@ $sql = "SELECT `historytext_id`,
         ORDER BY `historytext_id` ASC";
 $historytext_sql = $mysqli->query($sql);
 
-$historytext_array = $historytext_sql->fetch_all(MYSQLI_ASSOC);
+$historytext_array = $historytext_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

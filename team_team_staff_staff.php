@@ -25,7 +25,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -49,7 +49,7 @@ $sql = "SELECT `country_id`,
         WHERE `staff_team_id`='$num_get'";
 $staff_sql = $mysqli->query($sql);
 
-$staff_array = $staff_sql->fetch_all(MYSQLI_ASSOC);
+$staff_array = $staff_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

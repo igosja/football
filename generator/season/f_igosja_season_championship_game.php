@@ -12,7 +12,7 @@ function f_igosja_season_championship_game()
     $shedule_sql = f_igosja_mysqli_query($sql);
 
     $count_shedule = $shedule_sql->num_rows;
-    $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+    $shedule_array = $shedule_sql->fetch_all(1);
 
     for ($i=0; $i<$count_shedule; $i++)
     {
@@ -29,7 +29,7 @@ function f_igosja_season_championship_game()
     $country_sql = f_igosja_mysqli_query($sql);
 
     $count_country = $country_sql->num_rows;
-    $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+    $country_array = $country_sql->fetch_all(1);
 
     for ($i=0; $i<$count_country; $i++)
     {
@@ -44,7 +44,7 @@ function f_igosja_season_championship_game()
         $standing_sql = f_igosja_mysqli_query($sql);
 
         $count_standing = $standing_sql->num_rows;
-        $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+        $standing_array = $standing_sql->fetch_all(1);
 
         for($j=0; $j<$count_standing; $j++)
         {
@@ -61,7 +61,7 @@ function f_igosja_season_championship_game()
         $referee_sql = f_igosja_mysqli_query($sql);
 
         $count_referee = $referee_sql->num_rows;
-        $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+        $referee_array = $referee_sql->fetch_all(1);
 
         for ($j=0; $j<$count_referee; $j++)
         {

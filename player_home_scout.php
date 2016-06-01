@@ -25,7 +25,7 @@ $sql = "SELECT COUNT(`scout_id`) AS `count`
         AND `scout_team_id`='$authorization_team_id'";
 $scout_sql = $mysqli->query($sql);
 
-$scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+$scout_array = $scout_sql->fetch_all(1);
 $count_scout = $scout_array[0]['count'];
 
 $sql = "SELECT COUNT(`player_id`) AS `count`
@@ -34,7 +34,7 @@ $sql = "SELECT COUNT(`player_id`) AS `count`
         AND `player_team_id`='$authorization_team_id'";
 $player_sql = $mysqli->query($sql);
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 $count_player = $player_array[0]['count'];
 
 if (0 != $count_scout ||
@@ -52,7 +52,7 @@ $sql = "SELECT COUNT(`scoutnearest_id`) AS `count`
         AND `scoutnearest_team_id`='$authorization_team_id'";
 $scoutnearest_sql = $mysqli->query($sql);
 
-$scoutnearest_array = $scoutnearest_sql->fetch_all(MYSQLI_ASSOC);
+$scoutnearest_array = $scoutnearest_sql->fetch_all(1);
 $count_scoutnearest = $scoutnearest_array[0]['count'];
 
 if (0 != $count_scoutnearest)

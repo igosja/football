@@ -62,7 +62,7 @@ if (isset($_POST['name_name']))
     redirect('name_list.php');
 }
 
-$name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+$name_array = $name_sql->fetch_all(1);
 
 $sql = "SELECT `country_id`,
                `country_name`
@@ -70,7 +70,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `country_id` ASC";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 $tpl = 'name_create';
 
 include (__DIR__ . '/../view/admin_main.php');

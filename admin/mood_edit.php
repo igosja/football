@@ -46,7 +46,7 @@ if (isset($_POST['mood_name']))
     redirect('mood_list.php');
 }
 
-$mood_array = $mood_sql->fetch_all(MYSQLI_ASSOC);
+$mood_array = $mood_sql->fetch_all(1);
 
 $tpl = 'mood_create';
 

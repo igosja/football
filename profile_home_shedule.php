@@ -34,7 +34,7 @@ $sql = "SELECT `game_home_team_id`,
         ORDER BY `shedule_date` ASC";
 $shedule_sql = $mysqli->query($sql);
 
-$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+$shedule_array = $shedule_sql->fetch_all(1);
 
 if (isset($authorization_country_id))
 {
@@ -60,7 +60,7 @@ if (isset($authorization_country_id))
             ORDER BY `shedule_date` ASC";
     $shedule_national_sql = $mysqli->query($sql);
 
-    $shedule_national_array = $shedule_national_sql->fetch_all(MYSQLI_ASSOC);
+    $shedule_national_array = $shedule_national_sql->fetch_all(1);
 
     $shedule_array = array_merge($shedule_array, $shedule_national_array);
 

@@ -63,7 +63,7 @@ $sql = "SELECT `note_id`,
         ORDER BY `note_id` DESC";
 $note_sql = $mysqli->query($sql);
 
-$note_array = $note_sql->fetch_all(MYSQLI_ASSOC);
+$note_array = $note_sql->fetch_all(1);
 
 $num                = $authorization_id;
 $header_title       = $authorization_login;

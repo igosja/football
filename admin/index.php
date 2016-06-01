@@ -8,7 +8,7 @@ $sql = "SELECT COUNT(`team_id`) AS `count`
         AND `team_user_id`='0'";
 $freeteam_sql = $mysqli->query($sql);
 
-$freeteam_array = $freeteam_sql->fetch_all(MYSQLI_ASSOC);
+$freeteam_array = $freeteam_sql->fetch_all(1);
 $count_freeteam = $freeteam_array[0]['count'];
 
 $sql = "SELECT COUNT(`team_id`) AS `count`
@@ -17,7 +17,7 @@ $sql = "SELECT COUNT(`team_id`) AS `count`
         AND `team_user_id`!='0'";
 $userteam_sql = $mysqli->query($sql);
 
-$userteam_array = $userteam_sql->fetch_all(MYSQLI_ASSOC);
+$userteam_array = $userteam_sql->fetch_all(1);
 $count_userteam = $userteam_array[0]['count'];
 
 $sql = "SELECT COUNT(`user_id`) AS `count`,
@@ -29,7 +29,7 @@ $sql = "SELECT COUNT(`user_id`) AS `count`,
         ORDER BY `user_registration_date` ASC";
 $registration_sql = $mysqli->query($sql);
 
-$registration_array = $registration_sql->fetch_all(MYSQLI_ASSOC);
+$registration_array = $registration_sql->fetch_all(1);
 
 $registration_date = array();
 $registration_user = array();
@@ -72,6 +72,6 @@ $sql = "SELECT `history_date`,
         LIMIT 25";
 $history_sql = $mysqli->query($sql);
 
-$history_array = $history_sql->fetch_all(MYSQLI_ASSOC);
+$history_array = $history_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

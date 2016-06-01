@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -52,7 +52,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `worldcup_place` ASC";
 $standing_sql = $mysqli->query($sql);
 
-$standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+$standing_array = $standing_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

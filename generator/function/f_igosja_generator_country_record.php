@@ -19,7 +19,7 @@ function f_igosja_generator_country_record()
     $game_sql = f_igosja_mysqli_query($sql);
 
     $count_game = $game_sql->num_rows;
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -64,7 +64,7 @@ function f_igosja_generator_country_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordcountry_value'];
 
@@ -99,7 +99,7 @@ function f_igosja_generator_country_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordcountry_value'];
 
@@ -135,7 +135,7 @@ function f_igosja_generator_country_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordcountry_value'];
 
@@ -174,7 +174,7 @@ function f_igosja_generator_country_record()
                 }
                 else
                 {
-                    $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                    $record_array = $record_sql->fetch_all(1);
 
                     $record_value = $record_array[0]['recordcountry_value'];
 
@@ -213,7 +213,7 @@ function f_igosja_generator_country_record()
                 }
                 else
                 {
-                    $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                    $record_array = $record_sql->fetch_all(1);
 
                     $record_value = $record_array[0]['recordcountry_value'];
 
@@ -249,7 +249,7 @@ function f_igosja_generator_country_record()
     $country_sql = f_igosja_mysqli_query($sql);
 
     $count_country = $country_sql->num_rows;
-    $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+    $country_array = $country_sql->fetch_all(1);
 
     for ($i=0; $i<$count_country; $i++)
     {
@@ -269,7 +269,7 @@ function f_igosja_generator_country_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
 
         $player_id  = $player_array[0]['lineup_player_id'];
         $goal       = $player_array[0]['lineup_goal'];
@@ -294,7 +294,7 @@ function f_igosja_generator_country_record()
         }
         else
         {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_array = $record_sql->fetch_all(1);
 
             $record_value = $record_array[0]['recordcountry_value'];
 
@@ -319,7 +319,7 @@ function f_igosja_generator_country_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
 
         $player_id  = $player_array[0]['statisticplayer_player_id'];
         $goal       = $player_array[0]['goal'];
@@ -344,7 +344,7 @@ function f_igosja_generator_country_record()
         }
         else
         {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_array = $record_sql->fetch_all(1);
             $record_value = $record_array[0]['recordcountry_value'];
 
             if ($goal > $record_value)
@@ -368,7 +368,7 @@ function f_igosja_generator_country_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
 
         $player_id  = $player_array[0]['statisticplayer_player_id'];
         $game       = $player_array[0]['game'];
@@ -393,7 +393,7 @@ function f_igosja_generator_country_record()
         }
         else
         {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_array = $record_sql->fetch_all(1);
             $record_value = $record_array[0]['recordcountry_value'];
 
             if ($game > $record_value)
@@ -417,7 +417,7 @@ function f_igosja_generator_country_record()
                 LIMIT 1";
         $player_sql = f_igosja_mysqli_query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
 
         $player_id  = $player_array[0]['statisticplayer_player_id'];
         $pass       = $player_array[0]['pass'];
@@ -442,7 +442,7 @@ function f_igosja_generator_country_record()
         }
         else
         {
-            $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+            $record_array = $record_sql->fetch_all(1);
             $record_value = $record_array[0]['recordcountry_value'];
 
             if ($pass > $record_value)

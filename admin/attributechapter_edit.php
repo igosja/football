@@ -41,7 +41,7 @@ if (isset($_POST['chapter_name']))
     redirect('attributechapter_list.php');
 }
 
-$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(1);
 
 $chapter_name = $chapter_array[0]['attributechapter_name'];
 

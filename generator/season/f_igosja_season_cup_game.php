@@ -13,7 +13,7 @@ function f_igosja_season_cup_game()
     $country_sql = f_igosja_mysqli_query($sql);
 
     $count_country = $country_sql->num_rows;
-    $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+    $country_array = $country_sql->fetch_all(1);
 
     for ($i=0; $i<$count_country; $i++)
     {
@@ -27,7 +27,7 @@ function f_igosja_season_cup_game()
         $referee_sql = f_igosja_mysqli_query($sql);
 
         $count_referee = $referee_sql->num_rows;
-        $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+        $referee_array = $referee_sql->fetch_all(1);
 
         for ($j=0; $j<$count_referee; $j++)
         {
@@ -53,7 +53,7 @@ function f_igosja_season_cup_game()
                 LIMIT 2";
         $shedule_sql = f_igosja_mysqli_query($sql);
 
-        $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+        $shedule_array = $shedule_sql->fetch_all(1);
 
         $shedule_id_1 = $shedule_array[0]['shedule_id'];
         $shedule_id_2 = $shedule_array[1]['shedule_id'];
@@ -67,7 +67,7 @@ function f_igosja_season_cup_game()
         $team_sql = f_igosja_mysqli_query($sql);
 
         $count_team = $team_sql->num_rows;
-        $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+        $team_array = $team_sql->fetch_all(1);
 
         for ($j=0; $j<$count_team; $j=$j+2)
         {

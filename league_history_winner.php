@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -48,7 +48,7 @@ $sql = "SELECT `city_name`,
 $winner_sql = $mysqli->query($sql);
 
 $count_winner = $winner_sql->num_rows;
-$winner_array = $winner_sql->fetch_all(MYSQLI_ASSOC);
+$winner_array = $winner_sql->fetch_all(1);
 
 $sql = "SELECT `city_name`,
                `country_name`,
@@ -67,7 +67,7 @@ $sql = "SELECT `city_name`,
         ORDER BY `leagueparticipant_season_id` DESC";
 $looser_sql = $mysqli->query($sql);
 
-$looser_array = $looser_sql->fetch_all(MYSQLI_ASSOC);
+$looser_array = $looser_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

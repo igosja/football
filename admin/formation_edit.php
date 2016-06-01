@@ -94,7 +94,7 @@ if (isset($_POST['formation_name']))
     redirect('formation_list.php');
 }
 
-$formation_array = $formation_sql->fetch_all(MYSQLI_ASSOC);
+$formation_array = $formation_sql->fetch_all(1);
 
 $formation_position = array(
                             $formation_array[0]['formation_position_id_1'],
@@ -116,7 +116,7 @@ $sql = "SELECT `position_id`,
         ORDER BY `position_id` ASC";
 $position_sql = $mysqli->query($sql);
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 $tpl = 'formation_create';
 

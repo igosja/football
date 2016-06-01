@@ -25,7 +25,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -219,11 +219,11 @@ $prepare->execute();
 $player_sql = $prepare->get_result();
 $prepare->close();
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count`";
 $count_page = $mysqli->query($sql);
-$count_page = $count_page->fetch_all(MYSQLI_ASSOC);
+$count_page = $count_page->fetch_all(1);
 $count_page = $count_page[0]['count'];
 $count_page = ceil($count_page / 30);
 
@@ -234,7 +234,7 @@ $sql = "SELECT `position_id`,
         ORDER BY `position_id` ASC";
 $position_sql = $mysqli->query($sql);
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 $sql = "SELECT `country_id`,
                `country_name`
@@ -243,7 +243,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `country_id` ASC";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

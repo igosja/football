@@ -41,7 +41,7 @@ if (isset($_POST['recordteamtype_name']))
     redirect('recordteamtype_list.php');
 }
 
-$recordteamtype_array = $recordteamtype_sql->fetch_all(MYSQLI_ASSOC);
+$recordteamtype_array = $recordteamtype_sql->fetch_all(1);
 
 $tpl = 'recordteamtype_create';
 

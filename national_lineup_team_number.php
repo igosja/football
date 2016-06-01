@@ -26,7 +26,7 @@ if (0 == $count_country)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -84,7 +84,7 @@ $sql = "SELECT `mood_id`,
         ORDER BY `player_position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $country_name;

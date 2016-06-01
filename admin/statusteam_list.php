@@ -7,6 +7,6 @@ $sql = "SELECT `statusteam_id`, `statusteam_name`
         ORDER BY `statusteam_id` ASC";
 $statusteam_sql = $mysqli->query($sql);
 
-$statusteam_array = $statusteam_sql->fetch_all(MYSQLI_ASSOC);
+$statusteam_array = $statusteam_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

@@ -69,7 +69,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
@@ -87,7 +87,7 @@ $sql = "SELECT `attribute_name`,
 $attribute_sql = $mysqli->query($sql);
 
 $count_attribute = $attribute_sql->num_rows;
-$attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+$attribute_array = $attribute_sql->fetch_all(1);
 
 $sql = "SELECT `statisticplayer_best`,
                `statisticplayer_foul`,
@@ -112,7 +112,7 @@ $sql = "SELECT `statisticplayer_best`,
         ORDER BY `tournament_id` ASC";
 $statistic_sql = $mysqli->query($sql);
 
-$statistic_array = $statistic_sql->fetch_all(MYSQLI_ASSOC);
+$statistic_array = $statistic_sql->fetch_all(1);
 
 $sql = "SELECT SUM(`statisticplayer_best`) AS `count_best`,
                SUM(`statisticplayer_foul`) AS `count_foul`,
@@ -132,7 +132,7 @@ $sql = "SELECT SUM(`statisticplayer_best`) AS `count_best`,
         AND `statisticplayer_season_id`='$igosja_season_id'";
 $total_statistic_sql = $mysqli->query($sql);
 
-$total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
+$total_statistic_array = $total_statistic_sql->fetch_all(1);
 
 if (isset($authorization_team_id))
 {
@@ -142,7 +142,7 @@ if (isset($authorization_team_id))
             AND `scout_team_id`='$authorization_team_id'";
     $scout_sql = $mysqli->query($sql);
 
-    $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+    $scout_array = $scout_sql->fetch_all(1);
     $count_scout = $scout_array[0]['count'];
 }
 else

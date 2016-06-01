@@ -44,7 +44,7 @@ if (isset($_POST['injurytype_name']))
     redirect('injurytype_list.php');
 }
 
-$injurytype_array = $injurytype_sql->fetch_all(MYSQLI_ASSOC);
+$injurytype_array = $injurytype_sql->fetch_all(1);
 
 $tpl = 'injurytype_create';
 

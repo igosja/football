@@ -25,7 +25,7 @@ if (0 == $count_continent)
     exit;
 }
 
-$continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
+$continent_array = $continent_sql->fetch_all(1);
 
 $continent_name = $continent_array[0]['continent_name'];
 
@@ -59,11 +59,11 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
 $user_sql = $mysqli->query($sql);
 
 $count_user = $user_sql->num_rows;
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+$user_array = $user_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count_page`";
 $count_page = $mysqli->query($sql);
-$count_page = $count_page->fetch_all(MYSQLI_ASSOC);
+$count_page = $count_page->fetch_all(1);
 $count_page = $count_page[0]['count_page'];
 $count_page = ceil($count_page / 30);
 

@@ -47,7 +47,7 @@ if (isset($_POST['eventtype_name']))
     redirect('eventtype_list.php');
 }
 
-$eventtype_array = $eventtype_sql->fetch_all(MYSQLI_ASSOC);
+$eventtype_array = $eventtype_sql->fetch_all(1);
 
 $tpl = 'eventtype_create';
 

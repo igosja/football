@@ -37,7 +37,7 @@ function f_igosja_generator_training()
     $player_sql = f_igosja_mysqli_query($sql);
 
     $count_player = $player_sql->num_rows;
-    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+    $player_array = $player_sql->fetch_all(1);
 
     for ($i=0; $i<$count_player; $i++)
     {
@@ -71,7 +71,7 @@ function f_igosja_generator_training()
                     AND `playerposition_position_id`='$position_id'";
             $check_sql = f_igosja_mysqli_query($sql);
 
-            $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
+            $check_array = $check_sql->fetch_all(1);
 
             $count_check = $check_array[0]['count'];
 
@@ -103,7 +103,7 @@ function f_igosja_generator_training()
                     AND `training_attribute_id`='$attribute_id'";
             $check_sql = f_igosja_mysqli_query($sql);
 
-            $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
+            $check_array = $check_sql->fetch_all(1);
 
             $count_check = $check_array[0]['count'];
 
@@ -137,7 +137,7 @@ function f_igosja_generator_training()
         $training_sql = f_igosja_mysqli_query($sql);
 
         $count_training = $training_sql->num_rows;
-        $training_array = $training_sql->fetch_all(MYSQLI_ASSOC);
+        $training_array = $training_sql->fetch_all(1);
         $training_check = array();
 
         for ($j=0; $j<$count_training; $j++)
@@ -154,7 +154,7 @@ function f_igosja_generator_training()
         $attribute_sql = f_igosja_mysqli_query($sql);
 
         $count_attribute = $attribute_sql->num_rows;
-        $attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+        $attribute_array = $attribute_sql->fetch_all(1);
 
         for ($j=0; $j<$count_attribute; $j++)
         {
@@ -193,7 +193,7 @@ function f_igosja_generator_training()
         $attribute_sql = f_igosja_mysqli_query($sql);
 
         $count_attribute = $attribute_sql->num_rows;
-        $attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+        $attribute_array = $attribute_sql->fetch_all(1);
 
         for ($j=0; $j<$count_attribute; $j++)
         {

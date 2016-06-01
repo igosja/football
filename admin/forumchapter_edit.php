@@ -41,7 +41,7 @@ if (isset($_POST['chapter_name']))
     redirect('forumchapter_list.php');
 }
 
-$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(1);
 
 $tpl = 'forumchapter_create';
 

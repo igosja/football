@@ -25,7 +25,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -52,7 +52,7 @@ $sql = "SELECT `game_home_team_id`,
         ORDER BY `shedule_date` ASC";
 $game_sql = $mysqli->query($sql);
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

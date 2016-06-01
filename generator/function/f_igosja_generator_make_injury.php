@@ -15,7 +15,7 @@ function f_igosja_generator_make_injury()
             ORDER BY `game_id` ASC";
     $game_sql = f_igosja_mysqli_query($sql);
 
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
     $count_game = $game_array[0]['count'];
 
     if (0 != $count_game)
@@ -37,7 +37,7 @@ function f_igosja_generator_make_injury()
 
         if (0 != $count_team)
         {
-            $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+            $team_array = $team_sql->fetch_all(1);
 
             $team_id = $team_array[0]['team_id'];
 
@@ -59,7 +59,7 @@ function f_igosja_generator_make_injury()
                     LIMIT 1";
             $player_sql = f_igosja_mysqli_query($sql);
 
-            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+            $player_array = $player_sql->fetch_all(1);
 
             $player_id  = $player_array[0]['lineup_player_id'];
             $reputation = $player_array[0]['staff_reputation'];
@@ -71,7 +71,7 @@ function f_igosja_generator_make_injury()
                     LIMIT 1";
             $injurytype_sql = f_igosja_mysqli_query($sql);
 
-            $injurytype_array = $injurytype_sql->fetch_all(MYSQLI_ASSOC);
+            $injurytype_array = $injurytype_sql->fetch_all(1);
 
             $injurytype_id  = $injurytype_array[0]['injurytype_id'];
             $injurytype_day = $injurytype_array[0]['injurytype_day'];

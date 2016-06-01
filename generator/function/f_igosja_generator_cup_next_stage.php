@@ -12,7 +12,7 @@ function f_igosja_generator_cup_next_stage()
             LIMIT 1";
     $shedule_sql = f_igosja_mysqli_query($sql);
 
-    $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+    $shedule_array = $shedule_sql->fetch_all(1);
 
     $tournamenttype_id = $shedule_array[0]['shedule_tournamenttype_id'];
 
@@ -37,7 +37,7 @@ function f_igosja_generator_cup_next_stage()
         $game_sql = f_igosja_mysqli_query($sql);
 
         $count_game = $game_sql->num_rows;
-        $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+        $game_array = $game_sql->fetch_all(1);
 
         for ($i=0; $i<$count_game; $i++)
         {
@@ -58,7 +58,7 @@ function f_igosja_generator_cup_next_stage()
                     LIMIT 1";
             $first_game_sql = f_igosja_mysqli_query($sql);
 
-            $first_game_array = $first_game_sql->fetch_all(MYSQLI_ASSOC);
+            $first_game_array = $first_game_sql->fetch_all(1);
 
             $first_home_score  = $first_game_array[0]['game_home_score'];
             $first_guest_score = $first_game_array[0]['game_guest_score'];
@@ -91,7 +91,7 @@ function f_igosja_generator_cup_next_stage()
                     LIMIT 2";
             $shedule_sql = f_igosja_mysqli_query($sql);
 
-            $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+            $shedule_array = $shedule_sql->fetch_all(1);
 
             if (isset($shedule_array[0]['shedule_id']))
             {
@@ -119,7 +119,7 @@ function f_igosja_generator_cup_next_stage()
             $tournament_sql = f_igosja_mysqli_query($sql);
 
             $count_tournament = $tournament_sql->num_rows;
-            $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+            $tournament_array = $tournament_sql->fetch_all(1);
 
             for ($i=0; $i<$count_tournament; $i++)
             {
@@ -132,7 +132,7 @@ function f_igosja_generator_cup_next_stage()
                         ORDER BY RAND()";
                 $referee_sql = f_igosja_mysqli_query($sql);
 
-                $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+                $referee_array = $referee_sql->fetch_all(1);
 
                 $sql = "SELECT `cupparticipant_team_id`
                         FROM `cupparticipant`
@@ -143,7 +143,7 @@ function f_igosja_generator_cup_next_stage()
                 $team_sql = f_igosja_mysqli_query($sql);
 
                 $count_team = $team_sql->num_rows;
-                $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+                $team_array = $team_sql->fetch_all(1);
 
                 for ($j=0; $j<$count_team; $j=$j+2)
                 {
@@ -208,7 +208,7 @@ function f_igosja_generator_cup_next_stage()
         $game_sql = f_igosja_mysqli_query($sql);
 
         $count_game = $game_sql->num_rows;
-        $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+        $game_array = $game_sql->fetch_all(1);
 
         for ($i=0; $i<$count_game; $i++)
         {

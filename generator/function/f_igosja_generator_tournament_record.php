@@ -17,7 +17,7 @@ function f_igosja_generator_tournament_record()
 
     $count_tournament = $tournament_sql->num_rows;
 
-    $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+    $tournament_array = $tournament_sql->fetch_all(1);
 
     for ($i=0; $i<$count_tournament; $i++)
     {
@@ -39,7 +39,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_game)
         {
-            $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+            $game_array = $game_sql->fetch_all(1);
 
             $game_id = $game_array[0]['game_id'];
             $visitor = $game_array[0]['game_visitor'];
@@ -64,7 +64,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
@@ -95,7 +95,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_visitor)
         {
-            $visitor_array = $visitor_sql->fetch_all(MYSQLI_ASSOC);
+            $visitor_array = $visitor_sql->fetch_all(1);
 
             $team_id                = $visitor_array[0]['statisticteam_team_id'];
             $statistic_season_id    = $visitor_array[0]['statisticteam_season_id'];
@@ -123,7 +123,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array  = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array  = $record_sql->fetch_all(1);
 
                 $record_value  = $record_array[0]['recordtournament_value_1'];
                 $record_season = $record_array[0]['recordtournament_season_id'];
@@ -156,7 +156,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_visitor)
         {
-            $visitor_array = $visitor_sql->fetch_all(MYSQLI_ASSOC);
+            $visitor_array = $visitor_sql->fetch_all(1);
 
             $country_id                = $visitor_array[0]['statisticcountry_country_id'];
             $statistic_season_id    = $visitor_array[0]['statisticcountry_season_id'];
@@ -184,7 +184,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array  = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array  = $record_sql->fetch_all(1);
 
                 $record_value  = $record_array[0]['recordtournament_value_1'];
                 $record_season = $record_array[0]['recordtournament_season_id'];
@@ -219,7 +219,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_game)
         {
-            $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+            $game_array = $game_sql->fetch_all(1);
 
             $game_id = $game_array[0]['game_id'];
             $score   = $game_array[0]['game_score'];
@@ -244,7 +244,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
@@ -277,7 +277,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_game)
         {
-            $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+            $game_array = $game_sql->fetch_all(1);
 
             $game_id = $game_array[0]['game_id'];
             $score   = $game_array[0]['game_score'];
@@ -302,7 +302,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
@@ -337,7 +337,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_player)
         {
-            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+            $player_array = $player_sql->fetch_all(1);
 
             $player_id  = $player_array[0]['lineup_player_id'];
             $goal       = $player_array[0]['lineup_goal'];
@@ -362,7 +362,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
@@ -397,7 +397,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_player)
         {
-            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+            $player_array = $player_sql->fetch_all(1);
 
             $player_id  = $player_array[0]['lineup_player_id'];
             $mark       = $player_array[0]['lineup_mark'] * 10; //Нужно целое число
@@ -422,7 +422,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
@@ -452,7 +452,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_player)
         {
-            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+            $player_array = $player_sql->fetch_all(1);
 
             $player_id  = $player_array[0]['statisticplayer_player_id'];
             $goal       = $player_array[0]['goal'];
@@ -477,7 +477,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
                 if ($goal > $record_value)
@@ -506,7 +506,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_player)
         {
-            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+            $player_array = $player_sql->fetch_all(1);
 
             $player_id  = $player_array[0]['statisticplayer_player_id'];
             $pass       = $player_array[0]['pass'];
@@ -531,7 +531,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
@@ -561,7 +561,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_player)
         {
-            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+            $player_array = $player_sql->fetch_all(1);
 
             $player_id  = $player_array[0]['statisticplayer_player_id'];
             $best       = $player_array[0]['best'];
@@ -586,7 +586,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
@@ -616,7 +616,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_point)
         {
-            $point_array = $point_sql->fetch_all(MYSQLI_ASSOC);
+            $point_array = $point_sql->fetch_all(1);
 
             $team_id = $point_array[0]['standing_team_id'];
             $point   = $point_array[0]['standing_point'];
@@ -642,7 +642,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
                 if ($point > $record_value)
@@ -672,7 +672,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_point)
         {
-            $point_array = $point_sql->fetch_all(MYSQLI_ASSOC);
+            $point_array = $point_sql->fetch_all(1);
 
             $country_id = $point_array[0]['worldcup_country_id'];
             $point      = $point_array[0]['worldcup_point'];
@@ -698,7 +698,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
                 if ($point > $record_value)
@@ -728,7 +728,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_score)
         {
-            $score_array = $score_sql->fetch_all(MYSQLI_ASSOC);
+            $score_array = $score_sql->fetch_all(1);
 
             $team_id = $score_array[0]['standing_team_id'];
             $score   = $score_array[0]['standing_score'];
@@ -754,7 +754,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
                 if ($score > $record_value)
@@ -784,7 +784,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_score)
         {
-            $score_array = $score_sql->fetch_all(MYSQLI_ASSOC);
+            $score_array = $score_sql->fetch_all(1);
 
             $country_id = $score_array[0]['worldcup_country_id'];
             $score      = $score_array[0]['worldcup_score'];
@@ -810,7 +810,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
                 $record_value = $record_array[0]['recordtournament_value_1'];
 
                 if ($score > $record_value)
@@ -841,7 +841,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_discipline)
         {
-            $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
+            $discipline_array = $discipline_sql->fetch_all(1);
 
             $team_id = $discipline_array[0]['statisticteam_team_id'];
             $red     = $discipline_array[0]['statisticteam_red'];
@@ -870,7 +870,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array   = $record_sql->fetch_all(1);
                 $record_value_1 = $record_array[0]['recordtournament_value_1'];
                 $record_value_2 = $record_array[0]['recordtournament_value_2'];
 
@@ -905,7 +905,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_discipline)
         {
-            $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
+            $discipline_array = $discipline_sql->fetch_all(1);
 
             $country_id = $discipline_array[0]['statisticcountry_country_id'];
             $red        = $discipline_array[0]['statisticcountry_red'];
@@ -934,7 +934,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array   = $record_sql->fetch_all(1);
                 $record_value_1 = $record_array[0]['recordtournament_value_1'];
                 $record_value_2 = $record_array[0]['recordtournament_value_2'];
 
@@ -969,7 +969,7 @@ function f_igosja_generator_tournament_record()
 
         if (0 != $count_discipline)
         {
-            $discipline_array = $discipline_sql->fetch_all(MYSQLI_ASSOC);
+            $discipline_array = $discipline_sql->fetch_all(1);
 
             $player_id  = $discipline_array[0]['statisticplayer_player_id'];
             $red        = $discipline_array[0]['red'];
@@ -997,7 +997,7 @@ function f_igosja_generator_tournament_record()
             }
             else
             {
-                $record_array   = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array   = $record_sql->fetch_all(1);
                 $record_value_1 = $record_array[0]['recordtournament_value_1'];
                 $record_value_2 = $record_array[0]['recordtournament_value_2'];
 

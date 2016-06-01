@@ -28,7 +28,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name  = $team_array[0]['team_name'];
 $country_id = $team_array[0]['city_country_id'];
@@ -65,7 +65,7 @@ if (isset($_GET['staff_id'])
         redirect('team_team_transfer_search_staff.php?num=' . $num_get);
     }
 
-    $staff_array = $staff_sql->fetch_all(MYSQLI_ASSOC);
+    $staff_array = $staff_sql->fetch_all(1);
 
     $name       = $staff_array[0]['name_name'];
     $surname    = $staff_array[0]['surname_name'];
@@ -99,7 +99,7 @@ $sql = "SELECT `staffpost_id`
 $staffpost_sql = $mysqli->query($sql);
 
 $count_staffpost = $staffpost_sql->num_rows;
-$staffpost_array = $staffpost_sql->fetch_all(MYSQLI_ASSOC);
+$staffpost_array = $staffpost_sql->fetch_all(1);
 
 for ($i=0; $i<$count_staffpost; $i++)
 {
@@ -118,7 +118,7 @@ for ($i=0; $i<$count_staffpost; $i++)
                 AND `staff_reputation` BETWEEN '$min_reputation' AND '$max_reputation'";
         $staff_sql = $mysqli->query($sql);
 
-        $staff_array = $staff_sql->fetch_all(MYSQLI_ASSOC);
+        $staff_array = $staff_sql->fetch_all(1);
 
         $count = $staff_array[0]['count'];
 
@@ -143,7 +143,7 @@ for ($i=0; $i<$count_staffpost; $i++)
                     LIMIT 1";
             $name_sql = $mysqli->query($sql);
 
-            $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+            $name_array = $name_sql->fetch_all(1);
 
             $name_id    = $name_array[0]['countryname_name_id'];
             $surname_id = $name_array[0]['countrysurname_surname_id'];
@@ -275,11 +275,11 @@ $prepare->execute();
 $staff_sql = $prepare->get_result();
 $prepare->close();
 
-$staff_array = $staff_sql->fetch_all(MYSQLI_ASSOC);
+$staff_array = $staff_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count`";
 $count_page = $mysqli->query($sql);
-$count_page = $count_page->fetch_all(MYSQLI_ASSOC);
+$count_page = $count_page->fetch_all(1);
 $count_page = $count_page[0]['count'];
 $count_page = ceil($count_page / 30);
 
@@ -289,7 +289,7 @@ $sql = "SELECT `staffpost_id`,
         ORDER BY `staffpost_id` ASC";
 $staffpost_sql = $mysqli->query($sql);
 
-$staffpost_array = $staffpost_sql->fetch_all(MYSQLI_ASSOC);
+$staffpost_array = $staffpost_sql->fetch_all(1);
 
 $sql = "SELECT `country_id`,
                `country_name`
@@ -298,7 +298,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `country_id` ASC";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

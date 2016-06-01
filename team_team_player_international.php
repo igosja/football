@@ -48,7 +48,7 @@ if (isset($_POST['data']))
     redirect('team_team_player_international.php?num=' . $num_get);
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -80,7 +80,7 @@ $sql = "SELECT `country_id`,
         WHERE `team_id`='$num_get'";
 $player_sql = $mysqli->query($sql);
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $sql = "SELECT `statusnational_id`,
                `statusnational_name`
@@ -88,7 +88,7 @@ $sql = "SELECT `statusnational_id`,
         ORDER BY `statusnational_id` ASC";
 $statusnational_sql = $mysqli->query($sql);
 
-$statusnational_array = $statusnational_sql->fetch_all(MYSQLI_ASSOC);
+$statusnational_array = $statusnational_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

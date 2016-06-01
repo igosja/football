@@ -44,7 +44,7 @@ if (isset($_POST['inboxtheme_name']))
     redirect('inboxtheme_list.php');
 }
 
-$inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+$inboxtheme_array = $inboxtheme_sql->fetch_all(1);
 
 $tpl = 'inboxtheme_create';
 

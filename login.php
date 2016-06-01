@@ -48,7 +48,7 @@ if (isset($_POST['data']))
         redirect('login.php');
     }
 
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
 
     $user_password      = $user_array[0]['user_password'];
     $user_activation    = $user_array[0]['user_activation'];
@@ -84,7 +84,7 @@ if (isset($_POST['data']))
             WHERE `ip_user_id`='$authorization_user_id'";
     $ip_sql = $mysqli->query($sql);
 
-    $ip_array = $ip_sql->fetch_all(MYSQLI_ASSOC);
+    $ip_array = $ip_sql->fetch_all(1);
     $count_ip = $ip_array[0]['count'];
 
     if (10 == $count_ip)

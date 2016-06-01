@@ -28,7 +28,7 @@ if (isset($_POST['data']))
         redirect('forget_password.php');
     }
 
-    $user_array = $check_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $check_sql->fetch_all(1);
 
     $user_id        = $user_array[0]['user_id'];
     $user_login     = $user_array[0]['user_login'];

@@ -63,7 +63,7 @@ if ($result)
 
     if (1 == $count_user)
     {
-        $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+        $user_array = $user_sql->fetch_all(1);
 
         $user_id    = $user_array[0]['user_id'];
         $user_login = $user_array[0]['user_login'];
@@ -77,7 +77,7 @@ if ($result)
                 WHERE `ip_user_id`='$user_id'";
         $ip_sql = $mysqli->query($sql);
 
-        $ip_array = $ip_sql->fetch_all(MYSQLI_ASSOC);
+        $ip_array = $ip_sql->fetch_all(1);
         $count_ip = $ip_array[0]['count'];
 
         if (10 == $count_ip)

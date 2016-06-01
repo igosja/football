@@ -26,7 +26,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -74,7 +74,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
         redirect('team_lineup_team_school.php?num=' . $num_get);
     }
 
-    $school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
+    $school_array = $school_sql->fetch_all(1);
 
     $country_id     = $school_array[0]['city_country_id'];
     $position_id    = $school_array[0]['school_position_id'];
@@ -179,7 +179,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
                 LIMIT 1";
         $name_sql = $mysqli->query($sql);
 
-        $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+        $name_array = $name_sql->fetch_all(1);
 
         $name_id = $name_array[0]['countryname_name_id'];
 
@@ -201,7 +201,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
                 LIMIT 1";
         $surname_sql = $mysqli->query($sql);
 
-        $surname_array = $surname_sql->fetch_all(MYSQLI_ASSOC);
+        $surname_array = $surname_sql->fetch_all(1);
 
         $surname_id = $surname_array[0]['countrysurname_surname_id'];
 
@@ -247,7 +247,7 @@ elseif (isset($_GET['data']) && isset($_GET['ok']))
         redirect('team_lineup_team_school.php?num=' . $num_get);
     }
 
-    $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+    $name_array = $name_sql->fetch_all(1);
 
     $name = $name_array[0]['name_name'];
 
@@ -267,7 +267,7 @@ elseif (isset($_GET['data']) && isset($_GET['ok']))
         redirect('team_lineup_team_school.php?num=' . $num_get);
     }
 
-    $surname_array = $surname_sql->fetch_all(MYSQLI_ASSOC);
+    $surname_array = $surname_sql->fetch_all(1);
 
     $surname = $surname_array[0]['surname_name'];
 
@@ -287,7 +287,7 @@ elseif (isset($_GET['data']) && isset($_GET['ok']))
         redirect('team_lineup_team_school.php?num=' . $num_get);
     }
 
-    $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+    $position_array = $position_sql->fetch_all(1);
 
     $position = $position_array[0]['position_description'];
 
@@ -327,7 +327,7 @@ elseif (isset($_GET['data']) && isset($_GET['ok']))
         redirect('team_lineup_team_school.php?num=' . $num_get);
     }
 
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+    $team_array = $team_sql->fetch_all(1);
 
     $school_level   = $team_array[0]['team_school_level'];
     $staff_level    = $team_array[0]['staff_reputation'];
@@ -418,7 +418,7 @@ $sql = "SELECT COUNT(`position_id`) AS `count`
         WHERE `position_available`='1'";
 $position_sql = $mysqli->query($sql);
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 $count_position = $position_array[0]['count'];
 
 $sql = "SELECT COUNT(`school_id`) AS `count`
@@ -426,7 +426,7 @@ $sql = "SELECT COUNT(`school_id`) AS `count`
         WHERE `school_team_id`='$num_get'";
 $school_sql = $mysqli->query($sql);
 
-$school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
+$school_array = $school_sql->fetch_all(1);
 $count_school = $school_array[0]['count'];
 
 if ($count_position > $count_school)
@@ -437,7 +437,7 @@ if ($count_position > $count_school)
             ORDER BY `position_id` ASC";
     $position_sql = $mysqli->query($sql);
 
-    $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+    $position_array = $position_sql->fetch_all(1);
 
     foreach ($position_array as $item)
     {
@@ -449,7 +449,7 @@ if ($count_position > $count_school)
                 AND `school_position_id`='$position_id'";
         $school_sql = $mysqli->query($sql);
 
-        $school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
+        $school_array = $school_sql->fetch_all(1);
         $count_school = $school_array[0]['count'];
 
         if (0 == $count_school)
@@ -472,7 +472,7 @@ if ($count_position > $count_school)
                     LIMIT 1";
             $name_sql = $mysqli->query($sql);
 
-            $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+            $name_array = $name_sql->fetch_all(1);
 
             $name_id = $name_array[0]['countryname_name_id'];
 
@@ -494,7 +494,7 @@ if ($count_position > $count_school)
                     LIMIT 1";
             $surname_sql = $mysqli->query($sql);
 
-            $surname_array = $surname_sql->fetch_all(MYSQLI_ASSOC);
+            $surname_array = $surname_sql->fetch_all(1);
 
             $surname_id = $surname_array[0]['countrysurname_surname_id'];
 
@@ -541,7 +541,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `school_position_id` ASC";
 $school_sql = $mysqli->query($sql);
 
-$school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
+$school_array = $school_sql->fetch_all(1);
 
 $sql = "SELECT `position_id`,
                `position_name`
@@ -550,7 +550,7 @@ $sql = "SELECT `position_id`,
         ORDER BY `position_id` ASC";
 $position_sql = $mysqli->query($sql);
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 $sql = "SELECT `surname_id`,
                `surname_name`
@@ -565,7 +565,7 @@ $sql = "SELECT `surname_id`,
         ORDER BY `surname_name` ASC";
 $surname_sql = $mysqli->query($sql);
 
-$surname_array = $surname_sql->fetch_all(MYSQLI_ASSOC);
+$surname_array = $surname_sql->fetch_all(1);
 
 $sql = "SELECT `name_id`,
                `name_name`
@@ -580,7 +580,7 @@ $sql = "SELECT `name_id`,
         ORDER BY `name_name` ASC";
 $name_sql = $mysqli->query($sql);
 
-$name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+$name_array = $name_sql->fetch_all(1);
 
 $sql = "SELECT `mood_id`,
                `mood_name`
@@ -589,7 +589,7 @@ $sql = "SELECT `mood_id`,
         LIMIT 1";
 $mood_sql = $mysqli->query($sql);
 
-$mood_array = $mood_sql->fetch_all(MYSQLI_ASSOC);
+$mood_array = $mood_sql->fetch_all(1);
 
 $sql = "SELECT `country_id`,
                `country_name`
@@ -602,7 +602,7 @@ $sql = "SELECT `country_id`,
         LIMIT 1";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

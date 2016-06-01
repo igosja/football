@@ -8,6 +8,6 @@ $sql = "SELECT `formation_id`,
         ORDER BY `formation_id` ASC";
 $formation_sql = $mysqli->query($sql);
 
-$formation_array = $formation_sql->fetch_all(MYSQLI_ASSOC);
+$formation_array = $formation_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

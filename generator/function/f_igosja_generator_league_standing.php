@@ -21,7 +21,7 @@ function f_igosja_generator_league_standing()
 
     $count_game = $game_sql->num_rows;
 
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -94,7 +94,7 @@ function f_igosja_generator_league_standing()
     $group_sql = f_igosja_mysqli_query($sql);
 
     $count_group = $group_sql->num_rows;
-    $group_array = $group_sql->fetch_all(MYSQLI_ASSOC);
+    $group_array = $group_sql->fetch_all(1);
 
     for ($i=0; $i<$count_group; $i++)
     {
@@ -108,7 +108,7 @@ function f_igosja_generator_league_standing()
         $league_sql = f_igosja_mysqli_query($sql);
 
         $count_league = $league_sql->num_rows;
-        $league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
+        $league_array = $league_sql->fetch_all(1);
 
         for ($j=0; $j<$count_league; $j++)
         {

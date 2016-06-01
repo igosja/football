@@ -22,7 +22,7 @@ function f_igosja_generator_tournament_series_to_record()
 
         $count_tournament = $tournament_sql->num_rows;
 
-        $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+        $tournament_array = $tournament_sql->fetch_all(1);
 
         for ($i=0; $i<$count_tournament; $i++)
         {
@@ -40,7 +40,7 @@ function f_igosja_generator_tournament_series_to_record()
                     LIMIT 1";
             $series_sql = f_igosja_mysqli_query($sql);
 
-            $series_array = $series_sql->fetch_all(MYSQLI_ASSOC);
+            $series_array = $series_sql->fetch_all(1);
 
             $team_id    = $series_array[0]['series_team_id'];
             $date_start = $series_array[0]['series_date_start'];
@@ -74,7 +74,7 @@ function f_igosja_generator_tournament_series_to_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordtournament_value_1'];
 

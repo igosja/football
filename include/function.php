@@ -240,7 +240,7 @@ function f_igosja_referee_create($country_id)
             LIMIT 1";
     $name_sql = $mysqli->query($sql);
 
-    $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+    $name_array = $name_sql->fetch_all(1);
 
     $name_id    = $name_array[0]['countryname_name_id'];
     $surname_id = $name_array[0]['countrysurname_surname_id'];
@@ -269,7 +269,7 @@ function f_igosja_player_create($team_id, $i)
             WHERE `positioncreate_id`='$i'";
     $position_sql = $mysqli->query($sql);
 
-    $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+    $position_array = $position_sql->fetch_all(1);
 
     $position_id = $position_array[0]['positioncreate_position_id'];
 
@@ -285,7 +285,7 @@ function f_igosja_player_create($team_id, $i)
             LIMIT 1";
     $team_sql = $mysqli->query($sql);
 
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+    $team_array = $team_sql->fetch_all(1);
 
     $country_id = $team_array[0]['city_country_id'];
 
@@ -307,7 +307,7 @@ function f_igosja_player_create($team_id, $i)
             LIMIT 1";
     $name_sql = $mysqli->query($sql);
 
-    $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+    $name_array = $name_sql->fetch_all(1);
 
     $name_id    = $name_array[0]['countryname_name_id'];
     $surname_id = $name_array[0]['countrysurname_surname_id'];
@@ -370,7 +370,7 @@ function f_igosja_staff_create($team_id)
             ORDER BY `staffpost_id` ASC";
     $post_sql = $mysqli->query($sql);
 
-    $post_array = $post_sql->fetch_all(MYSQLI_ASSOC);
+    $post_array = $post_sql->fetch_all(1);
     $count_post = $post_sql->num_rows;
 
     for ($i=0; $i<$count_post; $i++)
@@ -386,7 +386,7 @@ function f_igosja_staff_create($team_id)
                 LIMIT 1";
         $team_sql = $mysqli->query($sql);
 
-        $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+        $team_array = $team_sql->fetch_all(1);
 
         $country_id = $team_array[0]['city_country_id'];
 
@@ -406,7 +406,7 @@ function f_igosja_staff_create($team_id)
                 LIMIT 1";
         $name_sql = $mysqli->query($sql);
 
-        $name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+        $name_array = $name_sql->fetch_all(1);
 
         $name_id    = $name_array[0]['countryname_name_id'];
         $surname_id = $name_array[0]['countrysurname_surname_id'];
@@ -631,7 +631,7 @@ function f_igosja_player_to_scout_and_fire_button($player_id)
                 AND `scout_team_id`='$authorization_team_id'";
         $scout_sql = $mysqli->query($sql);
 
-        $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+        $scout_array = $scout_sql->fetch_all(1);
         $count_scout = $scout_array[0]['count'];
 
         $sql = "SELECT COUNT(`player_id`) AS `count`
@@ -640,7 +640,7 @@ function f_igosja_player_to_scout_and_fire_button($player_id)
                 AND `player_team_id`='$authorization_team_id'";
         $player_sql = $mysqli->query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
         $count_player = $player_array[0]['count'];
 
         $sql = "SELECT COUNT(`scoutnearest_id`) AS `count`
@@ -649,7 +649,7 @@ function f_igosja_player_to_scout_and_fire_button($player_id)
                 AND `scoutnearest_team_id`='$authorization_team_id'";
         $scoutnearest_sql = $mysqli->query($sql);
 
-        $scoutnearest_array = $scoutnearest_sql->fetch_all(MYSQLI_ASSOC);
+        $scoutnearest_array = $scoutnearest_sql->fetch_all(1);
         $count_scoutnearest = $scoutnearest_array[0]['count'];
 
         if (0 == $count_scout &&
@@ -680,7 +680,7 @@ function f_igosja_penalty_player_select($team_id, $game_id, $i = 0)
                 LIMIT 1";
         $penalty_sql = f_igosja_mysqli_query($sql);
 
-        $penalty_array = $penalty_sql->fetch_all(MYSQLI_ASSOC);
+        $penalty_array = $penalty_sql->fetch_all(1);
 
         $penalty_player_id = $penalty_array[0]['team_penalty_player_id_' . $i];
 
@@ -710,7 +710,7 @@ function f_igosja_penalty_player_select($team_id, $game_id, $i = 0)
             }
             else
             {
-                $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                $player_array = $player_sql->fetch_all(1);
 
                 $lineup_id = $player_array[0]['lineup_id'];
                 $player_id = $player_array[0]['lineup_player_id'];
@@ -739,7 +739,7 @@ function f_igosja_penalty_player_country_select($country_id, $game_id, $i = 0)
                 LIMIT 1";
         $penalty_sql = f_igosja_mysqli_query($sql);
 
-        $penalty_array = $penalty_sql->fetch_all(MYSQLI_ASSOC);
+        $penalty_array = $penalty_sql->fetch_all(1);
 
         $penalty_player_id = $penalty_array[0]['country_penalty_player_id_' . $i];
 
@@ -769,7 +769,7 @@ function f_igosja_penalty_player_country_select($country_id, $game_id, $i = 0)
             }
             else
             {
-                $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                $player_array = $player_sql->fetch_all(1);
 
                 $lineup_id = $player_array[0]['lineup_id'];
                 $player_id = $player_array[0]['lineup_player_id'];

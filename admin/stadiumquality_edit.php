@@ -41,7 +41,7 @@ if (isset($_POST['stadiumquality_name']))
     redirect('stadiumquality_list.php');
 }
 
-$stadiumquality_array = $stadiumquality_sql->fetch_all(MYSQLI_ASSOC);
+$stadiumquality_array = $stadiumquality_sql->fetch_all(1);
 
 $tpl = 'stadiumquality_create';
 

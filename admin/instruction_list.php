@@ -30,6 +30,6 @@ else
 
 $instruction_sql = $mysqli->query($sql);
 
-$instruction_array = $instruction_sql->fetch_all(MYSQLI_ASSOC);
+$instruction_array = $instruction_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

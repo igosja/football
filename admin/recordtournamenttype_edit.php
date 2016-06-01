@@ -41,7 +41,7 @@ if (isset($_POST['recordtournamenttype_name']))
     redirect('recordtournamenttype_list.php');
 }
 
-$recordtournamenttype_array = $recordtournamenttype_sql->fetch_all(MYSQLI_ASSOC);
+$recordtournamenttype_array = $recordtournamenttype_sql->fetch_all(1);
 
 $tpl = 'recordtournamenttype_create';
 

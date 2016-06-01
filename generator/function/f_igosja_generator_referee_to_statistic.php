@@ -28,7 +28,7 @@ function f_igosja_generator_referee_to_statistic()
     $referee_sql = f_igosja_mysqli_query($sql);
 
     $count_referee = $referee_sql->num_rows;
-    $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+    $referee_array = $referee_sql->fetch_all(1);
 
     for ($i=0; $i<$count_referee; $i++)
     {

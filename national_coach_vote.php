@@ -23,7 +23,7 @@ if (isset($_POST['application_id']))
             AND `coachvote_season_id`='$igosja_season_id'";
     $count_sql = $mysqli->query($sql);
 
-    $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+    $count_array = $count_sql->fetch_all(1);
 
     $count = $count_array[0]['count'];
 
@@ -82,7 +82,7 @@ $sql = "SELECT `coachapplication_text`,
         ORDER BY `count` DESC";
 $application_sql = $mysqli->query($sql);
 
-$application_array = $application_sql->fetch_all(MYSQLI_ASSOC);
+$application_array = $application_sql->fetch_all(1);
 
 $sql = "SELECT COUNT(`coachvote_id`) AS `count`
         FROM `coachvote`
@@ -90,7 +90,7 @@ $sql = "SELECT COUNT(`coachvote_id`) AS `count`
         AND `coachvote_season_id`='$igosja_season_id'";
 $coachvote_sql = $mysqli->query($sql);
 
-$coachvote_array = $coachvote_sql->fetch_all(MYSQLI_ASSOC);
+$coachvote_array = $coachvote_sql->fetch_all(1);
 
 $header_title       = 'Выборы';
 $seo_title          = $header_title . ' тренеров национальных сборных. ' . $seo_title;

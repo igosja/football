@@ -30,7 +30,7 @@ if (0 == $count_game)
     exit;
 }
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $home_team_id       = $game_array[0]['game_home_team_id'];
 $tournamenttype_id  = $game_array[0]['tournament_tournamenttype_id'];
@@ -100,7 +100,7 @@ if (0 == $count_game)
     exit;
 }
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $game_played            = $game_array[0]['game_played'];
 $header_2_home_id       = $game_array[0]['game_home_' . $team_country . '_id'];
@@ -126,7 +126,7 @@ $sql = "SELECT `statisticreferee_game`,
         LIMIT 1";
 $referee_sql = $mysqli->query($sql);
 
-$referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+$referee_array = $referee_sql->fetch_all(1);
 
 $sql = "SELECT `game_guest_score`,
                `game_guest_" . $team_country . "_id`,
@@ -156,7 +156,7 @@ $sql = "SELECT `game_guest_score`,
 
 $last_sql = $mysqli->query($sql);
 
-$last_array = $last_sql->fetch_all(MYSQLI_ASSOC);
+$last_array = $last_sql->fetch_all(1);
 
 $sql = "SELECT `game_id`,
                IF (`game_home_" . $team_country . "_id`='$header_2_home_id', `game_guest_score`, `game_home_score`) AS `guest_score`,
@@ -177,7 +177,7 @@ $sql = "SELECT `game_id`,
 
 $home_latest_game_sql = $mysqli->query($sql);
 
-$home_latest_game_array = $home_latest_game_sql->fetch_all(MYSQLI_ASSOC);
+$home_latest_game_array = $home_latest_game_sql->fetch_all(1);
 
 $sql = "SELECT IF (`game_home_" . $team_country . "_id`='$header_2_guest_id', `game_home_score`, `game_guest_score`) AS `home_score`,
                `game_id`,
@@ -198,7 +198,7 @@ $sql = "SELECT IF (`game_home_" . $team_country . "_id`='$header_2_guest_id', `g
 
 $guest_latest_game_sql = $mysqli->query($sql);
 
-$guest_latest_game_array = $guest_latest_game_sql->fetch_all(MYSQLI_ASSOC);
+$guest_latest_game_array = $guest_latest_game_sql->fetch_all(1);
 
 if (TOURNAMENT_TYPE_WORLD_CUP == $tournamenttype_id)
 {
@@ -250,7 +250,7 @@ elseif (TOURNAMENT_TYPE_CUP == $tournamenttype_id)
 
 $position_sql = $mysqli->query($sql);
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $header_2_home_name . ' ' . $header_2_score . ' ' . $header_2_guest_name;

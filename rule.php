@@ -36,7 +36,7 @@ if (0 == $count_rule)
     exit;
 }
 
-$rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);
+$rule_array = $rule_sql->fetch_all(1);
 
 $header_title       = 'Правила';
 $seo_title          = $header_title . '. ' . $seo_title;

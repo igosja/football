@@ -66,7 +66,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $team_id        = $player_array[0]['team_id'];
 $team_name      = $player_array[0]['team_name'];
@@ -86,7 +86,7 @@ $sql = "SELECT `attribute_name`,
 $attribute_sql = $mysqli->query($sql);
 
 $count_attribute = $attribute_sql->num_rows;
-$attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+$attribute_array = $attribute_sql->fetch_all(1);
 
 $sql = "SELECT `playerposition_value`,
                `position_coordinate_x`,
@@ -100,7 +100,7 @@ $sql = "SELECT `playerposition_value`,
         ORDER BY `playerposition_value` DESC";
 $position_sql = $mysqli->query($sql);
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 $sql = "SELECT `lineup_mark`
         FROM `lineup`
@@ -114,7 +114,7 @@ $sql = "SELECT `lineup_mark`
         LIMIT 5";
 $last_five_sql = $mysqli->query($sql);
 
-$last_five_array = $last_five_sql->fetch_all(MYSQLI_ASSOC);
+$last_five_array = $last_five_sql->fetch_all(1);
 
 $sql = "SELECT `disqualification_red`,
                `disqualification_yellow`,
@@ -135,7 +135,7 @@ $sql = "SELECT `disqualification_red`,
         ORDER BY `disqualification_tournament_id` ASC";
 $disqualification_sql = $mysqli->query($sql);
 
-$disqualification_array = $disqualification_sql->fetch_all(MYSQLI_ASSOC);
+$disqualification_array = $disqualification_sql->fetch_all(1);
 
 if (isset($authorization_team_id))
 {
@@ -145,7 +145,7 @@ if (isset($authorization_team_id))
             AND `scout_team_id`='$authorization_team_id'";
     $scout_sql = $mysqli->query($sql);
 
-    $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+    $scout_array = $scout_sql->fetch_all(1);
     $count_scout = $scout_array[0]['count'];
 }
 else

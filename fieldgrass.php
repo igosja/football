@@ -34,7 +34,7 @@ $sql = "SELECT `shedule_date`,
         WHERE `stadium_team_id`='$num_get'";
 $stadium_sql = $mysqli->query($sql);
 
-$stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
+$stadium_array = $stadium_sql->fetch_all(1);
 
 $price          = 1000;
 $team_finance   = $stadium_array[0]['team_finance'];
@@ -80,7 +80,7 @@ if (isset($_GET['change']) &&
                 LIMIT 1";
         $finance_sql = $mysqli->query($sql);
 
-        $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
+        $finance_array = $finance_sql->fetch_all(1);
         $count_finance = $finance_array[0]['count'];
 
         if (0 == $count_finance)

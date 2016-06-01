@@ -25,7 +25,7 @@ if (0 == $count_country)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -52,7 +52,7 @@ $sql = "SELECT `game_home_country_id`,
         ORDER BY `shedule_date` ASC";
 $game_sql = $mysqli->query($sql);
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $country_name;

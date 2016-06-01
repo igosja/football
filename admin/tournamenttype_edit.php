@@ -43,7 +43,7 @@ if (isset($_POST['tournamenttype_name']))
     redirect('tournamenttype_list.php');
 }
 
-$tournamenttype_array = $tournamenttype_sql->fetch_all(MYSQLI_ASSOC);
+$tournamenttype_array = $tournamenttype_sql->fetch_all(1);
 
 $tpl = 'tournamenttype_create';
 

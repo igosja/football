@@ -26,7 +26,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -83,7 +83,7 @@ elseif (isset($_GET['to_ok']))
             WHERE `playeroffer_id`='$ok'";
     $count_sql = $mysqli->query($sql);
 
-    $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+    $count_array = $count_sql->fetch_all(1);
 
     $count = $count_array[0]['count'];
 
@@ -105,7 +105,7 @@ elseif (isset($_GET['to_ok']))
             )";
     $count_sql = $mysqli->query($sql);
 
-    $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+    $count_array = $count_sql->fetch_all(1);
 
     $count = $count_array[0]['count'];
 
@@ -117,7 +117,7 @@ elseif (isset($_GET['to_ok']))
                 LIMIT 1";
         $player_sql = $mysqli->query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
 
         $player_id = $player_array[0]['playeroffer_player_id'];
 
@@ -128,7 +128,7 @@ elseif (isset($_GET['to_ok']))
         $playeroffer_sql = $mysqli->query($sql);
 
         $count_playeroffer = $playeroffer_sql->num_rows;
-        $playeroffer_array = $playeroffer_sql->fetch_all(MYSQLI_ASSOC);
+        $playeroffer_array = $playeroffer_sql->fetch_all(1);
 
         for ($i=0; $i<$count_playeroffer; $i++)
         {
@@ -224,7 +224,7 @@ $sql = "SELECT `name_name`,
         ORDER BY `transfer_id` ASC";
 $transfer_sql = $mysqli->query($sql);
 
-$transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
+$transfer_array = $transfer_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `offertype_id`,
@@ -258,7 +258,7 @@ $sql = "SELECT `name_name`,
         ORDER BY `playeroffer_id` ASC";
 $offer_from_me_sql = $mysqli->query($sql);
 
-$offer_from_me_array = $offer_from_me_sql->fetch_all(MYSQLI_ASSOC);
+$offer_from_me_array = $offer_from_me_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `offertype_id`,
@@ -292,7 +292,7 @@ $sql = "SELECT `name_name`,
         ORDER BY `playeroffer_id` ASC";
 $offer_to_me_sql = $mysqli->query($sql);
 
-$offer_to_me_array = $offer_to_me_sql->fetch_all(MYSQLI_ASSOC);
+$offer_to_me_array = $offer_to_me_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

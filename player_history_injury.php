@@ -34,7 +34,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $team_id        = $player_array[0]['team_id'];
 $team_name      = $player_array[0]['team_name'];
@@ -51,7 +51,7 @@ $sql = "SELECT `injury_start_date`,
         ORDER BY `injury_start_date` ASC";
 $injury_sql = $mysqli->query($sql);
 
-$injury_array = $injury_sql->fetch_all(MYSQLI_ASSOC);
+$injury_array = $injury_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $player_name . ' ' . $player_surname;

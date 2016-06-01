@@ -15,6 +15,6 @@ $sql = "SELECT `inbox_id`,
         ORDER BY `inbox_id` DESC";
 $support_sql = $mysqli->query($sql);
 
-$support_array = $support_sql->fetch_all(MYSQLI_ASSOC);
+$support_array = $support_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

@@ -45,7 +45,7 @@ if (0 == $count_user)
     exit;
 }
 
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+$user_array = $user_sql->fetch_all(1);
 
 $sql = "SELECT `ip_date`,
                `ip_ip`
@@ -54,6 +54,6 @@ $sql = "SELECT `ip_date`,
         ORDER BY `ip_date` DESC";
 $ip_sql = $mysqli->query($sql);
 
-$ip_array = $ip_sql->fetch_all(MYSQLI_ASSOC);
+$ip_array = $ip_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

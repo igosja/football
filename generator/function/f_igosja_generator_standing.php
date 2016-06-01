@@ -24,7 +24,7 @@ function f_igosja_generator_standing()
 
     $count_game = $game_sql->num_rows;
 
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -100,7 +100,7 @@ function f_igosja_generator_standing()
     $country_sql = f_igosja_mysqli_query($sql);
 
     $count_country = $country_sql->num_rows;
-    $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+    $country_array = $country_sql->fetch_all(1);
 
     for ($i=0; $i<$count_country; $i++)
     {
@@ -114,7 +114,7 @@ function f_igosja_generator_standing()
         $standing_sql = f_igosja_mysqli_query($sql);
 
         $count_standing = $standing_sql->num_rows;
-        $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+        $standing_array = $standing_sql->fetch_all(1);
 
         for ($j=0; $j<$count_standing; $j++)
         {

@@ -30,6 +30,6 @@ else
 
 $attribute_sql = $mysqli->query($sql);
 
-$attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+$attribute_array = $attribute_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

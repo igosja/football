@@ -26,7 +26,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -76,7 +76,7 @@ $sql = "SELECT `name_name`,
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $sql = "SELECT `position_id`,
                `position_description`
@@ -86,7 +86,7 @@ $sql = "SELECT `position_id`,
         ORDER BY `position_id` ASC";
 $position_sql = $mysqli->query($sql);
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 $sql = "SELECT `attribute_id`,
                `attribute_name`
@@ -95,7 +95,7 @@ $sql = "SELECT `attribute_id`,
         ORDER BY `attribute_name` ASC";
 $attribute_sql = $mysqli->query($sql);
 
-$attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+$attribute_array = $attribute_sql->fetch_all(1);
 
 $sql = "SELECT `attribute_id`, `attribute_name`
         FROM `attribute`
@@ -103,7 +103,7 @@ $sql = "SELECT `attribute_id`, `attribute_name`
         ORDER BY `attribute_name` ASC";
 $attribute_sql = $mysqli->query($sql);
 
-$gk_attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+$gk_attribute_array = $attribute_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

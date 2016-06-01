@@ -8,6 +8,6 @@ $sql = "SELECT `name_id`,
         ORDER BY `name_name` ASC";
 $name_sql = $mysqli->query($sql);
 
-$name_array = $name_sql->fetch_all(MYSQLI_ASSOC);
+$name_array = $name_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

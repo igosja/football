@@ -44,7 +44,7 @@ if (0 == $count_staff)
     exit;
 }
 
-$staff_array = $staff_sql->fetch_all(MYSQLI_ASSOC);
+$staff_array = $staff_sql->fetch_all(1);
 
 $sql = "SELECT `attributestaff_name`,
                `attributechapterstaff_name`,
@@ -61,7 +61,7 @@ $sql = "SELECT `attributestaff_name`,
 $attribute_sql = $mysqli->query($sql);
 
 $count_attribute = $attribute_sql->num_rows;
-$attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+$attribute_array = $attribute_sql->fetch_all(1);
 
 $sql = "SELECT ROUND(COUNT(`scout_id`)/`count_player`*100) AS `count_scout`,
                `country_id`,
@@ -90,7 +90,7 @@ $sql = "SELECT ROUND(COUNT(`scout_id`)/`count_player`*100) AS `count_scout`,
         ORDER BY `player`.`player_country_id` ASC";
 $scout_sql = $mysqli->query($sql);
 
-$scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+$scout_array = $scout_sql->fetch_all(1);
 
 $staff_name     = $staff_array[0]['name_name'];
 $staff_surname  = $staff_array[0]['surname_name'];

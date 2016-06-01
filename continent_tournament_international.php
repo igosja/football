@@ -25,7 +25,7 @@ if (0 == $count_continent)
     exit;
 }
 
-$continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
+$continent_array = $continent_sql->fetch_all(1);
 
 $continent_name = $continent_array[0]['continent_name'];
 
@@ -45,7 +45,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `tournament_reputation` DESC, `tournament_id` ASC";
 $tournament_sql = $mysqli->query($sql);
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $sql = "SELECT `tournament_id`,
                `tournament_name`,
@@ -56,7 +56,7 @@ $sql = "SELECT `tournament_id`,
 $league_sql = $mysqli->query($sql);
 
 $count_league = $league_sql->num_rows;
-$league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
+$league_array = $league_sql->fetch_all(1);
 
 $sql = "SELECT `game_guest_score`,
                `game_guest_shoot_out`,
@@ -78,7 +78,7 @@ $count_game = $game_sql->num_rows;
 
 if (2 == $count_game)
 {
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     $home_team_id       = $game_array[0]['game_home_team_id'];
     $home_score_1       = $game_array[0]['game_guest_score'];
@@ -108,7 +108,7 @@ if (2 == $count_game)
             LIMIT 1";
     $team_sql = $mysqli->query($sql);
 
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+    $team_array = $team_sql->fetch_all(1);
 }
 
 if (isset($team_array[0]['team_name']))

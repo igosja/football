@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -43,7 +43,7 @@ $sql = "SELECT `shedule_date`,
         ORDER BY `shedule_date` ASC";
 $shedule_sql = $mysqli->query($sql);
 
-$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+$shedule_array = $shedule_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

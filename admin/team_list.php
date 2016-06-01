@@ -102,6 +102,6 @@ else
 
 $team_sql = $mysqli->query($sql);
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

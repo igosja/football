@@ -21,7 +21,7 @@ function f_igosja_generator_world_cup_standing()
 
     $count_game = $game_sql->num_rows;
 
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -91,7 +91,7 @@ function f_igosja_generator_world_cup_standing()
     $worldcup_sql = f_igosja_mysqli_query($sql);
 
     $count_worldcup = $worldcup_sql->num_rows;
-    $worldcup_array = $worldcup_sql->fetch_all(MYSQLI_ASSOC);
+    $worldcup_array = $worldcup_sql->fetch_all(1);
 
     for ($i=0; $i<$count_worldcup; $i++)
     {

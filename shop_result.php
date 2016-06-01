@@ -61,7 +61,7 @@ if (0 == $count_payment)
     redirect('shop.php');
 }
 
-$payment_array = $payment_sql->fetch_all(MYSQLI_ASSOC);
+$payment_array = $payment_sql->fetch_all(1);
 
 $status = $payment_array[0]['payment_status'];
 
@@ -100,7 +100,7 @@ $sql = "SELECT `user_referrer`
         LIMIT 1";
 $user_sql = $mysqli->query($sql);
 
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+$user_array = $user_sql->fetch_all(1);
 
 $refferer = $user_array[0]['user_referrer'];
 

@@ -26,7 +26,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -77,7 +77,7 @@ $sql = "SELECT `leader`,
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $sql = "SELECT `leader`,
                `name_name`,
@@ -100,7 +100,7 @@ $sql = "SELECT `leader`,
         ORDER BY `leader` DESC, `player_id` ASC";
 $leader_sql = $mysqli->query($sql);
 
-$leader_array = $leader_sql->fetch_all(MYSQLI_ASSOC);
+$leader_array = $leader_sql->fetch_all(1);
 
 $sql = "SELECT `team_captain_player_id_1`,
                `team_captain_player_id_2`,
@@ -112,7 +112,7 @@ $sql = "SELECT `team_captain_player_id_1`,
         LIMIT 1";
 $captain_sql = $mysqli->query($sql);
 
-$captain_array = $captain_sql->fetch_all(MYSQLI_ASSOC);
+$captain_array = $captain_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

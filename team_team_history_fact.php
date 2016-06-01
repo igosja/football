@@ -25,7 +25,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -201,7 +201,7 @@ $sql = "SELECT `cheap_salary`,
         LIMIT 1";
 $team_fact_sql = $mysqli->query($sql);
 
-$team_fact_array = $team_fact_sql->fetch_all(MYSQLI_ASSOC);
+$team_fact_array = $team_fact_sql->fetch_all(1);
 
 $sql = "SELECT `tournament_id`,
                `tournament_name`
@@ -214,7 +214,7 @@ $sql = "SELECT `tournament_id`,
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_id = $tournament_array[0]['tournament_id'];
 
@@ -423,7 +423,7 @@ $sql = "SELECT `cheap_salary`,
         LIMIT 1";
 $tournament_fact_sql = $mysqli->query($sql);
 
-$tournament_fact_array = $tournament_fact_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_fact_array = $tournament_fact_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

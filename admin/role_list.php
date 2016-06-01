@@ -9,6 +9,6 @@ $sql = "SELECT `role_id`,
         ORDER BY `role_id` ASC";
 $role_sql = $mysqli->query($sql);
 
-$role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
+$role_array = $role_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

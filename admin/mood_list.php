@@ -7,6 +7,6 @@ $sql = "SELECT `mood_id`, `mood_name`
         ORDER BY `mood_id` ASC";
 $mood_sql = $mysqli->query($sql);
 
-$mood_array = $mood_sql->fetch_all(MYSQLI_ASSOC);
+$mood_array = $mood_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

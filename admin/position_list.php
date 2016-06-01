@@ -9,6 +9,6 @@ $sql = "SELECT `position_description`,
         ORDER BY `position_id` ASC";
 $position_sql = $mysqli->query($sql);
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

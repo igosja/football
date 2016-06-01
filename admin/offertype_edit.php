@@ -41,7 +41,7 @@ if (isset($_POST['offertype_name']))
     redirect('offertype_list.php');
 }
 
-$offertype_array = $offertype_sql->fetch_all(MYSQLI_ASSOC);
+$offertype_array = $offertype_sql->fetch_all(1);
 
 $tpl = 'offertype_create';
 

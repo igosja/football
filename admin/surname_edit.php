@@ -62,7 +62,7 @@ if (isset($_POST['surname_name']))
     redirect('surname_list.php');
 }
 
-$surname_array = $surname_sql->fetch_all(MYSQLI_ASSOC);
+$surname_array = $surname_sql->fetch_all(1);
 
 $sql = "SELECT `country_id`,
                `country_name`
@@ -70,7 +70,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `country_id` ASC";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $tpl = 'surname_create';
 

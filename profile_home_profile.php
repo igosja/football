@@ -80,7 +80,7 @@ $sql = "SELECT `country_id`,
         LIMIT 1";
 $user_sql = $mysqli->query($sql);
 
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+$user_array = $user_sql->fetch_all(1);
 
 $sql = "SELECT `country_id`,
                `country_name`,
@@ -100,7 +100,7 @@ $sql = "SELECT `country_id`,
 $career_sql = $mysqli->query($sql);
 
 $count_career = $career_sql->num_rows;
-$career_array = $career_sql->fetch_all(MYSQLI_ASSOC);
+$career_array = $career_sql->fetch_all(1);
 
 $num                = $authorization_id;
 $header_title       = $authorization_login;

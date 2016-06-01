@@ -26,7 +26,7 @@ function f_igosja_generator_lineup_main_create()
     $game_sql = f_igosja_mysqli_query($sql);
 
     $count_game = $game_sql->num_rows;
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -73,7 +73,7 @@ function f_igosja_generator_lineup_main_create()
     $game_sql = f_igosja_mysqli_query($sql);
 
     $count_game = $game_sql->num_rows;
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {

@@ -25,7 +25,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -53,14 +53,14 @@ $sql = "SELECT `name_name`,
         ORDER BY `transferhistory_date` DESC";
 $transferhistory_sell_sql = $mysqli->query($sql);
 
-$transferhistory_sell_array = $transferhistory_sell_sql->fetch_all(MYSQLI_ASSOC);
+$transferhistory_sell_array = $transferhistory_sell_sql->fetch_all(1);
 
 $sql = "SELECT SUM(`transferhistory_price`) AS `transferhistory_total_price`
         FROM `transferhistory`
         WHERE `transferhistory_seller_id`='$num_get'";
 $transferhistory_sell_sql = $mysqli->query($sql);
 
-$transferhistory_sell_summ = $transferhistory_sell_sql->fetch_all(MYSQLI_ASSOC);
+$transferhistory_sell_summ = $transferhistory_sell_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `offertype_name`,
@@ -86,14 +86,14 @@ $sql = "SELECT `name_name`,
         ORDER BY `transferhistory_date` DESC";
 $transferhistory_buy_sql = $mysqli->query($sql);
 
-$transferhistory_buy_array = $transferhistory_buy_sql->fetch_all(MYSQLI_ASSOC);
+$transferhistory_buy_array = $transferhistory_buy_sql->fetch_all(1);
 
 $sql = "SELECT SUM(`transferhistory_price`) AS `transferhistory_total_price`
         FROM `transferhistory`
         WHERE `transferhistory_buyer_id`='$num_get'";
 $transferhistory_buy_sql = $mysqli->query($sql);
 
-$transferhistory_buy_summ = $transferhistory_buy_sql->fetch_all(MYSQLI_ASSOC);
+$transferhistory_buy_summ = $transferhistory_buy_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

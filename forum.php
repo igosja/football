@@ -60,7 +60,7 @@ $sql = "SELECT `count_post`,
 $forum_sql = $mysqli->query($sql);
 
 $count_forum = $forum_sql->num_rows;
-$forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
+$forum_array = $forum_sql->fetch_all(1);
 
 $header_title       = 'Форум';
 $seo_title          = 'Форум. ' . $seo_title;

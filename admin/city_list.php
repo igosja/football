@@ -83,6 +83,6 @@ else
 
 $city_sql = $mysqli->query($sql);
 
-$city_array = $city_sql->fetch_all(MYSQLI_ASSOC);
+$city_array = $city_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

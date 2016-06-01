@@ -25,7 +25,7 @@ if (0 == $count_continent)
     exit;
 }
 
-$continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
+$continent_array = $continent_sql->fetch_all(1);
 
 $continent_name = $continent_array[0]['continent_name'];
 
@@ -47,7 +47,7 @@ $sql = "SELECT `team_reputation`
         LIMIT 1";
 $best_team_sql = $mysqli->query($sql);
 
-$best_team_array = $best_team_sql->fetch_all(MYSQLI_ASSOC);
+$best_team_array = $best_team_sql->fetch_all(1);
 
 $sql = "SELECT SQL_CALC_FOUND_ROWS
                `team_id`,
@@ -67,11 +67,11 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
 $team_sql = $mysqli->query($sql);
 
 $count_team = $team_sql->num_rows;
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count_page`";
 $count_page = $mysqli->query($sql);
-$count_page = $count_page->fetch_all(MYSQLI_ASSOC);
+$count_page = $count_page->fetch_all(1);
 $count_page = $count_page[0]['count_page'];
 $count_page = ceil($count_page / 30);
 

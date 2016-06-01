@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -47,7 +47,7 @@ $sql = "SELECT `history_date`,
         AND `standing_tournament_id`='$num_get'";
 $manager_new_sql = $mysqli->query($sql);
 
-$manager_new_array = $manager_new_sql->fetch_all(MYSQLI_ASSOC);
+$manager_new_array = $manager_new_sql->fetch_all(1);
 
 $sql = "SELECT `history_date`,
                `team_id`,
@@ -63,7 +63,7 @@ $sql = "SELECT `history_date`,
         AND `history_season_id`='$igosja_season_id'";
 $manager_old_sql = $mysqli->query($sql);
 
-$manager_old_array = $manager_old_sql->fetch_all(MYSQLI_ASSOC);
+$manager_old_array = $manager_old_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

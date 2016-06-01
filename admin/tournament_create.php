@@ -45,7 +45,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `country_id` ASC";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $sql = "SELECT `tournamenttype_id`,
                `tournamenttype_name`
@@ -53,6 +53,6 @@ $sql = "SELECT `tournamenttype_id`,
         ORDER BY `tournamenttype_id` ASC";
 $tournamenttype_sql = $mysqli->query($sql);
 
-$tournamenttype_array = $tournamenttype_sql->fetch_all(MYSQLI_ASSOC);
+$tournamenttype_array = $tournamenttype_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

@@ -8,6 +8,6 @@ $sql = "SELECT `stage_id`,
         ORDER BY `stage_id` ASC";
 $stage_sql = $mysqli->query($sql);
 
-$stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
+$stage_array = $stage_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

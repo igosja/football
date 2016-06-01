@@ -8,6 +8,6 @@ $sql = "SELECT `recordteamtype_id`,
         ORDER BY `recordteamtype_id` ASC";
 $recordteamtype_sql = $mysqli->query($sql);
 
-$recordteamtype_array = $recordteamtype_sql->fetch_all(MYSQLI_ASSOC);
+$recordteamtype_array = $recordteamtype_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

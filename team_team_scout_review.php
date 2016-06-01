@@ -26,7 +26,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -44,7 +44,7 @@ $sql = "SELECT `name_name`,
         ORDER BY `staff_id` ASC";
 $scout_sql = $mysqli->query($sql);
 
-$scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+$scout_array = $scout_sql->fetch_all(1);
 
 $sql = "SELECT ROUND(COUNT(DISTINCT `scout_player_id`)/`count_player`*100) AS `count_scout`,
                COUNT(DISTINCT `scout_player_id`) AS `count_scout_player`,
@@ -71,7 +71,7 @@ $sql = "SELECT ROUND(COUNT(DISTINCT `scout_player_id`)/`count_player`*100) AS `c
         ORDER BY `player`.`player_country_id` ASC";
 $knowledge_sql = $mysqli->query($sql);
 
-$knowledge_array = $knowledge_sql->fetch_all(MYSQLI_ASSOC);
+$knowledge_array = $knowledge_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

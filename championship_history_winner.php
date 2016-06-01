@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -42,7 +42,7 @@ $sql = "SELECT `standing_season_id`,
 $first_sql = $mysqli->query($sql);
 
 $count_first = $first_sql->num_rows;
-$first_array = $first_sql->fetch_all(MYSQLI_ASSOC);
+$first_array = $first_sql->fetch_all(1);
 
 $sql = "SELECT `team_id`,
                `team_name`
@@ -55,7 +55,7 @@ $sql = "SELECT `team_id`,
         ORDER BY `standing_season_id` DESC";
 $second_sql = $mysqli->query($sql);
 
-$second_array = $second_sql->fetch_all(MYSQLI_ASSOC);
+$second_array = $second_sql->fetch_all(1);
 
 $sql = "SELECT `team_id`,
                `team_name`
@@ -68,7 +68,7 @@ $sql = "SELECT `team_id`,
         ORDER BY `standing_season_id` DESC";
 $third_sql = $mysqli->query($sql);
 
-$third_array = $third_sql->fetch_all(MYSQLI_ASSOC);
+$third_array = $third_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

@@ -23,7 +23,7 @@ function f_igosja_generator_country_series_to_record()
         $series_sql = f_igosja_mysqli_query($sql);
 
         $count_series = $series_sql->num_rows;
-        $series_array = $series_sql->fetch_all(MYSQLI_ASSOC);
+        $series_array = $series_sql->fetch_all(1);
 
         for ($i=0; $i<$count_series; $i++)
         {
@@ -53,7 +53,7 @@ function f_igosja_generator_country_series_to_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
 
                 $record_value = $record_array[0]['recordcountry_value'];
 

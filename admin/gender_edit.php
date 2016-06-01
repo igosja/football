@@ -41,7 +41,7 @@ if (isset($_POST['gender_name']))
     redirect('gender_list.php');
 }
 
-$gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);
+$gender_array = $gender_sql->fetch_all(1);
 
 $tpl = 'gender_create';
 

@@ -30,7 +30,7 @@ function f_igosja_generator_country_to_statistic()
     $country_sql = f_igosja_mysqli_query($sql);
 
     $count_country = $country_sql->num_rows;
-    $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+    $country_array = $country_sql->fetch_all(1);
 
     for ($i=0; $i<$count_country; $i++)
     {

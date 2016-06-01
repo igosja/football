@@ -44,7 +44,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];

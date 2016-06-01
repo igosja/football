@@ -7,6 +7,6 @@ $sql = "SELECT `offertype_id`, `offertype_name`
         ORDER BY `offertype_id` ASC";
 $offertype_sql = $mysqli->query($sql);
 
-$offertype_array = $offertype_sql->fetch_all(MYSQLI_ASSOC);
+$offertype_array = $offertype_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

@@ -45,7 +45,7 @@ if (0 == $count_country)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -60,7 +60,7 @@ $sql = "SELECT `team_id`,
         LIMIT 7";
 $team_sql = $mysqli->query($sql);
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_id`,
@@ -84,7 +84,7 @@ $sql = "SELECT `name_name`,
         LIMIT 7";
 $player_sql = $mysqli->query($sql);
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $sql = "SELECT `game_id`,
                `country_id`,
@@ -105,7 +105,7 @@ $sql = "SELECT `game_id`,
         LIMIT 1";
 $nearest_game_sql = $mysqli->query($sql);
 
-$nearest_game_array = $nearest_game_sql->fetch_all(MYSQLI_ASSOC);
+$nearest_game_array = $nearest_game_sql->fetch_all(1);
 
 $sql = "SELECT `ratingcountry_position`
         FROM `ratingcountry`
@@ -113,7 +113,7 @@ $sql = "SELECT `ratingcountry_position`
         LIMIT 1";
 $rating_sql = $mysqli->query($sql);
 
-$rating_array = $rating_sql->fetch_all(MYSQLI_ASSOC);
+$rating_array = $rating_sql->fetch_all(1);
 
 $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
                `buyer`.`team_name` AS `buyer_name`,
@@ -144,7 +144,7 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         LIMIT 10";
 $transfer_sql = $mysqli->query($sql);
 
-$transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
+$transfer_array = $transfer_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $country_name;

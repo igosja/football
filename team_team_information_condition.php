@@ -40,7 +40,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -56,7 +56,7 @@ $sql = "SELECT `building_capacity`,
         ORDER BY `shedule_id` ASC";
 $building_sql = $mysqli->query($sql);
 
-$building_array = $building_sql->fetch_all(MYSQLI_ASSOC);
+$building_array = $building_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

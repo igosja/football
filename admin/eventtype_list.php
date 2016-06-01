@@ -8,6 +8,6 @@ $sql = "SELECT `eventtype_id`,
         ORDER BY `eventtype_id` ASC";
 $eventtype_sql = $mysqli->query($sql);
 
-$eventtype_array = $eventtype_sql->fetch_all(MYSQLI_ASSOC);
+$eventtype_array = $eventtype_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

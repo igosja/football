@@ -77,7 +77,7 @@ if (isset($_POST['city_id']))
     redirect('team_list.php');
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $sql = "SELECT `city_id`,
                `city_name`
@@ -85,7 +85,7 @@ $sql = "SELECT `city_id`,
         ORDER BY `city_name` ASC";
 $city_sql = $mysqli->query($sql);
 
-$city_array = $city_sql->fetch_all(MYSQLI_ASSOC);
+$city_array = $city_sql->fetch_all(1);
 
 $tpl = 'team_create';
 

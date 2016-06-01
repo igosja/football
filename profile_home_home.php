@@ -25,7 +25,7 @@ if (!isset($authorization_team_id))
                 LIMIT 1";
         $team_sql = $mysqli->query($sql);
 
-        $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+        $team_array = $team_sql->fetch_all(1);
 
         $user_id = $team_array[0]['team_user_id'];
 
@@ -117,7 +117,7 @@ if (!isset($authorization_team_id))
             ORDER BY `team_id` ASC";
     $team_sql = $mysqli->query($sql);
 
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+    $team_array = $team_sql->fetch_all(1);
 
     $num            = $authorization_id;
     $header_title   = $authorization_login;
@@ -157,7 +157,7 @@ $sql = "SELECT `game_temperature`,
         LIMIT 1";
 $next_sql = $mysqli->query($sql);
 
-$next_array = $next_sql->fetch_all(MYSQLI_ASSOC);
+$next_array = $next_sql->fetch_all(1);
 
 if (isset($authorization_country_id))
 {
@@ -192,7 +192,7 @@ if (isset($authorization_country_id))
             LIMIT 1";
     $next_sql = $mysqli->query($sql);
 
-    $next_country_array = $next_sql->fetch_all(MYSQLI_ASSOC);
+    $next_country_array = $next_sql->fetch_all(1);
 
     $next_array = array_merge($next_array, $next_country_array);
 }
@@ -223,7 +223,7 @@ $sql = "SELECT `game_home_team_id`,
         LIMIT 5";
 $latest_sql = $mysqli->query($sql);
 
-$latest_array = $latest_sql->fetch_all(MYSQLI_ASSOC);
+$latest_array = $latest_sql->fetch_all(1);
 
 if (isset($authorization_country_id))
 {
@@ -249,7 +249,7 @@ if (isset($authorization_country_id))
             LIMIT 1";
     $latest_sql = $mysqli->query($sql);
 
-    $latest_country_array = $latest_sql->fetch_all(MYSQLI_ASSOC);
+    $latest_country_array = $latest_sql->fetch_all(1);
 
     $latest_array = array_merge($latest_array, $latest_country_array);
 }
@@ -280,7 +280,7 @@ $sql = "SELECT `game_home_team_id`,
         LIMIT 5";
 $nearest_sql = $mysqli->query($sql);
 
-$nearest_array = $nearest_sql->fetch_all(MYSQLI_ASSOC);
+$nearest_array = $nearest_sql->fetch_all(1);
 
 if (isset($authorization_country_id))
 {
@@ -308,7 +308,7 @@ if (isset($authorization_country_id))
             LIMIT 2";
     $nearest_sql = $mysqli->query($sql);
 
-    $nearest_country_array = $nearest_sql->fetch_all(MYSQLI_ASSOC);
+    $nearest_country_array = $nearest_sql->fetch_all(1);
 
     $nearest_array = array_merge($nearest_array, $nearest_country_array);
 }
@@ -333,7 +333,7 @@ $sql = "SELECT `team_id`,
         ORDER BY `standing_place` ASC";
 $standing_sql = $mysqli->query($sql);
 
-$standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+$standing_array = $standing_sql->fetch_all(1);
 
 $sql = "SELECT `statisticteam_full_house`,
                `statisticteam_game`,
@@ -353,7 +353,7 @@ $sql = "SELECT `statisticteam_full_house`,
         LIMIT 1";
 $statistic_team_sql = $mysqli->query($sql);
 
-$statistic_team_array = $statistic_team_sql->fetch_all(MYSQLI_ASSOC);
+$statistic_team_array = $statistic_team_sql->fetch_all(1);
 
 $sql = "SELECT `best_name`,
                `best_player_id`,
@@ -506,7 +506,7 @@ $sql = "SELECT `best_name`,
         LIMIT 1";
 $statistic_player_sql = $mysqli->query($sql);
 
-$statistic_player_array = $statistic_player_sql->fetch_all(MYSQLI_ASSOC);
+$statistic_player_array = $statistic_player_sql->fetch_all(1);
 
 $sql = "SELECT ROUND((`injury_end_date` - UNIX_TIMESTAMP()) / 60 / 60 / 24) AS `day`,
                `injurytype_name`,
@@ -527,7 +527,7 @@ $sql = "SELECT ROUND((`injury_end_date` - UNIX_TIMESTAMP()) / 60 / 60 / 24) AS `
         ORDER BY `injury_id` ASC";
 $injury_sql = $mysqli->query($sql);
 
-$injury_array = $injury_sql->fetch_all(MYSQLI_ASSOC);
+$injury_array = $injury_sql->fetch_all(1);
 
 $sql = "SELECT `average_player_salary`,
                `average_staff_salary`,
@@ -579,7 +579,7 @@ $sql = "SELECT `average_player_salary`,
         LIMIT 1";
 $finance_sql = $mysqli->query($sql);
 
-$finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
+$finance_array = $finance_sql->fetch_all(1);
 
 $sql = "SELECT `standing_place`,
                `tournament_id`,
@@ -593,7 +593,7 @@ $sql = "SELECT `standing_place`,
         LIMIT 1";
 $tournament_championship_sql = $mysqli->query($sql);
 
-$tournament_championship_array = $tournament_championship_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_championship_array = $tournament_championship_sql->fetch_all(1);
 
 $sql = "SELECT `stage_name`,
                `tournament_id`,
@@ -609,7 +609,7 @@ $sql = "SELECT `stage_name`,
         LIMIT 1";
 $tournament_cup_sql = $mysqli->query($sql);
 
-$tournament_cup_array = $tournament_cup_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_cup_array = $tournament_cup_sql->fetch_all(1);
 
 $sql = "SELECT `stage_name`,
                `tournament_id`,
@@ -625,7 +625,7 @@ $sql = "SELECT `stage_name`,
         LIMIT 1";
 $tournament_league_sql = $mysqli->query($sql);
 
-$tournament_league_array = $tournament_league_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_league_array = $tournament_league_sql->fetch_all(1);
 
 if (isset($authorization_country_id))
 {
@@ -641,7 +641,7 @@ if (isset($authorization_country_id))
             LIMIT 1";
     $tournament_worldcup_sql = $mysqli->query($sql);
 
-    $tournament_worldcup_array = $tournament_worldcup_sql->fetch_all(MYSQLI_ASSOC);
+    $tournament_worldcup_array = $tournament_worldcup_sql->fetch_all(1);
 }
 
 $num                = $authorization_id;

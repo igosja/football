@@ -21,7 +21,7 @@ function f_igosja_season_national_coach()
     $country_sql = f_igosja_mysqli_query($sql);
 
     $count_country = $country_sql->num_rows;
-    $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+    $country_array = $country_sql->fetch_all(1);
 
     for ($i=0; $i<$count_country; $i++)
     {
@@ -50,7 +50,7 @@ function f_igosja_season_national_coach()
                 LIMIT 1";
         $user_sql = f_igosja_mysqli_query($sql);
 
-        $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+        $user_array = $user_sql->fetch_all(1);
 
         if (isset($user_array[0]['coachapplication_user_id']))
         {

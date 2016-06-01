@@ -46,7 +46,7 @@ if (isset($_POST['horizontalmenupage_name']))
     redirect('horizontalmenupage_list.php');
 }
 
-$horizontalmenupage_array = $horizontalmenupage_sql->fetch_all(MYSQLI_ASSOC);
+$horizontalmenupage_array = $horizontalmenupage_sql->fetch_all(1);
 
 $sql = "SELECT `horizontalmenuchapter_id`,
                `horizontalmenuchapter_name`
@@ -54,7 +54,7 @@ $sql = "SELECT `horizontalmenuchapter_id`,
         ORDER BY `horizontalmenuchapter_name` ASC";
 $chapter_sql = $mysqli->query($sql);
 
-$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(1);
 
 $tpl = 'horizontalmenupage_create';
 

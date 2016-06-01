@@ -50,7 +50,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $team_id = $player_array[0]['team_id'];
 
@@ -71,7 +71,7 @@ if (isset($_POST['data']) &&
                 AND `player_id`!='$num_get'";
         $count_sql = $mysqli->query($sql);
 
-        $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+        $count_array = $count_sql->fetch_all(1);
 
         $count = $count_array[0]['count_player'];
 
@@ -95,7 +95,7 @@ if (isset($_POST['data']) &&
                     AND `player_id`!='$num_get'";
             $count_sql = $mysqli->query($sql);
 
-            $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+            $count_array = $count_sql->fetch_all(1);
 
             $count = $count_array[0]['count_player'];
 
@@ -117,7 +117,7 @@ if (isset($_POST['data']) &&
                     AND `player_id`!='$num_get'";
             $count_sql = $mysqli->query($sql);
 
-            $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+            $count_array = $count_sql->fetch_all(1);
 
             $count = $count_array[0]['count_player'];
 
@@ -162,7 +162,7 @@ $sql = "SELECT `team_id`,
         LIMIT 5";
 $playeroffer_sql = $mysqli->query($sql);
 
-$playeroffer_array = $playeroffer_sql->fetch_all(MYSQLI_ASSOC);
+$playeroffer_array = $playeroffer_sql->fetch_all(1);
 
 $sql = "SELECT `statusteam_id`,
                `statusteam_name`
@@ -170,7 +170,7 @@ $sql = "SELECT `statusteam_id`,
         ORDER BY `statusteam_id` ASC";
 $statusteam_sql = $mysqli->query($sql);
 
-$statusteam_array = $statusteam_sql->fetch_all(MYSQLI_ASSOC);
+$statusteam_array = $statusteam_sql->fetch_all(1);
 
 $sql = "SELECT `statustransfer_id`,
                `statustransfer_name`
@@ -178,7 +178,7 @@ $sql = "SELECT `statustransfer_id`,
         ORDER BY `statustransfer_id` ASC";
 $statustransfer_sql = $mysqli->query($sql);
 
-$statustransfer_array = $statustransfer_sql->fetch_all(MYSQLI_ASSOC);
+$statustransfer_array = $statustransfer_sql->fetch_all(1);
 
 $sql = "SELECT `statusrent_id`,
                `statusrent_name`
@@ -187,7 +187,7 @@ $sql = "SELECT `statusrent_id`,
         ORDER BY `statusrent_id` ASC";
 $statusrent_sql = $mysqli->query($sql);
 
-$statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);
+$statusrent_array = $statusrent_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $player_name . ' ' . $player_surname;

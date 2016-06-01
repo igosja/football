@@ -28,7 +28,7 @@ if (isset($_POST['city_id']))
             WHERE `city_id`='$city_id'";
     $country_sql = $mysqli->query($sql);
 
-    $country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+    $country_array = $country_sql->fetch_all(1);
 
     $count_team = $country_array[0]['count_team_id'];
 
@@ -101,6 +101,6 @@ $sql = "SELECT `city_id`,
         ORDER BY `city_name` ASC";
 $city_sql = $mysqli->query($sql);
 
-$city_array = $city_sql->fetch_all(MYSQLI_ASSOC);
+$city_array = $city_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

@@ -50,7 +50,7 @@ if (isset($_POST['data']))
             redirect('profile_news_outbox.php?num=' . $num_get);
         }
 
-        $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+        $user_array = $user_sql->fetch_all(1);
 
         $inbox_user_id = $user_array[0]['user_id'];
 
@@ -88,7 +88,7 @@ $sql = "SELECT `inbox_id`,
         ORDER BY `inbox_date` DESC, `inbox_id` DESC";
 $inbox_sql = $mysqli->query($sql);
 
-$inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);
+$inbox_array = $inbox_sql->fetch_all(1);
 
 $sql = "SELECT `user_id`,
                `user_login`
@@ -98,7 +98,7 @@ $sql = "SELECT `user_id`,
         ORDER BY `user_login` ASC";
 $user_sql = $mysqli->query($sql);
 
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+$user_array = $user_sql->fetch_all(1);
 
 $num                = $authorization_id;
 $header_title       = $authorization_login;

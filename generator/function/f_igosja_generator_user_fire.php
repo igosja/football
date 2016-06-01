@@ -13,7 +13,7 @@ function f_igosja_generator_user_fire()
     $user_sql = f_igosja_mysqli_query($sql);
 
     $count_user = $user_sql->num_rows;
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
 
     for ($i=0; $i<$count_user; $i++)
     {

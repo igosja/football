@@ -17,7 +17,7 @@ $sql = "SELECT `tournament_tournamenttype_id`
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournamenttype_id = $tournament_array[0]['tournament_tournamenttype_id'];
 

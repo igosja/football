@@ -26,7 +26,7 @@ function f_igosja_generator_lineup_to_disqualification()
     $lineup_sql = f_igosja_mysqli_query($sql);
 
     $count_lineup = $lineup_sql->num_rows;
-    $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+    $lineup_array = $lineup_sql->fetch_all(1);
 
     for ($i=0; $i<$count_lineup; $i++)
     {

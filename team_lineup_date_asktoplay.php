@@ -26,7 +26,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -43,7 +43,7 @@ if (isset($_GET['ok']))
             AND `game_shedule_id`='$shedule_id'";
     $check_sql = $mysqli->query($sql);
 
-    $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
+    $check_array = $check_sql->fetch_all(1);
     $count_check = $check_array[0]['count'];
 
     if (0 != $count_check)
@@ -68,7 +68,7 @@ if (isset($_GET['ok']))
             AND `game_shedule_id`='$shedule_id'";
     $check_sql = $mysqli->query($sql);
 
-    $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
+    $check_array = $check_sql->fetch_all(1);
     $count_check = $check_array[0]['count'];
 
     if (0 != $count_check)
@@ -105,7 +105,7 @@ if (isset($_GET['ok']))
 
     if (0 != $count_asktoplay)
     {
-        $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
+        $asktoplay_array = $asktoplay_sql->fetch_all(1);
 
         $asktoplay_home = $asktoplay_array[0]['asktoplay_home'];
         $user_id        = $asktoplay_array[0]['team_user_id'];
@@ -122,7 +122,7 @@ if (isset($_GET['ok']))
                 LIMIT 1";
         $referee_sql = $mysqli->query($sql);
 
-        $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+        $referee_array = $referee_sql->fetch_all(1);
 
         $referee_id = $referee_array[0]['referee_id'];
 
@@ -156,7 +156,7 @@ if (isset($_GET['ok']))
                 LIMIT 1";
         $inboxtheme_sql = $mysqli->query($sql);
 
-        $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+        $inboxtheme_array = $inboxtheme_sql->fetch_all(1);
 
         $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
         $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
@@ -179,7 +179,7 @@ if (isset($_GET['ok']))
                 LIMIT 1";
         $inboxtheme_sql = $mysqli->query($sql);
 
-        $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+        $inboxtheme_array = $inboxtheme_sql->fetch_all(1);
 
         $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
         $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
@@ -198,7 +198,7 @@ if (isset($_GET['ok']))
 
         $count_asktoplay = $asktoplay_sql->num_rows;
 
-        $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
+        $asktoplay_array = $asktoplay_sql->fetch_all(1);
 
         for ($i=0; $i<$count_asktoplay; $i++)
         {
@@ -233,7 +233,7 @@ if (isset($_GET['ok']))
 
         $count_asktoplay = $asktoplay_sql->num_rows;
 
-        $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
+        $asktoplay_array = $asktoplay_sql->fetch_all(1);
 
         for ($i=0; $i<$count_asktoplay; $i++)
         {
@@ -292,7 +292,7 @@ $sql = "SELECT `asktoplay_shedule_id`,
         ORDER BY `shedule_date` ASC";
 $shedule_sql = $mysqli->query($sql);
 
-$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+$shedule_array = $shedule_sql->fetch_all(1);
 
 $sql = "SELECT `cupparticipant_out`
         FROM `cupparticipant`
@@ -301,7 +301,7 @@ $sql = "SELECT `cupparticipant_out`
         LIMIT 1";
 $cupparticipant_sql = $mysqli->query($sql);
 
-$cupparticipant_array = $cupparticipant_sql->fetch_all(MYSQLI_ASSOC);
+$cupparticipant_array = $cupparticipant_sql->fetch_all(1);
 
 $sql = "SELECT `leagueparticipant_out`
         FROM `leagueparticipant`
@@ -310,7 +310,7 @@ $sql = "SELECT `leagueparticipant_out`
         LIMIT 1";
 $leagueparticipant_sql = $mysqli->query($sql);
 
-$leagueparticipant_array = $leagueparticipant_sql->fetch_all(MYSQLI_ASSOC);
+$leagueparticipant_array = $leagueparticipant_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

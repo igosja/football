@@ -11,7 +11,7 @@ function f_igosja_generator_asktoplay_delete()
     $asktoplay_sql = f_igosja_mysqli_query($sql);
 
     $count_asktoplay = $asktoplay_sql->num_rows;
-    $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
+    $asktoplay_array = $asktoplay_sql->fetch_all(1);
 
     for ($i=0; $i<$count_asktoplay; $i++)
     {

@@ -8,6 +8,6 @@ $sql = "SELECT `gamemood_id`,
         ORDER BY `gamemood_id` ASC";
 $gamemood_sql = $mysqli->query($sql);
 
-$gamemood_array = $gamemood_sql->fetch_all(MYSQLI_ASSOC);
+$gamemood_array = $gamemood_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

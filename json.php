@@ -57,7 +57,7 @@ if (isset($_GET['player_tactic_position_id']))
     $lineup_sql = $mysqli->query($sql);
 
     $count_lineup = $lineup_sql->num_rows;
-    $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+    $lineup_array = $lineup_sql->fetch_all(1);
 
     $sql = "SELECT `role_id`,
                    `role_name`
@@ -68,7 +68,7 @@ if (isset($_GET['player_tactic_position_id']))
             ORDER BY `positionrole_id` ASC";
     $role_sql = $mysqli->query($sql);
 
-    $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
+    $role_array = $role_sql->fetch_all(1);
 
     if (0 != $count_lineup)
     {
@@ -147,7 +147,7 @@ elseif (isset($_GET['national_player_tactic_position_id']))
             LIMIT 1";
     $lineup_sql = $mysqli->query($sql);
 
-    $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+    $lineup_array = $lineup_sql->fetch_all(1);
 
     $sql = "SELECT `role_id`,
                    `role_name`
@@ -158,7 +158,7 @@ elseif (isset($_GET['national_player_tactic_position_id']))
             ORDER BY `positionrole_id` ASC";
     $role_sql = $mysqli->query($sql);
 
-    $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
+    $role_array = $role_sql->fetch_all(1);
 
     $json_data['lineup_id']             = $lineup_array[0]['lineup_id'];
     $json_data['position_name']         = $lineup_array[0]['position_name'];
@@ -180,7 +180,7 @@ elseif (isset($_GET['player_tactic_position_id_national']))
             LIMIT 1";
     $position_sql = $mysqli->query($sql);
 
-    $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+    $position_array = $position_sql->fetch_all(1);
 
     $sql = "SELECT `count_game`,
                    `lineup_position`,
@@ -263,7 +263,7 @@ elseif (isset($_GET['player_tactic_position_id_national']))
             LIMIT 1";
     $lineup_sql = $mysqli->query($sql);
 
-    $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+    $lineup_array = $lineup_sql->fetch_all(1);
 
     $sql = "SELECT `role_id`,
                    `role_name`
@@ -274,7 +274,7 @@ elseif (isset($_GET['player_tactic_position_id_national']))
             ORDER BY `positionrole_id` ASC";
     $role_sql = $mysqli->query($sql);
 
-    $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
+    $role_array = $role_sql->fetch_all(1);
 
     $json_data['position_name']         = $position_array[0]['position_name'];
     $json_data['position_description']  = $lineup_array[0]['position_description'];
@@ -301,7 +301,7 @@ elseif (isset($_GET['select_value']))
     $result_sql = $mysqli->query($sql);
 
     $count_result = $result_sql->num_rows;
-    $result_array = $result_sql->fetch_all(MYSQLI_ASSOC);
+    $result_array = $result_sql->fetch_all(1);
 
     $select_array = array();
 
@@ -370,7 +370,7 @@ elseif (isset($_GET['stage_prev']))
             }
         }
 
-        $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
+        $stage_array = $stage_sql->fetch_all(1);
 
         $stage_id   = $stage_array[0]['stage_id'];
         $stage_name = $stage_array[0]['stage_name'];
@@ -398,7 +398,7 @@ elseif (isset($_GET['stage_prev']))
         $stage_game_sql = $mysqli->query($sql);
 
         $count_stage_game = $stage_game_sql->num_rows;
-        $stage_game_array = $stage_game_sql->fetch_all(MYSQLI_ASSOC);
+        $stage_game_array = $stage_game_sql->fetch_all(1);
 
         $stage_array = array();
 
@@ -461,7 +461,7 @@ elseif (isset($_GET['stage_prev']))
                 ORDER BY `league_group` ASC, `league_place` ASC";
         $stage_sql = $mysqli->query($sql);
 
-        $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
+        $stage_array = $stage_sql->fetch_all(1);
     }
 
     $stage_array = array_values($stage_array);
@@ -525,7 +525,7 @@ elseif (isset($_GET['stage_next']))
             }
         }
 
-        $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
+        $stage_array = $stage_sql->fetch_all(1);
 
         $stage_id   = $stage_array[0]['stage_id'];
         $stage_name = $stage_array[0]['stage_name'];
@@ -553,7 +553,7 @@ elseif (isset($_GET['stage_next']))
         $stage_game_sql = $mysqli->query($sql);
 
         $count_stage_game = $stage_game_sql->num_rows;
-        $stage_game_array = $stage_game_sql->fetch_all(MYSQLI_ASSOC);
+        $stage_game_array = $stage_game_sql->fetch_all(1);
 
         $stage_array = array();
 
@@ -616,7 +616,7 @@ elseif (isset($_GET['stage_next']))
                 ORDER BY `league_group` ASC, `league_place` ASC";
         $stage_sql = $mysqli->query($sql);
 
-        $stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
+        $stage_array = $stage_sql->fetch_all(1);
     }
 
     $stage_array = array_values($stage_array);
@@ -705,7 +705,7 @@ elseif (isset($_GET['shedule_prev']))
         $count_result = $result_sql->num_rows;
     }
 
-    $result_array = $result_sql->fetch_all(MYSQLI_ASSOC);
+    $result_array = $result_sql->fetch_all(1);
 
     $game_array = array();
 
@@ -808,7 +808,7 @@ elseif (isset($_GET['shedule_next']))
         $count_result = $result_sql->num_rows;
     }
 
-    $result_array = $result_sql->fetch_all(MYSQLI_ASSOC);
+    $result_array = $result_sql->fetch_all(1);
 
     $game_array = array();
 
@@ -911,7 +911,7 @@ elseif (isset($_GET['shedule_worldcup_prev']))
         $count_result = $result_sql->num_rows;
     }
 
-    $result_array = $result_sql->fetch_all(MYSQLI_ASSOC);
+    $result_array = $result_sql->fetch_all(1);
 
     $game_array = array();
 
@@ -1014,7 +1014,7 @@ elseif (isset($_GET['shedule_worldcup_next']))
         $count_result = $result_sql->num_rows;
     }
 
-    $result_array = $result_sql->fetch_all(MYSQLI_ASSOC);
+    $result_array = $result_sql->fetch_all(1);
 
     $game_array = array();
 
@@ -1062,7 +1062,7 @@ elseif (isset($_GET['inbox_id']))
             LIMIT 1";
     $inbox_sql = $mysqli->query($sql);
 
-    $inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);
+    $inbox_array = $inbox_sql->fetch_all(1);
 
     $inboxtheme_id  = $inbox_array[0]['inbox_inboxtheme_id'];
     $asktoplay_id   = $inbox_array[0]['inbox_asktoplay_id'];
@@ -1108,7 +1108,7 @@ elseif (isset($_GET['outbox_id']))
             LIMIT 1";
     $inbox_sql = $mysqli->query($sql);
 
-    $inbox_array = $inbox_sql->fetch_all(MYSQLI_ASSOC);
+    $inbox_array = $inbox_sql->fetch_all(1);
 
     $inbox_array[0]['inbox_button'] = '';
     $inbox_array[0]['inbox_text']   = nl2br($inbox_array[0]['inbox_text']);
@@ -1127,7 +1127,7 @@ elseif (isset($_GET['note_id']))
     $note_sql = $mysqli->query($sql);
 
     $count_note = $note_sql->num_rows;
-    $note_array = $note_sql->fetch_all(MYSQLI_ASSOC);
+    $note_array = $note_sql->fetch_all(1);
 
     if (1 == $count_note)
     {
@@ -1159,7 +1159,7 @@ elseif (isset($_GET['asktoplay']))
 
         if (0 != $count_asktoplay)
         {
-            $asktoplay_array = $asktoplay_sql->fetch_all(MYSQLI_ASSOC);
+            $asktoplay_array = $asktoplay_sql->fetch_all(1);
 
             $user_id = $asktoplay_array[0]['team_user_id'];
 
@@ -1170,7 +1170,7 @@ elseif (isset($_GET['asktoplay']))
                     LIMIT 1";
             $inboxtheme_sql = $mysqli->query($sql);
 
-            $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+            $inboxtheme_array = $inboxtheme_sql->fetch_all(1);
 
             $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
             $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
@@ -1205,7 +1205,7 @@ elseif (isset($_GET['asktoplay']))
                 OR `game_guest_team_id`='$authorization_team_id')";
         $check_sql = $mysqli->query($sql);
 
-        $check_array = $check_sql->fetch_all(MYSQLI_ASSOC);
+        $check_array = $check_sql->fetch_all(1);
         $count_check = $check_array[0]['count'];
 
         if (0 == $count_check)
@@ -1226,7 +1226,7 @@ elseif (isset($_GET['asktoplay']))
                     LIMIT 1";
             $team_sql = $mysqli->query($sql);
 
-            $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+            $team_array = $team_sql->fetch_all(1);
 
             $team_name  = $team_array[0]['team_name'];
             $user_id    = $team_array[0]['team_user_id'];
@@ -1258,7 +1258,7 @@ elseif (isset($_GET['asktoplay']))
 
             $stadium_sql = $mysqli->query($sql);
 
-            $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
+            $stadium_array = $stadium_sql->fetch_all(1);
 
             $city_name      = $stadium_array[0]['city_name'];
             $stadium_name   = $stadium_array[0]['stadium_name'];
@@ -1269,7 +1269,7 @@ elseif (isset($_GET['asktoplay']))
                     LIMIT 1";
             $shedule_sql = $mysqli->query($sql);
 
-            $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+            $shedule_array = $shedule_sql->fetch_all(1);
 
             $shedule_date = $shedule_array[0]['shedule_date'];
             $shedule_date = date('d.m.Y', strtotime($shedule_date));
@@ -1281,7 +1281,7 @@ elseif (isset($_GET['asktoplay']))
                     LIMIT 1";
             $inboxtheme_sql = $mysqli->query($sql);
 
-            $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+            $inboxtheme_array = $inboxtheme_sql->fetch_all(1);
 
             $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
             $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
@@ -1305,7 +1305,7 @@ elseif (isset($_GET['asktoplay']))
             WHERE `shedule_id`='$shedule_id'";
     $shedule_sql = $mysqli->query($sql);
 
-    $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+    $shedule_array = $shedule_sql->fetch_all(1);
 
     $shedule_date       = date('d.m.Y', strtotime($shedule_array[0]['shedule_date']));
     $tournamenttype_id  = $shedule_array[0]['shedule_tournamenttype_id'];
@@ -1349,7 +1349,7 @@ elseif (isset($_GET['asktoplay']))
             ORDER BY `team_name` ASC";
     $team_sql = $mysqli->query($sql);
 
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+    $team_array = $team_sql->fetch_all(1);
 
     $sql = "SELECT `asktoplay_home`,
                    `asktoplay_id`,
@@ -1363,7 +1363,7 @@ elseif (isset($_GET['asktoplay']))
             AND `asktoplay_delete`='0'";
     $invitee_sql = $mysqli->query($sql);
 
-    $invitee_array = $invitee_sql->fetch_all(MYSQLI_ASSOC);
+    $invitee_array = $invitee_sql->fetch_all(1);
 
     $sql = "SELECT `asktoplay_home`,
                    `asktoplay_id`,
@@ -1377,7 +1377,7 @@ elseif (isset($_GET['asktoplay']))
             AND `asktoplay_delete`='0'";
     $inviter_sql = $mysqli->query($sql);
 
-    $inviter_array = $inviter_sql->fetch_all(MYSQLI_ASSOC);
+    $inviter_array = $inviter_sql->fetch_all(1);
 
     $json_data['shedule_date']  = $shedule_date;
     $json_data['num']           = $authorization_team_id;
@@ -1395,7 +1395,7 @@ elseif (isset($_GET['change_role_id']))
             LIMIT 1";
     $role_sql = $mysqli->query($sql);
 
-    $role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
+    $role_array = $role_sql->fetch_all(1);
 
     $json_data['role_array'] = $role_array;
 }
@@ -1409,7 +1409,7 @@ elseif (isset($_GET['to_national_player_id']))
             LIMIT 1";
     $player_sql = $mysqli->query($sql);
 
-    $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+    $player_array = $player_sql->fetch_all(1);
 
     $national_id = $player_array[0]['player_national_id'];
 
@@ -1445,7 +1445,7 @@ elseif (isset($_GET['application_country_id']))
     $application_sql = $mysqli->query($sql);
 
     $count_application = $application_sql->num_rows;
-    $application_array = $application_sql->fetch_all(MYSQLI_ASSOC);
+    $application_array = $application_sql->fetch_all(1);
 
     if (0 == $count_application)
     {
@@ -1471,7 +1471,7 @@ elseif (isset($_GET['registration_login']))
 
     $prepare->close();
 
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
     $count_user = $user_array[0]['count'];
 
     $json_data['count_user'] = $count_user;
@@ -1491,7 +1491,7 @@ elseif (isset($_GET['registration_email']))
 
     $prepare->close();
 
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
     $count_user = $user_array[0]['count'];
 
     $json_data['count_user'] = $count_user;
@@ -1512,7 +1512,7 @@ elseif (isset($_GET['questionary_login']))
 
     $prepare->close();
 
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
     $count_user = $user_array[0]['count'];
 
     $json_data['count_user'] = $count_user;
@@ -1533,7 +1533,7 @@ elseif (isset($_GET['questionary_email']))
 
     $prepare->close();
 
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
     $count_user = $user_array[0]['count'];
 
     $json_data['count_user'] = $count_user;

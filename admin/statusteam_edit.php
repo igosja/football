@@ -41,7 +41,7 @@ if (isset($_POST['statusteam_name']))
     redirect('statusteam_list.php');
 }
 
-$statusteam_array = $statusteam_sql->fetch_all(MYSQLI_ASSOC);
+$statusteam_array = $statusteam_sql->fetch_all(1);
 
 $tpl = 'statusteam_create';
 

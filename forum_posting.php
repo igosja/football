@@ -34,7 +34,7 @@ if (isset($_GET['group']))
             LIMIT 1";
     $forum_sql = $mysqli->query($sql);
 
-    $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
+    $forum_array = $forum_sql->fetch_all(1);
 }
 else
 {
@@ -74,7 +74,7 @@ else
             WHERE `forumtheme_id`='$get_theme'";
     $forum_sql = $mysqli->query($sql);
 
-    $forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
+    $forum_array = $forum_sql->fetch_all(1);
 
     if (isset($_GET['answer']))
     {
@@ -86,7 +86,7 @@ else
                 LIMIT 1";
         $answer_sql = $mysqli->query($sql);
 
-        $answer_array = $answer_sql->fetch_all(MYSQLI_ASSOC);
+        $answer_array = $answer_sql->fetch_all(1);
     }
 }
 

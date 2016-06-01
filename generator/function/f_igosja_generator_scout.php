@@ -14,7 +14,7 @@ function f_igosja_generator_scout()
     $team_sql = f_igosja_mysqli_query($sql);
 
     $count_team = $team_sql->num_rows;
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+    $team_array = $team_sql->fetch_all(1);
 
     for ($i=0; $i<$count_team; $i++)
     {
@@ -31,7 +31,7 @@ function f_igosja_generator_scout()
         $scout_sql = f_igosja_mysqli_query($sql);
 
         $count_scout = $scout_sql->num_rows;
-        $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+        $scout_array = $scout_sql->fetch_all(1);
 
         for ($j=0; $j<$count_scout; $j++)
         {
@@ -74,7 +74,7 @@ function f_igosja_generator_scout()
             FROM `scoutnearest`";
     $scout_sql = f_igosja_mysqli_query($sql);
 
-    $scout_array = $scout_sql->fetch_all(MYSQLI_ASSOC);
+    $scout_array = $scout_sql->fetch_all(1);
 
     $count_scout = $scout_array[0]['count'];
 

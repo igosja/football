@@ -31,7 +31,7 @@ function f_igosja_generator_user_formation_gamemood_gamestyle()
     $game_sql = f_igosja_mysqli_query($sql);
 
     $count_game = $game_sql->num_rows;
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -65,7 +65,7 @@ function f_igosja_generator_user_formation_gamemood_gamestyle()
                         AND `userformation_formation_id`='$formation_id'";
                 $count_sql = f_igosja_mysqli_query($sql);
 
-                $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+                $count_array = $count_sql->fetch_all(1);
 
                 $count = $count_array[0]['count'];
 
@@ -93,7 +93,7 @@ function f_igosja_generator_user_formation_gamemood_gamestyle()
                         AND `usergamemood_gamemood_id`='$gamemood_id'";
                 $count_sql = f_igosja_mysqli_query($sql);
 
-                $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+                $count_array = $count_sql->fetch_all(1);
 
                 $count = $count_array[0]['count'];
 
@@ -121,7 +121,7 @@ function f_igosja_generator_user_formation_gamemood_gamestyle()
                         AND `usergamestyle_gamestyle_id`='$gamestyle_id'";
                 $count_sql = f_igosja_mysqli_query($sql);
 
-                $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+                $count_array = $count_sql->fetch_all(1);
 
                 $count = $count_array[0]['count'];
 
@@ -174,7 +174,7 @@ function f_igosja_generator_user_formation_gamemood_gamestyle()
     $game_sql = f_igosja_mysqli_query($sql);
 
     $count_game = $game_sql->num_rows;
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -208,7 +208,7 @@ function f_igosja_generator_user_formation_gamemood_gamestyle()
                         AND `userformation_formation_id`='$formation_id'";
                 $count_sql = f_igosja_mysqli_query($sql);
 
-                $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+                $count_array = $count_sql->fetch_all(1);
 
                 $count = $count_array[0]['count'];
 
@@ -236,7 +236,7 @@ function f_igosja_generator_user_formation_gamemood_gamestyle()
                         AND `usergamemood_gamemood_id`='$gamemood_id'";
                 $count_sql = f_igosja_mysqli_query($sql);
 
-                $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+                $count_array = $count_sql->fetch_all(1);
 
                 $count = $count_array[0]['count'];
 
@@ -264,7 +264,7 @@ function f_igosja_generator_user_formation_gamemood_gamestyle()
                         AND `usergamestyle_gamestyle_id`='$gamestyle_id'";
                 $count_sql = f_igosja_mysqli_query($sql);
 
-                $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+                $count_array = $count_sql->fetch_all(1);
 
                 $count = $count_array[0]['count'];
 

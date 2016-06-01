@@ -8,6 +8,6 @@ $sql = "SELECT `tournamenttype_id`,
         ORDER BY `tournamenttype_id` ASC";
 $tournamenttype_sql = $mysqli->query($sql);
 
-$tournamenttype_array = $tournamenttype_sql->fetch_all(MYSQLI_ASSOC);
+$tournamenttype_array = $tournamenttype_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

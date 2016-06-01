@@ -17,7 +17,7 @@ function f_igosja_generator_field_worse()
             AND `tournament_tournamenttype_id`='" . TOURNAMENT_TYPE_CHAMPIONSHIP . "'";
     $game_sql = f_igosja_mysqli_query($sql);
 
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
     $count_game = $game_array[0]['count'];
 
     if (0 != $count_game)

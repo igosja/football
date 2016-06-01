@@ -76,7 +76,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
@@ -88,7 +88,7 @@ $sql = "SELECT `user_money_position`,
         LIMIT 1";
 $user_sql = $mysqli->query($sql);
 
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+$user_array = $user_sql->fetch_all(1);
 
 if (isset($_GET['char']))
 {
@@ -124,7 +124,7 @@ if (isset($_GET['char']))
         redirect('player_home_training.php?num=' . $num_get);
     }
 
-    $attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+    $attribute_array = $attribute_sql->fetch_all(1);
     $attribute_value = $attribute_array[0]['playerattribute_value'];
 
     if (100 <= $attribute_value)
@@ -209,7 +209,7 @@ elseif (isset($_GET['position']))
         redirect('player_home_training.php?num=' . $num_get);
     }
 
-    $position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+    $position_array = $position_sql->fetch_all(1);
 
     $sql = "SELECT `playerposition_id`,
                    `playerposition_value`
@@ -223,7 +223,7 @@ elseif (isset($_GET['position']))
 
     if (0 < $count_playerposition)
     {
-        $playerposition_array   = $playerposition_sql->fetch_all(MYSQLI_ASSOC);
+        $playerposition_array   = $playerposition_sql->fetch_all(1);
         $playerposition_value   = $playerposition_array[0]['playerposition_value'];
         $playerposition_id      = $playerposition_array[0]['playerposition_id'];
 
@@ -289,7 +289,7 @@ $sql = "SELECT `attribute_id`,
 $attribute_sql = $mysqli->query($sql);
 
 $count_attribute = $attribute_sql->num_rows;
-$attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+$attribute_array = $attribute_sql->fetch_all(1);
 
 $sql = "SELECT `playerposition_value`,
                `position_coordinate_x`,
@@ -304,7 +304,7 @@ $sql = "SELECT `playerposition_value`,
         ORDER BY `playerposition_value` DESC";
 $playerposition_sql = $mysqli->query($sql);
 
-$playerposition_array = $playerposition_sql->fetch_all(MYSQLI_ASSOC);
+$playerposition_array = $playerposition_sql->fetch_all(1);
 
 $sql = "SELECT `position_id`,
                `position_name`
@@ -319,7 +319,7 @@ $sql = "SELECT `position_id`,
         ORDER BY `position_id` DESC";
 $position_sql = $mysqli->query($sql);
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $player_name . ' ' . $player_surname;

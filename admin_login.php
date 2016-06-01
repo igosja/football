@@ -43,7 +43,7 @@ if (isset($_POST['data']))
         redirect('/admin/');
     }
 
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
 
     $user_password      = $user_array[0]['user_password'];
     $user_activation    = $user_array[0]['user_activation'];

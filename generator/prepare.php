@@ -113,7 +113,7 @@ $sql = "SELECT `team_id`
 $team_sql = $mysqli->query($sql);
 
 $count_team = $team_sql->num_rows;
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 for ($i=0; $i<$count_team; $i++)
 {
@@ -193,7 +193,7 @@ $sql = "SELECT `shedule_id`
 $shedule_sql = $mysqli->query($sql);
 
 $count_shedule = $shedule_sql->num_rows;
-$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+$shedule_array = $shedule_sql->fetch_all(1);
 
 for ($i=0; $i<$count_shedule; $i++)
 {
@@ -210,7 +210,7 @@ $sql = "SELECT `standing_country_id`,
 $country_sql = $mysqli->query($sql);
 
 $count_country = $country_sql->num_rows;
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 for ($i=0; $i<$count_country; $i++)
 {
@@ -225,7 +225,7 @@ for ($i=0; $i<$count_country; $i++)
     $standing_sql = $mysqli->query($sql);
 
     $count_standing = $standing_sql->num_rows;
-    $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+    $standing_array = $standing_sql->fetch_all(1);
 
     for($j=0; $j<$count_standing; $j++)
     {
@@ -677,7 +677,7 @@ $sql = "SELECT `standing_country_id`,
 $country_sql = $mysqli->query($sql);
 
 $count_country = $country_sql->num_rows;
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 for ($i=0; $i<$count_country; $i++)
 {
@@ -692,7 +692,7 @@ for ($i=0; $i<$count_country; $i++)
     $standing_sql = $mysqli->query($sql);
 
     $count_standing = $standing_sql->num_rows;
-    $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+    $standing_array = $standing_sql->fetch_all(1);
 
     for($j=0; $j<$count_standing; $j++)
     {
@@ -1104,7 +1104,7 @@ $sql = "SELECT `tournament_id`,
 $country_sql = $mysqli->query($sql);
 
 $count_country = $country_sql->num_rows;
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 for ($i=0; $i<$count_country; $i++)
 {
@@ -1127,7 +1127,7 @@ for ($i=0; $i<$count_country; $i++)
     $team_sql = $mysqli->query($sql);
 
     $count_team = $team_sql->num_rows;
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+    $team_array = $team_sql->fetch_all(1);
 
     for ($j=0; $j<$count_team; $j=$j+2)
     {
@@ -1207,7 +1207,7 @@ $sql = "SELECT `leagueparticipant_team_id`
 $team_sql = $mysqli->query($sql);
 
 $count_team = $team_sql->num_rows;
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 for ($i=0; $i<$count_team; $i=$i+2)
 {
@@ -1248,7 +1248,7 @@ $sql = "SELECT `ratingcountry_country_id`
 $country_sql = $mysqli->query($sql);
 
 $count_country = $country_sql->num_rows;
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_1 = $country_array[0]['ratingcountry_country_id'];
 $country_2 = $country_array[1]['ratingcountry_country_id'];

@@ -13,7 +13,7 @@ if (isset($_GET['count_support']))
             AND `inbox_read`='0'";
     $support_sql = $mysqli->query($sql);
 
-    $support_array = $support_sql->fetch_all(MYSQLI_ASSOC);
+    $support_array = $support_sql->fetch_all(1);
     $count_support = $support_array[0]['count'];
 
     $json_data['count_support'] = $count_support;

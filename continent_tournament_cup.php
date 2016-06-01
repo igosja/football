@@ -25,7 +25,7 @@ if (0 == $count_continent)
     exit;
 }
 
-$continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
+$continent_array = $continent_sql->fetch_all(1);
 
 $continent_name = $continent_array[0]['continent_name'];
 
@@ -58,7 +58,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `tournament_reputation` DESC, `tournament_id` ASC";
 $tournament_sql = $mysqli->query($sql);
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $continent_name;

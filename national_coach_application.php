@@ -25,7 +25,7 @@ if (isset($_POST['country_id']))
             AND `coachapplication_user_id`='$authorization_user_id'";
     $count_sql = $mysqli->query($sql);
 
-    $count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+    $count_array = $count_sql->fetch_all(1);
 
     $count = $count_array[0]['count'];
 
@@ -70,7 +70,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `country_name` ASC";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_id = $country_array[0]['country_id'];
 
@@ -81,7 +81,7 @@ $sql = "SELECT `coachapplication_text`
         AND `coachapplication_user_id`='$authorization_user_id'";
 $application_sql = $mysqli->query($sql);
 
-$application_array = $application_sql->fetch_all(MYSQLI_ASSOC);
+$application_array = $application_sql->fetch_all(1);
 
 $header_title       = 'Выборы';
 $seo_title          = $header_title . ' тренеров национальных сборных. Подача заявок. ' . $seo_title;

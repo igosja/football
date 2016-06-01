@@ -41,7 +41,7 @@ if (isset($_POST['post_name']))
     redirect('post_list.php');
 }
 
-$post_array = $post_sql->fetch_all(MYSQLI_ASSOC);
+$post_array = $post_sql->fetch_all(1);
 
 $tpl = 'post_create';
 

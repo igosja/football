@@ -104,7 +104,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $sql = "SELECT `game_id`,
                `shedule_date`,
@@ -125,7 +125,7 @@ $sql = "SELECT `game_id`,
         LIMIT 1";
 $nearest_game_sql = $mysqli->query($sql);
 
-$nearest_game_array = $nearest_game_sql->fetch_all(MYSQLI_ASSOC);
+$nearest_game_array = $nearest_game_sql->fetch_all(1);
 
 $sql = "SELECT `game_home_team_id`,
                IF (`game_home_team_id`='$num_get', `game_home_score`, `game_guest_score`) AS `home_score`,
@@ -149,7 +149,7 @@ $sql = "SELECT `game_home_team_id`,
         LIMIT 5";
 $latest_game_sql = $mysqli->query($sql);
 
-$latest_game_array = $latest_game_sql->fetch_all(MYSQLI_ASSOC);
+$latest_game_array = $latest_game_sql->fetch_all(1);
 
 $sql = "SELECT SUM(`statisticteam_game`) AS `count_game`
         FROM `statisticteam`
@@ -157,7 +157,7 @@ $sql = "SELECT SUM(`statisticteam_game`) AS `count_game`
         AND `statisticteam_season_id`='$igosja_season_id'";
 $count_game_sql = $mysqli->query($sql);
 
-$count_game_array = $count_game_sql->fetch_all(MYSQLI_ASSOC);
+$count_game_array = $count_game_sql->fetch_all(1);
 
 $sql = "SELECT SUM(`statisticplayer_goal`) AS `goal`,
                `name_name`,
@@ -176,7 +176,7 @@ $sql = "SELECT SUM(`statisticplayer_goal`) AS `goal`,
         LIMIT 1";
 $player_goal_sql = $mysqli->query($sql);
 
-$player_goal_array = $player_goal_sql->fetch_all(MYSQLI_ASSOC);
+$player_goal_array = $player_goal_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                SUM(`statisticplayer_pass_scoring`) AS `pass`,
@@ -195,7 +195,7 @@ $sql = "SELECT `name_name`,
         LIMIT 1";
 $player_pass_sql = $mysqli->query($sql);
 
-$player_pass_array = $player_pass_sql->fetch_all(MYSQLI_ASSOC);
+$player_pass_array = $player_pass_sql->fetch_all(1);
 
 $sql = "SELECT SUM(`statisticplayer_best`) AS `best`,
                `name_name`,
@@ -214,7 +214,7 @@ $sql = "SELECT SUM(`statisticplayer_best`) AS `best`,
         LIMIT 1";
 $player_best_sql = $mysqli->query($sql);
 
-$player_best_array = $player_best_sql->fetch_all(MYSQLI_ASSOC);
+$player_best_array = $player_best_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 

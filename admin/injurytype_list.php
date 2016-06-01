@@ -9,6 +9,6 @@ $sql = "SELECT `injurytype_id`,
         ORDER BY `injurytype_id` ASC";
 $injurytype_sql = $mysqli->query($sql);
 
-$injurytype_array = $injurytype_sql->fetch_all(MYSQLI_ASSOC);
+$injurytype_array = $injurytype_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

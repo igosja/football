@@ -12,7 +12,7 @@ function f_igosja_prize_championship_prize()
     $standing_sql = f_igosja_mysqli_query($sql);
 
     $count_standing = $standing_sql->num_rows;
-    $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+    $standing_array = $standing_sql->fetch_all(1);
 
     for ($i=0; $i<$count_standing; $i++)
     {

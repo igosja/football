@@ -18,7 +18,7 @@ function f_igosja_generator_lineup_check_and_fill()
     $game_sql = f_igosja_mysqli_query($sql);
 
     $count_game = $game_sql->num_rows;
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     for ($i=0; $i<$count_game; $i++)
     {
@@ -114,7 +114,7 @@ function f_igosja_generator_lineup_check_and_fill()
                                 LIMIT 1";
                         $player_sql = f_igosja_mysqli_query($sql);
 
-                        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                        $player_array = $player_sql->fetch_all(1);
 
                         $player_id = $player_array[0]['player_id'];
 
@@ -129,7 +129,7 @@ function f_igosja_generator_lineup_check_and_fill()
                     }
                     else
                     {
-                        $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+                        $lineup_array = $lineup_sql->fetch_all(1);
 
                         $lineup_id      = $lineup_array[0]['lineup_id'];
                         $player_id      = $lineup_array[0]['lineup_player_id'];
@@ -143,7 +143,7 @@ function f_igosja_generator_lineup_check_and_fill()
                                 AND `lineup_id`!='$lineup_id'";
                         $lineup_sql = f_igosja_mysqli_query($sql);
 
-                        $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+                        $lineup_array = $lineup_sql->fetch_all(1);
 
                         $count_lineup = $lineup_array[0]['count'];
 
@@ -155,7 +155,7 @@ function f_igosja_generator_lineup_check_and_fill()
                                 AND `disqualification_tournament_id`='$tournament_id'";
                         $disqualification_sql = f_igosja_mysqli_query($sql);
 
-                        $disqualification_array = $disqualification_sql->fetch_all(MYSQLI_ASSOC);
+                        $disqualification_array = $disqualification_sql->fetch_all(1);
 
                         $count_disqualification = $disqualification_array[0]['count'];
 
@@ -201,7 +201,7 @@ function f_igosja_generator_lineup_check_and_fill()
                                     LIMIT 1";
                             $player_sql = f_igosja_mysqli_query($sql);
 
-                            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                            $player_array = $player_sql->fetch_all(1);
 
                             $player_id = $player_array[0]['player_id'];
 
@@ -319,7 +319,7 @@ function f_igosja_generator_lineup_check_and_fill()
                                 LIMIT 1";
                         $player_sql = f_igosja_mysqli_query($sql);
 
-                        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                        $player_array = $player_sql->fetch_all(1);
 
                         $player_id = $player_array[0]['player_id'];
 
@@ -334,7 +334,7 @@ function f_igosja_generator_lineup_check_and_fill()
                     }
                     else
                     {
-                        $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+                        $lineup_array = $lineup_sql->fetch_all(1);
 
                         $lineup_id      = $lineup_array[0]['lineup_id'];
                         $player_id      = $lineup_array[0]['lineup_player_id'];
@@ -348,7 +348,7 @@ function f_igosja_generator_lineup_check_and_fill()
                                 AND `lineup_id`!='$lineup_id'";
                         $lineup_sql = f_igosja_mysqli_query($sql);
 
-                        $lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+                        $lineup_array = $lineup_sql->fetch_all(1);
 
                         $count_lineup = $lineup_array[0]['count'];
 
@@ -360,7 +360,7 @@ function f_igosja_generator_lineup_check_and_fill()
                                 AND `disqualification_tournament_id`='$tournament_id'";
                         $disqualification_sql = f_igosja_mysqli_query($sql);
 
-                        $disqualification_array = $disqualification_sql->fetch_all(MYSQLI_ASSOC);
+                        $disqualification_array = $disqualification_sql->fetch_all(1);
 
                         $count_disqualification = $disqualification_array[0]['count'];
 
@@ -405,7 +405,7 @@ function f_igosja_generator_lineup_check_and_fill()
                                     LIMIT 1";
                             $player_sql = f_igosja_mysqli_query($sql);
 
-                            $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+                            $player_array = $player_sql->fetch_all(1);
 
                             $player_id = $player_array[0]['player_id'];
 

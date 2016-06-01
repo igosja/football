@@ -8,6 +8,6 @@ $sql = "SELECT `statusnational_id`,
         ORDER BY `statusnational_id` ASC";
 $statusnational_sql = $mysqli->query($sql);
 
-$statusnational_array = $statusnational_sql->fetch_all(MYSQLI_ASSOC);
+$statusnational_array = $statusnational_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

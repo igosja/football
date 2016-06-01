@@ -39,7 +39,7 @@ if (0 == $count_head)
     exit;
 }
 
-$head_array = $head_sql->fetch_all(MYSQLI_ASSOC);
+$head_array = $head_sql->fetch_all(1);
 
 $forumthemegroup_country_id = $head_array[0]['forumthemegroup_country_id'];
 
@@ -102,12 +102,12 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         LIMIT $offset, $limit";
 $forum_sql = $mysqli->query($sql);
 
-$forum_array = $forum_sql->fetch_all(MYSQLI_ASSOC);
+$forum_array = $forum_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count_forum`";
 
 $count_forum = $mysqli->query($sql);
-$count_forum = $count_forum->fetch_all(MYSQLI_ASSOC);
+$count_forum = $count_forum->fetch_all(1);
 $count_forum = $count_forum[0]['count_forum'];
 $count_forum = ceil($count_forum / $limit);
 
@@ -123,7 +123,7 @@ if (isset($authorization_user_id))
             ORDER BY `forumread_id`";
     $forumread_sql = $mysqli->query($sql);
 
-    $forumread_array = $forumread_sql->fetch_all(MYSQLI_ASSOC);
+    $forumread_array = $forumread_sql->fetch_all(1);
 }
 
 $num                = $num_get;

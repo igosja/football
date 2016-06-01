@@ -44,7 +44,7 @@ if (isset($_POST['chapter_id']))
     redirect('instruction_list.php');
 }
 
-$instruction_array = $instruction_sql->fetch_all(MYSQLI_ASSOC);
+$instruction_array = $instruction_sql->fetch_all(1);
 
 $sql = "SELECT `instructionchapter_id`,
                `instructionchapter_name`
@@ -52,7 +52,7 @@ $sql = "SELECT `instructionchapter_id`,
         ORDER BY `instructionchapter_id` ASC";
 $chapter_sql = $mysqli->query($sql);
 
-$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(1);
 
 $tpl = 'instruction_create';
 

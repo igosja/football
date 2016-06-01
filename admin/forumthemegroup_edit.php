@@ -50,7 +50,7 @@ if (isset($_POST['chapter_name']))
     redirect('forumthemegroup_list.php');
 }
 
-$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(1);
 
 $sql = "SELECT `forumchapter_id`,
                `forumchapter_name`
@@ -58,7 +58,7 @@ $sql = "SELECT `forumchapter_id`,
         ORDER BY `forumchapter_id` ASC";
 $forumchapter_sql = $mysqli->query($sql);
 
-$forumchapter_array = $forumchapter_sql->fetch_all(MYSQLI_ASSOC);
+$forumchapter_array = $forumchapter_sql->fetch_all(1);
 
 $sql = "SELECT `country_id`,
                `country_name`
@@ -69,7 +69,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `country_name` ASC";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $tpl = 'forumthemegroup_create';
 

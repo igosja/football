@@ -44,7 +44,7 @@ if (isset($_POST['chapter_id']))
     redirect('attribute_list.php');
 }
 
-$attribute_array = $attribute_sql->fetch_all(MYSQLI_ASSOC);
+$attribute_array = $attribute_sql->fetch_all(1);
 
 $sql = "SELECT `attributechapter_id`,
                `attributechapter_name`
@@ -52,7 +52,7 @@ $sql = "SELECT `attributechapter_id`,
         ORDER BY `attributechapter_id` ASC";
 $chapter_sql = $mysqli->query($sql);
 
-$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(1);
 
 $tpl = 'attribute_create';
 

@@ -25,7 +25,7 @@ $sql = "SELECT SUM(`statisticuser_draw`) AS `draw`,
         WHERE `statisticuser_user_id`='$num_get'";
 $career_sql = $mysqli->query($sql);
 
-$career_array = $career_sql->fetch_all(MYSQLI_ASSOC);
+$career_array = $career_sql->fetch_all(1);
 
 $sql = "SELECT `user_buy_max`,
                `user_buy_player`,
@@ -42,7 +42,7 @@ $sql = "SELECT `user_buy_max`,
         LIMIT 1";
 $summary_sql = $mysqli->query($sql);
 
-$user_array = $summary_sql->fetch_all(MYSQLI_ASSOC);
+$user_array = $summary_sql->fetch_all(1);
 
 $num                = $authorization_id;
 $header_title       = $authorization_login;

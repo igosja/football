@@ -60,7 +60,7 @@ if (isset($_POST['continent_id']))
     redirect('country_list.php');
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $sql = "SELECT `continent_id`,
                `continent_name`
@@ -68,7 +68,7 @@ $sql = "SELECT `continent_id`,
         ORDER BY `continent_id` ASC";
 $continent_sql = $mysqli->query($sql);
 
-$continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
+$continent_array = $continent_sql->fetch_all(1);
 
 $tpl = 'country_create';
 

@@ -34,7 +34,7 @@ $sql = "SELECT `shedule_date`,
         WHERE `stadium_team_id`='$num_get'";
 $stadium_sql = $mysqli->query($sql);
 
-$stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
+$stadium_array = $stadium_sql->fetch_all(1);
 
 if (isset($_GET['data']) &&
     isset($_GET['ok']) &&

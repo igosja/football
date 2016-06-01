@@ -52,7 +52,7 @@ if (0 == $count_referee)
     exit;
 }
 
-$referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+$referee_array = $referee_sql->fetch_all(1);
 
 $referee_name    = $referee_array[0]['name_name'];
 $referee_surname = $referee_array[0]['surname_name'];
@@ -94,7 +94,7 @@ $sql = "SELECT `game_guest_country_id`,
         LIMIT 10";
 $game_sql = $mysqli->query($sql);
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $referee_name . ' ' . $referee_surname;

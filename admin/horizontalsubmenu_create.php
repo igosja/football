@@ -26,7 +26,7 @@ $sql = "SELECT `horizontalmenuchapter_id`,
         ORDER BY `horizontalmenuchapter_name` ASC";
 $horizontalmenuchapter_sql = $mysqli->query($sql);
 
-$horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(MYSQLI_ASSOC);
+$horizontalmenuchapter_array = $horizontalmenuchapter_sql->fetch_all(1);
 
 $horizontalmenuchapter_id = $horizontalmenuchapter_array[0]['horizontalmenuchapter_id'];
 
@@ -36,6 +36,6 @@ $sql = "SELECT `horizontalmenu_id`,
         WHERE `horizontalmenu_horizontalmenuchapter_id`='$horizontalmenuchapter_id'";
 $horizontalmenu_sql = $mysqli->query($sql);
 
-$horizontalmenu_array = $horizontalmenu_sql->fetch_all(MYSQLI_ASSOC);
+$horizontalmenu_array = $horizontalmenu_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

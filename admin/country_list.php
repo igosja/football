@@ -70,11 +70,11 @@ else
 
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count_country`";
 $count_country = $mysqli->query($sql);
-$count_country = $count_country->fetch_all(MYSQLI_ASSOC);
+$count_country = $count_country->fetch_all(1);
 $count_country = $count_country[0]['count_country'];
 
 include (__DIR__ . '/../view/admin_main.php');

@@ -43,7 +43,7 @@ else
             LIMIT 1";
     $game_sql = $mysqli->query($sql);
 
-    $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+    $game_array = $game_sql->fetch_all(1);
 
     if (isset($game_array[0]['game_id']))
     {
@@ -63,7 +63,7 @@ $sql = "SELECT COUNT(`game_id`) AS `count`
         OR `game_guest_country_id`='$num_get')";
 $count_sql = $mysqli->query($sql);
 
-$count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+$count_array = $count_sql->fetch_all(1);
 
 $count_game = $count_array[0]['count'];
 
@@ -73,7 +73,7 @@ if (0 == $count_game)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -84,7 +84,7 @@ $sql = "SELECT COUNT(`lineupmain_id`) AS `count`
         AND `lineupmain_formation_id`!='0'";
 $count_sql = $mysqli->query($sql);
 
-$count_array = $count_sql->fetch_all(MYSQLI_ASSOC);
+$count_array = $count_sql->fetch_all(1);
 
 $count_game = $count_array[0]['count'];
 
@@ -144,7 +144,7 @@ $sql = "SELECT `game_home_country_id`,
         LIMIT 5";
 $nearest_sql = $mysqli->query($sql);
 
-$nearest_array = $nearest_sql->fetch_all(MYSQLI_ASSOC);
+$nearest_array = $nearest_sql->fetch_all(1);
 
 $sql = "SELECT `lineupmain_formation_id`
         FROM `lineupmain`
@@ -153,7 +153,7 @@ $sql = "SELECT `lineupmain_formation_id`
         LIMIT 1";
 $lineup_sql = $mysqli->query($sql);
 
-$lineup_array = $lineup_sql->fetch_all(MYSQLI_ASSOC);
+$lineup_array = $lineup_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $country_name;

@@ -8,6 +8,6 @@ $sql = "SELECT `statusrent_id`,
         ORDER BY `statusrent_id` ASC";
 $statusrent_sql = $mysqli->query($sql);
 
-$statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);
+$statusrent_array = $statusrent_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

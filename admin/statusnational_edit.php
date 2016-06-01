@@ -41,7 +41,7 @@ if (isset($_POST['statusnational_name']))
     redirect('statusnational_list.php');
 }
 
-$statusnational_array = $statusnational_sql->fetch_all(MYSQLI_ASSOC);
+$statusnational_array = $statusnational_sql->fetch_all(1);
 
 $tpl = 'statusnational_create';
 

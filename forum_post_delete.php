@@ -23,7 +23,7 @@ if (0 == $count_theme)
     redirect('forum.php');
 }
 
-$theme_array = $theme_sql->fetch_all(MYSQLI_ASSOC);
+$theme_array = $theme_sql->fetch_all(1);
 
 $theme_id = $theme_array[0]['forumpost_forumtheme_id'];
 

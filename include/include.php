@@ -109,7 +109,7 @@ $sql = "SELECT `site_status`,
         LIMIT 1";
 $site_sql = $mysqli->query($sql);
 
-$site_array = $site_sql->fetch_all(MYSQLI_ASSOC);
+$site_array = $site_sql->fetch_all(1);
 
 $site_status = $site_array[0]['site_status'];
 
@@ -128,7 +128,7 @@ if ('admin' == $chapter)
             AND `inbox_read`='0'";
     $admin_support_sql = $mysqli->query($sql);
 
-    $admin_support_array = $admin_support_sql->fetch_all(MYSQLI_ASSOC);
+    $admin_support_array = $admin_support_sql->fetch_all(1);
     $count_admin_support = $admin_support_array[0]['count'];
 
     if (0 == $count_admin_support)
@@ -143,7 +143,7 @@ $sql = "SELECT `season_id`
         LIMIT 1";
 $season_sql = $mysqli->query($sql);
 
-$season_array = $season_sql->fetch_all(MYSQLI_ASSOC);
+$season_array = $season_sql->fetch_all(1);
 
 $igosja_season_id = $season_array[0]['season_id'];
 
@@ -153,7 +153,7 @@ $sql = "SELECT `continent_id`,
         ORDER BY `continent_id` ASC";
 $continent_sql = $mysqli->query($sql);
 
-$continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
+$continent_array = $continent_sql->fetch_all(1);
 
 $sql = "SELECT `horizontalmenu_authorization`,
                `horizontalmenu_myteam`,
@@ -173,7 +173,7 @@ $sql = "SELECT `horizontalmenu_authorization`,
         ORDER BY `horizontalmenu_id` ASC, `horizontalsubmenu_id` ASC";
 $horizontalmenu_sql = $mysqli->query($sql);
 
-$horizontalmenu_array = $horizontalmenu_sql->fetch_all(MYSQLI_ASSOC);
+$horizontalmenu_array = $horizontalmenu_sql->fetch_all(1);
 
 if ('admin' == $chapter)
 {
@@ -198,7 +198,7 @@ $sql = "SELECT `horizontalmenupage_authorization`,
         LIMIT 1";
 $horizontalmenupage_sql = $mysqli->query($sql);
 
-$horizontalmenupage_array = $horizontalmenupage_sql->fetch_all(MYSQLI_ASSOC);
+$horizontalmenupage_array = $horizontalmenupage_sql->fetch_all(1);
 
 if (isset($horizontalmenupage_array[0]['horizontalmenupage_authorization']))
 {
@@ -223,7 +223,7 @@ $sql = "SELECT COUNT(`shedule_id`) AS `count`
         AND `shedule_season_id`='$igosja_season_id'";
 $shedule_sql = $mysqli->query($sql);
 
-$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+$shedule_array = $shedule_sql->fetch_all(1);
 $count_shedule = $shedule_array[0]['count'];
 
 if (0 == $count_shedule)

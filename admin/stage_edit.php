@@ -41,7 +41,7 @@ if (isset($_POST['stage_name']))
     redirect('stage_list.php');
 }
 
-$stage_array = $stage_sql->fetch_all(MYSQLI_ASSOC);
+$stage_array = $stage_sql->fetch_all(1);
 
 $tpl = 'stage_create';
 

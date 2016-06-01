@@ -8,6 +8,6 @@ $sql = "SELECT `inboxtheme_id`,
         ORDER BY `inboxtheme_id` ASC";
 $inboxtheme_sql = $mysqli->query($sql);
 
-$inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+$inboxtheme_array = $inboxtheme_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

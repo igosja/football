@@ -25,7 +25,7 @@ if (0 == $count_country)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -52,7 +52,7 @@ if (0 == $count_nearest_game)
     exit;
 }
 
-$nearest_game_array = $nearest_game_sql->fetch_all(MYSQLI_ASSOC);
+$nearest_game_array = $nearest_game_sql->fetch_all(1);
 
 $opponent_id = $nearest_game_array[0]['country_id'];
 
@@ -85,7 +85,7 @@ $game_sql = $mysqli->query($sql);
 
 $game = $game_sql->num_rows;
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $win    = 0;
 $draw   = 0;

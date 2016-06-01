@@ -20,7 +20,7 @@ $sql = "SELECT `team_id`,
         LIMIT 1";
 $transfer_sql = $mysqli->query($sql);
 
-$transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
+$transfer_array = $transfer_sql->fetch_all(1);
 
 $sql = "SELECT `name_name`,
                `player_statustransfer_id`,
@@ -56,7 +56,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 if (isset($_POST['data']))
 {
@@ -69,7 +69,7 @@ if (isset($_POST['data']))
             LIMIT 1";
     $finance_sql = $mysqli->query($sql);
 
-    $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
+    $finance_array = $finance_sql->fetch_all(1);
 
     $team_finance = $finance_array[0]['team_finance'];
 
@@ -137,7 +137,7 @@ if (isset($_POST['data']))
                 LIMIT 1";
         $player_sql = $mysqli->query($sql);
 
-        $player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+        $player_array = $player_sql->fetch_all(1);
 
         $name           = $player_array[0]['name_name'];
         $surname        = $player_array[0]['surname_name'];
@@ -151,7 +151,7 @@ if (isset($_POST['data']))
                 LIMIT 1";
         $inboxtheme_sql = $mysqli->query($sql);
 
-        $inboxtheme_array = $inboxtheme_sql->fetch_all(MYSQLI_ASSOC);
+        $inboxtheme_array = $inboxtheme_sql->fetch_all(1);
 
         $inboxtheme_name = $inboxtheme_array[0]['inboxtheme_name'];
         $inboxtheme_text = $inboxtheme_array[0]['inboxtheme_text'];
@@ -194,7 +194,7 @@ $sql = "SELECT `offertype_id`,
         ORDER BY `offertype_id` ASC";
 $offertype_sql = $mysqli->query($sql);
 
-$offertype_array = $offertype_sql->fetch_all(MYSQLI_ASSOC);
+$offertype_array = $offertype_sql->fetch_all(1);
 
 
 $num                = $num_get;

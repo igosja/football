@@ -34,7 +34,7 @@ if (0 == $count_player)
     exit;
 }
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $player_name    = $player_array[0]['name_name'];
 $player_surname = $player_array[0]['surname_name'];
@@ -52,7 +52,7 @@ $sql = "SELECT MAX(`lineup_mark`) AS `max_mark`,
         AND `lineup_mark`>'0'";
 $mark_sql = $mysqli->query($sql);
 
-$mark_array = $mark_sql->fetch_all(MYSQLI_ASSOC);
+$mark_array = $mark_sql->fetch_all(1);
 
 $sql = "SELECT IF (`game_home_team_id`=`lineup_team_id`, `game_home_score`, `game_guest_score`) AS `home_score`,
                `game_id`,
@@ -83,7 +83,7 @@ $sql = "SELECT IF (`game_home_team_id`=`lineup_team_id`, `game_home_score`, `gam
         ORDER BY `shedule_date` DESC";
 $game_sql = $mysqli->query($sql);
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $sql = "SELECT `statisticplayer_best`,
                `statisticplayer_foul`,
@@ -108,7 +108,7 @@ $sql = "SELECT `statisticplayer_best`,
         ORDER BY `tournament_id` ASC";
 $statistic_sql = $mysqli->query($sql);
 
-$statistic_array = $statistic_sql->fetch_all(MYSQLI_ASSOC);
+$statistic_array = $statistic_sql->fetch_all(1);
 
 $sql = "SELECT SUM(`statisticplayer_best`) AS `count_best`,
                SUM(`statisticplayer_foul`) AS `count_foul`,
@@ -129,7 +129,7 @@ $sql = "SELECT SUM(`statisticplayer_best`) AS `count_best`,
         AND `statisticplayer_season_id`='$igosja_season_id'";
 $total_statistic_sql = $mysqli->query($sql);
 
-$total_statistic_array = $total_statistic_sql->fetch_all(MYSQLI_ASSOC);
+$total_statistic_array = $total_statistic_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $player_name . ' ' . $player_surname;

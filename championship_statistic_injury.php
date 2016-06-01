@@ -25,7 +25,7 @@ if (0 == $count_tournament)
     exit;
 }
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $tournament_name = $tournament_array[0]['tournament_name'];
 
@@ -55,7 +55,7 @@ $sql = "SELECT ROUND((`injury_end_date` - UNIX_TIMESTAMP()) / 60 / 60 / 24) AS `
         ORDER BY `team_id` ASC, `injury_id` ASC";
 $injury_sql = $mysqli->query($sql);
 
-$injury_array = $injury_sql->fetch_all(MYSQLI_ASSOC);
+$injury_array = $injury_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $tournament_name;

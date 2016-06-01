@@ -47,7 +47,7 @@ if (isset($_POST['continent_name']))
     redirect('continent_list.php');
 }
 
-$continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
+$continent_array = $continent_sql->fetch_all(1);
 
 $tpl = 'continent_create';
 

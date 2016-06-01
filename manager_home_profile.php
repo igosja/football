@@ -71,7 +71,7 @@ if (0 == $count_user)
     exit;
 }
 
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+$user_array = $user_sql->fetch_all(1);
 
 $sql = "SELECT `country_id`,
                `country_name`,
@@ -91,7 +91,7 @@ $sql = "SELECT `country_id`,
 $career_sql = $mysqli->query($sql);
 
 $count_career = $career_sql->num_rows;
-$career_array = $career_sql->fetch_all(MYSQLI_ASSOC);
+$career_array = $career_sql->fetch_all(1);
 
 $sql = "SELECT SUM(`statisticuser_draw`) AS `draw`,
                SUM(`statisticuser_game`) AS `game`,
@@ -106,7 +106,7 @@ $sql = "SELECT SUM(`statisticuser_draw`) AS `draw`,
         WHERE `statisticuser_user_id`='$num_get'";
 $career_statistic_sql = $mysqli->query($sql);
 
-$career_statistic_array = $career_statistic_sql->fetch_all(MYSQLI_ASSOC);
+$career_statistic_array = $career_statistic_sql->fetch_all(1);
 
 $sql = "SELECT `user_buy_max`,
                `user_buy_player`,
@@ -123,7 +123,7 @@ $sql = "SELECT `user_buy_max`,
         LIMIT 1";
 $summary_sql = $mysqli->query($sql);
 
-$summary_array = $summary_sql->fetch_all(MYSQLI_ASSOC);
+$summary_array = $summary_sql->fetch_all(1);
 
 $sql = "SELECT `standing_place`,
                `standing_season_id` AS `season_id`,
@@ -141,7 +141,7 @@ $sql = "SELECT `standing_place`,
         ORDER BY `standing_season_id` DESC";
 $championship_sql = $mysqli->query($sql);
 
-$championship_array = $championship_sql->fetch_all(MYSQLI_ASSOC);
+$championship_array = $championship_sql->fetch_all(1);
 
 $sql = "SELECT `stage_name` AS `standing_place`,
                `cupparticipant_season_id` AS `season_id`,
@@ -161,7 +161,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         ORDER BY `cupparticipant_season_id` DESC";
 $cup_sql = $mysqli->query($sql);
 
-$cup_array = $cup_sql->fetch_all(MYSQLI_ASSOC);
+$cup_array = $cup_sql->fetch_all(1);
 
 $sql = "SELECT `stage_name` AS `standing_place`,
                `leagueparticipant_season_id` AS `season_id`,
@@ -181,7 +181,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         ORDER BY `leagueparticipant_season_id` DESC";
 $league_sql = $mysqli->query($sql);
 
-$league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
+$league_array = $league_sql->fetch_all(1);
 
 $sql = "SELECT `worldcup_place` AS `standing_place`,
                `worldcup_season_id` AS `season_id`,
@@ -199,7 +199,7 @@ $sql = "SELECT `worldcup_place` AS `standing_place`,
         ORDER BY `worldcup_season_id` DESC";
 $worldcup_sql = $mysqli->query($sql);
 
-$worldcup_array = $worldcup_sql->fetch_all(MYSQLI_ASSOC);
+$worldcup_array = $worldcup_sql->fetch_all(1);
 
 $progress_array = array_merge($championship_array, $worldcup_array, $cup_array, $league_array);
 

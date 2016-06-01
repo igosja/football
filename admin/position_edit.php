@@ -69,7 +69,7 @@ if (isset($_POST['position_name']))
     redirect('position_list.php');
 }
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 $position_name          = $position_array[0]['position_name'];
 $position_description   = $position_array[0]['position_description'];
@@ -83,7 +83,7 @@ $sql = "SELECT `role_id`,
         ORDER BY `role_id` ASC";
 $role_sql = $mysqli->query($sql);
 
-$role_array = $role_sql->fetch_all(MYSQLI_ASSOC);
+$role_array = $role_sql->fetch_all(1);
 
 $sql = "SELECT `positionrole_role_id`
         FROM `positionrole`
@@ -91,7 +91,7 @@ $sql = "SELECT `positionrole_role_id`
         ORDER BY `positionrole_id` ASC";
 $positionrole_sql = $mysqli->query($sql);
 
-$positionrole_array = $positionrole_sql->fetch_all(MYSQLI_ASSOC);
+$positionrole_array = $positionrole_sql->fetch_all(1);
 
 $tpl = 'position_create';
 

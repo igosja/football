@@ -41,7 +41,7 @@ if (isset($_POST['chapter_name']))
     redirect('attributechapter_staff_list.php');
 }
 
-$chapter_array = $chapter_sql->fetch_all(MYSQLI_ASSOC);
+$chapter_array = $chapter_sql->fetch_all(1);
 
 $tpl = 'attributechapter_staff_create';
 

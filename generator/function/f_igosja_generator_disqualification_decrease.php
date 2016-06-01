@@ -14,7 +14,7 @@ function f_igosja_generator_disqualification_decrease()
     $tournament_sql = f_igosja_mysqli_query($sql);
 
     $count_tournament = $tournament_sql->num_rows;
-    $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+    $tournament_array = $tournament_sql->fetch_all(1);
 
     for ($i=0; $i<$count_tournament; $i++)
     {

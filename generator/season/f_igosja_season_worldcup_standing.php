@@ -29,7 +29,7 @@ function f_igosja_season_worldcup_standing()
     $standing_sql = f_igosja_mysqli_query($sql);
 
     $count_standing = $standing_sql->num_rows;
-    $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+    $standing_array = $standing_sql->fetch_all(1);
 
     for($i=0; $i<$count_standing; $i++)
     {
@@ -46,7 +46,7 @@ function f_igosja_season_worldcup_standing()
                 LIMIT 1";
         $stadium_sql = f_igosja_mysqli_query($sql);
 
-        $stadium_array = $stadium_sql->fetch_all(MYSQLI_ASSOC);
+        $stadium_array = $stadium_sql->fetch_all(1);
 
         $stadium_id = $stadium_array[0]['stadium_id'];
 

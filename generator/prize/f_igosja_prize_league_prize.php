@@ -12,7 +12,7 @@ function f_igosja_prize_league_prize()
     $leagueparticipant_sql = f_igosja_mysqli_query($sql);
 
     $count_leagueparticipant = $leagueparticipant_sql->num_rows;
-    $leagueparticipant_array = $leagueparticipant_sql->fetch_all(MYSQLI_ASSOC);
+    $leagueparticipant_array = $leagueparticipant_sql->fetch_all(1);
 
     for ($i=0; $i<$count_leagueparticipant; $i++)
     {

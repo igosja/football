@@ -44,7 +44,7 @@ if (isset($_POST['rule_name']))
     redirect('rule_list.php');
 }
 
-$rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);
+$rule_array = $rule_sql->fetch_all(1);
 
 $tpl = 'rule_create';
 

@@ -8,6 +8,6 @@ $sql = "SELECT `weather_id`,
         ORDER BY `weather_id` ASC";
 $weather_sql = $mysqli->query($sql);
 
-$weather_array = $weather_sql->fetch_all(MYSQLI_ASSOC);
+$weather_array = $weather_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

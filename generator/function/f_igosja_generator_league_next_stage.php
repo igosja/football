@@ -12,7 +12,7 @@ function f_igosja_generator_league_next_stage()
             LIMIT 1";
     $shedule_sql = f_igosja_mysqli_query($sql);
 
-    $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+    $shedule_array = $shedule_sql->fetch_all(1);
 
     $tournamenttype_id = $shedule_array[0]['shedule_tournamenttype_id'];
 
@@ -23,7 +23,7 @@ function f_igosja_generator_league_next_stage()
                 ORDER BY RAND()";
         $referee_sql = f_igosja_mysqli_query($sql);
 
-        $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+        $referee_array = $referee_sql->fetch_all(1);
 
         $sql = "SELECT `game_first_game_id`,
                        `game_guest_score`,
@@ -43,7 +43,7 @@ function f_igosja_generator_league_next_stage()
         $game_sql = f_igosja_mysqli_query($sql);
 
         $count_game = $game_sql->num_rows;
-        $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+        $game_array = $game_sql->fetch_all(1);
 
         for ($i=0; $i<$count_game; $i++)
         {
@@ -63,7 +63,7 @@ function f_igosja_generator_league_next_stage()
                     LIMIT 1";
             $first_game_sql = f_igosja_mysqli_query($sql);
 
-            $first_game_array = $first_game_sql->fetch_all(MYSQLI_ASSOC);
+            $first_game_array = $first_game_sql->fetch_all(1);
 
             $first_home_score  = $first_game_array[0]['game_home_score'];
             $first_guest_score = $first_game_array[0]['game_guest_score'];
@@ -104,7 +104,7 @@ function f_igosja_generator_league_next_stage()
                     LIMIT 2";
             $shedule_sql = f_igosja_mysqli_query($sql);
 
-            $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+            $shedule_array = $shedule_sql->fetch_all(1);
 
             $shedule_1 = $shedule_array[0]['shedule_id'];
             $shedule_2 = $shedule_array[1]['shedule_id'];
@@ -119,7 +119,7 @@ function f_igosja_generator_league_next_stage()
             $team_sql = f_igosja_mysqli_query($sql);
 
             $count_team = $team_sql->num_rows;
-            $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+            $team_array = $team_sql->fetch_all(1);
 
             for ($j=0; $j<$count_team; $j=$j+2)
             {
@@ -174,7 +174,7 @@ function f_igosja_generator_league_next_stage()
             $league_sql = f_igosja_mysqli_query($sql);
 
             $count_league = $league_sql->num_rows;
-            $league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
+            $league_array = $league_sql->fetch_all(1);
 
             for ($j=0; $j<$count_league; $j++)
             {
@@ -203,7 +203,7 @@ function f_igosja_generator_league_next_stage()
                     LIMIT 6";
             $shedule_sql = f_igosja_mysqli_query($sql);
 
-            $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+            $shedule_array = $shedule_sql->fetch_all(1);
 
             $shedule_1 = $shedule_array[0]['shedule_id'];
             $shedule_2 = $shedule_array[1]['shedule_id'];
@@ -220,7 +220,7 @@ function f_igosja_generator_league_next_stage()
             $group_sql = f_igosja_mysqli_query($sql);
 
             $count_group = $group_sql->num_rows;
-            $group_array = $group_sql->fetch_all(MYSQLI_ASSOC);
+            $group_array = $group_sql->fetch_all(1);
 
             for ($j=0; $j<$count_group; $j++)
             {
@@ -234,7 +234,7 @@ function f_igosja_generator_league_next_stage()
                 $league_sql = f_igosja_mysqli_query($sql);
 
                 $count_league = $league_sql->num_rows;
-                $league_array = $league_sql->fetch_all(MYSQLI_ASSOC);
+                $league_array = $league_sql->fetch_all(1);
 
                 for($k=0; $k<$count_league; $k++)
                 {
@@ -288,7 +288,7 @@ function f_igosja_generator_league_next_stage()
                 ORDER BY `game_id` ASC";
         $game_sql = f_igosja_mysqli_query($sql);
 
-        $game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+        $game_array = $game_sql->fetch_all(1);
 
         $count_game = $game_array[0]['count'];
 
@@ -326,7 +326,7 @@ function f_igosja_generator_league_next_stage()
                     LIMIT 2";
             $shedule_sql = f_igosja_mysqli_query($sql);
 
-            $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+            $shedule_array = $shedule_sql->fetch_all(1);
 
             $shedule_1 = $shedule_array[0]['shedule_id'];
             $shedule_2 = $shedule_array[1]['shedule_id'];
@@ -339,7 +339,7 @@ function f_igosja_generator_league_next_stage()
             $team_sql = f_igosja_mysqli_query($sql);
 
             $count_team = $team_sql->num_rows;
-            $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+            $team_array = $team_sql->fetch_all(1);
 
             for ($j=0; $j<$count_team; $j=$j+2)
             {

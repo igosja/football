@@ -149,7 +149,7 @@ $sql = "SELECT `user_birth_day`,
         LIMIT 1";
 $user_sql = $mysqli->query($sql);
 
-$user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+$user_array = $user_sql->fetch_all(1);
 
 $social_array = f_igosja_social_array($user_array);
 
@@ -160,7 +160,7 @@ $sql = "SELECT `country_id`,
         ORDER BY `country_id` ASC";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $sql = "SELECT `gender_id`,
                `gender_name`
@@ -168,7 +168,7 @@ $sql = "SELECT `gender_id`,
         ORDER BY `gender_id` ASC";
 $gender_sql = $mysqli->query($sql);
 
-$gender_array = $gender_sql->fetch_all(MYSQLI_ASSOC);
+$gender_array = $gender_sql->fetch_all(1);
 
 $header_title       = $authorization_login;
 $seo_title          = $header_title . '. Анкета менеджера. ' . $seo_title;

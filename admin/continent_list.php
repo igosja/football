@@ -41,6 +41,6 @@ $sql = "SELECT `continent_id`,
         ON `t1`.`continent_id`=`t4`.`country_continent_id`";
 $continent_sql = $mysqli->query($sql);
 
-$continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
+$continent_array = $continent_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

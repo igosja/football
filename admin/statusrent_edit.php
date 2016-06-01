@@ -41,7 +41,7 @@ if (isset($_POST['statusrent_name']))
     redirect('statusrent_list.php');
 }
 
-$statusrent_array = $statusrent_sql->fetch_all(MYSQLI_ASSOC);
+$statusrent_array = $statusrent_sql->fetch_all(1);
 
 $tpl = 'statusrent_create';
 

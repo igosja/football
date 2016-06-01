@@ -45,7 +45,7 @@ if (isset($_POST['newstheme_name']))
     redirect('newstheme_list.php');
 }
 
-$newstheme_array = $newstheme_sql->fetch_all(MYSQLI_ASSOC);
+$newstheme_array = $newstheme_sql->fetch_all(1);
 
 $newstheme_name = $newstheme_array[0]['newstheme_name'];
 $newstheme_text = $newstheme_array[0]['newstheme_text'];

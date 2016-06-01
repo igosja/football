@@ -25,7 +25,7 @@ if (0 == $count_continent)
     exit;
 }
 
-$continent_array = $continent_sql->fetch_all(MYSQLI_ASSOC);
+$continent_array = $continent_sql->fetch_all(1);
 
 $continent_name = $continent_array[0]['continent_name'];
 
@@ -45,11 +45,11 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         LIMIT 10";
 $team_sql = $mysqli->query($sql);
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count_team`";
 $count_team = $mysqli->query($sql);
-$count_team = $count_team->fetch_all(MYSQLI_ASSOC);
+$count_team = $count_team->fetch_all(1);
 $count_team = $count_team[0]['count_team'];
 
 $sql = "SELECT SQL_CALC_FOUND_ROWS
@@ -63,11 +63,11 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         LIMIT 10";
 $country_sql = $mysqli->query($sql);
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count_country`";
 $count_country = $mysqli->query($sql);
-$count_country = $count_country->fetch_all(MYSQLI_ASSOC);
+$count_country = $count_country->fetch_all(1);
 $count_country = $count_country[0]['count_country'];
 
 $sql = "SELECT `name_name`,
@@ -92,7 +92,7 @@ $sql = "SELECT `name_name`,
         LIMIT 10";
 $player_sql = $mysqli->query($sql);
 
-$player_array = $player_sql->fetch_all(MYSQLI_ASSOC);
+$player_array = $player_sql->fetch_all(1);
 
 $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
                `buyer`.`team_name` AS `buyer_name`,
@@ -117,7 +117,7 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         LIMIT 10";
 $transfer_sql = $mysqli->query($sql);
 
-$transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
+$transfer_array = $transfer_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $continent_name;

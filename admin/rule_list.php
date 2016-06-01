@@ -28,6 +28,6 @@ $sql = "SELECT `rule_id`,
         ORDER BY `rule_order` ASC";
 $rule_sql = $mysqli->query($sql);
 
-$rule_array = $rule_sql->fetch_all(MYSQLI_ASSOC);
+$rule_array = $rule_sql->fetch_all(1);
 
 include (__DIR__ . '/../view/admin_main.php');

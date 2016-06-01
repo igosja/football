@@ -25,7 +25,7 @@ if (0 == $count_country)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -59,7 +59,7 @@ $sql = "SELECT `buyer`.`team_id` AS `buyer_id`,
         ORDER BY `transferhistory_price` DESC";
 $transfer_sql = $mysqli->query($sql);
 
-$transfer_array = $transfer_sql->fetch_all(MYSQLI_ASSOC);
+$transfer_array = $transfer_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $country_name;

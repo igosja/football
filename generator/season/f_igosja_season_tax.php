@@ -31,7 +31,7 @@ function f_igosja_season_tax()
     $finance_sql = f_igosja_mysqli_query($sql);
 
     $count_finance = $finance_sql->num_rows;
-    $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
+    $finance_array = $finance_sql->fetch_all(1);
 
     for ($i=0; $i<$count_finance; $i++)
     {

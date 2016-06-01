@@ -25,7 +25,7 @@ if (0 == $count_country)
     exit;
 }
 
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
@@ -41,7 +41,7 @@ $sql = "SELECT `worldcup_place`,
         ORDER BY `worldcup_season_id` DESC";
 $tournament_sql = $mysqli->query($sql);
 
-$tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+$tournament_array = $tournament_sql->fetch_all(1);
 
 $sql = "SELECT `history_date`,
                `user_id`,
@@ -54,7 +54,7 @@ $sql = "SELECT `history_date`,
         ORDER BY `history_date` DESC";
 $manager_sql = $mysqli->query($sql);
 
-$manager_array = $manager_sql->fetch_all(MYSQLI_ASSOC);
+$manager_array = $manager_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $country_name;

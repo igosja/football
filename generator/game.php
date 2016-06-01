@@ -218,7 +218,7 @@ $sql = "SELECT `team_id`
 $team_sql = $mysqli->query($sql);
 
 $count_team = $team_sql->num_rows;
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 for ($i=0; $i<$count_team; $i++)
 {
@@ -291,7 +291,7 @@ $sql = "SELECT `shedule_id`
 $shedule_sql = $mysqli->query($sql);
 
 $count_shedule = $shedule_sql->num_rows;
-$shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+$shedule_array = $shedule_sql->fetch_all(1);
 
 for ($i=0; $i<$count_shedule; $i++)
 {
@@ -308,7 +308,7 @@ $sql = "SELECT `standing_country_id`,
 $country_sql = $mysqli->query($sql);
 
 $count_country = $country_sql->num_rows;
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 for ($i=0; $i<$count_country; $i++)
 {
@@ -329,7 +329,7 @@ for ($i=0; $i<$count_country; $i++)
     $standing_sql = $mysqli->query($sql);
 
     $count_standing = $standing_sql->num_rows;
-    $standing_array = $standing_sql->fetch_all(MYSQLI_ASSOC);
+    $standing_array = $standing_sql->fetch_all(1);
 
     for($j=0; $j<$count_standing; $j++)
     {
@@ -346,7 +346,7 @@ for ($i=0; $i<$count_country; $i++)
     $referee_sql = $mysqli->query($sql);
 
     $count_referee = $referee_sql->num_rows;
-    $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+    $referee_array = $referee_sql->fetch_all(1);
 
     for ($j=0; $j<$count_referee; $j++)
     {
@@ -757,7 +757,7 @@ $sql = "SELECT `tournament_id`,
 $country_sql = $mysqli->query($sql);
 
 $count_country = $country_sql->num_rows;
-$country_array = $country_sql->fetch_all(MYSQLI_ASSOC);
+$country_array = $country_sql->fetch_all(1);
 
 for ($i=0; $i<$count_country; $i++)
 {
@@ -771,7 +771,7 @@ for ($i=0; $i<$count_country; $i++)
     $referee_sql = $mysqli->query($sql);
 
     $count_referee = $referee_sql->num_rows;
-    $referee_array = $referee_sql->fetch_all(MYSQLI_ASSOC);
+    $referee_array = $referee_sql->fetch_all(1);
 
     for ($j=0; $j<$count_referee; $j++)
     {
@@ -796,7 +796,7 @@ for ($i=0; $i<$count_country; $i++)
             LIMIT 2";
     $shedule_sql = $mysqli->query($sql);
 
-    $shedule_array = $shedule_sql->fetch_all(MYSQLI_ASSOC);
+    $shedule_array = $shedule_sql->fetch_all(1);
 
     $shedule_id_1 = $shedule_array[0]['shedule_id'];
     $shedule_id_2 = $shedule_array[1]['shedule_id'];
@@ -809,7 +809,7 @@ for ($i=0; $i<$count_country; $i++)
     $team_sql = $mysqli->query($sql);
 
     $count_team = $team_sql->num_rows;
-    $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+    $team_array = $team_sql->fetch_all(1);
 
     for ($j=0; $j<$count_team; $j=$j+2)
     {

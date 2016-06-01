@@ -44,7 +44,7 @@ if (isset($_POST['gamestyle_name']))
     redirect('gamestyle_list.php');
 }
 
-$gamestyle_array = $gamestyle_sql->fetch_all(MYSQLI_ASSOC);
+$gamestyle_array = $gamestyle_sql->fetch_all(1);
 
 $tpl = 'gamestyle_create';
 

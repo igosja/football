@@ -25,7 +25,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -44,7 +44,7 @@ $sql = "SELECT `game_id`,
         LIMIT 1";
 $nearest_game_sql = $mysqli->query($sql);
 
-$nearest_game_array = $nearest_game_sql->fetch_all(MYSQLI_ASSOC);
+$nearest_game_array = $nearest_game_sql->fetch_all(1);
 
 $opponent_id = $nearest_game_array[0]['team_id'];
 
@@ -77,7 +77,7 @@ $game_sql = $mysqli->query($sql);
 
 $game = $game_sql->num_rows;
 
-$game_array = $game_sql->fetch_all(MYSQLI_ASSOC);
+$game_array = $game_sql->fetch_all(1);
 
 $win    = 0;
 $draw   = 0;

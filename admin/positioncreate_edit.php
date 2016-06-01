@@ -37,7 +37,7 @@ if (isset($_POST['position_id']))
     redirect('positioncreate_list.php');
 }
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 $position_id = $position_array[0]['positioncreate_position_id'];
 
@@ -47,7 +47,7 @@ $sql = "SELECT `position_description`,
         ORDER BY `position_id`";
 $position_sql = $mysqli->query($sql);
 
-$position_array = $position_sql->fetch_all(MYSQLI_ASSOC);
+$position_array = $position_sql->fetch_all(1);
 
 $tpl = 'positioncreate_create';
 

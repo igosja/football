@@ -41,7 +41,7 @@ if (isset($_POST['historytext_name']))
     redirect('historytext_list.php');
 }
 
-$historytext_array = $historytext_sql->fetch_all(MYSQLI_ASSOC);
+$historytext_array = $historytext_sql->fetch_all(1);
 
 $tpl = 'historytext_create';
 

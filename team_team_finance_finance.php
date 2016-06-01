@@ -27,7 +27,7 @@ if (0 == $count_team)
     exit;
 }
 
-$team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+$team_array = $team_sql->fetch_all(1);
 
 $team_name = $team_array[0]['team_name'];
 
@@ -75,7 +75,7 @@ $sql = "SELECT `finance_expense_agent`+
         LIMIT 1";
 $finance_sql = $mysqli->query($sql);
 
-$finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
+$finance_array = $finance_sql->fetch_all(1);
 
 $sql = "SELECT `historyfinanceteam_date`,
                `historyfinanceteam_value`,
@@ -88,7 +88,7 @@ $sql = "SELECT `historyfinanceteam_date`,
         ORDER BY `historyfinanceteam_date` DESC";
 $history_sql = $mysqli->query($sql);
 
-$history_array = $history_sql->fetch_all(MYSQLI_ASSOC);
+$history_array = $history_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;

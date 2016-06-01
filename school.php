@@ -30,7 +30,7 @@ $sql = "SELECT `shedule_date`,
         WHERE `team_id`='$num_get'";
 $school_sql = $mysqli->query($sql);
 
-$school_array = $school_sql->fetch_all(MYSQLI_ASSOC);
+$school_array = $school_sql->fetch_all(1);
 
 $school_level   = $school_array[0]['team_school_level'];
 $price          = pow($school_level + 1, 1.3) * 1000000;
@@ -86,7 +86,7 @@ if (isset($_GET['level']) &&
                     LIMIT 1";
             $finance_sql = $mysqli->query($sql);
 
-            $finance_array = $finance_sql->fetch_all(MYSQLI_ASSOC);
+            $finance_array = $finance_sql->fetch_all(1);
             $count_finance = $finance_array[0]['count'];
 
             if (0 == $count_finance)

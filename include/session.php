@@ -32,7 +32,7 @@ if (isset($_SESSION['authorization_id']))
             LIMIT 1";
     $user_sql = $mysqli->query($sql);
 
-    $user_array = $user_sql->fetch_all(MYSQLI_ASSOC);
+    $user_array = $user_sql->fetch_all(1);
 
     if (!isset($user_array[0]['user_id']))
     {
@@ -54,7 +54,7 @@ if (isset($_SESSION['authorization_id']))
             LIMIT 1";
     $forumcountry_sql = $mysqli->query($sql);
 
-    $forumcountry_array = $forumcountry_sql->fetch_all(MYSQLI_ASSOC);
+    $forumcountry_array = $forumcountry_sql->fetch_all(1);
 
     $authorization_forumcountry_id = $forumcountry_array[0]['city_country_id'];
 
@@ -71,7 +71,7 @@ if (isset($_SESSION['authorization_id']))
             AND `inbox_read`='0'";
     $message_sql = $mysqli->query($sql);
 
-    $message_array = $message_sql->fetch_all(MYSQLI_ASSOC);
+    $message_array = $message_sql->fetch_all(1);
 
     $count_message = $message_array[0]['count_inbox'];
 
@@ -82,7 +82,7 @@ if (isset($_SESSION['authorization_id']))
             AND `inbox_read`='0'";
     $support_sql = $mysqli->query($sql);
 
-    $support_array = $support_sql->fetch_all(MYSQLI_ASSOC);
+    $support_array = $support_sql->fetch_all(1);
 
     $count_support = $support_array[0]['count_inbox'];
 }

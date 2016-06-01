@@ -39,11 +39,11 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         LIMIT $offset, $limit";
 $history_sql = $mysqli->query($sql);
 
-$history_array = $history_sql->fetch_all(MYSQLI_ASSOC);
+$history_array = $history_sql->fetch_all(1);
 
 $sql = "SELECT FOUND_ROWS() AS `count_history`";
 $count_history = $mysqli->query($sql);
-$count_history = $count_history->fetch_all(MYSQLI_ASSOC);
+$count_history = $count_history->fetch_all(1);
 $count_history = $count_history[0]['count_history'];
 
 $count_pagination   = ceil($count_history/$limit);

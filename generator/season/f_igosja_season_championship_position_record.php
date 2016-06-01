@@ -12,7 +12,7 @@ function f_igosja_season_championship_position_record()
     $tournament_sql = f_igosja_mysqli_query($sql);
 
     $count_tournament = $tournament_sql->num_rows;
-    $tournament_array = $tournament_sql->fetch_all(MYSQLI_ASSOC);
+    $tournament_array = $tournament_sql->fetch_all(1);
 
     for ($i=0; $i<$count_tournament; $i++)
     {
@@ -27,7 +27,7 @@ function f_igosja_season_championship_position_record()
         $team_sql = f_igosja_mysqli_query($sql);
 
         $count_team = $team_sql->num_rows;
-        $team_array = $team_sql->fetch_all(MYSQLI_ASSOC);
+        $team_array = $team_sql->fetch_all(1);
 
         for ($j=0; $j<$count_team; $j++)
         {
@@ -54,7 +54,7 @@ function f_igosja_season_championship_position_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
                 $record_place = $record_array[0]['recordteam_value'];
 
                 if ($place < $record_place ||
@@ -90,7 +90,7 @@ function f_igosja_season_championship_position_record()
             }
             else
             {
-                $record_array = $record_sql->fetch_all(MYSQLI_ASSOC);
+                $record_array = $record_sql->fetch_all(1);
                 $record_place = $record_array[0]['recordteam_value'];
 
                 if ($place > $record_place ||
