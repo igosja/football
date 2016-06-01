@@ -149,7 +149,7 @@
                 </p>
             </td>
             <td class="block-page">
-                <p class="header">Инструкции (пока не работает)</p>
+                <p class="header">Инструкции</p>
                 <table class="w100">
                     <tr>
                         <td>
@@ -193,6 +193,7 @@
                 </table>
             </td>
         </tr>
+        <?php if (1 == 0) { ?>
         <tr>
             <td class="block-page">
                 <p class="header">Замены (пока не работает)</p>
@@ -364,5 +365,6 @@
                 </p>
             </td>
         </tr>
+        <?php } ?>
     </table>
 </form>
