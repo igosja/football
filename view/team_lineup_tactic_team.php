@@ -193,7 +193,6 @@
                 </table>
             </td>
         </tr>
-        <?php if (1 == 0) { ?>
         <tr>
             <td class="block-page">
                 <p class="header">Замены</p>
@@ -205,14 +204,36 @@
                         <th class="w30">Выходит</th>
                     </tr>
                     <?php for ($i=0; $i<5; $i++) { ?>
+                        <?php if (0 < count($lineupsubstitution_array)) { $substitution_item = array_shift($lineupsubstitution_array); }?>
                         <tr>
                             <td class="center">
-                                <input type="text" size="1" value="0" name="data[substitution][<?= $i; ?>][minute]"/>
+                                <input
+                                    name="data[substitution][<?= $i; ?>][minute]"
+                                    size="1"
+                                    type="text"
+                                    value="<?php
+                                    if (isset($substitution_item['lineupsubstitution_minute']))
+                                    {
+                                        print $substitution_item['lineupsubstitution_minute'];
+                                    }
+                                    else
+                                    {
+                                        print '0';
+                                    }
+                                    ?>"
+                                />
                             </td>
                             <td class="nopadding">
                                 <select class="w100" name="data[substitution][<?= $i; ?>][condition]">
                                     <?php foreach ($lineupcondition_array as $condition) { ?>
-                                        <option value="<?= $condition['lineupcondition_id']; ?>">
+                                        <option value="<?= $condition['lineupcondition_id']; ?>"
+                                            <?php
+                                            if (isset($substitution_item['lineupsubstitution_lineupcondition_id']) &&
+                                                $substitution_item['lineupsubstitution_lineupcondition_id'] == $condition['lineupcondition_id'])
+                                            { ?>
+                                                selected
+                                            <?php } ?>
+                                        >
                                             <?= $condition['lineupcondition_name']; ?>
                                         </option>
                                     <?php } ?>
@@ -222,7 +243,16 @@
                                 <select class="w100" name="data[substitution][<?= $i; ?>][out]">
                                     <option value="0"></option>
                                     <?php foreach ($player_array as $item) { ?>
-                                        <option value="<?= $item['lineup_id']; ?>"><?= $item['surname_name']; ?> (<?= $item['position_name']; ?>)</option>
+                                        <option value="<?= $item['lineup_id']; ?>"
+                                            <?php
+                                            if (isset($substitution_item['lineupsubstitution_out']) &&
+                                                $substitution_item['lineupsubstitution_out'] == $item['lineup_id'])
+                                            { ?>
+                                                selected
+                                            <?php } ?>
+                                        >
+                                            <?= $item['surname_name']; ?> (<?= $item['position_name']; ?>)
+                                        </option>
                                     <?php } ?>
                                 </select>
                             </td>
@@ -230,11 +260,21 @@
                                 <select class="w100" name="data[substitution][<?= $i; ?>][in]">
                                     <option value="0"></option>
                                     <?php foreach ($reserve_array as $item) { ?>
-                                        <option value="<?= $item['lineup_id']; ?>"><?= $item['surname_name']; ?> (<?= $item['position_name']; ?>)</option>
+                                        <option value="<?= $item['lineup_id']; ?>"
+                                            <?php
+                                            if (isset($substitution_item['lineupsubstitution_in']) &&
+                                                $substitution_item['lineupsubstitution_in'] == $item['lineup_id'])
+                                            { ?>
+                                                selected
+                                            <?php } ?>
+                                        >
+                                            <?= $item['surname_name']; ?> (<?= $item['position_name']; ?>)
+                                        </option>
                                     <?php } ?>
                                 </select>
                             </td>
                         </tr>
+                        <?php unset($substitution_item); ?>
                     <?php } ?>
                 </table>
             </td>
@@ -247,14 +287,36 @@
                         <th class="w50">Действие</th>
                     </tr>
                     <?php for ($i=0; $i<5; $i++) { ?>
+                        <?php if (0 < count($lineuptactic_array)) { $tactic_item = array_shift($lineuptactic_array); }?>
                         <tr>
                             <td class="center">
-                                <input type="text" size="1" value="0" name="data[tactic][<?= $i; ?>][minute]" />
+                                <input
+                                    name="data[tactic][<?= $i; ?>][minute]"
+                                    size="1"
+                                    type="text"
+                                    value="<?php
+                                    if (isset($tactic_item['lineuptactic_minute']))
+                                    {
+                                        print $tactic_item['lineuptactic_minute'];
+                                    }
+                                    else
+                                    {
+                                        print '0';
+                                    }
+                                    ?>"
+                                />
                             </td>
                             <td class="nopadding">
                                 <select class="w100" name="data[tactic][<?= $i; ?>][condition]">
                                     <?php foreach ($lineupcondition_array as $condition) { ?>
-                                        <option value="<?= $condition['lineupcondition_id']; ?>">
+                                        <option value="<?= $condition['lineupcondition_id']; ?>"
+                                            <?php
+                                            if (isset($tactic_item['lineuptactic_lineupcondition_id']) &&
+                                                $tactic_item['lineuptactic_lineupcondition_id'] == $condition['lineupcondition_id'])
+                                            { ?>
+                                                selected
+                                            <?php } ?>
+                                        >
                                             <?= $condition['lineupcondition_name']; ?>
                                         </option>
                                     <?php } ?>
@@ -264,19 +326,37 @@
                                 <select class="w100" name="data[tactic][<?= $i; ?>][tactic]">
                                     <option value="0"></option>
                                     <?php foreach ($gamemood_array as $item) { ?>
-                                        <option value="1;<?= $item['gamemood_id']; ?>">Настрой - <?= $item['gamemood_name']; ?></option>
+                                        <option value="1;<?= $item['gamemood_id']; ?>"
+                                            <?php
+                                            if (isset($tactic_item['lineuptactic_gamemood_id']) &&
+                                                $tactic_item['lineuptactic_gamemood_id'] == $item['gamemood_id'])
+                                            { ?>
+                                                selected
+                                            <?php } ?>
+                                        >
+                                            Настрой - <?= $item['gamemood_name']; ?>
+                                        </option>
                                     <?php } ?>
                                     <?php foreach ($gamestyle_array as $item) { ?>
-                                        <option value="2;<?= $item['gamestyle_id']; ?>">Стиль - <?= $item['gamestyle_name']; ?></option>
+                                        <option value="2;<?= $item['gamestyle_id']; ?>"
+                                            <?php
+                                            if (isset($tactic_item['lineuptactic_gamestyle_id']) &&
+                                                $tactic_item['lineuptactic_gamestyle_id'] == $item['gamestyle_id'])
+                                            { ?>
+                                                selected
+                                            <?php } ?>
+                                        >
+                                            Стиль - <?= $item['gamestyle_name']; ?>
+                                        </option>
                                     <?php } ?>
                                 </select>
                             </td>
                         </tr>
+                        <?php unset($tactic_item); ?>
                     <?php } ?>
                 </table>
             </td>
         </tr>
-        <?php } ?>
         <tr>
             <td class="block-page" colspan="2">
                 <p class="center">
