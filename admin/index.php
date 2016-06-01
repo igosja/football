@@ -11,6 +11,15 @@ $freeteam_sql = $mysqli->query($sql);
 $freeteam_array = $freeteam_sql->fetch_all(MYSQLI_ASSOC);
 $count_freeteam = $freeteam_array[0]['count'];
 
+$sql = "SELECT COUNT(`team_id`) AS `count`
+        FROM `team`
+        WHERE `team_id`!='0'
+        AND `team_user_id`!='0'";
+$userteam_sql = $mysqli->query($sql);
+
+$userteam_array = $userteam_sql->fetch_all(MYSQLI_ASSOC);
+$count_userteam = $userteam_array[0]['count'];
+
 $sql = "SELECT COUNT(`user_id`) AS `count`,
                DATE_FORMAT(FROM_UNIXTIME(`user_registration_date`), '%d') AS `day`,
                DATE_FORMAT(FROM_UNIXTIME(`user_registration_date`), '%m') AS `month`
