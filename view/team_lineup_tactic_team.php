@@ -149,7 +149,7 @@
                 </p>
             </td>
             <td class="block-page">
-                <p class="header">Инструкции</p>
+                <p class="header">Инструкции (пока не работает)</p>
                 <table class="w100">
                     <tr>
                         <td>
@@ -195,7 +195,7 @@
         </tr>
         <tr>
             <td class="block-page">
-                <p class="header">Замены</p>
+                <p class="header">Замены (пока не работает)</p>
                 <table class="striped w100">
                     <tr>
                         <th class="w10">C мин</th>
