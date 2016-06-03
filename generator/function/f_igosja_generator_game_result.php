@@ -630,6 +630,16 @@ function f_igosja_generator_game_result()
             $home_possesion = 30;
         }
 
+        if (0 > $home_moment)
+        {
+            $home_moment = 0;
+        }
+
+        if (0 > $guest_moment)
+        {
+            $guest_moment = 0;
+        }
+
         $guest_possesion = 100 - $home_possesion;
 
         $sql = "UPDATE `game`

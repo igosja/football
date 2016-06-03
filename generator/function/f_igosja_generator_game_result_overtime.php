@@ -675,6 +675,16 @@ function f_igosja_generator_game_result_overtime()
                     $guest_shoot_out = 0;
                 }
 
+                if (0 > $home_moment)
+                {
+                    $home_moment = 0;
+                }
+
+                if (0 > $guest_moment)
+                {
+                    $guest_moment = 0;
+                }
+
                 $sql = "UPDATE `game`
                         SET `game_guest_corner`=`game_guest_corner`+'$guest_corner',
                             `game_guest_foul`=`game_guest_foul`+'$guest_foul',
