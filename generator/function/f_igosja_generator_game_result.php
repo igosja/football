@@ -620,7 +620,17 @@ function f_igosja_generator_game_result()
         $home_red           = $home_red  + floor(rand(0, 7 + $referee_rigor) / 8);
         $guest_red          = $guest_red + floor(rand(0, 7 + $referee_rigor) / 8);
         $home_possesion     = round($home_team_power / ( $home_team_power + $guest_team_power ) * 100 + rand(-10, 10));
-        $guest_possesion    = 100 - $home_possesion;
+
+        if (70 < $home_possesion)
+        {
+            $home_possesion = 70;
+        }
+        elseif(30 > $home_possesion)
+        {
+            $home_possesion = 30;
+        }
+
+        $guest_possesion = 100 - $home_possesion;
 
         $sql = "UPDATE `game`
                 SET `game_guest_corner`='$guest_corner',
