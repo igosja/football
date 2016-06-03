@@ -5,12 +5,16 @@
                 <p class="header">Спортшкола</p>
                 <p class="center">
                     Вы собираетесь перевести игрока <?= $name; ?> <?= $surname; ?>, <?= $position; ?> из моложедной команды в основную.<br />
-                    <button>
-                        <a href="team_lineup_team_school.php?num=<?= $num; ?>&school_id=<?= $school_id; ?>&ok=1">Подтверить</a>
-                    </button>
-                    <button>
-                        <a href="team_lineup_team_school.php?num=<?= $num; ?>">Отказаться</a>
-                    </button>
+                    <a href="team_lineup_team_school.php?num=<?= $num; ?>&school_id=<?= $school_id; ?>&ok=1">
+                        <button>
+                            Подтверить
+                        </button>
+                    </a>
+                    <a href="team_lineup_team_school.php?num=<?= $num; ?>">
+                        <button>
+                            Отказаться
+                        </button>
+                    </a>
                 </p>
             </td>
         </tr>
