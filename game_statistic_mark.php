@@ -89,7 +89,9 @@ else
 
 $sql = "SELECT `lineup_condition`,
                `lineup_goal`,
+               `lineup_in`,
                `lineup_mark`,
+               `lineup_out`,
                `name_name`,
                `player_id`,
                `player_number" . $number . "`,
@@ -113,7 +115,9 @@ $home_player_array = $home_player_sql->fetch_all(1);
 
 $sql = "SELECT `lineup_condition`,
                `lineup_goal`,
+               `lineup_in`,
                `lineup_mark`,
+               `lineup_out`,
                `name_name`,
                `player_id`,
                `player_number" . $number . "`,

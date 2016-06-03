@@ -119,7 +119,7 @@ if (isset($_POST['data']))
             WHERE `teaminstruction_team_id`='$num_get'
             AND `teaminstruction_game_id`='$game_id'";
     $mysqli->query($sql);
-    
+
     if (isset($data['instruction']))
     {
         foreach ($data['instruction'] as $item)
@@ -175,6 +175,15 @@ if (isset($_POST['data']))
                 $out        = (int) $item['out'];
                 $in         = (int) $item['in'];
 
+                if (1 > $minute)
+                {
+                    $minute = 1;
+                }
+                elseif (90 < $minute)
+                {
+                    $minute = 90;
+                }
+
                 $sql = "INSERT INTO `lineupsubstitution`
                         SET `lineupsubstitution_game_id`='$game_id',
                             `lineupsubstitution_team_id`='$num_get',
@@ -201,6 +210,15 @@ if (isset($_POST['data']))
                 $minute     = (int) $item['minute'];
                 $condition  = (int) $item['condition'];
                 $tactic     = explode(';', $item['tactic']);
+
+                if (10 > $minute)
+                {
+                    $minute = 10;
+                }
+                elseif (80 < $minute)
+                {
+                    $minute = 80;
+                }
 
                 if (1 == $tactic[0])
                 {

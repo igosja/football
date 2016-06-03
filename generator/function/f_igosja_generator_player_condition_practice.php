@@ -15,8 +15,9 @@ function f_igosja_generator_player_condition_practice()
             SET `lineup_condition`=`lineup_condition`-'13'-`player_age`/'5'-`stadium_stadiumquality_id`,
                 `lineup_practice`=`lineup_practice`+'10'+`player_age`/'5'
             WHERE `shedule_date`=CURDATE()
-            AND `lineup_position_id`<='25'
-            AND `lineup_position_id`!='0'
+            AND ((`lineup_position_id`<='25'
+            AND `lineup_position_id`!='0')
+            OR `lineup_in`!='0')
             AND `game_played`='0'";
     f_igosja_mysqli_query($sql);
 
@@ -30,8 +31,9 @@ function f_igosja_generator_player_condition_practice()
             SET `player_condition`=`lineup_condition`,
                 `player_practice`=`lineup_practice`
             WHERE `shedule_date`=CURDATE()
-            AND `lineup_position_id`<='25'
-            AND `lineup_position_id`!='0'
+            AND ((`lineup_position_id`<='25'
+            AND `lineup_position_id`!='0')
+            OR `lineup_in`!='0')
             AND `game_played`='0'";
     f_igosja_mysqli_query($sql);
 

@@ -5,6 +5,7 @@
             <table class="striped w100">
                 <tr>
                     <th class="w4">№</th>
+                    <th class="w4">Зам</th>
                     <th>Игрок</th>
                     <th class="w4">Конд</th>
                     <th class="w8">Дист</th>
@@ -24,6 +25,13 @@
                 <?php foreach ($game_array as $item) { ?>
                     <tr>
                         <td class="center"><?= $item['player_number' . $number]; ?></td>
+                        <td class="center">
+                            <?php if (0 != $item['lineup_in']) { ?>
+                                <?= $item['lineup_in']; ?>
+                            <?php } elseif (0 != $item['lineup_out']) { ?>
+                                <?= $item['lineup_out']; ?>
+                            <?php } ?>
+                        </td>
                         <td>
                             <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
                                 <?= $item['name_name']; ?> <?= $item['surname_name']; ?>

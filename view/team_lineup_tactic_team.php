@@ -143,10 +143,6 @@
                         </tr>
                     <?php } ?>
                 </table>
-                <br />
-                <p class="center">
-                    <input type="submit" value="Сохранить" />
-                </p>
             </td>
             <td class="block-page">
                 <p class="header">Инструкции</p>
@@ -193,7 +189,6 @@
                 </table>
             </td>
         </tr>
-        <?php if (1 == 0) { ?>
         <tr>
             <td class="block-page">
                 <p class="header">Замены (пока не работает)</p>
@@ -365,6 +360,5 @@
                 </p>
             </td>
         </tr>
-        <?php } ?>
     </table>
 </form>

@@ -18,8 +18,10 @@ f_igosja_generator_teamwork_decrease();
 f_igosja_generator_visitor();
 f_igosja_generator_game_result();
 f_igosja_generator_game_result_overtime();
+f_igosja_generator_lineup_event();
+f_igosja_generator_lineup_substitution();
+f_igosja_generator_lineup_statisticplayer_after_game();
 f_igosja_generator_lineup_mark_distance();
-f_igosja_generator_lineup_statisticplayer_after_game_and_event();
 f_igosja_generator_statisticplayer();
 f_igosja_generator_best_player();
 f_igosja_generator_statistic_team_user_referee();
@@ -62,7 +64,7 @@ f_igosja_generator_building();
 f_igosja_generator_transfer();
 f_igosja_generator_ticket_price();
 f_igosja_generator_user_fire();
-f_igosja_generator_email();
+//f_igosja_generator_email();
 
 $sql = "SELECT COUNT(`shedule_id`) AS `count`
         FROM `shedule`
