@@ -64,7 +64,7 @@ f_igosja_generator_building();
 f_igosja_generator_transfer();
 f_igosja_generator_ticket_price();
 f_igosja_generator_user_fire();
-//f_igosja_generator_email();
+f_igosja_generator_email();
 
 $sql = "SELECT COUNT(`shedule_id`) AS `count`
         FROM `shedule`
