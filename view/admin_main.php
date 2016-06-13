@@ -55,6 +55,14 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li>
+                                <a href="#">Новости<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="news_list.php">Новости</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
                                 <a href="#">Горизонтальное меню<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>

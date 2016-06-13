@@ -118,6 +118,14 @@
                                         <?php } ?>
                                     <?php } ?>
                                     <li><a href="forum.php" class="main-menu-link">Форум</a></li>
+                                    <li>
+                                        <a href="news.php" class="main-menu-link">
+                                            Новости
+                                            <?php if (isset($count_news) && 0 < $count_news) { ?>
+                                                <sup class="inbox-sup"><?= $count_news; ?></sup>
+                                            <?php } ?>
+                                        </a>
+                                    </li>
                                     <?php if (isset($authorization_id) && 1 == 0) { ?>
                                         <li><a href="shop.php" class="main-menu-link">Магазин</a></li>
                                     <?php } ?>

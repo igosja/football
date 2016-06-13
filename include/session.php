@@ -20,6 +20,7 @@ if (isset($_SESSION['authorization_id']))
                    `team_id`,
                    `team_name`,
                    `user_id`,
+                   `user_news_id`,
                    `userrole_permission`
             FROM `user`
             LEFT JOIN `userrole`
@@ -85,4 +86,15 @@ if (isset($_SESSION['authorization_id']))
     $support_array = $support_sql->fetch_all(1);
 
     $count_support = $support_array[0]['count_inbox'];
+
+    $news_id = $user_array[0]['user_news_id'];
+
+    $sql = "SELECT COUNT(`news_id`) AS `count_news`
+            FROM `news`
+            WHERE `news_id`>'$news_id'";
+    $news_sql = $mysqli->query($sql);
+
+    $news_array = $news_sql->fetch_all(1);
+
+    $count_news = $news_array[0]['count_news'];
 }
