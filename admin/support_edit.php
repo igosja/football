@@ -11,10 +11,14 @@ else
     $num_get = 1;
 }
 
-$sql = "SELECT `inbox_sender_id`,
+$sql = "SELECT `inbox_date`,
+               `inbox_sender_id`,
                `inbox_title`,
-               `inbox_text`
+               `inbox_text`,
+               `user_login`
         FROM `inbox`
+        LEFT JOIN `user`
+        ON `user_id`=`inbox_sender_id`
         WHERE `inbox_id`='$num_get'
         LIMIT 1";
 $inbox_sql = $mysqli->query($sql);
