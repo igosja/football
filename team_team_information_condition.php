@@ -45,18 +45,24 @@ $team_array = $team_sql->fetch_all(1);
 $team_name = $team_array[0]['team_name'];
 
 $sql = "SELECT `building_capacity`,
-               `shedule_date`,
+               `building_shedule_id`,
                `buildingtype_name`
         FROM `building`
         LEFT JOIN `buildingtype`
         ON `building_buildingtype_id`=`buildingtype_id`
-        LEFT JOIN `shedule`
-        ON `shedule_id`=`building_shedule_id`
         WHERE `building_team_id`='$num_get'
-        ORDER BY `shedule_id` ASC";
+        ORDER BY `building_shedule_id` ASC";
 $building_sql = $mysqli->query($sql);
 
 $building_array = $building_sql->fetch_all(1);
+
+$sql = "SELECT `shedule_id`
+        FROM `shedule`
+        WHERE `shedule_date`=CURDATE()
+        LIMIT 1";
+$shedule_sql = $mysqli->query($sql);
+
+$shedule_array = $shedule_sql->fetch_all(1);
 
 $num                = $num_get;
 $header_title       = $team_name;
