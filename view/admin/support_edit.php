@@ -15,6 +15,9 @@
                 <table class="table table-striped table-bordered">
                     <tr>
                         <td>
+                            <?= f_igosja_ufu_date_time($inbox_array[0]['inbox_date']); ?>,
+                            <?= $inbox_array[0]['user_login']; ?>
+                            <br />
                             <?= nl2br($inbox_array[0]['inbox_text']); ?>
                         </td>
                     </tr>
