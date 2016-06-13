@@ -41,14 +41,16 @@
                                 <tr>
                                     <td class="center">
                                         Текущий обладатель титула:
-                                        <img
-                                            alt="<?= $tournament_array[$i]['team_name']; ?>"
-                                            class="img-12"
-                                            src="/img/team/12/<?= $tournament_array[$i]['team_id']; ?>.png"
-                                        />
-                                        <a href="team_team_review_profile.php?num=<?= $tournament_array[$i]['team_id']; ?>">
-                                            <?= $tournament_array[$i]['team_name']; ?>
-                                        </a>
+                                        <?php if (isset($tournament_array[$i]['team_name'])) { ?>
+                                            <img
+                                                alt="<?= $tournament_array[$i]['team_name']; ?>"
+                                                class="img-12"
+                                                src="/img/team/12/<?= $tournament_array[$i]['team_id']; ?>.png"
+                                            />
+                                            <a href="team_team_review_profile.php?num=<?= $tournament_array[$i]['team_id']; ?>">
+                                                <?= $tournament_array[$i]['team_name']; ?>
+                                            </a>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -83,16 +85,20 @@
                             </a>
                         </td>
                         <td class="w1">
+                            <?php if (isset($tournament_array[$i]['team_name'])) { ?>
                             <img
                                 alt="<?= $item['team_name']; ?>"
                                 class="img-12"
                                 src="/img/team/12/<?= $item['team_id']; ?>.png"
                             />
+                            <?php } ?>
                         </td>
                         <td class="left w20">
+                            <?php if (isset($tournament_array[$i]['team_name'])) { ?>
                             <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
                                 <?= $item['team_name']; ?>
                             </a>
+                            <?php } ?>
                         </td>
                         <td class="w1">
                             <img
