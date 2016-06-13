@@ -18,9 +18,9 @@ $sql = "SELECT `news_date`,
         WHERE `news_id`='$num_get'";
 $news_sql = $mysqli->query($sql);
 
-$count_news = $news_sql->num_rows;
+$count_check = $news_sql->num_rows;
 
-if (0 == $count_news)
+if (0 == $count_check)
 {
     include (__DIR__ . '/view/wrong_page.php');
     exit;
