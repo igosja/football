@@ -580,7 +580,7 @@ function f_igosja_generator_lineup_statisticplayer_after_game()
                         AND `lineup_penalty_goal`='0'
                         AND `lineup_penalty`='0'
                         AND `lineup_pass_scoring`='0'
-                        ORDER BY RAND()
+                        ORDER BY `lineup_yellow` ASC, RAND()
                         LIMIT 1";
                 $player_sql = f_igosja_mysqli_query($sql);
 
