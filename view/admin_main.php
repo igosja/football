@@ -273,6 +273,14 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="#">Трансферы<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="transfer_list.php">Ближайшие трансферы</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
