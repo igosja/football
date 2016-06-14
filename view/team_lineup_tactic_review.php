@@ -77,7 +77,7 @@
             <div id="field-icon" class="relative"></div>
             <img src="/img/field/tactic-player.png" />
         </td>
-        <td class="block-page w50" rowspan="2">
+        <td class="block-page w50" rowspan="3">
             <p class="header">Игроки</p>
             <table class="striped w100">
                 <tr>
@@ -136,7 +136,7 @@
     </tr>
     <tr>
         <td class="block-page">
-            <form method="POST">
+            <form method="POST" id="lineup-save-form">
                 <table class="w100">
                     <tr>
                         <td>
@@ -223,6 +223,8 @@
                                     <?php } ?>
                                 />
                             <?php } ?>
+                            <input type="hidden" name="data[save]" value="0" id="lineup-save-field-status" />
+                            <input type="hidden" name="data[save_name]" value="" id="lineup-save-field-name" />
                             <input type="submit" value="Сохранить" />
                         </td>
                     </tr>
@@ -230,4 +232,64 @@
             </form>
         </td>
     </tr>
+    <tr>
+        <td class="block-page">
+            <p class="header">Сохраненные составы</p>
+            <p class="center">
+                <a href="javascript:;" id="lineup-save-open">
+                    <button>
+                        Сохранить текущую схему
+                    </button>
+                </a>
+            </p>
+            <table class="striped w100">
+                <tr>
+                    <th class="w50">Имя</th>
+                    <th class="w25">Дата</th>
+                    <th></th>
+                </tr>
+                <?php foreach ($lineupsave_array as $item) { ?>
+                    <tr>
+                        <td><?= $item['lineupsave_name']; ?></td>
+                        <td class="center"><?= f_igosja_ufu_date($item['lineupsave_date']); ?></td>
+                        <td>
+                            <a href="team_lineup_tactic_review.php?num=<?= $num_get; ?>&game=<?= $game_id; ?>&lineupsave_load=<?= $item['lineupsave_id']; ?>">
+                                <button>
+                                    Зарузить
+                                </button>
+                            </a>
+                            <a href="team_lineup_tactic_review.php?num=<?= $num_get; ?>&game=<?= $game_id; ?>&lineupsave_delete=<?= $item['lineupsave_id']; ?>">
+                                <button>
+                                    Удалить
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
+        </td>
+    </tr>
 </table>
+
+<div id="open-modal" class="modal">
+    <div>
+        <a href="javascript:;" title="Закрыть" class="close-modal">X</a>
+        <table class="center bordered w100">
+            <tr>
+                <td>
+                    <strong>Сохранение текущей расстановки игроков</strong>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="lineup-save-name" placeholder="Название" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Сохранить" id="lineup-save" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

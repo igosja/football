@@ -1449,4 +1449,31 @@ $(document).ready(function($)
     {
         $('#form-school').submit();
     });
+
+    $('#lineup-save-open').on('click', function()
+    //Открытие модального окна
+    {
+        $('.modal').show();
+    });
+
+    $('#lineup-save-open').on('click', function()
+    //Открытие модального окна
+    {
+        $('.modal').show();
+    });
+
+    $('.close-modal').on('click', function()
+    //Закрытие модального окна
+    {
+        $('.modal').hide();
+    });
+    
+    $('#lineup-save').on('click', function()
+    //Сохраниние текущей расстановки
+    {
+        var save_name = $('#lineup-save-name').val();
+        $('#lineup-save-field-name').val(save_name);
+        $('#lineup-save-field-status').val(1);
+        $('#lineup-save-form').submit();
+    });
 });
