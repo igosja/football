@@ -1,7 +1,7 @@
 <?php
 
-function f_igosja_generator_lineup_mark_distance()
-//Добавляем доп данные в составы матча (дистанция, оценки)
+function f_igosja_generator_lineup_distance()
+//Добавляем доп данные в составы матча (дистанция, передачи, точность)
 {
     for ($i=0; $i<2; $i++) //Вратарям ставим меньше беготни и передач
     {
@@ -30,7 +30,6 @@ function f_igosja_generator_lineup_mark_distance()
                 LEFT JOIN `player`
                 ON `player_id`=`lineup_player_id`
                 SET `lineup_distance`=" . $distance . " * " . $if_sql . ",
-                    `lineup_mark`='5'+RAND()+RAND()+RAND()+RAND()+RAND(),
                     `lineup_pass`=" . $pass . " * " . $if_sql . ",
                     `lineup_pass_accurate`=" . $accurate . " * " . $if_sql . "
                 WHERE `shedule_date`=CURDATE()
