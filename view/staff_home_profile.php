@@ -111,4 +111,84 @@
             </td>
         <?php } ?>
     </tr>
+    <?php if (6 == $staff_array[0]['staffpost_id']) { ?>
+        <tr>
+            <td class="block-page" colspan="2">
+                <p class="header">Изученные игроки</p>
+                <table class="w100">
+                    <tr>
+                        <td class="right">
+                            <form method="GET" id="page-form">
+                                <input type="hidden" name="num" value="<?= $num_get; ?>" />
+                                Старница:
+                                <select name="page" id="page-select">
+                                    <?php for ($i=0; $i<$count_page; $i++) { ?>
+                                        <option value="<?= $i + 1; ?>"
+                                            <?php if (isset($_GET['page']) && $_GET['page'] == $i + 1) { ?>
+                                                selected
+                                            <?php } ?>
+                                        ><?= $i + 1; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                <table class="striped w100">
+                    <tr>
+                        <th>Имя</th>
+                        <th class="w15">Команда</th>
+                        <th class="w1">Нац</th>
+                        <th class="w5">Поз</th>
+                        <th class="w5">Воз</th>
+                        <th class="w5">Вес</th>
+                        <th class="w5">Рост</th>
+                        <th class="w15">Настроение</th>
+                        <th class="w10">Зарплата</th>
+                    </tr>
+                    <?php foreach ($player_array as $item) { ?>
+                        <tr>
+                            <td>
+                                <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
+                                    <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <img
+                                    alt="<?= $item['team_name']; ?>"
+                                    class="img-12"
+                                    src="/img/team/12/<?= $item['team_id']; ?>.png"
+                                />
+                                <a href="team_team_review_profile.php?num=<?= $item['team_id']; ?>">
+                                    <?= $item['team_name']; ?>
+                                </a>
+                            </td>
+                            <td class="center">
+                                <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">
+                                    <img
+                                        alt="<?= $item['country_name']; ?>"
+                                        class="img-12"
+                                        src="/img/flag/12/<?= $item['country_id']; ?>.png"
+                                    />
+                                </a>
+                            </td>
+                            <td class="center"><?= $item['position_name']; ?></td>
+                            <td class="center"><?= $item['player_age']; ?></td>
+                            <td class="center"><?= $item['player_weight']; ?> кг</td>
+                            <td class="center"><?= $item['player_height']; ?> см</td>
+                            <td>
+                                <img
+                                    alt="<?= $item['mood_name']; ?>"
+                                    class="img-12"
+                                    src="/img/mood/<?= $item['mood_id']; ?>.png"
+                                />
+                                <?= $item['mood_name']; ?>
+                            </td>
+                            <td class="right"><?= f_igosja_money($item['player_salary']); ?></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </td>
+        </tr>
+    <?php } ?>
 </table>
