@@ -124,4 +124,21 @@ if (0 != $refferer)
 $_SESSION['message_class']  = 'success';
 $_SESSION['message_text']   = 'Счет успешно пополнен';
 
-redirect('shop.php');
+$xml =  '<?xml version="1.0" encoding="UTF-8"?>
+        <result>
+            <status>yes</status>
+            <error_msg></error_msg>
+        </result> ';
+
+$sign   = base64_encode(md5($secret_key . $xml . $secret_key));
+$xml    = base64_encode($xml);
+
+$params = array
+(
+    'xml'   => $xml,
+    'sign'  => $sign,
+);
+
+$url = 'https://merchant.pay2pay.com/?page=init&' . http_build_query($params);
+
+redirect($url);
