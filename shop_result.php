@@ -124,24 +124,9 @@ if (0 != $refferer)
 $_SESSION['message_class']  = 'success';
 $_SESSION['message_text']   = 'Счет успешно пополнен';
 
-$xml =  '<?xml version="1.0" encoding="UTF-8"?>
+$xml = '<?xml version="1.0" encoding="UTF-8"?>
         <result>
             <status>yes</status>
-            <error_msg></error_msg>
-        </result> ';
-
-$sign   = base64_encode(md5($secret_key . $xml . $secret_key));
-$xml    = base64_encode($xml);
-
-$params = array
-(
-    'xml'   => $xml,
-    'sign'  => $sign,
-);
-
-$url = 'https://merchant.pay2pay.com/?page=init&' . http_build_query($params);
-
-$ch = curl_init(); 
-curl_setopt($ch, CURLOPT_URL,$url);
-curl_exec($ch);
-curl_close($ch); 
+            <err_msg></err_msg>
+        </result>';
+die($xml);
