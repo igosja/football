@@ -141,4 +141,7 @@ $params = array
 
 $url = 'https://merchant.pay2pay.com/?page=init&' . http_build_query($params);
 
-redirect($url);
+$ch = curl_init(); 
+curl_setopt($ch, CURLOPT_URL,$url);
+curl_exec($ch);
+curl_close($ch); 
