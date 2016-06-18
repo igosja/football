@@ -465,6 +465,39 @@ if (isset($_POST['data']))
     redirect('team_lineup_tactic_review.php?num=' . $num_get . '&game=' . $game_id);
 }
 
+$sql = "SELECT `game_tournament_id`
+        FROM `game`
+        WHERE `game_id`='$game_id'
+        LIMIT 1";
+$game_sql = $mysqli->query($sql);
+
+$game_array = $game_sql->fetch_all(1);
+
+$tourname_id = $game_array[0]['game_tournament_id'];
+
+$sql = "SELECT `game_id`
+        FROM `game`
+        WHERE `game_tournament_id`='$tourname_id'
+        AND `game_played`='0'
+        AND (`game_home_team_id`='$num_get'
+        OR `game_guest_team_id`='$num_get')
+        ORDER BY `game_id` ASC
+        LIMIT 1";
+$game_sql = $mysqli->query($sql);
+
+$game_array = $game_sql->fetch_all(1);
+
+$check_game_id = $game_array[0]['game_id'];
+
+if ($check_game_id == $game_id)
+{
+    $disqualification_show = 1;
+}
+else
+{
+    $disqualification_show = 0;
+}
+
 $sql = "SELECT `game_home_team_id`,
                `game_id`,
                `game_temperature`,

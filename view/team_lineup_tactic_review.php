@@ -117,7 +117,7 @@
                             <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
                                 <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
-                            <?php if ($item['disqualification_player_id']) { ?>
+                            <?php if ($item['disqualification_player_id'] && $disqualification_show) { ?>
                                 <img
                                     alt="Дисквалификация"
                                     class="img-12"
