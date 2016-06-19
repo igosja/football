@@ -170,7 +170,6 @@ $sql = "SELECT `event_minute`,
         WHERE `event_game_id`='$num_get'
         AND `event_" . $team_country . "_id`='$header_2_guest_id'
         ORDER BY `event_minute` ASC";
-
 $guest_event_sql = $mysqli->query($sql);
 
 $guest_event_array = $guest_event_sql->fetch_all(1);

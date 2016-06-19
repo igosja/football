@@ -153,7 +153,6 @@ $sql = "SELECT `game_guest_score`,
         AND `game_guest_" . $team_country . "_id`='$header_2_home_id'))
         AND `game_played`='1'
         ORDER BY `shedule_date` DESC";
-
 $last_sql = $mysqli->query($sql);
 
 $last_array = $last_sql->fetch_all(1);
@@ -174,7 +173,6 @@ $sql = "SELECT `game_id`,
         AND `game_played`='1'
         ORDER BY `shedule_date` DESC
         LIMIT 5";
-
 $home_latest_game_sql = $mysqli->query($sql);
 
 $home_latest_game_array = $home_latest_game_sql->fetch_all(1);
@@ -195,7 +193,6 @@ $sql = "SELECT IF (`game_home_" . $team_country . "_id`='$header_2_guest_id', `g
         AND `game_played`='1'
         ORDER BY `shedule_date` DESC
         LIMIT 5";
-
 $guest_latest_game_sql = $mysqli->query($sql);
 
 $guest_latest_game_array = $guest_latest_game_sql->fetch_all(1);
