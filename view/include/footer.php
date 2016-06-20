@@ -1,8 +1,7 @@
     </div>
     <div class="footer">
-        <p>Связь с администраницей: info@virtual-football-league.ru, skype - igosja87<p>
+        <p>Связь с администраницей: info@virtual-football-league.ru<p>
         <p>Страница сгенерирована за <?= round(microtime(true) - $start_time, 5); ?> сек.<p>
-        <p>Потребление памяти: <?= number_format(memory_get_usage(), 0, ",", " "); ?> Б</p>
         <p>Версия сайта: <?= $site_array[0]['site_version_1'] ?>.<?= $site_array[0]['site_version_2'] ?>.<?= $site_array[0]['site_version_3'] ?>.<?= $site_array[0]['site_version_4'] ?> от <?= date('d.m.Y', $site_array[0]['site_version_date']); ?></p>
         <?php if (1 < $authorization_permission) { ?>
             <p><a href="/admin">Административный раздел</a></p>
