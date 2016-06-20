@@ -46,6 +46,14 @@
             <table class="forum-group w100">
                 <tr>
                     <td class="w25">
+                        <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/img/user/90/' . $head_array[0]['user_id'] . '.png')) { ?>
+                            <img
+                                alt="<?= $head_array[0]['user_login']; ?>"
+                                class="img-90"
+                                src="/img/user/90/<?= $head_array[0]['user_id']; ?>.png"
+                            />
+                            <br />
+                        <?php } ?>
                         <strong>
                             <a href="manager_home_profile.php?num=<?= $head_array[0]['user_id']; ?>"
                                 <?php if (1 == $head_array[0]['user_id']) { ?>class="red"<?php } ?>
@@ -54,11 +62,13 @@
                             </a>
                         </strong>
                         <br />
-                        <a href="team_team_review_profile.php?num=<?= $head_array[0]['team_id']; ?>">
-                            <?= $head_array[0]['team_name']; ?>
-                            (<?= $head_array[0]['city_name']; ?>, <?= $head_array[0]['country_name']; ?>)
-                        </a>
-                        <br />
+                        <?php if ($head_array[0]['team_id']) { ?>
+                            <a href="team_team_review_profile.php?num=<?= $head_array[0]['team_id']; ?>">
+                                <?= $head_array[0]['team_name']; ?>
+                                (<?= $head_array[0]['city_name']; ?>, <?= $head_array[0]['country_name']; ?>)
+                            </a>
+                            <br />
+                        <?php } ?>
                         <?php if (isset($authorization_id) && $authorization_id != $head_array[0]['user_id']) { ?>
                             <a href="profile_news_outbox.php?answer=<?= $head_array[0]['user_id']; ?>" class="button-link">
                                 <button>
@@ -77,6 +87,14 @@
                 <?php for ($i=0; $i<$count; $i++) { ?>
                     <tr>
                         <td class="w25">
+                            <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/img/user/90/' . $forum_array[$i]['user_id'] . '.png')) { ?>
+                                <img
+                                    alt="<?= $forum_array[$i]['user_login']; ?>"
+                                    class="img-90"
+                                    src="/img/user/90/<?= $forum_array[$i]['user_id']; ?>.png"
+                                />
+                                <br />
+                            <?php } ?>
                             <strong>
                                 <a href="manager_home_profile.php?num=<?= $forum_array[$i]['user_id']; ?>"
                                     <?php if (1 == $forum_array[$i]['user_id']) { ?>class="red"<?php } ?>
@@ -85,11 +103,13 @@
                                 </a>
                             </strong>
                             <br />
-                            <a href="team_team_review_profile.php?num=<?= $forum_array[$i]['team_id']; ?>">
-                                <?= $forum_array[$i]['team_name']; ?>
-                                (<?= $forum_array[$i]['city_name']; ?>, <?= $forum_array[$i]['country_name']; ?>)
-                            </a>
-                            <br />
+                            <?php if ($forum_array[$i]['team_id']) { ?>
+                                <a href="team_team_review_profile.php?num=<?= $forum_array[$i]['team_id']; ?>">
+                                    <?= $forum_array[$i]['team_name']; ?>
+                                    (<?= $forum_array[$i]['city_name']; ?>, <?= $forum_array[$i]['country_name']; ?>)
+                                </a>
+                                <br />
+                            <?php } ?>
                             <?php if (isset($authorization_id) && $authorization_id != $forum_array[$i]['user_id']) { ?>
                                 <a href="profile_news_outbox.php?answer=<?= $forum_array[$i]['user_id']; ?>" class="button-link">
                                     <button>
