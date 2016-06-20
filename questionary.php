@@ -129,6 +129,70 @@ if (isset($_POST['data']))
         }
     }
 
+    if (isset($_FILES['logo']))
+    {
+        $file = $_FILES['logo'];
+
+        if (in_array($file['type'], array('image/jpeg', 'image/png', 'image/gif')))
+        {
+            $sizeh          = 90;
+            $sizew          = 90;
+            $image_url      = $file['tmp_name'];
+            $image_info     = getimagesize($image_url);
+            $image_height   = $image_info[1];
+            $image_width    = $image_info[0];
+            $h_koef         = $sizeh / $image_height;
+            $w_koef         = $sizew / $image_width;
+
+            if ($h_koef > $w_koef)
+            {
+                $sizew_new = $image_width * $h_koef;
+                $sizeh_new = $sizeh;
+            }
+            else
+            {
+                $sizeh_new = $image_height * $w_koef;
+                $sizew_new = $sizew;
+            }
+
+            if ($image_info[2] == IMAGETYPE_JPEG)
+            {
+                $src = imagecreatefromjpeg($image_url);
+            }
+            elseif($image_info[2] == IMAGETYPE_GIF)
+            {
+                $src = imagecreatefromgif($image_url);
+            }
+            elseif($image_info[2] == IMAGETYPE_PNG)
+            {
+                $src = imagecreatefrompng($image_url);
+            }
+
+            $im         = imagecreatetruecolor($sizew, $sizeh);
+            $back       = imagecolorallocate($im, 255, 255, 255);
+            imagefill($im, 0, 0, $back);
+            $file_name  = $authorization_user_id . '.png';
+            $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/img/user/90/';
+            $file_url   = $upload_dir . $file_name;
+            $offset_x   = ($sizew_new - $sizew) / $h_koef / 2;
+
+            if(0 > $offset_x)
+            {
+                $offset_x = -$offset_x;
+            }
+
+            $offset_y = ($sizeh_new - $sizeh) / $w_koef / 2;
+
+            if(0 > $offset_y)
+            {
+                $offset_y = -$offset_y;
+            }
+
+            imagecopyresampled($im, $src, 0, 0, $offset_x, $offset_y, $sizew_new, $sizeh_new, imagesx($src), imagesy($src));
+            imagejpeg($im, $file_url);
+        }
+    }
+
     redirect('questionary.php');
 }
 

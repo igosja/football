@@ -1,7 +1,7 @@
 <table class="block-table w100">
     <tr>
         <td class="block-page">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <p class="center header">Персональные данные</p>
                 <table class="center striped">
                     <tr>
@@ -81,6 +81,20 @@
                                     </option>
                                 <?php } ?>
                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">Аватара (.jpg, .png или .gif)</td>
+                        <td class="left">
+                            <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/img/user/90/' . $authorization_user_id . '.png')) { ?>
+                                <img
+                                    alt="<?= $user_array[0]['user_login']; ?>"
+                                    class="img-90"
+                                    src="/img/user/90/<?= $authorization_user_id; ?>.png"
+                                />
+                                <br />
+                            <?php } ?>
+                            <input name="logo" type="file" />
                         </td>
                     </tr>
                     <tr>
