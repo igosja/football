@@ -126,9 +126,7 @@
                                             <?php } ?>
                                         </a>
                                     </li>
-                                    <?php if (isset($authorization_id) && 1 == 0) { ?>
-                                        <li><a href="shop.php" class="main-menu-link">Магазин</a></li>
-                                    <?php } ?>
+                                    <li><a href="shop.php" class="main-menu-link">Магазин</a></li>
                                     <li><a href="rule.php" class="main-menu-last">Правила</a></li>
                                 </ul>
                             </td>
