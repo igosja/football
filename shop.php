@@ -222,6 +222,11 @@ elseif (isset($_POST['data']))
         $sum = 1;
     }
 
+    $sql = "DELETE FROM `payment`
+            WHERE `payment_date`<UNIX_TIMESTAMP()-'86400'
+            AND `payment_status`='0'";
+    $mysqli->query($sql);
+
     $sql = "INSERT INTO `payment`
             SET `payment_date`=UNIX_TIMESTAMP(),
                 `payment_sum`='$sum',
