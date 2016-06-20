@@ -16,7 +16,8 @@ if (isset($_GET['group']))
                     `forumtheme_name`=?,
                     `forumtheme_text`=?,
                     `forumtheme_user_id`='$authorization_id',
-                    `forumtheme_date`=UNIX_TIMESTAMP()";
+                    `forumtheme_date`=UNIX_TIMESTAMP()
+                    `forumtheme_edit`=UNIX_TIMESTAMP()";
         $prepare = $mysqli->prepare($sql);
         $prepare->bind_param('ss', $name, $text);
         $prepare->execute();
@@ -62,6 +63,12 @@ else
         $prepare->bind_param('ss', $name, $text);
         $prepare->execute();
         $prepare->close();
+
+        $sql = "UPDATE `forumtheme`
+                SET `forumtheme_edit`=UNIX_TIMESTAMP()
+                WHERE `forumtheme_id`='$get_theme'
+                LIMIT 1";
+        $mysqli->query($sql);
 
         $_SESSION['message_class']  = 'success';
         $_SESSION['message_text']   = 'Сообщение успешно добавлено.';
