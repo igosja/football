@@ -9,6 +9,12 @@ if (isset($_GET['group']))
     if (isset($_POST['text']))
     {
         $name = $_POST['name'];
+
+        if (empty($name))
+        {
+            $name = 'Без названия';
+        }
+
         $text = strip_tags($_POST['text']);
 
         $sql = "INSERT INTO `forumtheme`
@@ -51,6 +57,12 @@ else
     if (isset($_POST['text']))
     {
         $name = $_POST['name'];
+
+        if (empty($name))
+        {
+            $name = 'Без названия';
+        }
+
         $text = strip_tags($_POST['text']);
 
         $sql = "INSERT INTO `forumpost`

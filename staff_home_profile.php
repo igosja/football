@@ -145,7 +145,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
             WHERE `staff_id`='$num_get'
         )
         AND `player_team_id`!='0'
-        ORDER BY `player_salary` DESC
+        ORDER BY `player_salary` DESC, `player_id` ASC
         LIMIT $offset, 30";
 $player_sql = $mysqli->query($sql);
 
