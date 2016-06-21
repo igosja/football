@@ -69,6 +69,8 @@
                             </a>
                             <br />
                         <?php } ?>
+                        <p class="grey">Сообщений: <?= $head_array[0]['user_count_message']; ?></p>
+                        <p class="grey">Рагистрация: <?= f_igosja_ufu_date($head_array[0]['user_registration_date']); ?></p>
                         <?= f_igosja_ufu_last_visit_forum($head_array[0]['user_last_visit']); ?>
                         <?php if (isset($authorization_id) && $authorization_id != $head_array[0]['user_id']) { ?>
                             <a href="profile_news_outbox.php?answer=<?= $head_array[0]['user_id']; ?>" class="button-link">
@@ -111,6 +113,8 @@
                                 </a>
                                 <br />
                             <?php } ?>
+                            <p class="grey">Сообщений: <?= $forum_array[$i]['user_count_message']; ?></p>
+                            <p class="grey">Рагистрация: <?= f_igosja_ufu_date($forum_array[$i]['user_registration_date']); ?></p>
                             <?= f_igosja_ufu_last_visit_forum($forum_array[$i]['user_last_visit']); ?>
                             <?php if (isset($authorization_id) && $authorization_id != $forum_array[$i]['user_id']) { ?>
                                 <a href="profile_news_outbox.php?answer=<?= $forum_array[$i]['user_id']; ?>" class="button-link">

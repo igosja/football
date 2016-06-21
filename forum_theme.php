@@ -48,9 +48,11 @@ $sql = "SELECT `city_name`,
                `forumtheme_text`,
                `team_id`,
                `team_name`,
+               `user_count_message`,
                `user_id`,
                `user_last_visit`,
-               `user_login`
+               `user_login`,
+               `user_registration_date`
         FROM `forumtheme`
         LEFT JOIN `forumthemegroup`
         ON `forumtheme_forumthemegroup_id`=`forumthemegroup_id`
@@ -62,6 +64,14 @@ $sql = "SELECT `city_name`,
         ON `team_city_id`=`city_id`
         LEFT JOIN `country`
         ON `country_id`=`city_country_id`
+        LEFT JOIN
+        (
+            SELECT `forumpost_user_id` AS `count_user_id`,
+                   COUNT(`forumpost_id`) AS `user_count_message`
+            FROM `forumpost`
+            GROUP BY `forumpost_user_id`
+        ) AS `t1`
+        ON `count_user_id`=`user_id`
         WHERE `forumtheme_id`='$num_get'
         LIMIT 1";
 $head_sql = $mysqli->query($sql);
@@ -105,9 +115,11 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
                `forumpost_text`,
                `team_id`,
                `team_name`,
+               `user_count_message`,
                `user_id`,
                `user_last_visit`,
-               `user_login`
+               `user_login`,
+               `user_registration_date`
         FROM `forumpost`
         LEFT JOIN `user`
         ON `forumpost_user_id`=`user_id`
@@ -117,6 +129,14 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         ON `team_city_id`=`city_id`
         LEFT JOIN `country`
         ON `country_id`=`city_country_id`
+        LEFT JOIN
+        (
+            SELECT `forumpost_user_id` AS `count_user_id`,
+                   COUNT(`forumpost_id`) AS `user_count_message`
+            FROM `forumpost`
+            GROUP BY `forumpost_user_id`
+        ) AS `t1`
+        ON `count_user_id`=`user_id`
         WHERE `forumpost_forumtheme_id`='$num_get'
         ORDER BY `forumpost_id` ASC
         LIMIT $offset, $limit";
