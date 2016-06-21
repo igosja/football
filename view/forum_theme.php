@@ -111,7 +111,7 @@
                                 </a>
                                 <br />
                             <?php } ?>
-                            <?= f_igosja_ufu_date_time($forum_array[$i]['user_last_visit']); ?>
+                            <?= f_igosja_ufu_last_visit_forum($forum_array[$i]['user_last_visit']); ?>
                             <?php if (isset($authorization_id) && $authorization_id != $forum_array[$i]['user_id']) { ?>
                                 <a href="profile_news_outbox.php?answer=<?= $forum_array[$i]['user_id']; ?>" class="button-link">
                                     <button>
