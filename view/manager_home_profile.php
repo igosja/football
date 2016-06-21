@@ -28,6 +28,17 @@
                     <td>Дата регистрации</td>
                     <td class="right"><?= f_igosja_ufu_date($user_array[0]['user_registration_date']); ?></td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <?php if (isset($authorization_id) && $authorization_id != $num_get) { ?>
+                            <a href="profile_news_outbox.php?answer=<?= $num_get; ?>" class="button-link">
+                                <button>
+                                    Сообщение
+                                </button>
+                            </a>
+                        <?php } ?>
+                    </td>
+                </tr>
             </table>
         </td>
         <td class="block-page" rowspan="2">
