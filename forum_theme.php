@@ -49,6 +49,7 @@ $sql = "SELECT `city_name`,
                `team_id`,
                `team_name`,
                `user_id`,
+               `user_last_visit`,
                `user_login`
         FROM `forumtheme`
         LEFT JOIN `forumthemegroup`
@@ -105,6 +106,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
                `team_id`,
                `team_name`,
                `user_id`,
+               `user_last_visit`,
                `user_login`
         FROM `forumpost`
         LEFT JOIN `user`

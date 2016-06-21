@@ -202,6 +202,32 @@ function f_igosja_ufu_last_visit($date)
     return $date;
 }
 
+function f_igosja_ufu_last_visit_forum($date)
+//Кто онлайн на форуме
+{
+    if (!is_numeric($date))
+    {
+        $min_5  = strtotime($date . '+5 min');
+        $now    = strtotime(date('Y-m-d H:i:s'));
+    }
+    else
+    {
+        $min_5  = $date + 5 * 60;
+        $now    = time();
+    }
+
+    if ($min_5 >= $now)
+    {
+        $date = '<p class="red">онлайн</p>';
+    }
+    else
+    {
+        $date = '';
+    }
+
+    return $date;
+}
+
 function f_igosja_chiper_password($password)
 //Шифрование пароля
 {
