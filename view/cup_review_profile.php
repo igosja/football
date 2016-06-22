@@ -38,16 +38,24 @@
                             </a>
                         </td>
                         <td class="center">
-                            <a href="game_review_main.php?num=<?= $item['game_id_2']; ?>">
-                                <?php if (1 == $item['game_played_2']) { ?>
-                                    <?= $item['home_score_2']; ?>:<?= $item['guest_score_2']; ?>
-                                <?php } ?>
-                            </a>
-                            <a href="game_review_main.php?num=<?= $item['game_id_1']; ?>">
-                                <?php if (1 == $item['game_played_1']) { ?>
-                                    <?php if (isset($item['game_played_2'])) { ?>(<?php } ?><?= $item['home_score_1']; ?>:<?= $item['guest_score_1']; ?><?php if (isset($item['game_played_2'])) { ?>)<?php } ?>
-                                <?php } ?>
-                            </a>
+                            <?php if (isset($item['game_played_2'])) { ?>
+                                <a href="game_review_main.php?num=<?= $item['game_id_2']; ?>">
+                                    <?php if (1 == $item['game_played_2']) { ?>
+                                        <?= $item['home_score_2']; ?>:<?= $item['guest_score_2']; ?>
+                                    <?php } ?>
+                                </a>
+                                <a href="game_review_main.php?num=<?= $item['game_id_1']; ?>">
+                                    <?php if (1 == $item['game_played_1']) { ?>
+                                        (<?= $item['home_score_1']; ?>:<?= $item['guest_score_1']; ?>)
+                                    <?php } ?>
+                                </a>
+                            <?php } else { ?>
+                                <a href="game_review_main.php?num=<?= $item['game_id_1']; ?>">
+                                    <?php if (1 == $item['game_played_1']) { ?>
+                                        (<?= $item['home_score_1']; ?>:<?= $item['guest_score_1']; ?>)
+                                    <?php } ?>
+                                </a>
+                            <?php } ?>
                         </td>
                         <td class="w40">
                             <a href="team_team_review_profile.php?num=<?= $item['guest_team_id']; ?>">
