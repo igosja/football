@@ -52,7 +52,7 @@
                             <?php } else { ?>
                                 <a href="game_review_main.php?num=<?= $item['game_id_1']; ?>">
                                     <?php if (1 == $item['game_played_1']) { ?>
-                                        (<?= $item['home_score_1']; ?>:<?= $item['guest_score_1']; ?>)
+                                        <?= $item['home_score_1']; ?>:<?= $item['guest_score_1']; ?>
                                     <?php } ?>
                                 </a>
                             <?php } ?>
