@@ -77,7 +77,7 @@
                         {
 
                         ?>
-                            <td>
+                            <td class="w33">
                                 <table class="striped w100">
                                     <tr>
                                         <th colspan="2"><?= $attribute_array[$i]['attributechapter_name']; ?></th>
@@ -85,11 +85,14 @@
                         <?php } ?>
                             <tr>
                                 <td><?= $attribute_array[$i]['attribute_name']; ?></td>
-                                <td class="center w33">
+                                <td class="center">
                                     <?php if (1 == $count_scout ||
                                              (isset($authorization_team_id) &&
                                               $player_array[0]['team_id'] == $authorization_team_id)) { ?>
                                         <?= $attribute_array[$i]['playerattribute_value']; ?>/100
+                                        <span title="Тренировочный прогресс">
+                                            (<?= $attribute_array[$i]['training_percent']; ?>%)
+                                        </span>
                                     <?php } else { ?>
                                         ?
                                     <?php } ?>
@@ -122,11 +125,11 @@
                             </tr>
                             <tr>
                                 <td>Последние 5 игр</td>
-                                <td><?= $player_array[0]['player_mark']; ?></td>
+                                <td class="center"><?= $player_array[0]['player_mark']; ?></td>
                             </tr>
                             <tr>
                                 <td>Настроение</td>
-                                <td>
+                                <td class="center">
                                     <img
                                         alt="<?= $player_array[0]['mood_name']; ?>"
                                         class="img-12"
@@ -137,7 +140,7 @@
                             </tr>
                             <tr>
                                 <td>Рабочая нога</td>
-                                <td><?= f_igosja_leg_name($player_array[0]['player_leg_left'], $player_array[0]['player_leg_right']); ?></td>
+                                <td class="center"><?= f_igosja_leg_name($player_array[0]['player_leg_left'], $player_array[0]['player_leg_right']); ?></td>
                             </tr>
                         <?php } ?>
                         <?php

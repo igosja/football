@@ -76,12 +76,16 @@ $player_surname = $player_array[0]['surname_name'];
 
 $sql = "SELECT `attribute_name`,
                `attributechapter_name`,
-               `playerattribute_value`
+               `playerattribute_value`,
+               `training_percent`
         FROM `playerattribute`
         LEFT JOIN `attribute`
         ON `attribute_id`=`playerattribute_attribute_id`
         LEFT JOIN `attributechapter`
         ON `attributechapter_id`=`attribute_attributechapter_id`
+        LEFT JOIN `training`
+        ON (`training_attribute_id`=`attribute_id`
+        AND `training_player_id`=`playerattribute_player_id`)
         WHERE `playerattribute_player_id`='$num_get'
         ORDER BY `attributechapter_id` ASC, `attribute_id` ASC";
 $attribute_sql = $mysqli->query($sql);
