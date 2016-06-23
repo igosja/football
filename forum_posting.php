@@ -22,7 +22,7 @@ if (isset($_GET['group']))
                     `forumtheme_name`=?,
                     `forumtheme_text`=?,
                     `forumtheme_user_id`='$authorization_id',
-                    `forumtheme_date`=UNIX_TIMESTAMP()
+                    `forumtheme_date`=UNIX_TIMESTAMP(),
                     `forumtheme_edit`=UNIX_TIMESTAMP()";
         $prepare = $mysqli->prepare($sql);
         $prepare->bind_param('ss', $name, $text);

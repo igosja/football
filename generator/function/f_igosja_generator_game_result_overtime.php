@@ -18,10 +18,12 @@ function f_igosja_generator_game_result_overtime()
                    `game_home_score`,
                    `game_home_country_id`,
                    `game_home_team_id`,
+                   `game_stage_id`,
                    `game_weather_id`,
                    `referee_rigor`,
                    `stadium_length`,
-                   `stadium_width`
+                   `stadium_width`,
+                   `tournament_tournamenttype_id`
             FROM `game`
             LEFT JOIN `shedule`
             ON `shedule_id`=`game_shedule_id`
@@ -29,6 +31,8 @@ function f_igosja_generator_game_result_overtime()
             ON `game_referee_id`=`referee_id`
             LEFT JOIN `stadium`
             ON `stadium_id`=`game_stadium_id`
+            LEFT JOIN `tournament`
+            ON `tournament_id`=`game_tournament_id`
             WHERE `game_played`='0'
             AND `shedule_date`=CURDATE()
             ORDER BY `game_id` ASC";
@@ -39,31 +43,40 @@ function f_igosja_generator_game_result_overtime()
 
     for ($i=0; $i<$count_game; $i++)
     {
-        $game_id        = $game_array[$i]['game_id'];
-        $first_game_id  = $game_array[$i]['game_first_game_id'];
-        $referee_rigor  = $game_array[$i]['referee_rigor'];
-        $weather_id     = $game_array[$i]['game_weather_id'];
-        $stadium_length = $game_array[$i]['stadium_length'];
-        $stadium_width  = $game_array[$i]['stadium_width'];
+        $game_id            = $game_array[$i]['game_id'];
+        $first_game_id      = $game_array[$i]['game_first_game_id'];
+        $referee_rigor      = $game_array[$i]['referee_rigor'];
+        $weather_id         = $game_array[$i]['game_weather_id'];
+        $stadium_length     = $game_array[$i]['stadium_length'];
+        $stadium_width      = $game_array[$i]['stadium_width'];
+        $stage_id           = $game_array[$i]['game_stage_id'];
+        $tournamenttype_id  = $game_array[$i]['tournament_tournamenttype_id'];
 
-        if (0 != $first_game_id)
+        if (0 != $first_game_id ||
+            (CUP_FINAL_STAGE == $stage_id &&
+            TOURNAMENT_TYPE_CUP == $tournamenttype_id))
         {
             $home_score     = $game_array[$i]['game_home_score'];
             $guest_score    = $game_array[$i]['game_guest_score'];
 
-            $sql = "SELECT `game_guest_score`,
-                           `game_home_score`
-                    FROM `game`
-                    WHERE `game_id`='$first_game_id'
-                    LIMIT 1";
-            $first_game_sql = f_igosja_mysqli_query($sql);
+            if (0 != $first_game_id)
+            {
+                $sql = "SELECT `game_guest_score`,
+                               `game_home_score`
+                        FROM `game`
+                        WHERE `game_id`='$first_game_id'
+                        LIMIT 1";
+                $first_game_sql = f_igosja_mysqli_query($sql);
 
-            $first_game_array = $first_game_sql->fetch_all(1);
+                $first_game_array = $first_game_sql->fetch_all(1);
 
-            $first_home_score   = $first_game_array[0]['game_guest_score'];
-            $first_guest_score  = $first_game_array[0]['game_home_score'];
+                $first_home_score   = $first_game_array[0]['game_guest_score'];
+                $first_guest_score  = $first_game_array[0]['game_home_score'];
+                $home_score         = $home_score + $first_home_score;
+                $guest_score        = $guest_score + $first_guest_score;
+            }
 
-            if ($home_score + $first_home_score == $guest_score + $first_guest_score)
+            if ($home_score == $guest_score)
             {
                 $home_team_power        = 0;
                 $home_gk                = 0;
