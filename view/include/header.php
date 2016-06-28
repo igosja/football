@@ -57,6 +57,9 @@
                                             <li><a href="continent_review_profile.php?num=1">Лига</a></li>
                                             <li><a href="worldcup_review_profile.php?num=<?= TOURNAMENT_WORLD_CUP; ?>">Чемпионат мира</a></li>
                                             <li><a href="league_review_profile.php?num=<?= TOURNAMENT_CHAMPIONS_LEAGUE; ?>">Лига чемпионов</a></li>
+                                            <li><a href="forum.php">Форум</a></li>
+                                            <li><a href="shop.php">Магазин</a></li>
+                                            <li><a href="rule.php">Правила</a></li>
                                         </ul>
                                     </li>
                                     <?php if (!isset($authorization_id)) { ?>
@@ -117,19 +120,14 @@
                                             </li>
                                         <?php } ?>
                                     <?php } ?>
-                                    <li><a href="forum.php" class="main-menu-link">Форум</a></li>
                                     <li>
-                                        <a href="news.php" class="main-menu-link">
+                                        <a href="news.php" class="main-menu-last">
                                             Новости
                                             <?php if (isset($count_news) && 0 < $count_news) { ?>
                                                 <sup class="inbox-sup"><?= $count_news; ?></sup>
                                             <?php } ?>
                                         </a>
                                     </li>
-                                    <?php if (isset($authorization_user_id)) { ?>
-                                        <li><a href="shop.php" class="main-menu-link">Магазин</a></li>
-                                    <?php } ?>
-                                    <li><a href="rule.php" class="main-menu-last">Правила</a></li>
                                 </ul>
                             </td>
                         </tr>
