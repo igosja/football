@@ -478,7 +478,7 @@
             </td>
         </tr>
     </table>
-<?php } elseif (0 == $user_array[0]['user_change_team']) { ?>
+<?php } elseif (0 == $user_change_team) { ?>
     <table class="block-table w100">
         <tr>
             <td class="block-page">
