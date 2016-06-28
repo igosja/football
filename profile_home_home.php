@@ -122,6 +122,14 @@ if (!isset($authorization_team_id))
     $num            = $authorization_id;
     $header_title   = $authorization_login;
 
+    $sql = "SELECT `user_change_team`
+            FROM `user`
+            WHERE `user_id`='$authorization_user_id'
+            LIMIT 1";
+    $user_sql = $mysqli->query($sql);
+
+    $user_array = $user_sql->fetch_all(1);
+
     include (__DIR__ . '/view/main.php');
     exit;
 }

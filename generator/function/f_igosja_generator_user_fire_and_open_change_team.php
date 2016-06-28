@@ -1,6 +1,7 @@
 <?php
 
-function f_igosja_generator_user_fire()
+function f_igosja_generator_user_fire_and_open_change_team()
+//Увольняем давно не заходивших и даем возможность менять команды
 {
     $sql = "SELECT `team_id`,
                    `user_id`
@@ -33,4 +34,9 @@ function f_igosja_generator_user_fire()
         print '.';
         flush();
     }
+
+    $sql = "UPDATE `user`
+            SET `user_change_team`='0'
+            WHERE `user_change_team`='1'";
+    f_igosja_mysqli_query($sql);
 }

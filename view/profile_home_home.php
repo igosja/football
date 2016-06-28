@@ -478,7 +478,7 @@
             </td>
         </tr>
     </table>
-<?php } else { ?>
+<?php } elseif (0 == $user_array[0]['user_change_team']) { ?>
     <table class="block-table w100">
         <tr>
             <td class="block-page">
@@ -541,4 +541,8 @@
             </td>
         </tr>
     </table>
+<?php } else { ?>
+    <p class="center info">
+        Вы недавно отказались от команды. Взять новую команду вы сможете только после генерации очередного игрового дня.
+    </p>
 <?php } ?>
