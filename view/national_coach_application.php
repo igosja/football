@@ -10,7 +10,7 @@
                             <select name="country_id" id="application-country-id">
                                 <?php foreach ($country_array as $item) { ?>
                                     <option value="<?=$item['country_id']?>">
-                                        <?=$item['country_name']?>
+                                        <?=$item['country_name']?> (<?=$item['count']?> канд.)
                                     </option>
                                 <?php } ?>
                             </select>

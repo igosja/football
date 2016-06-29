@@ -61,10 +61,20 @@ if (isset($_POST['country_id']))
 }
 
 $sql = "SELECT `country_id`,
-               `country_name`
+               `country_name`,
+               IF (`count` IS NOT NULL, `count`, '0') AS `count`
         FROM `city`
         LEFT JOIN `country`
         ON `city_country_id`=`country_id`
+        LEFT JOIN
+        (
+            SELECT COUNT(`coachapplication_id`) AS `count`,
+                   `coachapplication_country_id`
+            FROM `coachapplication`
+            WHERE `coachapplication_season_id`='$igosja_season_id'
+            GROUP BY `coachapplication_country_id`
+        ) AS `t1`
+        ON `coachapplication_country_id`=`country_id`
         WHERE `city_id`!='0'
         GROUP BY `country_id`
         ORDER BY `country_name` ASC";
