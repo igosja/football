@@ -13,8 +13,9 @@
                         </tr>
                 <?php } ?>
                 <?php
-                if (4 != $forum_array[$i]['forumchapter_id'] ||
-                    isset($authorization_forumcountry_id) && $authorization_forumcountry_id == $forum_array[$i]['forumthemegroup_country_id']) { ?>
+                //if (4 != $forum_array[$i]['forumchapter_id'] ||
+                    //isset($authorization_forumcountry_id) && $authorization_forumcountry_id == $forum_array[$i]['forumthemegroup_country_id']) {
+                ?>
                     <tr>
                         <td>
                             <a href="forum_group.php?num=<?= $forum_array[$i]['forumthemegroup_id']; ?>">
@@ -38,7 +39,7 @@
                             (<?= f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?>)
                         </td>
                     </tr>
-                <?php } ?>
+                <?php //} ?>
                 <?php if (!isset($forum_array[$i+1]['forumchapter_id']) || $forum_array[$i+1]['forumchapter_id'] != $forum_array[$i]['forumchapter_id']) { ?>
                     </table>
                 <?php } ?>

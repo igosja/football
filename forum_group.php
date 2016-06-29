@@ -41,15 +41,15 @@ if (0 == $count_head)
 
 $head_array = $head_sql->fetch_all(1);
 
-$forumthemegroup_country_id = $head_array[0]['forumthemegroup_country_id'];
+//$forumthemegroup_country_id = $head_array[0]['forumthemegroup_country_id'];
 
-if (0 != $forumthemegroup_country_id &&
-    (!isset($authorization_forumcountry_id) ||
-    $authorization_forumcountry_id != $forumthemegroup_country_id))
-{
-    include (__DIR__ . '/view/wrong_page.php');
-    exit;
-}
+//if (0 != $forumthemegroup_country_id &&
+//    (!isset($authorization_forumcountry_id) ||
+//    $authorization_forumcountry_id != $forumthemegroup_country_id))
+//{
+//    include (__DIR__ . '/view/wrong_page.php');
+//    exit;
+//}
 
 $header_title   = $head_array[0]['forumthemegroup_name'];
 $bread_array    = array(array('url' => 'forum.php', 'text' => 'Форум'));
