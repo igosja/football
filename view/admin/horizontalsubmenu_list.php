@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="dataTable_wrapper">
-            <table class="table table-striped table-bordered table-hover table-condensed" id="bootstrap-table">
+            <table class="table table-striped table-bordered table-hover table-condensed">
                 <thead>
                     <tr>
                         <th>Меню</th>

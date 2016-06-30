@@ -271,6 +271,9 @@
                                     <li>
                                         <a href="forumthemegroup_list.php">Форумы</a>
                                     </li>
+                                    <li>
+                                        <a href="forum.php">Просмотр</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
