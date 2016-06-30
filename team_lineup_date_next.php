@@ -44,6 +44,13 @@ $sql = "SELECT `game_id`,
         LIMIT 1";
 $nearest_game_sql = $mysqli->query($sql);
 
+$count_nearest_game = $nearest_game_sql->num_rows;
+
+if (0 == $count_nearest_game)
+{
+    include(__DIR__ . '/view/no_game.php');
+    exit;
+}
 $nearest_game_array = $nearest_game_sql->fetch_all(1);
 
 $opponent_id = $nearest_game_array[0]['team_id'];
