@@ -8,9 +8,9 @@
         <?php } ?>
     </div>
     <script src="/js/jquery.js"></script>
-    <script src="/js/function.js"></script>
+    <script src="/js/function.js?<?= $css_js_version; ?>"></script>
     <script src="/js/autocomplete.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js?<?= $css_js_version; ?>"></script>
     <script src="/js/highcharts.js"></script>
 </body>
 </html>
