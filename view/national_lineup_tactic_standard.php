@@ -505,3 +505,11 @@
         </tr>
     </table>
 </form>
+<script>
+    var player_array =
+    [
+        <?php foreach ($player_array as $item) { ?>
+            [<?= $item['player_id']; ?>, '<?= $item['name_name']; ?> <?= $item['surname_name']; ?>'],
+        <?php } ?>
+    ];
+</script>

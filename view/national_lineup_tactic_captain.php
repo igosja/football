@@ -122,3 +122,11 @@
         </td>
     </tr>
 </table>
+<script>
+    var player_array =
+    [
+        <?php foreach ($leader_array as $item) { ?>
+            [<?= $item['player_id']; ?>, '<?= $item['name_name']; ?> <?= $item['surname_name']; ?>'],
+        <?php } ?>
+    ];
+</script>

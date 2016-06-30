@@ -332,131 +332,821 @@ function tactic_field()
 }
 
 function penalty_select()
-//Выбор пенальнистов команды
+//Выбор исполнителей пенальти команды
 {
-    $('option').show();
+    var count_player = player_array.length;
+    var selected = '';
 
-    for (var i=1; i<=7; i++) //Всего у нас семь возможных пенальтистов
+    var select_penalty_1 = parseInt($('#select-penalty-1').val());
+    var select_penalty_2 = parseInt($('#select-penalty-2').val());
+    var select_penalty_3 = parseInt($('#select-penalty-3').val());
+    var select_penalty_4 = parseInt($('#select-penalty-4').val());
+    var select_penalty_5 = parseInt($('#select-penalty-5').val());
+    var select_penalty_6 = parseInt($('#select-penalty-6').val());
+    var select_penalty_7 = parseInt($('#select-penalty-7').val());
+
+    var option_1 = '<option value="0">-</option>';
+    var option_2 = '<option value="0">-</option>';
+    var option_3 = '<option value="0">-</option>';
+    var option_4 = '<option value="0">-</option>';
+    var option_5 = '<option value="0">-</option>';
+    var option_6 = '<option value="0">-</option>';
+    var option_7 = '<option value="0">-</option>';
+
+    for (var i=0; i<count_player; i++)
     {
-        var penalty_value = $('#select-penalty-' + i).val();
-
-        if (0 != penalty_value)
+        if (-1 == $.inArray(player_array[i][0], [select_penalty_2, select_penalty_3, select_penalty_4, select_penalty_5, select_penalty_6, select_penalty_7]))
         {
-            $('option[value=' + penalty_value + ']').hide();
+            if (select_penalty_1 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_1 = option_1 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_penalty_1, select_penalty_3, select_penalty_4, select_penalty_5, select_penalty_6, select_penalty_7]))
+        {
+            if (select_penalty_2 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_2 = option_2 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_penalty_1, select_penalty_2, select_penalty_4, select_penalty_5, select_penalty_6, select_penalty_7]))
+        {
+            if (select_penalty_3 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_3 = option_3 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_penalty_1, select_penalty_2, select_penalty_3, select_penalty_5, select_penalty_6, select_penalty_7]))
+        {
+            if (select_penalty_4 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_4 = option_4 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_penalty_1, select_penalty_2, select_penalty_3, select_penalty_4, select_penalty_6, select_penalty_7]))
+        {
+            if (select_penalty_5 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_5 = option_5 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_penalty_1, select_penalty_2, select_penalty_3, select_penalty_4, select_penalty_5, select_penalty_7]))
+        {
+            if (select_penalty_6 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_6 = option_6 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_penalty_1, select_penalty_2, select_penalty_3, select_penalty_4, select_penalty_5, select_penalty_6]))
+        {
+            if (select_penalty_7 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_7 = option_7 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
         }
     }
+
+    $('#select-penalty-1').html(option_1);
+    $('#select-penalty-2').html(option_2);
+    $('#select-penalty-3').html(option_3);
+    $('#select-penalty-4').html(option_4);
+    $('#select-penalty-5').html(option_5);
+    $('#select-penalty-6').html(option_6);
+    $('#select-penalty-7').html(option_7);
 }
 
 function captain_select()
 //Выбор капитана команды
 {
-    $('option').show();
+    var count_player = player_array.length;
+    var selected = '';
 
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных капитанов
+    var select_captain_1 = parseInt($('#select-captain-1').val());
+    var select_captain_2 = parseInt($('#select-captain-2').val());
+    var select_captain_3 = parseInt($('#select-captain-3').val());
+    var select_captain_4 = parseInt($('#select-captain-4').val());
+    var select_captain_5 = parseInt($('#select-captain-5').val());
+
+    var option_1 = '<option value="0">-</option>';
+    var option_2 = '<option value="0">-</option>';
+    var option_3 = '<option value="0">-</option>';
+    var option_4 = '<option value="0">-</option>';
+    var option_5 = '<option value="0">-</option>';
+
+    for (var i=0; i<count_player; i++)
     {
-        var captain_value = $('#select-captain-' + i).val();
-
-        if (0 != captain_value)
+        if (-1 == $.inArray(player_array[i][0], [select_captain_2, select_captain_3, select_captain_4, select_captain_5]))
         {
-            $('option[value=' + captain_value + ']').hide();
+            if (select_captain_1 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_1 = option_1 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_captain_1, select_captain_3, select_captain_4, select_captain_5]))
+        {
+            if (select_captain_2 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_2 = option_2 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_captain_1, select_captain_2, select_captain_4, select_captain_5]))
+        {
+            if (select_captain_3 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_3 = option_3 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_captain_1, select_captain_2, select_captain_3, select_captain_5]))
+        {
+            if (select_captain_4 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_4 = option_4 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_captain_1, select_captain_2, select_captain_3, select_captain_4]))
+        {
+            if (select_captain_5 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_5 = option_5 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
         }
     }
+
+    $('#select-captain-1').html(option_1);
+    $('#select-captain-2').html(option_2);
+    $('#select-captain-3').html(option_3);
+    $('#select-captain-4').html(option_4);
+    $('#select-captain-5').html(option_5);
 }
 
 function corner_left_select()
 //Выбор исполнителя левого углового команды
 {
-    $('.select-corner-left option').show();
+    var count_player = player_array.length;
+    var selected = '';
 
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
+    var select_corner_1 = parseInt($('#select-corner-left-1').val());
+    var select_corner_2 = parseInt($('#select-corner-left-2').val());
+    var select_corner_3 = parseInt($('#select-corner-left-3').val());
+    var select_corner_4 = parseInt($('#select-corner-left-4').val());
+    var select_corner_5 = parseInt($('#select-corner-left-5').val());
+
+    var option_1 = '<option value="0">-</option>';
+    var option_2 = '<option value="0">-</option>';
+    var option_3 = '<option value="0">-</option>';
+    var option_4 = '<option value="0">-</option>';
+    var option_5 = '<option value="0">-</option>';
+
+    for (var i=0; i<count_player; i++)
     {
-        var corner_left_value = $('#select-corner-left-' + i).val();
-
-        if (0 != corner_left_value)
+        if (-1 == $.inArray(player_array[i][0], [select_corner_2, select_corner_3, select_corner_4, select_corner_5]))
         {
-            $('.select-corner-left option[value=' + corner_left_value + ']').hide();
+            if (select_corner_1 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_1 = option_1 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_corner_1, select_corner_3, select_corner_4, select_corner_5]))
+        {
+            if (select_corner_2 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_2 = option_2 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_corner_1, select_corner_2, select_corner_4, select_corner_5]))
+        {
+            if (select_corner_3 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_3 = option_3 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_corner_1, select_corner_2, select_corner_3, select_corner_5]))
+        {
+            if (select_corner_4 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_4 = option_4 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_corner_1, select_corner_2, select_corner_3, select_corner_4]))
+        {
+            if (select_corner_5 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_5 = option_5 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
         }
     }
+
+    $('#select-corner-left-1').html(option_1);
+    $('#select-corner-left-2').html(option_2);
+    $('#select-corner-left-3').html(option_3);
+    $('#select-corner-left-4').html(option_4);
+    $('#select-corner-left-5').html(option_5);
 }
 
 function corner_right_select()
-//Выбор исполнителя левого углового команды
+//Выбор исполнителя правого углового команды
 {
-    $('.select-corner-right option').show();
+    var count_player = player_array.length;
+    var selected = '';
 
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
+    var select_corner_1 = parseInt($('#select-corner-right-1').val());
+    var select_corner_2 = parseInt($('#select-corner-right-2').val());
+    var select_corner_3 = parseInt($('#select-corner-right-3').val());
+    var select_corner_4 = parseInt($('#select-corner-right-4').val());
+    var select_corner_5 = parseInt($('#select-corner-right-5').val());
+
+    var option_1 = '<option value="0">-</option>';
+    var option_2 = '<option value="0">-</option>';
+    var option_3 = '<option value="0">-</option>';
+    var option_4 = '<option value="0">-</option>';
+    var option_5 = '<option value="0">-</option>';
+
+    for (var i=0; i<count_player; i++)
     {
-        var corner_right_value = $('#select-corner-right-' + i).val();
-
-        if (0 != corner_right_value)
+        if (-1 == $.inArray(player_array[i][0], [select_corner_2, select_corner_3, select_corner_4, select_corner_5]))
         {
-            $('.select-corner-right option[value=' + corner_right_value + ']').hide();
+            if (select_corner_1 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_1 = option_1 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_corner_1, select_corner_3, select_corner_4, select_corner_5]))
+        {
+            if (select_corner_2 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_2 = option_2 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_corner_1, select_corner_2, select_corner_4, select_corner_5]))
+        {
+            if (select_corner_3 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_3 = option_3 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_corner_1, select_corner_2, select_corner_3, select_corner_5]))
+        {
+            if (select_corner_4 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_4 = option_4 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_corner_1, select_corner_2, select_corner_3, select_corner_4]))
+        {
+            if (select_corner_5 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_5 = option_5 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
         }
     }
+
+    $('#select-corner-right-1').html(option_1);
+    $('#select-corner-right-2').html(option_2);
+    $('#select-corner-right-3').html(option_3);
+    $('#select-corner-right-4').html(option_4);
+    $('#select-corner-right-5').html(option_5);
 }
 
 function freekick_left_select()
-//Выбор исполнителя левого углового команды
+//Выбор исполнителя левого штрафного команды
 {
-    $('.select-freekick-left option').show();
+    var count_player = player_array.length;
+    var selected = '';
 
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
+    var select_freekick_1 = parseInt($('#select-freekick-left-1').val());
+    var select_freekick_2 = parseInt($('#select-freekick-left-2').val());
+    var select_freekick_3 = parseInt($('#select-freekick-left-3').val());
+    var select_freekick_4 = parseInt($('#select-freekick-left-4').val());
+    var select_freekick_5 = parseInt($('#select-freekick-left-5').val());
+
+    var option_1 = '<option value="0">-</option>';
+    var option_2 = '<option value="0">-</option>';
+    var option_3 = '<option value="0">-</option>';
+    var option_4 = '<option value="0">-</option>';
+    var option_5 = '<option value="0">-</option>';
+
+    for (var i=0; i<count_player; i++)
     {
-        var freekick_left_value = $('#select-freekick-left-' + i).val();
-
-        if (0 != freekick_left_value)
+        if (-1 == $.inArray(player_array[i][0], [select_freekick_2, select_freekick_3, select_freekick_4, select_freekick_5]))
         {
-            $('.select-freekick-left option[value=' + freekick_left_value + ']').hide();
+            if (select_freekick_1 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_1 = option_1 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_freekick_1, select_freekick_3, select_freekick_4, select_freekick_5]))
+        {
+            if (select_freekick_2 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_2 = option_2 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_freekick_1, select_freekick_2, select_freekick_4, select_freekick_5]))
+        {
+            if (select_freekick_3 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_3 = option_3 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_freekick_1, select_freekick_2, select_freekick_3, select_freekick_5]))
+        {
+            if (select_freekick_4 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_4 = option_4 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_freekick_1, select_freekick_2, select_freekick_3, select_freekick_4]))
+        {
+            if (select_freekick_5 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_5 = option_5 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
         }
     }
+
+    $('#select-freekick-left-1').html(option_1);
+    $('#select-freekick-left-2').html(option_2);
+    $('#select-freekick-left-3').html(option_3);
+    $('#select-freekick-left-4').html(option_4);
+    $('#select-freekick-left-5').html(option_5);
 }
 
 function freekick_right_select()
-//Выбор исполнителя левого углового команды
+//Выбор исполнителя правого штрафного команды
 {
-    $('.select-freekick-right option').show();
+    var count_player = player_array.length;
+    var selected = '';
 
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
+    var select_freekick_1 = parseInt($('#select-freekick-right-1').val());
+    var select_freekick_2 = parseInt($('#select-freekick-right-2').val());
+    var select_freekick_3 = parseInt($('#select-freekick-right-3').val());
+    var select_freekick_4 = parseInt($('#select-freekick-right-4').val());
+    var select_freekick_5 = parseInt($('#select-freekick-right-5').val());
+
+    var option_1 = '<option value="0">-</option>';
+    var option_2 = '<option value="0">-</option>';
+    var option_3 = '<option value="0">-</option>';
+    var option_4 = '<option value="0">-</option>';
+    var option_5 = '<option value="0">-</option>';
+
+    for (var i=0; i<count_player; i++)
     {
-        var freekick_right_value = $('#select-freekick-right-' + i).val();
-
-        if (0 != freekick_right_value)
+        if (-1 == $.inArray(player_array[i][0], [select_freekick_2, select_freekick_3, select_freekick_4, select_freekick_5]))
         {
-            $('.select-freekick-right option[value=' + freekick_right_value + ']').hide();
+            if (select_freekick_1 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_1 = option_1 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_freekick_1, select_freekick_3, select_freekick_4, select_freekick_5]))
+        {
+            if (select_freekick_2 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_2 = option_2 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_freekick_1, select_freekick_2, select_freekick_4, select_freekick_5]))
+        {
+            if (select_freekick_3 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_3 = option_3 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_freekick_1, select_freekick_2, select_freekick_3, select_freekick_5]))
+        {
+            if (select_freekick_4 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_4 = option_4 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_freekick_1, select_freekick_2, select_freekick_3, select_freekick_4]))
+        {
+            if (select_freekick_5 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_5 = option_5 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
         }
     }
+
+    $('#select-freekick-right-1').html(option_1);
+    $('#select-freekick-right-2').html(option_2);
+    $('#select-freekick-right-3').html(option_3);
+    $('#select-freekick-right-4').html(option_4);
+    $('#select-freekick-right-5').html(option_5);
 }
 
 function out_left_select()
-//Выбор исполнителя левого углового команды
+//Выбор исполнителя левого аута команды
 {
-    $('.select-out-left option').show();
+    var count_player = player_array.length;
+    var selected = '';
 
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
+    var select_out_1 = parseInt($('#select-out-left-1').val());
+    var select_out_2 = parseInt($('#select-out-left-2').val());
+    var select_out_3 = parseInt($('#select-out-left-3').val());
+    var select_out_4 = parseInt($('#select-out-left-4').val());
+    var select_out_5 = parseInt($('#select-out-left-5').val());
+
+    var option_1 = '<option value="0">-</option>';
+    var option_2 = '<option value="0">-</option>';
+    var option_3 = '<option value="0">-</option>';
+    var option_4 = '<option value="0">-</option>';
+    var option_5 = '<option value="0">-</option>';
+
+    for (var i=0; i<count_player; i++)
     {
-        var out_left_value = $('#select-out-left-' + i).val();
-
-        if (0 != out_left_value)
+        if (-1 == $.inArray(player_array[i][0], [select_out_2, select_out_3, select_out_4, select_out_5]))
         {
-            $('.select-out-left option[value=' + out_left_value + ']').hide();
+            if (select_out_1 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_1 = option_1 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_out_1, select_out_3, select_out_4, select_out_5]))
+        {
+            if (select_out_2 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_2 = option_2 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_out_1, select_out_2, select_out_4, select_out_5]))
+        {
+            if (select_out_3 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_3 = option_3 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_out_1, select_out_2, select_out_3, select_out_5]))
+        {
+            if (select_out_4 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_4 = option_4 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_out_1, select_out_2, select_out_3, select_out_4]))
+        {
+            if (select_out_5 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_5 = option_5 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
         }
     }
+
+    $('#select-out-left-1').html(option_1);
+    $('#select-out-left-2').html(option_2);
+    $('#select-out-left-3').html(option_3);
+    $('#select-out-left-4').html(option_4);
+    $('#select-out-left-5').html(option_5);
 }
 
 function out_right_select()
-//Выбор исполнителя левого углового команды
+//Выбор исполнителя правого аута команды
 {
-    $('.select-out-right option').show();
+    var count_player = player_array.length;
+    var selected = '';
 
-    for (var i=1; i<=5; i++) //Всего у нас пять возможных исполнителей
+    var select_out_1 = parseInt($('#select-out-right-1').val());
+    var select_out_2 = parseInt($('#select-out-right-2').val());
+    var select_out_3 = parseInt($('#select-out-right-3').val());
+    var select_out_4 = parseInt($('#select-out-right-4').val());
+    var select_out_5 = parseInt($('#select-out-right-5').val());
+
+    var option_1 = '<option value="0">-</option>';
+    var option_2 = '<option value="0">-</option>';
+    var option_3 = '<option value="0">-</option>';
+    var option_4 = '<option value="0">-</option>';
+    var option_5 = '<option value="0">-</option>';
+
+    for (var i=0; i<count_player; i++)
     {
-        var out_right_value = $('#select-out-right-' + i).val();
-
-        if (0 != out_right_value)
+        if (-1 == $.inArray(player_array[i][0], [select_out_2, select_out_3, select_out_4, select_out_5]))
         {
-            $('.select-out-right option[value=' + out_right_value + ']').hide();
+            if (select_out_1 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_1 = option_1 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_out_1, select_out_3, select_out_4, select_out_5]))
+        {
+            if (select_out_2 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_2 = option_2 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_out_1, select_out_2, select_out_4, select_out_5]))
+        {
+            if (select_out_3 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_3 = option_3 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_out_1, select_out_2, select_out_3, select_out_5]))
+        {
+            if (select_out_4 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_4 = option_4 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
+        }
+
+        if (-1 == $.inArray(player_array[i][0], [select_out_1, select_out_2, select_out_3, select_out_4]))
+        {
+            if (select_out_5 == player_array[i][0])
+            {
+                selected = 'selected';
+            }
+            else
+            {
+                selected = '';
+            }
+
+            option_5 = option_5 + '<option value="' + player_array[i][0] + '" ' + selected + '>' + player_array[i][1] + '</option>';
         }
     }
+
+    $('#select-out-right-1').html(option_1);
+    $('#select-out-right-2').html(option_2);
+    $('#select-out-right-3').html(option_3);
+    $('#select-out-right-4').html(option_4);
+    $('#select-out-right-5').html(option_5);
 }
 
 var formation_array =
