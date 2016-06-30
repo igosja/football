@@ -146,8 +146,6 @@ if (isset($_POST['gamecomment_text']) && isset($authorization_user_id))
     redirect('game_press.php?num=' . $num_get);
 }
 
-$news_array = $news_sql->fetch_all(1);
-
 $sql = "SELECT `gamecomment_date`,
                `gamecomment_text`,
                `user_id`,
