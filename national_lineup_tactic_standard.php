@@ -153,6 +153,7 @@ $sql = "SELECT `corner`,
         LEFT JOIN `position`
         ON `playerposition_position_id`=`position_id`
         WHERE `player_national_id`='$num_get'
+        AND `player_team_id`!='0'
         ORDER BY `position_id` ASC";
 $player_sql = $mysqli->query($sql);
 

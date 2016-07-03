@@ -229,6 +229,7 @@ $sql = "SELECT `disqualification_player_id`,
         ) AS `t1`
         ON `player_id`=`disqualification_player_id`
         WHERE `country_id`='$num_get'
+        AND `player_team_id`!='0'
         ORDER BY `position_id` ASC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
