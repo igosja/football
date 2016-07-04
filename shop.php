@@ -237,10 +237,12 @@ elseif (isset($_POST['data']))
     $secret_key     = 's3lyp66r';
     $order_id       = $mysqli->insert_id;
 
+    $sum = $sum * 50;
+
     $params = array
     (
         'm'     => $merchant_id,
-        'oa'    => $sum * 50,
+        'oa'    => $sum,
         'o'     => $mysqli->insert_id,
         's'     => md5($merchant_id . ':' . $sum . ':' . $secret_key . ':' . $order_id),
         'lang'  => 'ru',
