@@ -30,6 +30,11 @@ $country_array = $country_sql->fetch_all(1);
 
 $country_name = $country_array[0]['country_name'];
 
+$sql = "UPDATE `player`
+        SET `player_national_id`='0'
+        WHERE `player_team_id`='0'";
+$mysqli->query($sql);
+
 $sql = "SELECT `mood_id`,
                `mood_name`,
                `name_name`,
@@ -57,6 +62,7 @@ $sql = "SELECT `mood_id`,
         ON `player_team_id`=`team_id`
         WHERE `player_country_id`='$num_get'
         AND `player_statusnational_id`='1'
+        AND `player_team_id`!='0'
         ORDER BY `player_position_id` ASC, `player_reputation` DESC, `player_id` ASC";
 $player_sql = $mysqli->query($sql);
 
