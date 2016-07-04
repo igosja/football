@@ -243,6 +243,7 @@ elseif (isset($_POST['data']))
         'oa'    => $sum,
         'o'     => $mysqli->insert_id,
         's'     => md5($merchant_id . ':' . $sum . ':' . $secret_key . ':' . $order_id),
+        'i'     => 1,
         'lang'  => 'ru',
     );
 
