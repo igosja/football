@@ -41,6 +41,11 @@
             </a>
             <br />
             <br />
+            <a href="//www.free-kassa.ru/" target="_blank">
+                <img src="//www.free-kassa.ru/img/fk_btn/18.png" width="88">
+            </a>
+            <br />
+            <br />
             <a href="https://passport.webmoney.ru/asp/certview.asp?wmid=274662367507" target="_blank">
                 <img src="/img/webmoney.png" />
             </a>
