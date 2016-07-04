@@ -4,24 +4,36 @@
             <tr>
                 <td class="block-page center">
                     <p class="left header">Реклама</p>
+                    <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <ins
                         class="adsbygoogle"
                         style="display:inline-block;width:300px;height:250px"
                         data-ad-client="ca-pub-9189986235139627"
                         data-ad-slot="9164813595"
                     ></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <ins
                         class="adsbygoogle"
                         style="display:inline-block;width:300px;height:250px"
                         data-ad-client="ca-pub-9189986235139627"
                         data-ad-slot="3118279999"
                     ></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <ins
                         class="adsbygoogle"
                         style="display:inline-block;width:300px;height:250px"
                         data-ad-client="ca-pub-9189986235139627"
                         data-ad-slot="6071746393"
                     ></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </td>
             </tr>
         </table>
@@ -39,7 +51,6 @@
     <script src="/js/autocomplete.js"></script>
     <script src="/js/main.js?<?= $css_js_version; ?>"></script>
     <script src="/js/highcharts.js"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
