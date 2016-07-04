@@ -1,4 +1,31 @@
     </div>
+    <div class="page-content">
+        <table class="block-table w100">
+            <tr>
+                <td class="block-page center">
+                    <p class="left header">Реклама</p>
+                    <ins
+                        class="adsbygoogle"
+                        style="display:inline-block;width:300px;height:250px"
+                        data-ad-client="ca-pub-9189986235139627"
+                        data-ad-slot="9164813595"
+                    ></ins>
+                    <ins
+                        class="adsbygoogle"
+                        style="display:inline-block;width:300px;height:250px"
+                        data-ad-client="ca-pub-9189986235139627"
+                        data-ad-slot="3118279999"
+                    ></ins>
+                    <ins
+                        class="adsbygoogle"
+                        style="display:inline-block;width:300px;height:250px"
+                        data-ad-client="ca-pub-9189986235139627"
+                        data-ad-slot="6071746393"
+                    ></ins>
+                </td>
+            </tr>
+        </table>
+    </div>
     <div class="footer">
         <p>Связь с администраницей: info@virtual-football-league.ru<p>
         <p>Страница сгенерирована за <?= round(microtime(true) - $start_time, 5); ?> сек.<p>
@@ -12,5 +39,9 @@
     <script src="/js/autocomplete.js"></script>
     <script src="/js/main.js?<?= $css_js_version; ?>"></script>
     <script src="/js/highcharts.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 </body>
 </html>
