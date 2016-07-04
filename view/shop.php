@@ -72,6 +72,7 @@
                 <tr>
                     <td class="center" colspan="2">
                         Курс обмена: 1 ед. на счету = 50 руб.
+                        <br />
                         <a href="//www.free-kassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/4.png"></a>
 <!--                        <a href="http://www.pay2pay.com/" target="_blank">-->
 <!--                            <img src="/img/pay2pay.png">-->
