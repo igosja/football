@@ -240,10 +240,9 @@ elseif (isset($_POST['data']))
     $params = array
     (
         'm'     => $merchant_id,
-        'oa'    => $sum,
+        'oa'    => $sum * 50,
         'o'     => $mysqli->insert_id,
         's'     => md5($merchant_id . ':' . $sum . ':' . $secret_key . ':' . $order_id),
-        'i'     => 1,
         'lang'  => 'ru',
     );
 
