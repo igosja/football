@@ -233,6 +233,25 @@ elseif (isset($_POST['data']))
                 `payment_user_id`='$num_get'";
     $mysqli->query($sql);
 
+    $merchant_id    = 27937;
+    $secret_key     = 's3lyp66r';
+    $order_id       = $mysqli->insert_id;
+
+    $params = array
+    (
+        'm'     => $merchant_id,
+        'oa'    => $sum,
+        'o'     => $mysqli->insert_id,
+        's'     => md5($merchant_id . ':' . $sum . ':' . $secret_key . ':' . $order_id),
+        'i'     => 100,
+        'lang'  => 'ru',
+    );
+
+    $url = 'http://www.free-kassa.ru/merchant/cash.php?' . http_build_query($params);
+
+    redirect($url);
+
+    /*
     $secret_key     = 'hRCuJWDxBpG5eNj';
     $hidden_key     = '9cCCtEqwPcgzZKf';
     $api_key        = '2rC7Xb3lbg2OAwr';
@@ -267,7 +286,7 @@ elseif (isset($_POST['data']))
 
     $url = 'https://merchant.pay2pay.com/?page=init&' . http_build_query($params);
 
-    redirect($url);
+    redirect($url);*/
 }
 
 $sql = "SELECT `user_money`

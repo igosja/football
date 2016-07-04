@@ -117,7 +117,7 @@ $site_status = $site_array[0]['site_status'];
 
 if (SITE_CLOSED == $site_status && 'admin' != $chapter)
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/site_closed.php');
+    include (__DIR__ . '/../view/site_closed.php');
     exit;
 }
 
@@ -214,7 +214,7 @@ else
 if (1 == $page_authorization &&
     !isset($authorization_id))
 {
-    include ($_SERVER['DOCUMENT_ROOT'] . '/view/only_logged.php');
+    include (__DIR__ . '/../view/only_logged.php');
     exit;
 }
 
@@ -232,7 +232,7 @@ if (0 == $count_shedule)
 {
     $coach_link = '';
 }
-elseif (5 >= $count_shedule)
+elseif (4 >= $count_shedule)
 {
     $coach_link = 'national_coach_application.php';
 }
