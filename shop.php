@@ -213,6 +213,87 @@ elseif (isset($_GET['money']))
     include (__DIR__ . '/view/main.php');
     exit;
 }
+elseif (isset($_GET['vip']))
+{
+    $get_vip = (int) $_GET['vip'];
+
+    $vip_array = array('15' => 2, '30' => 3, '60' => 5, '180' => 10, '365' => 365);
+
+    if (!isset($vip_array[$get_vip]))
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Товар выбран неправильно';
+
+        redirect('shop.php');
+    }
+
+    $price = $vip_array[$get_vip];
+
+    $sql = "SELECT `user_money`
+            FROM `user`
+            WHERE `user_id`='$num_get'
+            LIMIT 1";
+    $user_sql = $mysqli->query($sql);
+
+    $user_array = $user_sql->fetch_all(1);
+
+    $user_money = $user_array[0]['user_money'];
+
+    if ($price > $user_money)
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'На вашем счету недостаточно денег для покупки этого товара';
+
+        redirect('shop.php');
+    }
+
+    if (isset($_GET['ok']))
+    {
+        $sql = "SELECT `user_vip`
+                FROM `user`
+                WHERE `user_id`='$num_get'
+                LIMIT 1";
+        $user_sql = $mysqli->query($sql);
+
+        $user_array = $user_sql->fetch_all(1);
+
+        $user_vip = $user_array[0]['user_vip'];
+        $cur_time = time();
+
+        if ($user_vip < $cur_time)
+        {
+            $user_vip = $cur_time + $get_vip * 24 * 60 * 60;
+        }
+        else
+        {
+            $user_vip = $user_vip + $get_vip * 24 * 60 * 60;
+        }
+
+        $sql = "UPDATE `user`
+                SET `user_money`=`user_money`-'$price',
+                    `user_vip`='$user_vip'
+                WHERE `user_id`='$num_get'
+                LIMIT 1";
+        $mysqli->query($sql);
+
+        $sql = "INSERT INTO `historyfinanceuser`
+                SET `historyfinanceuser_date`=UNIX_TIMESTAMP(),
+                    `historyfinanceuser_sum`='-$price',
+                    `historyfinanceuser_user_id`='$num_get'";
+        $mysqli->query($sql);
+
+        $_SESSION['message_class']  = 'success';
+        $_SESSION['message_text']   = 'Ваш VIP-клуб успешно продлен';
+
+        redirect('shop.php');
+    }
+
+    $tpl            = 'submit_shop_vip';
+    $header_title   = 'Магазин';
+
+    include (__DIR__ . '/view/main.php');
+    exit;
+}
 elseif (isset($_POST['data']))
 {
     $sum = (int) $_POST['data']['sum'];

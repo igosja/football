@@ -1,43 +1,45 @@
     </div>
-    <div class="page-content">
-        <table class="block-table w100">
-            <tr>
-                <td class="block-page center">
-                    <p class="left header">Реклама</p>
-                    <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <ins
-                        class="adsbygoogle"
-                        style="display:inline-block;width:300px;height:250px"
-                        data-ad-client="ca-pub-9189986235139627"
-                        data-ad-slot="9164813595"
-                    ></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                    <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <ins
-                        class="adsbygoogle"
-                        style="display:inline-block;width:300px;height:250px"
-                        data-ad-client="ca-pub-9189986235139627"
-                        data-ad-slot="3118279999"
-                    ></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                    <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <ins
-                        class="adsbygoogle"
-                        style="display:inline-block;width:300px;height:250px"
-                        data-ad-client="ca-pub-9189986235139627"
-                        data-ad-slot="6071746393"
-                    ></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <?php if (!isset($$authorization_vip) && !$authorization_vip) { ?>
+        <div class="page-content">
+            <table class="block-table w100">
+                <tr>
+                    <td class="block-page center">
+                        <p class="left header">Реклама <span class="grey"><a href="shop.php">[Отключить]</a></span></p>
+                        <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <ins
+                            class="adsbygoogle"
+                            style="display:inline-block;width:300px;height:250px"
+                            data-ad-client="ca-pub-9189986235139627"
+                            data-ad-slot="9164813595"
+                        ></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                        <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <ins
+                            class="adsbygoogle"
+                            style="display:inline-block;width:300px;height:250px"
+                            data-ad-client="ca-pub-9189986235139627"
+                            data-ad-slot="3118279999"
+                        ></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                        <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <ins
+                            class="adsbygoogle"
+                            style="display:inline-block;width:300px;height:250px"
+                            data-ad-client="ca-pub-9189986235139627"
+                            data-ad-slot="6071746393"
+                        ></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <?php }?>
     <div class="footer">
         <p>Связь с администраницей: info@virtual-football-league.ru<p>
         <p>Страница сгенерирована за <?= round(microtime(true) - $start_time, 5); ?> сек.<p>

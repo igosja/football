@@ -115,6 +115,64 @@
                     </td>
                 </tr>
             </table>
+            <p class="justify"><?= SPACE; ?></p>
+            <p class="justify">
+                Если вам нравится эта игра, если вы хотите пользоваться более комфортным интерфейсом без рекламы,
+                а может у вас просто есть желание и возможность поддержать нашу дальнейшую работу -
+                рекомендуем вам оплатить небольшой взнос и стать VIP-менеджером. Спасибо!
+            </p>
+            <table class="striped w100">
+                <tr>
+                    <td>Вступить в VIP-клуб на 15 дней</td>
+                    <td class="right">
+                        <a href="shop.php?vip=15" class="button-link">
+                            <button>
+                                Купить за 2 ед.
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Вступить в VIP-клуб на 30 дней</td>
+                    <td class="right">
+                        <a href="shop.php?vip=30" class="button-link">
+                            <button>
+                                Купить за 3 ед.
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Вступить в VIP-клуб на 60 дней</td>
+                    <td class="right">
+                        <a href="shop.php?vip=60" class="button-link">
+                            <button>
+                                Купить за 5 ед.
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Вступить в VIP-клуб на 180 дней</td>
+                    <td class="right">
+                        <a href="shop.php?vip=180" class="button-link">
+                            <button>
+                                Купить за 10 ед.
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Вступить в VIP-клуб на 365 дней</td>
+                    <td class="right">
+                        <a href="shop.php?vip=365" class="button-link">
+                            <button>
+                                Купить за 15 ед.
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
         </td>
     </tr>
 </table>

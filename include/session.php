@@ -21,6 +21,7 @@ if (isset($_SESSION['authorization_id']))
                    `team_name`,
                    `user_id`,
                    `user_news_id`,
+                   `user_vip`,
                    `userrole_permission`
             FROM `user`
             LEFT JOIN `userrole`
@@ -46,6 +47,16 @@ if (isset($_SESSION['authorization_id']))
     $authorization_country_id   = $user_array[0]['country_id'];
     $authorization_country_name = $user_array[0]['country_name'];
     $authorization_permission   = $user_array[0]['userrole_permission'];
+    $authorization_vip          = $user_array[0]['user_vip'];
+
+    if ($authorization_vip > time())
+    {
+        $authorization_vip = 1;
+    }
+    else
+    {
+        $authorization_vip = 0;
+    }
 
     $sql = "SELECT `city_country_id`
             FROM `team`
