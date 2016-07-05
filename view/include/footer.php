@@ -1,5 +1,5 @@
     </div>
-    <?php if (!isset($$authorization_vip) && !$authorization_vip) { ?>
+    <?php if (!isset($authorization_vip) || !$authorization_vip) { ?>
         <div class="page-content">
             <table class="block-table w100">
                 <tr>
