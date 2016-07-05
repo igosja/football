@@ -128,6 +128,11 @@
                             <p class="justify w100">
                                 <span class="grey"><?= f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?></span>
                                 <?php if (isset($authorization_id) && $authorization_id == $forum_array[$i]['user_id']) { ?>
+                                    <a href="forum_posting.php?edit=<?= $forum_array[$i]['forumpost_id']; ?>" class="button-link">
+                                        <button class="fright">
+                                            Редактировать
+                                        </button>
+                                    </a>
                                     <a href="forum_post_delete.php?num=<?= $forum_array[$i]['forumpost_id']; ?>" class="button-link">
                                         <button class="fright">
                                             Удалить

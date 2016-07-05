@@ -16,6 +16,7 @@
                 />
                 <textarea class="w98" rows="10" placeholder="Сообщение" name="text"><?php
                     if (isset($answer_array[0]['forumpost_text'])) { ?>[quote]<?= $answer_array[0]['forumpost_text']; ?>[/quote]<?php }
+                    elseif (isset($edit_array[0]['forumpost_text'])) { ?><?= $edit_array[0]['forumpost_text']; ?><?php }
                 ?></textarea>
                 <input type="submit" value="Добавить сообщение" />
             </form>

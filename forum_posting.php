@@ -65,25 +65,56 @@ else
 
         $text = strip_tags($_POST['text']);
 
-        $sql = "INSERT INTO `forumpost`
-                SET `forumpost_forumtheme_id`='$get_theme',
-                    `forumpost_name`=?,
-                    `forumpost_text`=?,
-                    `forumpost_user_id`='$authorization_id',
-                    `forumpost_date`=UNIX_TIMESTAMP()";
-        $prepare = $mysqli->prepare($sql);
-        $prepare->bind_param('ss', $name, $text);
-        $prepare->execute();
-        $prepare->close();
+        if (!isset($_GET['edit']))
+        {
+            $sql = "INSERT INTO `forumpost`
+                    SET `forumpost_forumtheme_id`='$get_theme',
+                        `forumpost_name`=?,
+                        `forumpost_text`=?,
+                        `forumpost_user_id`='$authorization_id',
+                        `forumpost_date`=UNIX_TIMESTAMP()";
+            $prepare = $mysqli->prepare($sql);
+            $prepare->bind_param('ss', $name, $text);
+            $prepare->execute();
+            $prepare->close();
 
-        $sql = "UPDATE `forumtheme`
-                SET `forumtheme_edit`=UNIX_TIMESTAMP()
-                WHERE `forumtheme_id`='$get_theme'
-                LIMIT 1";
-        $mysqli->query($sql);
+            $sql = "UPDATE `forumtheme`
+                    SET `forumtheme_edit`=UNIX_TIMESTAMP()
+                    WHERE `forumtheme_id`='$get_theme'
+                    LIMIT 1";
+            $mysqli->query($sql);
 
-        $_SESSION['message_class']  = 'success';
-        $_SESSION['message_text']   = 'Сообщение успешно добавлено.';
+            $_SESSION['message_class']  = 'success';
+            $_SESSION['message_text']   = 'Сообщение успешно добавлено.';
+        }
+        else
+        {
+            $edit = (int) $_GET['edit'];
+
+            $sql = "SELECT `forumpost_forumtheme_id`
+                    FROM `forumpost`
+                    WHERE `forumpost_id`='$edit'
+                    LIMIT 1";
+            $forumtheme_sql = $mysqli->query($sql);
+
+            $forumtheme_array = $forumtheme_sql->fetch_all(1);
+
+            $get_theme = $forumtheme_array[0]['forumpost_forumtheme_id'];
+
+            $sql = "UPDATE `forumpost`
+                    SET `forumpost_name`=?,
+                        `forumpost_text`=?
+                    WHERE `forumpost_id`='$edit'
+                    AND `forumpost_user_id`='$authorization_id'
+                    LIMIT 1";
+            $prepare = $mysqli->prepare($sql);
+            $prepare->bind_param('ss', $name, $text);
+            $prepare->execute();
+            $prepare->close();
+
+            $_SESSION['message_class']  = 'success';
+            $_SESSION['message_text']   = 'Сообщение успешно отредактировано.';
+        }
 
         redirect('forum_theme.php?num=' . $get_theme);
     }
@@ -105,7 +136,42 @@ else
                 LIMIT 1";
         $answer_sql = $mysqli->query($sql);
 
+        $count_answer = $answer_sql->num_rows;
+
+        if (0 == $count_answer)
+        {
+            $_SESSION['message_class']  = 'success';
+            $_SESSION['message_text']   = 'Сообщение выбрано неправильно.';
+
+            redirect('forum_theme.php?num=' . $get_theme);
+        }
+
         $answer_array = $answer_sql->fetch_all(1);
+    }
+
+    if (isset($_GET['edit']))
+    {
+        $edit = (int) $_GET['edit'];
+
+        $sql = "SELECT `forumpost_name`,
+                       `forumpost_text`
+                FROM `forumpost`
+                WHERE `forumpost_id`='$edit'
+                AND `forumpost_user_id`='$authorization_user_id'
+                LIMIT 1";
+        $edit_sql = $mysqli->query($sql);
+
+        $count_edit = $edit_sql->num_rows;
+
+        if (0 == $count_edit)
+        {
+            $_SESSION['message_class']  = 'success';
+            $_SESSION['message_text']   = 'Сообщение выбрано неправильно.';
+
+            redirect('forum_theme.php?num=' . $get_theme);
+        }
+
+        $edit_array = $edit_sql->fetch_all(1);
     }
 }
 
