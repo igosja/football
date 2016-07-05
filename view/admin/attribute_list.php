@@ -1,16 +1,18 @@
 <div class="row">
     <div class="col-lg-12 text-center">
         <h1 class="page-header">Характеристики</h1>
-        <button type="button" class="btn btn-default">
-            <a href="attributechapter_list.php">
-                <i class="fa fa-list"></i>
-            </a>
-        </button>
-        <button type="button" class="btn btn-default">
-            <a href="attribute_create.php">
-                <i class="fa fa-plus"></i>
-            </a>
-        </button>
+        <ul class="list-inline preview-links text-center">
+            <li>
+                <a href="attributechapter_list.php" class="btn btn-default">
+                    <i class="fa fa-list"></i>
+                </a>
+            </li>
+            <li>
+                <a href="attribute_create.php" class="btn btn-default">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 <div class="row">

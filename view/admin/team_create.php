@@ -1,11 +1,13 @@
 <div class="row">
     <div class="col-lg-12 text-center">
         <h1 class="page-header">Редактирование команды</h1>
-        <button type="button" class="btn btn-default">
-            <a href="team_list.php">
-                <i class="fa fa-list"></i>
-            </a>
-        </button>
+        <ul class="list-inline preview-links text-center">
+            <li>
+                <a href="team_list.php" class="btn btn-default">
+                    <i class="fa fa-list"></i>
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 <form method="POST" enctype="multipart/form-data">

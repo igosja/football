@@ -1,11 +1,13 @@
 <div class="row">
     <div class="col-lg-12 text-center">
         <h1 class="page-header">Командный статус</h1>
-        <button type="button" class="btn btn-default">
-            <a href="statusteam_create.php">
-                <i class="fa fa-plus"></i>
-            </a>
-        </button>
+        <ul class="list-inline preview-links text-center">
+            <li>
+                <a href="statusteam_create.php" class="btn btn-default">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 <div class="row">
