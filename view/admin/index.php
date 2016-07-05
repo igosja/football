@@ -48,6 +48,30 @@
             </a>
         </div>
     </div>
+    <?php if ($count_event) { ?>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-times fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?= $count_event; ?></div>
+                            <div>События матча</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="javascript:;">
+                    <div class="panel-footer">
+                        <span class="pull-left">Подробнее</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    <?php } ?>
 </div>
 <div class="row">
     <div class="col-lg-12">

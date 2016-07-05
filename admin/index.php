@@ -2,6 +2,14 @@
 
 include (__DIR__ . '/../include/include.php');
 
+$sql = "SELECT COUNT(`event_id`) AS `count`
+        FROM `event`
+        WHERE `event_player_id`='0'";
+$event_sql = $mysqli->query($sql);
+
+$event_array = $event_sql->fetch_all(1);
+$count_event = $event_array[0]['count'];
+
 $sql = "SELECT COUNT(`team_id`) AS `count`
         FROM `team`
         WHERE `team_id`!='0'
