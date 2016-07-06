@@ -24,7 +24,7 @@ $sql = "SELECT `city_id`,
         ON `country_continent_id`=`continent_id`
         LEFT JOIN `user`
         ON `user_id`=`team_user_id`
-        WHERE `team_user_id`='0'
+        WHERE `team_user_id`!='0'
         ORDER BY `continent_name` ASC, `country_name` ASC, `team_name` ASC, `city_name` ASC";
 $team_sql = $mysqli->query($sql);
 
