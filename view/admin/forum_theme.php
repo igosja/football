@@ -48,6 +48,10 @@
                         <?php } ?>
                     </td>
                     <td>
+                        <a href="forum_theme_delete.php?num=<?= $num_get; ?>">
+                            Удалить
+                        </a>
+                        <br/>
                         <?= nl2br($head_array[0]['forumtheme_text']); ?>
                     </td>
                 </tr>
