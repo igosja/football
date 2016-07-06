@@ -20,7 +20,9 @@
                             <td></i><?= f_igosja_ufu_date_time($item['inbox_date']); ?></td>
                             <td>
                                 <?php if (0 == $item['inbox_read']) { ?><i class="fa fa-comment-o"><?php } ?>
-                                <?= $item['user_login']; ?>
+                                <a href="user.php?num=<?= $item['user_id']; ?>">
+                                    <?= $item['user_login']; ?>
+                                </a>
                             </td>
                             <td>
                                 <a href="support_edit.php?num=<?= $item['inbox_id']; ?>"><i class="fa fa-eye"></i></a>

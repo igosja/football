@@ -18,7 +18,9 @@
                     <tr>
                         <td>
                             <?= f_igosja_ufu_date_time($inbox_array[0]['inbox_date']); ?>,
-                            <?= $inbox_array[0]['user_login']; ?>
+                            <a href="user.php?num=<?= $inbox_array[0]['user_id']; ?>">
+                                <?= $inbox_array[0]['user_login']; ?>
+                            </a>
                             <br />
                             <?= nl2br($inbox_array[0]['inbox_text']); ?>
                         </td>

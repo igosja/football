@@ -15,7 +15,8 @@ $sql = "SELECT `inbox_date`,
                `inbox_sender_id`,
                `inbox_title`,
                `inbox_text`,
-               `user_login`
+               `user_login`,
+               `user_id`
         FROM `inbox`
         LEFT JOIN `user`
         ON `user_id`=`inbox_sender_id`
