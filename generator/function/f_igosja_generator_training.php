@@ -60,7 +60,7 @@ function f_igosja_generator_training()
             $reputation = $player_array[$i]['coach_reputation'];
         }
 
-        $percent            = ceil($training_level * $reputation * $ability / 10000);
+        $percent            = ceil($training_level * $reputation * $ability / 10000) * 2;
         $training_percent   = ceil($percent * $intensity / 10);
 
         if (0 != $position_id)

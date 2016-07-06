@@ -15,8 +15,7 @@ function f_igosja_generator_lineup_event()
                    `game_home_red`,
                    `game_home_score`,
                    `game_home_team_id`,
-                   `game_home_yellow`,
-                   `game_tournament_id`
+                   `game_home_yellow`
             FROM `game`
             LEFT JOIN `shedule`
             ON `game_shedule_id`=`shedule_id`
@@ -30,20 +29,17 @@ function f_igosja_generator_lineup_event()
 
     for ($i=0; $i<$count_game; $i++)
     {
-        $game_id        = $game_array[$i]['game_id'];
-        $tournament_id  = $game_array[$i]['game_tournament_id'];
+        $game_id = $game_array[$i]['game_id'];
 
         for ($k=0; $k<HOME_GUEST_LOOP; $k++)
         {
             if (0 == $k)
             {
                 $team       = 'home';
-                $opponent   = 'guest';
             }
             else
             {
                 $team       = 'guest';
-                $opponent   = 'home';
             }
 
             $team_id        = $game_array[$i]['game_' . $team . '_team_id'];

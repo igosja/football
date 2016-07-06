@@ -50,7 +50,7 @@
     </div>
     <?php if ($count_event) { ?>
         <div class="col-lg-3 col-md-6">
-            <div class="panel panel-danger">
+            <div class="panel panel-red">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="javascript:;">
+                <a href="eventerror_list.php">
                     <div class="panel-footer">
                         <span class="pull-left">Подробнее</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
