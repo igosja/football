@@ -9,7 +9,7 @@
             <table class="table table-striped table-bordered table-hover table-condensed">
                 <thead>
                     <tr>
-                        <th>Пользователь</th>
+                        <th class="col-lg-6">Пользователь</th>
                         <th>Последний визит</th>
                     </tr>
                 </thead>
@@ -27,5 +27,12 @@
                 </tbody>
             </table>
         </div>
+        <nav class="text-center">
+            <ul class="pagination">
+                <?php for ($i=$start_pagination; $i<$end_pagination; $i++) { ?>
+                    <li <?php if ($page == $i) { ?>class="active"<?php } ?>><a href="?page=<?=$i?>"><?=$i+1?></a></li>
+                <?php } ?>
+            </ul>
+        </nav>
     </div>
 </div>
