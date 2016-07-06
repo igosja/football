@@ -3,10 +3,16 @@
         <td class="block-page" colspan="2">
             <p class="header">Общая информация</p>
             <p class="center">На этой странице вы можете провести платную тренировку своего игрока.</p>
-            <p class="center">Доступные баллы для улучшения характеристик игроков:
-            <strong><?= $user_array[0]['user_money_training']; ?></strong></p>
-            <p class="center">Доступные тернировки позиций:
-            <strong><?= $user_array[0]['user_money_position']; ?></strong></p>
+            <p class="center">
+                Доступные баллы для улучшения характеристик игроков:
+                <strong><?= $user_array[0]['user_money_training']; ?></strong>
+                <span class="grey">[<a href="shop.php">Приобрести еще</a>]</span>
+            </p>
+            <p class="center">
+                Доступные тернировки позиций:
+                <strong><?= $user_array[0]['user_money_position']; ?></strong>
+                <span class="grey">[<a href="shop.php">Приобрести еще</a>]</span>
+            </p>
         </td>
     </tr>
     <tr>
