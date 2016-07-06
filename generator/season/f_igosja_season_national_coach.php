@@ -38,6 +38,8 @@ function f_igosja_season_national_coach()
                     GROUP BY `coachvote_coachapplication_id`
                 ) AS `t1`
                 ON `coachvote_coachapplication_id`=`coachapplication_id`
+                LEFT JOIN `user`
+                ON `user_id`=`coachapplication_user_id`
                 WHERE `coachapplication_season_id`='$igosja_season_id'
                 AND `coachapplication_country_id`='$country_id'
                 AND `coachapplication_user_id` NOT IN
@@ -46,7 +48,7 @@ function f_igosja_season_national_coach()
                     FROM `country`
                     WHERE `country_user_id`!='0'
                 )
-                ORDER BY `count` DESC
+                ORDER BY `count` DESC, `user_reputation` DESC
                 LIMIT 1";
         $user_sql = f_igosja_mysqli_query($sql);
 
