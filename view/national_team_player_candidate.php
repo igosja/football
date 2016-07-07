@@ -5,7 +5,7 @@
             <table class="striped w100">
                 <tr>
                     <th class="w1"></th>
-                    <th class="w25">Имя</th>
+                    <th>Имя</th>
                     <th colspan="2">Команда</th>
                     <th class="w5">Позиция</th>
                     <th class="w5">Воз</th>
@@ -14,6 +14,7 @@
                     <th class="w15">Настроение</th>
                     <th class="w5">Конд</th>
                     <th class="w5">Фит</th>
+                    <th class="w7">Стоимость</th>
                 </tr>
                 <?php foreach ($player_array as $item) { ?>
                     <tr>
@@ -59,6 +60,7 @@
                         </td>
                         <td class="center"><?= $item['player_condition']; ?> %</td>
                         <td class="center"><?= $item['player_practice']; ?> %</td>
+                        <td class="right"><?= f_igosja_money($item['player_price']); ?></td>
                     </tr>
                 <?php } ?>
             </table>
