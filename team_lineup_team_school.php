@@ -87,7 +87,7 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
     $weight         = $school_array[0]['school_weight'];
     $school_level   = $school_array[0]['team_school_level'];
     $staff_level    = $school_array[0]['staff_reputation'];
-    $level          = round(($school_level * 10 + $staff_level) / 3);
+    $level          = ceil(($school_level * 10 + $staff_level) / 3);
 
     if (10 > $level)
     {
@@ -324,7 +324,7 @@ elseif (isset($_GET['data']) && isset($_GET['ok']))
 
     $school_level   = $team_array[0]['team_school_level'];
     $staff_level    = $team_array[0]['staff_reputation'];
-    $level          = ($school_level * 10 + $staff_level) / 2;
+    $level          = ceil(($school_level * 10 + $staff_level) / 3);
 
     if (10 > $level)
     {
