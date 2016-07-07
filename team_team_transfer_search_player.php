@@ -152,7 +152,7 @@ if (0 == $sql_position)
 }
 else
 {
-    $sql_position = "`playerposition_position_id`='$sql_position'";
+    $sql_position = "`player_position_id`='$sql_position'";
 }
 
 if (0 == $sql_country)
