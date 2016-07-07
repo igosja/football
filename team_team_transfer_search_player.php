@@ -2,13 +2,14 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (isset($_GET['num']))
+if (isset($authorization_team_id))
 {
-    $num_get = (int) $_GET['num'];
+    $num_get = $authorization_team_id;
 }
 else
 {
-    $num_get = $authorization_team_id;
+    include (__DIR__ . '/view/only_my_team.php');
+    exit;
 }
 
 $sql = "SELECT `team_name`
