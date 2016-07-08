@@ -171,6 +171,7 @@ $sql = "SELECT SUM(`statisticplayer_goal`) AS `goal`,
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
         WHERE `statisticplayer_team_id`='$num_get'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         GROUP BY `statisticplayer_player_id`
         ORDER BY `statisticplayer_goal` DESC
         LIMIT 1";
@@ -190,6 +191,7 @@ $sql = "SELECT `name_name`,
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
         WHERE `statisticplayer_team_id`='$num_get'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         GROUP BY `statisticplayer_player_id`
         ORDER BY `statisticplayer_pass_scoring` DESC
         LIMIT 1";
@@ -209,6 +211,7 @@ $sql = "SELECT SUM(`statisticplayer_best`) AS `best`,
         LEFT JOIN `surname`
         ON `player_surname_id`=`surname_id`
         WHERE `statisticplayer_team_id`='$num_get'
+        AND `statisticplayer_season_id`='$igosja_season_id'
         GROUP BY `statisticplayer_player_id`
         ORDER BY `statisticplayer_best` DESC
         LIMIT 1";
