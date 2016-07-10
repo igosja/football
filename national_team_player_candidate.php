@@ -49,6 +49,31 @@ for ($i=0; $i<$count_position; $i++)
 {
     $position_id = $position_array[$i]['position_id'];
 
+    $sql = "UPDATE `player`
+            SET `player_national_id`='0'
+            WHERE `player_id` NOT IN
+            (
+                SELECT `player_id`
+                FROM `player`
+                LEFT JOIN `position`
+                ON `player_position_id`=`position_id`
+                LEFT JOIN `name`
+                ON `player_name_id`=`name_id`
+                LEFT JOIN `surname`
+                ON `player_surname_id`=`surname_id`
+                LEFT JOIN `mood`
+                ON `player_mood_id`=`mood_id`
+                LEFT JOIN `team`
+                ON `player_team_id`=`team_id`
+                WHERE `player_country_id`='$num_get'
+                AND `player_statusnational_id`='1'
+                AND `player_team_id`!='0'
+                AND `player_position_id`='$position_id'
+                ORDER BY `player_reputation` DESC, `player_id` ASC
+                LIMIT 25
+            )";
+    $mysqli->query($sql);
+
     $sql = "SELECT `mood_id`,
                    `mood_name`,
                    `name_name`,
