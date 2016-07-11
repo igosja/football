@@ -2,113 +2,790 @@
 
 include (__DIR__ . '/include/include.php');
 
-$country_1 = 132;
-$country_2 = 6;
-$country_3 = 133;
-$country_4 = 119;
-$country_5 = 65;
-$country_6 = 168;
-$country_7 = 107;
-$country_8 = 64;
-$country_9 = 10;
-$country_10 = 171;
-$country_11 = 25;
-$country_12 = 43;
-$country_13 = 79;
-$country_14 = 177;
+$sql = "SELECT `lineup_id`
+        FROM `lineup`
+        WHERE `lineup_game_id`='5908'
+        AND `lineup_country_id`='119'";
+$lineup_sql = $mysqli->query($sql);
 
-$game = "'$country_1',  '$country_2',  '1',  '1',  '1',  '1'<br>
-        '$country_13', '$country_3',  '2',  '13', '1',  '1'<br>
-        '$country_12', '$country_4',  '3',  '12', '1',  '1'<br>
-        '$country_11', '$country_5',  '4',  '11', '1',  '1'<br>
-        '$country_10', '$country_6',  '5',  '10', '1',  '1'<br>
-        '$country_9',  '$country_7',  '6',  '9',  '1',  '1'<br>
-        '$country_14', '$country_8',  '7',  '14', '1',  '1'<br>
-        '$country_3',  '$country_1',  '8',  '3',  '2',  '2'<br>
-        '$country_4',  '$country_13', '9',  '4',  '2',  '2'<br>
-        '$country_5',  '$country_12', '10', '5',  '2',  '2'<br>
-        '$country_6',  '$country_11', '11', '6',  '2',  '2'<br>
-        '$country_7',  '$country_10', '12', '7',  '2',  '2'<br>
-        '$country_8',  '$country_9',  '13', '8',  '2',  '2'<br>
-        '$country_2',  '$country_14', '14', '2',  '2',  '2'<br>
-        '$country_1',  '$country_4',  '15', '1',  '3',  '3'<br>
-        '$country_2',  '$country_3',  '16', '2',  '3',  '3'<br>
-        '$country_10', '$country_8',  '17', '10', '3',  '3'<br>
-        '$country_11', '$country_7',  '18', '11', '3',  '3'<br>
-        '$country_12', '$country_6',  '19', '12', '3',  '3'<br>
-        '$country_13', '$country_5',  '20', '13', '3',  '3'<br>
-        '$country_14', '$country_9',  '21', '14', '3',  '3'<br>
-        '$country_4',  '$country_2',  '22', '4',  '4',  '4'<br>
-        '$country_5',  '$country_1',  '23', '5',  '4',  '4'<br>
-        '$country_6',  '$country_13', '24', '6',  '4',  '4'<br>
-        '$country_7',  '$country_12', '25', '7',  '4',  '4'<br>
-        '$country_8',  '$country_11', '26', '8',  '4',  '4'<br>
-        '$country_9',  '$country_10', '27', '9',  '4',  '4'<br>
-        '$country_3',  '$country_14', '28', '3',  '4',  '4'<br>
-        '$country_1',  '$country_6',  '29', '1',  '5',  '5'<br>
-        '$country_2',  '$country_5',  '30', '2',  '5',  '5'<br>
-        '$country_3',  '$country_4',  '31', '3',  '5',  '5'<br>
-        '$country_11', '$country_9',  '32', '11', '5',  '5'<br>
-        '$country_12', '$country_8',  '33', '12', '5',  '5'<br>
-        '$country_13', '$country_7',  '34', '13', '5',  '5'<br>
-        '$country_14', '$country_10', '35', '14', '5',  '5'<br>
-        '$country_7',  '$country_1',  '36', '7',  '6',  '6'<br>
-        '$country_6',  '$country_2',  '37', '6',  '6',  '6'<br>
-        '$country_5',  '$country_3',  '38', '5',  '6',  '6'<br>
-        '$country_10', '$country_11', '39', '10', '6',  '6'<br>
-        '$country_9',  '$country_12', '40', '9',  '6',  '6'<br>
-        '$country_8',  '$country_13', '41', '8',  '6',  '6'<br>
-        '$country_4',  '$country_14', '42', '14', '6',  '6'<br>
-        '$country_1',  '$country_8',  '43', '1',  '7',  '7'<br>
-        '$country_2',  '$country_7',  '44', '2',  '7',  '7'<br>
-        '$country_3',  '$country_6',  '45', '3',  '7',  '7'<br>
-        '$country_4',  '$country_5',  '46', '4',  '7',  '7'<br>
-        '$country_12', '$country_10', '47', '12', '7',  '7'<br>
-        '$country_13', '$country_9',  '48', '13', '7',  '7'<br>
-        '$country_14', '$country_11', '49', '14', '7',  '7'<br>
-        '$country_9',  '$country_1',  '50', '9',  '8',  '8'<br>
-        '$country_8',  '$country_2',  '51', '8',  '8',  '8'<br>
-        '$country_7',  '$country_3',  '52', '7',  '8',  '8'<br>
-        '$country_6',  '$country_4',  '53', '6',  '8',  '8'<br>
-        '$country_11', '$country_12', '54', '11', '8',  '8'<br>
-        '$country_10', '$country_13', '55', '10', '8',  '8'<br>
-        '$country_5',  '$country_14', '56', '5',  '8',  '8'<br>
-        '$country_1',  '$country_10', '57', '1',  '9',  '9'<br>
-        '$country_2',  '$country_9',  '58', '2',  '9',  '9'<br>
-        '$country_3',  '$country_8',  '59', '3',  '9',  '9'<br>
-        '$country_4',  '$country_7',  '60', '4',  '9',  '9'<br>
-        '$country_5',  '$country_6',  '61', '5',  '9',  '9'<br>
-        '$country_13', '$country_11', '62', '13', '9',  '9'<br>
-        '$country_14', '$country_12', '63', '14', '9',  '9'<br>
-        '$country_11', '$country_1',  '64', '11', '10', '10'<br>
-        '$country_10', '$country_2',  '65', '10', '10', '10'<br>
-        '$country_9',  '$country_3',  '66', '9',  '10', '10'<br>
-        '$country_8',  '$country_4',  '67', '8',  '10', '10'<br>
-        '$country_7',  '$country_5',  '68', '7',  '10', '10'<br>
-        '$country_12', '$country_13', '69', '12', '10', '10'<br>
-        '$country_6',  '$country_14', '70', '6',  '10', '10'<br>
-        '$country_1',  '$country_12', '71', '1',  '11', '11'<br>
-        '$country_2',  '$country_11', '72', '2',  '11', '11'<br>
-        '$country_3',  '$country_10', '73', '3',  '11', '11'<br>
-        '$country_4',  '$country_9',  '74', '4',  '11', '11'<br>
-        '$country_5',  '$country_8',  '75', '5',  '11', '11'<br>
-        '$country_6',  '$country_7',  '76', '6',  '11', '11'<br>
-        '$country_14', '$country_13', '77', '14', '11', '11'<br>
-        '$country_13', '$country_1',  '78', '13', '12', '12'<br>
-        '$country_12', '$country_2',  '79', '12', '12', '12'<br>
-        '$country_11', '$country_3',  '80', '11', '12', '12'<br>
-        '$country_10', '$country_4',  '81', '10', '12', '12'<br>
-        '$country_9',  '$country_5',  '82', '9',  '12', '12'<br>
-        '$country_8',  '$country_6',  '83', '8',  '12', '12'<br>
-        '$country_7',  '$country_14', '84', '7',  '12', '12'<br>
-        '$country_1',  '$country_14', '85', '1',  '13', '13'<br>
-        '$country_2',  '$country_13', '86', '2',  '13', '13'<br>
-        '$country_3',  '$country_12', '87', '3',  '13', '13'<br>
-        '$country_4',  '$country_11', '88', '4',  '13', '13'<br>
-        '$country_5',  '$country_10', '89', '5',  '13', '13'<br>
-        '$country_6',  '$country_9',  '90', '6',  '13', '13'<br>
-        '$country_7',  '$country_8',  '91', '7',  '13', '13'<br>";
+$sql = "UPDATE `lineup`
+        LEFT JOIN `player`
+        ON `player_id`=`lineup_player_id`
+        LEFT JOIN `game`
+        ON `game_id`=`lineup_game_id`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        SET `lineup_condition`=`player_condition`,
+            `lineup_practice`=`player_practice`
+        WHERE `lineup_game_id`='5908'
+        AND `lineup_country_id`='119'";
+$mysqli->query($sql);
 
-print $game;
+for ($i=0; $i<2; $i++) //Вратарям ставим меньше беготни и передач
+{
+    $if_sql = "(IF(`lineup_in`='0', IF(`lineup_out`='0', '1', (`lineup_out`)/'90'), ('90'-`lineup_in`)/'90'))";
+
+    if (0 == $i)
+    {
+        $distance   = "('3000'+'1000'*RAND()+'1000'*RAND()+'1000'*RAND()+'1000'*RAND()+'1000'*RAND()+'1000'*RAND()+'1000'*RAND())";
+        $pass       = "('30'+'10'*RAND()+'10'*RAND()+'10'*RAND())";
+        $accurate   = "('15'+'5'*RAND()+'5'*RAND()+'5'*RAND())";
+        $position   = " BETWEEN '2' AND '25'";
+    }
+    else
+    {
+        $distance   = "('2000'+'1000'*RAND()+'1000'*RAND()+'1000'*RAND())";
+        $pass       = "('15'+'2'*RAND()+'2'*RAND()+'2'*RAND())";
+        $accurate   = "('9'+'2'*RAND()+'2'*RAND()+'2'*RAND())";
+        $position   = "='1'";
+    }
+
+    $sql = "UPDATE `lineup`
+            LEFT JOIN `game`
+            ON `lineup_game_id`=`game_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            LEFT JOIN `player`
+            ON `player_id`=`lineup_player_id`
+            SET `lineup_distance`=" . $distance . " * " . $if_sql . ",
+                `lineup_pass`=" . $pass . " * " . $if_sql . ",
+                `lineup_pass_accurate`=" . $accurate . " * " . $if_sql . "
+            WHERE `lineup_game_id`='5908'
+            AND `lineup_country_id`='119'
+            AND (`lineup_position_id`" . $position . "
+            OR `lineup_in`!='0')";
+    $mysqli->query($sql);
+}
+
+$sql = "SELECT `game_id`,
+               `game_guest_country_id`,
+               `game_guest_foul`,
+               `game_guest_offside`,
+               `game_guest_ontarget`,
+               `game_guest_penalty`,
+               `game_guest_red`,
+               `game_guest_shot`,
+               `game_guest_score`,
+               `game_guest_team_id`,
+               `game_guest_yellow`,
+               `game_home_country_id`,
+               `game_home_foul`,
+               `game_home_offside`,
+               `game_home_ontarget`,
+               `game_home_penalty`,
+               `game_home_red`,
+               `game_home_score`,
+               `game_home_shot`,
+               `game_home_team_id`,
+               `game_home_yellow`,
+               `game_tournament_id`
+        FROM `game`
+        LEFT JOIN `shedule`
+        ON `game_shedule_id`=`shedule_id`
+        WHERE `game_id`='5908'
+        ORDER BY `game_id` ASC";
+$game_sql = $mysqli->query($sql);
+
+$count_game = $game_sql->num_rows;
+$game_array = $game_sql->fetch_all(1);
+
+for ($i=0; $i<$count_game; $i++) {
+    $game_id = $game_array[$i]['game_id'];
+    $tournament_id = $game_array[$i]['game_tournament_id'];
+
+    for ($k = 1; $k < HOME_GUEST_LOOP; $k++) {
+        if (0 == $k) {
+            $team = 'home';
+            $opponent = 'guest';
+        } else {
+            $team = 'guest';
+            $opponent = 'home';
+        }
+
+        $team_id = $game_array[$i]['game_' . $team . '_team_id'];
+        $country_id = $game_array[$i]['game_' . $team . '_country_id'];
+        $opponent_id = $game_array[$i]['game_' . $opponent . '_team_id'];
+        $country_opp_id = $game_array[$i]['game_' . $opponent . '_country_id'];
+        $foul = $game_array[$i]['game_' . $team . '_foul'];
+        $offside = $game_array[$i]['game_' . $team . '_offside'];
+        $ontarget = $game_array[$i]['game_' . $team . '_ontarget'];
+        $score = $game_array[$i]['game_' . $team . '_score'];
+        $shot = $game_array[$i]['game_' . $team . '_shot'];
+        $penalty = $game_array[$i]['game_' . $team . '_penalty'];
+        $red = $game_array[$i]['game_' . $team . '_red'];
+        $yellow = $game_array[$i]['game_' . $team . '_yellow'];
+
+        for ($j = 0; $j < $shot; $j++) {
+            $offset = rand(1, 100);
+
+            if (15 >= $offset) {
+                $offset = 0;
+            } elseif (29 >= $offset) {
+                $offset = 1;
+            } elseif (42 >= $offset) {
+                $offset = 2;
+            } elseif (54 >= $offset) {
+                $offset = 3;
+            } elseif (65 >= $offset) {
+                $offset = 4;
+            } elseif (74 >= $offset) {
+                $offset = 5;
+            } elseif (82 >= $offset) {
+                $offset = 6;
+            } elseif (89 >= $offset) {
+                $offset = 7;
+            } elseif (95 >= $offset) {
+                $offset = 8;
+            } else {
+                $offset = 9;
+            }
+
+            $sql = "SELECT `lineup_id`,
+                               `lineup_player_id`
+                        FROM `lineup`
+                        WHERE `lineup_team_id`='$team_id'
+                        AND `lineup_country_id`='$country_id'
+                        AND (`lineup_position_id` BETWEEN '2' AND '25'
+                        OR `lineup_in`!='0')
+                        AND `lineup_game_id`='$game_id'
+                        ORDER BY `lineup_position_id` DESC
+                        LIMIT $offset, 1";
+            $player_sql = $mysqli->query($sql);
+
+            $player_array = $player_sql->fetch_all(1);
+
+            $player_id = $player_array[0]['lineup_player_id'];
+            $lineup_id = $player_array[0]['lineup_id'];
+
+            $sql = "UPDATE `statisticplayer`
+                    SET `statisticplayer_shot`=`statisticplayer_shot`+'1'
+                    WHERE `statisticplayer_player_id`='$player_id'
+                    AND `statisticplayer_season_id`='$igosja_season_id'
+                    AND `statisticplayer_tournament_id`='$tournament_id'
+                    AND `statisticplayer_team_id`='$team_id'
+                    AND `statisticplayer_country_id`='$country_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                    SET `lineup_shot`=`lineup_shot`+'1'
+                    WHERE `lineup_id`='$lineup_id'
+                    LIMIT 1";
+            $mysqli->query($sql);
+        }
+
+        for ($j = 0; $j < $ontarget; $j++) {
+            $sql = "SELECT `lineup_id`,
+                               `lineup_player_id`
+                        FROM `lineup`
+                        WHERE `lineup_team_id`='$team_id'
+                        AND `lineup_country_id`='$country_id'
+                        AND (`lineup_position_id` BETWEEN '2' AND '25'
+                        OR `lineup_in`!='0')
+                        AND `lineup_game_id`='$game_id'
+                        AND `lineup_shot`>`lineup_ontarget`
+                        ORDER BY `lineup_shot`-`lineup_ontarget` DESC, RAND()
+                        LIMIT 1";
+            $player_sql = $mysqli->query($sql);
+
+            $player_array = $player_sql->fetch_all(1);
+
+            $player_id = $player_array[0]['lineup_player_id'];
+            $lineup_id = $player_array[0]['lineup_id'];
+
+            $sql = "UPDATE `statisticplayer`
+                        SET `statisticplayer_ontarget`=`statisticplayer_ontarget`+'1'
+                        WHERE `statisticplayer_player_id`='$player_id'
+                        AND `statisticplayer_season_id`='$igosja_season_id'
+                        AND `statisticplayer_tournament_id`='$tournament_id'
+                        AND `statisticplayer_team_id`='$team_id'
+                        AND `statisticplayer_country_id`='$country_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_ontarget`=`lineup_ontarget`+'1'
+                        WHERE `lineup_id`='$lineup_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+        }
+
+        for ($j = 0; $j < $penalty; $j++) {
+            $sql = "SELECT `event_id`,
+                               `event_minute`
+                        FROM `event`
+                        WHERE `event_eventtype_id`='" . EVENT_PENALTY_GOAL . "'
+                        AND `event_game_id`='$game_id'
+                        AND `event_team_id`='$team_id'
+                        AND `event_country_id`='$country_id'
+                        AND `event_player_id`='0'
+                        LIMIT 1";
+            $event_sql = $mysqli->query($sql);
+
+            $event_array = $event_sql->fetch_all(1);
+
+            $event_id = $event_array[0]['event_id'];
+            $event_minute = $event_array[0]['event_minute'];
+
+            $penalty_array = f_igosja_penalty_player_select($team_id, $country_id, $game_id, $event_minute);
+
+            if (isset($penalty_array['player_id'])) {
+                $player_id = $penalty_array['player_id'];
+                $lineup_id = $penalty_array['lineup_id'];
+            } else {
+                $sql = "SELECT `lineup_id`,
+                                   `lineup_player_id`
+                            FROM `lineup`
+                            WHERE `lineup_team_id`='$team_id'
+                            AND `lineup_country_id`='$country_id'
+                            AND ((`lineup_position_id` BETWEEN '2' AND '25'
+                            AND (`lineup_out`='0'
+                            OR `lineup_out`>='$event_minute'))
+                            OR (`lineup_in`<='$event_minute'
+                            AND `lineup_in`!='0'))
+                            AND `lineup_game_id`='$game_id'
+                            AND `lineup_red`='0'
+                            AND `lineup_yellow`<'2'
+                            AND `lineup_ontarget`>`lineup_goal`
+                            ORDER BY RAND()
+                            LIMIT 1";
+                $player_sql = $mysqli->query($sql);
+
+                $player_array = $player_sql->fetch_all(1);
+
+                $player_id = $player_array[0]['lineup_player_id'];
+                $lineup_id = $player_array[0]['lineup_id'];
+            }
+
+            $sql = "UPDATE `statisticplayer`
+                        SET `statisticplayer_goal`=`statisticplayer_goal`+'1',
+                            `statisticplayer_penalty`=`statisticplayer_penalty`+'1',
+                            `statisticplayer_penalty_goal`=`statisticplayer_penalty_goal`+'1'
+                        WHERE `statisticplayer_player_id`='$player_id'
+                        AND `statisticplayer_season_id`='$igosja_season_id'
+                        AND `statisticplayer_tournament_id`='$tournament_id'
+                        AND `statisticplayer_team_id`='$team_id'
+                        AND `statisticplayer_country_id`='$country_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_goal`=`lineup_goal`+'1',
+                            `lineup_penalty`=`lineup_penalty`+'1',
+                            `lineup_penalty_goal`=`lineup_penalty_goal`+'1'
+                        WHERE `lineup_id`='$lineup_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `event`
+                        SET `event_player_id`='$player_id'
+                        WHERE `event_id`='$event_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `lineup_id`,
+                               `lineup_player_id`
+                        FROM `lineup`
+                        WHERE `lineup_team_id`='$opponent_id'
+                        AND `lineup_country_id`='$country_opp_id'
+                        AND ((`lineup_position_id`='1'
+                        AND (`lineup_out`='0'
+                        OR `lineup_out`>='$event_minute'))
+                        OR (`lineup_in`<='$event_minute'
+                        AND `lineup_in`!='0'))
+                        AND `lineup_game_id`='$game_id'
+                        LIMIT 1";
+            $gk_sql = $mysqli->query($sql);
+
+            $gk_array = $gk_sql->fetch_all(1);
+
+            $player_id = $gk_array[0]['lineup_player_id'];
+            $lineup_id = $gk_array[0]['lineup_id'];
+
+            $sql = "UPDATE `statisticplayer`
+                        SET `statisticplayer_goal`=`statisticplayer_goal`-'1',
+                            `statisticplayer_penalty_goal`=`statisticplayer_penalty_goal`-'1'
+                        WHERE `statisticplayer_player_id`='$player_id'
+                        AND `statisticplayer_season_id`='$igosja_season_id'
+                        AND `statisticplayer_tournament_id`='$tournament_id'
+                        AND `statisticplayer_team_id`='$opponent_id'
+                        AND `statisticplayer_country_id`='$country_opp_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_goal`=`lineup_goal`-'1',
+                            `lineup_penalty_goal`=`lineup_penalty_goal`-'1'
+                        WHERE `lineup_id`='$lineup_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+        }
+
+        for ($j = 0; $j < $score - $penalty; $j++) {
+            $sql = "SELECT `event_id`,
+                               `event_minute`
+                        FROM `event`
+                        WHERE `event_eventtype_id`='" . EVENT_GOAL . "'
+                        AND `event_game_id`='$game_id'
+                        AND `event_team_id`='$team_id'
+                        AND `event_country_id`='$country_id'
+                        AND `event_player_id`='0'
+                        LIMIT 1";
+            $event_sql = $mysqli->query($sql);
+
+            $event_array = $event_sql->fetch_all(1);
+
+            $event_id = $event_array[0]['event_id'];
+            $event_minute = $event_array[0]['event_minute'];
+
+            $sql = "SELECT `lineup_id`,
+                               `lineup_player_id`
+                        FROM `lineup`
+                        WHERE `lineup_team_id`='$team_id'
+                        AND `lineup_country_id`='$country_id'
+                        AND ((`lineup_position_id` BETWEEN '2' AND '25'
+                        AND (`lineup_out`='0'
+                        OR `lineup_out`>='$event_minute'))
+                        OR (`lineup_in`<='$event_minute'
+                        AND `lineup_in`!='0'))
+                        AND `lineup_game_id`='$game_id'
+                        AND `lineup_red`='0'
+                        AND `lineup_yellow`<'2'
+                        AND `lineup_ontarget`>`lineup_goal`
+                        ORDER BY `lineup_ontarget`-`lineup_goal` DESC, RAND()
+                        LIMIT 1";
+            $player_sql = $mysqli->query($sql);
+
+            $player_array = $player_sql->fetch_all(1);
+
+            $player_id = $player_array[0]['lineup_player_id'];
+            $lineup_id = $player_array[0]['lineup_id'];
+
+            $sql = "UPDATE `statisticplayer`
+                        SET `statisticplayer_goal`=`statisticplayer_goal`+'1'
+                        WHERE `statisticplayer_player_id`='$player_id'
+                        AND `statisticplayer_season_id`='$igosja_season_id'
+                        AND `statisticplayer_tournament_id`='$tournament_id'
+                        AND `statisticplayer_team_id`='$team_id'
+                        AND `statisticplayer_country_id`='$country_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_goal`=`lineup_goal`+'1'
+                        WHERE `lineup_id`='$lineup_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `event`
+                        SET `event_player_id`='$player_id'
+                        WHERE `event_id`='$event_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `lineup_id`,
+                               `lineup_player_id`
+                        FROM `lineup`
+                        WHERE `lineup_team_id`='$team_id'
+                        AND `lineup_country_id`='$country_id'
+                        AND ((`lineup_position_id` BETWEEN '2' AND '25'
+                        AND (`lineup_out`='0'
+                        OR `lineup_out`>='$event_minute'))
+                        OR (`lineup_in`<='$event_minute'
+                        AND `lineup_in`!='0'))
+                        AND `lineup_game_id`='$game_id'
+                        AND `lineup_red`='0'
+                        AND `lineup_yellow`<'2'
+                        AND `lineup_id`!='$lineup_id'
+                        ORDER BY RAND()
+                        LIMIT 1";
+            $player_sql = $mysqli->query($sql);
+
+            $player_array = $player_sql->fetch_all(1);
+
+            $player_id = $player_array[0]['lineup_player_id'];
+            $lineup_id = $player_array[0]['lineup_id'];
+
+            $sql = "UPDATE `statisticplayer`
+                        SET `statisticplayer_pass_scoring`=`statisticplayer_pass_scoring`+'1'
+                        WHERE `statisticplayer_player_id`='$player_id'
+                        AND `statisticplayer_season_id`='$igosja_season_id'
+                        AND `statisticplayer_tournament_id`='$tournament_id'
+                        AND `statisticplayer_team_id`='$team_id'
+                        AND `statisticplayer_country_id`='$country_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_pass_scoring`=`lineup_pass_scoring`+'1'
+                        WHERE `lineup_id`='$lineup_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "SELECT `lineup_id`,
+                               `lineup_player_id`
+                        FROM `lineup`
+                        WHERE `lineup_team_id`='$opponent_id'
+                        AND `lineup_country_id`='$country_opp_id'
+                        AND ((`lineup_position_id`='1'
+                        AND (`lineup_out`='0'
+                        OR `lineup_out`>='$event_minute'))
+                        OR (`lineup_in`<='$event_minute'
+                        AND `lineup_in`!='0'))
+                        AND `lineup_game_id`='$game_id'
+                        LIMIT 1";
+            $gk_sql = $mysqli->query($sql);
+
+            $gk_array = $gk_sql->fetch_all(1);
+
+            $player_id = $gk_array[0]['lineup_player_id'];
+            $lineup_id = $gk_array[0]['lineup_id'];
+
+            $sql = "UPDATE `statisticplayer`
+                        SET `statisticplayer_goal`=`statisticplayer_goal`-'1'
+                        WHERE `statisticplayer_player_id`='$player_id'
+                        AND `statisticplayer_season_id`='$igosja_season_id'
+                        AND `statisticplayer_tournament_id`='$tournament_id'
+                        AND `statisticplayer_team_id`='$opponent_id'
+                        AND `statisticplayer_country_id`='$country_opp_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_goal`=`lineup_goal`-'1'
+                        WHERE `lineup_id`='$lineup_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+        }
+
+        for ($j = 0; $j < $foul; $j++) {
+            $sql = "SELECT `lineup_id`,
+                               `lineup_player_id`
+                        FROM `lineup`
+                        WHERE `lineup_team_id`='$team_id'
+                        AND `lineup_country_id`='$country_id'
+                        AND (`lineup_position_id` BETWEEN '2' AND '25'
+                        OR `lineup_in`!='0')
+                        AND `lineup_game_id`='$game_id'
+                        ORDER BY RAND()
+                        LIMIT 1";
+            $player_sql = $mysqli->query($sql);
+
+            $player_array = $player_sql->fetch_all(1);
+
+            $player_id = $player_array[0]['lineup_player_id'];
+            $lineup_id = $player_array[0]['lineup_id'];
+
+            $sql = "UPDATE `statisticplayer`
+                        SET `statisticplayer_foul`=`statisticplayer_foul`+'1'
+                        WHERE `statisticplayer_player_id`='$player_id'
+                        AND `statisticplayer_season_id`='$igosja_season_id'
+                        AND `statisticplayer_tournament_id`='$tournament_id'
+                        AND `statisticplayer_team_id`='$team_id'
+                        AND `statisticplayer_country_id`='$country_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_foul_made`=`lineup_foul_made`+'1'
+                        WHERE `lineup_id`='$lineup_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_foul_recieve`=`lineup_foul_recieve`+'1'
+                        WHERE `lineup_team_id`='$opponent_id'
+                        AND `lineup_country_id`='$country_opp_id'
+                        AND `lineup_position_id` BETWEEN '2' AND '25'
+                        AND `lineup_game_id`='$game_id'
+                        ORDER BY RAND()
+                        LIMIT 1";
+            $mysqli->query($sql);
+        }
+
+        for ($j = 0; $j < $yellow; $j++) {
+            $sql = "SELECT `event_id`,
+                               `event_minute`
+                        FROM `event`
+                        WHERE `event_eventtype_id`='" . EVENT_YELLOW . "'
+                        AND `event_game_id`='$game_id'
+                        AND `event_team_id`='$team_id'
+                        AND `event_country_id`='$country_id'
+                        AND `event_player_id`='0'
+                        LIMIT 1";
+            $event_sql = $mysqli->query($sql);
+
+            $event_array = $event_sql->fetch_all(1);
+
+            $event_id = $event_array[0]['event_id'];
+            $event_minute = $event_array[0]['event_minute'];
+
+            $sql = "SELECT `lineup_id`,
+                               `lineup_player_id`
+                        FROM `lineup`
+                        WHERE `lineup_team_id`='$team_id'
+                        AND `lineup_country_id`='$country_id'
+                        AND ((`lineup_position_id` BETWEEN '2' AND '25'
+                        AND (`lineup_out`='0'
+                        OR `lineup_out`>='$event_minute'))
+                        OR (`lineup_in`<='$event_minute'
+                        AND `lineup_in`!='0'))
+                        AND `lineup_game_id`='$game_id'
+                        AND `lineup_foul_made`>'0'
+                        AND `lineup_yellow`='0'
+                        AND `lineup_red`='0'
+                        ORDER BY RAND()
+                        LIMIT 1";
+            $player_sql = $mysqli->query($sql);
+
+            $player_array = $player_sql->fetch_all(1);
+
+            if (!isset($player_array[0])) {
+                $sql = "SELECT `lineup_id`,
+                                   `lineup_player_id`
+                            FROM `lineup`
+                            WHERE `lineup_team_id`='$team_id'
+                            AND `lineup_country_id`='$country_id'
+                            AND (`lineup_position_id` BETWEEN '2' AND '25'
+                            OR `lineup_in`!='0')
+                            AND `lineup_game_id`='$game_id'
+                            AND `lineup_yellow`='0'
+                            AND `lineup_red`='0'
+                            ORDER BY RAND()
+                            LIMIT 1";
+                $player_sql = $mysqli->query($sql);
+
+                $player_array = $player_sql->fetch_all(1);
+            }
+
+            $player_id = $player_array[0]['lineup_player_id'];
+            $lineup_id = $player_array[0]['lineup_id'];
+
+            $sql = "UPDATE `disqualification`
+                        SET `disqualification_yellow`=`disqualification_yellow`+'1'
+                        WHERE `disqualification_player_id`='$player_id'
+                        AND `disqualification_tournament_id`='$tournament_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `statisticplayer`
+                        SET `statisticplayer_yellow`=`statisticplayer_yellow`+'1'
+                        WHERE `statisticplayer_player_id`='$player_id'
+                        AND `statisticplayer_season_id`='$igosja_season_id'
+                        AND `statisticplayer_tournament_id`='$tournament_id'
+                        AND `statisticplayer_team_id`='$team_id'
+                        AND `statisticplayer_country_id`='$country_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_yellow`=`lineup_yellow`+'1'
+                        WHERE `lineup_id`='$lineup_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `event`
+                        SET `event_player_id`='$player_id'
+                        WHERE `event_id`='$event_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+        }
+
+        for ($j = 0; $j < $red; $j++) {
+            $sql = "SELECT `event_id`,
+                               `event_minute`
+                        FROM `event`
+                        WHERE `event_eventtype_id`='" . EVENT_RED . "'
+                        AND `event_game_id`='$game_id'
+                        AND `event_team_id`='$team_id'
+                        AND `event_country_id`='$country_id'
+                        AND `event_player_id`='0'
+                        LIMIT 1";
+            $event_sql = $mysqli->query($sql);
+
+            $event_array = $event_sql->fetch_all(1);
+
+            $event_id = $event_array[0]['event_id'];
+            $event_minute = $event_array[0]['event_minute'];
+
+            $sql = "SELECT `lineup_id`,
+                               `lineup_player_id`
+                        FROM `lineup`
+                        WHERE `lineup_team_id`='$team_id'
+                        AND `lineup_country_id`='$country_id'
+                        AND ((`lineup_position_id` BETWEEN '2' AND '25'
+                        AND (`lineup_out`='0'
+                        OR `lineup_out`>='$event_minute'))
+                        OR (`lineup_in`<='$event_minute'
+                        AND `lineup_in`!='0'))
+                        AND `lineup_game_id`='$game_id'
+                        AND `lineup_foul_made`>`lineup_yellow`
+                        AND `lineup_red`='0'
+                        AND `lineup_yellow`<'2'
+                        AND `lineup_goal`='0'
+                        AND `lineup_penalty_goal`='0'
+                        AND `lineup_penalty`='0'
+                        AND `lineup_pass_scoring`='0'
+                        ORDER BY `lineup_yellow` ASC, RAND()
+                        LIMIT 1";
+            $player_sql = $mysqli->query($sql);
+
+            $player_array = $player_sql->fetch_all(1);
+
+            $player_id = $player_array[0]['lineup_player_id'];
+            $lineup_id = $player_array[0]['lineup_id'];
+
+            $sql = "UPDATE `disqualification`
+                        SET `disqualification_red`=`disqualification_red`+'1'
+                        WHERE `disqualification_player_id`='$player_id'
+                        AND `disqualification_tournament_id`='$tournament_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `statisticplayer`
+                        SET `statisticplayer_red`=`statisticplayer_red`+'1'
+                        WHERE `statisticplayer_player_id`='$player_id'
+                        AND `statisticplayer_season_id`='$igosja_season_id'
+                        AND `statisticplayer_tournament_id`='$tournament_id'
+                        AND `statisticplayer_team_id`='$team_id'
+                        AND `statisticplayer_country_id`='$country_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_red`=`lineup_red`+'1'
+                        WHERE `lineup_id`='$lineup_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+
+            $sql = "UPDATE `event`
+                        SET `event_player_id`='$player_id'
+                        WHERE `event_id`='$event_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+        }
+
+        for ($j = 0; $j < $offside; $j++) {
+            $offset = rand(1, 100);
+
+            if (15 >= $offset) {
+                $offset = 0;
+            } elseif (29 >= $offset) {
+                $offset = 1;
+            } elseif (42 >= $offset) {
+                $offset = 2;
+            } elseif (54 >= $offset) {
+                $offset = 3;
+            } elseif (65 >= $offset) {
+                $offset = 4;
+            } elseif (74 >= $offset) {
+                $offset = 5;
+            } elseif (82 >= $offset) {
+                $offset = 6;
+            } elseif (89 >= $offset) {
+                $offset = 7;
+            } elseif (95 >= $offset) {
+                $offset = 8;
+            } else {
+                $offset = 9;
+            }
+
+            $sql = "SELECT `lineup_id`
+                        FROM `lineup`
+                        WHERE `lineup_team_id`='$team_id'
+                        AND `lineup_country_id`='$country_id'
+                        AND (`lineup_position_id` BETWEEN '2' AND '25'
+                        OR `lineup_in`!='0')
+                        AND `lineup_game_id`='$game_id'
+                        ORDER BY `lineup_position_id` DESC
+                        LIMIT $offset, 1";
+            $lineup_sql = $mysqli->query($sql);
+
+            $lineup_array = $lineup_sql->fetch_all(1);
+
+            $lineup_id = $lineup_array[0]['lineup_id'];
+
+            $sql = "UPDATE `lineup`
+                        SET `lineup_offside`=`lineup_offside`+'1'
+                        WHERE `lineup_id`='$lineup_id'
+                        LIMIT 1";
+            $mysqli->query($sql);
+        }
+    }
+}
+
+$sql = "UPDATE `lineup`
+        LEFT JOIN `game`
+        ON `lineup_game_id`=`game_id`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `player`
+        ON `player_id`=`lineup_player_id`
+        SET `lineup_mark`='6'+RAND()+`lineup_goal`/'2'+`lineup_pass_scoring`/'3'-`lineup_red`/'2'-`lineup_yellow`/'3'
+        WHERE `lineup_game_id`='5908'
+        AND `lineup_country_id`='119'
+        AND (`lineup_position_id` BETWEEN 2 AND 25
+        OR `lineup_in`!='0')";
+$mysqli->query($sql);
+
+$sql = "UPDATE `lineup`
+        LEFT JOIN `game`
+        ON `lineup_game_id`=`game_id`
+        LEFT JOIN `shedule`
+        ON `shedule_id`=`game_shedule_id`
+        LEFT JOIN `player`
+        ON `player_id`=`lineup_player_id`
+        SET `lineup_mark`='7'+RAND()+`lineup_goal`/'2'+`lineup_pass_scoring`/'3'-`lineup_red`/'2'-`lineup_yellow`/'3'
+        WHERE `lineup_game_id`='5908'
+        AND `lineup_country_id`='119'
+        AND `lineup_position_id`='1'";
+$mysqli->query($sql);
+
+$sql = "UPDATE `lineup`
+            LEFT JOIN `game`
+            ON `lineup_game_id`=`game_id`
+            LEFT JOIN `shedule`
+            ON `shedule_id`=`game_shedule_id`
+            LEFT JOIN `statisticplayer`
+            ON `statisticplayer_player_id`=`lineup_player_id`
+            AND `statisticplayer_tournament_id`=`game_tournament_id`
+            AND `statisticplayer_country_id`=`lineup_country_id`
+            SET `statisticplayer_game`=`statisticplayer_game`+'1',
+                `statisticplayer_distance`=`statisticplayer_distance`+`lineup_distance`,
+                `statisticplayer_mark`=`statisticplayer_mark`+`lineup_mark`,
+                `statisticplayer_pass`=`statisticplayer_pass`+`lineup_pass`,
+                `statisticplayer_pass_accurate`=`statisticplayer_pass_accurate`+`lineup_pass_accurate`
+            WHERE `statisticplayer_season_id`='$igosja_season_id'
+            AND `lineup_team_id`='0'
+            AND `lineup_position_id`<='25'
+            AND `lineup_game_id`='5908'
+          AND `lineup_country_id`='119'";
+$mysqli->query($sql);
+
+$sql = "UPDATE `statisticplayer`
+            LEFT JOIN
+            (
+                SELECT *
+                FROM `lineup`
+                LEFT JOIN `game`
+                ON `lineup_game_id`=`game_id`
+                LEFT JOIN `shedule`
+                ON `shedule_id`=`game_shedule_id`
+                WHERE `shedule_date`=CURDATE()
+                AND `game_played`='0'
+                GROUP BY `lineup_game_id`
+                ORDER BY `lineup_mark` DESC
+            ) AS `t1`
+            ON `statisticplayer_player_id`=`lineup_player_id`
+            AND `statisticplayer_tournament_id`=`game_tournament_id`
+            AND `statisticplayer_country_id`=`lineup_country_id`
+            SET `statisticplayer_best`=`statisticplayer_best`+'1'
+            WHERE `statisticplayer_season_id`='$igosja_season_id'
+            AND `lineup_team_id`='0'
+            AND `lineup_id` IS NOT NULL
+            AND `lineup_game_id`='5908'
+          AND `lineup_country_id`='119'";
+$mysqli->query($sql);
+
 print '<br />Страница сгенерирована за ' . round(microtime(true) - $start_time, 5) . ' сек. в ' . date('H:i:s') . '
        <br />Потребление памяти: ' . number_format(memory_get_usage(), 0, ",", " ") . ' Б';
