@@ -100,6 +100,14 @@ $sql = "SELECT `playerposition_value`,
         ORDER BY `playerposition_value` DESC";
 $position_sql = $mysqli->query($sql);
 
+$count_position = $position_sql->num_rows;
+
+if (0 == $count_position)
+{
+    include (__DIR__ . '/view/wrong_page.php');
+    exit;
+}
+
 $position_array = $position_sql->fetch_all(1);
 
 $sql = "SELECT `lineup_mark`

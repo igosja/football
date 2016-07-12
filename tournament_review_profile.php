@@ -17,6 +17,14 @@ $sql = "SELECT `tournament_tournamenttype_id`
         LIMIT 1";
 $tournament_sql = $mysqli->query($sql);
 
+$count_tournament = $tournament_sql->num_rows;
+
+if (0 == $count_tournament)
+{
+    include (__DIR__ . '/view/wrong_page.php');
+    exit;
+}
+
 $tournament_array = $tournament_sql->fetch_all(1);
 
 $tournamenttype_id = $tournament_array[0]['tournament_tournamenttype_id'];
