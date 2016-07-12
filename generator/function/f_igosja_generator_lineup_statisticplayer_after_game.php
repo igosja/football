@@ -306,6 +306,28 @@ function f_igosja_generator_lineup_statisticplayer_after_game()
                         LIMIT 1";
                 $player_sql = f_igosja_mysqli_query($sql);
 
+                $count_player = $player_sql->num_rows;
+
+                if (0 == $count_player)
+                {
+                    $sql = "SELECT `lineup_id`,
+                                   `lineup_player_id`
+                            FROM `lineup`
+                            WHERE `lineup_team_id`='$team_id'
+                            AND `lineup_country_id`='$country_id'
+                            AND ((`lineup_position_id` BETWEEN '2' AND '25'
+                            AND (`lineup_out`='0'
+                            OR `lineup_out`>='$event_minute'))
+                            OR (`lineup_in`<='$event_minute'
+                            AND `lineup_in`!='0'))
+                            AND `lineup_game_id`='$game_id'
+                            AND `lineup_red`='0'
+                            AND `lineup_yellow`<'2'
+                            ORDER BY `lineup_ontarget`-`lineup_goal` DESC, RAND()
+                            LIMIT 1";
+                    $player_sql = f_igosja_mysqli_query($sql);
+                }
+
                 $player_array = $player_sql->fetch_all(1);
 
                 $player_id = $player_array[0]['lineup_player_id'];

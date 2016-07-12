@@ -114,18 +114,23 @@ function f_igosja_generator_lineup_check_and_fill()
                                 LIMIT 1";
                         $player_sql = f_igosja_mysqli_query($sql);
 
-                        $player_array = $player_sql->fetch_all(1);
+                        $count_player = $player_sql->num_rows;
 
-                        $player_id = $player_array[0]['player_id'];
+                        if (0 != $count_player)
+                        {
+                            $player_array = $player_sql->fetch_all(1);
 
-                        $sql = "INSERT INTO `lineup`
-                                SET `lineup_auto`='1',
-                                    `lineup_player_id`='$player_id',
-                                    `lineup_position_id`='$position_id',
-                                    `lineup_role_id`='$role_id',
-                                    `lineup_game_id`='$game_id',
-                                    `lineup_team_id`='$team_id'";
-                        f_igosja_mysqli_query($sql);
+                            $player_id = $player_array[0]['player_id'];
+
+                            $sql = "INSERT INTO `lineup`
+                                    SET `lineup_auto`='1',
+                                        `lineup_player_id`='$player_id',
+                                        `lineup_position_id`='$position_id',
+                                        `lineup_role_id`='$role_id',
+                                        `lineup_game_id`='$game_id',
+                                        `lineup_team_id`='$team_id'";
+                            f_igosja_mysqli_query($sql);
+                        }
                     }
                     else
                     {
@@ -201,15 +206,20 @@ function f_igosja_generator_lineup_check_and_fill()
                                     LIMIT 1";
                             $player_sql = f_igosja_mysqli_query($sql);
 
-                            $player_array = $player_sql->fetch_all(1);
+                            $count_player = $player_sql->num_rows;
 
-                            $player_id = $player_array[0]['player_id'];
+                            if (0 != $count_player)
+                            {
+                                $player_array = $player_sql->fetch_all(1);
 
-                            $sql = "UPDATE `lineup`
-                                    SET `lineup_player_id`='$player_id'
-                                    WHERE `lineup_id`='$lineup_id'
-                                    LIMIT 1";
-                            f_igosja_mysqli_query($sql);
+                                $player_id = $player_array[0]['player_id'];
+
+                                $sql = "UPDATE `lineup`
+                                        SET `lineup_player_id`='$player_id'
+                                        WHERE `lineup_id`='$lineup_id'
+                                        LIMIT 1";
+                                f_igosja_mysqli_query($sql);
+                            }
                         }
 
                         if (0 == $position_id)
