@@ -50,6 +50,7 @@ if (!isset($authorization_team_id))
             $sql = "UPDATE `standing`
                     SET `standing_user_id`='0'
                     WHERE `standing_user_id`='$authorization_id'
+                    AND `standing_season_id`='$igosja_season_id'
                     LIMIT 1";
             $mysqli->query($sql);
 
