@@ -2,6 +2,27 @@
     <tr>
         <td class="block-page" id="player-block">
             <p class="header">Игроки</p>
+            <table class="w100">
+                <tr>
+                    <td>
+                        <form method="GET">
+                            <select name="position">
+                                <option value="0">Позиция</option>
+                                <?php foreach ($position_array as $item) { ?>
+                                    <option value="<?= $item['position_id']; ?>"
+                                        <?php if (isset($_GET['position']) && $_GET['position'] == $item['position_id']) { ?>
+                                            selected
+                                        <?php } ?>
+                                    >
+                                        <?= $item['position_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                            <input type="submit" value="Поиск">
+                        </form>
+                    </td>
+                </tr>
+            </table>
             <table class="striped w100">
                 <tr>
                     <th class="w1"></th>
