@@ -39,7 +39,7 @@ $(document).ready(function ($) {
     {
         $('#index-registration-chart').highcharts({
             title: {
-                text: 'Регистрации за месяц',
+                text: 'Регистрации за 2 недели',
                 x: -20 //center
             },
             xAxis: {
@@ -65,6 +65,43 @@ $(document).ready(function ($) {
             series: [{
                 name: 'Зарегистрировано',
                 data: registration_user
+            }],
+            credits: {
+                enabled: false
+            }
+        });
+    }
+
+    if ($(div_on_page_array).is('#index-payment-chart'))
+    {
+        $('#index-payment-chart').highcharts({
+            title: {
+                text: 'Платежи на год',
+                x: -20 //center
+            },
+            xAxis: {
+                categories: payment_date
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: 'Платежи'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: ' руб.'
+            },
+            legend: {
+                enabled: false
+            },
+            series: [{
+                name: 'Оплаты',
+                data: payment_sum
             }],
             credits: {
                 enabled: false

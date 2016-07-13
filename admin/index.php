@@ -28,11 +28,38 @@ $userteam_sql = $mysqli->query($sql);
 $userteam_array = $userteam_sql->fetch_all(1);
 $count_userteam = $userteam_array[0]['count'];
 
+$sql = "SELECT SUM(`payment_sum`) AS `count`,
+               DATE_FORMAT(FROM_UNIXTIME(`payment_date`), '%m') AS `month`,
+               DATE_FORMAT(FROM_UNIXTIME(`payment_date`), '%Y') AS `year`
+        FROM `payment`
+        WHERE `payment_date`>UNIX_TIMESTAMP()-365*60*60
+        AND `payment_status`='1'
+        GROUP BY DATE_FORMAT(FROM_UNIXTIME(`payment_date`), '%m')
+        ORDER BY `payment_date` ASC";
+$payment_sql = $mysqli->query($sql);
+
+$payment_array = $payment_sql->fetch_all(1);
+
+$payment_date = array();
+$payment_user = array();
+
+foreach ($payment_array as $item)
+{
+    $date = "'" . $item['month'] . '.' . $item['year'] . "'";
+    $sum  = $item['count'] * 50;
+
+    $payment_date[] = $date;
+    $payment_sum[]  = $sum;
+}
+
+$payment_date = implode(', ', $payment_date);
+$payment_sum  = implode(', ', $payment_sum);
+
 $sql = "SELECT COUNT(`user_id`) AS `count`,
                DATE_FORMAT(FROM_UNIXTIME(`user_registration_date`), '%d') AS `day`,
                DATE_FORMAT(FROM_UNIXTIME(`user_registration_date`), '%m') AS `month`
         FROM `user`
-        WHERE `user_registration_date`>UNIX_TIMESTAMP()-30*24*60*60
+        WHERE `user_registration_date`>UNIX_TIMESTAMP()-14*24*60*60
         GROUP BY DATE_FORMAT(FROM_UNIXTIME(`user_registration_date`), '%d')
         ORDER BY `user_registration_date` ASC";
 $registration_sql = $mysqli->query($sql);
