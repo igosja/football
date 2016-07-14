@@ -5,7 +5,7 @@
             <table class="w100">
                 <tr>
                     <?php for ($i=0; $i<3; $i++) { ?>
-                        <td class="33">
+                        <td class="w33">
                             <table class="striped w100">
                                 <tr>
                                     <td class="center">

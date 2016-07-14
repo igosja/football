@@ -26,7 +26,7 @@
             <p class="center header">Увлекательные футбольные матчи и первые победы уже ждут Вас!</p>
             <p class="justify">Футбольный онлайн менеджер <strong>“Виртуальная Футбольная Лига”</strong> – это больше, чем обычная игра. Это сообщество людей, которые объединены страстью и любовью к футболу. Здесь Вы обязательно сможете найти интересных людей, заведете новые знакомства и просто отлично проведетё время в непринужденной и максимально комфортной атмосфере. Вперёд, пришло время занять тренерское кресло и кабинет менеджера!</p>
         </td>
-        <td class="block-page w1">
+        <td class="block-page w1" rowspan="2">
             <p class="header">Кнопки</p>
             <a href="//www.liveinternet.ru/click" target="_blank">
                 <img
@@ -51,6 +51,51 @@
             <a href="https://passport.webmoney.ru/asp/certview.asp?wmid=274662367507" target="_blank">
                 <img src="/img/webmoney.png" />
             </a>
+        </td>
+    </tr>
+    <tr>
+        <td class="block-page">
+            <p class="header">Ближайшее расписание</p>
+            <table class="striped w100">
+                <tr>
+                    <th>Дата</th>
+                    <th>Турнир</th>
+                </tr>
+                <?php foreach ($shedule_array as $item) { ?>
+                    <?php
+
+                    if (TOURNAMENT_TYPE_CHAMPIONSHIP == $item['tournamenttype_id'])
+                    {
+                        $link = 'continent_tournament_championship.php?num=1';
+                    }
+                    elseif (TOURNAMENT_TYPE_CUP == $item['tournamenttype_id'])
+                    {
+                        $link = 'continent_tournament_cup.php?num=1';
+                    }
+                    elseif (TOURNAMENT_TYPE_CHAMPIONS_LEAGUE == $item['tournamenttype_id'])
+                    {
+                        $link = 'league_review_profile.php?num=3';
+                    }
+                    elseif (TOURNAMENT_TYPE_WORLD_CUP == $item['tournamenttype_id'])
+                    {
+                        $link = 'worldcup_review_profile.php?num=2';
+                    }
+                    else
+                    {
+                        $link = 'javascript:;';
+                    }
+
+                    ?>
+                    <tr <?php if ($item['shedule_date'] == date('Y-m-d')) { ?>class="current"<?php } ?>>
+                        <td class="center w15"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
+                        <td>
+                            <a href="<?= $link; ?>">
+                                <?= $item['tournamenttype_name']; ?>
+                            </a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
         </td>
     </tr>
 </table>
