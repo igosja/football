@@ -59,6 +59,7 @@ if (isset($_POST['data']))
 $sql = "SELECT `name_name`,
                `player_condition`,
                `player_id`,
+               `player_national_id`,
                `player_training_attribute_id`,
                `player_training_intensity`,
                `player_training_position_id`,

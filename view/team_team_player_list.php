@@ -18,6 +18,7 @@
                             <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
                                 <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                             </a>
+                            <?= f_igosja_player_info_icon($item); ?>
                         </td>
                         <td>
                             <a href="national_team_review_profile.php?num=<?= $item['country_id']; ?>">

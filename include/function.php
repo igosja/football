@@ -770,3 +770,21 @@ function f_igosja_penalty_player_select($team_id, $country_id, $game_id, $event_
 
     return $penalty_array;
 }
+
+function f_igosja_player_info_icon($item)
+{
+    $return = '';
+
+    if (isset($item['player_national_id']) && 0 != $item['player_national_id'])
+    {
+        $return = $return .
+        '<img
+            alt="Игрок сборной"
+            class="img-12"
+            src="/img/roster/national.png"
+            title="Игрок сборной"
+        />';
+    }
+
+    return $return;
+}

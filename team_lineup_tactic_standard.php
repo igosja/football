@@ -117,6 +117,7 @@ $sql = "SELECT `corner`,
                `name_name`,
                `out`,
                `player_id`,
+               `player_national_id`,
                `position_name`,
                `surname_name`
         FROM `player`

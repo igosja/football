@@ -16,6 +16,7 @@
                                 <a href="player_home_profile.php?num=<?= $item['player_id']; ?>">
                                     <?= $item['name_name']; ?> <?= $item['surname_name']; ?>
                                 </a>
+                                <?= f_igosja_player_info_icon($item); ?>
                             </td>
                             <td class="center"><?= $item['free_kick']; ?></td>
                             <td class="center"><?= $item['corner']; ?></td>

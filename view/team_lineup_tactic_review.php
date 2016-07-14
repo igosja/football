@@ -125,6 +125,7 @@
                                     title="Дисквалификация"
                                 />
                             <?php } ?>
+                            <?= f_igosja_player_info_icon($item); ?>
                         </td>
                         <td class="center"><?= $item['position_name']; ?></td>
                         <td class="center"><?= $item['player_condition']; ?> %</td>

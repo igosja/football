@@ -56,6 +56,7 @@ $sql = "SELECT `leader`,
                `name_name`,
                `player_age`,
                `player_id`,
+               `player_national_id`,
                `position_name`,
                `surname_name`
         FROM `player`
