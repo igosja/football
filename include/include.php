@@ -2,7 +2,7 @@
 
 $start_time = microtime(true);
 
-$css_js_version = 1;
+$css_js_version = 2;
 
 $phpstorm_licence = 'http://idea.qinxi1992.cn/';
 $wind_php_command = 'D:\xampp\php\php-cgi.exe D:\xampp\htdocs\fm.local.net\www\generator\generator.php';
