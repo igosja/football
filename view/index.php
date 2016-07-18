@@ -87,7 +87,7 @@
 
                     ?>
                     <tr <?php if ($item['shedule_date'] == date('Y-m-d')) { ?>class="current"<?php } ?>>
-                        <td class="center w15"><?= f_igosja_ufu_date($item['shedule_date']); ?></td>
+                        <td class="center w15">12:00 МСК, <?= f_igosja_ufu_date($item['shedule_date']); ?></td>
                         <td>
                             <a href="<?= $link; ?>">
                                 <?= $item['tournamenttype_name']; ?>
