@@ -18,7 +18,7 @@
             <table class="bordered w100">
                 <?php for ($i=0; $i<$count_vote; $i++) { ?>
                     <?php if (!isset($vote_array[$i-1]['vote_id']) || $vote_array[$i-1]['vote_id'] != $vote_array[$i]['vote_id']) { ?>
-                        <tr class="current">
+                        <tr class="current-vote">
                             <td><strong><?= $vote_array[$i]['vote_question']; ?></strong></td>
                             <td class="w10"></td>
                         </tr>
