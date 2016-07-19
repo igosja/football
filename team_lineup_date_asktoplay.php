@@ -166,7 +166,7 @@ if (isset($_GET['ok']))
                 SET `inbox_asktoplay_id`='$asktoplay_id',
                     `inbox_date`=UNIX_TIMESTAMP(),
                     `inbox_inboxtheme_id`='" . INBOXTHEME_ASKTOPLAY_YES . "',
-                    `inbox_sender_id`='$authorization_id',
+                    `inbox_sender_id`='$authorization_user_id',
                     `inbox_title`='$inboxtheme_name',
                     `inbox_text`='$inboxtheme_text',
                     `inbox_user_id`='$user_id'";

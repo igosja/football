@@ -21,7 +21,7 @@ if (isset($_GET['group']))
                 SET `forumtheme_forumthemegroup_id`='$get_group',
                     `forumtheme_name`=?,
                     `forumtheme_text`=?,
-                    `forumtheme_user_id`='$authorization_id',
+                    `forumtheme_user_id`='$authorization_user_id',
                     `forumtheme_date`=UNIX_TIMESTAMP(),
                     `forumtheme_edit`=UNIX_TIMESTAMP()";
         $prepare = $mysqli->prepare($sql);
@@ -66,7 +66,7 @@ else
                 SET `forumpost_forumtheme_id`='$get_theme',
                     `forumpost_name`=?,
                     `forumpost_text`=?,
-                    `forumpost_user_id`='$authorization_id',
+                    `forumpost_user_id`='$authorization_user_id',
                     `forumpost_date`=UNIX_TIMESTAMP()";
         $prepare = $mysqli->prepare($sql);
         $prepare->bind_param('ss', $name, $text);

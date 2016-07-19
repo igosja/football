@@ -2,14 +2,54 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (isset($authorization_id))
+if (isset($authorization_user_id))
 {
-    $num_get = $authorization_id;
+    $num_get = $authorization_user_id;
 }
 else
 {
     include (__DIR__ . '/view/wrong_page.php');
     exit;
+}
+
+$sql = "SELECT `vote_id`
+        FROM `vote`
+        WHERE `vote_view`='1'
+        AND `vote_ready`='0'
+        ORDER BY `vote_id` DESC
+        LIMIT 1";
+$check_vote_sql = $mysqli->query($sql);
+
+$count_check_vote = $check_vote_sql->num_rows;
+
+if (0 != $count_check_vote)
+{
+    $check_vote_array = $check_vote_sql->fetch_all(1);
+
+    $vote_id = $check_vote_array[0]['vote_id'];
+
+    $sql = "SELECT `voteuser_vote_id`
+            FROM `voteuser`
+            WHERE `voteuser_user_id`='$authorization_user_id'
+            ORDER BY `voteuser_vote_id` DESC 
+            LIMIT 1";
+    $voteuser_sql = $mysqli->query($sql);
+
+    $count_voteuser = $voteuser_sql->num_rows;
+
+    if (0 == $count_voteuser)
+    {
+        redirect('vote.php?num=' . $vote_id);
+    }
+
+    $voteuser_array = $voteuser_sql->fetch_all(1);
+
+    $voteuser_vote_id = $voteuser_array[0]['voteuser_vote_id'];
+
+    if ($vote_id > $voteuser_vote_id)
+    {
+        redirect('vote.php?num=' . $vote_id);
+    }
 }
 
 if (!isset($authorization_team_id))
@@ -42,20 +82,20 @@ if (!isset($authorization_team_id))
         if (0 == $user_id)
         {
             $sql = "UPDATE `team`
-                    SET `team_user_id`='$authorization_id'
+                    SET `team_user_id`='$authorization_user_id'
                     WHERE `team_id`='$team_id'
                     LIMIT 1";
             $mysqli->query($sql);
 
             $sql = "UPDATE `standing`
                     SET `standing_user_id`='0'
-                    WHERE `standing_user_id`='$authorization_id'
+                    WHERE `standing_user_id`='$authorization_user_id'
                     AND `standing_season_id`='$igosja_season_id'
                     LIMIT 1";
             $mysqli->query($sql);
 
             $sql = "UPDATE `standing`
-                    SET `standing_user_id`='$authorization_id'
+                    SET `standing_user_id`='$authorization_user_id'
                     WHERE `standing_team_id`='$team_id'
                     AND `standing_season_id`='$igosja_season_id'
                     LIMIT 1";
@@ -63,13 +103,13 @@ if (!isset($authorization_team_id))
 
             $sql = "UPDATE `cupparticipant`
                     SET `cupparticipant_user_id`='0'
-                    WHERE `cupparticipant_user_id`='$authorization_id'
+                    WHERE `cupparticipant_user_id`='$authorization_user_id'
                     AND `cupparticipant_season_id`='$igosja_season_id'
                     LIMIT 1";
             $mysqli->query($sql);
 
             $sql = "UPDATE `cupparticipant`
-                    SET `cupparticipant_user_id`='$authorization_id'
+                    SET `cupparticipant_user_id`='$authorization_user_id'
                     WHERE `cupparticipant_team_id`='$team_id'
                     AND `cupparticipant_season_id`='$igosja_season_id'
                     LIMIT 1";
@@ -77,23 +117,23 @@ if (!isset($authorization_team_id))
 
             $sql = "UPDATE `leagueparticipant`
                     SET `leagueparticipant_user_id`='0'
-                    WHERE `leagueparticipant_user_id`='$authorization_id'
+                    WHERE `leagueparticipant_user_id`='$authorization_user_id'
                     AND `leagueparticipant_season_id`='$igosja_season_id'
                     LIMIT 1";
             $mysqli->query($sql);
 
             $sql = "UPDATE `leagueparticipant`
-                    SET `leagueparticipant_user_id`='$authorization_id'
+                    SET `leagueparticipant_user_id`='$authorization_user_id'
                     WHERE `leagueparticipant_team_id`='$team_id'
                     AND `leagueparticipant_season_id`='$igosja_season_id'
                     LIMIT 1";
             $mysqli->query($sql);
 
-            f_igosja_history(HISTORY_TEXT_GET_TEAM, $authorization_id, 0, $team_id);
+            f_igosja_history(HISTORY_TEXT_GET_TEAM, $authorization_user_id, 0, $team_id);
 
             $sql = "UPDATE `user`
                     SET `user_team`=`user_team`+'1'
-                    WHERE `user_id`='$authorization_id'
+                    WHERE `user_id`='$authorization_user_id'
                     LIMIT 1";
             $mysqli->query($sql);
 
@@ -130,7 +170,7 @@ if (!isset($authorization_team_id))
 
     $team_array = $team_sql->fetch_all(1);
 
-    $num            = $authorization_id;
+    $num            = $authorization_user_id;
     $header_title   = $authorization_login;
 
     include (__DIR__ . '/view/main.php');
@@ -655,7 +695,7 @@ if (isset($authorization_country_id))
     $tournament_worldcup_array = $tournament_worldcup_sql->fetch_all(1);
 }
 
-$num                = $authorization_id;
+$num                = $authorization_user_id;
 $header_title       = $authorization_login;
 $seo_title          = $header_title . '. Профиль менеджера. ' . $seo_title;
 $seo_description    = $header_title . '. Профиль менеджера. ' . $seo_description;

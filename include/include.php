@@ -225,7 +225,7 @@ else
 }
 
 if (1 == $page_authorization &&
-    !isset($authorization_id))
+    !isset($authorization_user_id))
 {
     include (__DIR__ . '/../view/only_logged.php');
     exit;

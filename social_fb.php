@@ -50,8 +50,8 @@ if ($result)
         $user_login = $user_array[0]['user_login'];
         $user_ip    = $_SERVER['REMOTE_ADDR'];
 
-        $_SESSION['authorization_id']    = $user_id;
-        $_SESSION['authorization_login'] = $user_login;
+        $_SESSION['authorization_user_id']  = $user_id;
+        $_SESSION['authorization_login']    = $user_login;
 
         $sql = "SELECT COUNT(`ip_id`) AS `count`
                 FROM `ip`

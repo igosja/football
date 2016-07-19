@@ -2,9 +2,9 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (isset($authorization_id))
+if (isset($authorization_user_id))
 {
-    $num_get = $authorization_id;
+    $num_get = $authorization_user_id;
 }
 else
 {
@@ -102,7 +102,7 @@ $career_sql = $mysqli->query($sql);
 $count_career = $career_sql->num_rows;
 $career_array = $career_sql->fetch_all(1);
 
-$num                = $authorization_id;
+$num                = $authorization_user_id;
 $header_title       = $authorization_login;
 $seo_title          = $header_title . '. Профиль менеджера. ' . $seo_title;
 $seo_description    = $header_title . '. Профиль менеджера. ' . $seo_description;

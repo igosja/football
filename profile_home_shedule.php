@@ -2,9 +2,9 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (isset($authorization_id))
+if (isset($authorization_user_id))
 {
-    $num_get = $authorization_id;
+    $num_get = $authorization_user_id;
 }
 else
 {
@@ -67,7 +67,7 @@ if (isset($authorization_country_id))
     usort($shedule_array, 'f_igosja_nearest_game_sort');
 }
 
-$num                = $authorization_id;
+$num                = $authorization_user_id;
 $header_title       = $authorization_login;
 $seo_title          = $header_title . '. Матчи менеджера. ' . $seo_title;
 $seo_description    = $header_title . '. Матчи менеджера. ' . $seo_description;

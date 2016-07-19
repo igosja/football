@@ -2,9 +2,9 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (isset($authorization_id))
+if (isset($authorization_user_id))
 {
-    $num_get = $authorization_id;
+    $num_get = $authorization_user_id;
 }
 else
 {
@@ -26,7 +26,7 @@ $referral_sql = $mysqli->query($sql);
 
 $referral_array = $referral_sql->fetch_all(1);
 
-$num                = $authorization_id;
+$num                = $authorization_user_id;
 $header_title       = $authorization_login;
 $seo_title          = $header_title . '. Подопечные. ' . $seo_title;
 $seo_description    = $header_title . '. Подопечные. ' . $seo_description;

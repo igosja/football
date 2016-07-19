@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <?php if (isset($authorization_id) && $authorization_id != $num_get) { ?>
+                        <?php if (isset($authorization_user_id) && $authorization_user_id != $num_get) { ?>
                             <a href="profile_news_outbox.php?answer=<?= $num_get; ?>" class="button-link">
                                 <button>
                                     Сообщение

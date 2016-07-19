@@ -5,9 +5,9 @@ session_regenerate_id();
 
 $authorization_permission = 0;
 
-if (isset($_SESSION['authorization_id']))
+if (isset($_SESSION['authorization_user_id']))
 {
-    $authorization_id       = $_SESSION['authorization_id'];
+    $authorization_user_id  = $_SESSION['authorization_user_id'];
     $authorization_login    = $_SESSION['authorization_login'];
 
     if (!$authorization_login)
@@ -30,7 +30,7 @@ if (isset($_SESSION['authorization_id']))
             ON `team_user_id`=`user_id`
             LEFT JOIN `country`
             ON `country_user_id`=`user_id`
-            WHERE `user_id`='$authorization_id'
+            WHERE `user_id`='$authorization_user_id'
             LIMIT 1";
     $user_sql = $mysqli->query($sql);
 
@@ -72,13 +72,13 @@ if (isset($_SESSION['authorization_id']))
 
     $sql = "UPDATE `user`
             SET `user_last_visit`=UNIX_TIMESTAMP()
-            WHERE `user_id`='$authorization_id'
+            WHERE `user_id`='$authorization_user_id'
             LIMIT 1";
     $mysqli->query($sql);
 
     $sql = "SELECT COUNT(`inbox_id`) AS `count_inbox`
             FROM `inbox`
-            WHERE `inbox_user_id`='$authorization_id'
+            WHERE `inbox_user_id`='$authorization_user_id'
             AND `inbox_support`='0'
             AND `inbox_read`='0'";
     $message_sql = $mysqli->query($sql);
@@ -89,7 +89,7 @@ if (isset($_SESSION['authorization_id']))
 
     $sql = "SELECT COUNT(`inbox_id`) AS `count_inbox`
             FROM `inbox`
-            WHERE `inbox_user_id`='$authorization_id'
+            WHERE `inbox_user_id`='$authorization_user_id'
             AND `inbox_support`='1'
             AND `inbox_read`='0'";
     $support_sql = $mysqli->query($sql);

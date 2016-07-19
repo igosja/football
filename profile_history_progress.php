@@ -2,9 +2,9 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (isset($authorization_id))
+if (isset($authorization_user_id))
 {
-    $num_get = $authorization_id;
+    $num_get = $authorization_user_id;
 }
 else
 {
@@ -23,7 +23,7 @@ $sql = "SELECT `standing_place`,
         ON `tournament_id`=`standing_tournament_id`
         LEFT JOIN `team`
         ON `team_id`=`standing_team_id`
-        WHERE `standing_user_id`='$authorization_id'
+        WHERE `standing_user_id`='$authorization_user_id'
         AND `standing_season_id`<'$igosja_season_id'
         ORDER BY `standing_season_id` DESC";
 $championship_sql = $mysqli->query($sql);
@@ -43,7 +43,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         ON `team_id`=`cupparticipant_team_id`
         LEFT JOIN `stage`
         ON `stage_id`=`cupparticipant_out`
-        WHERE `cupparticipant_user_id`='$authorization_id'
+        WHERE `cupparticipant_user_id`='$authorization_user_id'
         AND `cupparticipant_season_id`<'$igosja_season_id'
         ORDER BY `cupparticipant_season_id` DESC";
 $cup_sql = $mysqli->query($sql);
@@ -63,7 +63,7 @@ $sql = "SELECT `stage_name` AS `standing_place`,
         ON `team_id`=`leagueparticipant_team_id`
         LEFT JOIN `stage`
         ON `stage_id`=`leagueparticipant_out`
-        WHERE `leagueparticipant_user_id`='$authorization_id'
+        WHERE `leagueparticipant_user_id`='$authorization_user_id'
         AND `leagueparticipant_season_id`<'$igosja_season_id'
         ORDER BY `leagueparticipant_season_id` DESC";
 $league_sql = $mysqli->query($sql);
@@ -81,7 +81,7 @@ $sql = "SELECT `worldcup_place` AS `standing_place`,
         ON `tournament_id`=`worldcup_tournament_id`
         LEFT JOIN `country`
         ON `country_id`=`worldcup_country_id`
-        WHERE `worldcup_user_id`='$authorization_id'
+        WHERE `worldcup_user_id`='$authorization_user_id'
         AND `worldcup_season_id`<'$igosja_season_id'
         ORDER BY `worldcup_season_id` DESC";
 $worldcup_sql = $mysqli->query($sql);
@@ -92,7 +92,7 @@ $progress_array = array_merge($championship_array, $worldcup_array, $cup_array, 
 
 usort($progress_array, 'f_igosja_trophy_sort');
 
-$num                = $authorization_id;
+$num                = $authorization_user_id;
 $header_title       = $authorization_login;
 $seo_title          = $header_title . '. Достижения менеджера. ' . $seo_title;
 $seo_description    = $header_title . '. Достижения менеджера. ' . $seo_description;

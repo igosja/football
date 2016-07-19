@@ -63,7 +63,7 @@
                                             <li><a href="rule.php">Правила</a></li>
                                         </ul>
                                     </li>
-                                    <?php if (!isset($authorization_id)) { ?>
+                                    <?php if (!isset($authorization_user_id)) { ?>
                                         <li><a href="login.php" class="main-menu-link">Войти</a></li>
                                     <?php } else { ?>
                                         <li><a href="profile_home_home.php" class="main-menu-link"><?= $authorization_login; ?></a>
@@ -166,7 +166,7 @@
                                                         if (((!isset($horizontalmenu_array[$i-1]['horizontalmenu_name']) ||
                                                             $horizontalmenu_array[$i-1]['horizontalmenu_name'] != $horizontalmenu_array[$i]['horizontalmenu_name']) &&
                                                             ((1 == $horizontalmenu_array[$i]['horizontalmenu_authorization'] &&
-                                                            isset($authorization_id)) ||
+                                                            isset($authorization_user_id)) ||
                                                             0 == $horizontalmenu_array[$i]['horizontalmenu_authorization'])) &&
                                                             ((1 == $horizontalmenu_array[$i]['horizontalmenu_myteam'] &&
                                                             isset($_GET['num']) &&
@@ -236,7 +236,7 @@
                                         if (($horizontalmenu_array[$i]['horizontalsubmenu_name'] &&
                                             (0 == $horizontalmenu_array[$i]['horizontalsubmenu_authorization'] ||
                                             (1 == $horizontalmenu_array[$i]['horizontalsubmenu_authorization'] &&
-                                            isset($authorization_id)))) &&
+                                            isset($authorization_user_id)))) &&
                                             ((1 == $horizontalmenu_array[$i]['horizontalmenu_myteam'] &&
                                             isset($_GET['num']) &&
                                             isset($authorization_team_id) &&

@@ -8,9 +8,9 @@ if (!isset($authorization_team_id))
     exit;
 }
 
-if (isset($authorization_id))
+if (isset($authorization_user_id))
 {
-    $num_get = $authorization_id;
+    $num_get = $authorization_user_id;
 }
 else
 {
@@ -32,7 +32,7 @@ if (isset($_GET['ok']))
             LIMIT 1";
     $mysqli->query($sql);
 
-    f_igosja_history(HISTORY_TEXT_LOST_TEAM, $authorization_id, 0, $authorization_team_id);
+    f_igosja_history(HISTORY_TEXT_LOST_TEAM, $authorization_user_id, 0, $authorization_team_id);
 
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Вы успешно отказались от команды.';

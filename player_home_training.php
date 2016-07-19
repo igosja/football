@@ -84,7 +84,7 @@ $player_surname = $player_array[0]['surname_name'];
 $sql = "SELECT `user_money_position`,
                `user_money_training`
         FROM `user`
-        WHERE `user_id`='$authorization_id'
+        WHERE `user_id`='$authorization_user_id'
         LIMIT 1";
 $user_sql = $mysqli->query($sql);
 
@@ -146,7 +146,7 @@ if (isset($_GET['char']))
 
         $sql = "UPDATE `user`
                 SET `user_money_training`=`user_money_training`-'1'
-                WHERE `user_id`='$authorization_id'
+                WHERE `user_id`='$authorization_user_id'
                 LIMIT 1";
         $mysqli->query($sql);
 
@@ -257,7 +257,7 @@ elseif (isset($_GET['position']))
 
         $sql = "UPDATE `user`
                 SET `user_money_position`=`user_money_position`-'1'
-                WHERE `user_id`='$authorization_id'
+                WHERE `user_id`='$authorization_user_id'
                 LIMIT 1";
         $mysqli->query($sql);
 

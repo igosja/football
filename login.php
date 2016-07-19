@@ -2,7 +2,7 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (isset($authorization_id))
+if (isset($authorization_user_id))
 {
     redirect('index.php');
 }
@@ -76,7 +76,7 @@ if (isset($_POST['data']))
     $user_permission            = $user_array[0]['userrole_permission'];
     $user_ip                    = $_SERVER['REMOTE_ADDR'];
 
-    $_SESSION['authorization_id']       = $authorization_user_id;
+    $_SESSION['authorization_user_id']  = $authorization_user_id;
     $_SESSION['authorization_login']    = $authorization_login;
 
     $sql = "SELECT COUNT(`ip_id`) AS `count`

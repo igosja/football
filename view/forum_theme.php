@@ -14,7 +14,7 @@
             <table class="striped w100">
                 <tr>
                     <td>
-                        <?php if (isset($authorization_id)) { ?>
+                        <?php if (isset($authorization_user_id)) { ?>
                             <a href="forum_posting.php?theme=<?= $head_array[0]['forumtheme_id']; ?>" class="button-link">
                                 <button>
                                     Ответить
@@ -72,7 +72,7 @@
                         <p class="grey">Сообщений: <?= $head_array[0]['user_count_message']; ?></p>
                         <p class="grey">Регистрация: <?= f_igosja_ufu_date($head_array[0]['user_registration_date']); ?></p>
                         <?= f_igosja_ufu_last_visit_forum($head_array[0]['user_last_visit']); ?>
-                        <?php if (isset($authorization_id) && $authorization_id != $head_array[0]['user_id']) { ?>
+                        <?php if (isset($authorization_user_id) && $authorization_user_id != $head_array[0]['user_id']) { ?>
                             <a href="profile_news_outbox.php?answer=<?= $head_array[0]['user_id']; ?>" class="button-link">
                                 <button>
                                     ЛC
@@ -116,7 +116,7 @@
                             <p class="grey">Сообщений: <?= $forum_array[$i]['user_count_message']; ?></p>
                             <p class="grey">Регистрация: <?= f_igosja_ufu_date($forum_array[$i]['user_registration_date']); ?></p>
                             <?= f_igosja_ufu_last_visit_forum($forum_array[$i]['user_last_visit']); ?>
-                            <?php if (isset($authorization_id) && $authorization_id != $forum_array[$i]['user_id']) { ?>
+                            <?php if (isset($authorization_user_id) && $authorization_user_id != $forum_array[$i]['user_id']) { ?>
                                 <a href="profile_news_outbox.php?answer=<?= $forum_array[$i]['user_id']; ?>" class="button-link">
                                     <button>
                                         ЛC
@@ -127,7 +127,7 @@
                         <td>
                             <p class="justify w100">
                                 <span class="grey"><?= f_igosja_ufu_date_time($forum_array[$i]['forumpost_date']); ?></span>
-                                <?php if (isset($authorization_id) && $authorization_id == $forum_array[$i]['user_id']) { ?>
+                                <?php if (isset($authorization_user_id) && $authorization_user_id == $forum_array[$i]['user_id']) { ?>
                                     <a href="forum_posting.php?edit=<?= $forum_array[$i]['forumpost_id']; ?>" class="button-link">
                                         <button class="fright">
                                             Редактировать
@@ -139,7 +139,7 @@
                                         </button>
                                     </a>
                                 <?php }?>
-                                <?php if (isset($authorization_id) && $authorization_id != $forum_array[$i]['user_id']) { ?>
+                                <?php if (isset($authorization_user_id) && $authorization_user_id != $forum_array[$i]['user_id']) { ?>
                                     <a href="forum_posting.php?theme=<?= $head_array[0]['forumtheme_id']; ?>&answer=<?= $forum_array[$i]['forumpost_id']; ?>" class="button-link">
                                         <button class="fright">
                                             Цитата
@@ -155,7 +155,7 @@
             <table class="striped w100">
                 <tr>
                     <td>
-                        <?php if (isset($authorization_id)) { ?>
+                        <?php if (isset($authorization_user_id)) { ?>
                             <a href="forum_posting.php?theme=<?= $head_array[0]['forumtheme_id']; ?>" class="button-link">
                                 <button>
                                     Ответить

@@ -101,7 +101,7 @@ if (isset($_GET['ok']))
             OR `teamwork_second_id`='$num_get'";
     $mysqli->query($sql);
 
-    f_igosja_history(HISTORY_TEXT_PLAYER_FIRE, $authorization_id, 0, $authorization_team_id, $num_get);
+    f_igosja_history(HISTORY_TEXT_PLAYER_FIRE, $authorization_user_id, 0, $authorization_team_id, $num_get);
 
     $_SESSION['message_class']  = 'success';
     $_SESSION['message_text']   = 'Игрок успешно уволен.';

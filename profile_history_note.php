@@ -2,7 +2,7 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (!isset($authorization_id))
+if (!isset($authorization_user_id))
 {
     include (__DIR__ . '/view/wrong_page.php');
     exit;
@@ -20,7 +20,7 @@ if (isset($_POST['note_id']))
                 SET `note_title`=?,
                     `note_text`=?
                 WHERE `note_id`='$note_id'
-                AND `note_user_id`='$authorization_id'
+                AND `note_user_id`='$authorization_user_id'
                 LIMIT 1";
     }
     else
@@ -28,7 +28,7 @@ if (isset($_POST['note_id']))
         $sql = "INSERT INTO `note`
                 SET `note_title`=?,
                     `note_text`=?,
-                    `note_user_id`='$authorization_id'";
+                    `note_user_id`='$authorization_user_id'";
     }
 
     $prepare = $mysqli->prepare($sql);
@@ -46,7 +46,7 @@ elseif (isset($_GET['note']))
     $note_id = (int) $_GET['note'];
 
     $sql = "DELETE FROM `note`
-            WHERE `note_user_id`='$authorization_id'
+            WHERE `note_user_id`='$authorization_user_id'
             AND `note_id`='$note_id'";
     $mysqli->query($sql);
 
@@ -59,13 +59,13 @@ elseif (isset($_GET['note']))
 $sql = "SELECT `note_id`,
                `note_title`
         FROM `note`
-        WHERE `note_user_id`='$authorization_id'
+        WHERE `note_user_id`='$authorization_user_id'
         ORDER BY `note_id` DESC";
 $note_sql = $mysqli->query($sql);
 
 $note_array = $note_sql->fetch_all(1);
 
-$num                = $authorization_id;
+$num                = $authorization_user_id;
 $header_title       = $authorization_login;
 $seo_title          = $header_title . '. Записная книжка. ' . $seo_title;
 $seo_description    = $header_title . '. Записная книжка. ' . $seo_description;

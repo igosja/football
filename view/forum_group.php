@@ -14,7 +14,7 @@
             <table class="striped w100">
                 <tr>
                     <td>
-                        <?php if (isset($authorization_id)) { ?>
+                        <?php if (isset($authorization_user_id)) { ?>
                             <a href="forum_posting.php?group=<?= $head_array[0]['forumthemegroup_id']; ?>" class="button-link">
                                 <button>
                                     Создать тему
@@ -94,7 +94,7 @@
             <table class="striped w100">
                 <tr>
                     <td>
-                        <?php if (isset($authorization_id)) { ?>
+                        <?php if (isset($authorization_user_id)) { ?>
                             <a href="forum_posting.php?group=<?= $head_array[0]['forumthemegroup_id']; ?>" class="button-link">
                                 <button>
                                     Создать тему

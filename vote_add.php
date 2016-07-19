@@ -2,7 +2,7 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (!isset($authorization_id))
+if (!isset($authorization_user_id))
 {
     include (__DIR__ . '/view/only_logged.php');
     exit;
@@ -20,7 +20,7 @@ if (isset($_POST['data']))
         $sql = "INSERT INTO `vote`
                 SET `vote_question`=?,
                     `vote_date`=UNIX_TIMESTAMP(),
-                    `vote_user_id`='$authorization_id'";
+                    `vote_user_id`='$authorization_user_id'";
         $prepare = $mysqli->prepare($sql);
         $prepare->bind_param('s', $question);
         $prepare->execute();

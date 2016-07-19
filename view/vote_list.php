@@ -2,7 +2,7 @@
     <tr>
         <td class="block-page">
             <p class="header">Опросы</p>
-            <?php if (isset($authorization_id)) { ?>
+            <?php if (isset($authorization_user_id)) { ?>
                 <table class="bordered center w100">
                     <tr>
                         <td>

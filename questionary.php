@@ -2,7 +2,7 @@
 
 include (__DIR__ . '/include/include.php');
 
-if (!isset($authorization_id))
+if (!isset($authorization_user_id))
 {
     include (__DIR__ . '/view/wrong_page.php');
     exit;
@@ -34,7 +34,7 @@ if (isset($_POST['data']))
                 `user_birth_month`=?,
                 `user_birth_year`=?,
                 `user_country_id`=?
-            WHERE `user_id`='$authorization_id'
+            WHERE `user_id`='$authorization_user_id'
             LIMIT 1";
     $prepare = $mysqli->prepare($sql);
     $prepare->bind_param('ssiiiii', $firstname, $lastname, $gender, $day, $month, $year, $country_id);
@@ -47,7 +47,7 @@ if (isset($_POST['data']))
 
         $sql = "UPDATE `user`
                 SET `user_password`='$password'
-                WHERE `user_id`='$authorization_id'
+                WHERE `user_id`='$authorization_user_id'
                 LIMIT 1";
         $mysqli->query($sql);
     }
@@ -61,7 +61,7 @@ if (isset($_POST['data']))
 
         $sql = "SELECT `user_id`
                 FROM `user`
-                WHERE `user_id`!='$authorization_id'
+                WHERE `user_id`!='$authorization_user_id'
                 AND `user_email`=?
                 LIMIT 1";
         $prepare = $mysqli->prepare($sql);
@@ -77,7 +77,7 @@ if (isset($_POST['data']))
         {
             $sql = "UPDATE `user`
                     SET `user_email`=?
-                    WHERE `user_id`='$authorization_id'
+                    WHERE `user_id`='$authorization_user_id'
                     LIMIT 1";
             $prepare = $mysqli->prepare($sql);
             $prepare->bind_param('s', $email);
@@ -97,7 +97,7 @@ if (isset($_POST['data']))
 
         $sql = "SELECT `user_id`
                 FROM `user`
-                WHERE `user_id`!='$authorization_id'
+                WHERE `user_id`!='$authorization_user_id'
                 AND `user_login`=?
                 LIMIT 1";
         $prepare = $mysqli->prepare($sql);
@@ -113,7 +113,7 @@ if (isset($_POST['data']))
         {
             $sql = "UPDATE `user`
                     SET `user_login`=?
-                    WHERE `user_id`='$authorization_id'
+                    WHERE `user_id`='$authorization_user_id'
                     LIMIT 1";
             $prepare = $mysqli->prepare($sql);
             $prepare->bind_param('s', $login);
@@ -209,7 +209,7 @@ $sql = "SELECT `user_birth_day`,
                `user_social_gl`,
                `user_social_vk`
         FROM `user`
-        WHERE `user_id`='$authorization_id'
+        WHERE `user_id`='$authorization_user_id'
         LIMIT 1";
 $user_sql = $mysqli->query($sql);
 
