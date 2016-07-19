@@ -241,11 +241,58 @@ $shedule_sql = $mysqli->query($sql);
 $shedule_array = $shedule_sql->fetch_all(1);
 $count_shedule = $shedule_array[0]['count'];
 
-if (0 == $count_shedule)
+$sql = "SELECT COUNT(`country_id`) AS `count`
+        FROM `city`
+        LEFT JOIN `country`
+        ON `country_id`=`city_country_id`
+        WHERE `country_user_id`='0'
+        AND `city_id`!='0'";
+$coach_country_sql = $mysqli->query($sql);
+
+$coach_country_array = $coach_country_sql->fetch_all(1);
+$count_coach_country = $coach_country_array[0]['count'];
+
+$sql = "SELECT COUNT(`coachapplication_id`) AS `count`
+        FROM `coachapplication`
+        WHERE `coachapplication_ready`='0'
+        AND `coachapplication_date`<UNIX_TIMESTAMP()-'24'*'60'*'60'";
+$coach_application_sql = $mysqli->query($sql);
+
+$coach_application_array = $coach_application_sql->fetch_all(1);
+$coach_application_country = $coach_application_array[0]['count'];
+
+if (isset($authorization_team_id))
+{
+    $sql = "SELECT COUNT(`coachapplication_id`) AS `count`
+            FROM `coachapplication`
+            LEFT JOIN `country`
+            ON `country_id`=`coachapplication_country_id`
+            LEFT JOIN `city`
+            ON `city_country_id`=`country_id`
+            LEFT JOIN `team`
+            ON `team_city_id`=`city_id`
+            WHERE `coachapplication_ready`='0'
+            AND `coachapplication_date`<UNIX_TIMESTAMP()-'24'*'60'*'60'
+            AND `team_id`='$authorization_team_id'";
+    $my_coach_application_sql = $mysqli->query($sql);
+
+    $my_coach_application_array = $my_coach_application_sql->fetch_all(1);
+    $my_coach_application_country = $my_coach_application_array[0]['count'];
+}
+else
+{
+    $my_coach_application_country = 0;
+}
+
+if (0 == $count_shedule && 0 == $count_coach_country && 0 == $coach_application_country)
 {
     $coach_link = '';
 }
-elseif (4 >= $count_shedule)
+elseif (0 != $count_coach_country && 0 != $my_coach_application_country)
+{
+    $coach_link = 'national_coach_vote.php';
+}
+elseif (4 >= $count_shedule || (0 != $count_coach_country && 0 == $coach_application_country))
 {
     $coach_link = 'national_coach_application.php';
 }

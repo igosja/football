@@ -70,6 +70,7 @@ $sql = "SELECT `coachapplication_text`,
         ) AS `t1`
         ON `coachvote_coachapplication_id`=`coachapplication_id`
         WHERE `coachapplication_season_id`='$igosja_season_id'
+        AND `coachapplication_ready`='0'
         AND `coachapplication_country_id`=
         (
             SELECT `city_country_id`

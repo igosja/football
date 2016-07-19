@@ -42,6 +42,7 @@ function f_igosja_season_national_coach()
                 ON `user_id`=`coachapplication_user_id`
                 WHERE `coachapplication_season_id`='$igosja_season_id'
                 AND `coachapplication_country_id`='$country_id'
+                AND `coachapplication_ready`='0'
                 AND `coachapplication_user_id` NOT IN
                 (
                     SELECT `country_user_id`
@@ -70,4 +71,9 @@ function f_igosja_season_national_coach()
             f_igosja_history(22, $user_id, $country_id);
         }
     }
+
+    $sql = "UPDATE `coachapplication`
+            SET `coachapplication_ready`='1'
+            WHERE `coachapplication_ready`='0'";
+    f_igosja_mysqli_query($sql);
 }

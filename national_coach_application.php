@@ -72,10 +72,12 @@ $sql = "SELECT `country_id`,
                    `coachapplication_country_id`
             FROM `coachapplication`
             WHERE `coachapplication_season_id`='$igosja_season_id'
+            AND `coachapplication_ready`='0'
             GROUP BY `coachapplication_country_id`
         ) AS `t1`
         ON `coachapplication_country_id`=`country_id`
         WHERE `city_id`!='0'
+        AND `country_user_id`='0'
         GROUP BY `country_id`
         ORDER BY `country_name` ASC";
 $country_sql = $mysqli->query($sql);
