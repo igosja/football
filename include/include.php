@@ -2,7 +2,7 @@
 
 $start_time = microtime(true);
 
-$css_js_version = 2;
+$css_js_version = 3;
 
 $phpstorm_licence = 'http://idea.qinxi1992.cn/';
 $wind_php_command = 'D:\xampp\php\php-cgi.exe D:\xampp\htdocs\fm.local.net\www\generator\generator.php';
@@ -136,6 +136,19 @@ if ('admin' == $chapter)
     if (0 == $count_admin_support)
     {
         $count_admin_support = '';
+    }
+
+    $sql = "SELECT COUNT(`vote_id`) AS `count`
+            FROM `vote`
+            WHERE `vote_view`='0'";
+    $admin_vote_sql = $mysqli->query($sql);
+
+    $admin_vote_array = $admin_vote_sql->fetch_all(1);
+    $count_admin_vote = $admin_vote_array[0]['count'];
+
+    if (0 == $count_admin_vote)
+    {
+        $count_admin_vote = '';
     }
 }
 

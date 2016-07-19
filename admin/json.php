@@ -18,5 +18,17 @@ if (isset($_GET['count_support']))
 
     $json_data['count_support'] = $count_support;
 }
+elseif (isset($_GET['count_vote']))
+{
+    $sql = "SELECT COUNT(`vote_id`) AS `count`
+            FROM `vote`
+            WHERE `vote_view`='0'";
+    $vote_sql = $mysqli->query($sql);
+
+    $vote_array = $vote_sql->fetch_all(1);
+    $count_vote = $vote_array[0]['count'];
+
+    $json_data['count_vote'] = $count_vote;
+}
 
 print json_encode($json_data);

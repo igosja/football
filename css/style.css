@@ -559,6 +559,11 @@ textarea
     background-color: #BBBBFF;
 }
 
+tr.current-vote
+{
+    background-color: #BBBBFF;
+}
+
 td.nopadding
 {
     padding: 0;

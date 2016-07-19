@@ -110,6 +110,7 @@ $(document).ready(function ($) {
     }
 
     setInterval(get_count_support_message, 60000);
+    setInterval(get_count_vote, 60000);
 });
 
 function get_count_support_message()
@@ -129,6 +130,28 @@ function get_count_support_message()
                 }
 
                 $('#admin-support-badge').text(count_support);
+            }
+        }
+    );
+}
+
+function get_count_vote()
+{
+    $.ajax
+    (
+        {
+            url: '/admin/json.php?count_vote=0',
+            dataType: "json",
+            success: function (data)
+            {
+                var count_vote = data.count_vote;
+
+                if (0 == count_vote)
+                {
+                    count_vote = '';
+                }
+
+                $('#admin-vote-badge').text(count_vote);
             }
         }
     );
