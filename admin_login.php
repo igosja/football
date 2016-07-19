@@ -70,8 +70,8 @@ if (isset($_POST['data']))
     $authorization_country_name = $user_array[0]['country_name'];
     $user_permission            = $user_array[0]['userrole_permission'];
 
-    $_SESSION['authorization_id']           = $user_id;
-    $_SESSION['authorization_login']        = $authorization_login;
+    $_SESSION['authorization_user_id']  = $user_id;
+    $_SESSION['authorization_login']    = $authorization_login;
 
     redirect('/admin/');
 }
