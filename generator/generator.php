@@ -65,6 +65,7 @@ f_igosja_generator_building();
 f_igosja_generator_transfer();
 f_igosja_generator_ticket_price();
 f_igosja_generator_user_fire_and_open_change_team();
+f_igosja_generator_national_coach();
 f_igosja_generator_email();
 f_igosja_generator_referal_prize();
 
