@@ -113,7 +113,7 @@
                                                 </a>
                                             </li>
                                         <?php } ?>
-                                        <?php if (!empty($coach_link) && 0 == 1) { ?>
+                                        <?php if (!empty($coach_link)) { ?>
                                             <li>
                                                 <a href="<?=$coach_link?>" class="main-menu-link main-menu-link-red">
                                                     Выборы

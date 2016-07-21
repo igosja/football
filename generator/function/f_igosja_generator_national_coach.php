@@ -67,11 +67,12 @@ function f_igosja_generator_national_coach()
             f_igosja_mysqli_query($sql);
 
             f_igosja_history(22, $user_id, $country_id);
+
+            $sql = "UPDATE `coachapplication`
+                    SET `coachapplication_ready`='1'
+                    WHERE `coachapplication_ready`='0'
+                    AND `coachapplication_country_id`='$country_id'";
+            f_igosja_mysqli_query($sql);
         }
     }
-
-    $sql = "UPDATE `coachapplication`
-            SET `coachapplication_ready`='1'
-            WHERE `coachapplication_ready`='0'";
-    f_igosja_mysqli_query($sql);
 }
