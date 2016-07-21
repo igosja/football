@@ -39,7 +39,7 @@ function f_igosja_generator_national_coach()
                 WHERE `coachapplication_season_id`='$igosja_season_id'
                 AND `coachapplication_country_id`='$country_id'
                 AND `coachapplication_ready`='0'
-                AND `coachapplication_date`<(UNIX_TIMESTAMP()-'3'*'24'*'60'*'60')
+                AND `coachapplication_date`<(UNIX_TIMESTAMP()-'2'*'24'*'60'*'60')
                 AND `count`>'0'
                 AND `coachapplication_user_id` NOT IN
                 (
