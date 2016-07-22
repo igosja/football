@@ -10,6 +10,7 @@ $mysqli->query($sql);
 
 $sql = "SELECT `vote_id`,
                `vote_question`,
+               `vote_ready`,
                `voteanswer_answer`,
                `voteanswer_value`
         FROM `vote`
