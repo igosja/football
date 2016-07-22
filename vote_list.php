@@ -2,6 +2,12 @@
 
 include (__DIR__ . '/include/include.php');
 
+$sql = "UPDATE `vote`
+        SET `vote_ready`='1'
+        WHERE `vote_ready`='0'
+        AND `vote_date`<UNIX_TIMESTAMP()-'7'*'24'*'60'*'60'";
+$mysqli->query($sql);
+
 $sql = "SELECT `vote_id`,
                `vote_question`,
                `voteanswer_answer`,
