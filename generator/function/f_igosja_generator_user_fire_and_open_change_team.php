@@ -8,7 +8,7 @@ function f_igosja_generator_user_fire_and_open_change_team()
             FROM `team`
             LEFT JOIN `user`
             ON `user_id`=`team_user_id`
-            WHERE `user_last_visit`<UNIX_TIMESTAMP() - 14 * 24 * 24 * 60
+            WHERE `user_last_visit`<UNIX_TIMESTAMP() - 7 * 24 * 60 * 60
             AND `user_id`!='0'
             ORDER BY `team_id` ASC";
     $user_sql = f_igosja_mysqli_query($sql);
@@ -40,7 +40,7 @@ function f_igosja_generator_user_fire_and_open_change_team()
             FROM `country`
             LEFT JOIN `user`
             ON `user_id`=`country_user_id`
-            WHERE `user_last_visit`<UNIX_TIMESTAMP() - 14 * 24 * 24 * 60
+            WHERE `user_last_visit`<UNIX_TIMESTAMP() - 7 * 24 * 60 * 60
             AND `user_id`!='0'
             ORDER BY `country_id` ASC";
     $user_sql = f_igosja_mysqli_query($sql);
