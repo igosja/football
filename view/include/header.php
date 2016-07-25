@@ -58,6 +58,7 @@
                                             <li><a href="worldcup_review_profile.php?num=<?= TOURNAMENT_WORLD_CUP; ?>">Чемпионат мира</a></li>
                                             <li><a href="league_review_profile.php?num=<?= TOURNAMENT_CHAMPIONS_LEAGUE; ?>">Лига чемпионов</a></li>
                                             <li><a href="vote.php">Опросы</a></li>
+                                            <li><a href="press.php">Пресс-центр</a></li>
                                             <li><a href="forum.php">Форум</a></li>
                                             <li><a href="shop.php">Магазин</a></li>
                                             <li><a href="rule.php">Правила</a></li>
