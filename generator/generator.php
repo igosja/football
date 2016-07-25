@@ -127,6 +127,7 @@ if (0 == $count_shedule)
     f_igosja_season_champions_league_game();
     f_igosja_season_championship_game();
     f_igosja_season_cup_game();
+    f_igosja_season_school_limit();
 }
 
 f_igosja_generator_site_open();
