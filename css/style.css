@@ -383,7 +383,7 @@ textarea
     margin: 0 auto;
     text-align: center;
     padding: 5px;
-    min-width: 1024px;
+    width: 960px;
 }
 
 .footer a
@@ -1034,4 +1034,30 @@ input.es-input:focus
     -webkit-border-radius: 12px;
     -moz-border-radius: 12px;
     border-radius: 12px;
+}
+
+.siteinfo
+{
+    color: #9CA2A5;
+    font-size: 11px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 5px;
+    width: 960px;
+}
+
+.siteinfo .wrap
+{
+    height: 15px;
+    overflow: hidden;
+}
+
+.siteinfo.siteinfo-opened .wrap
+{
+    height: auto !important;
+}
+
+.siteinfo h1, .siteinfo h2
+{
+    font-size: 11px;
 }

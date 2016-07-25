@@ -1,5 +1,13 @@
 $(document).ready(function($)
 {
+    $('.siteinfo').on('click', function () {
+        if ($(this).hasClass('siteinfo-opened')) {
+            $(this).removeClass('siteinfo-opened');
+        } else {
+            $(this).addClass('siteinfo-opened');
+        }
+    });
+
     var select_on_page_array = $('select');
     var input_on_page_array  = $('input');
     var div_on_page_array  = $('div');
