@@ -16,7 +16,7 @@
                                     <input type="radio" name="data" value="<?= $item['voteanswer_id']; ?>"/>
                                 </td>
                                 <td><?= $item['voteanswer_answer']; ?></td>
-                                <td class="center"><?= $item['voteanswer_value']; ?></td>
+                                <td class="center"></td>
                             </tr>
                         <?php } ?>
                         <tr>
