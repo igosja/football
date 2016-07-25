@@ -38,9 +38,22 @@
             </td>
         </tr>
     <?php } else { ?>
+        <p class="center info">
+            <?php if (0 == $school_use) { ?>
+                Вы больше не можете подписывать юниоров в этом сезоне.
+            <?php } else { ?>
+                В этом сезоне вы можете перевести в основную команду
+                <?php if (1 == $school_use) { ?>
+                    <?= $school_use; ?>-го молодого игрока.
+                <?php } else { ?>
+                    <?= $school_use; ?>-х молодых игроков.
+                <?php } ?>
+            <?php } ?>
+        </p>
         <tr>
             <td class="block-page">
                 <p class="header">Созать игрока</p>
+                <p class="center">В этом сезоне вы можете перевести в основную команду <?= $school_use; ?>-х молодых игроков</p>
                 <form method="GET" id="form-school">
                     <table class="striped w100">
                         <tr>

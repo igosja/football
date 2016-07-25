@@ -12,7 +12,8 @@ else
     exit;
 }
 
-$sql = "SELECT `team_name`
+$sql = "SELECT `team_name`,
+               `team_school_use`
         FROM `team`
         WHERE `team_id`='$num_get'
         LIMIT 1";
@@ -28,10 +29,19 @@ if (0 == $count_team)
 
 $team_array = $team_sql->fetch_all(1);
 
-$team_name = $team_array[0]['team_name'];
+$team_name  = $team_array[0]['team_name'];
+$school_use = $team_array[0]['team_school_use'];
 
 if (isset($_GET['school_id']) && isset($_GET['ok']))
 {
+    if (0 == $school_use)
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Вы больше не можете подписывать юниоров в этом сезоне.';
+
+        redirect('team_lineup_team_school.php?num=' . $num_get);
+    }
+
     $school_id  = (int) $_GET['school_id'];
     $ok         = (int) $_GET['ok'];
 
@@ -207,6 +217,12 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
                 LIMIT 1";
         $mysqli->query($sql);
 
+        $sql = "UPDATE `team`
+                SET `team_school_use`=`team_school_use`-'1'
+                WHERE `team_id`='$num_get'
+                LIMIT 1";
+        $mysqli->query($sql);
+
         $_SESSION['message_class']  = 'success';
         $_SESSION['message_text']   = 'Изменения успешно сохранены.';
 
@@ -215,6 +231,14 @@ if (isset($_GET['school_id']) && isset($_GET['ok']))
 }
 elseif (isset($_GET['data']) && isset($_GET['ok']))
 {
+    if (0 == $school_use)
+    {
+        $_SESSION['message_class']  = 'error';
+        $_SESSION['message_text']   = 'Вы больше не можете подписывать юниоров в этом сезоне.';
+
+        redirect('team_lineup_team_school.php?num=' . $num_get);
+    }
+
     $data_array     = $_GET['data'];
     $ok             = (int) $_GET['ok'];
     $name_id        = (int) $data_array['name_id'];
@@ -397,6 +421,12 @@ elseif (isset($_GET['data']) && isset($_GET['ok']))
                     `player_power`=`power`,
                     `player_reputation`=`power`/'" . MAX_PLAYER_POWER . "'*'100'
                 WHERE `player_id`='$player_id'";
+        $mysqli->query($sql);
+
+        $sql = "UPDATE `team`
+                SET `team_school_use`=`team_school_use`-'1'
+                WHERE `team_id`='$num_get'
+                LIMIT 1";
         $mysqli->query($sql);
 
         $_SESSION['message_class']  = 'success';
