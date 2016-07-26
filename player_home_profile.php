@@ -118,6 +118,8 @@ $sql = "SELECT `lineup_mark`
         ON `shedule_id`=`game_shedule_id`
         WHERE `lineup_player_id`='$num_get'
         AND `game_played`='1'
+        AND (`lineup_position_id` BETWEEN '1' AND '25'
+        OR `lineup_in`!='0')
         ORDER BY `shedule_date` DESC
         LIMIT 5";
 $last_five_sql = $mysqli->query($sql);
