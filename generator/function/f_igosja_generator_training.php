@@ -127,9 +127,15 @@ function f_igosja_generator_training()
             $percent_minus = $percent_minus + $training_percent;
         }
 
-        $percent    = ceil(($percent - $percent_minus) / TRAINING_ATTRIBUTES_COUNT);
-        $insert     = array();
-        $update     = array();
+        $percent = ceil(($percent - $percent_minus) / TRAINING_ATTRIBUTES_COUNT);
+
+        if (0 == $percent)
+        {
+            $percent = 1;
+        }
+
+        $insert = array();
+        $update = array();
 
         $sql = "SELECT `training_attribute_id`
                 FROM `training`
