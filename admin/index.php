@@ -32,7 +32,7 @@ $sql = "SELECT SUM(`payment_sum`) AS `count`,
                DATE_FORMAT(FROM_UNIXTIME(`payment_date`), '%m') AS `month`,
                DATE_FORMAT(FROM_UNIXTIME(`payment_date`), '%Y') AS `year`
         FROM `payment`
-        WHERE `payment_date`>UNIX_TIMESTAMP()-365*60*60
+        WHERE `payment_date`>UNIX_TIMESTAMP()-'365'*'24'*'60'*'60'
         AND `payment_status`='1'
         GROUP BY DATE_FORMAT(FROM_UNIXTIME(`payment_date`), '%m')
         ORDER BY `payment_date` ASC";
