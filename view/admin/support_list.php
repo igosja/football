@@ -9,7 +9,7 @@
             <table class="table table-striped table-bordered table-hover table-condensed">
                 <thead>
                     <tr>
-                        <th>Дата</th>
+                        <th class="col-lg-2">Дата</th>
                         <th>Пользователь</th>
                         <th class="col-lg-1"></th>
                     </tr>
@@ -25,7 +25,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="support_edit.php?num=<?= $item['inbox_id']; ?>"><i class="fa fa-eye"></i></a>
+                                <a href="support_edit.php?num=<?= $item['user_id']; ?>"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                     <?php } ?>

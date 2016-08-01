@@ -20,8 +20,10 @@ $sql = "SELECT `inbox_date`,
         FROM `inbox`
         LEFT JOIN `user`
         ON `user_id`=`inbox_sender_id`
-        WHERE `inbox_id`='$num_get'
-        LIMIT 1";
+        WHERE `inbox_support`='1'
+        AND (`inbox_sender_id`='$num_get'
+        OR `inbox_user_id`='$num_get')
+        ORDER BY `inbox_id` DESC";
 $inbox_sql = $mysqli->query($sql);
 
 $count_inbox = $inbox_sql->num_rows;
