@@ -46,7 +46,7 @@ $payment_user = array();
 foreach ($payment_array as $item)
 {
     $date = "'" . $item['month'] . '.' . $item['year'] . "'";
-    $sum  = $item['count'] * 50;
+    $sum  = $item['count'];
 
     $payment_date[] = $date;
     $payment_sum[]  = $sum;
