@@ -36,8 +36,7 @@ if (0 == $count_inbox)
 
 $sql = "UPDATE `inbox`
         SET `inbox_read`='1'
-        WHERE `inbox_id`='$num_get'
-        LIMIT 1";
+        WHERE `inbox_sender_id`='$num_get'";
 $mysqli->query($sql);
 
 if (isset($_POST['inbox_text']))

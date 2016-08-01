@@ -16,20 +16,6 @@
             <div class="dataTable_wrapper">
                 <table class="table table-striped table-bordered">
                     <tr>
-                        <td <?php if (0 == $inbox_array[0]['user_id']) { ?>class="text-right info"<?php } else { ?>class="warning"<?php } ?>>
-                            <?= f_igosja_ufu_date_time($inbox_array[0]['inbox_date']); ?>,
-                            <?php if (0 == $inbox_array[0]['user_id']) { ?>
-                                <span class="text-danger">Игося</span>
-                            <?php } else { ?>
-                                <a href="user.php?num=<?= $inbox_array[0]['user_id']; ?>">
-                                    <?= $inbox_array[0]['user_login']; ?>
-                                </a>
-                            <?php } ?>
-                            <br />
-                            <?= nl2br($inbox_array[0]['inbox_text']); ?>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>
                             <textarea 
                                 class="form-control"
@@ -44,7 +30,7 @@
                             <input class="btn btn-default" type="submit" value="Ответить" />
                         </td>
                     </tr>
-                    <?php foreach (array_slice($inbox_array, 1) as $item) { ?>
+                    <?php foreach ($inbox_array as $item) { ?>
                         <tr>
                             <td <?php if (0 == $item['user_id']) { ?>class="text-right info"<?php } else { ?>class="warning"<?php } ?>>
                                 <?= f_igosja_ufu_date_time($item['inbox_date']); ?>,
