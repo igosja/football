@@ -7,7 +7,11 @@
                     <?php foreach ($inbox_array as $item) { ?>
                         <tr>
                             <td class="inbox-title <?php if (0 == $item['inbox_read']) { ?>strong<?php } ?>" data-id="<?= $item['inbox_id']; ?>">
-                                <?= $item['inbox_title']; ?>
+                                <?php if (INBOXTHEME_PERSONAL == $item['inbox_inboxtheme_id']) { ?>
+                                    Личное сообщение
+                                <?php } else { ?>
+                                    <?= $item['inbox_title']; ?>
+                                <?php } ?>
                                 <p class="grey">
                                     <?= f_igosja_ufu_date($item['inbox_date']); ?>
                                     (<a href="manager_home_profile.php?num=<?= $item['user_id']; ?>"><?= $item['user_login']; ?></a>)

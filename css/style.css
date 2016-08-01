@@ -630,6 +630,11 @@ td.nopadding
 }
 
 /*Выравнивание*/
+.striped td.padding-left
+{
+    padding-left: 25px;
+}
+
 .left
 {
     text-align: left;

@@ -85,10 +85,34 @@ $sql = "SELECT `inbox_id`,
         ON `user_id`=`inbox_user_id`
         WHERE `inbox_sender_id`='$num_get'
         AND `inbox_support`='0'
+        AND `inbox_inboxtheme_id`!='5'
         ORDER BY `inbox_date` DESC, `inbox_id` DESC";
 $inbox_sql = $mysqli->query($sql);
 
-$inbox_array = $inbox_sql->fetch_all(1);
+$inbox_array_1 = $inbox_sql->fetch_all(1);
+
+$sql = "SELECT MAX(`inbox_id`) AS `inbox_id`,
+               `inbox_inboxtheme_id`,
+               MAX(`inbox_date`) AS `inbox_date`,
+               MAX(`inbox_read`) AS `inbox_read`,
+               `inbox_title`,
+               `user_id`,
+               `user_login`
+        FROM `inbox`
+        LEFT JOIN `user`
+        ON `user_id`=`inbox_user_id`
+        WHERE `inbox_sender_id`='$num_get'
+        AND `inbox_support`='0'
+        AND `inbox_inboxtheme_id`='5'
+        GROUP BY `inbox_user_id`
+        ORDER BY `inbox_date` DESC, `inbox_id` DESC";
+$inbox_sql = $mysqli->query($sql);
+
+$inbox_array_2 = $inbox_sql->fetch_all(1);
+
+$inbox_array = array_merge($inbox_array_1, $inbox_array_2);
+
+usort($inbox_array, 'f_igosja_inbox_sort');
 
 $sql = "SELECT `user_id`,
                `user_login`

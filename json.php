@@ -1085,7 +1085,37 @@ elseif (isset($_GET['inbox_id']))
         $inbox_array[0]['inbox_button'] = '';
     }
 
-    $inbox_array[0]['inbox_text'] = nl2br($inbox_array[0]['inbox_text']);
+    if (INBOXTHEME_PERSONAL == $inboxtheme_id)
+    {
+        $sql = "SELECT `inbox_date`,
+                       `inbox_inboxtheme_id`,
+                       `inbox_title`,
+                       `inbox_text`,
+                       `user_id`,
+                       `user_login`
+                FROM `inbox`
+                LEFT JOIN `user`
+                ON `inbox_sender_id`=`user_id`
+                WHERE ((`inbox_user_id`='$authorization_user_id'
+                AND `inbox_sender_id`='$user_id')
+                OR (`inbox_user_id`='$user_id'
+                AND `inbox_sender_id`='$authorization_user_id'))
+                AND `inbox_inboxtheme_id`='" . INBOXTHEME_PERSONAL . "'
+                ORDER BY `inbox_id` DESC";
+        $inbox_sql = $mysqli->query($sql);
+
+        $inbox_array = $inbox_sql->fetch_all(1);
+
+        $inbox_array[0]['inbox_button'] = '<a href="profile_news_outbox.php?num=' . $authorization_user_id . '&answer=' . $user_id . '" class="button-link"><button>Ответить</button></a>';
+
+        $json_data['inbox_array'] = $inbox_array;
+    }
+    else
+    {
+        $inbox_array[0]['inbox_text'] = nl2br($inbox_array[0]['inbox_text']);
+
+        $json_data['inbox_array'] = $inbox_array;
+    }
 
     $sql = "UPDATE `inbox`
             SET `inbox_read`='1'
@@ -1093,7 +1123,7 @@ elseif (isset($_GET['inbox_id']))
             LIMIT 1";
     $mysqli->query($sql);
 
-    $json_data['inbox_array'] = $inbox_array;
+    $json_data['user_id'] = $authorization_user_id;
 }
 elseif (isset($_GET['outbox_id']))
 {
@@ -1101,6 +1131,7 @@ elseif (isset($_GET['outbox_id']))
 
     $sql = "SELECT `inbox_asktoplay_id`,
                    `inbox_inboxtheme_id`,
+                   `inbox_user_id`,
                    `inbox_text`,
                    `inbox_title`
             FROM `inbox`
@@ -1110,10 +1141,41 @@ elseif (isset($_GET['outbox_id']))
 
     $inbox_array = $inbox_sql->fetch_all(1);
 
-    $inbox_array[0]['inbox_button'] = '';
-    $inbox_array[0]['inbox_text']   = nl2br($inbox_array[0]['inbox_text']);
+    $user_id        = $inbox_array[0]['inbox_user_id'];
+    $inboxtheme_id  = $inbox_array[0]['inbox_inboxtheme_id'];
 
-    $json_data['inbox_array'] = $inbox_array;
+    $inbox_array[0]['inbox_button'] = '';
+
+    if (INBOXTHEME_PERSONAL == $inboxtheme_id)
+    {
+        $sql = "SELECT `inbox_date`,
+                       `inbox_title`,
+                       `inbox_text`,
+                       `user_id`,
+                       `user_login`
+                FROM `inbox`
+                LEFT JOIN `user`
+                ON `inbox_sender_id`=`user_id`
+                WHERE ((`inbox_user_id`='$authorization_user_id'
+                AND `inbox_sender_id`='$user_id')
+                OR (`inbox_user_id`='$user_id'
+                AND `inbox_sender_id`='$authorization_user_id'))
+                AND `inbox_inboxtheme_id`='" . INBOXTHEME_PERSONAL . "'
+                ORDER BY `inbox_id` DESC";
+        $inbox_sql = $mysqli->query($sql);
+
+        $inbox_array = $inbox_sql->fetch_all(1);
+
+        $json_data['inbox_array'] = $inbox_array;
+    }
+    else
+    {
+        $inbox_array[0]['inbox_text'] = nl2br($inbox_array[0]['inbox_text']);
+
+        $json_data['inbox_array'] = $inbox_array;
+    }
+
+    $json_data['user_id'] = $authorization_user_id;
 }
 elseif (isset($_GET['note_id']))
 {

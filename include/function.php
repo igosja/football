@@ -640,6 +640,15 @@ function f_igosja_trophy_sort($a, $b)
     return $sort_result;
 }
 
+function f_igosja_inbox_sort($a, $b)
+{
+    $a_date         = $a['inbox_date'];
+    $b_date         = $b['inbox_date'];
+    $sort_result    = strcmp($b_date, $a_date);
+
+    return $sort_result;
+}
+
 function f_igosja_player_to_scout_and_fire_button($player_id)
 {
     global $mysqli;

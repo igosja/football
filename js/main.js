@@ -807,8 +807,50 @@ $(document).ready(function($)
                 dataType: "json",
                 success: function(data)
                 {
+                    var message_text = '';
+                    var message_date = '';
+
+                    if (undefined !== data.inbox_array[0].user_id)
+                    {
+                        message_text = '<table class="striped w100">';
+
+                        for (var i=0; i<data.inbox_array.length; i++)
+                        {
+                            message_date = new Date(data.inbox_array[i].inbox_date * 1000);
+                            message_text = message_text + '<tr><td ';
+
+                            if (data.inbox_array[i].user_id == data.user_id)
+                            {
+                                message_text = message_text + 'class="padding-left"'
+                            }
+
+                            message_text = message_text
+                                         + '><span class="grey">'
+                                         + data.inbox_array[i].user_login
+                                         + ', '
+                                         + ("0" + message_date.getHours()).slice(-2)
+                                         + ':'
+                                         + ("0" + message_date.getMinutes()).slice(-2)
+                                         + ' '
+                                         + ("0" + message_date.getDate()).slice(-2)
+                                         + '.'
+                                         + ("0" + (message_date.getMonth() + 1)).slice(-2)
+                                         + '.'
+                                         + message_date.getFullYear()
+                                         + '</span><br/>'
+                                         + data.inbox_array[i].inbox_text
+                                         + '</td></tr>';
+                        }
+
+                        message_text = message_text + '</table>';
+                    }
+                    else
+                    {
+                        message_text = data.inbox_array[0].inbox_text;
+                    }
+
                     $('.inbox-header').html(data.inbox_array[0].inbox_title);
-                    $('.inbox-text').html(data.inbox_array[0].inbox_text);
+                    $('.inbox-text').html(message_text);
                     $('.inbox-button').html(data.inbox_array[0].inbox_button);
                     $('#inbox-block').removeClass('loading');
                 }
@@ -830,8 +872,51 @@ $(document).ready(function($)
                 dataType: "json",
                 success: function(data)
                 {
+                    console.log(data);
+                    var message_text = '';
+                    var message_date = '';
+
+                    if (undefined !== data.inbox_array[0].user_id)
+                    {
+                        message_text = '<table class="striped w100">';
+
+                        for (var i=0; i<data.inbox_array.length; i++)
+                        {
+                            message_date = new Date(data.inbox_array[i].inbox_date * 1000);
+                            message_text = message_text + '<tr><td ';
+
+                            if (data.inbox_array[i].user_id == data.user_id)
+                            {
+                                message_text = message_text + 'class="padding-left"'
+                            }
+
+                            message_text = message_text
+                                + '><span class="grey">'
+                                + data.inbox_array[i].user_login
+                                + ', '
+                                + ("0" + message_date.getHours()).slice(-2)
+                                + ':'
+                                + ("0" + message_date.getMinutes()).slice(-2)
+                                + ' '
+                                + ("0" + message_date.getDate()).slice(-2)
+                                + '.'
+                                + ("0" + (message_date.getMonth() + 1)).slice(-2)
+                                + '.'
+                                + message_date.getFullYear()
+                                + '</span><br/>'
+                                + data.inbox_array[i].inbox_text
+                                + '</td></tr>';
+                        }
+
+                        message_text = message_text + '</table>';
+                    }
+                    else
+                    {
+                        message_text = data.inbox_array[0].inbox_text;
+                    }
+
                     $('.inbox-header').html(data.inbox_array[0].inbox_title);
-                    $('.inbox-text').html(data.inbox_array[0].inbox_text);
+                    $('.inbox-text').html(message_text);
                     $('.inbox-button').html(data.inbox_array[0].inbox_button);
                     $('#inbox-block').removeClass('loading');
                 }
