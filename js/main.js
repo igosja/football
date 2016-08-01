@@ -456,7 +456,7 @@ $(document).ready(function($)
 
                             table_data = table_data
                                 + '<tr><td class="right w40"><a href="team_team_review_profile.php?num='
-                                + data.stage_array[i].game_home_team_id
+                                + data.stage_array[i].home_team_id
                                 + '">'
                                 + data.stage_array[i].home_team_name
                                 + '</a></td><td class="center"><a href="game_review_main.php?num='
@@ -468,7 +468,7 @@ $(document).ready(function($)
                                 + '">'
                                 + score_1
                                 + '</a>)</td><td class="w40"><a href="team_team_review_profile.php?num='
-                                + data.stage_array[i].game_guest_team_id
+                                + data.stage_array[i].guest_team_id
                                 + '">'
                                 + data.stage_array[i].guest_team_name
                                 + '</a></td></tr>';
@@ -547,70 +547,70 @@ $(document).ready(function($)
                 {
                     if (undefined !== data.stage_array[0].game_played_1)
                     {
-                    var table_data  = '';
-                    var stage_id    = data.stage_array[0].stage_id;
-
-                    for (var i=0; i<data.stage_array.length; i++)
-                    {
-                        if (1 == data.stage_array[i].game_played_1)
+                        var table_data  = '';
+                        var stage_id    = data.stage_array[0].stage_id;
+    
+                        for (var i=0; i<data.stage_array.length; i++)
                         {
-                            var score_1 = data.stage_array[i].home_score_1
-                                + ':'
-                                + data.stage_array[i].guest_score_1
-                        }
-                        else
-                        {
-                            var score_1 = '';
-                        }
-
-                        if (1 == data.stage_array[i].game_played_2)
-                        {
-                            var score_2 = data.stage_array[i].home_score_2
-                                + ':'
-                                + data.stage_array[i].guest_score_2
-                        }
-                        else
-                        {
-                            var score_2 = '';
-                        }
-
-                        table_data = table_data
-                            + '<tr><td class="right w40"><a href="team_team_review_profile.php?num='
-                            + data.stage_array[i].game_home_team_id
-                            + '">'
-                            + data.stage_array[i].home_team_name
-                            + '</a></td><td class="center">';
-
-                        if (49 != stage_id || 3 == tournament_id)
-                        {
+                            if (1 == data.stage_array[i].game_played_1)
+                            {
+                                var score_1 = data.stage_array[i].home_score_1
+                                    + ':'
+                                    + data.stage_array[i].guest_score_1
+                            }
+                            else
+                            {
+                                var score_1 = '';
+                            }
+    
+                            if (1 == data.stage_array[i].game_played_2)
+                            {
+                                var score_2 = data.stage_array[i].home_score_2
+                                    + ':'
+                                    + data.stage_array[i].guest_score_2
+                            }
+                            else
+                            {
+                                var score_2 = '';
+                            }
+    
+                            table_data = table_data
+                                + '<tr><td class="right w40"><a href="team_team_review_profile.php?num='
+                                + data.stage_array[i].home_team_id
+                                + '">'
+                                + data.stage_array[i].home_team_name
+                                + '</a></td><td class="center">';
+    
+                            if (49 != stage_id || 3 == tournament_id)
+                            {
+                                table_data = table_data
+                                    + '<a href="game_review_main.php?num='
+                                    + data.stage_array[i].game_id_2
+                                    + '">'
+                                    + score_2
+                                    + '</a> (';
+                            }
+    
                             table_data = table_data
                                 + '<a href="game_review_main.php?num='
-                                + data.stage_array[i].game_id_2
+                                + data.stage_array[i].game_id_1
                                 + '">'
-                                + score_2
-                                + '</a> (';
-                        }
-
-                        table_data = table_data
-                            + '<a href="game_review_main.php?num='
-                            + data.stage_array[i].game_id_1
-                            + '">'
-                            + score_1
-                            + '</a>';
-
-                        if (49 != stage_id || 3 == tournament_id)
-                        {
+                                + score_1
+                                + '</a>';
+    
+                            if (49 != stage_id || 3 == tournament_id)
+                            {
+                                table_data = table_data
+                                    + ')';
+                            }
+    
                             table_data = table_data
-                                + ')';
+                                + '</td><td class="w40"><a href="team_team_review_profile.php?num='
+                                + data.stage_array[i].guest_team_id
+                                + '">'
+                                + data.stage_array[i].guest_team_name
+                                + '</a></td></tr>';
                         }
-
-                        table_data = table_data
-                            + '</td><td class="w40"><a href="team_team_review_profile.php?num='
-                            + data.stage_array[i].game_guest_team_id
-                            + '">'
-                            + data.stage_array[i].guest_team_name
-                            + '</a></td></tr>';
-                    }
                         var stage_name  = data.stage_array[0].stage_name;
                         var stage_id    = data.stage_array[0].stage_id;
                     }
