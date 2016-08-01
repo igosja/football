@@ -17,7 +17,6 @@
                 <table class="table table-striped table-bordered">
                     <tr>
                         <td <?php if (0 == $inbox_array[0]['user_id']) { ?>class="text-right info"<?php } else { ?>class="warning"<?php } ?>>
-                        <td class="warning">
                             <?= f_igosja_ufu_date_time($inbox_array[0]['inbox_date']); ?>,
                             <?php if (0 == $inbox_array[0]['user_id']) { ?>
                                 <span class="text-danger">Игося</span>
