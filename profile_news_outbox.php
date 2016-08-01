@@ -73,8 +73,9 @@ if (isset($_POST['data']))
     redirect('profile_news_outbox.php?num=' . $num_get);
 }
 
-$sql = "SELECT `inbox_id`,
-               `inbox_date`,
+$sql = "SELECT `inbox_date`,
+               `inbox_id`,
+               `inbox_inboxtheme_id`,
                `inbox_read`,
                `inbox_title`,
                `inbox_user_id`,
