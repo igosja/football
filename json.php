@@ -1119,8 +1119,8 @@ elseif (isset($_GET['inbox_id']))
 
     $sql = "UPDATE `inbox`
             SET `inbox_read`='1'
-            WHERE `inbox_id`='$inbox_id'
-            LIMIT 1";
+            WHERE `inbox_user_id`='$authorization_user_id'
+            AND `inbox_sender_id`='$user_id'";
     $mysqli->query($sql);
 
     $json_data['user_id'] = $authorization_user_id;

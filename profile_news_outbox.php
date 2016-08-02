@@ -95,7 +95,7 @@ $inbox_array_1 = $inbox_sql->fetch_all(1);
 $sql = "SELECT MAX(`inbox_id`) AS `inbox_id`,
                `inbox_inboxtheme_id`,
                MAX(`inbox_date`) AS `inbox_date`,
-               MAX(`inbox_read`) AS `inbox_read`,
+               MIN(`inbox_read`) AS `inbox_read`,
                `inbox_title`,
                `user_id`,
                `user_login`
