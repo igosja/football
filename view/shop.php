@@ -63,7 +63,7 @@
                 <tr>
                     <td class="center" colspan="2">
                         <form method="POST">
-                            Сумма пополнения:
+                            Сумма пополнения, ед.:
                             <input name="data[sum]" type="text" size="5" />
                             <input type="submit" value="Пополнить" />
                         </form>
