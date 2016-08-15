@@ -6,8 +6,8 @@
                 <tr>
                     <td colspan="2">
                         <p class="justify">Развитие команды не требует обязательного совершения покупок в магазине, но если вы не привыкли ждать, хотите "всё и сразу" и имеете возможность "ускорить процесс", то добро пожаловать в магазин игровых товаров! Цены для разных команд разные - чем сильнее команда, тем сложнее её усилить с помощью магазина.</p>
-<!--                        <p class="justify">Пополнение производится с использованием системы электронных платежей <a href="http://http://www.free-kassa.ru//" target="_blank">Free-kassa©.</p>-->
-                        <p class="justify">Пополнение производится с использованием системы электронных платежей <a href="http://www.pay2pay.com/" target="_blank">Pay2Pay©. [<a href="javascript:;" id="pay2pay-button">Подробнее</a>]</p>
+                        <p class="justify">Пополнение производится с использованием системы электронных платежей <a href="http://http://www.free-kassa.ru//" target="_blank">Free-kassa©.</p>
+<!--                        <p class="justify">Пополнение производится с использованием системы электронных платежей <a href="http://www.pay2pay.com/" target="_blank">Pay2Pay©. [<a href="javascript:;" id="pay2pay-button">Подробнее</a>]</p>-->
                     </td>
                 </tr>
                 <tr style="display: none;" id="pay2pay-description">
@@ -71,12 +71,12 @@
                 </tr>
                 <tr>
                     <td class="center" colspan="2">
-                        Курс обмена: 1 ед. на счету = 1 $.
+                        Курс обмена: 1 ед. на счету = 50 руб.
                         <br />
-<!--                        <a href="//www.free-kassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/4.png"></a>-->
-                        <a href="http://www.pay2pay.com/" target="_blank">
-                            <img src="/img/pay2pay.png">
-                        </a>
+                        <a href="//www.free-kassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/4.png"></a>
+<!--                        <a href="http://www.pay2pay.com/" target="_blank">-->
+<!--                            <img src="/img/pay2pay.png">-->
+<!--                        </a>-->
                     </td>
                 </tr>
             </table>
