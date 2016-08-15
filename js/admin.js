@@ -94,7 +94,7 @@ $(document).ready(function ($) {
                 }]
             },
             tooltip: {
-                valueSuffix: ' $'
+                valueSuffix: ' руб'
             },
             legend: {
                 enabled: false
