@@ -59,6 +59,51 @@ for ($i=0; $i<$count_event; $i++)
         $lineup_id = $player_array[0]['lineup_id'];
 
         $sql = "UPDATE `statisticplayer`
+                SET `statisticplayer_goal`=`statisticplayer_goal`+'1'
+                WHERE `statisticplayer_player_id`='$player_id'
+                AND `statisticplayer_season_id`='$season_id'
+                AND `statisticplayer_tournament_id`='$tournament_id'
+                AND `statisticplayer_team_id`='$team_id'
+                AND `statisticplayer_country_id`='$country_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+
+        $sql = "UPDATE `lineup`
+                SET `lineup_goal`=`lineup_goal`+'1'
+                WHERE `lineup_id`='$lineup_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+
+        $sql = "UPDATE `event`
+                SET `event_player_id`='$player_id'
+                WHERE `event_id`='$event_id'
+                LIMIT 1";
+        $mysqli->query($sql);
+    }
+    elseif (3 == $eventtype_id)
+    {
+        $sql = "SELECT `lineup_id`,
+                       `lineup_player_id`
+                FROM `lineup`
+                WHERE `lineup_team_id`='$team_id'
+                AND `lineup_country_id`='$country_id'
+                AND `lineup_red`='0'
+                AND `lineup_yellow`<'2'
+                AND `lineup_game_id`='$game_id'
+                AND ((`lineup_position_id` BETWEEN '2' AND '25'
+                AND (`lineup_out`='0'
+                OR `lineup_out`>='$event_minute'))
+                OR (`lineup_in`<='$event_minute'
+                AND `lineup_in`!='0'))
+                LIMIT 1";
+        $player_sql = $mysqli->query($sql);
+
+        $player_array = $player_sql->fetch_all(1);
+
+        $player_id = $player_array[0]['lineup_player_id'];
+        $lineup_id = $player_array[0]['lineup_id'];
+
+        $sql = "UPDATE `statisticplayer`
                 SET `statisticplayer_goal`=`statisticplayer_goal`+'1',
                     `statisticplayer_penalty`=`statisticplayer_penalty`+'1',
                     `statisticplayer_penalty_goal`=`statisticplayer_penalty_goal`+'1'
